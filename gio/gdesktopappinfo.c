@@ -2418,6 +2418,7 @@ g_app_info_get_default_for_type (const char *content_type,
 GAppInfo *
 g_app_info_get_default_for_uri_scheme (const char *uri_scheme)
 {
+#ifndef GST_SDK_GLIB_GIO_OLD_URI_SCHEME_HANDLERS
   GAppInfo *app_info;
   char *content_type, *scheme_down;
 
@@ -2428,6 +2429,56 @@ g_app_info_get_default_for_uri_scheme (const char *uri_scheme)
   g_free (content_type);
 
   return app_info;
+#else
+  static gsize lookup = 0;
+  
+  if (g_once_init_enter (&lookup))
+    {
+      gsize setup_value = 1;
+      GDesktopAppInfoLookup *lookup_instance;
+      const char *use_this;
+      GIOExtensionPoint *ep;
+      GIOExtension *extension;
+      GList *l;
+ 
+      use_this = g_getenv ("GIO_USE_URI_ASSOCIATION");
+      
+      /* Ensure vfs in modules loaded */
+      _g_io_modules_ensure_loaded ();
+      
+      ep = g_io_extension_point_lookup (G_DESKTOP_APP_INFO_LOOKUP_EXTENSION_POINT_NAME);
+ 
+      lookup_instance = NULL;
+      if (use_this)
+	{
+	  extension = g_io_extension_point_get_extension_by_name (ep, use_this);
+	  if (extension)
+	    lookup_instance = g_object_new (g_io_extension_get_type (extension), NULL);
+	}
+      
+      if (lookup_instance == NULL)
+	{
+	  for (l = g_io_extension_point_get_extensions (ep); l != NULL; l = l->next)
+	    {
+	      extension = l->data;
+	      lookup_instance = g_object_new (g_io_extension_get_type (extension), NULL);
+	      if (lookup_instance != NULL)
+		break;
+	    }
+	}
+
+      if (lookup_instance != NULL)
+	setup_value = (gsize)lookup_instance;
+      
+      g_once_init_leave (&lookup, setup_value);
+    }
+
+  if (lookup == 1)
+    return NULL;
+
+  return g_desktop_app_info_lookup_get_default_for_uri_scheme (G_DESKTOP_APP_INFO_LOOKUP (lookup),
+							       uri_scheme);
+#endif
 }
 
 static void
