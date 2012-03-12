@@ -771,6 +771,11 @@ _g_io_modules_ensure_loaded (void)
       g_io_modules_scan_all_in_directory_with_scope (GST_SDK_GLIB_GIO_DISTRO_GIO_MODULE_PATH, scope);
 #endif
 
+#ifdef GST_SDK_GLIB_GIO_DISTRO_GIO_MODULE_PATH2
+      /* Now load all modules from the distro, e.g. gvfs */
+      g_io_modules_scan_all_in_directory_with_scope (GST_SDK_GLIB_GIO_DISTRO_GIO_MODULE_PATH2, scope);
+#endif
+
       g_io_module_scope_free (scope);
 
       /* Initialize types from built-in "modules" */
