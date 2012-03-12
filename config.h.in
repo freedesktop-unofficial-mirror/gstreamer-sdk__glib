@@ -270,7 +270,7 @@
 /* Define if you have <langinfo.h> and nl_langinfo(CODESET). */
 #undef HAVE_LANGINFO_CODESET
 
-/* Have nl_langinfo (_NL_CTYPE_OUTDIGITn_WC) */
+/* Have nl_langinfo (_NL_CTYPE_OUTDIGITn_MB) */
 #undef HAVE_LANGINFO_OUTDIGIT
 
 /* Have nl_langinfo (PM_STR) */

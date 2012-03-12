@@ -54,6 +54,8 @@
         <sub name="GDataOutputStream" link="GDataOutputStream.html"/>
         <sub name="GUnixInputStream" link="GUnixInputStream.html"/>
         <sub name="GUnixOutputStream" link="GUnixOutputStream.html"/>
+        <sub name="GWin32InputStream" link="gio-GWin32InputStream.html"/>
+        <sub name="GWin32OutputStream" link="gio-GWin32OutputStream.html"/>
         <sub name="GConverterInputstream" link="gio-GConverterInputstream.html"/>
         <sub name="GConverterOutputstream" link="gio-GConverterOutputstream.html"/>
         <sub name="GPollableInputStream" link="GPollableInputStream.html"/>
@@ -185,12 +187,12 @@
         <sub name="Migrating from POSIX to GIO" link="ch26.html"/>
       </sub>
       <sub name="Migrating from GnomeVFS to GIO" link="ch27.html">
-        <sub name="Trash handling" link="ch27.html#id594590"/>
+        <sub name="Trash handling" link="ch27.html#id779930"/>
         <sub name="Operations on multiple files" link="ch27s02.html"/>
         <sub name="Mime monitoring" link="ch27s03.html"/>
       </sub>
       <sub name="Migrating from GConf to GSettings" link="ch28.html">
-        <sub name="Before you start" link="ch28.html#id866543"/>
+        <sub name="Before you start" link="ch28.html#id733424"/>
         <sub name="Conceptual differences" link="ch28s02.html"/>
         <sub name="GConfClient (and GConfBridge) API conversion" link="ch28s03.html"/>
         <sub name="Change notification" link="ch28s04.html"/>
@@ -199,7 +201,7 @@
         <sub name="Data conversion" link="ch28s07.html"/>
       </sub>
       <sub name="Migrating to GDBus" link="ch29.html">
-        <sub name="Conceptual differences" link="ch29.html#id1073752"/>
+        <sub name="Conceptual differences" link="ch29.html#id1057505"/>
         <sub name="API comparison" link="ch29s02.html"/>
         <sub name="Owning bus names" link="ch29s03.html"/>
         <sub name="Creating proxies for well-known names" link="ch29s04.html"/>
@@ -824,6 +826,15 @@
     <keyword type="function" name="g_unix_output_stream_get_fd ()" link="GUnixOutputStream.html#g-unix-output-stream-get-fd" since="2.20"/>
     <keyword type="property" name="The &quot;close-fd&quot; property" link="GUnixOutputStream.html#GUnixOutputStream--close-fd"/>
     <keyword type="property" name="The &quot;fd&quot; property" link="GUnixOutputStream.html#GUnixOutputStream--fd"/>
+    <keyword type="struct" name="struct GWin32InputStream" link="gio-GWin32InputStream.html#GWin32InputStream"/>
+    <keyword type="function" name="g_win32_input_stream_new ()" link="gio-GWin32InputStream.html#g-win32-input-stream-new"/>
+    <keyword type="function" name="g_win32_input_stream_set_close_handle ()" link="gio-GWin32InputStream.html#g-win32-input-stream-set-close-handle" since="2.26"/>
+    <keyword type="function" name="g_win32_input_stream_get_close_handle ()" link="gio-GWin32InputStream.html#g-win32-input-stream-get-close-handle" since="2.26"/>
+    <keyword type="struct" name="struct GWin32OutputStream" link="gio-GWin32OutputStream.html#GWin32OutputStream"/>
+    <keyword type="function" name="g_win32_output_stream_new ()" link="gio-GWin32OutputStream.html#g-win32-output-stream-new" since="2.26"/>
+    <keyword type="function" name="g_win32_output_stream_set_close_handle ()" link="gio-GWin32OutputStream.html#g-win32-output-stream-set-close-handle" since="2.26"/>
+    <keyword type="function" name="g_win32_output_stream_get_close_handle ()" link="gio-GWin32OutputStream.html#g-win32-output-stream-get-close-handle" since="2.26"/>
+    <keyword type="function" name="g_win32_output_stream_get_handle ()" link="gio-GWin32OutputStream.html#g-win32-output-stream-get-handle" since="2.26"/>
     <keyword type="struct" name="GConverterInputStream" link="gio-GConverterInputstream.html#GConverterInputStream-struct"/>
     <keyword type="function" name="g_converter_input_stream_new ()" link="gio-GConverterInputstream.html#g-converter-input-stream-new"/>
     <keyword type="function" name="g_converter_input_stream_get_converter ()" link="gio-GConverterInputstream.html#g-converter-input-stream-get-converter" since="2.24"/>
@@ -1925,8 +1936,8 @@
     <keyword type="property" name="The &quot;object-path&quot; property" link="GDBusObjectManagerClient.html#GDBusObjectManagerClient--object-path"/>
     <keyword type="signal" name="The &quot;interface-proxy-properties-changed&quot; signal" link="GDBusObjectManagerClient.html#GDBusObjectManagerClient-interface-proxy-properties-changed"/>
     <keyword type="signal" name="The &quot;interface-proxy-signal&quot; signal" link="GDBusObjectManagerClient.html#GDBusObjectManagerClient-interface-proxy-signal"/>
-    <keyword type="" name="Vendor overrides" link="GSettings.html#id966148"/>
-    <keyword type="" name="Binding" link="GSettings.html#id966192"/>
+    <keyword type="" name="Vendor overrides" link="GSettings.html#id949889"/>
+    <keyword type="" name="Binding" link="GSettings.html#id949933"/>
     <keyword type="struct" name="GSettings" link="GSettings.html#GSettings-struct"/>
     <keyword type="function" name="g_settings_new ()" link="GSettings.html#g-settings-new" since="2.26"/>
     <keyword type="function" name="g_settings_new_with_path ()" link="GSettings.html#g-settings-new-with-path" since="2.26"/>
@@ -2141,11 +2152,11 @@
     <keyword type="function" name="g_io_extension_point_register ()" link="gio-Extension-Points.html#g-io-extension-point-register"/>
     <keyword type="function" name="g_io_extension_point_set_required_type ()" link="gio-Extension-Points.html#g-io-extension-point-set-required-type"/>
     <keyword type="function" name="g_io_extension_ref_class ()" link="gio-Extension-Points.html#g-io-extension-ref-class"/>
-    <keyword type="" name="Commands" link="gsettings-tool.html#id799467"/>
-    <keyword type="" name="Options" link="glib-compile-schemas.html#id629978"/>
-    <keyword type="" name="Commands" link="gdbus.html#id812900"/>
-    <keyword type="" name="Client-side usage" link="gdbus-codegen.html#id571144"/>
-    <keyword type="" name="Server-side usage" link="gdbus-codegen.html#id726984"/>
+    <keyword type="" name="Commands" link="gsettings-tool.html#id977916"/>
+    <keyword type="" name="Options" link="glib-compile-schemas.html#id840218"/>
+    <keyword type="" name="Commands" link="gdbus.html#id824326"/>
+    <keyword type="" name="Client-side usage" link="gdbus-codegen.html#id774638"/>
+    <keyword type="" name="Server-side usage" link="gdbus-codegen.html#id560503"/>
     <keyword type="method" name="The Poke() method" link="gdbus-org.gtk.GDBus.Example.ObjectManager.Animal.html#gdbus-method-org-gtk-GDBus-Example-ObjectManager-Animal.Poke"/>
     <keyword type="signal" name="The &quot;Jumped&quot; signal" link="gdbus-org.gtk.GDBus.Example.ObjectManager.Animal.html#gdbus-signal-org-gtk-GDBus-Example-ObjectManager-Animal.Jumped"/>
     <keyword type="property" name="The &quot;Mood&quot; property" link="gdbus-org.gtk.GDBus.Example.ObjectManager.Animal.html#gdbus-property-org-gtk-GDBus-Example-ObjectManager-Animal.Mood"/>

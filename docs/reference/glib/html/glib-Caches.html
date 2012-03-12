@@ -74,8 +74,8 @@ A <a class="link" href="glib-Caches.html#GCache" title="GCache"><span class="typ
 save system resources.
 </p>
 <p>
-GTK+ uses caches for <a href="http://library.gnome.org/devel/gtk3/GtkStyle.html"><span class="type">GtkStyles</span></a> and <a href="http://library.gnome.org/devel/gdk3/gdk-Graphics-Contexts.html#GdkGC"><span class="type">GdkGCs</span></a>. These consume a lot of
-resources, so a <a class="link" href="glib-Caches.html#GCache" title="GCache"><span class="type">GCache</span></a> is used to see if a <a href="http://library.gnome.org/devel/gtk3/GtkStyle.html"><span class="type">GtkStyle</span></a> or <a href="http://library.gnome.org/devel/gdk3/gdk-Graphics-Contexts.html#GdkGC"><span class="type">GdkGC</span></a> with
+GTK+ uses caches for <a href="http://library.gnome.org/devel/gtk/GtkStyle.html"><span class="type">GtkStyles</span></a> and <span class="type">GdkGCs</span>. These consume a lot of
+resources, so a <a class="link" href="glib-Caches.html#GCache" title="GCache"><span class="type">GCache</span></a> is used to see if a <a href="http://library.gnome.org/devel/gtk/GtkStyle.html"><span class="type">GtkStyle</span></a> or <span class="type">GdkGC</span> with
 the required properties already exists. If it does, then the
 existing object is used instead of creating a new one.
 </p>
