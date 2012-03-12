@@ -355,6 +355,13 @@ is_valid_module_name (const gchar        *basename,
 {
   gboolean result;
 
+  /* bamf module that uses Ubuntu specific GLib
+   * API on Ubuntu... and thus crashes everything
+   * that ever tries to use GIO.
+   */
+  if (g_str_is_equal (basename, "libgiobamf.so"))
+    return FALSE;
+
 #if !defined(G_OS_WIN32) && !defined(G_WITH_CYGWIN)
   if (!g_str_has_prefix (basename, "lib") ||
       !g_str_has_suffix (basename, ".so"))
