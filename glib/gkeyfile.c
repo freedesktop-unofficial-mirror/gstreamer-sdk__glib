@@ -1571,6 +1571,7 @@ g_key_file_get_string_list (GKeyFile     *key_file,
       else
         g_propagate_error (error, key_file_error);
 
+      g_slist_free_full (pieces, g_free);
       return NULL;
     }
 
@@ -3350,6 +3351,12 @@ g_key_file_remove_group_node (GKeyFile *key_file,
     }
 
   g_warn_if_fail (group->key_value_pairs == NULL);
+
+  if (group->comment)
+    {
+      g_key_file_key_value_pair_free (group->comment);
+      group->comment = NULL;
+    }
 
   if (group->lookup_map)
     {

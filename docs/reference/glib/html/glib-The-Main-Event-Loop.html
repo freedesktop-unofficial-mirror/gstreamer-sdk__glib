@@ -267,13 +267,13 @@ boxes. Note that event sources are associated with a particular
 loops associated with that GMainContext.
 </p>
 <p>
-GTK+ contains wrappers of some of these functions, e.g. <a href="http://library.gnome.org/devel/gtk3/gtk-General.html#gtk-main"><code class="function">gtk_main()</code></a>,
-<a href="http://library.gnome.org/devel/gtk3/gtk-General.html#gtk-main-quit"><code class="function">gtk_main_quit()</code></a> and <a href="http://library.gnome.org/devel/gtk3/gtk-General.html#gtk-events-pending"><code class="function">gtk_events_pending()</code></a>.
+GTK+ contains wrappers of some of these functions, e.g. <a href="http://library.gnome.org/devel/gtk/gtk3-General.html#gtk-main"><code class="function">gtk_main()</code></a>,
+<a href="http://library.gnome.org/devel/gtk/gtk3-General.html#gtk-main-quit"><code class="function">gtk_main_quit()</code></a> and <a href="http://library.gnome.org/devel/gtk/gtk3-General.html#gtk-events-pending"><code class="function">gtk_events_pending()</code></a>.
 </p>
 <p>
 </p>
 <div class="refsect2">
-<a name="id539084"></a><h3>Creating new source types</h3>
+<a name="id641211"></a><h3>Creating new source types</h3>
 <p>One of the unusual features of the <a class="link" href="glib-The-Main-Event-Loop.html#GMainLoop" title="GMainLoop"><span class="type">GMainLoop</span></a> functionality
 is that new types of event source can be created and used in
 addition to the builtin type of event source. A new event source
@@ -296,7 +296,7 @@ can add file descriptors to the set that the main context checks using
 </p>
 <hr>
 <div class="refsect2">
-<a name="id539153"></a><h3>Customizing the main loop iteration</h3>
+<a name="id641280"></a><h3>Customizing the main loop iteration</h3>
 <p>Single iterations of a <a class="link" href="glib-The-Main-Event-Loop.html#GMainContext" title="GMainContext"><span class="type">GMainContext</span></a> can be run with
 <a class="link" href="glib-The-Main-Event-Loop.html#g-main-context-iteration" title="g_main_context_iteration ()"><code class="function">g_main_context_iteration()</code></a>. In some cases, more detailed control
 of exactly how the details of the main loop work is desired, for
@@ -1544,7 +1544,7 @@ following techniques:
 </p>
 <div class="orderedlist"><ol class="orderedlist" type="1">
 <li class="listitem"><p>
-    Use <a href="http://library.gnome.org/devel/gtk3/GtkWidget.html#gtk-widget-set-sensitive"><code class="function">gtk_widget_set_sensitive()</code></a> or modal dialogs to prevent
+    Use <a href="http://library.gnome.org/devel/gtk/GtkWidget.html#gtk-widget-set-sensitive"><code class="function">gtk_widget_set_sensitive()</code></a> or modal dialogs to prevent
     the user from interacting with elements while the main
     loop is recursing.
   </p></li>

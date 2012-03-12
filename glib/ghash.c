@@ -145,12 +145,30 @@
  * hash functions which can be used when the key is a #gpointer, #gint,
  * and #gchar* respectively.
  *
- * <!-- FIXME: Need more here. --> The hash values should be evenly
- * distributed over a fairly large range? The modulus is taken with the
- * hash table size (a prime number) to find the 'bucket' to place each
- * key into. The function should also be very fast, since it is called
- * for each key lookup.
- **/
+ * g_direct_hash() is also the appropriate hash function for keys
+ * of the form <literal>GINT_TO_POINTER (n)</literal> (or similar macros).
+ *
+ * <!-- FIXME: Need more here. --> A good hash functions should produce
+ * hash values that are evenly distributed over a fairly large range.
+ * The modulus is taken with the hash table size (a prime number) to
+ * find the 'bucket' to place each key into. The function should also
+ * be very fast, since it is called for each key lookup.
+ *
+ * Note that the hash functions provided by GLib have these qualities,
+ * but are not particularly robust against manufactured keys that
+ * cause hash collisions. Therefore, you should consider choosing
+ * a more secure hash function when using a GHashTable with keys
+ * that originate in untrusted data (such as HTTP requests).
+ * Using g_str_hash() in that situation might make your application
+ * vulerable to <ulink url="https://lwn.net/Articles/474912/">Algorithmic Complexity Attacks</ulink>.
+ *
+ * The key to choosing a good hash is unpredictability.  Even
+ * cryptographic hashes are very easy to find collisions for when the
+ * remainder is taken modulo a somewhat predictable prime number.  There
+ * must be an element of randomness that an attacker is unable to guess.
+ *
+ * Returns: the hash value corresponding to the key
+ */
 
 /**
  * GHFunc:
@@ -1411,11 +1429,15 @@ g_hash_table_foreach (GHashTable *hash_table,
 {
   gint i;
 #ifndef G_DISABLE_ASSERT
-  gint version = hash_table->version;
+  gint version;
 #endif
 
   g_return_if_fail (hash_table != NULL);
   g_return_if_fail (func != NULL);
+
+#ifndef G_DISABLE_ASSERT
+  version = hash_table->version;
+#endif
 
   for (i = 0; i < hash_table->size; i++)
     {
@@ -1465,12 +1487,16 @@ g_hash_table_find (GHashTable *hash_table,
 {
   gint i;
 #ifndef G_DISABLE_ASSERT
-  gint version = hash_table->version;
+  gint version;
 #endif
   gboolean match;
 
   g_return_val_if_fail (hash_table != NULL, NULL);
   g_return_val_if_fail (predicate != NULL, NULL);
+
+#ifndef G_DISABLE_ASSERT
+  version = hash_table->version;
+#endif
 
   match = FALSE;
 

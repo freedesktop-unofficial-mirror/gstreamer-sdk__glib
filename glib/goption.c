@@ -139,6 +139,13 @@
 #include <stdio.h>
 #include <errno.h>
 
+#if defined __OpenBSD__
+#include <sys/types.h>
+#include <unistd.h>
+#include <sys/param.h>
+#include <sys/sysctl.h>
+#endif
+
 #include "goption.h"
 
 #include "gprintf.h"
@@ -1665,7 +1672,7 @@ free_pending_nulls (GOptionContext *context,
 static char *
 platform_get_argv0 (void)
 {
-#ifdef __linux
+#if defined __linux
   char *cmdline;
   char *base_arg0;
   gsize len;
@@ -1683,6 +1690,28 @@ platform_get_argv0 (void)
    * could be large.
    */
   base_arg0 = g_path_get_basename (cmdline);
+  g_free (cmdline);
+  return base_arg0;
+#elif defined __OpenBSD__
+  char **cmdline = NULL;
+  char *base_arg0;
+  gsize len = PATH_MAX;
+
+  int mib[] = { CTL_KERN, KERN_PROC_ARGS, getpid(), KERN_PROC_ARGV };
+
+  cmdline = (char **) realloc (cmdline, len);
+
+  if (sysctl (mib, nitems (mib), cmdline, &len, NULL, 0) == -1)
+    {
+      g_free (cmdline);
+      return NULL;
+    }
+
+  /* We could just return cmdline, but I think it's better
+   * to hold on to a smaller malloc block; the arguments
+   * could be large.
+   */
+  base_arg0 = g_path_get_basename (*cmdline);
   g_free (cmdline);
   return base_arg0;
 #endif
@@ -2150,14 +2179,16 @@ g_option_group_add_entries (GOptionGroup       *group,
 
       if (c == '-' || (c != 0 && !g_ascii_isprint (c)))
         {
-          g_warning (G_STRLOC ": ignoring invalid short option '%c' (%d)", c, c);
-          group->entries[i].short_name = 0;
+          g_warning (G_STRLOC ": ignoring invalid short option '%c' (%d) in entry %s:%s",
+              c, c, group->name, group->entries[i].long_name);
+          group->entries[i].short_name = '\0';
         }
 
       if (group->entries[i].arg != G_OPTION_ARG_NONE &&
           (group->entries[i].flags & G_OPTION_FLAG_REVERSE) != 0)
         {
-          g_warning (G_STRLOC ": ignoring reverse flag on option of type %d", group->entries[i].arg);
+          g_warning (G_STRLOC ": ignoring reverse flag on option of arg-type %d in entry %s:%s",
+              group->entries[i].arg, group->name, group->entries[i].long_name);
 
           group->entries[i].flags &= ~G_OPTION_FLAG_REVERSE;
         }
@@ -2165,7 +2196,8 @@ g_option_group_add_entries (GOptionGroup       *group,
       if (group->entries[i].arg != G_OPTION_ARG_CALLBACK &&
           (group->entries[i].flags & (G_OPTION_FLAG_NO_ARG|G_OPTION_FLAG_OPTIONAL_ARG|G_OPTION_FLAG_FILENAME)) != 0)
         {
-          g_warning (G_STRLOC ": ignoring no-arg, optional-arg or filename flags (%d) on option of type %d", group->entries[i].flags, group->entries[i].arg);
+          g_warning (G_STRLOC ": ignoring no-arg, optional-arg or filename flags (%d) on option of arg-type %d in entry %s:%s",
+              group->entries[i].flags, group->entries[i].arg, group->name, group->entries[i].long_name);
 
           group->entries[i].flags &= ~(G_OPTION_FLAG_NO_ARG|G_OPTION_FLAG_OPTIONAL_ARG|G_OPTION_FLAG_FILENAME);
         }

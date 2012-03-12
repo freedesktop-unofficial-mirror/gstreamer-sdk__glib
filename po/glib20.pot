@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=glib&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2011-11-11 17:30-0500\n"
+"POT-Creation-Date: 2012-03-11 19:37-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,344 +42,344 @@ msgstr ""
 msgid "Unexpected tag '%s' inside '%s'"
 msgstr ""
 
-#: ../glib/gbookmarkfile.c:1834
+#: ../glib/gbookmarkfile.c:1826
 msgid "No valid bookmark file found in data dirs"
 msgstr ""
 
-#: ../glib/gbookmarkfile.c:2035
+#: ../glib/gbookmarkfile.c:2027
 #, c-format
 msgid "A bookmark for URI '%s' already exists"
 msgstr ""
 
-#: ../glib/gbookmarkfile.c:2081 ../glib/gbookmarkfile.c:2239
-#: ../glib/gbookmarkfile.c:2324 ../glib/gbookmarkfile.c:2404
-#: ../glib/gbookmarkfile.c:2489 ../glib/gbookmarkfile.c:2572
-#: ../glib/gbookmarkfile.c:2650 ../glib/gbookmarkfile.c:2729
-#: ../glib/gbookmarkfile.c:2771 ../glib/gbookmarkfile.c:2868
-#: ../glib/gbookmarkfile.c:2994 ../glib/gbookmarkfile.c:3184
-#: ../glib/gbookmarkfile.c:3260 ../glib/gbookmarkfile.c:3425
-#: ../glib/gbookmarkfile.c:3514 ../glib/gbookmarkfile.c:3604
-#: ../glib/gbookmarkfile.c:3732
+#: ../glib/gbookmarkfile.c:2073 ../glib/gbookmarkfile.c:2231
+#: ../glib/gbookmarkfile.c:2316 ../glib/gbookmarkfile.c:2396
+#: ../glib/gbookmarkfile.c:2481 ../glib/gbookmarkfile.c:2564
+#: ../glib/gbookmarkfile.c:2642 ../glib/gbookmarkfile.c:2721
+#: ../glib/gbookmarkfile.c:2763 ../glib/gbookmarkfile.c:2860
+#: ../glib/gbookmarkfile.c:2986 ../glib/gbookmarkfile.c:3176
+#: ../glib/gbookmarkfile.c:3252 ../glib/gbookmarkfile.c:3417
+#: ../glib/gbookmarkfile.c:3506 ../glib/gbookmarkfile.c:3596
+#: ../glib/gbookmarkfile.c:3724
 #, c-format
 msgid "No bookmark found for URI '%s'"
 msgstr ""
 
-#: ../glib/gbookmarkfile.c:2413
+#: ../glib/gbookmarkfile.c:2405
 #, c-format
 msgid "No MIME type defined in the bookmark for URI '%s'"
 msgstr ""
 
-#: ../glib/gbookmarkfile.c:2498
+#: ../glib/gbookmarkfile.c:2490
 #, c-format
 msgid "No private flag has been defined in bookmark for URI '%s'"
 msgstr ""
 
-#: ../glib/gbookmarkfile.c:2877
+#: ../glib/gbookmarkfile.c:2869
 #, c-format
 msgid "No groups set in bookmark for URI '%s'"
 msgstr ""
 
-#: ../glib/gbookmarkfile.c:3278 ../glib/gbookmarkfile.c:3435
+#: ../glib/gbookmarkfile.c:3270 ../glib/gbookmarkfile.c:3427
 #, c-format
 msgid "No application with name '%s' registered a bookmark for '%s'"
 msgstr ""
 
-#: ../glib/gbookmarkfile.c:3458
+#: ../glib/gbookmarkfile.c:3450
 #, c-format
 msgid "Failed to expand exec line '%s' with URI '%s'"
 msgstr ""
 
-#: ../glib/gconvert.c:567 ../glib/gconvert.c:645 ../glib/giochannel.c:1404
+#: ../glib/gconvert.c:568 ../glib/gconvert.c:646 ../glib/giochannel.c:1404
 #: ../gio/gcharsetconverter.c:458
 #, c-format
 msgid "Conversion from character set '%s' to '%s' is not supported"
 msgstr ""
 
-#: ../glib/gconvert.c:571 ../glib/gconvert.c:649
+#: ../glib/gconvert.c:572 ../glib/gconvert.c:650
 #: ../gio/gcharsetconverter.c:462
 #, c-format
 msgid "Could not open converter from '%s' to '%s'"
 msgstr ""
 
-#: ../glib/gconvert.c:767 ../glib/gconvert.c:1159 ../glib/giochannel.c:1576
+#: ../glib/gconvert.c:768 ../glib/gconvert.c:1160 ../glib/giochannel.c:1576
 #: ../glib/giochannel.c:1618 ../glib/giochannel.c:2461 ../glib/gutf8.c:1012
 #: ../glib/gutf8.c:1463 ../gio/gcharsetconverter.c:345
-#: ../gio/gdatainputstream.c:854 ../gio/gdatainputstream.c:1291
+#: ../gio/gdatainputstream.c:854 ../gio/gdatainputstream.c:1294
 msgid "Invalid byte sequence in conversion input"
 msgstr ""
 
-#: ../glib/gconvert.c:775 ../glib/gconvert.c:1084 ../glib/giochannel.c:1583
+#: ../glib/gconvert.c:776 ../glib/gconvert.c:1085 ../glib/giochannel.c:1583
 #: ../glib/giochannel.c:2473 ../gio/gcharsetconverter.c:350
 #, c-format
 msgid "Error during conversion: %s"
 msgstr ""
 
-#: ../glib/gconvert.c:806 ../glib/gutf8.c:1008 ../glib/gutf8.c:1218
+#: ../glib/gconvert.c:807 ../glib/gutf8.c:1008 ../glib/gutf8.c:1218
 #: ../glib/gutf8.c:1355 ../glib/gutf8.c:1459
 msgid "Partial character sequence at end of input"
 msgstr ""
 
-#: ../glib/gconvert.c:1056
+#: ../glib/gconvert.c:1057
 #, c-format
 msgid "Cannot convert fallback '%s' to codeset '%s'"
 msgstr ""
 
-#: ../glib/gconvert.c:1883
+#: ../glib/gconvert.c:1884
 #, c-format
 msgid "The URI '%s' is not an absolute URI using the \"file\" scheme"
 msgstr ""
 
-#: ../glib/gconvert.c:1893
+#: ../glib/gconvert.c:1894
 #, c-format
 msgid "The local file URI '%s' may not include a '#'"
 msgstr ""
 
-#: ../glib/gconvert.c:1910
+#: ../glib/gconvert.c:1911
 #, c-format
 msgid "The URI '%s' is invalid"
 msgstr ""
 
-#: ../glib/gconvert.c:1922
+#: ../glib/gconvert.c:1923
 #, c-format
 msgid "The hostname of the URI '%s' is invalid"
 msgstr ""
 
-#: ../glib/gconvert.c:1938
+#: ../glib/gconvert.c:1939
 #, c-format
 msgid "The URI '%s' contains invalidly escaped characters"
 msgstr ""
 
-#: ../glib/gconvert.c:2033
+#: ../glib/gconvert.c:2034
 #, c-format
 msgid "The pathname '%s' is not an absolute path"
 msgstr ""
 
-#: ../glib/gconvert.c:2043
+#: ../glib/gconvert.c:2044
 msgid "Invalid hostname"
 msgstr ""
 
 #. Translators: 'before midday' indicator
-#: ../glib/gdatetime.c:202
+#: ../glib/gdatetime.c:203
 msgctxt "GDateTime"
 msgid "AM"
 msgstr ""
 
 #. Translators: 'after midday' indicator
-#: ../glib/gdatetime.c:204
+#: ../glib/gdatetime.c:205
 msgctxt "GDateTime"
 msgid "PM"
 msgstr ""
 
 #. Translators: this is the preferred format for expressing the date and the time
-#: ../glib/gdatetime.c:207
+#: ../glib/gdatetime.c:208
 msgctxt "GDateTime"
 msgid "%a %b %e %H:%M:%S %Y"
 msgstr ""
 
 #. Translators: this is the preferred format for expressing the date
-#: ../glib/gdatetime.c:210
+#: ../glib/gdatetime.c:211
 msgctxt "GDateTime"
 msgid "%m/%d/%y"
 msgstr ""
 
 #. Translators: this is the preferred format for expressing the time
-#: ../glib/gdatetime.c:213
+#: ../glib/gdatetime.c:214
 msgctxt "GDateTime"
 msgid "%H:%M:%S"
 msgstr ""
 
 #. Translators: this is the preferred format for expressing 12 hour time
-#: ../glib/gdatetime.c:216
+#: ../glib/gdatetime.c:217
 msgctxt "GDateTime"
 msgid "%I:%M:%S %p"
 msgstr ""
 
-#: ../glib/gdatetime.c:229
+#: ../glib/gdatetime.c:230
 msgctxt "full month name"
 msgid "January"
 msgstr ""
 
-#: ../glib/gdatetime.c:231
+#: ../glib/gdatetime.c:232
 msgctxt "full month name"
 msgid "February"
 msgstr ""
 
-#: ../glib/gdatetime.c:233
+#: ../glib/gdatetime.c:234
 msgctxt "full month name"
 msgid "March"
 msgstr ""
 
-#: ../glib/gdatetime.c:235
+#: ../glib/gdatetime.c:236
 msgctxt "full month name"
 msgid "April"
 msgstr ""
 
-#: ../glib/gdatetime.c:237
+#: ../glib/gdatetime.c:238
 msgctxt "full month name"
 msgid "May"
 msgstr ""
 
-#: ../glib/gdatetime.c:239
+#: ../glib/gdatetime.c:240
 msgctxt "full month name"
 msgid "June"
 msgstr ""
 
-#: ../glib/gdatetime.c:241
+#: ../glib/gdatetime.c:242
 msgctxt "full month name"
 msgid "July"
 msgstr ""
 
-#: ../glib/gdatetime.c:243
+#: ../glib/gdatetime.c:244
 msgctxt "full month name"
 msgid "August"
 msgstr ""
 
-#: ../glib/gdatetime.c:245
+#: ../glib/gdatetime.c:246
 msgctxt "full month name"
 msgid "September"
 msgstr ""
 
-#: ../glib/gdatetime.c:247
+#: ../glib/gdatetime.c:248
 msgctxt "full month name"
 msgid "October"
 msgstr ""
 
-#: ../glib/gdatetime.c:249
+#: ../glib/gdatetime.c:250
 msgctxt "full month name"
 msgid "November"
 msgstr ""
 
-#: ../glib/gdatetime.c:251
+#: ../glib/gdatetime.c:252
 msgctxt "full month name"
 msgid "December"
 msgstr ""
 
-#: ../glib/gdatetime.c:266
+#: ../glib/gdatetime.c:267
 msgctxt "abbreviated month name"
 msgid "Jan"
 msgstr ""
 
-#: ../glib/gdatetime.c:268
+#: ../glib/gdatetime.c:269
 msgctxt "abbreviated month name"
 msgid "Feb"
 msgstr ""
 
-#: ../glib/gdatetime.c:270
+#: ../glib/gdatetime.c:271
 msgctxt "abbreviated month name"
 msgid "Mar"
 msgstr ""
 
-#: ../glib/gdatetime.c:272
+#: ../glib/gdatetime.c:273
 msgctxt "abbreviated month name"
 msgid "Apr"
 msgstr ""
 
-#: ../glib/gdatetime.c:274
+#: ../glib/gdatetime.c:275
 msgctxt "abbreviated month name"
 msgid "May"
 msgstr ""
 
-#: ../glib/gdatetime.c:276
+#: ../glib/gdatetime.c:277
 msgctxt "abbreviated month name"
 msgid "Jun"
 msgstr ""
 
-#: ../glib/gdatetime.c:278
+#: ../glib/gdatetime.c:279
 msgctxt "abbreviated month name"
 msgid "Jul"
 msgstr ""
 
-#: ../glib/gdatetime.c:280
+#: ../glib/gdatetime.c:281
 msgctxt "abbreviated month name"
 msgid "Aug"
 msgstr ""
 
-#: ../glib/gdatetime.c:282
+#: ../glib/gdatetime.c:283
 msgctxt "abbreviated month name"
 msgid "Sep"
 msgstr ""
 
-#: ../glib/gdatetime.c:284
+#: ../glib/gdatetime.c:285
 msgctxt "abbreviated month name"
 msgid "Oct"
 msgstr ""
 
-#: ../glib/gdatetime.c:286
+#: ../glib/gdatetime.c:287
 msgctxt "abbreviated month name"
 msgid "Nov"
 msgstr ""
 
-#: ../glib/gdatetime.c:288
+#: ../glib/gdatetime.c:289
 msgctxt "abbreviated month name"
 msgid "Dec"
 msgstr ""
 
-#: ../glib/gdatetime.c:303
+#: ../glib/gdatetime.c:304
 msgctxt "full weekday name"
 msgid "Monday"
 msgstr ""
 
-#: ../glib/gdatetime.c:305
+#: ../glib/gdatetime.c:306
 msgctxt "full weekday name"
 msgid "Tuesday"
 msgstr ""
 
-#: ../glib/gdatetime.c:307
+#: ../glib/gdatetime.c:308
 msgctxt "full weekday name"
 msgid "Wednesday"
 msgstr ""
 
-#: ../glib/gdatetime.c:309
+#: ../glib/gdatetime.c:310
 msgctxt "full weekday name"
 msgid "Thursday"
 msgstr ""
 
-#: ../glib/gdatetime.c:311
+#: ../glib/gdatetime.c:312
 msgctxt "full weekday name"
 msgid "Friday"
 msgstr ""
 
-#: ../glib/gdatetime.c:313
+#: ../glib/gdatetime.c:314
 msgctxt "full weekday name"
 msgid "Saturday"
 msgstr ""
 
-#: ../glib/gdatetime.c:315
+#: ../glib/gdatetime.c:316
 msgctxt "full weekday name"
 msgid "Sunday"
 msgstr ""
 
-#: ../glib/gdatetime.c:330
+#: ../glib/gdatetime.c:331
 msgctxt "abbreviated weekday name"
 msgid "Mon"
 msgstr ""
 
-#: ../glib/gdatetime.c:332
+#: ../glib/gdatetime.c:333
 msgctxt "abbreviated weekday name"
 msgid "Tue"
 msgstr ""
 
-#: ../glib/gdatetime.c:334
+#: ../glib/gdatetime.c:335
 msgctxt "abbreviated weekday name"
 msgid "Wed"
 msgstr ""
 
-#: ../glib/gdatetime.c:336
+#: ../glib/gdatetime.c:337
 msgctxt "abbreviated weekday name"
 msgid "Thu"
 msgstr ""
 
-#: ../glib/gdatetime.c:338
+#: ../glib/gdatetime.c:339
 msgctxt "abbreviated weekday name"
 msgid "Fri"
 msgstr ""
 
-#: ../glib/gdatetime.c:340
+#: ../glib/gdatetime.c:341
 msgctxt "abbreviated weekday name"
 msgid "Sat"
 msgstr ""
 
-#: ../glib/gdatetime.c:342
+#: ../glib/gdatetime.c:343
 msgctxt "abbreviated weekday name"
 msgid "Sun"
 msgstr ""
@@ -1213,61 +1213,61 @@ msgstr ""
 msgid "Character out of range for UTF-16"
 msgstr ""
 
-#: ../glib/goption.c:760
+#: ../glib/goption.c:767
 msgid "Usage:"
 msgstr ""
 
-#: ../glib/goption.c:760
+#: ../glib/goption.c:767
 msgid "[OPTION...]"
 msgstr ""
 
-#: ../glib/goption.c:866
+#: ../glib/goption.c:873
 msgid "Help Options:"
 msgstr ""
 
-#: ../glib/goption.c:867
+#: ../glib/goption.c:874
 msgid "Show help options"
 msgstr ""
 
-#: ../glib/goption.c:873
+#: ../glib/goption.c:880
 msgid "Show all help options"
 msgstr ""
 
-#: ../glib/goption.c:935
+#: ../glib/goption.c:942
 msgid "Application Options:"
 msgstr ""
 
-#: ../glib/goption.c:997 ../glib/goption.c:1067
+#: ../glib/goption.c:1004 ../glib/goption.c:1074
 #, c-format
 msgid "Cannot parse integer value '%s' for %s"
 msgstr ""
 
-#: ../glib/goption.c:1007 ../glib/goption.c:1075
+#: ../glib/goption.c:1014 ../glib/goption.c:1082
 #, c-format
 msgid "Integer value '%s' for %s out of range"
 msgstr ""
 
-#: ../glib/goption.c:1032
+#: ../glib/goption.c:1039
 #, c-format
 msgid "Cannot parse double value '%s' for %s"
 msgstr ""
 
-#: ../glib/goption.c:1040
+#: ../glib/goption.c:1047
 #, c-format
 msgid "Double value '%s' for %s out of range"
 msgstr ""
 
-#: ../glib/goption.c:1303 ../glib/goption.c:1382
+#: ../glib/goption.c:1310 ../glib/goption.c:1389
 #, c-format
 msgid "Error parsing option %s"
 msgstr ""
 
-#: ../glib/goption.c:1413 ../glib/goption.c:1526
+#: ../glib/goption.c:1420 ../glib/goption.c:1533
 #, c-format
 msgid "Missing argument for %s"
 msgstr ""
 
-#: ../glib/goption.c:1957
+#: ../glib/goption.c:1986
 #, c-format
 msgid "Unknown option %s"
 msgstr ""
@@ -1309,9 +1309,9 @@ msgstr ""
 msgid "Key file contains unsupported encoding '%s'"
 msgstr ""
 
-#: ../glib/gkeyfile.c:1149 ../glib/gkeyfile.c:1311 ../glib/gkeyfile.c:2686
-#: ../glib/gkeyfile.c:2752 ../glib/gkeyfile.c:2887 ../glib/gkeyfile.c:3020
-#: ../glib/gkeyfile.c:3162 ../glib/gkeyfile.c:3394 ../glib/gkeyfile.c:3463
+#: ../glib/gkeyfile.c:1149 ../glib/gkeyfile.c:1311 ../glib/gkeyfile.c:2687
+#: ../glib/gkeyfile.c:2753 ../glib/gkeyfile.c:2888 ../glib/gkeyfile.c:3021
+#: ../glib/gkeyfile.c:3163 ../glib/gkeyfile.c:3401 ../glib/gkeyfile.c:3470
 #, c-format
 msgid "Key file does not have group '%s'"
 msgstr ""
@@ -1326,7 +1326,7 @@ msgstr ""
 msgid "Key file contains key '%s' with value '%s' which is not UTF-8"
 msgstr ""
 
-#: ../glib/gkeyfile.c:1450 ../glib/gkeyfile.c:1934
+#: ../glib/gkeyfile.c:1450 ../glib/gkeyfile.c:1935
 #, c-format
 msgid "Key file contains key '%s' which has value that cannot be interpreted."
 msgstr ""
@@ -1337,43 +1337,43 @@ msgid ""
 "Key file contains key '%s' which has a value that cannot be interpreted."
 msgstr ""
 
-#: ../glib/gkeyfile.c:2151 ../glib/gkeyfile.c:2515
+#: ../glib/gkeyfile.c:2152 ../glib/gkeyfile.c:2516
 #, c-format
 msgid ""
 "Key file contains key '%s' in group '%s' which has value that cannot be "
 "interpreted."
 msgstr ""
 
-#: ../glib/gkeyfile.c:2701 ../glib/gkeyfile.c:2902 ../glib/gkeyfile.c:3474
+#: ../glib/gkeyfile.c:2702 ../glib/gkeyfile.c:2903 ../glib/gkeyfile.c:3481
 #, c-format
 msgid "Key file does not have key '%s' in group '%s'"
 msgstr ""
 
-#: ../glib/gkeyfile.c:3708
+#: ../glib/gkeyfile.c:3715
 msgid "Key file contains escape character at end of line"
 msgstr ""
 
-#: ../glib/gkeyfile.c:3730
+#: ../glib/gkeyfile.c:3737
 #, c-format
 msgid "Key file contains invalid escape sequence '%s'"
 msgstr ""
 
-#: ../glib/gkeyfile.c:3872
+#: ../glib/gkeyfile.c:3879
 #, c-format
 msgid "Value '%s' cannot be interpreted as a number."
 msgstr ""
 
-#: ../glib/gkeyfile.c:3886
+#: ../glib/gkeyfile.c:3893
 #, c-format
 msgid "Integer value '%s' out of range"
 msgstr ""
 
-#: ../glib/gkeyfile.c:3919
+#: ../glib/gkeyfile.c:3926
 #, c-format
 msgid "Value '%s' cannot be interpreted as a float number."
 msgstr ""
 
-#: ../glib/gkeyfile.c:3943
+#: ../glib/gkeyfile.c:3950
 #, c-format
 msgid "Value '%s' cannot be interpreted as a boolean."
 msgstr ""
@@ -1393,7 +1393,7 @@ msgstr ""
 
 #: ../gio/gcancellable.c:321 ../gio/gdbusconnection.c:1796
 #: ../gio/gdbusconnection.c:1885 ../gio/gdbusconnection.c:2072
-#: ../gio/gdbusprivate.c:1391 ../gio/glocalfile.c:2100
+#: ../gio/gdbusprivate.c:1422 ../gio/glocalfile.c:2100
 #: ../gio/gsimpleasyncresult.c:815 ../gio/gsimpleasyncresult.c:841
 #, c-format
 msgid "Operation was cancelled"
@@ -1917,7 +1917,7 @@ msgstr ""
 msgid "Error return with empty body"
 msgstr ""
 
-#: ../gio/gdbusprivate.c:1996
+#: ../gio/gdbusprivate.c:2067
 msgid "Unable to load /var/lib/dbus/machine-id: "
 msgstr ""
 

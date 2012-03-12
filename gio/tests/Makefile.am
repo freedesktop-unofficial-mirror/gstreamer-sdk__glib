@@ -22,6 +22,7 @@ progs_ldadd     = 					\
 	$(top_builddir)/glib/libglib-2.0.la 		\
 	$(top_builddir)/gthread/libgthread-2.0.la	\
 	$(top_builddir)/gobject/libgobject-2.0.la	\
+	$(top_builddir)/gmodule/libgmodule-2.0.la	\
 	$(top_builddir)/gio/libgio-2.0.la
 
 TEST_PROGS +=	 		\
@@ -61,6 +62,7 @@ if OS_UNIX
 TEST_PROGS +=			\
 	gdbus-close-pending	\
 	gdbus-connection	\
+	gdbus-connection-flush	\
 	gdbus-connection-loss	\
 	gdbus-connection-slow	\
 	gdbus-names		\
@@ -296,6 +298,15 @@ endif # OS_UNIX
 gdbus_connection_SOURCES = gdbus-connection.c gdbus-sessionbus.c gdbus-sessionbus.h gdbus-tests.h gdbus-tests.c
 gdbus_connection_LDADD = $(progs_ldadd)
 
+gdbus_connection_flush_SOURCES = \
+	gdbus-connection-flush.c \
+	test-io-stream.c \
+	test-io-stream.h \
+	test-pipe-unix.c \
+	test-pipe-unix.h \
+	$(NULL)
+gdbus_connection_flush_LDADD = $(progs_ldadd)
+
 gdbus_connection_loss_SOURCES = gdbus-connection-loss.c gdbus-sessionbus.c gdbus-sessionbus.h gdbus-tests.h gdbus-tests.c
 gdbus_connection_loss_LDADD = $(progs_ldadd)
 
@@ -332,7 +343,15 @@ gdbus_error_LDADD = $(progs_ldadd)
 gdbus_peer_SOURCES = gdbus-peer.c gdbus-tests.h gdbus-tests.c
 gdbus_peer_LDADD = $(progs_ldadd)
 
-gdbus_non_socket_SOURCES = gdbus-non-socket.c gdbus-tests.h gdbus-tests.c
+gdbus_non_socket_SOURCES = \
+	gdbus-non-socket.c \
+	gdbus-tests.c \
+	gdbus-tests.h \
+	test-io-stream.c \
+	test-io-stream.h \
+	test-pipe-unix.c \
+	test-pipe-unix.h \
+	$(NULL)
 gdbus_non_socket_LDADD = $(progs_ldadd)
 
 gdbus_exit_on_close_SOURCES = gdbus-exit-on-close.c gdbus-sessionbus.c gdbus-sessionbus.h gdbus-tests.h gdbus-tests.c
