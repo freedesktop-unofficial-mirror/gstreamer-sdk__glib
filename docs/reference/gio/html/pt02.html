@@ -21,7 +21,7 @@
 </tr></table>
 <div class="part">
 <div class="titlepage"><div><div><h1 class="title">
-<a name="id488878"></a>Part II. API Reference</h1></div></div></div>
+<a name="id540078"></a>Part II. API Reference</h1></div></div></div>
 <div class="toc">
 <p><b>Table of Contents</b></p>
 <dl>
@@ -219,13 +219,16 @@
 <span class="refentrytitle"><a href="GAsyncInitable.html">GAsyncInitable</a></span><span class="refpurpose"> — Asynchronously failable object initialization interface</span>
 </dt>
 </dl></dd>
-<dt><span class="chapter"><a href="networking.html">Lowlevel network support</a></span></dt>
+<dt><span class="chapter"><a href="networking.html">Low-level network support</a></span></dt>
 <dd><dl>
 <dt>
 <span class="refentrytitle"><a href="GSocket.html">GSocket</a></span><span class="refpurpose"> — Low-level socket object</span>
 </dt>
 <dt>
 <span class="refentrytitle"><a href="GInetAddress.html">GInetAddress</a></span><span class="refpurpose"> — An IPv4/IPv6 address</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="gio-GInetAddressMask.html">GInetAddressMask</a></span><span class="refpurpose"> — An IPv4/IPv6 address mask</span>
 </dt>
 <dt>
 <span class="refentrytitle"><a href="GSocketAddress.html">GSocketAddress</a></span><span class="refpurpose"> — Abstract base class representing endpoints for
@@ -259,7 +262,7 @@ socket communication</span>
 <span class="refentrytitle"><a href="GProxyAddress.html">GProxyAddress</a></span><span class="refpurpose"> — An internet address with proxy information</span>
 </dt>
 </dl></dd>
-<dt><span class="chapter"><a href="highlevel-socket.html">Highlevel network functionallity</a></span></dt>
+<dt><span class="chapter"><a href="highlevel-socket.html">High-level network functionallity</a></span></dt>
 <dd><dl>
 <dt>
 <span class="refentrytitle"><a href="GSocketClient.html">GSocketClient</a></span><span class="refpurpose"> — Helper for connecting to a network service</span>
@@ -284,6 +287,9 @@ socket communication</span>
 </dt>
 <dt>
 <span class="refentrytitle"><a href="GThreadedSocketService.html">GThreadedSocketService</a></span><span class="refpurpose"> — A threaded GSocketService</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="GNetworkMonitor.html">GNetworkMonitor</a></span><span class="refpurpose"> — Network status monitor</span>
 </dt>
 </dl></dd>
 <dt><span class="chapter"><a href="tls.html">TLS (SSL) support</a></span></dt>
@@ -414,7 +420,15 @@ socket communication</span>
 <dt>
 <span class="refentrytitle"><a href="GSettingsBackend.html">GSettingsBackend</a></span><span class="refpurpose"> — Interface for settings backend implementations</span>
 </dt>
+<dt>
+<span class="refentrytitle"><a href="gio-GSettingsSchema-GSettingsSchemaSource.html">GSettingsSchema, GSettingsSchemaSource</a></span><span class="refpurpose"> — introspecting and controlling the loading of
+                    <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> schemas</span>
+</dt>
 </dl></dd>
+<dt><span class="chapter"><a href="resources.html">Resources</a></span></dt>
+<dd><dl><dt>
+<span class="refentrytitle"><a href="gio-GResource.html">GResource</a></span><span class="refpurpose"> — Resource framework</span>
+</dt></dl></dd>
 <dt><span class="chapter"><a href="permissions.html">Permissions</a></span></dt>
 <dd><dl>
 <dt>
@@ -428,22 +442,46 @@ socket communication</span>
 <dt><span class="chapter"><a href="application.html">Application support</a></span></dt>
 <dd><dl>
 <dt>
+<span class="refentrytitle"><a href="GApplication.html">GApplication</a></span><span class="refpurpose"> — Core application class</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="GApplicationCommandLine.html">GApplicationCommandLine</a></span><span class="refpurpose"> — A command-line invocation of an application</span>
+</dt>
+<dt>
 <span class="refentrytitle"><a href="GActionGroup.html">GActionGroup</a></span><span class="refpurpose"> — A group of actions</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="GActionMap.html">GActionMap</a></span><span class="refpurpose"> — Interface for action containers</span>
 </dt>
 <dt>
 <span class="refentrytitle"><a href="GSimpleActionGroup.html">GSimpleActionGroup</a></span><span class="refpurpose"> — A simple GActionGroup implementation</span>
 </dt>
 <dt>
-<span class="refentrytitle"><a href="GAction.html">GAction</a></span><span class="refpurpose"> — An action</span>
+<span class="refentrytitle"><a href="GAction.html">GAction</a></span><span class="refpurpose"> — An action interface</span>
 </dt>
 <dt>
-<span class="refentrytitle"><a href="GSimpleAction.html">GSimpleAction</a></span><span class="refpurpose"> — A simple GSimpleAction</span>
+<span class="refentrytitle"><a href="GSimpleAction.html">GSimpleAction</a></span><span class="refpurpose"> — A simple GAction implementation</span>
 </dt>
 <dt>
-<span class="refentrytitle"><a href="GApplication.html">GApplication</a></span><span class="refpurpose"> — Core application class</span>
+<span class="refentrytitle"><a href="GRemoteActionGroup.html">GRemoteActionGroup</a></span><span class="refpurpose"> — a <a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> that interacts with other processes</span>
 </dt>
 <dt>
-<span class="refentrytitle"><a href="GApplicationCommandLine.html">GApplicationCommandLine</a></span><span class="refpurpose"> — A command-line invocation of an application</span>
+<span class="refentrytitle"><a href="gio-GActionGroup-exporter.html">GActionGroup exporter</a></span><span class="refpurpose"> — Export GActionGroups on D-Bus</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="GDBusActionGroup.html">GDBusActionGroup</a></span><span class="refpurpose"> — A D-Bus GActionGroup implementation</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="GMenuModel.html">GMenuModel</a></span><span class="refpurpose"> — An abstract class representing the contents of a menu</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="GMenu.html">GMenu</a></span><span class="refpurpose"> — A simple implementation of GMenuModel</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="gio-GMenuModel-exporter.html">GMenuModel exporter</a></span><span class="refpurpose"> — Export GMenuModels on D-Bus</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="GDBusMenuModel.html">GDBusMenuModel</a></span><span class="refpurpose"> — A D-Bus GMenuModel implementation</span>
 </dt>
 </dl></dd>
 <dt><span class="chapter"><a href="extending.html">Extending GIO</a></span></dt>
@@ -470,10 +508,16 @@ socket communication</span>
 <span class="refentrytitle"><a href="glib-compile-schemas.html">glib-compile-schemas</a></span><span class="refpurpose"> — GSettings schema compiler</span>
 </dt>
 <dt>
+<span class="refentrytitle"><a href="glib-compile-resources.html">glib-compile-resources</a></span><span class="refpurpose"> — GLib resource compiler</span>
+</dt>
+<dt>
 <span class="refentrytitle"><a href="gdbus.html">gdbus</a></span><span class="refpurpose"> — Tool for working with D-Bus objects</span>
 </dt>
 <dt>
 <span class="refentrytitle"><a href="gdbus-codegen.html">gdbus-codegen</a></span><span class="refpurpose"> — D-Bus code and documentation generator</span>
+</dt>
+<dt>
+<span class="refentrytitle"><a href="gresource-tool.html">gresource</a></span><span class="refpurpose"> — GResource tool</span>
 </dt>
 </dl></dd>
 </dl>

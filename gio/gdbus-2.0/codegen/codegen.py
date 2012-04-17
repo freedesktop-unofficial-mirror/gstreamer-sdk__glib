@@ -2058,11 +2058,11 @@ class CodeGenerator:
 
         self.c.write('struct _%sSkeletonPrivate\n'
                      '{\n'
-                     '  GValueArray *properties;\n'
+                     '  GValue *properties;\n'
                      '  GList *changed_properties;\n'
                      '  GSource *changed_properties_idle_source;\n'
                      '  GMainContext *context;\n'
-                     '  GMutex *lock;\n'
+                     '  GMutex lock;\n'
                      '};\n'
                      '\n'%i.camel_name)
 
@@ -2086,7 +2086,7 @@ class CodeGenerator:
                      '  guint num_extra;\n'
                      '  guint n;\n'
                      '  guint signal_id;\n'
-                     '  GValue return_value = {0};\n'
+                     '  GValue return_value = G_VALUE_INIT;\n'
                      %(i.name_lower, i.camel_name, i.ns_upper, i.name_upper))
         self.c.write('  info = (_ExtendedGDBusMethodInfo *) g_dbus_method_invocation_get_method_info (invocation);\n'
                      '  g_assert (info != NULL);\n'
@@ -2149,7 +2149,7 @@ class CodeGenerator:
                      '  gpointer user_data)\n'
                      '{\n'
                      '  %sSkeleton *skeleton = %s%s_SKELETON (user_data);\n'
-                     '  GValue value = {0};\n'
+                     '  GValue value = G_VALUE_INIT;\n'
                      '  GParamSpec *pspec;\n'
                      '  _ExtendedGDBusPropertyInfo *info;\n'
                      '  GVariant *ret;\n'
@@ -2186,7 +2186,7 @@ class CodeGenerator:
                      '  gpointer user_data)\n'
                      '{\n'
                      '  %sSkeleton *skeleton = %s%s_SKELETON (user_data);\n'
-                     '  GValue value = {0};\n'
+                     '  GValue value = G_VALUE_INIT;\n'
                      '  GParamSpec *pspec;\n'
                      '  _ExtendedGDBusPropertyInfo *info;\n'
                      '  gboolean ret;\n'
@@ -2284,14 +2284,14 @@ class CodeGenerator:
             self.c.write('  %sSkeleton *skeleton = %s%s_SKELETON (_skeleton);\n'
                          '  gboolean emit_changed = FALSE;\n'
                          '\n'
-                         '  g_mutex_lock (skeleton->priv->lock);\n'
+                         '  g_mutex_lock (&skeleton->priv->lock);\n'
                          '  if (skeleton->priv->changed_properties_idle_source != NULL)\n'
                          '    {\n'
                          '      g_source_destroy (skeleton->priv->changed_properties_idle_source);\n'
                          '      skeleton->priv->changed_properties_idle_source = NULL;\n'
                          '      emit_changed = TRUE;\n'
                          '    }\n'
-                         '  g_mutex_unlock (skeleton->priv->lock);\n'
+                         '  g_mutex_unlock (&skeleton->priv->lock);\n'
                          '\n'
                          '  if (emit_changed)\n'
                          '    _%s_emit_changed (skeleton);\n'
@@ -2307,21 +2307,30 @@ class CodeGenerator:
                 self.c.write(',\n    %sarg_%s'%(a.ctype_in, a.name))
             self.c.write(')\n'
                          '{\n'
-                         '  %sSkeleton *skeleton = %s%s_SKELETON (object);\n'
-                         '  GDBusConnection *connection = g_dbus_interface_skeleton_get_connection (G_DBUS_INTERFACE_SKELETON (skeleton));\n'
+                         '  %sSkeleton *skeleton = %s%s_SKELETON (object);\n\n'
+                         '  GList      *connections, *l;\n'
+                         '  GVariant   *signal_variant;\n'
+                         '  connections = g_dbus_interface_skeleton_get_connections (G_DBUS_INTERFACE_SKELETON (skeleton));\n'
                          %(i.camel_name, i.ns_upper, i.name_upper))
-            self.c.write('  if (connection == NULL)\n'
-                         '    return;\n'
-                         '  g_dbus_connection_emit_signal (connection,\n'
-                         '    NULL, g_dbus_interface_skeleton_get_object_path (G_DBUS_INTERFACE_SKELETON (skeleton)), "%s", "%s",\n'
-                         '    g_variant_new ("('
-                         %(i.name, s.name))
+            self.c.write('\n'
+                         '  signal_variant = g_variant_ref_sink (g_variant_new ("(')
             for a in s.args:
                 self.c.write('%s'%(a.format_in))
             self.c.write(')"')
             for a in s.args:
                 self.c.write(',\n                   arg_%s'%(a.name))
-            self.c.write('), NULL);\n')
+            self.c.write('));\n')
+
+            self.c.write('  for (l = connections; l != NULL; l = l->next)\n'
+                         '    {\n'
+                         '      GDBusConnection *connection = l->data;\n'
+                         '      g_dbus_connection_emit_signal (connection,\n'
+                         '        NULL, g_dbus_interface_skeleton_get_object_path (G_DBUS_INTERFACE_SKELETON (skeleton)), "%s", "%s",\n'
+                         '        signal_variant, NULL);\n'
+                         '    }\n'
+                         %(i.name, s.name))
+            self.c.write('  g_variant_unref (signal_variant);\n')
+            self.c.write('  g_list_free_full (connections, g_object_unref);\n')
             self.c.write('}\n'
                          '\n')
 
@@ -2337,14 +2346,15 @@ class CodeGenerator:
                      '{\n'%(i.name_lower))
         self.c.write('  %sSkeleton *skeleton = %s%s_SKELETON (object);\n'%(i.camel_name, i.ns_upper, i.name_upper))
         if len(i.properties) > 0:
-            self.c.write('  g_value_array_free (skeleton->priv->properties);\n')
-        self.c.write('  g_list_foreach (skeleton->priv->changed_properties, (GFunc) _changed_property_free, NULL);\n')
-        self.c.write('  g_list_free (skeleton->priv->changed_properties);\n')
+            self.c.write('  guint n;\n'
+                         '  for (n = 0; n < %d; n++)\n'
+                         '    g_value_unset (&skeleton->priv->properties[n]);\n'%(len(i.properties)))
+            self.c.write('  g_free (skeleton->priv->properties);\n')
+        self.c.write('  g_list_free_full (skeleton->priv->changed_properties, (GDestroyNotify) _changed_property_free);\n')
         self.c.write('  if (skeleton->priv->changed_properties_idle_source != NULL)\n')
         self.c.write('    g_source_destroy (skeleton->priv->changed_properties_idle_source);\n')
-        self.c.write('  if (skeleton->priv->context != NULL)\n')
-        self.c.write('    g_main_context_unref (skeleton->priv->context);\n')
-        self.c.write('  g_mutex_free (skeleton->priv->lock);\n')
+        self.c.write('  g_main_context_unref (skeleton->priv->context);\n')
+        self.c.write('  g_mutex_clear (&skeleton->priv->lock);\n')
         self.c.write('  G_OBJECT_CLASS (%s_skeleton_parent_class)->finalize (object);\n'
                      '}\n'
                      '\n'%(i.name_lower))
@@ -2359,9 +2369,9 @@ class CodeGenerator:
                          '{\n'%(i.name_lower))
             self.c.write('  %sSkeleton *skeleton = %s%s_SKELETON (object);\n'
                          '  g_assert (prop_id != 0 && prop_id - 1 < %d);\n'
-                         '  g_mutex_lock (skeleton->priv->lock);\n'
-                         '  g_value_copy (&skeleton->priv->properties->values[prop_id - 1], value);\n'
-                         '  g_mutex_unlock (skeleton->priv->lock);\n'
+                         '  g_mutex_lock (&skeleton->priv->lock);\n'
+                         '  g_value_copy (&skeleton->priv->properties[prop_id - 1], value);\n'
+                         '  g_mutex_unlock (&skeleton->priv->lock);\n'
                          %(i.camel_name, i.ns_upper, i.name_upper, len(i.properties)))
             self.c.write('}\n'
                          '\n')
@@ -2388,7 +2398,7 @@ class CodeGenerator:
                          '  GVariantBuilder invalidated_builder;\n'
                          '  guint num_changes;\n'
                          '\n'
-                         '  g_mutex_lock (skeleton->priv->lock);\n'
+                         '  g_mutex_lock (&skeleton->priv->lock);\n'
                          '  g_variant_builder_init (&builder, G_VARIANT_TYPE ("a{sv}"));\n'
                          '  g_variant_builder_init (&invalidated_builder, G_VARIANT_TYPE ("as"));\n'
                          '  for (l = skeleton->priv->changed_properties, num_changes = 0; l != NULL; l = l->next)\n'
@@ -2397,7 +2407,7 @@ class CodeGenerator:
                          '      GVariant *variant;\n'
                          '      const GValue *cur_value;\n'
                          '\n'
-                         '      cur_value = &skeleton->priv->properties->values[cp->prop_id - 1];\n'
+                         '      cur_value = &skeleton->priv->properties[cp->prop_id - 1];\n'
                          '      if (!_g_value_equal (cur_value, &cp->orig_value))\n'
                          '        {\n'
                          '          variant = g_dbus_gvalue_to_gvariant (cur_value, G_VARIANT_TYPE (cp->info->parent_struct.signature));\n'
@@ -2408,14 +2418,25 @@ class CodeGenerator:
                          '    }\n'
                          '  if (num_changes > 0)\n'
                          '    {\n'
-                         '      g_dbus_connection_emit_signal (g_dbus_interface_skeleton_get_connection (G_DBUS_INTERFACE_SKELETON (skeleton)),\n'
-                         '                                     NULL, g_dbus_interface_skeleton_get_object_path (G_DBUS_INTERFACE_SKELETON (skeleton)),\n'
-                         '                                     "org.freedesktop.DBus.Properties",\n'
-                         '                                     "PropertiesChanged",\n'
-                         '                                     g_variant_new ("(sa{sv}as)",\n'
-                         '                                                    "%s",\n'
-                         '                                                    &builder, &invalidated_builder),\n'
-                         '                                     NULL);\n'
+                         '      GList *connections, *l;\n'
+                         '      GVariant *signal_variant;'
+                         '\n'
+                         '      signal_variant = g_variant_ref_sink (g_variant_new ("(sa{sv}as)", "%s",\n'
+                         '                                           &builder, &invalidated_builder));\n'
+                         '      connections = g_dbus_interface_skeleton_get_connections (G_DBUS_INTERFACE_SKELETON (skeleton));\n'
+                         '      for (l = connections; l != NULL; l = l->next)\n'
+                         '        {\n'
+                         '          GDBusConnection *connection = l->data;\n'
+                         '\n'
+                         '          g_dbus_connection_emit_signal (connection,\n'
+                         '                                         NULL, g_dbus_interface_skeleton_get_object_path (G_DBUS_INTERFACE_SKELETON (skeleton)),\n'
+                         '                                         "org.freedesktop.DBus.Properties",\n'
+                         '                                         "PropertiesChanged",\n'
+                         '                                         signal_variant,\n'
+                         '                                         NULL);\n'
+                         '        }\n'
+                         '      g_variant_unref (signal_variant);\n'
+                         '      g_list_free_full (connections, g_object_unref);\n'
                          '    }\n'
                          '  else\n'
                          '    {\n'
@@ -2423,11 +2444,10 @@ class CodeGenerator:
                          '      g_variant_builder_clear (&invalidated_builder);\n'
                          '    }\n'
                          %(i.name))
-            self.c.write('  g_list_foreach (skeleton->priv->changed_properties, (GFunc) _changed_property_free, NULL);\n')
-            self.c.write('  g_list_free (skeleton->priv->changed_properties);\n')
+            self.c.write('  g_list_free_full (skeleton->priv->changed_properties, (GDestroyNotify) _changed_property_free);\n')
             self.c.write('  skeleton->priv->changed_properties = NULL;\n')
             self.c.write('  skeleton->priv->changed_properties_idle_source = NULL;\n')
-            self.c.write('  g_mutex_unlock (skeleton->priv->lock);\n')
+            self.c.write('  g_mutex_unlock (&skeleton->priv->lock);\n')
             self.c.write('  return FALSE;\n'
                          '}\n'
                          '\n')
@@ -2470,7 +2490,7 @@ class CodeGenerator:
                          '  GParamSpec *pspec)\n'
                          '{\n'
                          '  %sSkeleton *skeleton = %s%s_SKELETON (object);\n'
-                         '  g_mutex_lock (skeleton->priv->lock);\n'
+                         '  g_mutex_lock (&skeleton->priv->lock);\n'
                          '  if (skeleton->priv->changed_properties != NULL &&\n'
                          '      skeleton->priv->changed_properties_idle_source == NULL)\n'
                          '    {\n'
@@ -2480,7 +2500,7 @@ class CodeGenerator:
                          '      g_source_attach (skeleton->priv->changed_properties_idle_source, skeleton->priv->context);\n'
                          '      g_source_unref (skeleton->priv->changed_properties_idle_source);\n'
                          '    }\n'
-                         '  g_mutex_unlock (skeleton->priv->lock);\n'
+                         '  g_mutex_unlock (&skeleton->priv->lock);\n'
                          '}\n'
                          '\n'
                          %(i.name_lower, i.camel_name, i.ns_upper, i.name_upper, i.name_lower))
@@ -2493,16 +2513,16 @@ class CodeGenerator:
                          '{\n'%(i.name_lower))
             self.c.write('  %sSkeleton *skeleton = %s%s_SKELETON (object);\n'
                          '  g_assert (prop_id != 0 && prop_id - 1 < %d);\n'
-                         '  g_mutex_lock (skeleton->priv->lock);\n'
+                         '  g_mutex_lock (&skeleton->priv->lock);\n'
                          '  g_object_freeze_notify (object);\n'
-                         '  if (!_g_value_equal (value, &skeleton->priv->properties->values[prop_id - 1]))\n'
+                         '  if (!_g_value_equal (value, &skeleton->priv->properties[prop_id - 1]))\n'
                          '    {\n'
                          '      if (g_dbus_interface_skeleton_get_connection (G_DBUS_INTERFACE_SKELETON (skeleton)) != NULL)\n'
-                         '        _%s_schedule_emit_changed (skeleton, _%s_property_info_pointers[prop_id - 1], prop_id, &skeleton->priv->properties->values[prop_id - 1]);\n'
-                         '      g_value_copy (value, &skeleton->priv->properties->values[prop_id - 1]);\n'
+                         '        _%s_schedule_emit_changed (skeleton, _%s_property_info_pointers[prop_id - 1], prop_id, &skeleton->priv->properties[prop_id - 1]);\n'
+                         '      g_value_copy (value, &skeleton->priv->properties[prop_id - 1]);\n'
                          '      g_object_notify_by_pspec (object, pspec);\n'
                          '    }\n'
-                         '  g_mutex_unlock (skeleton->priv->lock);\n'
+                         '  g_mutex_unlock (&skeleton->priv->lock);\n'
                          '  g_object_thaw_notify (object);\n'
                          %(i.camel_name, i.ns_upper, i.name_upper, len(i.properties), i.name_lower, i.name_lower))
             self.c.write('}\n'
@@ -2513,16 +2533,13 @@ class CodeGenerator:
                      '{\n'
                      '  skeleton->priv = G_TYPE_INSTANCE_GET_PRIVATE (skeleton, %sTYPE_%s_SKELETON, %sSkeletonPrivate);\n'
                      %(i.name_lower, i.camel_name, i.ns_upper, i.name_upper, i.camel_name))
-        self.c.write('  skeleton->priv->lock = g_mutex_new ();\n')
-        self.c.write('  skeleton->priv->context = g_main_context_get_thread_default ();\n')
-        self.c.write('  if (skeleton->priv->context != NULL)\n')
-        self.c.write('    g_main_context_ref (skeleton->priv->context);\n')
+        self.c.write('  g_mutex_init (&skeleton->priv->lock);\n')
+        self.c.write('  skeleton->priv->context = g_main_context_ref_thread_default ();\n')
         if len(i.properties) > 0:
-            self.c.write('  skeleton->priv->properties = g_value_array_new (%d);\n'%(len(i.properties)))
+            self.c.write('  skeleton->priv->properties = g_new0 (GValue, %d);\n'%(len(i.properties)))
             n = 0
             for p in i.properties:
-                self.c.write('  g_value_array_append (skeleton->priv->properties, NULL);\n')
-                self.c.write('  g_value_init (&skeleton->priv->properties->values[%d], %s);\n'%(n, p.arg.gtype))
+                self.c.write('  g_value_init (&skeleton->priv->properties[%d], %s);\n'%(n, p.arg.gtype))
                 n += 1
         self.c.write('}\n'
                      '\n')
@@ -2536,9 +2553,9 @@ class CodeGenerator:
                          %(p.arg.ctype_in, i.name_lower, p.name_lower, i.camel_name))
             self.c.write('  %sSkeleton *skeleton = %s%s_SKELETON (object);\n'%(i.camel_name, i.ns_upper, i.name_upper))
             self.c.write('  %svalue;\n'
-                         '  g_mutex_lock (skeleton->priv->lock);\n'
-                         '  value = %s (&(skeleton->priv->properties->values[%d]));\n'
-                         '  g_mutex_unlock (skeleton->priv->lock);\n'
+                         '  g_mutex_lock (&skeleton->priv->lock);\n'
+                         '  value = %s (&(skeleton->priv->properties[%d]));\n'
+                         '  g_mutex_unlock (&skeleton->priv->lock);\n'
                          %(p.arg.ctype_in_g, p.arg.gvalue_get, n))
             self.c.write('  return value;\n')
             self.c.write('}\n')

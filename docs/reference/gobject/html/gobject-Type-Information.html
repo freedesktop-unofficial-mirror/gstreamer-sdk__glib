@@ -1579,6 +1579,9 @@ to initialize the type system and assorted other code portions
 system).
 </p>
 <p>
+This function is idempotent.
+</p>
+<p>
 Since version 2.24 this also initializes the thread system
 </p>
 </div>
@@ -1631,6 +1634,9 @@ Note that the messages can also be triggered by setting the
 <pre class="programlisting"><span class="returnvalue">void</span>                g_type_init_with_debug_flags        (<em class="parameter"><code><a class="link" href="gobject-Type-Information.html#GTypeDebugFlags" title="enum GTypeDebugFlags"><span class="type">GTypeDebugFlags</span></a> debug_flags</code></em>);</pre>
 <p>
 Similar to <a class="link" href="gobject-Type-Information.html#g-type-init" title="g_type_init ()"><code class="function">g_type_init()</code></a>, but additionally sets debug flags.
+</p>
+<p>
+This function is idempotent.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -1980,6 +1986,8 @@ The following example shows attaching a private structure
 <span class="structname">MyObject</span> defined in the standard GObject
 fashion.
 type's <code class="function">class_init()</code> function.
+Note the use of a structure member "priv" to avoid the overhead
+of repeatedly calling <code class="function">MY_OBJECT_GET_PRIVATE()</code>.
 </p>
 <p>
 </p>
@@ -2020,7 +2028,11 @@ type's <code class="function">class_init()</code> function.
 31
 32
 33
-34</pre></td>
+34
+35
+36
+37
+38</pre></td>
         <td class="listing_code"><pre class="programlisting"><span class="keyword">typedef</span><span class="normal"> </span><span class="keyword">struct</span><span class="normal"> </span><span class="classname">_MyObject</span><span class="normal">        MyObject</span><span class="symbol">;</span>
 <span class="keyword">typedef</span><span class="normal"> </span><span class="keyword">struct</span><span class="normal"> </span><span class="classname">_MyObjectPrivate</span><span class="normal"> MyObjectPrivate</span><span class="symbol">;</span>
 
@@ -2051,7 +2063,11 @@ type's <code class="function">class_init()</code> function.
 <span class="keyword">static</span><span class="normal"> </span><span class="type">int</span>
 <span class="function">my_object_get_some_field</span><span class="normal"> </span><span class="symbol">(</span><span class="usertype">MyObject</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">my_object</span><span class="symbol">)</span>
 <span class="cbracket">{</span>
-<span class="normal">  </span><span class="usertype">MyObjectPrivate</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">priv </span><span class="symbol">=</span><span class="normal"> my_object</span><span class="symbol">-&gt;</span><span class="normal">priv</span><span class="symbol">;</span>
+<span class="normal">  </span><span class="usertype">MyObjectPrivate</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">priv</span><span class="symbol">;</span>
+
+<span class="normal">  </span><span class="function"><a href="./../glib/glib/glib-Warnings-and-Assertions.html#g-return-val-if-fail">g_return_val_if_fail</a></span><span class="normal"> </span><span class="symbol">(</span><span class="function">MY_IS_OBJECT</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">my_object</span><span class="symbol">),</span><span class="normal"> </span><span class="number">0</span><span class="symbol">);</span>
+
+<span class="normal">  priv </span><span class="symbol">=</span><span class="normal"> my_object</span><span class="symbol">-&gt;</span><span class="normal">priv</span><span class="symbol">;</span>
 
 <span class="normal">  </span><span class="keyword">return</span><span class="normal"> priv</span><span class="symbol">-&gt;</span><span class="normal">some_field</span><span class="symbol">;</span>
 <span class="cbracket">}</span></pre></td>
@@ -3044,10 +3060,11 @@ instances (if not abstract).  The value of <em class="parameter"><code>flags</co
                                                          <em class="parameter"><code><a class="link" href="gobject-Type-Information.html#GTypeFlags" title="enum GTypeFlags"><span class="type">GTypeFlags</span></a> flags</code></em>);</pre>
 <p>
 Registers <em class="parameter"><code>type_id</code></em> as the predefined identifier and <em class="parameter"><code>type_name</code></em> as the
-name of a fundamental type.  The type system uses the information
-contained in the <a class="link" href="gobject-Type-Information.html#GTypeInfo" title="struct GTypeInfo"><span class="type">GTypeInfo</span></a> structure pointed to by <em class="parameter"><code>info</code></em> and the
-<a class="link" href="gobject-Type-Information.html#GTypeFundamentalInfo" title="struct GTypeFundamentalInfo"><span class="type">GTypeFundamentalInfo</span></a> structure pointed to by <em class="parameter"><code>finfo</code></em> to manage the
-type and its instances.  The value of <em class="parameter"><code>flags</code></em> determines additional
+name of a fundamental type. If <em class="parameter"><code>type_id</code></em> is already registered, or a type
+named <em class="parameter"><code>type_name</code></em> is already registered, the behaviour is undefined. The type
+system uses the information contained in the <a class="link" href="gobject-Type-Information.html#GTypeInfo" title="struct GTypeInfo"><span class="type">GTypeInfo</span></a> structure pointed to
+by <em class="parameter"><code>info</code></em> and the <a class="link" href="gobject-Type-Information.html#GTypeFundamentalInfo" title="struct GTypeFundamentalInfo"><span class="type">GTypeFundamentalInfo</span></a> structure pointed to by <em class="parameter"><code>finfo</code></em> to
+manage the type and its instances. The value of <em class="parameter"><code>flags</code></em> determines additional
 characteristics of the fundamental type.
 </p>
 <div class="variablelist"><table border="0">
@@ -3830,7 +3847,7 @@ expands to
 <span class="normal">                                       </span><span class="symbol">(</span><span class="normal"><a href="gobject-Type-Information.html#GInstanceInitFunc">GInstanceInitFunc</a></span><span class="symbol">)</span><span class="normal"> gtk_gadget_init</span><span class="symbol">,</span>
 <span class="normal">                                       </span><span class="symbol">(</span><span class="normal"><a href="gobject-Type-Information.html#GTypeFlags">GTypeFlags</a></span><span class="symbol">)</span><span class="normal"> flags</span><span class="symbol">);</span>
 <span class="normal">      </span><span class="cbracket">{</span>
-<span class="normal">        </span><span class="keyword">static</span><span class="normal"> </span><span class="keyword">const</span><span class="normal"> </span><span class="usertype">GInterfaceInfo</span><span class="normal"> g_implement_interface_info </span><span class="symbol">=</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">        </span><span class="keyword">const</span><span class="normal"> </span><span class="usertype">GInterfaceInfo</span><span class="normal"> g_implement_interface_info </span><span class="symbol">=</span><span class="normal"> </span><span class="cbracket">{</span>
 <span class="normal">          </span><span class="symbol">(</span><span class="normal"><a href="gobject-Type-Information.html#GInterfaceInitFunc">GInterfaceInitFunc</a></span><span class="symbol">)</span><span class="normal"> gtk_gadget_gizmo_init</span>
 <span class="normal">        </span><span class="cbracket">}</span><span class="symbol">;</span>
 <span class="normal">        </span><span class="function"><a href="gobject-Type-Information.html#g-type-add-interface-static">g_type_add_interface_static</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">g_define_type_id</span><span class="symbol">,</span><span class="normal"> TYPE_GIZMO</span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">&amp;</span><span class="normal">g_implement_interface_info</span><span class="symbol">);</span>

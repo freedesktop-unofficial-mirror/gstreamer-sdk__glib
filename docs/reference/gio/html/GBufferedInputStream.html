@@ -302,7 +302,9 @@ offset <em class="parameter"><code>offset</code></em> bytes.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>buffer</code></em> :</span></p></td>
-<td>a pointer to an allocated chunk of memory</td>
+<td>a pointer to
+an allocated chunk of memory. <span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=count][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> guint8]</span>
+</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>offset</code></em> :</span></p></td>
@@ -334,7 +336,7 @@ Will block during this read.
 </p>
 <p>
 If <em class="parameter"><code>count</code></em> is zero, returns zero and does nothing. A value of <em class="parameter"><code>count</code></em>
-larger than <a href="./../glib/glib/glib-Limits-of-Basic-Types.html#G-MAXSSIZE:CAPS"><code class="literal">G_MAXSSIZE</code></a> will cause a <a class="link" href="gio-GIOError.html#G-IO-ERROR-INVALID-ARGUMENT:CAPS"><code class="literal">G_IO_ERROR_INVALID_ARGUMENT</code></a> error.
+larger than <a href="./../glib/glib/glib-Basic-Types.html#G-MAXSSIZE:CAPS"><code class="literal">G_MAXSSIZE</code></a> will cause a <a class="link" href="gio-GIOError.html#G-IO-ERROR-INVALID-ARGUMENT:CAPS"><code class="literal">G_IO_ERROR_INVALID_ARGUMENT</code></a> error.
 </p>
 <p>
 On success, the number of bytes read into the buffer is returned.

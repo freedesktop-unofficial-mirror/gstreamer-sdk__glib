@@ -19,7 +19,7 @@
  * Author: Ryan Lortie <desrt@desrt.ca>
  */
 
-#if defined(G_DISABLE_SINGLE_INCLUDES) && !defined (__GLIB_H_INSIDE__) && !defined (GLIB_COMPILATION)
+#if !defined (__GLIB_H_INSIDE__) && !defined (GLIB_COMPILATION)
 #error "Only <glib.h> can be included directly."
 #endif
 
@@ -62,14 +62,13 @@ gsize                   g_atomic_pointer_or                   (volatile void  *a
 gsize                   g_atomic_pointer_xor                  (volatile void  *atomic,
                                                                gsize           val);
 
-#ifndef G_DISABLE_DEPRECATED
+GLIB_DEPRECATED_IN_2_30_FOR(g_atomic_add)
 gint                    g_atomic_int_exchange_and_add         (volatile gint  *atomic,
                                                                gint            val);
-#endif
 
 G_END_DECLS
 
-#if defined(__GNUC__) && defined(G_ATOMIC_OP_USE_GCC_BUILTINS)
+#if defined(G_ATOMIC_LOCK_FREE) && defined(__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4)
 
 #define g_atomic_int_get(atomic) \
   (G_GNUC_EXTENSION ({                                                          \
@@ -176,7 +175,7 @@ G_END_DECLS
     (gsize) __sync_fetch_and_xor ((atomic), (val));                          \
   }))
 
-#else /* defined(__GNUC__) && defined(G_ATOMIC_OP_USE_GCC_BUILTINS) */
+#else /* defined(G_ATOMIC_LOCK_FREE) && defined(__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4) */
 
 #define g_atomic_int_get(atomic) \
   (g_atomic_int_get ((gint *) (atomic)))
@@ -187,11 +186,11 @@ G_END_DECLS
 #define g_atomic_int_add(atomic, val) \
   (g_atomic_int_add ((gint *) (atomic), (val)))
 #define g_atomic_int_and(atomic, val) \
-  (g_atomic_int_and ((gint *) (atomic), (val)))
+  (g_atomic_int_and ((guint *) (atomic), (val)))
 #define g_atomic_int_or(atomic, val) \
-  (g_atomic_int_or ((gint *) (atomic), (val)))
+  (g_atomic_int_or ((guint *) (atomic), (val)))
 #define g_atomic_int_xor(atomic, val) \
-  (g_atomic_int_xor ((gint *) (atomic), (val)))
+  (g_atomic_int_xor ((guint *) (atomic), (val)))
 #define g_atomic_int_inc(atomic) \
   (g_atomic_int_inc ((gint *) (atomic)))
 #define g_atomic_int_dec_and_test(atomic) \

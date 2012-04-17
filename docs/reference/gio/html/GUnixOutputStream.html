@@ -67,7 +67,7 @@ struct              <a class="link" href="GUnixOutputStream.html#GUnixOutputStre
 <a name="GUnixOutputStream.implemented-interfaces"></a><h2>Implemented Interfaces</h2>
 <p>
 GUnixOutputStream implements
- <a class="link" href="GPollableOutputStream.html" title="GPollableOutputStream">GPollableOutputStream</a>.</p>
+ <a class="link" href="GPollableOutputStream.html" title="GPollableOutputStream">GPollableOutputStream</a> and  <a class="link" href="GFileDescriptorBased.html" title="GFileDescriptorBased">GFileDescriptorBased</a>.</p>
 </div>
 <div class="refsect1">
 <a name="GUnixOutputStream.properties"></a><h2>Properties</h2>
@@ -79,9 +79,11 @@ GUnixOutputStream implements
 <div class="refsect1">
 <a name="GUnixOutputStream.description"></a><h2>Description</h2>
 <p>
-<a class="link" href="GUnixOutputStream.html" title="GUnixOutputStream"><span class="type">GUnixOutputStream</span></a> implements <a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> for writing to a
-UNIX file descriptor, including asynchronous operations. The file
-descriptor must be selectable, so it doesn't work with opened files.
+<a class="link" href="GUnixOutputStream.html" title="GUnixOutputStream"><span class="type">GUnixOutputStream</span></a> implements <a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> for writing to a UNIX
+file descriptor, including asynchronous operations. (If the file
+descriptor refers to a socket or pipe, this will use <code class="function">poll()</code> to do
+asynchronous I/O. If it refers to a regular file, it will fall back
+to doing asynchronous I/O in another thread.)
 </p>
 <p>
 Note that <code class="filename">&lt;gio/gunixoutputstream.h&gt;</code> belongs

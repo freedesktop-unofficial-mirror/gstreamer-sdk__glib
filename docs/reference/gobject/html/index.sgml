@@ -259,6 +259,11 @@
 <ANCHOR id="g-object-watch-closure" href="gobject/gobject-The-Base-Object-Type.html#g-object-watch-closure">
 <ANCHOR id="g-object-run-dispose" href="gobject/gobject-The-Base-Object-Type.html#g-object-run-dispose">
 <ANCHOR id="G-OBJECT-WARN-INVALID-PROPERTY-ID:CAPS" href="gobject/gobject-The-Base-Object-Type.html#G-OBJECT-WARN-INVALID-PROPERTY-ID:CAPS">
+<ANCHOR id="GWeakRef" href="gobject/gobject-The-Base-Object-Type.html#GWeakRef">
+<ANCHOR id="g-weak-ref-init" href="gobject/gobject-The-Base-Object-Type.html#g-weak-ref-init">
+<ANCHOR id="g-weak-ref-clear" href="gobject/gobject-The-Base-Object-Type.html#g-weak-ref-clear">
+<ANCHOR id="g-weak-ref-get" href="gobject/gobject-The-Base-Object-Type.html#g-weak-ref-get">
+<ANCHOR id="g-weak-ref-set" href="gobject/gobject-The-Base-Object-Type.html#g-weak-ref-set">
 <ANCHOR id="gobject-The-Base-Object-Type.signal-details" href="gobject/gobject-The-Base-Object-Type.html#gobject-The-Base-Object-Type.signal-details">
 <ANCHOR id="GObject-notify" href="gobject/gobject-The-Base-Object-Type.html#GObject-notify">
 <ANCHOR id="gobject-The-Base-Object-Type.see-also" href="gobject/gobject-The-Base-Object-Type.html#gobject-The-Base-Object-Type.see-also">
@@ -310,12 +315,14 @@
 <ANCHOR id="G-TYPE-ARRAY:CAPS" href="gobject/gobject-Boxed-Types.html#G-TYPE-ARRAY:CAPS">
 <ANCHOR id="G-TYPE-BYTE-ARRAY:CAPS" href="gobject/gobject-Boxed-Types.html#G-TYPE-BYTE-ARRAY:CAPS">
 <ANCHOR id="G-TYPE-PTR-ARRAY:CAPS" href="gobject/gobject-Boxed-Types.html#G-TYPE-PTR-ARRAY:CAPS">
+<ANCHOR id="G-TYPE-BYTES:CAPS" href="gobject/gobject-Boxed-Types.html#G-TYPE-BYTES:CAPS">
 <ANCHOR id="G-TYPE-VARIANT-TYPE:CAPS" href="gobject/gobject-Boxed-Types.html#G-TYPE-VARIANT-TYPE:CAPS">
 <ANCHOR id="G-TYPE-ERROR:CAPS" href="gobject/gobject-Boxed-Types.html#G-TYPE-ERROR:CAPS">
 <ANCHOR id="G-TYPE-DATE-TIME:CAPS" href="gobject/gobject-Boxed-Types.html#G-TYPE-DATE-TIME:CAPS">
 <ANCHOR id="G-TYPE-IO-CHANNEL:CAPS" href="gobject/gobject-Boxed-Types.html#G-TYPE-IO-CHANNEL:CAPS">
 <ANCHOR id="G-TYPE-IO-CONDITION:CAPS" href="gobject/gobject-Boxed-Types.html#G-TYPE-IO-CONDITION:CAPS">
 <ANCHOR id="G-TYPE-VARIANT-BUILDER:CAPS" href="gobject/gobject-Boxed-Types.html#G-TYPE-VARIANT-BUILDER:CAPS">
+<ANCHOR id="G-TYPE-KEY-FILE:CAPS" href="gobject/gobject-Boxed-Types.html#G-TYPE-KEY-FILE:CAPS">
 <ANCHOR id="G-TYPE-MAIN-CONTEXT:CAPS" href="gobject/gobject-Boxed-Types.html#G-TYPE-MAIN-CONTEXT:CAPS">
 <ANCHOR id="G-TYPE-MAIN-LOOP:CAPS" href="gobject/gobject-Boxed-Types.html#G-TYPE-MAIN-LOOP:CAPS">
 <ANCHOR id="G-TYPE-SOURCE:CAPS" href="gobject/gobject-Boxed-Types.html#G-TYPE-SOURCE:CAPS">
@@ -369,6 +376,8 @@
 <ANCHOR id="g-param-spec-char" href="gobject/gobject-Standard-Parameter-and-Value-Types.html#g-param-spec-char">
 <ANCHOR id="g-value-set-char" href="gobject/gobject-Standard-Parameter-and-Value-Types.html#g-value-set-char">
 <ANCHOR id="g-value-get-char" href="gobject/gobject-Standard-Parameter-and-Value-Types.html#g-value-get-char">
+<ANCHOR id="g-value-get-schar" href="gobject/gobject-Standard-Parameter-and-Value-Types.html#g-value-get-schar">
+<ANCHOR id="g-value-set-schar" href="gobject/gobject-Standard-Parameter-and-Value-Types.html#g-value-set-schar">
 <ANCHOR id="G-IS-PARAM-SPEC-UCHAR:CAPS" href="gobject/gobject-Standard-Parameter-and-Value-Types.html#G-IS-PARAM-SPEC-UCHAR:CAPS">
 <ANCHOR id="G-PARAM-SPEC-UCHAR:CAPS" href="gobject/gobject-Standard-Parameter-and-Value-Types.html#G-PARAM-SPEC-UCHAR:CAPS">
 <ANCHOR id="G-VALUE-HOLDS-UCHAR:CAPS" href="gobject/gobject-Standard-Parameter-and-Value-Types.html#G-VALUE-HOLDS-UCHAR:CAPS">
@@ -630,6 +639,7 @@
 <ANCHOR id="G-SIGNAL-ACTION:CAPS" href="gobject/gobject-Signals.html#G-SIGNAL-ACTION:CAPS">
 <ANCHOR id="G-SIGNAL-NO-HOOKS:CAPS" href="gobject/gobject-Signals.html#G-SIGNAL-NO-HOOKS:CAPS">
 <ANCHOR id="G-SIGNAL-MUST-COLLECT:CAPS" href="gobject/gobject-Signals.html#G-SIGNAL-MUST-COLLECT:CAPS">
+<ANCHOR id="G-SIGNAL-DEPRECATED:CAPS" href="gobject/gobject-Signals.html#G-SIGNAL-DEPRECATED:CAPS">
 <ANCHOR id="GSignalMatchType" href="gobject/gobject-Signals.html#GSignalMatchType">
 <ANCHOR id="G-SIGNAL-MATCH-ID:CAPS" href="gobject/gobject-Signals.html#G-SIGNAL-MATCH-ID:CAPS">
 <ANCHOR id="G-SIGNAL-MATCH-DETAIL:CAPS" href="gobject/gobject-Signals.html#G-SIGNAL-MATCH-DETAIL:CAPS">
@@ -673,6 +683,7 @@
 <ANCHOR id="g-signal-handlers-block-by-func" href="gobject/gobject-Signals.html#g-signal-handlers-block-by-func">
 <ANCHOR id="g-signal-handlers-unblock-by-func" href="gobject/gobject-Signals.html#g-signal-handlers-unblock-by-func">
 <ANCHOR id="g-signal-handlers-disconnect-by-func" href="gobject/gobject-Signals.html#g-signal-handlers-disconnect-by-func">
+<ANCHOR id="g-signal-handlers-disconnect-by-data" href="gobject/gobject-Signals.html#g-signal-handlers-disconnect-by-data">
 <ANCHOR id="g-signal-has-handler-pending" href="gobject/gobject-Signals.html#g-signal-has-handler-pending">
 <ANCHOR id="g-signal-stop-emission" href="gobject/gobject-Signals.html#g-signal-stop-emission">
 <ANCHOR id="g-signal-stop-emission-by-name" href="gobject/gobject-Signals.html#g-signal-stop-emission-by-name">

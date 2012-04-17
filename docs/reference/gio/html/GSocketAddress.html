@@ -5,8 +5,8 @@
 <title>GSocketAddress</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="GIO Reference Manual">
-<link rel="up" href="networking.html" title="Lowlevel network support">
-<link rel="prev" href="GInetAddress.html" title="GInetAddress">
+<link rel="up" href="networking.html" title="Low-level network support">
+<link rel="prev" href="gio-GInetAddressMask.html" title="GInetAddressMask">
 <link rel="next" href="GInetSocketAddress.html" title="GInetSocketAddress">
 <meta name="generator" content="GTK-Doc V1.18 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
@@ -14,7 +14,7 @@
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
 <tr valign="middle">
-<td><a accesskey="p" href="GInetAddress.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="p" href="gio-GInetAddressMask.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
 <td><a accesskey="u" href="networking.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
 <th width="100%" align="center">GIO Reference Manual</th>
@@ -101,9 +101,7 @@ or one of its subtypes.
 <a name="GSocketFamily"></a><h3>enum GSocketFamily</h3>
 <pre class="programlisting">typedef enum {
   G_SOCKET_FAMILY_INVALID,
-#ifdef GLIB_SYSDEF_AF_UNIX
   G_SOCKET_FAMILY_UNIX = GLIB_SYSDEF_AF_UNIX,
-#endif
   G_SOCKET_FAMILY_IPV4 = GLIB_SYSDEF_AF_INET,
   G_SOCKET_FAMILY_IPV6 = GLIB_SYSDEF_AF_INET6
 } GSocketFamily;

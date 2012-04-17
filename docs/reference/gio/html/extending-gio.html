@@ -114,6 +114,15 @@
        glib-networking contains an implementation of this extension
        point.
      </p>
+<p><b>G_NETWORK_MONITOR_EXTENSION_POINT_NAME. </b>
+       Allows to provide implementations for network connectivity
+       monitoring.
+       Implementations of this extension point must implement
+       the <a class="link" href="GNetworkMonitor.html#GNetworkMonitorInterface" title="struct GNetworkMonitorInterface"><span class="type">GNetworkMonitorInterface</span></a> interface.
+     
+       GIO contains an implementation of this extension point
+       that is using the netlink interface of the Linux kernel.
+     </p>
 </div>
 <div class="footer">
 <hr>

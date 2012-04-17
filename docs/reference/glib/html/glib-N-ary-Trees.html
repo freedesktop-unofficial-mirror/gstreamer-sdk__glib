@@ -66,6 +66,9 @@ struct              <a class="link" href="glib-N-ary-Trees.html#GNode" title="st
 #define             <a class="link" href="glib-N-ary-Trees.html#g-node-insert-data" title="g_node_insert_data()">g_node_insert_data</a>                  (parent,
                                                          position,
                                                          data)
+#define             <a class="link" href="glib-N-ary-Trees.html#g-node-insert-data-after" title="g_node_insert_data_after()">g_node_insert_data_after</a>            (parent,
+                                                         sibling,
+                                                         data)
 #define             <a class="link" href="glib-N-ary-Trees.html#g-node-insert-data-before" title="g_node_insert_data_before()">g_node_insert_data_before</a>           (parent,
                                                          sibling,
                                                          data)
@@ -124,9 +127,6 @@ enum                <a class="link" href="glib-N-ary-Trees.html#GTraverseFlags" 
 
 <span class="returnvalue">void</span>                <a class="link" href="glib-N-ary-Trees.html#g-node-unlink" title="g_node_unlink ()">g_node_unlink</a>                       (<em class="parameter"><code><a class="link" href="glib-N-ary-Trees.html#GNode" title="struct GNode"><span class="type">GNode</span></a> *node</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="glib-N-ary-Trees.html#g-node-destroy" title="g_node_destroy ()">g_node_destroy</a>                      (<em class="parameter"><code><a class="link" href="glib-N-ary-Trees.html#GNode" title="struct GNode"><span class="type">GNode</span></a> *root</code></em>);
-
-<span class="returnvalue">void</span>                <a class="link" href="glib-N-ary-Trees.html#g-node-push-allocator" title="g_node_push_allocator ()">g_node_push_allocator</a>               (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> dummy</code></em>);
-<span class="returnvalue">void</span>                <a class="link" href="glib-N-ary-Trees.html#g-node-pop-allocator" title="g_node_pop_allocator ()">g_node_pop_allocator</a>                (<em class="parameter"><code><span class="type">void</span></code></em>);
 </pre>
 </div>
 <div class="refsect1">
@@ -144,8 +144,9 @@ To insert a node into a tree use <a class="link" href="glib-N-ary-Trees.html#g-n
 </p>
 <p>
 To create a new node and insert it into a tree use
-<a class="link" href="glib-N-ary-Trees.html#g-node-insert-data" title="g_node_insert_data()"><code class="function">g_node_insert_data()</code></a>, <a class="link" href="glib-N-ary-Trees.html#g-node-insert-data-before" title="g_node_insert_data_before()"><code class="function">g_node_insert_data_before()</code></a>,
-<a class="link" href="glib-N-ary-Trees.html#g-node-append-data" title="g_node_append_data()"><code class="function">g_node_append_data()</code></a> and <a class="link" href="glib-N-ary-Trees.html#g-node-prepend-data" title="g_node_prepend_data()"><code class="function">g_node_prepend_data()</code></a>.
+<a class="link" href="glib-N-ary-Trees.html#g-node-insert-data" title="g_node_insert_data()"><code class="function">g_node_insert_data()</code></a>, <a class="link" href="glib-N-ary-Trees.html#g-node-insert-data-after" title="g_node_insert_data_after()"><code class="function">g_node_insert_data_after()</code></a>,
+<a class="link" href="glib-N-ary-Trees.html#g-node-insert-data-before" title="g_node_insert_data_before()"><code class="function">g_node_insert_data_before()</code></a>, <a class="link" href="glib-N-ary-Trees.html#g-node-append-data" title="g_node_append_data()"><code class="function">g_node_append_data()</code></a>
+and <a class="link" href="glib-N-ary-Trees.html#g-node-prepend-data" title="g_node_prepend_data()"><code class="function">g_node_prepend_data()</code></a>.
 </p>
 <p>
 To reverse the children of a node use <a class="link" href="glib-N-ary-Trees.html#g-node-reverse-children" title="g_node_reverse_children ()"><code class="function">g_node_reverse_children()</code></a>.
@@ -498,6 +499,37 @@ Inserts a new <a class="link" href="glib-N-ary-Trees.html#GNode" title="struct G
 <td>the position to place the new <a class="link" href="glib-N-ary-Trees.html#GNode" title="struct GNode"><span class="type">GNode</span></a> at. If position is -1,
 the new <a class="link" href="glib-N-ary-Trees.html#GNode" title="struct GNode"><span class="type">GNode</span></a> is inserted as the last child of <em class="parameter"><code>parent</code></em>
 </td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
+<td>the data for the new <a class="link" href="glib-N-ary-Trees.html#GNode" title="struct GNode"><span class="type">GNode</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the new <a class="link" href="glib-N-ary-Trees.html#GNode" title="struct GNode"><span class="type">GNode</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-node-insert-data-after"></a><h3>g_node_insert_data_after()</h3>
+<pre class="programlisting">#define             g_node_insert_data_after(parent, sibling, data)</pre>
+<p>
+Inserts a new <a class="link" href="glib-N-ary-Trees.html#GNode" title="struct GNode"><span class="type">GNode</span></a> after the given sibling.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>parent</code></em> :</span></p></td>
+<td>the <a class="link" href="glib-N-ary-Trees.html#GNode" title="struct GNode"><span class="type">GNode</span></a> to place the new <a class="link" href="glib-N-ary-Trees.html#GNode" title="struct GNode"><span class="type">GNode</span></a> under</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>sibling</code></em> :</span></p></td>
+<td>the sibling <a class="link" href="glib-N-ary-Trees.html#GNode" title="struct GNode"><span class="type">GNode</span></a> to place the new <a class="link" href="glib-N-ary-Trees.html#GNode" title="struct GNode"><span class="type">GNode</span></a> after</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
@@ -1353,51 +1385,6 @@ allocated.
 <td>the root of the tree/subtree to destroy</td>
 </tr></tbody>
 </table></div>
-</div>
-<hr>
-<div class="refsect2">
-<a name="g-node-push-allocator"></a><h3>g_node_push_allocator ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_node_push_allocator               (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> dummy</code></em>);</pre>
-<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
-<h3 class="title">Warning</h3>
-<p><code class="literal">g_node_push_allocator</code> has been deprecated since version 2.10 and should not be used in newly-written code. It does nothing, since <a class="link" href="glib-N-ary-Trees.html#GNode" title="struct GNode"><span class="type">GNode</span></a> has been converted to
-                 the <a class="link" href="glib-Memory-Slices.html" title="Memory Slices">slice
-                 allocator</a></p>
-</div>
-<p>
-Sets the allocator to use to allocate <a class="link" href="glib-N-ary-Trees.html#GNode" title="struct GNode"><span class="type">GNode</span></a> elements. Use
-<a class="link" href="glib-N-ary-Trees.html#g-node-pop-allocator" title="g_node_pop_allocator ()"><code class="function">g_node_pop_allocator()</code></a> to restore the previous allocator.
-</p>
-<p>
-Note that this function is not available if GLib has been compiled
-with <code class="option">--disable-mem-pools</code>
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody><tr>
-<td><p><span class="term"><em class="parameter"><code>dummy</code></em> :</span></p></td>
-<td>the <a class="link" href="glib-Memory-Allocators.html#GAllocator" title="GAllocator"><span class="type">GAllocator</span></a> to use when allocating <a class="link" href="glib-N-ary-Trees.html#GNode" title="struct GNode"><span class="type">GNode</span></a> elements.</td>
-</tr></tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2">
-<a name="g-node-pop-allocator"></a><h3>g_node_pop_allocator ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_node_pop_allocator                (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
-<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
-<h3 class="title">Warning</h3>
-<p><code class="literal">g_node_pop_allocator</code> has been deprecated since version 2.10 and should not be used in newly-written code. It does nothing, since <a class="link" href="glib-N-ary-Trees.html#GNode" title="struct GNode"><span class="type">GNode</span></a> has been converted to
-                 the <a class="link" href="glib-Memory-Slices.html" title="Memory Slices">slice
-                 allocator</a></p>
-</div>
-<p>
-Restores the previous <a class="link" href="glib-Memory-Allocators.html#GAllocator" title="GAllocator"><span class="type">GAllocator</span></a>, used when allocating <a class="link" href="glib-N-ary-Trees.html#GNode" title="struct GNode"><span class="type">GNode</span></a>
-elements.
-</p>
-<p>
-Note that this function is not available if GLib has been compiled
-with <code class="option">--disable-mem-pools</code>
-</p>
 </div>
 </div>
 </div>

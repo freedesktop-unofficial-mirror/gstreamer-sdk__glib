@@ -56,6 +56,7 @@ typedef struct {
   GTlsInteractionClass parent;
 } TestInteractionClass;
 
+static GType test_interaction_get_type (void);
 G_DEFINE_TYPE (TestInteraction, test_interaction, G_TYPE_TLS_INTERACTION);
 
 #define TEST_TYPE_INTERACTION         (test_interaction_get_type ())
@@ -383,16 +384,22 @@ static void
 teardown_without_loop (Test            *test,
                        gconstpointer    unused)
 {
+  gpointer weak_pointer = test->interaction;
+
+  g_object_add_weak_pointer (weak_pointer, &weak_pointer);
+
   g_object_unref (test->password);
 
   g_object_unref (test->interaction);
-  g_assert (!G_IS_OBJECT (test->interaction));
+
+  g_assert (weak_pointer == NULL);
 
 }
 
 typedef struct {
-  GMutex *loop_mutex;
-  GCond *loop_started;
+  GMutex loop_mutex;
+  GCond loop_started;
+  gboolean started;
   Test *test;
 } ThreadLoop;
 
@@ -403,15 +410,16 @@ thread_loop (gpointer user_data)
   ThreadLoop *closure = user_data;
   Test *test = closure->test;
 
-  g_mutex_lock (closure->loop_mutex);
+  g_mutex_lock (&closure->loop_mutex);
 
   g_assert (test->loop_thread == g_thread_self ());
   g_assert (test->loop == NULL);
   test->loop = g_main_loop_new (context, TRUE);
 
   g_main_context_acquire (context);
-  g_cond_signal (closure->loop_started);
-  g_mutex_unlock (closure->loop_mutex);
+  closure->started = TRUE;
+  g_cond_signal (&closure->loop_started);
+  g_mutex_unlock (&closure->loop_mutex);
 
   while (g_main_loop_is_running (test->loop))
     g_main_context_iteration (context, TRUE);
@@ -424,19 +432,20 @@ static void
 setup_with_thread_loop (Test            *test,
                         gconstpointer    user_data)
 {
-  GError *error = NULL;
   ThreadLoop closure;
 
   setup_without_loop (test, user_data);
 
-  closure.loop_mutex = g_mutex_new ();
-  closure.loop_started = g_cond_new ();
+  g_mutex_init (&closure.loop_mutex);
+  g_cond_init (&closure.loop_started);
+  closure.started = FALSE;
   closure.test = test;
 
-  g_mutex_lock (closure.loop_mutex);
-  test->loop_thread = g_thread_create (thread_loop, &closure, TRUE, &error);
-  g_cond_wait (closure.loop_started, closure.loop_mutex);
-  g_mutex_unlock (closure.loop_mutex);
+  g_mutex_lock (&closure.loop_mutex);
+  test->loop_thread = g_thread_new ("loop", thread_loop, &closure);
+  while (!closure.started)
+    g_cond_wait (&closure.loop_started, &closure.loop_mutex);
+  g_mutex_unlock (&closure.loop_mutex);
 
   /*
    * When a loop is running then interaction should always occur in the main
@@ -444,8 +453,8 @@ setup_with_thread_loop (Test            *test,
    */
   test->interaction_thread = test->loop_thread;
 
-  g_mutex_free (closure.loop_mutex);
-  g_cond_free (closure.loop_started);
+  g_mutex_clear (&closure.loop_mutex);
+  g_cond_clear (&closure.loop_started);
 }
 
 static void
@@ -602,7 +611,6 @@ main (int   argc,
   gint ret;
 
   g_type_init ();
-  g_thread_init (NULL);
   g_test_init (&argc, &argv, NULL);
 
   fixtures = g_ptr_array_new_with_free_func (g_free);

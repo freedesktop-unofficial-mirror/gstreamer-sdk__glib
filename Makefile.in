@@ -40,23 +40,16 @@ host_triplet = @host@
 DIST_COMMON = README $(am__configure_deps) $(srcdir)/INSTALL.in \
 	$(srcdir)/Makefile.am $(srcdir)/Makefile.in \
 	$(srcdir)/README.in $(srcdir)/config.h.in \
-	$(srcdir)/config.h.win32.in \
-	$(srcdir)/gio-2.0-uninstalled.pc.in $(srcdir)/gio-2.0.pc.in \
-	$(srcdir)/gio-unix-2.0-uninstalled.pc.in \
+	$(srcdir)/config.h.win32.in $(srcdir)/gio-2.0.pc.in \
 	$(srcdir)/gio-unix-2.0.pc.in $(srcdir)/gio-windows-2.0.pc.in \
-	$(srcdir)/glib-2.0-uninstalled.pc.in $(srcdir)/glib-2.0.pc.in \
-	$(srcdir)/glib-gettextize.in $(srcdir)/glib-zip.in \
-	$(srcdir)/gmodule-2.0-uninstalled.pc.in \
-	$(srcdir)/gmodule-2.0.pc.in $(srcdir)/gmodule-export-2.0.pc.in \
-	$(srcdir)/gmodule-no-export-2.0-uninstalled.pc.in \
+	$(srcdir)/glib-2.0.pc.in $(srcdir)/glib-gettextize.in \
+	$(srcdir)/glib-zip.in $(srcdir)/gmodule-2.0.pc.in \
+	$(srcdir)/gmodule-export-2.0.pc.in \
 	$(srcdir)/gmodule-no-export-2.0.pc.in \
-	$(srcdir)/gobject-2.0-uninstalled.pc.in \
-	$(srcdir)/gobject-2.0.pc.in \
-	$(srcdir)/gthread-2.0-uninstalled.pc.in \
-	$(srcdir)/gthread-2.0.pc.in $(top_srcdir)/Makefile.decl \
-	$(top_srcdir)/configure AUTHORS COPYING ChangeLog INSTALL NEWS \
-	compile config.guess config.sub depcomp install-sh ltmain.sh \
-	missing mkinstalldirs py-compile
+	$(srcdir)/gobject-2.0.pc.in $(srcdir)/gthread-2.0.pc.in \
+	$(top_srcdir)/Makefile.decl $(top_srcdir)/configure AUTHORS \
+	COPYING ChangeLog INSTALL NEWS compile config.guess config.sub \
+	depcomp install-sh ltmain.sh missing mkinstalldirs py-compile
 @OS_UNIX_TRUE@am__append_1 = gio-unix-2.0.pc
 @OS_WIN32_TRUE@am__append_2 = gio-windows-2.0.pc
 subdir = .
@@ -78,15 +71,10 @@ am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
  configure.lineno config.status.lineno
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = config.h
-CONFIG_CLEAN_FILES = glib-2.0.pc glib-2.0-uninstalled.pc \
-	gmodule-2.0.pc gmodule-export-2.0.pc gmodule-no-export-2.0.pc \
-	gmodule-2.0-uninstalled.pc \
-	gmodule-no-export-2.0-uninstalled.pc gthread-2.0.pc \
-	gthread-2.0-uninstalled.pc gobject-2.0.pc \
-	gobject-2.0-uninstalled.pc gio-2.0.pc gio-unix-2.0.pc \
-	gio-windows-2.0.pc gio-2.0-uninstalled.pc \
-	gio-unix-2.0-uninstalled.pc glib-zip glib-gettextize INSTALL \
-	README config.h.win32
+CONFIG_CLEAN_FILES = glib-2.0.pc gmodule-2.0.pc gmodule-export-2.0.pc \
+	gmodule-no-export-2.0.pc gthread-2.0.pc gobject-2.0.pc \
+	gio-2.0.pc gio-unix-2.0.pc gio-windows-2.0.pc glib-zip \
+	glib-gettextize INSTALL README config.h.win32
 CONFIG_CLEAN_VPATH_FILES =
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
 am__vpath_adj = case $$p in \
@@ -211,7 +199,6 @@ DBUS1_CFLAGS = @DBUS1_CFLAGS@
 DBUS1_LIBS = @DBUS1_LIBS@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
-DISABLE_MEM_POOLS = @DISABLE_MEM_POOLS@
 DLLTOOL = @DLLTOOL@
 DSYMUTIL = @DSYMUTIL@
 DTRACE = @DTRACE@
@@ -228,6 +215,7 @@ GIO = @GIO@
 GIO_MODULE_DIR = @GIO_MODULE_DIR@
 GLIBC21 = @GLIBC21@
 GLIB_BINARY_AGE = @GLIB_BINARY_AGE@
+GLIB_COMPILE_RESOURCES = @GLIB_COMPILE_RESOURCES@
 GLIB_COMPILE_SCHEMAS = @GLIB_COMPILE_SCHEMAS@
 GLIB_DEBUG_FLAGS = @GLIB_DEBUG_FLAGS@
 GLIB_EXTRA_CFLAGS = @GLIB_EXTRA_CFLAGS@
@@ -237,7 +225,6 @@ GLIB_LINK_FLAGS = @GLIB_LINK_FLAGS@
 GLIB_MAJOR_VERSION = @GLIB_MAJOR_VERSION@
 GLIB_MICRO_VERSION = @GLIB_MICRO_VERSION@
 GLIB_MINOR_VERSION = @GLIB_MINOR_VERSION@
-GLIB_RT_LIBS = @GLIB_RT_LIBS@
 GLIB_RUNTIME_LIBDIR = @GLIB_RUNTIME_LIBDIR@
 GLIB_VERSION = @GLIB_VERSION@
 GLIB_WIN32_STATIC_COMPILATION_DEFINE = @GLIB_WIN32_STATIC_COMPILATION_DEFINE@
@@ -277,6 +264,8 @@ INSTOBJEXT = @INSTOBJEXT@
 INTLLIBS = @INTLLIBS@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
+LIBELF_CFLAGS = @LIBELF_CFLAGS@
+LIBELF_LIBS = @LIBELF_LIBS@
 LIBFFI_CFLAGS = @LIBFFI_CFLAGS@
 LIBFFI_LIBS = @LIBFFI_LIBS@
 LIBOBJS = @LIBOBJS@
@@ -434,11 +423,7 @@ EXTRA_DIST = ChangeLog.pre-2-20 ChangeLog.pre-2-18 ChangeLog.pre-2-16 \
 	glib-2.0.pc.in gobject-2.0.pc.in gmodule-2.0.pc.in \
 	gmodule-export-2.0.pc.in gmodule-no-export-2.0.pc.in \
 	gthread-2.0.pc.in gio-2.0.pc.in gio-unix-2.0.pc.in \
-	gio-windows-2.0.pc.in glib-2.0-uninstalled.pc.in \
-	gobject-2.0-uninstalled.pc.in gmodule-2.0-uninstalled.pc.in \
-	gthread-2.0-uninstalled.pc.in \
-	gmodule-no-export-2.0-uninstalled.pc.in \
-	gio-2.0-uninstalled.pc.in gio-unix-2.0-uninstalled.pc.in
+	gio-windows-2.0.pc.in
 TEST_PROGS = 
 ACLOCAL_AMFLAGS = -I m4macros ${ACLOCAL_FLAGS}
 SUBDIRS = . m4macros glib gmodule gthread gobject gio tests po docs
@@ -528,35 +513,21 @@ distclean-hdr:
 	-rm -f config.h stamp-h1
 glib-2.0.pc: $(top_builddir)/config.status $(srcdir)/glib-2.0.pc.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
-glib-2.0-uninstalled.pc: $(top_builddir)/config.status $(srcdir)/glib-2.0-uninstalled.pc.in
-	cd $(top_builddir) && $(SHELL) ./config.status $@
 gmodule-2.0.pc: $(top_builddir)/config.status $(srcdir)/gmodule-2.0.pc.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
 gmodule-export-2.0.pc: $(top_builddir)/config.status $(srcdir)/gmodule-export-2.0.pc.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
 gmodule-no-export-2.0.pc: $(top_builddir)/config.status $(srcdir)/gmodule-no-export-2.0.pc.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
-gmodule-2.0-uninstalled.pc: $(top_builddir)/config.status $(srcdir)/gmodule-2.0-uninstalled.pc.in
-	cd $(top_builddir) && $(SHELL) ./config.status $@
-gmodule-no-export-2.0-uninstalled.pc: $(top_builddir)/config.status $(srcdir)/gmodule-no-export-2.0-uninstalled.pc.in
-	cd $(top_builddir) && $(SHELL) ./config.status $@
 gthread-2.0.pc: $(top_builddir)/config.status $(srcdir)/gthread-2.0.pc.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
-gthread-2.0-uninstalled.pc: $(top_builddir)/config.status $(srcdir)/gthread-2.0-uninstalled.pc.in
-	cd $(top_builddir) && $(SHELL) ./config.status $@
 gobject-2.0.pc: $(top_builddir)/config.status $(srcdir)/gobject-2.0.pc.in
-	cd $(top_builddir) && $(SHELL) ./config.status $@
-gobject-2.0-uninstalled.pc: $(top_builddir)/config.status $(srcdir)/gobject-2.0-uninstalled.pc.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
 gio-2.0.pc: $(top_builddir)/config.status $(srcdir)/gio-2.0.pc.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
 gio-unix-2.0.pc: $(top_builddir)/config.status $(srcdir)/gio-unix-2.0.pc.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
 gio-windows-2.0.pc: $(top_builddir)/config.status $(srcdir)/gio-windows-2.0.pc.in
-	cd $(top_builddir) && $(SHELL) ./config.status $@
-gio-2.0-uninstalled.pc: $(top_builddir)/config.status $(srcdir)/gio-2.0-uninstalled.pc.in
-	cd $(top_builddir) && $(SHELL) ./config.status $@
-gio-unix-2.0-uninstalled.pc: $(top_builddir)/config.status $(srcdir)/gio-unix-2.0-uninstalled.pc.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
 glib-zip: $(top_builddir)/config.status $(srcdir)/glib-zip.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
@@ -1133,7 +1104,7 @@ test: test-nonrecursive
 
 # test-nonrecursive: run tests only in cwd
 @OS_UNIX_TRUE@test-nonrecursive: ${TEST_PROGS}
-@OS_UNIX_TRUE@	@test -z "${TEST_PROGS}" || MALLOC_CHECK_=2 MALLOC_PERTURB_=$$(($${RANDOM:-256} % 256)) ${GTESTER} --verbose ${TEST_PROGS}
+@OS_UNIX_TRUE@	@test -z "${TEST_PROGS}" || G_DEBUG=gc-friendly MALLOC_CHECK_=2 MALLOC_PERTURB_=$$(($${RANDOM:-256} % 256)) ${GTESTER} --verbose ${TEST_PROGS}
 @OS_UNIX_FALSE@test-nonrecursive:
 
 # test-report: run tests in subdirs and generate report

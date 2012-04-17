@@ -651,6 +651,7 @@ static void
 test_locale_string (void)
 {
   GKeyFile *keyfile;
+  gchar *old_locale;
 
   const gchar *data =
     "[valid]\n"
@@ -677,6 +678,7 @@ test_locale_string (void)
 
   /* now test that translations are thrown away */
 
+  old_locale = g_strdup (setlocale (LC_ALL, NULL));
   g_setenv ("LANGUAGE", "de", TRUE);
   setlocale (LC_ALL, "");
 
@@ -691,6 +693,9 @@ test_locale_string (void)
   check_locale_string_value (keyfile, "valid", "key1", "en", "v1");
 
   g_key_file_free (keyfile);
+
+  setlocale (LC_ALL, old_locale);
+  g_free (old_locale);
 }
 
 static void
@@ -1321,6 +1326,24 @@ test_load (void)
 }
 
 static void
+test_load_fail (void)
+{
+  GKeyFile *file;
+  GError *error;
+
+  file = g_key_file_new ();
+  error = NULL;
+  g_assert (!g_key_file_load_from_file (file, "/", 0, &error));
+  g_assert_error (error, G_KEY_FILE_ERROR, G_KEY_FILE_ERROR_PARSE);
+  g_clear_error (&error);
+  g_assert (!g_key_file_load_from_file (file, "/nosuchfile", 0, &error));
+  g_assert_error (error, G_FILE_ERROR, G_FILE_ERROR_NOENT);
+  g_clear_error (&error);
+
+  g_key_file_free (file);
+}
+
+static void
 test_non_utf8 (void)
 {
   GKeyFile *file;
@@ -1396,8 +1419,125 @@ test_page_boundary (void)
       g_assert_cmpint (val, ==, VALUE);
     }
 
+  g_key_file_free (file);
 }
 
+static void
+test_ref (void)
+{
+  GKeyFile *file;
+  static const char data[] =
+"[group]\n"
+"a=1\n";
+  gboolean ok;
+
+  file = g_key_file_new ();
+
+  ok = g_key_file_load_from_data (file, data, strlen (data), 0, NULL);
+  g_assert (ok);
+  g_assert (g_key_file_has_key (file, "group", "a", NULL));
+  g_key_file_ref (file);
+  g_key_file_free (file);
+  g_key_file_unref (file);
+}
+
+/* https://bugzilla.gnome.org/show_bug.cgi?id=634232 */
+static void
+test_replace_value (void)
+{
+  GKeyFile *keyfile;
+
+  keyfile = g_key_file_new();
+  g_key_file_set_value(keyfile, "grupo1", "chave1", "1234567890");
+  g_key_file_set_value(keyfile, "grupo1", "chave1", "123123423423423432432423423");
+  g_key_file_remove_group(keyfile, "grupo1", NULL);
+  g_free (g_key_file_to_data (keyfile, NULL, NULL));
+  g_key_file_unref (keyfile);
+}
+
+static void
+test_list_separator (void)
+{
+  GKeyFile *keyfile;
+  GError *error = NULL;
+
+  const gchar *data =
+    "[test]\n"
+    "key1=v1,v2\n";
+
+  keyfile = g_key_file_new ();
+  g_key_file_set_list_separator (keyfile, ',');
+  g_key_file_load_from_data (keyfile, data, -1, 0, &error);
+
+  check_string_list_value (keyfile, "test", "key1", "v1", "v2", NULL);
+  g_key_file_unref (keyfile);
+}
+
+static void
+test_empty_string (void)
+{
+  GError *error = NULL;
+  GKeyFile *kf;
+
+  kf = g_key_file_new ();
+
+  g_key_file_load_from_data (kf, "", 0, 0, &error);
+  g_assert_no_error (error);
+
+  g_key_file_load_from_data (kf, "", -1, 0, &error);
+  g_assert_no_error (error);
+
+  /* NULL is a fine pointer to use if length is zero */
+  g_key_file_load_from_data (kf, NULL, 0, 0, &error);
+  g_assert_no_error (error);
+
+  /* should not attempt to access non-NULL pointer if length is zero */
+  g_key_file_load_from_data (kf, GINT_TO_POINTER (1), 0, 0, &error);
+  g_assert_no_error (error);
+
+  g_key_file_unref (kf);
+}
+
+static void
+test_limbo (void)
+{
+  GKeyFile *file;
+  static const char data[] =
+"a=b\n"
+"[group]\n"
+"b=c\n";
+  gboolean ok;
+  GError *error;
+
+  file = g_key_file_new ();
+
+  error = NULL;
+  ok = g_key_file_load_from_data (file, data, strlen (data), 0, &error);
+  g_assert (!ok);
+  g_assert_error (error, G_KEY_FILE_ERROR, G_KEY_FILE_ERROR_GROUP_NOT_FOUND);
+  g_clear_error (&error);
+  g_key_file_free (file);
+}
+
+static void
+test_utf8 (void)
+{
+  GKeyFile *file;
+  static const char data[] =
+"[group]\n"
+"Encoding=non-UTF-8\n";
+  gboolean ok;
+  GError *error;
+
+  file = g_key_file_new ();
+
+  error = NULL;
+  ok = g_key_file_load_from_data (file, data, strlen (data), 0, &error);
+  g_assert (!ok);
+  g_assert_error (error, G_KEY_FILE_ERROR, G_KEY_FILE_ERROR_UNKNOWN_ENCODING);
+  g_clear_error (&error);
+  g_key_file_free (file);
+}
 int
 main (int argc, char *argv[])
 {
@@ -1427,8 +1567,15 @@ main (int argc, char *argv[])
   g_test_add_func ("/keyfile/reload", test_reload_idempotency);
   g_test_add_func ("/keyfile/int64", test_int64);
   g_test_add_func ("/keyfile/load", test_load);
+  g_test_add_func ("/keyfile/load-fail", test_load_fail);
   g_test_add_func ("/keyfile/non-utf8", test_non_utf8);
   g_test_add_func ("/keyfile/page-boundary", test_page_boundary);
+  g_test_add_func ("/keyfile/ref", test_ref);
+  g_test_add_func ("/keyfile/replace-value", test_replace_value);
+  g_test_add_func ("/keyfile/list-separator", test_list_separator);
+  g_test_add_func ("/keyfile/empty-string", test_empty_string);
+  g_test_add_func ("/keyfile/limbo", test_limbo);
+  g_test_add_func ("/keyfile/utf8", test_utf8);
 
   return g_test_run ();
 }

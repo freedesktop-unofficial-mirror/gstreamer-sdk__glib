@@ -6,7 +6,7 @@
 <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="GIO Reference Manual">
 <link rel="up" href="application.html" title="Application support">
-<link rel="prev" href="GSimpleAction.html" title="GSimpleAction">
+<link rel="prev" href="application.html" title="Application support">
 <link rel="next" href="GApplicationCommandLine.html" title="GApplicationCommandLine">
 <meta name="generator" content="GTK-Doc V1.18 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
@@ -14,7 +14,7 @@
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
 <tr valign="middle">
-<td><a accesskey="p" href="GSimpleAction.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="p" href="application.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
 <td><a accesskey="u" href="application.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
 <th width="100%" align="center">GIO Reference Manual</th>
@@ -78,6 +78,7 @@ const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="returnva
 
 <span class="returnvalue">void</span>                <a class="link" href="GApplication.html#g-application-hold" title="g_application_hold ()">g_application_hold</a>                  (<em class="parameter"><code><a class="link" href="GApplication.html" title="GApplication"><span class="type">GApplication</span></a> *application</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GApplication.html#g-application-release" title="g_application_release ()">g_application_release</a>               (<em class="parameter"><code><a class="link" href="GApplication.html" title="GApplication"><span class="type">GApplication</span></a> *application</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GApplication.html#g-application-quit" title="g_application_quit ()">g_application_quit</a>                  (<em class="parameter"><code><a class="link" href="GApplication.html" title="GApplication"><span class="type">GApplication</span></a> *application</code></em>);
 
 <span class="returnvalue">void</span>                <a class="link" href="GApplication.html#g-application-activate" title="g_application_activate ()">g_application_activate</a>              (<em class="parameter"><code><a class="link" href="GApplication.html" title="GApplication"><span class="type">GApplication</span></a> *application</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GApplication.html#g-application-open" title="g_application_open ()">g_application_open</a>                  (<em class="parameter"><code><a class="link" href="GApplication.html" title="GApplication"><span class="type">GApplication</span></a> *application</code></em>,
@@ -88,6 +89,8 @@ const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="returnva
 <span class="returnvalue">int</span>                 <a class="link" href="GApplication.html#g-application-run" title="g_application_run ()">g_application_run</a>                   (<em class="parameter"><code><a class="link" href="GApplication.html" title="GApplication"><span class="type">GApplication</span></a> *application</code></em>,
                                                          <em class="parameter"><code><span class="type">int</span> argc</code></em>,
                                                          <em class="parameter"><code><span class="type">char</span> **argv</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GApplication.html#g-application-set-default" title="g_application_set_default ()">g_application_set_default</a>           (<em class="parameter"><code><a class="link" href="GApplication.html" title="GApplication"><span class="type">GApplication</span></a> *application</code></em>);
+<a class="link" href="GApplication.html" title="GApplication"><span class="returnvalue">GApplication</span></a> *      <a class="link" href="GApplication.html#g-application-get-default" title="g_application_get_default ()">g_application_get_default</a>           (<em class="parameter"><code><span class="type">void</span></code></em>);
 </pre>
 </div>
 <div class="refsect1">
@@ -101,7 +104,7 @@ const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="returnva
 <a name="GApplication.implemented-interfaces"></a><h2>Implemented Interfaces</h2>
 <p>
 GApplication implements
- <a class="link" href="GActionGroup.html" title="GActionGroup">GActionGroup</a>.</p>
+ <a class="link" href="GActionGroup.html" title="GActionGroup">GActionGroup</a> and  <a class="link" href="GActionMap.html" title="GActionMap">GActionMap</a>.</p>
 </div>
 <div class="refsect1">
 <a name="GApplication.properties"></a><h2>Properties</h2>
@@ -120,7 +123,8 @@ GApplication implements
   "<a class="link" href="GApplication.html#GApplication-activate" title='The "activate" signal'>activate</a>"                                       : <a href="./../gobject/gobject/gobject-Signals.html#G-SIGNAL-RUN-LAST:CAPS"><code class="literal">Run Last</code></a>
   "<a class="link" href="GApplication.html#GApplication-command-line" title='The "command-line" signal'>command-line</a>"                                   : <a href="./../gobject/gobject/gobject-Signals.html#G-SIGNAL-RUN-LAST:CAPS"><code class="literal">Run Last</code></a>
   "<a class="link" href="GApplication.html#GApplication-open" title='The "open" signal'>open</a>"                                           : <a href="./../gobject/gobject/gobject-Signals.html#G-SIGNAL-RUN-LAST:CAPS"><code class="literal">Run Last</code></a>
-  "<a class="link" href="GApplication.html#GApplication-startup" title='The "startup" signal'>startup</a>"                                        : <a href="./../gobject/gobject/gobject-Signals.html#G-SIGNAL-RUN-LAST:CAPS"><code class="literal">Run Last</code></a>
+  "<a class="link" href="GApplication.html#GApplication-shutdown" title='The "shutdown" signal'>shutdown</a>"                                       : <a href="./../gobject/gobject/gobject-Signals.html#G-SIGNAL-RUN-LAST:CAPS"><code class="literal">Run Last</code></a>
+  "<a class="link" href="GApplication.html#GApplication-startup" title='The "startup" signal'>startup</a>"                                        : <a href="./../gobject/gobject/gobject-Signals.html#G-SIGNAL-RUN-FIRST:CAPS"><code class="literal">Run First</code></a>
 </pre>
 </div>
 <div class="refsect1">
@@ -130,7 +134,7 @@ A <a class="link" href="GApplication.html" title="GApplication"><span class="typ
 given application identifier.  The GApplication class wraps some
 low-level platform-specific services and is intended to act as the
 foundation for higher-level application classes such as
-<a href="http://library.gnome.org/devel/gtk/GtkApplication.html"><span class="type">GtkApplication</span></a> or <span class="type">MxApplication</span>.  In general, you should not use
+<a href="http://developer.gnome.org/devel/gtk/GtkApplication.html"><span class="type">GtkApplication</span></a> or <a href="/usr/share/gtk-doc/html/mx/MxApplication.html"><span class="type">MxApplication</span></a>.  In general, you should not use
 this class outside of a higher level framework.
 </p>
 <p>
@@ -140,48 +144,51 @@ platform-dependent, but corresponds roughly to a graphical desktop
 login.  When your application is launched again, its arguments
 are passed through platform communication to the already running
 program. The already running instance of the program is called the
-<em class="firstterm">primary instance</em>.
-</p>
-<p>
-Before using GApplication, you must choose an "application identifier".
-The expected form of an application identifier is very close to that of
-of a <a class="ulink" href="http://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-names-interface" target="_top">DBus bus name</a>.
-Examples include: "com.example.MyApp", "org.example.internal-apps.Calculator".
-For details on valid application identifiers, see
-<a class="link" href="GApplication.html#g-application-id-is-valid" title="g_application_id_is_valid ()"><code class="function">g_application_id_is_valid()</code></a>.
-</p>
-<p>
-The application identifier is claimed by the application as a
-well-known bus name on the user's session bus.  This means that the
-uniqueness of your application is scoped to the current session.  It
-also means that your application may provide additional services
-(through registration of other object paths) at that bus name.
-</p>
-<p>
-The registration of these object paths should be done with the shared
-GDBus session bus.  Note that due to the internal architecture of
-GDBus, method calls can be dispatched at any time (even if a main
-loop is not running).  For this reason, you must ensure that any
-object paths that you wish to register are registered before
-<a class="link" href="GApplication.html" title="GApplication"><span class="type">GApplication</span></a> attempts to acquire the bus name of your application
-(which happens in <a class="link" href="GApplication.html#g-application-register" title="g_application_register ()"><code class="function">g_application_register()</code></a>).  Unfortunately, this
-means that you cannot use <a class="link" href="GApplication.html#g-application-get-is-remote" title="g_application_get_is_remote ()"><code class="function">g_application_get_is_remote()</code></a> to decide if
-you want to register object paths.
+<em class="firstterm">primary instance</em>. On Linux, the D-Bus session
+bus is used for communication.
 </p>
 <p>
 GApplication provides convenient life cycle management by maintaining
 a <em class="firstterm">use count</em> for the primary application instance.
 The use count can be changed using <a class="link" href="GApplication.html#g-application-hold" title="g_application_hold ()"><code class="function">g_application_hold()</code></a> and
 <a class="link" href="GApplication.html#g-application-release" title="g_application_release ()"><code class="function">g_application_release()</code></a>. If it drops to zero, the application exits.
+Higher-level classes such as <a href="http://developer.gnome.org/devel/gtk/GtkApplication.html"><span class="type">GtkApplication</span></a> employ the use count to
+ensure that the application stays alive as long as it has any opened
+windows.
 </p>
 <p>
-GApplication also implements the <a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> interface and lets you
-easily export actions by adding them with <a class="link" href="GApplication.html#g-application-set-action-group" title="g_application_set_action_group ()"><code class="function">g_application_set_action_group()</code></a>.
-When invoking an action by calling <a class="link" href="GActionGroup.html#g-action-group-activate-action" title="g_action_group_activate_action ()"><code class="function">g_action_group_activate_action()</code></a> on
-the application, it is always invoked in the primary instance.
+Before using GApplication, you must choose an "application identifier".
+The expected form of an application identifier is very close to that of
+of a <a class="ulink" href="http://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-names-interface" target="_top">DBus bus name</a>.
+Examples include: "com.example.MyApp", "org.example.internal-apps.Calculator".
+For details on valid application identifiers, see <a class="link" href="GApplication.html#g-application-id-is-valid" title="g_application_id_is_valid ()"><code class="function">g_application_id_is_valid()</code></a>.
 </p>
 <p>
-There is a number of different entry points into a <a class="link" href="GApplication.html" title="GApplication"><span class="type">GApplication</span></a>:
+On Linux, the application identifier is claimed as a well-known bus name
+on the user's session bus.  This means that the uniqueness of your
+application is scoped to the current session.  It also means that your
+application may provide additional services (through registration of other
+object paths) at that bus name.  The registration of these object paths
+should be done with the shared GDBus session bus.  Note that due to the
+internal architecture of GDBus, method calls can be dispatched at any time
+(even if a main loop is not running).  For this reason, you must ensure that
+any object paths that you wish to register are registered before <a class="link" href="GApplication.html" title="GApplication"><span class="type">GApplication</span></a>
+attempts to acquire the bus name of your application (which happens in
+<a class="link" href="GApplication.html#g-application-register" title="g_application_register ()"><code class="function">g_application_register()</code></a>).  Unfortunately, this means that you cannot use
+<a class="link" href="GApplication.html#g-application-get-is-remote" title="g_application_get_is_remote ()"><code class="function">g_application_get_is_remote()</code></a> to decide if you want to register object paths.
+</p>
+<p>
+GApplication also implements the <a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> and <a class="link" href="GActionMap.html" title="GActionMap"><span class="type">GActionMap</span></a>
+interfaces and lets you easily export actions by adding them with
+<a class="link" href="GActionMap.html#g-action-map-add-action" title="g_action_map_add_action ()"><code class="function">g_action_map_add_action()</code></a>. When invoking an action by calling
+<a class="link" href="GActionGroup.html#g-action-group-activate-action" title="g_action_group_activate_action ()"><code class="function">g_action_group_activate_action()</code></a> on the application, it is always
+invoked in the primary instance. The actions are also exported on
+the session bus, and GIO provides the <a class="link" href="GDBusActionGroup.html" title="GDBusActionGroup"><span class="type">GDBusActionGroup</span></a> wrapper to
+conveniently access them remotely. GIO provides a <a class="link" href="GDBusMenuModel.html" title="GDBusMenuModel"><span class="type">GDBusMenuModel</span></a> wrapper
+for remote access to exported <a href="GMenuModel.html"><span class="type">GMenuModels</span></a>.
+</p>
+<p>
+There is a number of different entry points into a GApplication:
 </p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem">via 'Activate' (i.e. just starting the application)</li>
@@ -200,7 +207,7 @@ data</em> from the launching instance to the primary instance,
 in the form of a <a href="./../glib/glib/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> dictionary mapping strings to variants.
 To use platform data, override the <em class="parameter"><code>before_emit</code></em> or <em class="parameter"><code>after_emit</code></em> virtual
 functions in your <a class="link" href="GApplication.html" title="GApplication"><span class="type">GApplication</span></a> subclass. When dealing with
-<span class="type">GApplicationCommandline</span> objects, the platform data is directly
+<a class="link" href="GApplicationCommandLine.html" title="GApplicationCommandLine"><span class="type">GApplicationCommandLine</span></a> objects, the platform data is directly
 available via <a class="link" href="GApplicationCommandLine.html#g-application-command-line-get-cwd" title="g_application_command_line_get_cwd ()"><code class="function">g_application_command_line_get_cwd()</code></a>,
 <a class="link" href="GApplicationCommandLine.html#g-application-command-line-get-environ" title="g_application_command_line_get_environ ()"><code class="function">g_application_command_line_get_environ()</code></a> and
 <a class="link" href="GApplicationCommandLine.html#g-application-command-line-get-platform-data" title="g_application_command_line_get_platform_data ()"><code class="function">g_application_command_line_get_platform_data()</code></a>.
@@ -211,9 +218,9 @@ operating system, but it always includes the current directory (key
 "cwd"), and optionally the environment (ie the set of environment
 variables and their values) of the calling process (key "environ").
 The environment is only added to the platform data if the
-<span class="type">G_APPLICATION_SEND_ENVIONMENT</span> flag is set. GApplication subclasses
+<a class="link" href="GApplication.html#G-APPLICATION-SEND-ENVIRONMENT:CAPS"><code class="literal">G_APPLICATION_SEND_ENVIRONMENT</code></a> flag is set. <a class="link" href="GApplication.html" title="GApplication"><span class="type">GApplication</span></a> subclasses
 can add their own platform data by overriding the <em class="parameter"><code>add_platform_data</code></em>
-virtual function. For instance, <a href="http://library.gnome.org/devel/gtk/GtkApplication.html"><span class="type">GtkApplication</span></a> adds startup notification
+virtual function. For instance, <a href="http://developer.gnome.org/devel/gtk/GtkApplication.html"><span class="type">GtkApplication</span></a> adds startup notification
 data in this way.
 </p>
 <p>
@@ -225,7 +232,7 @@ respectively.
 <p>
 </p>
 <div class="example">
-<a name="gapplication-example-open"></a><p class="title"><b>Example 15. Opening files with a GApplication</b></p>
+<a name="gapplication-example-open"></a><p class="title"><b>Example 14. Opening files with a GApplication</b></p>
 <div class="example-contents">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -353,7 +360,7 @@ respectively.
 <p>
 </p>
 <div class="example">
-<a name="gapplication-example-actions"></a><p class="title"><b>Example 16. A GApplication with actions</b></p>
+<a name="gapplication-example-actions"></a><p class="title"><b>Example 15. A GApplication with actions</b></p>
 <div class="example-contents">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -479,13 +486,7 @@ respectively.
 119
 120
 121
-122
-123
-124
-125
-126
-127
-128</pre></td>
+122</pre></td>
         <td class="listing_code"><pre class="programlisting"><span class="preproc">#include</span><span class="normal"> </span><span class="string">&lt;gio/gio.h&gt;</span>
 <span class="preproc">#include</span><span class="normal"> </span><span class="string">&lt;stdlib.h&gt;</span>
 <span class="preproc">#include</span><span class="normal"> </span><span class="string">&lt;string.h&gt;</span>
@@ -533,24 +534,18 @@ respectively.
 <span class="keyword">static</span><span class="normal"> </span><span class="type">void</span>
 <span class="function">add_actions</span><span class="normal"> </span><span class="symbol">(</span><span class="usertype">GApplication</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">app</span><span class="symbol">)</span>
 <span class="cbracket">{</span>
-<span class="normal">  </span><span class="usertype">GSimpleActionGroup</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">actions</span><span class="symbol">;</span>
 <span class="normal">  </span><span class="usertype">GSimpleAction</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">action</span><span class="symbol">;</span>
-
-<span class="normal">  actions </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="GSimpleActionGroup.html#g-simple-action-group-new">g_simple_action_group_new</a></span><span class="normal"> </span><span class="symbol">();</span>
 
 <span class="normal">  action </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="GSimpleAction.html#g-simple-action-new">g_simple_action_new</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"simple-action"</span><span class="symbol">,</span><span class="normal"> <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">);</span>
 <span class="normal">  </span><span class="function"><a href="./../gobject/gobject/gobject-Signals.html#g-signal-connect">g_signal_connect</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">action</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"activate"</span><span class="symbol">,</span><span class="normal"> </span><span class="function"><a href="./../gobject/gobject/gobject-Closures.html#G-CALLBACK:CAPS">G_CALLBACK</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">activate_action</span><span class="symbol">),</span><span class="normal"> app</span><span class="symbol">);</span>
-<span class="normal">  </span><span class="function"><a href="GSimpleActionGroup.html#g-simple-action-group-insert">g_simple_action_group_insert</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">actions</span><span class="symbol">,</span><span class="normal"> </span><span class="function">G_ACTION</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">action</span><span class="symbol">));</span>
+<span class="normal">  </span><span class="function"><a href="GActionMap.html#g-action-map-add-action">g_action_map_add_action</a></span><span class="normal"> </span><span class="symbol">(</span><span class="function">G_ACTION_MAP</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">app</span><span class="symbol">),</span><span class="normal"> </span><span class="function">G_ACTION</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">action</span><span class="symbol">));</span>
 <span class="normal">  </span><span class="function"><a href="./../gobject/gobject/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">action</span><span class="symbol">);</span>
 
 <span class="normal">  action </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="GSimpleAction.html#g-simple-action-new-stateful">g_simple_action_new_stateful</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"toggle-action"</span><span class="symbol">,</span><span class="normal"> <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span>
 <span class="normal">                                         </span><span class="function"><a href="./../glib/glib/glib-GVariant.html#g-variant-new-boolean">g_variant_new_boolean</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="./../glib/glib/glib-Standard-Macros.html#FALSE:CAPS">FALSE</a></span><span class="symbol">));</span>
 <span class="normal">  </span><span class="function"><a href="./../gobject/gobject/gobject-Signals.html#g-signal-connect">g_signal_connect</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">action</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"activate"</span><span class="symbol">,</span><span class="normal"> </span><span class="function"><a href="./../gobject/gobject/gobject-Closures.html#G-CALLBACK:CAPS">G_CALLBACK</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">activate_toggle_action</span><span class="symbol">),</span><span class="normal"> app</span><span class="symbol">);</span>
-<span class="normal">  </span><span class="function"><a href="GSimpleActionGroup.html#g-simple-action-group-insert">g_simple_action_group_insert</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">actions</span><span class="symbol">,</span><span class="normal"> </span><span class="function">G_ACTION</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">action</span><span class="symbol">));</span>
+<span class="normal">  </span><span class="function"><a href="GActionMap.html#g-action-map-add-action">g_action_map_add_action</a></span><span class="normal"> </span><span class="symbol">(</span><span class="function">G_ACTION_MAP</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">app</span><span class="symbol">),</span><span class="normal"> </span><span class="function">G_ACTION</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">action</span><span class="symbol">));</span>
 <span class="normal">  </span><span class="function"><a href="./../gobject/gobject/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">action</span><span class="symbol">);</span>
-
-<span class="normal">  </span><span class="function"><a href="GApplication.html#g-application-set-action-group">g_application_set_action_group</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">app</span><span class="symbol">,</span><span class="normal"> </span><span class="function">G_ACTION_GROUP</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">actions</span><span class="symbol">));</span>
-<span class="normal">  </span><span class="function"><a href="./../gobject/gobject/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">actions</span><span class="symbol">);</span>
 <span class="cbracket">}</span>
 
 <span class="keyword">static</span><span class="normal"> </span><span class="type">void</span>
@@ -622,16 +617,30 @@ respectively.
 </div>
 <p><br class="example-break">
 </p>
+<p>
+</p>
+<div class="example">
+<a name="gapplication-example-menu"></a><p class="title"><b>Example 16. A GApplication with menus</b></p>
+<div class="example-contents">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="normal">FIXME</span><span class="symbol">:</span><span class="normal"> MISSING XINCLUDE CONTENT</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</div>
+<p><br class="example-break">
+</p>
 </div>
 <div class="refsect1">
 <a name="GApplication.details"></a><h2>Details</h2>
 <div class="refsect2">
 <a name="GApplication-struct"></a><h3>GApplication</h3>
 <pre class="programlisting">typedef struct _GApplication GApplication;</pre>
-<p>
-The <span class="structname">GApplication</span> structure contains private
-data and should only be accessed using the provided API
-</p>
 <p class="since">Since 2.28</p>
 </div>
 <hr>
@@ -664,8 +673,12 @@ data and should only be accessed using the provided API
                                                      GVariantBuilder           *builder);
   void                      (* quit_mainloop)       (GApplication              *application);
   void                      (* run_mainloop)        (GApplication              *application);
+  void                      (* shutdown)            (GApplication              *application);
 };
 </pre>
+<p>
+Virtual function table for <a class="link" href="GApplication.html" title="GApplication"><span class="type">GApplication</span></a>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
@@ -689,9 +702,10 @@ not handled locally</td>
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GApplicationClass.local-command-line"></a>local_command_line</code></em> ()</span></p></td>
 <td>invoked (locally) when the process has been invoked
-via commandline execution.  The virtual function has the chance to
-inspect (and possibly replace) the list of command line arguments.
-See <a class="link" href="GApplication.html#g-application-run" title="g_application_run ()"><code class="function">g_application_run()</code></a> for more information.</td>
+via commandline execution (as opposed to, say, D-Bus activation - which
+is not currently supported by GApplication). The virtual function has
+the chance to inspect (and possibly replace) the list of command line
+arguments. See <a class="link" href="GApplication.html#g-application-run" title="g_application_run ()"><code class="function">g_application_run()</code></a> for more information.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GApplicationClass.before-emit"></a>before_emit</code></em> ()</span></p></td>
@@ -712,14 +726,21 @@ the primary instance when activating, opening or invoking actions</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GApplicationClass.quit-mainloop"></a>quit_mainloop</code></em> ()</span></p></td>
-<td>invoked on the primary instance when the use count of the
-application drops to zero (and after any inactivity timeout, if
-requested)</td>
+<td>Used to be invoked on the primary instance when the use
+count of the application drops to zero (and after any inactivity
+timeout, if requested). Not used anymore since 2.32</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GApplicationClass.run-mainloop"></a>run_mainloop</code></em> ()</span></p></td>
-<td>invoked on the primary instance from <a class="link" href="GApplication.html#g-application-run" title="g_application_run ()"><code class="function">g_application_run()</code></a>
-if the use-count is non-zero</td>
+<td>Used to be invoked on the primary instance from
+<a class="link" href="GApplication.html#g-application-run" title="g_application_run ()"><code class="function">g_application_run()</code></a> if the use-count is non-zero. Since 2.32,
+GApplication is iterating the main context directly and is not
+using <em class="parameter"><code>run_mainloop</code></em> anymore</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="structfield"><code><a name="GApplicationClass.shutdown"></a>shutdown</code></em> ()</span></p></td>
+<td>invoked only on the registered primary instance immediately
+after the main loop terminates</td>
 </tr>
 </tbody>
 </table></div>
@@ -1058,15 +1079,17 @@ See <a class="link" href="GApplication.html#GApplicationFlags" title="enum GAppl
 <a name="g-application-set-action-group"></a><h3>g_application_set_action_group ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_application_set_action_group      (<em class="parameter"><code><a class="link" href="GApplication.html" title="GApplication"><span class="type">GApplication</span></a> *application</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> *action_group</code></em>);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">g_application_set_action_group</code> has been deprecated since version 2.32 and should not be used in newly-written code. Use the <a class="link" href="GActionMap.html" title="GActionMap"><span class="type">GActionMap</span></a> interface instead.  Never ever
+mix use of this API with use of <a class="link" href="GActionMap.html" title="GActionMap"><span class="type">GActionMap</span></a> on the same <em class="parameter"><code>application</code></em>
+or things will go very badly wrong.  This function is known to
+introduce buggy behaviour (ie: signals not emitted on changes to the
+action group), so you should really use <a class="link" href="GActionMap.html" title="GActionMap"><span class="type">GActionMap</span></a> instead.</p>
+</div>
 <p>
-Sets or unsets the group of actions associated with the application.
-</p>
-<p>
-These actions are the actions that can be remotely invoked.
-</p>
-<p>
-It is an error to call this function after the application has been
-registered.
+This used to be how actions were associated with a <a class="link" href="GApplication.html" title="GApplication"><span class="type">GApplication</span></a>.
+Now there is <a class="link" href="GActionMap.html" title="GActionMap"><span class="type">GActionMap</span></a> for that.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -1198,7 +1221,7 @@ instance is or is not the primary instance of the application.  See
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td>a <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a>, or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+<td>a <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a>, or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
@@ -1264,13 +1287,41 @@ call to <a class="link" href="GApplication.html#g-application-hold" title="g_app
 </div>
 <hr>
 <div class="refsect2">
+<a name="g-application-quit"></a><h3>g_application_quit ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_application_quit                  (<em class="parameter"><code><a class="link" href="GApplication.html" title="GApplication"><span class="type">GApplication</span></a> *application</code></em>);</pre>
+<p>
+Immediately quits the application.
+</p>
+<p>
+Upon return to the mainloop, <a class="link" href="GApplication.html#g-application-run" title="g_application_run ()"><code class="function">g_application_run()</code></a> will return,
+calling only the 'shutdown' function before doing so.
+</p>
+<p>
+The hold count is ignored.
+</p>
+<p>
+The result of calling <a class="link" href="GApplication.html#g-application-run" title="g_application_run ()"><code class="function">g_application_run()</code></a> again after it returns is
+unspecified.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>application</code></em> :</span></p></td>
+<td>a <a class="link" href="GApplication.html" title="GApplication"><span class="type">GApplication</span></a>
+</td>
+</tr></tbody>
+</table></div>
+<p class="since">Since 2.32</p>
+</div>
+<hr>
+<div class="refsect2">
 <a name="g-application-activate"></a><h3>g_application_activate ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_application_activate              (<em class="parameter"><code><a class="link" href="GApplication.html" title="GApplication"><span class="type">GApplication</span></a> *application</code></em>);</pre>
 <p>
 Activates the application.
 </p>
 <p>
-In essence, this results in the <a class="link" href="GApplication.html" title="GApplication"><span class="type">GApplication</span></a>::<code class="function">activate()</code> signal being
+In essence, this results in the <a class="link" href="GApplication.html#GApplication-activate" title='The "activate" signal'><span class="type">"activate"</span></a> signal being
 emitted in the primary instance.
 </p>
 <p>
@@ -1378,7 +1429,7 @@ instance, calling <a class="link" href="GApplication.html#g-application-activate
 If <code class="function">local_command_line()</code> returns <a href="./../glib/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> then the application is registered
 and the <a class="link" href="GApplication.html#GApplication-command-line" title='The "command-line" signal'><span class="type">"command-line"</span></a> signal is emitted in the primary
 instance (which may or may not be this instance). The signal handler
-gets passed a <span class="type">GApplicationCommandline</span> object that (among other things)
+gets passed a <a class="link" href="GApplicationCommandLine.html" title="GApplicationCommandLine"><span class="type">GApplicationCommandLine</span></a> object that (among other things)
 contains the remaining commandline arguments that have not been handled
 by <code class="function">local_command_line()</code>.
 </p>
@@ -1401,7 +1452,7 @@ are assumed to be filenames and <a class="link" href="GApplication.html#g-applic
 <p>
 If you need to handle commandline arguments that are not filenames,
 and you don't mind commandline handling to happen in the primary
-instance, you should set <code class="literal">G_APPLICATION_HANDLED_COMMAND_LINE</code> and
+instance, you should set <a class="link" href="GApplication.html#G-APPLICATION-HANDLES-COMMAND-LINE:CAPS"><code class="literal">G_APPLICATION_HANDLES_COMMAND_LINE</code></a> and
 process the commandline arguments in your <a class="link" href="GApplication.html#GApplication-command-line" title='The "command-line" signal'><span class="type">"command-line"</span></a>
 signal handler, either manually or using the <a href="./../glib/glib/glib-Commandline-option-parser.html#GOptionContext"><span class="type">GOptionContext</span></a> API.
 </p>
@@ -1416,8 +1467,8 @@ suppress the default handling. See
 <p>
 If, after the above is done, the use count of the application is zero
 then the exit status is returned immediately.  If the use count is
-non-zero then the mainloop is run until the use count falls to zero,
-at which point 0 is returned.
+non-zero then the default main context is iterated until the use count
+falls to zero, at which point 0 is returned.
 </p>
 <p>
 If the <a class="link" href="GApplication.html#G-APPLICATION-IS-SERVICE:CAPS"><code class="literal">G_APPLICATION_IS_SERVICE</code></a> flag is set, then the exiting at
@@ -1448,6 +1499,54 @@ around to provide its <span class="emphasis"><em>service</em></span> to others).
 </tbody>
 </table></div>
 <p class="since">Since 2.28</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-application-set-default"></a><h3>g_application_set_default ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_application_set_default           (<em class="parameter"><code><a class="link" href="GApplication.html" title="GApplication"><span class="type">GApplication</span></a> *application</code></em>);</pre>
+<p>
+Sets or unsets the default application for the process, as returned
+by <a class="link" href="GApplication.html#g-application-get-default" title="g_application_get_default ()"><code class="function">g_application_get_default()</code></a>.
+</p>
+<p>
+This function does not take its own reference on <em class="parameter"><code>application</code></em>.  If
+<em class="parameter"><code>application</code></em> is destroyed then the default application will revert
+back to <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>application</code></em> :</span></p></td>
+<td>the application to set as default, or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
+</tr></tbody>
+</table></div>
+<p class="since">Since 2.32</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-application-get-default"></a><h3>g_application_get_default ()</h3>
+<pre class="programlisting"><a class="link" href="GApplication.html" title="GApplication"><span class="returnvalue">GApplication</span></a> *      g_application_get_default           (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<p>
+Returns the default <a class="link" href="GApplication.html" title="GApplication"><span class="type">GApplication</span></a> instance for this process.
+</p>
+<p>
+Normally there is only one <a class="link" href="GApplication.html" title="GApplication"><span class="type">GApplication</span></a> per process and it becomes
+the default when it is created.  You can exercise more control over
+this by using <a class="link" href="GApplication.html#g-application-set-default" title="g_application_set_default ()"><code class="function">g_application_set_default()</code></a>.
+</p>
+<p>
+If there is no default application then <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> is returned.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the default application for this process, or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr></tbody>
+</table></div>
+<p class="since">Since 2.32</p>
 </div>
 </div>
 <div class="refsect1">
@@ -1525,7 +1624,7 @@ activation occurs. See <a class="link" href="GApplication.html#g-application-act
 <p>
 The ::command-line signal is emitted on the primary instance when
 a commandline is not handled locally. See <a class="link" href="GApplication.html#g-application-run" title="g_application_run ()"><code class="function">g_application_run()</code></a> and
-the <span class="type">GApplicationCommandline</span> documentation for more information.
+the <a class="link" href="GApplicationCommandLine.html" title="GApplicationCommandLine"><span class="type">GApplicationCommandLine</span></a> documentation for more information.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -1593,9 +1692,32 @@ files to open. See <a class="link" href="GApplication.html#g-application-open" t
 </div>
 <hr>
 <div class="refsect2">
-<a name="GApplication-startup"></a><h3>The <code class="literal">"startup"</code> signal</h3>
+<a name="GApplication-shutdown"></a><h3>The <code class="literal">"shutdown"</code> signal</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="GApplication.html" title="GApplication"><span class="type">GApplication</span></a> *application,
                                                         <a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>      user_data)        : <a href="./../gobject/gobject/gobject-Signals.html#G-SIGNAL-RUN-LAST:CAPS"><code class="literal">Run Last</code></a></pre>
+<p>
+The ::shutdown signal is emitted only on the registered primary instance
+immediately after the main loop terminates.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>application</code></em> :</span></p></td>
+<td>the application</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data set when the signal handler was connected.</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GApplication-startup"></a><h3>The <code class="literal">"startup"</code> signal</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="GApplication.html" title="GApplication"><span class="type">GApplication</span></a> *application,
+                                                        <a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>      user_data)        : <a href="./../gobject/gobject/gobject-Signals.html#G-SIGNAL-RUN-FIRST:CAPS"><code class="literal">Run First</code></a></pre>
 <p>
 The ::startup signal is emitted on the primary instance immediately
 after registration. See <a class="link" href="GApplication.html#g-application-register" title="g_application_register ()"><code class="function">g_application_register()</code></a>.

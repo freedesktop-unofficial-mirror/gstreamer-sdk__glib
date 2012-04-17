@@ -81,24 +81,6 @@ test_thread_functions (void)
 }
 
 static void
-test_count_threads_foreach (GThread *thread,
-			    guint   *count)
-{
-   ++*count;
-}
-
-static guint
-test_count_threads (void)
-{
-  guint count = 0;
-
-  g_thread_foreach ((GFunc) test_count_threads_foreach, &count);
-
-  /* Exclude main thread */
-  return count - 1;
-}
-
-static void
 test_thread_stop_unused (void)
 {
    GThreadPool *pool;
@@ -118,16 +100,12 @@ test_thread_stop_unused (void)
    /* Wait for the threads to migrate. */
    g_usleep (G_USEC_PER_SEC);
 
-   DEBUG_MSG (("[unused] current threads %d",
-	       test_count_threads()));
-
    DEBUG_MSG (("[unused] stopping unused threads"));
    g_thread_pool_stop_unused_threads ();
 
    for (i = 0; i < 5; i++)
      {
-       if (g_thread_pool_get_num_unused_threads () == 0 &&
-           test_count_threads () == 0)
+       if (g_thread_pool_get_num_unused_threads () == 0)
          break;
 
        DEBUG_MSG (("[unused] waiting ONE second for threads to die"));
@@ -136,11 +114,9 @@ test_thread_stop_unused (void)
        g_usleep (G_USEC_PER_SEC);
      }
 
-   DEBUG_MSG (("[unused] stopped idle threads, %d remain, %d threads still exist",
-	       g_thread_pool_get_num_unused_threads (),
-	       test_count_threads ()));
+   DEBUG_MSG (("[unused] stopped idle threads, %d remain",
+	       g_thread_pool_get_num_unused_threads ()));
 
-   g_assert (g_thread_pool_get_num_unused_threads () == test_count_threads ());
    g_assert (g_thread_pool_get_num_unused_threads () == 0);
 
    g_thread_pool_set_max_unused_threads (MAX_THREADS);
@@ -466,10 +442,6 @@ test_check_start_and_stop (gpointer user_data)
 int
 main (int argc, char *argv[])
 {
-  /* Only run the test, if threads are enabled and a default thread
-     implementation is available */
-
-#if defined(G_THREADS_ENABLED) && ! defined(G_THREADS_IMPL_NONE)
   g_thread_init (NULL);
 
   DEBUG_MSG (("Starting... (in one second)"));
@@ -477,7 +449,6 @@ main (int argc, char *argv[])
 
   main_loop = g_main_loop_new (NULL, FALSE);
   g_main_loop_run (main_loop);
-#endif
 
   return 0;
 }

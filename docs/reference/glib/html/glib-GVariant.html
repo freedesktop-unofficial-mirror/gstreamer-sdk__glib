@@ -134,6 +134,10 @@ const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span cla
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> n_children</code></em>);
 <a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><span class="returnvalue">GVariant</span></a> *          <a class="link" href="glib-GVariant.html#g-variant-new-dict-entry" title="g_variant_new_dict_entry ()">g_variant_new_dict_entry</a>            (<em class="parameter"><code><a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><span class="type">GVariant</span></a> *key</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><span class="type">GVariant</span></a> *value</code></em>);
+<a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><span class="returnvalue">GVariant</span></a> *          <a class="link" href="glib-GVariant.html#g-variant-new-fixed-array" title="g_variant_new_fixed_array ()">g_variant_new_fixed_array</a>           (<em class="parameter"><code>const <a class="link" href="glib-GVariantType.html#GVariantType" title="GVariantType"><span class="type">GVariantType</span></a> *element_type</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gconstpointer" title="gconstpointer"><span class="type">gconstpointer</span></a> elements</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> n_elements</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> element_size</code></em>);
 
 <a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><span class="returnvalue">GVariant</span></a> *          <a class="link" href="glib-GVariant.html#g-variant-get-maybe" title="g_variant_get_maybe ()">g_variant_get_maybe</a>                 (<em class="parameter"><code><a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><span class="type">GVariant</span></a> *value</code></em>);
 <a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="returnvalue">gsize</span></a>               <a class="link" href="glib-GVariant.html#g-variant-n-children" title="g_variant_n_children ()">g_variant_n_children</a>                (<em class="parameter"><code><a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><span class="type">GVariant</span></a> *value</code></em>);
@@ -261,7 +265,7 @@ Serialised <a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><
 <a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><span class="type">GVariant</span></a> is largely compatible with D-Bus.  Almost all types of
 <a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><span class="type">GVariant</span></a> instances can be sent over D-Bus.  See <a class="link" href="glib-GVariantType.html#GVariantType" title="GVariantType"><span class="type">GVariantType</span></a> for
 exceptions.  (However, <a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><span class="type">GVariant</span></a>'s serialisation format is not the same
-as the serialisation format of a D-Bus message body: use <a href="./../gio/gio/GDBusMessage.html"><span class="type">GDBusMessage</span></a>,
+as the serialisation format of a D-Bus message body: use <a href="http://library.gnome.org/devel/gio/unstable/GDBusMessage.html"><span class="type">GDBusMessage</span></a>,
 in the gio library, for those.)
 </p>
 <p>
@@ -272,6 +276,12 @@ file format always contains a little-endian <a class="link" href="glib-GVariantT
 or supplied out-of-band (for instance, a type and/or endianness
 indicator could be placed at the beginning of a file, network message
 or network stream).
+</p>
+<p>
+A <a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><span class="type">GVariant</span></a>'s size is limited mainly by any lower level operating
+system constraints, such as the number of bits in <a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a>.  For
+example, it is reasonable to have a 2GB file mapped into memory
+with <a class="link" href="glib-File-Utilities.html#GMappedFile" title="GMappedFile"><span class="type">GMappedFile</span></a>, and call <a class="link" href="glib-GVariant.html#g-variant-new-from-data" title="g_variant_new_from_data ()"><code class="function">g_variant_new_from_data()</code></a> on it.
 </p>
 <p>
 For convenience to C programmers, <a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><span class="type">GVariant</span></a> features powerful
@@ -286,7 +296,7 @@ with type inferencing.
 <p>
 </p>
 <div class="refsect2">
-<a name="id1006905"></a><h3>Memory Use</h3>
+<a name="id934962"></a><h3>Memory Use</h3>
 <p>
   <a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><span class="type">GVariant</span></a> tries to be quite efficient with respect to memory use.
   This section gives a rough idea of how much memory is used by the
@@ -368,7 +378,7 @@ with type inferencing.
   </p>
 </div>
 <div class="refsect3">
-<a name="id1007004"></a><h4>Type Information Cache</h4>
+<a name="id935062"></a><h4>Type Information Cache</h4>
 <p>
    For each GVariant type that currently exists in the program a type
    information structure is kept in the type information cache.  The
@@ -423,7 +433,7 @@ with type inferencing.
   </p>
 </div>
 <div class="refsect3">
-<a name="id1007074"></a><h4>Buffer Management Memory</h4>
+<a name="id935131"></a><h4>Buffer Management Memory</h4>
 <p>
    <a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><span class="type">GVariant</span></a> uses an internal buffer management structure to deal
    with the various different possible sources of serialised data
@@ -439,7 +449,7 @@ with type inferencing.
   </p>
 </div>
 <div class="refsect3">
-<a name="id1007128"></a><h4>GVariant structure</h4>
+<a name="id935186"></a><h4>GVariant structure</h4>
 <p>
    The size of a <a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><span class="type">GVariant</span></a> structure is 6 * (void *).  On 32 bit
    systems, that's 24 bytes.
@@ -464,7 +474,7 @@ with type inferencing.
   </p>
 </div>
 <div class="refsect3">
-<a name="id1007190"></a><h4>Summary</h4>
+<a name="id935247"></a><h4>Summary</h4>
 <p>
    To put the entire example together, for our dictionary mapping
    strings to variants (with two entries, as given above), we are
@@ -781,6 +791,7 @@ Checks if <em class="parameter"><code>value</code></em> is a container.
 </tr>
 </tbody>
 </table></div>
+<p class="since">Since 2.24</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -2150,8 +2161,7 @@ For an empty array, <em class="parameter"><code>length</code></em> will be set t
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>an array of constant
-strings. <span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=length zero-terminated=1][<acronym title="Free data container after the code is done."><span class="acronym">transfer container</span></acronym>]</span>
+<td>an array of constant strings. <span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=length zero-terminated=1][<acronym title="Free data container after the code is done."><span class="acronym">transfer container</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -2233,8 +2243,7 @@ For an empty array, <em class="parameter"><code>length</code></em> will be set t
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>an array of constant
-strings. <span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=length zero-terminated=1][<acronym title="Free data container after the code is done."><span class="acronym">transfer container</span></acronym>]</span>
+<td>an array of constant strings. <span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=length zero-terminated=1][<acronym title="Free data container after the code is done."><span class="acronym">transfer container</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -2350,8 +2359,8 @@ the length (not including the nul terminator). <span class="annotation">[<acrony
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>(transfer full) (array zero-terminated=1 length=length)
-(element-type guint8): a newly allocated string</td>
+<td>a newly allocated string. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>][<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> zero-terminated=1 length=length][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> guint8]</span>
+</td>
 </tr>
 </tbody>
 </table></div>
@@ -2607,6 +2616,60 @@ the new instance takes ownership of them as if via <a class="link" href="glib-GV
 </div>
 <hr>
 <div class="refsect2">
+<a name="g-variant-new-fixed-array"></a><h3>g_variant_new_fixed_array ()</h3>
+<pre class="programlisting"><a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><span class="returnvalue">GVariant</span></a> *          g_variant_new_fixed_array           (<em class="parameter"><code>const <a class="link" href="glib-GVariantType.html#GVariantType" title="GVariantType"><span class="type">GVariantType</span></a> *element_type</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gconstpointer" title="gconstpointer"><span class="type">gconstpointer</span></a> elements</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> n_elements</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> element_size</code></em>);</pre>
+<p>
+Provides access to the serialised data for an array of fixed-sized
+items.
+</p>
+<p>
+<em class="parameter"><code>value</code></em> must be an array with fixed-sized elements.  Numeric types are
+fixed-size as are tuples containing only other fixed-sized types.
+</p>
+<p>
+<em class="parameter"><code>element_size</code></em> must be the size of a single element in the array.  For
+example, if calling this function for an array of 32 bit integers,
+you might say <code class="code">sizeof (gint32)</code>.  This value isn't used
+except for the purpose of a double-check that the form of the
+serialised data matches the caller's expectation.
+</p>
+<p>
+<em class="parameter"><code>n_elements</code></em>, which must be non-<a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> is set equal to the number of
+items in the array.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>element_type</code></em> :</span></p></td>
+<td>the <a class="link" href="glib-GVariantType.html#GVariantType" title="GVariantType"><span class="type">GVariantType</span></a> of each element</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>elements</code></em> :</span></p></td>
+<td>a pointer to the fixed array of contiguous elements</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>n_elements</code></em> :</span></p></td>
+<td>the number of elements</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>element_size</code></em> :</span></p></td>
+<td>the size of each element</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>a floating reference to a new array <a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><span class="type">GVariant</span></a> instance. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.32</p>
+</div>
+<hr>
+<div class="refsect2">
 <a name="g-variant-get-maybe"></a><h3>g_variant_get_maybe ()</h3>
 <pre class="programlisting"><a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><span class="returnvalue">GVariant</span></a> *          g_variant_get_maybe                 (<em class="parameter"><code><a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><span class="type">GVariant</span></a> *value</code></em>);</pre>
 <p>
@@ -2678,6 +2741,10 @@ entries.  It is an error to call this function on any other type of
 <p>
 It is an error if <em class="parameter"><code>index_</code></em> is greater than the number of child items
 in the container.  See <a class="link" href="glib-GVariant.html#g-variant-n-children" title="g_variant_n_children ()"><code class="function">g_variant_n_children()</code></a>.
+</p>
+<p>
+The returned value is never floating.  You should free it with
+<a class="link" href="glib-GVariant.html#g-variant-unref" title="g_variant_unref ()"><code class="function">g_variant_unref()</code></a> when you're done with it.
 </p>
 <p>
 This function is O(1).
@@ -3369,6 +3436,7 @@ the output</td>
 </tr>
 </tbody>
 </table></div>
+<p class="since">Since 2.24</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -3587,7 +3655,7 @@ you no longer need it.
 <p>
 </p>
 <div class="example">
-<a name="id1023461"></a><p class="title"><b>Example 24. Iterating with <a class="link" href="glib-GVariant.html#g-variant-iter-next-value" title="g_variant_iter_next_value ()"><code class="function">g_variant_iter_next_value()</code></a></b></p>
+<a name="id951823"></a><p class="title"><b>Example 18. Iterating with <a class="link" href="glib-GVariant.html#g-variant-iter-next-value" title="g_variant_iter_next_value ()"><code class="function">g_variant_iter_next_value()</code></a></b></p>
 <div class="example-contents">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -3679,7 +3747,7 @@ Format Strings</GTKDOCLINK>.
 <p>
 </p>
 <div class="example">
-<a name="id1023698"></a><p class="title"><b>Example 25. Memory management with <a class="link" href="glib-GVariant.html#g-variant-iter-next" title="g_variant_iter_next ()"><code class="function">g_variant_iter_next()</code></a></b></p>
+<a name="id952060"></a><p class="title"><b>Example 19. Memory management with <a class="link" href="glib-GVariant.html#g-variant-iter-next" title="g_variant_iter_next ()"><code class="function">g_variant_iter_next()</code></a></b></p>
 <div class="example-contents">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -3753,8 +3821,7 @@ when dealing with loops, see <a class="link" href="glib-GVariant.html#g-variant-
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>
-<a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if a value was unpacked, or <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a> if there as no
-value</td>
+<a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if a value was unpacked, or <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a> if there as no value</td>
 </tr>
 </tbody>
 </table></div>
@@ -3791,13 +3858,18 @@ function and <a class="link" href="glib-GVariant.html#g-variant-iter-next" title
 the same iterator causes undefined behavior.
 </p>
 <p>
+If you break out of a such a while loop using <a class="link" href="glib-GVariant.html#g-variant-iter-loop" title="g_variant_iter_loop ()"><code class="function">g_variant_iter_loop()</code></a> then
+you must free or unreference all the unpacked values as you would with
+<a class="link" href="glib-GVariant.html#g-variant-get" title="g_variant_get ()"><code class="function">g_variant_get()</code></a>. Failure to do so will cause a memory leak.
+</p>
+<p>
 See the section on <GTKDOCLINK HREF="gvariant-format-strings">GVariant
 Format Strings</GTKDOCLINK>.
 </p>
 <p>
 </p>
 <div class="example">
-<a name="id1024005"></a><p class="title"><b>Example 26. Memory management with <a class="link" href="glib-GVariant.html#g-variant-iter-loop" title="g_variant_iter_loop ()"><code class="function">g_variant_iter_loop()</code></a></b></p>
+<a name="id952393"></a><p class="title"><b>Example 20. Memory management with <a class="link" href="glib-GVariant.html#g-variant-iter-loop" title="g_variant_iter_loop ()"><code class="function">g_variant_iter_loop()</code></a></b></p>
 <div class="example-contents">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -3818,7 +3890,8 @@ Format Strings</GTKDOCLINK>.
 14
 15
 16
-17</pre></td>
+17
+18</pre></td>
         <td class="listing_code"><pre class="programlisting"><span class="comment">/* Iterates a dictionary of type 'a{sv}' */</span>
 <span class="type">void</span>
 <span class="function">iterate_dictionary</span><span class="normal"> </span><span class="symbol">(</span><span class="usertype">GVariant</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">dictionary</span><span class="symbol">)</span>
@@ -3834,6 +3907,7 @@ Format Strings</GTKDOCLINK>.
 <span class="normal">               </span><span class="function"><a href="glib-GVariant.html#g-variant-get-type-string">g_variant_get_type_string</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">value</span><span class="symbol">));</span>
 
 <span class="normal">      </span><span class="comment">/* no need to free 'key' and 'value' here */</span>
+<span class="normal">      </span><span class="comment">/* unless breaking out of this loop */</span>
 <span class="normal">    </span><span class="cbracket">}</span>
 <span class="cbracket">}</span></pre></td>
       </tr>
@@ -4510,7 +4584,7 @@ produced by <a class="link" href="glib-GVariant.html#g-variant-print" title="g_v
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-GVariantType.html#GVariantType" title="GVariantType"><span class="type">GVariantType</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td>a <a class="link" href="glib-GVariantType.html#GVariantType" title="GVariantType"><span class="type">GVariantType</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
@@ -4519,17 +4593,17 @@ produced by <a class="link" href="glib-GVariant.html#g-variant-print" title="g_v
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>limit</code></em> :</span></p></td>
-<td>a pointer to the end of <em class="parameter"><code>text</code></em>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td>a pointer to the end of <em class="parameter"><code>text</code></em>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>endptr</code></em> :</span></p></td>
-<td>a location to store the end pointer, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td>a location to store the end pointer, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>a pointer to a <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> pointer, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td>a pointer to a <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> pointer, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>

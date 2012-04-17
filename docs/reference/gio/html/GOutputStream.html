@@ -132,7 +132,7 @@ GOutputStream is required by
 <div class="refsect1">
 <a name="GOutputStream.description"></a><h2>Description</h2>
 <p>
-GOutputStream has functions to write to a stream (<a class="link" href="GOutputStream.html#g-output-stream-write" title="g_output_stream_write ()"><code class="function">g_output_stream_write()</code></a>),
+<a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> has functions to write to a stream (<a class="link" href="GOutputStream.html#g-output-stream-write" title="g_output_stream_write ()"><code class="function">g_output_stream_write()</code></a>),
 to close a stream (<a class="link" href="GOutputStream.html#g-output-stream-close" title="g_output_stream_close ()"><code class="function">g_output_stream_close()</code></a>) and to flush pending writes
 (<a class="link" href="GOutputStream.html#g-output-stream-flush" title="g_output_stream_flush ()"><code class="function">g_output_stream_flush()</code></a>). 
 </p>
@@ -207,7 +207,7 @@ during the operation.
 </p>
 <p>
 If count is 0, returns 0 and does nothing. A value of <em class="parameter"><code>count</code></em>
-larger than <a href="./../glib/glib/glib-Limits-of-Basic-Types.html#G-MAXSSIZE:CAPS"><code class="literal">G_MAXSSIZE</code></a> will cause a <a class="link" href="gio-GIOError.html#G-IO-ERROR-INVALID-ARGUMENT:CAPS"><code class="literal">G_IO_ERROR_INVALID_ARGUMENT</code></a> error.
+larger than <a href="./../glib/glib/glib-Basic-Types.html#G-MAXSSIZE:CAPS"><code class="literal">G_MAXSSIZE</code></a> will cause a <a class="link" href="gio-GIOError.html#G-IO-ERROR-INVALID-ARGUMENT:CAPS"><code class="literal">G_IO_ERROR_INVALID_ARGUMENT</code></a> error.
 </p>
 <p>
 On success, the number of bytes written to the stream is returned.
@@ -218,7 +218,7 @@ is written or an error occurs; 0 is never returned (unless
 <em class="parameter"><code>count</code></em> is 0).
 </p>
 <p>
-If <em class="parameter"><code>cancellable</code></em> is not NULL, then the operation can be cancelled by
+If <em class="parameter"><code>cancellable</code></em> is not <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>, then the operation can be cancelled by
 triggering the cancellable object from another thread. If the operation
 was cancelled, the error <a class="link" href="gio-GIOError.html#G-IO-ERROR-CANCELLED:CAPS"><code class="literal">G_IO_ERROR_CANCELLED</code></a> will be returned. If an
 operation was partially finished when the operation was cancelled the
@@ -226,6 +226,9 @@ partial result will be returned, without an error.
 </p>
 <p>
 On error -1 is returned and <em class="parameter"><code>error</code></em> is set accordingly.
+</p>
+<p>
+Virtual: write_fn
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -281,7 +284,7 @@ On a successful write of <em class="parameter"><code>count</code></em> bytes, <a
 is set to <em class="parameter"><code>count</code></em>.
 </p>
 <p>
-If there is an error during the operation FALSE is returned and <em class="parameter"><code>error</code></em>
+If there is an error during the operation <a href="./../glib/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> is returned and <em class="parameter"><code>error</code></em>
 is set to indicate the error status, <em class="parameter"><code>bytes_written</code></em> is updated to contain
 the number of bytes written into the stream before the error occurred.
 </p>
@@ -364,7 +367,7 @@ ignore.</td>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>a <a href="./../glib/glib/glib-Basic-Types.html#gssize"><span class="type">gssize</span></a> containing the size of the data spliced, or
 -1 if an error occurred. Note that if the number of bytes
-spliced is greater than <a href="./../glib/glib/glib-Limits-of-Basic-Types.html#G-MAXSSIZE:CAPS"><code class="literal">G_MAXSSIZE</code></a>, then that will be
+spliced is greater than <a href="./../glib/glib/glib-Basic-Types.html#G-MAXSSIZE:CAPS"><code class="literal">G_MAXSSIZE</code></a>, then that will be
 returned, and there is no way to determine the actual number
 of bytes spliced.</td>
 </tr>
@@ -378,8 +381,9 @@ of bytes spliced.</td>
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
-Flushed any outstanding buffers in the stream. Will block during 
-the operation. Closing the stream will implicitly cause a flush.
+Forces a write of all user-space buffered data for the given
+<em class="parameter"><code>stream</code></em>. Will block during the operation. Closing the stream will
+implicitly cause a flush.
 </p>
 <p>
 This function is optional for inherited classes.
@@ -448,7 +452,7 @@ is important to check and report the error to the user, otherwise
 there might be a loss of data as all data might not be written.
 </p>
 <p>
-If <em class="parameter"><code>cancellable</code></em> is not NULL, then the operation can be cancelled by
+If <em class="parameter"><code>cancellable</code></em> is not <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>, then the operation can be cancelled by
 triggering the cancellable object from another thread. If the operation
 was cancelled, the error <a class="link" href="gio-GIOError.html#G-IO-ERROR-CANCELLED:CAPS"><code class="literal">G_IO_ERROR_CANCELLED</code></a> will be returned.
 Cancelling a close will still leave the stream closed, but there some streams
@@ -501,7 +505,7 @@ During an async request no other sync and async calls are allowed,
 and will result in <a class="link" href="gio-GIOError.html#G-IO-ERROR-PENDING:CAPS"><code class="literal">G_IO_ERROR_PENDING</code></a> errors. 
 </p>
 <p>
-A value of <em class="parameter"><code>count</code></em> larger than <a href="./../glib/glib/glib-Limits-of-Basic-Types.html#G-MAXSSIZE:CAPS"><code class="literal">G_MAXSSIZE</code></a> will cause a 
+A value of <em class="parameter"><code>count</code></em> larger than <a href="./../glib/glib/glib-Basic-Types.html#G-MAXSSIZE:CAPS"><code class="literal">G_MAXSSIZE</code></a> will cause a 
 <a class="link" href="gio-GIOError.html#G-IO-ERROR-INVALID-ARGUMENT:CAPS"><code class="literal">G_IO_ERROR_INVALID_ARGUMENT</code></a> error.
 </p>
 <p>
@@ -684,7 +688,7 @@ ignore.</td>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>a <a href="./../glib/glib/glib-Basic-Types.html#gssize"><span class="type">gssize</span></a> of the number of bytes spliced. Note that if the
-number of bytes spliced is greater than <a href="./../glib/glib/glib-Limits-of-Basic-Types.html#G-MAXSSIZE:CAPS"><code class="literal">G_MAXSSIZE</code></a>, then that
+number of bytes spliced is greater than <a href="./../glib/glib/glib-Basic-Types.html#G-MAXSSIZE:CAPS"><code class="literal">G_MAXSSIZE</code></a>, then that
 will be returned, and there is no way to determine the actual
 number of bytes spliced.</td>
 </tr>
@@ -700,7 +704,8 @@ number of bytes spliced.</td>
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> callback</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
 <p>
-Flushes a stream asynchronously.
+Forces an asynchronous write of all user-space buffered data for
+the given <em class="parameter"><code>stream</code></em>.
 For behaviour details see <a class="link" href="GOutputStream.html#g-output-stream-flush" title="g_output_stream_flush ()"><code class="function">g_output_stream_flush()</code></a>.
 </p>
 <p>

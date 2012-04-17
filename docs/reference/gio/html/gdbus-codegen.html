@@ -7,7 +7,7 @@
 <link rel="home" href="index.html" title="GIO Reference Manual">
 <link rel="up" href="tools.html" title="GIO Tools">
 <link rel="prev" href="gdbus.html" title="gdbus">
-<link rel="next" href="migrating.html" title="Part III. Migrating to GIO">
+<link rel="next" href="gresource-tool.html" title="gresource">
 <meta name="generator" content="GTK-Doc V1.18 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
@@ -17,7 +17,7 @@
 <td><a accesskey="u" href="tools.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
 <th width="100%" align="center">GIO Reference Manual</th>
-<td><a accesskey="n" href="migrating.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+<td><a accesskey="n" href="gresource-tool.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr></table>
 <div lang="en" class="refentry">
 <a name="gdbus-codegen"></a><div class="titlepage"></div>
@@ -40,7 +40,7 @@
     ]</p></div>
 </div>
 <div class="refsect1">
-<a name="id759050"></a><h2>Description</h2>
+<a name="id597372"></a><h2>Description</h2>
 <p>
     <span class="command"><strong>gdbus-codegen</strong></span> is used to generate code and/or
     documentation for one or more D-Bus interfaces. The tool reads
@@ -52,7 +52,7 @@
   </p>
 </div>
 <div class="refsect1">
-<a name="id567690"></a><h2>Generating C code</h2>
+<a name="id831460"></a><h2>Generating C code</h2>
 <p>
     When generating C code, a
     <span class="type">GInterface</span>-derived type is generated for each D-Bus
@@ -108,7 +108,7 @@
   </p>
 </div>
 <div class="refsect1">
-<a name="id868748"></a><h2>Generating Docbook documentation</h2>
+<a name="id605481"></a><h2>Generating Docbook documentation</h2>
 <p>
     Each generated Docbook XML file (see the
     <code class="option">--generate-docbook</code> option for details) is a <a class="ulink" href="http://www.docbook.org/tdg/en/html/refentry.html" target="_top"><code class="literal">RefEntry</code></a>
@@ -116,7 +116,7 @@
   </p>
 </div>
 <div class="refsect1">
-<a name="id613168"></a><h2>Options</h2>
+<a name="id599129"></a><h2>Options</h2>
 <p>
     The following options are supported:
   </p>
@@ -221,7 +221,7 @@
 </table></div>
 </div>
 <div class="refsect1">
-<a name="id542550"></a><h2>Supported D-Bus Annotations</h2>
+<a name="id643829"></a><h2>Supported D-Bus Annotations</h2>
 <p>
     The following D-Bus annotations are supported by
     <span class="command"><strong>gdbus-codegen</strong></span>:
@@ -444,7 +444,7 @@
   </p>
 </div>
 <div class="refsect1">
-<a name="id546803"></a><h2>Example</h2>
+<a name="id917094"></a><h2>Example</h2>
 <p>
     Consider the following D-Bus Introspection XML.
   </p>
@@ -465,21 +465,25 @@
 11
 12
 13
-14</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="symbol">&lt;</span><span class="usertype">interface</span><span class="normal"> name</span><span class="symbol">=</span><span class="string">"net.Corp.MyApp.Frobber"</span><span class="symbol">&gt;</span>
-<span class="normal">  </span><span class="symbol">&lt;</span><span class="usertype">method</span><span class="normal"> name</span><span class="symbol">=</span><span class="string">"HelloWorld"</span><span class="symbol">&gt;</span>
-<span class="normal">    </span><span class="symbol">&lt;</span><span class="usertype">arg</span><span class="normal"> name</span><span class="symbol">=</span><span class="string">"greeting"</span><span class="normal"> direction</span><span class="symbol">=</span><span class="string">"in"</span><span class="normal"> type</span><span class="symbol">=</span><span class="string">"s"</span><span class="symbol">/&gt;</span>
-<span class="normal">    </span><span class="symbol">&lt;</span><span class="usertype">arg</span><span class="normal"> name</span><span class="symbol">=</span><span class="string">"response"</span><span class="normal"> direction</span><span class="symbol">=</span><span class="string">"out"</span><span class="normal"> type</span><span class="symbol">=</span><span class="string">"s"</span><span class="symbol">/&gt;</span>
-<span class="normal">  </span><span class="symbol">&lt;/</span><span class="normal">method</span><span class="symbol">&gt;</span>
+14
+15
+16</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="symbol">&lt;</span><span class="normal">node</span><span class="symbol">&gt;</span>
+<span class="normal">  </span><span class="symbol">&lt;</span><span class="usertype">interface</span><span class="normal"> name</span><span class="symbol">=</span><span class="string">"net.Corp.MyApp.Frobber"</span><span class="symbol">&gt;</span>
+<span class="normal">    </span><span class="symbol">&lt;</span><span class="usertype">method</span><span class="normal"> name</span><span class="symbol">=</span><span class="string">"HelloWorld"</span><span class="symbol">&gt;</span>
+<span class="normal">      </span><span class="symbol">&lt;</span><span class="usertype">arg</span><span class="normal"> name</span><span class="symbol">=</span><span class="string">"greeting"</span><span class="normal"> direction</span><span class="symbol">=</span><span class="string">"in"</span><span class="normal"> type</span><span class="symbol">=</span><span class="string">"s"</span><span class="symbol">/&gt;</span>
+<span class="normal">      </span><span class="symbol">&lt;</span><span class="usertype">arg</span><span class="normal"> name</span><span class="symbol">=</span><span class="string">"response"</span><span class="normal"> direction</span><span class="symbol">=</span><span class="string">"out"</span><span class="normal"> type</span><span class="symbol">=</span><span class="string">"s"</span><span class="symbol">/&gt;</span>
+<span class="normal">    </span><span class="symbol">&lt;/</span><span class="normal">method</span><span class="symbol">&gt;</span>
 
-<span class="normal">  </span><span class="symbol">&lt;</span><span class="usertype">signal</span><span class="normal"> name</span><span class="symbol">=</span><span class="string">"Notification"</span><span class="symbol">&gt;</span>
-<span class="normal">    </span><span class="symbol">&lt;</span><span class="usertype">arg</span><span class="normal"> name</span><span class="symbol">=</span><span class="string">"icon_blob"</span><span class="normal"> type</span><span class="symbol">=</span><span class="string">"ay"</span><span class="symbol">/&gt;</span>
-<span class="normal">    </span><span class="symbol">&lt;</span><span class="usertype">arg</span><span class="normal"> name</span><span class="symbol">=</span><span class="string">"height"</span><span class="normal"> type</span><span class="symbol">=</span><span class="string">"i"</span><span class="symbol">/&gt;</span>
-<span class="normal">    </span><span class="symbol">&lt;</span><span class="usertype">arg</span><span class="normal"> name</span><span class="symbol">=</span><span class="string">"messages"</span><span class="normal"> type</span><span class="symbol">=</span><span class="string">"as"</span><span class="symbol">/&gt;</span>
-<span class="normal">  </span><span class="symbol">&lt;/</span><span class="normal">signal</span><span class="symbol">&gt;</span>
+<span class="normal">    </span><span class="symbol">&lt;</span><span class="usertype">signal</span><span class="normal"> name</span><span class="symbol">=</span><span class="string">"Notification"</span><span class="symbol">&gt;</span>
+<span class="normal">      </span><span class="symbol">&lt;</span><span class="usertype">arg</span><span class="normal"> name</span><span class="symbol">=</span><span class="string">"icon_blob"</span><span class="normal"> type</span><span class="symbol">=</span><span class="string">"ay"</span><span class="symbol">/&gt;</span>
+<span class="normal">      </span><span class="symbol">&lt;</span><span class="usertype">arg</span><span class="normal"> name</span><span class="symbol">=</span><span class="string">"height"</span><span class="normal"> type</span><span class="symbol">=</span><span class="string">"i"</span><span class="symbol">/&gt;</span>
+<span class="normal">      </span><span class="symbol">&lt;</span><span class="usertype">arg</span><span class="normal"> name</span><span class="symbol">=</span><span class="string">"messages"</span><span class="normal"> type</span><span class="symbol">=</span><span class="string">"as"</span><span class="symbol">/&gt;</span>
+<span class="normal">    </span><span class="symbol">&lt;/</span><span class="normal">signal</span><span class="symbol">&gt;</span>
 
-<span class="normal">  </span><span class="symbol">&lt;</span><span class="usertype">property</span><span class="normal"> name</span><span class="symbol">=</span><span class="string">"Verbose"</span><span class="normal"> type</span><span class="symbol">=</span><span class="string">"b"</span><span class="normal"> access</span><span class="symbol">=</span><span class="string">"readwrite"</span><span class="symbol">/&gt;</span>
-<span class="symbol">&lt;/</span><span class="normal">interface</span><span class="symbol">&gt;</span></pre></td>
+<span class="normal">    </span><span class="symbol">&lt;</span><span class="usertype">property</span><span class="normal"> name</span><span class="symbol">=</span><span class="string">"Verbose"</span><span class="normal"> type</span><span class="symbol">=</span><span class="string">"b"</span><span class="normal"> access</span><span class="symbol">=</span><span class="string">"readwrite"</span><span class="symbol">/&gt;</span>
+<span class="normal">  </span><span class="symbol">&lt;/</span><span class="normal">interface</span><span class="symbol">&gt;</span>
+<span class="symbol">&lt;/</span><span class="normal">node</span><span class="symbol">&gt;</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -770,7 +774,7 @@
 </tbody>
 </table></div>
 <div class="refsect2">
-<a name="id774638"></a><h3>Client-side usage</h3>
+<a name="id612334"></a><h3>Client-side usage</h3>
 <p>
       You can use the generated proxy type with the generated
       constructors:
@@ -838,7 +842,7 @@
 </div>
 <hr>
 <div class="refsect2">
-<a name="id560503"></a><h3>Server-side usage</h3>
+<a name="id737980"></a><h3>Server-side usage</h3>
 <p>
       The generated <span class="type">MyAppFrobber</span> interface is designed so
       it is easy to implement it in a <a href="./../gobject/gobject/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a>
@@ -977,7 +981,7 @@
 </div>
 </div>
 <div class="refsect1">
-<a name="id545689"></a><h2>C Type Mapping</h2>
+<a name="id959638"></a><h2>C Type Mapping</h2>
 <p>
     Scalar types
     (type-strings
@@ -1047,14 +1051,14 @@
   </p>
 </div>
 <div class="refsect1">
-<a name="id825967"></a><h2>Author</h2>
+<a name="id789558"></a><h2>Author</h2>
 <p>
     Written by David Zeuthen <code class="email">&lt;<a class="email" href="mailto:zeuthen@gmail.com">zeuthen@gmail.com</a>&gt;</code> with
     a lot of help from many others.
   </p>
 </div>
 <div class="refsect1">
-<a name="id733719"></a><h2>Bugs</h2>
+<a name="id743771"></a><h2>Bugs</h2>
 <p>
     Please send bug reports to either the distribution bug tracker
     or the upstream bug tracker at
@@ -1062,7 +1066,7 @@
   </p>
 </div>
 <div class="refsect1">
-<a name="id799339"></a><h2>See also</h2>
+<a name="id1031539"></a><h2>See also</h2>
 <p>
     <span class="citerefentry"><span class="refentrytitle">gdbus</span>(1)</span>
   </p>

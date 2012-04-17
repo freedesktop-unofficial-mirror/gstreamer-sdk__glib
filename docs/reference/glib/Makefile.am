@@ -13,7 +13,7 @@ DOC_MAIN_SGML_FILE=glib-docs.sgml
 DOC_SOURCE_DIR=$(top_srcdir)/glib $(top_srcdir)/gmodule
 
 # Extra options to supply to gtkdoc-scan
-SCAN_OPTIONS=--deprecated-guards="G_DISABLE_DEPRECATED" --ignore-decorators="GLIB_VAR"
+SCAN_OPTIONS=--deprecated-guards="G_DISABLE_DEPRECATED" --ignore-decorators="GLIB_VAR|G_GNUC_WARN_UNUSED_RESULT"
 
 # Extra options to supply to gtkdoc-mkdb
 MKDB_OPTIONS=--sgml-mode --output-format=xml --name-space=g
@@ -24,14 +24,18 @@ CFILE_GLOB=$(top_srcdir)/glib/*.c $(top_srcdir)/gmodule/*.c
 
 # Ignore some private headers
 IGNORE_HFILES = \
+	gallocator.h		\
 	gdatasetprivate.h	\
 	glibintl.h		\
 	gbsearcharray.h		\
+	glib-private.h		\
 	gmoduleconf.h		\
+	gthreadprivate.h	\
 	gunibreak.h		\
 	gunicomp.h		\
 	gunidecomp.h		\
 	gunichartables.h	\
+	glib_probes.h		\
 	glib_trace.h		\
 	libcharset.h		\
 	gdebug.h		\
@@ -42,7 +46,7 @@ IGNORE_HFILES = \
 	gnulib			\
 	pcre			\
 	update-pcre		\
-	gbufferprivate.h	\
+	gbytesprivate.h		\
 	gvariant-internal.h	\
 	gvariant-serialiser.h	\
 	gvariant-core.h		\
@@ -69,6 +73,9 @@ content_files =				\
 	gtester-report.xml		\
 	gvariant-varargs.xml		\
 	gvariant-text.xml
+
+expand_content_files = 			\
+	compiling.sgml
 
 # Extra options to supply to gtkdoc-fixref
 FIXXREF_OPTIONS=--extra-dir=$(srcdir)/../gobject/html --extra-dir=$(srcdir)/../gio/html
@@ -116,7 +123,7 @@ MAINTAINERCLEANFILES = $(man_MANS) $(BUILT_SOURCES)
 
 EXTRA_DIST += $(man_MANS)
 
-dist-hook-local: dist-local-check-mans-enabled glib-docs-clean all-local
+dist-hook-local: dist-local-check-mans-enabled all-local
 
 glib-docs-clean: clean
 	cd $(srcdir) && rm -rf xml html

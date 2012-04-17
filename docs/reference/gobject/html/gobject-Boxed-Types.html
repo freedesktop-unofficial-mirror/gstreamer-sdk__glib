@@ -61,12 +61,14 @@
 #define             <a class="link" href="gobject-Boxed-Types.html#G-TYPE-ARRAY:CAPS" title="G_TYPE_ARRAY">G_TYPE_ARRAY</a>
 #define             <a class="link" href="gobject-Boxed-Types.html#G-TYPE-BYTE-ARRAY:CAPS" title="G_TYPE_BYTE_ARRAY">G_TYPE_BYTE_ARRAY</a>
 #define             <a class="link" href="gobject-Boxed-Types.html#G-TYPE-PTR-ARRAY:CAPS" title="G_TYPE_PTR_ARRAY">G_TYPE_PTR_ARRAY</a>
+#define             <a class="link" href="gobject-Boxed-Types.html#G-TYPE-BYTES:CAPS" title="G_TYPE_BYTES">G_TYPE_BYTES</a>
 #define             <a class="link" href="gobject-Boxed-Types.html#G-TYPE-VARIANT-TYPE:CAPS" title="G_TYPE_VARIANT_TYPE">G_TYPE_VARIANT_TYPE</a>
 #define             <a class="link" href="gobject-Boxed-Types.html#G-TYPE-ERROR:CAPS" title="G_TYPE_ERROR">G_TYPE_ERROR</a>
 #define             <a class="link" href="gobject-Boxed-Types.html#G-TYPE-DATE-TIME:CAPS" title="G_TYPE_DATE_TIME">G_TYPE_DATE_TIME</a>
 #define             <a class="link" href="gobject-Boxed-Types.html#G-TYPE-IO-CHANNEL:CAPS" title="G_TYPE_IO_CHANNEL">G_TYPE_IO_CHANNEL</a>
 #define             <a class="link" href="gobject-Boxed-Types.html#G-TYPE-IO-CONDITION:CAPS" title="G_TYPE_IO_CONDITION">G_TYPE_IO_CONDITION</a>
 #define             <a class="link" href="gobject-Boxed-Types.html#G-TYPE-VARIANT-BUILDER:CAPS" title="G_TYPE_VARIANT_BUILDER">G_TYPE_VARIANT_BUILDER</a>
+#define             <a class="link" href="gobject-Boxed-Types.html#G-TYPE-KEY-FILE:CAPS" title="G_TYPE_KEY_FILE">G_TYPE_KEY_FILE</a>
 #define             <a class="link" href="gobject-Boxed-Types.html#G-TYPE-MAIN-CONTEXT:CAPS" title="G_TYPE_MAIN_CONTEXT">G_TYPE_MAIN_CONTEXT</a>
 #define             <a class="link" href="gobject-Boxed-Types.html#G-TYPE-MAIN-LOOP:CAPS" title="G_TYPE_MAIN_LOOP">G_TYPE_MAIN_LOOP</a>
 #define             <a class="link" href="gobject-Boxed-Types.html#G-TYPE-SOURCE:CAPS" title="G_TYPE_SOURCE">G_TYPE_SOURCE</a>
@@ -366,6 +368,16 @@ The <a class="link" href="gobject-Type-Information.html#GType" title="GType"><sp
 </div>
 <hr>
 <div class="refsect2">
+<a name="G-TYPE-BYTES:CAPS"></a><h3>G_TYPE_BYTES</h3>
+<pre class="programlisting">#define G_TYPE_BYTES (g_bytes_get_type ())
+</pre>
+<p>
+The <a class="link" href="gobject-Type-Information.html#GType" title="GType"><span class="type">GType</span></a> for <a href="./../glib/glib/glib-Byte-Arrays.html#GBytes"><span class="type">GBytes</span></a>.
+</p>
+<p class="since">Since 2.32</p>
+</div>
+<hr>
+<div class="refsect2">
 <a name="G-TYPE-VARIANT-TYPE:CAPS"></a><h3>G_TYPE_VARIANT_TYPE</h3>
 <pre class="programlisting">#define G_TYPE_VARIANT_TYPE (g_variant_type_get_gtype ())
 </pre>
@@ -421,6 +433,16 @@ The <a class="link" href="gobject-Type-Information.html#GType" title="GType"><sp
 The <a class="link" href="gobject-Type-Information.html#GType" title="GType"><span class="type">GType</span></a> for a boxed type holding a <a href="./../glib/glib/glib-GVariant.html#GVariantBuilder"><span class="type">GVariantBuilder</span></a>.
 </p>
 <p class="since">Since 2.30</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="G-TYPE-KEY-FILE:CAPS"></a><h3>G_TYPE_KEY_FILE</h3>
+<pre class="programlisting">#define G_TYPE_KEY_FILE (g_key_file_get_type ())
+</pre>
+<p>
+The <a class="link" href="gobject-Type-Information.html#GType" title="GType"><span class="type">GType</span></a> for a boxed type holding a <a href="./../glib/glib/glib-Key-value-file-parser.html#GKeyFile"><span class="type">GKeyFile</span></a>.
+</p>
+<p class="since">Since 2.32</p>
 </div>
 <hr>
 <div class="refsect2">

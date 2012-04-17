@@ -2,8 +2,9 @@ include $(top_srcdir)/Makefile.decl
 
 SUBDIRS=gobject refcount
 
-AM_CPPFLAGS = 				\
-	$(gmodule_INCLUDES) 		\
+AM_CPPFLAGS = \
+	$(gmodule_INCLUDES)			\
+	-DGLIB_DISABLE_DEPRECATION_WARNINGS	\
 	$(GLIB_DEBUG_FLAGS)
 
 AM_CFLAGS = -g
@@ -62,7 +63,6 @@ noinst_PROGRAMS = $(TEST_PROGS)	\
 	unicode-normalize 	\
 	unicode-collate 	\
 	$(timeloop) 		\
-	errorcheck-mutex-test	\
 	assert-msg-test		\
 	datetime
 
@@ -75,11 +75,10 @@ testgdate_LDADD = $(libglib)
 testgdateparser_LDADD = $(libglib)
 unicode_normalize_LDADD = $(libglib)
 unicode_collate_LDADD = $(libglib)
-errorcheck_mutex_test_LDADD = $(libglib) $(libgthread) $(G_THREAD_LIBS) 
 assert_msg_test_LDADD = $(libglib)
 if ENABLE_TIMELOOP
 timeloop_LDADD = $(libglib)
-timeloop_closure_LDADD = $(libglib) $(libgobject) $(libgthread)
+timeloop_closure_LDADD = $(libglib) $(libgobject)
 endif
 datetime_LDADD = $(libglib)
 

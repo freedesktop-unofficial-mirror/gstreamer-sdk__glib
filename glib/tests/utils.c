@@ -21,9 +21,12 @@
  * Author: Matthias Clasen
  */
 
+#define GLIB_DISABLE_DEPRECATION_WARNINGS
+
 #include "glib.h"
 
 #include <stdlib.h>
+#include <string.h>
 #include <stdarg.h>
 
 static gboolean
@@ -206,6 +209,29 @@ test_bits (void)
 }
 
 static void
+test_swap (void)
+{
+  guint16 a16, b16;
+  guint32 a32, b32;
+  guint64 a64, b64;
+
+  a16 = 0xaabb;
+  b16 = 0xbbaa;
+
+  g_assert_cmpint (GUINT16_SWAP_LE_BE (a16), ==, b16);
+
+  a32 = 0xaaaabbbb;
+  b32 = 0xbbbbaaaa;
+
+  g_assert_cmpint (GUINT32_SWAP_LE_BE (a32), ==, b32);
+
+  a64 = 0xaaaaaaaabbbbbbbb;
+  b64 = 0xbbbbbbbbaaaaaaaa;
+
+  g_assert_cmpint (GUINT64_SWAP_LE_BE (a64), ==, b64);
+}
+
+static void
 test_find_program (void)
 {
   gchar *res;
@@ -269,7 +295,49 @@ test_debug (void)
       exit (0);
     }
   g_test_trap_assert_passed ();
-  g_test_trap_assert_stderr ("*Supported debug values:  key1 key2 key3*");
+  g_test_trap_assert_stderr ("*Supported debug values: key1 key2 key3 all help*");
+}
+
+static void
+test_codeset (void)
+{
+  gchar *c;
+  const gchar *c2;
+
+  c = g_get_codeset ();
+  g_get_charset (&c2);
+
+  g_assert_cmpstr (c, ==, c2);
+
+  g_free (c);
+}
+
+static void
+test_basename (void)
+{
+  const gchar *path = "/path/to/a/file/deep/down.sh";
+  const gchar *b;
+
+  b = g_basename (path);
+
+  g_assert_cmpstr (b, ==, "down.sh");
+}
+
+extern const gchar *glib_pgettext (const gchar *msgidctxt, gsize msgidoffset);
+
+static void
+test_gettext (void)
+{
+  const gchar *am0, *am1, *am2, *am3;
+
+  am0 = glib_pgettext ("GDateTime\004AM", strlen ("GDateTime") + 1);
+  am1 = g_dpgettext ("glib20", "GDateTime\004AM", strlen ("GDateTime") + 1);
+  am2 = g_dpgettext ("glib20", "GDateTime|AM", 0);
+  am3 = g_dpgettext2 ("glib20", "GDateTime", "AM");
+
+  g_assert_cmpstr (am0, ==, am1);
+  g_assert_cmpstr (am1, ==, am2);
+  g_assert_cmpstr (am2, ==, am3);
 }
 
 int
@@ -292,8 +360,12 @@ main (int   argc,
   g_test_add_func ("/utils/appname", test_appname);
   g_test_add_func ("/utils/tmpdir", test_tmpdir);
   g_test_add_func ("/utils/bits", test_bits);
+  g_test_add_func ("/utils/swap", test_swap);
   g_test_add_func ("/utils/find-program", test_find_program);
   g_test_add_func ("/utils/debug", test_debug);
+  g_test_add_func ("/utils/codeset", test_codeset);
+  g_test_add_func ("/utils/basename", test_basename);
+  g_test_add_func ("/utils/gettext", test_gettext);
 
   return g_test_run();
 }

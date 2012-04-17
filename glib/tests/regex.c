@@ -27,8 +27,6 @@
 #include <locale.h>
 #include "glib.h"
 
-#ifdef ENABLE_REGEX
-
 /* U+20AC EURO SIGN (symbol, currency) */
 #define EURO "\xe2\x82\xac"
 /* U+00E0 LATIN SMALL LETTER A WITH GRAVE (letter, lowercase) */
@@ -202,7 +200,7 @@ struct _Match
 typedef struct _Match Match;
 
 static void
-free_match (gpointer data, gpointer user_data)
+free_match (gpointer data)
 {
   Match *match = data;
   if (match == NULL)
@@ -268,8 +266,7 @@ test_match_next (gconstpointer d)
     }
 
   g_regex_unref (regex);
-  g_slist_foreach (matches, free_match, NULL);
-  g_slist_free (matches);
+  g_slist_free_full (matches, free_match);
 }
 
 #define TEST_MATCH_NEXT0(_pattern, _string, _string_len, _start_position) { \
@@ -2298,6 +2295,9 @@ main (int argc, char *argv[])
   TEST_MATCH("a#\nb", G_REGEX_EXTENDED, G_REGEX_MATCH_NEWLINE_CR, "a", -1, 0, 0, FALSE);
   TEST_MATCH("a#\nb", G_REGEX_EXTENDED | G_REGEX_NEWLINE_CR, 0, "a", -1, 0, 0, TRUE);
 
+  /* This failed with PCRE 7.2 (gnome bug #455640) */
+  TEST_MATCH(".*$", 0, 0, "\xe1\xbb\x85", -1, 0, 0, TRUE);
+
   /* TEST_MATCH_NEXT#(pattern, string, string_len, start_position, ...) */
   TEST_MATCH_NEXT0("a", "x", -1, 0);
   TEST_MATCH_NEXT0("a", "ax", -1, 1);
@@ -2657,14 +2657,3 @@ main (int argc, char *argv[])
 
   return g_test_run ();
 }
-
-#else /* ENABLE_REGEX false */
-
-int
-main (int argc, char *argv[])
-{
-  g_print ("GRegex is disabled.\n");
-  return 0;
-}
-
-#endif /* ENABLE_REGEX */

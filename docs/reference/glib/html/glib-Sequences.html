@@ -247,7 +247,7 @@ are removed from the sequence.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>data_destroy</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="type">GDestroyNotify</span></a> function, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td>a <a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="type">GDestroyNotify</span></a> function, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
@@ -843,7 +843,7 @@ Removes the item pointed to by <em class="parameter"><code>iter</code></em>. It 
 end iterator to this function.
 </p>
 <p>
-If the sequnce has a data destroy function associated with it, this
+If the sequence has a data destroy function associated with it, this
 function is called on the data for the removed item.
 </p>
 <div class="variablelist"><table border="0">
@@ -945,6 +945,20 @@ the second item comes before the first.
 If you are simply searching for an existing element of the sequence,
 consider using <a class="link" href="glib-Sequences.html#g-sequence-lookup" title="g_sequence_lookup ()"><code class="function">g_sequence_lookup()</code></a>.
 </p>
+<p>
+</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Note</h3>
+<p>
+This function will fail if the data contained in the sequence is
+unsorted.  Use <a class="link" href="glib-Sequences.html#g-sequence-insert-sorted" title="g_sequence_insert_sorted ()"><code class="function">g_sequence_insert_sorted()</code></a> or
+<a class="link" href="glib-Sequences.html#g-sequence-insert-sorted-iter" title="g_sequence_insert_sorted_iter ()"><code class="function">g_sequence_insert_sorted_iter()</code></a> to add data to your sequence or, if
+you want to add a large amount of data, call <a class="link" href="glib-Sequences.html#g-sequence-sort" title="g_sequence_sort ()"><code class="function">g_sequence_sort()</code></a> after
+doing unsorted insertions.
+</p>
+</div>
+<p>
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
@@ -994,6 +1008,20 @@ value if the second iterator comes before the first.
 <p>
 If you are simply searching for an existing element of the sequence,
 consider using <a class="link" href="glib-Sequences.html#g-sequence-lookup-iter" title="g_sequence_lookup_iter ()"><code class="function">g_sequence_lookup_iter()</code></a>.
+</p>
+<p>
+</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Note</h3>
+<p>
+This function will fail if the data contained in the sequence is
+unsorted.  Use <a class="link" href="glib-Sequences.html#g-sequence-insert-sorted" title="g_sequence_insert_sorted ()"><code class="function">g_sequence_insert_sorted()</code></a> or
+<a class="link" href="glib-Sequences.html#g-sequence-insert-sorted-iter" title="g_sequence_insert_sorted_iter ()"><code class="function">g_sequence_insert_sorted_iter()</code></a> to add data to your sequence or, if
+you want to add a large amount of data, call <a class="link" href="glib-Sequences.html#g-sequence-sort" title="g_sequence_sort ()"><code class="function">g_sequence_sort()</code></a> after
+doing unsorted insertions.
+</p>
+</div>
+<p>
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -1046,6 +1074,20 @@ It should return 0 if the items are equal, a negative value if
 the first item comes before the second, and a positive value if
 the second item comes before the first.
 </p>
+<p>
+</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Note</h3>
+<p>
+This function will fail if the data contained in the sequence is
+unsorted.  Use <a class="link" href="glib-Sequences.html#g-sequence-insert-sorted" title="g_sequence_insert_sorted ()"><code class="function">g_sequence_insert_sorted()</code></a> or
+<a class="link" href="glib-Sequences.html#g-sequence-insert-sorted-iter" title="g_sequence_insert_sorted_iter ()"><code class="function">g_sequence_insert_sorted_iter()</code></a> to add data to your sequence or, if
+you want to add a large amount of data, call <a class="link" href="glib-Sequences.html#g-sequence-sort" title="g_sequence_sort ()"><code class="function">g_sequence_sort()</code></a> after
+doing unsorted insertions.
+</p>
+</div>
+<p>
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
@@ -1091,6 +1133,20 @@ instead of a <a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFun
 It should return 0 if the iterators are equal, a negative value
 if the first iterator comes before the second, and a positive
 value if the second iterator comes before the first.
+</p>
+<p>
+</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Note</h3>
+<p>
+This function will fail if the data contained in the sequence is
+unsorted.  Use <a class="link" href="glib-Sequences.html#g-sequence-insert-sorted" title="g_sequence_insert_sorted ()"><code class="function">g_sequence_insert_sorted()</code></a> or
+<a class="link" href="glib-Sequences.html#g-sequence-insert-sorted-iter" title="g_sequence_insert_sorted_iter ()"><code class="function">g_sequence_insert_sorted_iter()</code></a> to add data to your sequence or, if
+you want to add a large amount of data, call <a class="link" href="glib-Sequences.html#g-sequence-sort" title="g_sequence_sort ()"><code class="function">g_sequence_sort()</code></a> after
+doing unsorted insertions.
+</p>
+</div>
+<p>
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">

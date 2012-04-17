@@ -2,12 +2,12 @@
 .\"     Title: gdbus-codegen
 .\"    Author: [see the "Author" section]
 .\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
-.\"      Date: 03/11/2012
+.\"      Date: 04/13/2012
 .\"    Manual: User Commands
 .\"    Source: User Commands
 .\"  Language: English
 .\"
-.TH "GDBUS\-CODEGEN" "1" "03/11/2012" "User Commands" "User Commands"
+.TH "GDBUS\-CODEGEN" "1" "04/13/2012" "User Commands" "User Commands"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -300,20 +300,22 @@ Consider the following D\-Bus Introspection XML\&.
 .RS 4
 .\}
 .nf
-<interface name="net\&.Corp\&.MyApp\&.Frobber">
-  <method name="HelloWorld">
-    <arg name="greeting" direction="in" type="s"/>
-    <arg name="response" direction="out" type="s"/>
-  </method>
+<node>
+  <interface name="net\&.Corp\&.MyApp\&.Frobber">
+    <method name="HelloWorld">
+      <arg name="greeting" direction="in" type="s"/>
+      <arg name="response" direction="out" type="s"/>
+    </method>
 
-  <signal name="Notification">
-    <arg name="icon_blob" type="ay"/>
-    <arg name="height" type="i"/>
-    <arg name="messages" type="as"/>
-  </signal>
+    <signal name="Notification">
+      <arg name="icon_blob" type="ay"/>
+      <arg name="height" type="i"/>
+      <arg name="messages" type="as"/>
+    </signal>
 
-  <property name="Verbose" type="b" access="readwrite"/>
-</interface>
+    <property name="Verbose" type="b" access="readwrite"/>
+  </interface>
+</node>
 .fi
 .if n \{\
 .RE

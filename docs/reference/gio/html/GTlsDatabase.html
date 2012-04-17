@@ -406,8 +406,9 @@ result of verification.</td>
 } GTlsDatabaseLookupFlags;
 </pre>
 <p>
-Flags for <code class="function">g_tls_database_lookup_handle()</code>, <code class="function">g_tls_database_lookup_issuer()</code>,
-and <code class="function">g_tls_database_lookup_issued()</code>.
+Flags for <code class="function">g_tls_database_lookup_certificate_handle()</code>,
+<a class="link" href="GTlsDatabase.html#g-tls-database-lookup-certificate-issuer" title="g_tls_database_lookup_certificate_issuer ()"><code class="function">g_tls_database_lookup_certificate_issuer()</code></a>,
+and <a class="link" href="GTlsDatabase.html#g-tls-database-lookup-certificates-issued-by" title="g_tls_database_lookup_certificates_issued_by ()"><code class="function">g_tls_database_lookup_certificates_issued_by()</code></a>.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -633,8 +634,8 @@ the lookup operation asynchronously.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>a newly allocated list of <a class="link" href="GTlsCertificate.html" title="GTlsCertificate"><span class="type">GTlsCertificate</span></a> objects.
-Use <a href="./../gobject/gobject/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a> on each certificate, and <a href="./../glib/glib/glib-Doubly-Linked-Lists.html#g-list-free"><code class="function">g_list_free()</code></a> on the release the list. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+<td>a newly allocated list of <a class="link" href="GTlsCertificate.html" title="GTlsCertificate"><span class="type">GTlsCertificate</span></a>
+objects. Use <a href="./../gobject/gobject/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a> on each certificate, and <a href="./../glib/glib/glib-Doubly-Linked-Lists.html#g-list-free"><code class="function">g_list_free()</code></a> on the release the list. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> GTlsCertificate]</span>
 </td>
 </tr>
 </tbody>
@@ -789,9 +790,10 @@ then it is not guaranteed that this handle will continue to point to it.
 Lookup a certificate by its handle.
 </p>
 <p>
-The handle should have been created by calling <code class="function">g_tls_database_create_handle()</code>
-on a <a class="link" href="GTlsDatabase.html" title="GTlsDatabase"><span class="type">GTlsDatabase</span></a> object of the same TLS backend. The handle is designed
-to remain valid across instantiations of the database.
+The handle should have been created by calling
+<a class="link" href="GTlsDatabase.html#g-tls-database-create-certificate-handle" title="g_tls_database_create_certificate_handle ()"><code class="function">g_tls_database_create_certificate_handle()</code></a> on a <a class="link" href="GTlsDatabase.html" title="GTlsDatabase"><span class="type">GTlsDatabase</span></a> object of
+the same TLS backend. The handle is designed to remain valid across
+instantiations of the database.
 </p>
 <p>
 If the handle is no longer valid, or does not point to a certificate in
@@ -855,7 +857,7 @@ the lookup operation asynchronously.
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
 <p>
 Asynchronously lookup a certificate by its handle in the database. See
-<code class="function">g_tls_database_lookup_handle()</code> for more information.
+<a class="link" href="GTlsDatabase.html#g-tls-database-lookup-certificate-for-handle" title="g_tls_database_lookup_certificate_for_handle ()"><code class="function">g_tls_database_lookup_certificate_for_handle()</code></a> for more information.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -904,7 +906,7 @@ Asynchronously lookup a certificate by its handle in the database. See
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Finish an asynchronous lookup of a certificate by its handle. See
-<code class="function">g_tls_database_lookup_handle()</code> for more information.
+<code class="function">g_tls_database_lookup_certificate_handle()</code> for more information.
 </p>
 <p>
 If the handle is no longer valid, or does not point to a certificate in

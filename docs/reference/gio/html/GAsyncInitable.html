@@ -7,7 +7,7 @@
 <link rel="home" href="index.html" title="GIO Reference Manual">
 <link rel="up" href="failable_initialization.html" title="Failable Initialization">
 <link rel="prev" href="GInitable.html" title="GInitable">
-<link rel="next" href="networking.html" title="Lowlevel network support">
+<link rel="next" href="networking.html" title="Low-level network support">
 <meta name="generator" content="GTK-Doc V1.18 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
@@ -393,23 +393,7 @@ the object doesn't support cancellable initialization, the error
 <a class="link" href="gio-GIOError.html#G-IO-ERROR-NOT-SUPPORTED:CAPS"><code class="literal">G_IO_ERROR_NOT_SUPPORTED</code></a> will be returned.
 </p>
 <p>
-If this function is not called, or returns with an error, then all
-operations on the object should fail, generally returning the
-error <a class="link" href="gio-GIOError.html#G-IO-ERROR-NOT-INITIALIZED:CAPS"><code class="literal">G_IO_ERROR_NOT_INITIALIZED</code></a>.
-</p>
-<p>
-Implementations of this method must be idempotent: i.e. multiple calls
-to this function with the same argument should return the same results.
-Only the first call initializes the object; further calls return the result
-of the first call. This is so that it's safe to implement the singleton
-pattern in the GObject constructor function.
-</p>
-<p>
-For classes that also support the <a class="link" href="GInitable.html" title="GInitable"><span class="type">GInitable</span></a> interface, the default
-implementation of this method will run the <a class="link" href="GInitable.html#g-initable-init" title="g_initable_init ()"><code class="function">g_initable_init()</code></a> function
-in a thread, so if you want to support asynchronous initialization via
-threads, just implement the <a class="link" href="GAsyncInitable.html" title="GAsyncInitable"><span class="type">GAsyncInitable</span></a> interface without overriding
-any interface methods.
+As with <a class="link" href="GInitable.html" title="GInitable"><span class="type">GInitable</span></a>, if the object is not initialized, or initialization
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -434,6 +418,23 @@ of the operation.</td>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
 <td>the data to pass to callback function</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>with an error, then all operations on the object except
+<a href="./../gobject/gobject/gobject-The-Base-Object-Type.html#g-object-ref"><code class="function">g_object_ref()</code></a> and <a href="./../gobject/gobject/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a> are considered to be invalid, and
+have undefined behaviour. They will often fail with <a href="./../glib/glib/glib-Message-Logging.html#g-critical"><code class="function">g_critical()</code></a> or
+<a href="./../glib/glib/glib-Message-Logging.html#g-warning"><code class="function">g_warning()</code></a>, but this must not be relied on.
+Implementations of this method must be idempotent: i.e. multiple calls
+to this function with the same argument should return the same results.
+Only the first call initializes the object; further calls return the result
+of the first call. This is so that it's safe to implement the singleton
+pattern in the GObject constructor function.
+For classes that also support the <a class="link" href="GInitable.html" title="GInitable"><span class="type">GInitable</span></a> interface, the default
+implementation of this method will run the <a class="link" href="GInitable.html#g-initable-init" title="g_initable_init ()"><code class="function">g_initable_init()</code></a> function
+in a thread, so if you want to support asynchronous initialization via
+threads, just implement the <a class="link" href="GAsyncInitable.html" title="GAsyncInitable"><span class="type">GAsyncInitable</span></a> interface without overriding
+any interface methods.</td>
 </tr>
 </tbody>
 </table></div>
@@ -522,7 +523,8 @@ finished</td>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>first_property_name</code></em> :</span></p></td>
 <td>the name of the first property, or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if no
-properties</td>
+properties. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>

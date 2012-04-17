@@ -51,7 +51,7 @@ my_test_get_type (void)
   static GType test_type = 0;
 
   if (!test_type) {
-    static const GTypeInfo test_info = {
+    const GTypeInfo test_info = {
       sizeof (GTestClass),
       NULL,
       NULL,
@@ -178,7 +178,6 @@ main (int argc, char **argv)
   gint i;
   GTest *test;
 
-  g_thread_init (NULL);
   g_print ("START: %s\n", argv[0]);
   g_log_set_always_fatal (G_LOG_LEVEL_WARNING | G_LOG_LEVEL_CRITICAL | g_log_set_always_fatal (G_LOG_FATAL_MASK));
   g_type_init ();

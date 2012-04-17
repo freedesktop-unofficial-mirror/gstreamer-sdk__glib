@@ -200,13 +200,6 @@ The callback for an asynchronous operation is called only once, and is
 always called, even in the case of a cancelled operation. On cancellation
 the result is a <a class="link" href="gio-GIOError.html#G-IO-ERROR-CANCELLED:CAPS"><code class="literal">G_IO_ERROR_CANCELLED</code></a> error.
 </p>
-<p>
-Some asynchronous operations are implemented using synchronous calls.
-These are run in a separate thread, if <a href="./../glib/glib/glib-Threads.html#GThread"><span class="type">GThread</span></a> has been initialized, but
-otherwise they are sent to the Main Event Loop and processed in an idle
-function. So, if you truly need asynchronous operations, make sure to
-initialize <a href="./../glib/glib/glib-Threads.html#GThread"><span class="type">GThread</span></a>.
-</p>
 </div>
 <div class="refsect1">
 <a name="GAsyncResult.details"></a><h2>Details</h2>

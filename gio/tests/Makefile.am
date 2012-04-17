@@ -27,7 +27,6 @@ progs_ldadd     = 					\
 
 TEST_PROGS +=	 		\
 	io-stream		\
-	actions 		\
 	memory-input-stream 	\
 	memory-output-stream 	\
 	readwrite		\
@@ -53,13 +52,19 @@ TEST_PROGS +=	 		\
 	gdbus-message		\
 	socket			\
 	pollable		\
-	tls-certificate         \
-	tls-interaction         \
+	tls-certificate		\
+	tls-interaction		\
 	cancellable		\
+	vfs			\
+	network-monitor		\
+	fileattributematcher	\
+	gmenumodel		\
+	resources		\
 	$(NULL)
 
 if OS_UNIX
 TEST_PROGS +=			\
+	actions 		\
 	gdbus-close-pending	\
 	gdbus-connection	\
 	gdbus-connection-flush	\
@@ -79,6 +84,7 @@ TEST_PROGS +=			\
 	gdbus-bz627724		\
 	appinfo			\
 	contenttype		\
+	mimeapps		\
 	file			\
 	$(NULL)
 endif
@@ -109,7 +115,6 @@ SAMPLE_PROGS = 				\
 	gapplication-example-actions	\
 	$(NULL)
 
-
 if OS_UNIX
 TEST_PROGS += 			\
 	live-g-file		\
@@ -117,6 +122,7 @@ TEST_PROGS += 			\
 	unix-fd 		\
 	unix-streams 		\
 	gapplication 		\
+	basic-application	\
 	gdbus-test-codegen 	\
 	$(NULL)
 SAMPLE_PROGS +=					\
@@ -133,6 +139,7 @@ endif
 io_stream_SOURCES = io-stream.c
 io_stream_LDADD   = $(progs_ldadd)
 
+actions_SOURCES   = actions.c gdbus-sessionbus.c gdbus-sessionbus.h
 actions_LDADD	  = $(progs_ldadd)
 
 memory_input_stream_SOURCES	  = memory-input-stream.c
@@ -340,9 +347,6 @@ gdbus_export_LDADD = $(progs_ldadd)
 gdbus_error_SOURCES = gdbus-error.c gdbus-sessionbus.c gdbus-sessionbus.h gdbus-tests.h gdbus-tests.c
 gdbus_error_LDADD = $(progs_ldadd)
 
-gdbus_peer_SOURCES = gdbus-peer.c gdbus-tests.h gdbus-tests.c
-gdbus_peer_LDADD = $(progs_ldadd)
-
 gdbus_non_socket_SOURCES = \
 	gdbus-non-socket.c \
 	gdbus-tests.c \
@@ -390,17 +394,29 @@ gdbus_connection_flush_helper_LDADD = $(progs_ldadd)
 appinfo_SOURCES = appinfo.c
 appinfo_LDADD   = $(progs_ldadd)
 
+resources_SOURCES = resources.c test_resources.c test_resources2.c test_resources2.h
+resources_DEPENDENCIES = test.gresource
+resources_LDADD   = $(progs_ldadd)
+
 appinfo_test_SOURCES = appinfo-test.c
 appinfo_test_LDADD   = $(progs_ldadd)
 
 contenttype_SOURCES = contenttype.c
 contenttype_LDADD   = $(progs_ldadd)
 
+mimeapps_SOURCES = mimeapps.c
+mimeapps_LDADD   = $(progs_ldadd)
+
 file_SOURCES = file.c
 file_LDADD   = $(progs_ldadd)
 
-gapplication_SOURCES = gapplication.c gdbus-sessionbus.c
+fileattributematcher_SOURCES = fileattributematcher.c
+fileattributematcher_LDADD   = $(progs_ldadd)
+
+gapplication_SOURCES = gapplication.c gdbus-sessionbus.h gdbus-sessionbus.c gdbus-tests.h gdbus-tests.c
 gapplication_LDADD = $(progs_ldadd)
+
+basic_application_LDADD = $(progs_ldadd)
 
 gapplication_example_open_SOURCES = gapplication-example-open.c
 gapplication_example_open_LDADD   = $(progs_ldadd)
@@ -416,6 +432,9 @@ gapplication_example_cmdline3_LDADD   = $(progs_ldadd)
 
 gapplication_example_actions_SOURCES = gapplication-example-actions.c
 gapplication_example_actions_LDADD   = $(progs_ldadd)
+
+gmenumodel_SOURCES = gmenumodel.c gdbus-sessionbus.h gdbus-sessionbus.c
+gmenumodel_LDADD = $(progs_ldadd)
 
 schema_tests = \
 	schema-tests/array-default-not-in-choices.gschema.xml		\
@@ -501,6 +520,10 @@ tls_interaction_LDADD = $(progs_ldadd)
 
 cancellable_LDADD = $(progs_ldadd)
 
+vfs_LDADD = $(progs_ldadd)
+
+network_monitor_LDADD = $(progs_ldadd)
+
 # -----------------------------------------------------------------------------
 
 if OS_UNIX
@@ -511,6 +534,11 @@ gdbus_example_objectmanager_server_LDADD    = $(top_builddir)/gio/tests/gdbus-ob
 gdbus_example_objectmanager_client_SOURCES  = gdbus-example-objectmanager-client.c
 gdbus_example_objectmanager_client_CFLAGS   = -I$(top_builddir)/gio/tests/gdbus-object-manager-example
 gdbus_example_objectmanager_client_LDADD    = $(top_builddir)/gio/tests/gdbus-object-manager-example/libgdbus-example-objectmanager.la $(progs_ldadd)
+
+gdbus_peer_SOURCES = gdbus-peer.c gdbus-tests.h gdbus-tests.c
+gdbus_peer_CFLAGS  = -I$(top_builddir)/gio/tests/gdbus-object-manager-example
+gdbus_peer_LDADD   = $(top_builddir)/gio/tests/gdbus-object-manager-example/libgdbus-example-objectmanager.la $(progs_ldadd)
+
 endif OS_UNIX
 
 # -----------------------------------------------------------------------------
@@ -523,6 +551,7 @@ EXTRA_DIST += \
 	enums.xml.template		\
 	de.po				\
 	$(schema_tests)			\
+	org.gtk.schemasourcecheck.gschema.xml \
 	appinfo-test.desktop		\
 	appinfo-test2.desktop		\
 	appinfo-test-gnome.desktop	\
@@ -533,25 +562,64 @@ EXTRA_DIST += \
 	cert2.pem			\
 	cert3.pem			\
 	key.pem				\
+	key8.pem			\
 	key-cert.pem			\
 	cert-key.pem			\
 	cert-list.pem			\
 	nothing.pem			\
+	test.gresource.xml		\
+	test1.txt			\
+	test2.gresource.xml		\
+	test2.txt			\
+	test3.gresource.xml		\
+	test3.txt			\
+	test4.gresource.xml		\
 	$(NULL)
 
-MISC_STUFF = test.mo
+MISC_STUFF = test.mo test.gresource
 
 test.mo: de.po
 	$(MSGFMT) -o test.mo $(srcdir)/de.po; \
 	$(MKDIR_P) de/LC_MESSAGES; \
 	cp -f test.mo de/LC_MESSAGES
 
-CLEANFILES = gdbus-test-codegen-generated.[ch] gdbus-test-codegen-generated-doc-*.xml
+if CROSS_COMPILING
+  glib_compile_resources=$(GLIB_COMPILE_RESOURCES)
+else
+  glib_compile_resources=$(top_builddir)/gio/glib-compile-resources
+endif
+
+BUILT_SOURCES += test_resources.c test_resources2.c test_resources2.h
+test_resources.c: test2.gresource.xml Makefile $(shell $(glib_compile_resources) --generate-dependencies $(srcdir)/test2.gresource.xml)
+	$(AM_V_GEN) $(glib_compile_resources) --target=$@ --sourcedir=$(srcdir) --generate-source --c-name _g_test1 $<
+
+test_resources2.h test_resources2.c: test3.gresource.xml Makefile $(shell $(glib_compile_resources) --generate-dependencies $(srcdir)/test3.gresource.xml)
+	$(AM_V_GEN) $(glib_compile_resources) --target=$@ --sourcedir=$(srcdir) --generate --c-name _g_test2 --manual-register $<
+
+plugin_resources.c: test4.gresource.xml Makefile $(shell $(glib_compile_resources) --generate-dependencies $(srcdir)/test4.gresource.xml)
+	$(AM_V_GEN) $(glib_compile_resources) --target=$@ --sourcedir=$(srcdir) --generate-source --c-name _g_plugin $<
+
+test.gresource: test.gresource.xml Makefile $(shell $(glib_compile_resources) --generate-dependencies $(srcdir)/test.gresource.xml)
+	$(AM_V_GEN) $(glib_compile_resources) --target=$@ --sourcedir=$(srcdir) $<
+
+noinst_LTLIBRARIES = libresourceplugin.la
+
+libresourceplugin_la_SOURCES = resourceplugin.c plugin_resources.c
+libresourceplugin_la_LDFLAGS = -avoid-version -module $(no_undefined) -rpath $(libdir)
+libresourceplugin_la_LIBADD = $(progs_ldadd)
+
+CLEANFILES = gdbus-test-codegen-generated.[ch] gdbus-test-codegen-generated-doc-*.xml test_resources2.[ch] plugin_resources.c
 
 DISTCLEANFILES = \
 	applications/mimeinfo.cache	\
 	org.gtk.test.enums.xml		\
 	de/LC_MESSAGES/test.mo		\
 	test.mo				\
+	test.gresource			\
+	test_resources.c		\
 	gsettings.store			\
-	gschemas.compiled
+	gschemas.compiled 		\
+	schema-source/gschemas.compiled
+
+distclean-local:
+	rm -rf xdgdatahome xdgdatadir

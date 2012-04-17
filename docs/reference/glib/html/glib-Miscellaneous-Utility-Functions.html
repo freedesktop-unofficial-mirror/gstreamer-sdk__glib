@@ -45,6 +45,14 @@ const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span cla
 <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-prgname" title="g_get_prgname ()">g_get_prgname</a>                       (<em class="parameter"><code><span class="type">void</span></code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-set-prgname" title="g_set_prgname ()">g_set_prgname</a>                       (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *prgname</code></em>);
 <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> **            <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-environ" title="g_get_environ ()">g_get_environ</a>                       (<em class="parameter"><code><span class="type">void</span></code></em>);
+const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *       <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-environ-getenv" title="g_environ_getenv ()">g_environ_getenv</a>                    (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> **envp</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *variable</code></em>);
+<a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> **            <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-environ-setenv" title="g_environ_setenv ()">g_environ_setenv</a>                    (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> **envp</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *variable</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *value</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="type">gboolean</span></a> overwrite</code></em>);
+<a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> **            <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-environ-unsetenv" title="g_environ_unsetenv ()">g_environ_unsetenv</a>                  (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> **envp</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *variable</code></em>);
 const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *       <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-getenv" title="g_getenv ()">g_getenv</a>                            (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *variable</code></em>);
 <a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-setenv" title="g_setenv ()">g_setenv</a>                            (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *variable</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *value</code></em>,
@@ -86,7 +94,7 @@ const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span cla
 enum                <a class="link" href="glib-Miscellaneous-Utility-Functions.html#GFormatSizeFlags" title="enum GFormatSizeFlags">GFormatSizeFlags</a>;
 <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-format-size-full" title="g_format_size_full ()">g_format_size_full</a>                  (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint64" title="guint64"><span class="type">guint64</span></a> size</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Miscellaneous-Utility-Functions.html#GFormatSizeFlags" title="enum GFormatSizeFlags"><span class="type">GFormatSizeFlags</span></a> flags</code></em>);
-<span class="returnvalue">char</span> *              <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-format-size-for-display" title="g_format_size_for_display ()">g_format_size_for_display</a>           (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#goffset" title="goffset"><span class="type">goffset</span></a> size</code></em>);
+<a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-format-size-for-display" title="g_format_size_for_display ()">g_format_size_for_display</a>           (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#goffset" title="goffset"><span class="type">goffset</span></a> size</code></em>);
 
 <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-find-program-in-path" title="g_find_program_in_path ()">g_find_program_in_path</a>              (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *program</code></em>);
 
@@ -155,7 +163,7 @@ been called).
 Sets a human-readable name for the application. This name should be
 localized if possible, and is intended for display to the user.
 Contrast with <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-set-prgname" title="g_set_prgname ()"><code class="function">g_set_prgname()</code></a>, which sets a non-localized name.
-<a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-set-prgname" title="g_set_prgname ()"><code class="function">g_set_prgname()</code></a> will be called automatically by <a href="http://library.gnome.org/devel/gtk/gtk3-General.html#gtk-init"><code class="function">gtk_init()</code></a>,
+<a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-set-prgname" title="g_set_prgname ()"><code class="function">g_set_prgname()</code></a> will be called automatically by <a href="http://developer.gnome.org/devel/gtk/gtk3-General.html#gtk-init"><code class="function">gtk_init()</code></a>,
 but <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-set-application-name" title="g_set_application_name ()"><code class="function">g_set_application_name()</code></a> will not.
 </p>
 <p>
@@ -182,8 +190,8 @@ or when displaying an application's name in the task list.
 <p>
 Gets the name of the program. This name should <span class="emphasis"><em>not</em></span> 
 be localized, contrast with <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-application-name" title="g_get_application_name ()"><code class="function">g_get_application_name()</code></a>.
-(If you are using GDK or GTK+ the program name is set in <a href="http://library.gnome.org/devel/gdk/gdk3-General.html#gdk-init"><code class="function">gdk_init()</code></a>, 
-which is called by <a href="http://library.gnome.org/devel/gtk/gtk3-General.html#gtk-init"><code class="function">gtk_init()</code></a>. The program name is found by taking 
+(If you are using GDK or GTK+ the program name is set in <a href="http://developer.gnome.org/devel/gdk/gdk3-General.html#gdk-init"><code class="function">gdk_init()</code></a>, 
+which is called by <a href="http://developer.gnome.org/devel/gtk/gtk3-General.html#gtk-init"><code class="function">gtk_init()</code></a>. The program name is found by taking 
 the last component of <code class="literal">argv[0]</code>.)
 </p>
 <div class="variablelist"><table border="0">
@@ -217,9 +225,11 @@ thread-safety reasons this function can only be called once.
 <a name="g-get-environ"></a><h3>g_get_environ ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> **            g_get_environ                       (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
-Gets the list of environment variables for the current process.  The
-list is <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> terminated and each item in the list is of the form
-'NAME=VALUE'.
+Gets the list of environment variables for the current process.
+</p>
+<p>
+The list is <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> terminated and each item in the list is of the
+form 'NAME=VALUE'.
 </p>
 <p>
 This is equivalent to direct access to the 'environ' global variable,
@@ -233,7 +243,8 @@ The return value is freshly allocated and it should be freed with
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>the list of environment variables. <span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> zero-terminated=1][<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+<td>the list of
+environment variables. <span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> zero-terminated=1][<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
 </td>
 </tr></tbody>
 </table></div>
@@ -241,29 +252,153 @@ The return value is freshly allocated and it should be freed with
 </div>
 <hr>
 <div class="refsect2">
+<a name="g-environ-getenv"></a><h3>g_environ_getenv ()</h3>
+<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *       g_environ_getenv                    (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> **envp</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *variable</code></em>);</pre>
+<p>
+Returns the value of the environment variable <em class="parameter"><code>variable</code></em> in the
+provided list <em class="parameter"><code>envp</code></em>.
+</p>
+<p>
+The name and value are in the GLib file name encoding.
+On UNIX, this means the actual bytes which might or might not
+be in some consistent character set and encoding. On Windows,
+it is in UTF-8. On Windows, in case the environment variable's
+value contains references to other environment variables, they
+are expanded.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>envp</code></em> :</span></p></td>
+<td>an environment
+list (eg, as returned from <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-environ" title="g_get_environ ()"><code class="function">g_get_environ()</code></a>). <span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> zero-terminated=1][<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>variable</code></em> :</span></p></td>
+<td>the environment variable to get, in the GLib file name
+encoding</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the value of the environment variable, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> if
+the environment variable is not set in <em class="parameter"><code>envp</code></em>. The returned
+string is owned by <em class="parameter"><code>envp</code></em>, and will be freed if <em class="parameter"><code>variable</code></em> is
+set or unset again.</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.32</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-environ-setenv"></a><h3>g_environ_setenv ()</h3>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> **            g_environ_setenv                    (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> **envp</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *variable</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *value</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="type">gboolean</span></a> overwrite</code></em>);</pre>
+<p>
+Sets the environment variable <em class="parameter"><code>variable</code></em> in the provided list
+<em class="parameter"><code>envp</code></em> to <em class="parameter"><code>value</code></em>.
+</p>
+<p>
+Both the variable's name and value should be in the GLib
+file name encoding. On UNIX, this means that they can be
+arbitrary byte strings. On Windows, they should be in UTF-8.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>envp</code></em> :</span></p></td>
+<td>an environment
+list that can be freed using <a class="link" href="glib-String-Utility-Functions.html#g-strfreev" title="g_strfreev ()"><code class="function">g_strfreev()</code></a> (e.g., as returned from <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-environ" title="g_get_environ ()"><code class="function">g_get_environ()</code></a>). <span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> zero-terminated=1][<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>variable</code></em> :</span></p></td>
+<td>the environment variable to set, must not contain '='</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td>the value for to set the variable to</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>overwrite</code></em> :</span></p></td>
+<td>whether to change the variable if it already exists</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the
+updated environment list. Free it using <a class="link" href="glib-String-Utility-Functions.html#g-strfreev" title="g_strfreev ()"><code class="function">g_strfreev()</code></a>. <span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> zero-terminated=1][<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.32</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-environ-unsetenv"></a><h3>g_environ_unsetenv ()</h3>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> **            g_environ_unsetenv                  (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> **envp</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *variable</code></em>);</pre>
+<p>
+Removes the environment variable <em class="parameter"><code>variable</code></em> from the provided
+environment <em class="parameter"><code>envp</code></em>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>envp</code></em> :</span></p></td>
+<td>an environment
+list that can be freed using <a class="link" href="glib-String-Utility-Functions.html#g-strfreev" title="g_strfreev ()"><code class="function">g_strfreev()</code></a> (e.g., as returned from <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-environ" title="g_get_environ ()"><code class="function">g_get_environ()</code></a>). <span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> zero-terminated=1][<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>variable</code></em> :</span></p></td>
+<td>the environment variable to remove, must not contain '='</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the
+updated environment list. Free it using <a class="link" href="glib-String-Utility-Functions.html#g-strfreev" title="g_strfreev ()"><code class="function">g_strfreev()</code></a>. <span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> zero-terminated=1][<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.32</p>
+</div>
+<hr>
+<div class="refsect2">
 <a name="g-getenv"></a><h3>g_getenv ()</h3>
 <pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *       g_getenv                            (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *variable</code></em>);</pre>
 <p>
-Returns the value of an environment variable. The name and value
-are in the GLib file name encoding. On UNIX, this means the actual
-bytes which might or might not be in some consistent character set
-and encoding. On Windows, it is in UTF-8. On Windows, in case the
-environment variable's value contains references to other
-environment variables, they are expanded.
+Returns the value of an environment variable.
+</p>
+<p>
+The name and value are in the GLib file name encoding. On UNIX,
+this means the actual bytes which might or might not be in some
+consistent character set and encoding. On Windows, it is in UTF-8.
+On Windows, in case the environment variable's value contains
+references to other environment variables, they are expanded.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>variable</code></em> :</span></p></td>
-<td>the environment variable to get, in the GLib file name encoding.</td>
+<td>the environment variable to get, in the GLib file name
+encoding</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>the value of the environment variable, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> if
-the environment variable is not found. The returned string may be
-overwritten by the next call to <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-getenv" title="g_getenv ()"><code class="function">g_getenv()</code></a>, <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-setenv" title="g_setenv ()"><code class="function">g_setenv()</code></a> or
-<a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-unsetenv" title="g_unsetenv ()"><code class="function">g_unsetenv()</code></a>.</td>
+the environment variable is not found. The returned string
+may be overwritten by the next call to <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-getenv" title="g_getenv ()"><code class="function">g_getenv()</code></a>, <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-setenv" title="g_setenv ()"><code class="function">g_setenv()</code></a>
+or <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-unsetenv" title="g_unsetenv ()"><code class="function">g_unsetenv()</code></a>.</td>
 </tr>
 </tbody>
 </table></div>
@@ -277,12 +412,34 @@ overwritten by the next call to <a class="link" href="glib-Miscellaneous-Utility
 <p>
 Sets an environment variable. Both the variable's name and value
 should be in the GLib file name encoding. On UNIX, this means that
-they can be any sequence of bytes. On Windows, they should be in
+they can be arbitrary byte strings. On Windows, they should be in
 UTF-8.
 </p>
 <p>
-Note that on some systems, when variables are overwritten, the memory 
+Note that on some systems, when variables are overwritten, the memory
 used for the previous variables and its value isn't reclaimed.
+</p>
+<p>
+</p>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p>
+Environment variable handling in UNIX is not thread-safe, and your
+program may crash if one thread calls <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-setenv" title="g_setenv ()"><code class="function">g_setenv()</code></a> while another
+thread is calling <code class="function">getenv()</code>. (And note that many functions, such as
+<code class="function">gettext()</code>, call <code class="function">getenv()</code> internally.) This function is only safe to
+use at the very start of your program, before creating any other
+threads (or creating objects that create worker threads of their
+own).
+</p>
+<p>
+If you need to set up the environment for a child process, you can
+use <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-environ" title="g_get_environ ()"><code class="function">g_get_environ()</code></a> to get an environment array, modify that with
+<a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-environ-setenv" title="g_environ_setenv ()"><code class="function">g_environ_setenv()</code></a> and <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-environ-unsetenv" title="g_environ_unsetenv ()"><code class="function">g_environ_unsetenv()</code></a>, and then pass that
+array directly to <code class="function">execvpe()</code>, <a class="link" href="glib-Spawning-Processes.html#g-spawn-async" title="g_spawn_async ()"><code class="function">g_spawn_async()</code></a>, or the like.
+</p>
+</div>
+<p>
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -316,16 +473,36 @@ used for the previous variables and its value isn't reclaimed.
 Removes an environment variable from the environment.
 </p>
 <p>
-Note that on some systems, when variables are overwritten, the memory 
-used for the previous variables and its value isn't reclaimed.
-Furthermore, this function can't be guaranteed to operate in a 
-threadsafe way.
+Note that on some systems, when variables are overwritten, the
+memory used for the previous variables and its value isn't reclaimed.
+</p>
+<p>
+</p>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p>
+Environment variable handling in UNIX is not thread-safe, and your
+program may crash if one thread calls <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-unsetenv" title="g_unsetenv ()"><code class="function">g_unsetenv()</code></a> while another
+thread is calling <code class="function">getenv()</code>. (And note that many functions, such as
+<code class="function">gettext()</code>, call <code class="function">getenv()</code> internally.) This function is only safe
+to use at the very start of your program, before creating any other
+threads (or creating objects that create worker threads of their
+own).
+</p>
+<p>
+If you need to set up the environment for a child process, you can
+use <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-environ" title="g_get_environ ()"><code class="function">g_get_environ()</code></a> to get an environment array, modify that with
+<a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-environ-setenv" title="g_environ_setenv ()"><code class="function">g_environ_setenv()</code></a> and <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-environ-unsetenv" title="g_environ_unsetenv ()"><code class="function">g_environ_unsetenv()</code></a>, and then pass that
+array directly to <code class="function">execvpe()</code>, <a class="link" href="glib-Spawning-Processes.html#g-spawn-async" title="g_spawn_async ()"><code class="function">g_spawn_async()</code></a>, or the like.
+</p>
+</div>
+<p>
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>variable</code></em> :</span></p></td>
-<td>the environment variable to remove, must not contain '='.</td>
+<td>the environment variable to remove, must not contain '='</td>
 </tr></tbody>
 </table></div>
 <p class="since">Since 2.4</p>
@@ -337,18 +514,20 @@ threadsafe way.
 <p>
 Gets the names of all variables set in the environment.
 </p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody><tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>a <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>-terminated list of strings which must be freed
-with <a class="link" href="glib-String-Utility-Functions.html#g-strfreev" title="g_strfreev ()"><code class="function">g_strfreev()</code></a>.
+<p>
 Programs that want to be portable to Windows should typically use
 this function and <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-getenv" title="g_getenv ()"><code class="function">g_getenv()</code></a> instead of using the environ array
 from the C library directly. On Windows, the strings in the environ
 array are in system codepage encoding, while in most of the typical
 use cases for environment variables in GLib-using programs you want
-the UTF-8 encoding that this function and <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-getenv" title="g_getenv ()"><code class="function">g_getenv()</code></a> provide. <span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> zero-terminated=1][<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+the UTF-8 encoding that this function and <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-getenv" title="g_getenv ()"><code class="function">g_getenv()</code></a> provide.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>a <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>-terminated
+list of strings which must be freed with <a class="link" href="glib-String-Utility-Functions.html#g-strfreev" title="g_strfreev ()"><code class="function">g_strfreev()</code></a>. <span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> zero-terminated=1][<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
 </td>
 </tr></tbody>
 </table></div>
@@ -836,14 +1015,17 @@ it is always UTF-8. The return value is never <a class="link" href="glib-Standar
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             g_get_current_dir                   (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
 Gets the current directory.
-The returned string should be freed when no longer needed. The encoding 
-of the returned string is system defined. On Windows, it is always UTF-8.
+</p>
+<p>
+The returned string should be freed when no longer needed.
+The encoding of the returned string is system defined.
+On Windows, it is always UTF-8.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>the current directory.</td>
+<td>the current directory</td>
 </tr></tbody>
 </table></div>
 </div>
@@ -853,24 +1035,27 @@ of the returned string is system defined. On Windows, it is always UTF-8.
 <pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *       g_basename                          (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *file_name</code></em>);</pre>
 <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
 <h3 class="title">Warning</h3>
-<p><code class="literal">g_basename</code> has been deprecated since version 2.2 and should not be used in newly-written code. Use <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-path-get-basename" title="g_path_get_basename ()"><code class="function">g_path_get_basename()</code></a> instead, but notice that
-<a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-path-get-basename" title="g_path_get_basename ()"><code class="function">g_path_get_basename()</code></a> allocates new memory for the returned string, unlike
-this function which returns a pointer into the argument.</p>
+<p><code class="literal">g_basename</code> has been deprecated since version 2.2 and should not be used in newly-written code. Use <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-path-get-basename" title="g_path_get_basename ()"><code class="function">g_path_get_basename()</code></a> instead, but notice
+    that <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-path-get-basename" title="g_path_get_basename ()"><code class="function">g_path_get_basename()</code></a> allocates new memory for the
+    returned string, unlike this function which returns a pointer
+    into the argument.</p>
 </div>
 <p>
-Gets the name of the file without any leading directory components.  
-It returns a pointer into the given file name string.
+Gets the name of the file without any leading directory
+components. It returns a pointer into the given file name
+string.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>file_name</code></em> :</span></p></td>
-<td>the name of the file.</td>
+<td>the name of the file</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>the name of the file without any leading directory components.</td>
+<td>the name of the file without any leading
+directory components</td>
 </tr>
 </tbody>
 </table></div>
@@ -885,6 +1070,8 @@ It returns a pointer into the given file name string.
 </div>
 <p>
 Gets the directory components of a file name.
+</p>
+<p>
 If the file name has no directory components "." is returned.
 The returned string should be freed when no longer needed.
 </p>
@@ -941,12 +1128,12 @@ Windows-specific code.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>file_name</code></em> :</span></p></td>
-<td>a file name.</td>
+<td>a file name</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>
-<a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if <em class="parameter"><code>file_name</code></em> is absolute.</td>
+<a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if <em class="parameter"><code>file_name</code></em> is absolute</td>
 </tr>
 </tbody>
 </table></div>
@@ -956,20 +1143,20 @@ Windows-specific code.
 <a name="g-path-skip-root"></a><h3>g_path_skip_root ()</h3>
 <pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *       g_path_skip_root                    (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *file_name</code></em>);</pre>
 <p>
-Returns a pointer into <em class="parameter"><code>file_name</code></em> after the root component, i.e. after
-the "/" in UNIX or "C:\" under Windows. If <em class="parameter"><code>file_name</code></em> is not an absolute
-path it returns <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
+Returns a pointer into <em class="parameter"><code>file_name</code></em> after the root component,
+i.e. after the "/" in UNIX or "C:\" under Windows. If <em class="parameter"><code>file_name</code></em>
+is not an absolute path it returns <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>file_name</code></em> :</span></p></td>
-<td>a file name.</td>
+<td>a file name</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>a pointer into <em class="parameter"><code>file_name</code></em> after the root component.</td>
+<td>a pointer into <em class="parameter"><code>file_name</code></em> after the root component</td>
 </tr>
 </tbody>
 </table></div>
@@ -979,23 +1166,25 @@ path it returns <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title
 <a name="g-path-get-basename"></a><h3>g_path_get_basename ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             g_path_get_basename                 (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *file_name</code></em>);</pre>
 <p>
-Gets the last component of the filename. If <em class="parameter"><code>file_name</code></em> ends with a 
-directory separator it gets the component before the last slash. If 
-<em class="parameter"><code>file_name</code></em> consists only of directory separators (and on Windows, 
-possibly a drive letter), a single separator is returned. If
-<em class="parameter"><code>file_name</code></em> is empty, it gets ".".
+Gets the last component of the filename.
+</p>
+<p>
+If <em class="parameter"><code>file_name</code></em> ends with a directory separator it gets the component
+before the last slash. If <em class="parameter"><code>file_name</code></em> consists only of directory
+separators (and on Windows, possibly a drive letter), a single
+separator is returned. If <em class="parameter"><code>file_name</code></em> is empty, it gets ".".
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>file_name</code></em> :</span></p></td>
-<td>the name of the file.</td>
+<td>the name of the file</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>a newly allocated string containing the last component of
-the filename.</td>
+<td>a newly allocated string containing the last
+component of the filename</td>
 </tr>
 </tbody>
 </table></div>
@@ -1005,20 +1194,22 @@ the filename.</td>
 <a name="g-path-get-dirname"></a><h3>g_path_get_dirname ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             g_path_get_dirname                  (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *file_name</code></em>);</pre>
 <p>
-Gets the directory components of a file name.  If the file name has no
-directory components "." is returned.  The returned string should be
-freed when no longer needed.
+Gets the directory components of a file name.
+</p>
+<p>
+If the file name has no directory components "." is returned.
+The returned string should be freed when no longer needed.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>file_name</code></em> :</span></p></td>
-<td>the name of the file.</td>
+<td>the name of the file</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>the directory components of the file.</td>
+<td>the directory components of the file</td>
 </tr>
 </tbody>
 </table></div>
@@ -1218,7 +1409,7 @@ formatted.
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>a newly-allocated formatted string containing a human readable
-file size.</td>
+file size</td>
 </tr>
 </tbody>
 </table></div>
@@ -1234,8 +1425,7 @@ file size.</td>
 } GFormatSizeFlags;
 </pre>
 <p>
-Flags to modify the format of the string returned by
-<a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-format-size-full" title="g_format_size_full ()"><code class="function">g_format_size_full()</code></a>.
+Flags to modify the format of the string returned by <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-format-size-full" title="g_format_size_full ()"><code class="function">g_format_size_full()</code></a>.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -1248,18 +1438,15 @@ Flags to modify the format of the string returned by
 <tr>
 <td><p><a name="G-FORMAT-SIZE-LONG-FORMAT:CAPS"></a><span class="term"><code class="literal">G_FORMAT_SIZE_LONG_FORMAT</code></span></p></td>
 <td>include the exact number of bytes as part
-                            of the returned string.  For example,
-                            "45.6 kB (45,612 bytes)".
+    of the returned string.  For example, "45.6 kB (45,612 bytes)".
 </td>
 </tr>
 <tr>
 <td><p><a name="G-FORMAT-SIZE-IEC-UNITS:CAPS"></a><span class="term"><code class="literal">G_FORMAT_SIZE_IEC_UNITS</code></span></p></td>
 <td>use IEC (base 1024) units with "KiB"-style
-                          suffixes.  IEC units should only be used
-                          for reporting things with a strong "power
-                          of 2" basis, like RAM sizes or RAID stripe
-                          sizes.  Network and storage sizes should
-                          be reported in the normal SI units.
+    suffixes. IEC units should only be used for reporting things with
+    a strong "power of 2" basis, like RAM sizes or RAID stripe sizes.
+    Network and storage sizes should be reported in the normal SI units.
 </td>
 </tr>
 </tbody>
@@ -1274,8 +1461,8 @@ Flags to modify the format of the string returned by
 Formats a size.
 </p>
 <p>
-This function is similar to <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-format-size" title="g_format_size ()"><code class="function">g_format_size()</code></a> but allows for flags that
-modify the output.  See <a class="link" href="glib-Miscellaneous-Utility-Functions.html#GFormatSizeFlags" title="enum GFormatSizeFlags"><span class="type">GFormatSizeFlags</span></a>.
+This function is similar to <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-format-size" title="g_format_size ()"><code class="function">g_format_size()</code></a> but allows for flags
+that modify the output. See <a class="link" href="glib-Miscellaneous-Utility-Functions.html#GFormatSizeFlags" title="enum GFormatSizeFlags"><span class="type">GFormatSizeFlags</span></a>.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -1292,7 +1479,7 @@ modify the output.  See <a class="link" href="glib-Miscellaneous-Utility-Functio
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>a newly-allocated formatted string containing a human
-readable file size.</td>
+readable file size</td>
 </tr>
 </tbody>
 </table></div>
@@ -1301,18 +1488,18 @@ readable file size.</td>
 <hr>
 <div class="refsect2">
 <a name="g-format-size-for-display"></a><h3>g_format_size_for_display ()</h3>
-<pre class="programlisting"><span class="returnvalue">char</span> *              g_format_size_for_display           (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#goffset" title="goffset"><span class="type">goffset</span></a> size</code></em>);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             g_format_size_for_display           (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#goffset" title="goffset"><span class="type">goffset</span></a> size</code></em>);</pre>
 <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
 <h3 class="title">Warning</h3>
 <p><code class="literal">g_format_size_for_display</code> has been deprecated since version 2.30 and should not be used in newly-written code. This function is broken due to its use of SI
-                 suffixes to denote IEC units.  Use <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-format-size" title="g_format_size ()"><code class="function">g_format_size()</code></a>
-                 instead.</p>
+    suffixes to denote IEC units. Use <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-format-size" title="g_format_size ()"><code class="function">g_format_size()</code></a> instead.</p>
 </div>
 <p>
-Formats a size (for example the size of a file) into a human readable string.
-Sizes are rounded to the nearest size prefix (KB, MB, GB) and are displayed 
-rounded to the nearest  tenth. E.g. the file size 3292528 bytes will be
-converted into the string "3.1 MB".
+Formats a size (for example the size of a file) into a human
+readable string. Sizes are rounded to the nearest size prefix
+(KB, MB, GB) and are displayed rounded to the nearest tenth.
+E.g. the file size 3292528 bytes will be converted into the
+string "3.1 MB".
 </p>
 <p>
 The prefix units base is 1024 (i.e. 1 KB is 1024 bytes).
@@ -1325,12 +1512,12 @@ This string should be freed with <a class="link" href="glib-Memory-Allocation.ht
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>size</code></em> :</span></p></td>
-<td>a size in bytes.</td>
+<td>a size in bytes</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>a newly-allocated formatted string containing a human readable
-file size.</td>
+<td>a newly-allocated formatted string containing a human
+readable file size</td>
 </tr>
 </tbody>
 </table></div>
@@ -1494,6 +1681,10 @@ which is larger than <em class="parameter"><code>num</code></em>
 <div class="refsect2">
 <a name="g-atexit"></a><h3>g_atexit ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_atexit                            (<em class="parameter"><code><a class="link" href="glib-Miscellaneous-Utility-Functions.html#GVoidFunc" title="GVoidFunc ()"><span class="type">GVoidFunc</span></a> func</code></em>);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">g_atexit</code> has been deprecated since version 2.32 and should not be used in newly-written code. It is best to avoid <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-atexit" title="g_atexit ()"><code class="function">g_atexit()</code></a>.</p>
+</div>
 <p>
 Specifies a function to be called at normal program termination.
 </p>
@@ -1549,14 +1740,19 @@ program.
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> nkeys</code></em>);</pre>
 <p>
 Parses a string containing debugging options
-into a <a class="link" href="glib-Basic-Types.html#guint" title="guint"><code class="literal">guint</code></a> containing bit flags. This is used 
+into a <a class="link" href="glib-Basic-Types.html#guint" title="guint"><code class="literal">guint</code></a> containing bit flags. This is used
 within GDK and GTK+ to parse the debug options passed on the
 command line or through environment variables.
 </p>
 <p>
-If <em class="parameter"><code>string</code></em> is equal to "all", all flags are set.  If <em class="parameter"><code>string</code></em>
-is equal to "help", all the available keys in <em class="parameter"><code>keys</code></em> are printed
-out to standard error.
+If <em class="parameter"><code>string</code></em> is equal to <code class="code">"all"</code>, all flags are set. Any flags
+specified along with <code class="code">"all"</code> in <em class="parameter"><code>string</code></em> are inverted; thus,
+<code class="code">"all,foo,bar"</code> or <code class="code">"foo,bar,all"</code> sets all flags
+except those corresponding to <code class="code">"foo"</code> and <code class="code">"bar"</code>.
+</p>
+<p>
+If <em class="parameter"><code>string</code></em> is equal to <code class="code">"help"</code>, all the available keys in <em class="parameter"><code>keys</code></em>
+are printed out to standard error.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -1614,6 +1810,10 @@ Used in <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-parse-
 <div class="refsect2">
 <a name="GVoidFunc"></a><h3>GVoidFunc ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                (*GVoidFunc)                        (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">GVoidFunc</code> is deprecated and should not be used in newly-written code.</p>
+</div>
 <p>
 Declares a type of function which takes no arguments
 and has no return value. It is used to specify the type
@@ -1648,6 +1848,9 @@ not currently used in GLib or GTK+.
 <p>
 This is just like the standard C <code class="function">qsort()</code> function, but
 the comparison routine accepts a user data argument.
+</p>
+<p>
+This is guaranteed to be a stable sort since version 2.32.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">

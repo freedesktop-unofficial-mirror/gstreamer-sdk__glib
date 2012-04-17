@@ -7,7 +7,7 @@
 <link rel="home" href="index.html" title="GLib Reference Manual">
 <link rel="up" href="glib-core.html" title="GLib Core Application Support">
 <link rel="prev" href="glib-Dynamic-Loading-of-Modules.html" title="Dynamic Loading of Modules">
-<link rel="next" href="glib-IO-Channels.html" title="IO Channels">
+<link rel="next" href="glib-Memory-Slices.html" title="Memory Slices">
 <meta name="generator" content="GTK-Doc V1.18 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
@@ -18,7 +18,7 @@
 <td><a accesskey="u" href="glib-core.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
 <th width="100%" align="center">GLib Reference Manual</th>
-<td><a accesskey="n" href="glib-IO-Channels.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+<td><a accesskey="n" href="glib-Memory-Slices.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr>
 <tr><td colspan="5" class="shortcuts">
 <a href="#glib-Memory-Allocation.synopsis" class="shortcut">Top</a>
@@ -458,7 +458,8 @@ on failure. If <em class="parameter"><code>mem</code></em> is <a class="link" hr
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>mem</code></em> :</span></p></td>
-<td>previously-allocated memory, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.</td>
+<td>previously-allocated memory, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>n_bytes</code></em> :</span></p></td>
@@ -632,7 +633,8 @@ but care is taken to detect possible overflow during multiplication.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>mem</code></em> :</span></p></td>
-<td>previously-allocated memory, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.</td>
+<td>previously-allocated memory, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>n_blocks</code></em> :</span></p></td>
@@ -673,7 +675,7 @@ If <em class="parameter"><code>mem</code></em> is <a class="link" href="glib-Sta
 </pre>
 <p>
 This variable is <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the <code class="envar">G_DEBUG</code> environment variable
-includes the key gc-friendly.
+includes the key <code class="literal">gc-friendly</code>.
 </p>
 </div>
 <hr>

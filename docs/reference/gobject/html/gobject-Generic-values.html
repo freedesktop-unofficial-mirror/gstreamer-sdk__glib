@@ -423,6 +423,10 @@ used to pass around pointers to GValues.
 <a name="G-TYPE-VALUE-ARRAY:CAPS"></a><h3>G_TYPE_VALUE_ARRAY</h3>
 <pre class="programlisting">#define G_TYPE_VALUE_ARRAY (g_value_array_get_type ())
 </pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">G_TYPE_VALUE_ARRAY</code> has been deprecated since version 2.32 and should not be used in newly-written code. Use <a href="./../glib/glib/glib-Arrays.html#GArray"><span class="type">GArray</span></a> instead of <a class="link" href="gobject-Value-arrays.html#GValueArray" title="struct GValueArray"><span class="type">GValueArray</span></a></p>
+</div>
 <p>
 The type ID of the "GValueArray" type which is a boxed type,
 used to pass around pointers to GValueArrays.

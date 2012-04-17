@@ -16,6 +16,9 @@
  * Boston, MA 02111-1307, USA.
  */
 
+/* We are testing some deprecated APIs here */
+#define GLIB_DISABLE_DEPRECATION_WARNINGS
+
 #include <glib.h>
 
 static gint value_create_count = 0;
@@ -88,6 +91,17 @@ key_foreach (gpointer valuep, gpointer keyp, gpointer data)
 }
 
 static void
+value_foreach (gpointer keyp, gpointer nodep, gpointer data)
+{
+  gint *count = data;
+  gint *key = keyp;
+
+  (*count)++;
+
+  g_assert_cmpint (*key, ==, 2);
+}
+
+static void
 test_cache_basic (void)
 {
   GCache *c;
@@ -114,6 +128,10 @@ test_cache_basic (void)
   g_cache_key_foreach (c, key_foreach, &count);
   g_assert_cmpint (count, ==, 1);
 
+  count = 0;
+  g_cache_value_foreach (c, value_foreach, &count);
+  g_assert_cmpint (count, ==, 1);
+
   value = g_cache_insert (c, key);
   g_assert_cmpint (*value, ==, 4);
   g_assert_cmpint (value_create_count, ==, 1);
@@ -132,7 +150,9 @@ test_cache_basic (void)
   g_assert_cmpint (value_create_count, ==, 2);
   g_assert_cmpint (value_destroy_count, ==, 1);
 
+  g_cache_remove (c, value);
   g_cache_destroy (c);
+  g_free (key);
 }
 
 int

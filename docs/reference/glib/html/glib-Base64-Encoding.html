@@ -114,6 +114,9 @@ non-zero state). If you enable line-breaking you will need at least:
 <em class="parameter"><code>break_lines</code></em> is typically used when putting base64-encoded data in emails.
 It breaks the lines at 72 columns instead of putting all of the text on
 the same line. This avoids problems with long lines in the email system.
+Note however that it breaks the lines with <code class="literal">LF</code>
+characters, not <code class="literal">CR LF</code> sequences, so the result cannot
+be passed directly to SMTP or certain other protocols.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">

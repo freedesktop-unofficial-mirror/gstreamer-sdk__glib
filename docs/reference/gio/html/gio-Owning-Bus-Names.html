@@ -482,15 +482,18 @@ unregister the objects (if any) in <em class="parameter"><code>name_lost_handler
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>bus_acquired_handler</code></em> :</span></p></td>
-<td>Handler to invoke when connected to the bus of type <em class="parameter"><code>bus_type</code></em> or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.</td>
+<td>Handler to invoke when connected to the bus of type <em class="parameter"><code>bus_type</code></em> or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>name_acquired_handler</code></em> :</span></p></td>
-<td>Handler to invoke when <em class="parameter"><code>name</code></em> is acquired or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.</td>
+<td>Handler to invoke when <em class="parameter"><code>name</code></em> is acquired or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>name_lost_handler</code></em> :</span></p></td>
-<td>Handler to invoke when <em class="parameter"><code>name</code></em> is lost or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.</td>
+<td>Handler to invoke when <em class="parameter"><code>name</code></em> is lost or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
@@ -498,7 +501,8 @@ unregister the objects (if any) in <em class="parameter"><code>name_lost_handler
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data_free_func</code></em> :</span></p></td>
-<td>Function for freeing <em class="parameter"><code>user_data</code></em> or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.</td>
+<td>Function for freeing <em class="parameter"><code>user_data</code></em> or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
@@ -540,11 +544,13 @@ Like <a class="link" href="gio-Owning-Bus-Names.html#g-bus-own-name" title="g_bu
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>name_acquired_handler</code></em> :</span></p></td>
-<td>Handler to invoke when <em class="parameter"><code>name</code></em> is acquired or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.</td>
+<td>Handler to invoke when <em class="parameter"><code>name</code></em> is acquired or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>name_lost_handler</code></em> :</span></p></td>
-<td>Handler to invoke when <em class="parameter"><code>name</code></em> is lost or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.</td>
+<td>Handler to invoke when <em class="parameter"><code>name</code></em> is lost or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
@@ -552,7 +558,8 @@ Like <a class="link" href="gio-Owning-Bus-Names.html#g-bus-own-name" title="g_bu
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data_free_func</code></em> :</span></p></td>
-<td>Function for freeing <em class="parameter"><code>user_data</code></em> or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.</td>
+<td>Function for freeing <em class="parameter"><code>user_data</code></em> or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>

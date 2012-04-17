@@ -5,6 +5,9 @@
 static void
 test_warnings (void)
 {
+  if (!g_test_undefined ())
+    return;
+
   if (g_test_trap_fork (0, G_TEST_TRAP_SILENCE_STDERR))
     {
       g_warn_if_reached ();
@@ -62,29 +65,32 @@ test_set_handler (void)
 static void
 test_default_handler (void)
 {
-  if (g_test_trap_fork (0, G_TEST_TRAP_SILENCE_STDERR))
+  if (g_test_undefined ())
     {
-      g_error ("message1");
-      exit (0);
-    }
-  g_test_trap_assert_failed ();
-  g_test_trap_assert_stderr ("*ERROR*message1*");
+      if (g_test_trap_fork (0, G_TEST_TRAP_SILENCE_STDERR))
+        {
+          g_error ("message1");
+          exit (0);
+        }
+      g_test_trap_assert_failed ();
+      g_test_trap_assert_stderr ("*ERROR*message1*");
 
-  if (g_test_trap_fork (0, G_TEST_TRAP_SILENCE_STDERR))
-    {
-      g_critical ("message2");
-      exit (0);
-    }
-  g_test_trap_assert_failed ();
-  g_test_trap_assert_stderr ("*CRITICAL*message2*");
+      if (g_test_trap_fork (0, G_TEST_TRAP_SILENCE_STDERR))
+        {
+          g_critical ("message2");
+          exit (0);
+        }
+      g_test_trap_assert_failed ();
+      g_test_trap_assert_stderr ("*CRITICAL*message2*");
 
-  if (g_test_trap_fork (0, G_TEST_TRAP_SILENCE_STDERR))
-    {
-      g_warning ("message3");
-      exit (0);
+      if (g_test_trap_fork (0, G_TEST_TRAP_SILENCE_STDERR))
+        {
+          g_warning ("message3");
+          exit (0);
+        }
+      g_test_trap_assert_failed ();
+      g_test_trap_assert_stderr ("*WARNING*message3*");
     }
-  g_test_trap_assert_failed ();
-  g_test_trap_assert_stderr ("*WARNING*message3*");
 
   if (g_test_trap_fork (0, G_TEST_TRAP_SILENCE_STDERR))
     {
@@ -100,16 +106,37 @@ test_default_handler (void)
       exit (0);
     }
   g_test_trap_assert_passed ();
+  g_test_trap_assert_stdout_unmatched ("*INFO*message5*");
+
+  g_setenv ("G_MESSAGES_DEBUG", "foo bar baz", TRUE);
+  if (g_test_trap_fork (0, G_TEST_TRAP_SILENCE_STDOUT))
+    {
+      g_log ("bar", G_LOG_LEVEL_INFO, "message5");
+      exit (0);
+    }
+  g_test_trap_assert_passed ();
   g_test_trap_assert_stdout ("*INFO*message5*");
 
   if (g_test_trap_fork (0, G_TEST_TRAP_SILENCE_STDOUT))
     {
-      g_debug ("message6");
+      g_log ("baz", G_LOG_LEVEL_DEBUG, "message6");
       exit (0);
     }
   g_test_trap_assert_passed ();
   g_test_trap_assert_stdout ("*DEBUG*message6*");
 
+  g_setenv ("G_MESSAGES_DEBUG", "all", TRUE);
+  if (g_test_trap_fork (0, G_TEST_TRAP_SILENCE_STDOUT))
+    {
+      g_log ("foo", G_LOG_LEVEL_DEBUG, "6");
+      g_log ("bar", G_LOG_LEVEL_DEBUG, "6");
+      g_log ("baz", G_LOG_LEVEL_DEBUG, "6");
+      exit (0);
+    }
+  g_test_trap_assert_passed ();
+  g_test_trap_assert_stdout ("*DEBUG*6*6*6*");
+
+  g_unsetenv ("G_MESSAGES_DEBUG");
   if (g_test_trap_fork (0, G_TEST_TRAP_SILENCE_STDOUT))
     {
       g_log (G_LOG_DOMAIN, 1<<10, "message7");
@@ -124,6 +151,9 @@ static void
 test_fatal_log_mask (void)
 {
   GLogLevelFlags flags;
+
+  if (!g_test_undefined ())
+    return;
 
   flags = g_log_set_fatal_mask ("bu", G_LOG_LEVEL_INFO);
   if (g_test_trap_fork (0, G_TEST_TRAP_SILENCE_STDOUT))
@@ -172,7 +202,7 @@ test_printerr_handler (void)
 static char *fail_str = "foo";
 static char *log_str = "bar";
 
-gboolean
+static gboolean
 good_failure_handler (const gchar    *log_domain,
                       GLogLevelFlags  log_level,
                       const gchar    *msg,
@@ -185,7 +215,7 @@ good_failure_handler (const gchar    *log_domain,
   return FALSE;
 }
 
-gboolean
+static gboolean
 bad_failure_handler (const gchar    *log_domain,
                      GLogLevelFlags  log_level,
                      const gchar    *msg,
@@ -198,7 +228,7 @@ bad_failure_handler (const gchar    *log_domain,
   return FALSE;
 }
 
-void
+static void
 test_handler (const gchar    *log_domain,
               GLogLevelFlags  log_level,
               const gchar    *msg,
@@ -209,9 +239,12 @@ test_handler (const gchar    *log_domain,
   g_assert ((char *)user_data == log_str);
 }
 
-void
+static void
 bug653052 (void)
 {
+  if (!g_test_undefined ())
+    return;
+
   g_test_bug ("653052");
 
   g_test_log_set_fatal_handler (good_failure_handler, fail_str);
@@ -228,6 +261,8 @@ bug653052 (void)
 int
 main (int argc, char *argv[])
 {
+  g_unsetenv ("G_MESSAGES_DEBUG");
+
   g_test_init (&argc, &argv, NULL);
   g_test_bug_base ("http://bugzilla.gnome.org/");
 
