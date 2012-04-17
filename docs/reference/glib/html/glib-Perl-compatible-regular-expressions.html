@@ -7,7 +7,7 @@
 <link rel="home" href="index.html" title="GLib Reference Manual">
 <link rel="up" href="glib-utilities.html" title="GLib Utilities">
 <link rel="prev" href="glib-Glob-style-pattern-matching.html" title="Glob-style pattern matching">
-<link rel="next" href="glib-Simple-XML-Subset-Parser.html" title="Simple XML Subset Parser">
+<link rel="next" href="glib-regex-syntax.html" title="Regular expression syntax">
 <meta name="generator" content="GTK-Doc V1.18 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
@@ -18,7 +18,7 @@
 <td><a accesskey="u" href="glib-utilities.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
 <th width="100%" align="center">GLib Reference Manual</th>
-<td><a accesskey="n" href="glib-Simple-XML-Subset-Parser.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+<td><a accesskey="n" href="glib-regex-syntax.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr>
 <tr><td colspan="5" class="shortcuts">
 <a href="#glib-Perl-compatible-regular-expressions.synopsis" class="shortcut">Top</a>
@@ -2138,8 +2138,6 @@ references in <em class="parameter"><code>replacement</code></em> or <a class="l
 <div class="refsect2">
 <a name="GMatchInfo"></a><h3>GMatchInfo</h3>
 <pre class="programlisting">typedef struct _GMatchInfo GMatchInfo;</pre>
-<p>
-</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -2432,7 +2430,7 @@ contains references.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>match_info</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Perl-compatible-regular-expressions.html#GMatchInfo" title="GMatchInfo"><span class="type">GMatchInfo</span></a> or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td>a <a class="link" href="glib-Perl-compatible-regular-expressions.html#GMatchInfo" title="GMatchInfo"><span class="type">GMatchInfo</span></a> or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>

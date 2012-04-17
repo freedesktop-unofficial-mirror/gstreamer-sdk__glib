@@ -7,7 +7,7 @@
 <link rel="home" href="index.html" title="GIO Reference Manual">
 <link rel="up" href="application.html" title="Application support">
 <link rel="prev" href="GApplication.html" title="GApplication">
-<link rel="next" href="extending.html" title="Extending GIO">
+<link rel="next" href="GActionGroup.html" title="GActionGroup">
 <meta name="generator" content="GTK-Doc V1.18 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
@@ -18,7 +18,7 @@
 <td><a accesskey="u" href="application.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
 <th width="100%" align="center">GIO Reference Manual</th>
-<td><a accesskey="n" href="extending.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+<td><a accesskey="n" href="GActionGroup.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr>
 <tr><td colspan="5" class="shortcuts">
 <a href="#GApplicationCommandLine.synopsis" class="shortcut">Top</a>
@@ -104,7 +104,7 @@ of this object (ie: the process exits when the last reference is
 dropped).
 </p>
 <p>
-The main use for <span class="type">GApplicationCommandline</span> (and the
+The main use for <a class="link" href="GApplicationCommandLine.html" title="GApplicationCommandLine"><span class="type">GApplicationCommandLine</span></a> (and the
 <a class="link" href="GApplication.html#GApplication-command-line" title='The "command-line" signal'><span class="type">"command-line"</span></a> signal) is 'Emacs server' like use cases:
 You can set the <code class="envar">EDITOR</code> environment variable to have
 e.g. git use your favourite editor to edit commit messages, and if you
@@ -244,6 +244,7 @@ test_local_cmdline (GApplication   *application,
 typedef GApplication TestApplication;
 typedef GApplicationClass TestApplicationClass;
 
+static GType test_application_get_type (void);
 G_DEFINE_TYPE (TestApplication, test_application, G_TYPE_APPLICATION)
 
 static void
@@ -264,7 +265,7 @@ test_application_class_init (TestApplicationClass *class)
   G_APPLICATION_CLASS (class)-&gt;local_command_line = test_local_cmdline;
 }
 
-GApplication *
+static GApplication *
 test_application_new (const gchar       *application_id,
                       GApplicationFlags  flags)
 {
@@ -308,7 +309,7 @@ main (int argc, char **argv)
 <p>
 An example of deferred commandline handling. Here, the commandline is
 not completely handled before the <a class="link" href="GApplication.html#GApplication-command-line" title='The "command-line" signal'><span class="type">"command-line"</span></a> handler
-returns. Instead, we keep a reference to the GApplicationCommandline
+returns. Instead, we keep a reference to the GApplicationCommandLine
 object and handle it later(in this example, in an idle). Note that it
 is necessary to hold the application until you are done with the
 commandline.
@@ -390,7 +391,7 @@ my_cmdline_handler (gpointer data)
   /* we are done handling this commandline */
   g_object_unref (cmdline);
 
-  return FALSE;
+  return G_SOURCE_REMOVE;
 }
 
 static int
@@ -439,11 +440,6 @@ main (int argc, char **argv)
 <div class="refsect2">
 <a name="GApplicationCommandLine-struct"></a><h3>GApplicationCommandLine</h3>
 <pre class="programlisting">typedef struct _GApplicationCommandLine GApplicationCommandLine;</pre>
-<p>
-The <span class="structname">GApplicationCommandLine</span> structure contains private
-data and should only be accessed using the provided API
-</p>
-<p class="since">Since 2.28</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -452,8 +448,8 @@ data and should only be accessed using the provided API
 };
 </pre>
 <p>
-The <span class="structname">GApplicationCommandLineClass</span> structure contains
-private data only
+The <span class="structname">GApplicationCommandLineClass</span> structure
+contains private data only
 </p>
 <p class="since">Since 2.28</p>
 </div>
@@ -483,7 +479,7 @@ The return value is <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>argc</code></em> :</span></p></td>
-<td>the length of the arguments array, or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>]</span>
+<td>the length of the arguments array, or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>][<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
@@ -663,7 +659,7 @@ For local invocation, it will be <a href="./../glib/glib/glib-Standard-Macros.ht
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>the platform data, or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+<td>the platform data, or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 </tbody>

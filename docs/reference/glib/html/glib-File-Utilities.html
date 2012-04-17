@@ -64,8 +64,8 @@ enum                <a class="link" href="glib-File-Utilities.html#GFileTest" ti
                                                          <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);
 <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             <a class="link" href="glib-File-Utilities.html#g-file-read-link" title="g_file_read_link ()">g_file_read_link</a>                    (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *filename</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);
-<span class="returnvalue">int</span>                 <a class="link" href="glib-File-Utilities.html#g-mkdir-with-parents" title="g_mkdir_with_parents ()">g_mkdir_with_parents</a>                (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *pathname</code></em>,
-                                                         <em class="parameter"><code><span class="type">int</span> mode</code></em>);
+<a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a>                <a class="link" href="glib-File-Utilities.html#g-mkdir-with-parents" title="g_mkdir_with_parents ()">g_mkdir_with_parents</a>                (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *pathname</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> mode</code></em>);
 <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             <a class="link" href="glib-File-Utilities.html#g-mkdtemp" title="g_mkdtemp ()">g_mkdtemp</a>                           (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *tmpl</code></em>);
 <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             <a class="link" href="glib-File-Utilities.html#g-mkdtemp-full" title="g_mkdtemp_full ()">g_mkdtemp_full</a>                      (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *tmpl</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> mode</code></em>);
@@ -82,6 +82,9 @@ const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span cla
 
                     <a class="link" href="glib-File-Utilities.html#GMappedFile" title="GMappedFile">GMappedFile</a>;
 <a class="link" href="glib-File-Utilities.html#GMappedFile" title="GMappedFile"><span class="returnvalue">GMappedFile</span></a> *       <a class="link" href="glib-File-Utilities.html#g-mapped-file-new" title="g_mapped_file_new ()">g_mapped_file_new</a>                   (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *filename</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="type">gboolean</span></a> writable</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);
+<a class="link" href="glib-File-Utilities.html#GMappedFile" title="GMappedFile"><span class="returnvalue">GMappedFile</span></a> *       <a class="link" href="glib-File-Utilities.html#g-mapped-file-new-from-fd" title="g_mapped_file_new_from_fd ()">g_mapped_file_new_from_fd</a>           (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> fd</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="type">gboolean</span></a> writable</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);
 <a class="link" href="glib-File-Utilities.html#GMappedFile" title="GMappedFile"><span class="returnvalue">GMappedFile</span></a> *       <a class="link" href="glib-File-Utilities.html#g-mapped-file-ref" title="g_mapped_file_ref ()">g_mapped_file_ref</a>                   (<em class="parameter"><code><a class="link" href="glib-File-Utilities.html#GMappedFile" title="GMappedFile"><span class="type">GMappedFile</span></a> *file</code></em>);
@@ -132,9 +135,9 @@ characters in them on Windows without having to use ifdefs and the
 wide character API in the application code.
 </p>
 <p>
-The pathname argument should be in the GLib file name encoding. On
-POSIX this is the actual on-disk encoding which might correspond to
-the locale settings of the process (or the
+The pathname argument should be in the GLib file name encoding.
+On POSIX this is the actual on-disk encoding which might correspond
+to the locale settings of the process (or the
 <code class="envar">G_FILENAME_ENCODING</code> environment variable), or not.
 </p>
 <p>
@@ -183,12 +186,12 @@ in the GLib file name encoding. These are <a class="link" href="glib-File-Utilit
 } GFileError;
 </pre>
 <p>
-Values corresponding to <code class="literal">errno</code> codes returned from file operations
-on UNIX. Unlike <code class="literal">errno</code> codes, <a class="link" href="glib-File-Utilities.html#GFileError" title="enum GFileError"><span class="type">GFileError</span></a> values are available on
-all systems, even Windows. The exact meaning of each code depends on what
-sort of file operation you were performing; the UNIX documentation
-gives more details. The following error code descriptions come
-from the GNU C Library manual, and are under the copyright
+Values corresponding to <em class="parameter"><code>errno</code></em> codes returned from file operations
+on UNIX. Unlike <em class="parameter"><code>errno</code></em> codes, GFileError values are available on
+all systems, even Windows. The exact meaning of each code depends
+on what sort of file operation you were performing; the UNIX
+documentation gives more details. The following error code descriptions
+come from the GNU C Library manual, and are under the copyright
 of that manual.
 </p>
 <p>
@@ -202,21 +205,21 @@ differences in when a system will report a given error, etc.
 <tbody>
 <tr>
 <td><p><a name="G-FILE-ERROR-EXIST:CAPS"></a><span class="term"><code class="literal">G_FILE_ERROR_EXIST</code></span></p></td>
-<td>Operation not permitted; only the owner of the
-     file (or other resource) or processes with special privileges can
-     perform the operation.
+<td>Operation not permitted; only the owner of
+    the file (or other resource) or processes with special privileges
+    can perform the operation.
 </td>
 </tr>
 <tr>
 <td><p><a name="G-FILE-ERROR-ISDIR:CAPS"></a><span class="term"><code class="literal">G_FILE_ERROR_ISDIR</code></span></p></td>
 <td>File is a directory; you cannot open a directory
-     for writing, or create or remove hard links to it.
+    for writing, or create or remove hard links to it.
 </td>
 </tr>
 <tr>
 <td><p><a name="G-FILE-ERROR-ACCES:CAPS"></a><span class="term"><code class="literal">G_FILE_ERROR_ACCES</code></span></p></td>
 <td>Permission denied; the file permissions do not
-     allow the attempted operation.
+    allow the attempted operation.
 </td>
 </tr>
 <tr>
@@ -226,36 +229,36 @@ differences in when a system will report a given error, etc.
 </tr>
 <tr>
 <td><p><a name="G-FILE-ERROR-NOENT:CAPS"></a><span class="term"><code class="literal">G_FILE_ERROR_NOENT</code></span></p></td>
-<td>No such file or directory.  This is a "file
-     doesn't exist" error for ordinary files that are referenced in
-     contexts where they are expected to already exist.
+<td>No such file or directory. This is a "file
+    doesn't exist" error for ordinary files that are referenced in
+    contexts where they are expected to already exist.
 </td>
 </tr>
 <tr>
 <td><p><a name="G-FILE-ERROR-NOTDIR:CAPS"></a><span class="term"><code class="literal">G_FILE_ERROR_NOTDIR</code></span></p></td>
 <td>A file that isn't a directory was specified when
-     a directory is required.
+    a directory is required.
 </td>
 </tr>
 <tr>
 <td><p><a name="G-FILE-ERROR-NXIO:CAPS"></a><span class="term"><code class="literal">G_FILE_ERROR_NXIO</code></span></p></td>
-<td>No such device or address.  The system tried to
-     use the device represented by a file you specified, and it
-     couldn't find the device.  This can mean that the device file was
-     installed incorrectly, or that the physical device is missing or
-     not correctly attached to the computer.
+<td>No such device or address. The system tried to
+    use the device represented by a file you specified, and it
+    couldn't find the device. This can mean that the device file was
+    installed incorrectly, or that the physical device is missing or
+    not correctly attached to the computer.
 </td>
 </tr>
 <tr>
 <td><p><a name="G-FILE-ERROR-NODEV:CAPS"></a><span class="term"><code class="literal">G_FILE_ERROR_NODEV</code></span></p></td>
-<td>The  underlying  file system of the specified file
-     does not support memory mapping.
+<td>The underlying file system of the specified file
+    does not support memory mapping.
 </td>
 </tr>
 <tr>
 <td><p><a name="G-FILE-ERROR-ROFS:CAPS"></a><span class="term"><code class="literal">G_FILE_ERROR_ROFS</code></span></p></td>
 <td>The directory containing the new link can't be
-          modified because it's on a read-only file system.
+    modified because it's on a read-only file system.
 </td>
 </tr>
 <tr>
@@ -266,105 +269,105 @@ differences in when a system will report a given error, etc.
 <tr>
 <td><p><a name="G-FILE-ERROR-FAULT:CAPS"></a><span class="term"><code class="literal">G_FILE_ERROR_FAULT</code></span></p></td>
 <td>You passed in a pointer to bad memory.
-  (GLib won't reliably return this, don't pass in pointers to bad
-  memory.)
+    (GLib won't reliably return this, don't pass in pointers to bad
+    memory.)
 </td>
 </tr>
 <tr>
 <td><p><a name="G-FILE-ERROR-LOOP:CAPS"></a><span class="term"><code class="literal">G_FILE_ERROR_LOOP</code></span></p></td>
 <td>Too many levels of symbolic links were encountered
-  in looking up a file name.  This often indicates a cycle of symbolic
-  links.
+    in looking up a file name. This often indicates a cycle of symbolic
+    links.
 </td>
 </tr>
 <tr>
 <td><p><a name="G-FILE-ERROR-NOSPC:CAPS"></a><span class="term"><code class="literal">G_FILE_ERROR_NOSPC</code></span></p></td>
 <td>No space left on device; write operation on a
-  file failed because the disk is full.
+    file failed because the disk is full.
 </td>
 </tr>
 <tr>
 <td><p><a name="G-FILE-ERROR-NOMEM:CAPS"></a><span class="term"><code class="literal">G_FILE_ERROR_NOMEM</code></span></p></td>
-<td>No memory available.  The system cannot allocate
-     more virtual memory because its capacity is full.
+<td>No memory available. The system cannot allocate
+    more virtual memory because its capacity is full.
 </td>
 </tr>
 <tr>
 <td><p><a name="G-FILE-ERROR-MFILE:CAPS"></a><span class="term"><code class="literal">G_FILE_ERROR_MFILE</code></span></p></td>
 <td>The current process has too many files open and
-     can't open any more.  Duplicate descriptors do count toward this
-     limit.
+    can't open any more. Duplicate descriptors do count toward this
+    limit.
 </td>
 </tr>
 <tr>
 <td><p><a name="G-FILE-ERROR-NFILE:CAPS"></a><span class="term"><code class="literal">G_FILE_ERROR_NFILE</code></span></p></td>
 <td>There are too many distinct file openings in the
-     entire system.
+    entire system.
 </td>
 </tr>
 <tr>
 <td><p><a name="G-FILE-ERROR-BADF:CAPS"></a><span class="term"><code class="literal">G_FILE_ERROR_BADF</code></span></p></td>
 <td>Bad file descriptor; for example, I/O on a
-     descriptor that has been closed or reading from a descriptor open
-     only for writing (or vice versa).
+    descriptor that has been closed or reading from a descriptor open
+    only for writing (or vice versa).
 </td>
 </tr>
 <tr>
 <td><p><a name="G-FILE-ERROR-INVAL:CAPS"></a><span class="term"><code class="literal">G_FILE_ERROR_INVAL</code></span></p></td>
-<td>Invalid argument.  This is used to indicate
-     various kinds of problems with passing the wrong argument to a
-     library function.
+<td>Invalid argument. This is used to indicate
+    various kinds of problems with passing the wrong argument to a
+    library function.
 </td>
 </tr>
 <tr>
 <td><p><a name="G-FILE-ERROR-PIPE:CAPS"></a><span class="term"><code class="literal">G_FILE_ERROR_PIPE</code></span></p></td>
 <td>Broken pipe; there is no process reading from the
-     other end of a pipe.  Every library function that returns this
-     error code also generates a `SIGPIPE' signal; this signal
-     terminates the program if not handled or blocked.  Thus, your
-     program will never actually see this code unless it has handled or
-     blocked `SIGPIPE'.
+    other end of a pipe. Every library function that returns this
+    error code also generates a `SIGPIPE' signal; this signal
+    terminates the program if not handled or blocked. Thus, your
+    program will never actually see this code unless it has handled
+    or blocked `SIGPIPE'.
 </td>
 </tr>
 <tr>
 <td><p><a name="G-FILE-ERROR-AGAIN:CAPS"></a><span class="term"><code class="literal">G_FILE_ERROR_AGAIN</code></span></p></td>
 <td>Resource temporarily unavailable; the call might
-     work if you try again later.
+    work if you try again later.
 </td>
 </tr>
 <tr>
 <td><p><a name="G-FILE-ERROR-INTR:CAPS"></a><span class="term"><code class="literal">G_FILE_ERROR_INTR</code></span></p></td>
 <td>Interrupted function call; an asynchronous signal
-     occurred and prevented completion of the call.  When this
-     happens, you should try the call again.
+    occurred and prevented completion of the call. When this
+    happens, you should try the call again.
 </td>
 </tr>
 <tr>
 <td><p><a name="G-FILE-ERROR-IO:CAPS"></a><span class="term"><code class="literal">G_FILE_ERROR_IO</code></span></p></td>
 <td>Input/output error; usually used for physical read
-    or write errors. i.e. the disk or other physical device hardware
-    is returning errors.
+   or write errors. i.e. the disk or other physical device hardware
+   is returning errors.
 </td>
 </tr>
 <tr>
 <td><p><a name="G-FILE-ERROR-PERM:CAPS"></a><span class="term"><code class="literal">G_FILE_ERROR_PERM</code></span></p></td>
 <td>Operation not permitted; only the owner of the
-     file (or other resource) or processes with special privileges can
-     perform the operation.
+   file (or other resource) or processes with special privileges can
+   perform the operation.
 </td>
 </tr>
 <tr>
 <td><p><a name="G-FILE-ERROR-NOSYS:CAPS"></a><span class="term"><code class="literal">G_FILE_ERROR_NOSYS</code></span></p></td>
-<td>Function not implemented; this indicates that the
-    system is missing some functionality.
+<td>Function not implemented; this indicates that
+   the system is missing some functionality.
 </td>
 </tr>
 <tr>
 <td><p><a name="G-FILE-ERROR-FAILED:CAPS"></a><span class="term"><code class="literal">G_FILE_ERROR_FAILED</code></span></p></td>
 <td>Does not correspond to a UNIX error code; this
-  is the standard "failed for unspecified reason" error code present in
-  all <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> error code enumerations. Returned if no specific
-  code applies.
+   is the standard "failed for unspecified reason" error code present
+   in all <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> error code enumerations. Returned if no specific
+   code applies.
 </td>
 </tr>
 </tbody>
@@ -377,8 +380,8 @@ differences in when a system will report a given error, etc.
 </pre>
 <p>
 Error domain for file operations. Errors in this domain will
-be from the <a class="link" href="glib-File-Utilities.html#GFileError" title="enum GFileError"><span class="type">GFileError</span></a> enumeration. See <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> for information on
-error domains.
+be from the <a class="link" href="glib-File-Utilities.html#GFileError" title="enum GFileError"><span class="type">GFileError</span></a> enumeration. See <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> for information
+on error domains.
 </p>
 </div>
 <hr>
@@ -401,9 +404,9 @@ A test to perform on a file using <a class="link" href="glib-File-Utilities.html
 <tr>
 <td><p><a name="G-FILE-TEST-IS-REGULAR:CAPS"></a><span class="term"><code class="literal">G_FILE_TEST_IS_REGULAR</code></span></p></td>
 <td>
-<a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the file is a regular file (not a directory).
-    Note that this test will also return <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the tested file is a symlink
-    to a regular file.
+<a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the file is a regular file
+    (not a directory). Note that this test will also return <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a>
+    if the tested file is a symlink to a regular file.
 </td>
 </tr>
 <tr>
@@ -427,8 +430,8 @@ A test to perform on a file using <a class="link" href="glib-File-Utilities.html
 <tr>
 <td><p><a name="G-FILE-TEST-EXISTS:CAPS"></a><span class="term"><code class="literal">G_FILE_TEST_EXISTS</code></span></p></td>
 <td>
-<a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the file exists. 
-    It may or may not be a regular file.
+<a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the file exists. It may or may not
+    be a regular file.
 </td>
 </tr>
 </tbody>
@@ -439,9 +442,9 @@ A test to perform on a file using <a class="link" href="glib-File-Utilities.html
 <a name="g-file-error-from-errno"></a><h3>g_file_error_from_errno ()</h3>
 <pre class="programlisting"><a class="link" href="glib-File-Utilities.html#GFileError" title="enum GFileError"><span class="returnvalue">GFileError</span></a>          g_file_error_from_errno             (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> err_no</code></em>);</pre>
 <p>
-Gets a <a class="link" href="glib-File-Utilities.html#GFileError" title="enum GFileError"><span class="type">GFileError</span></a> constant based on the passed-in <em class="parameter"><code>errno</code></em>.
+Gets a <a class="link" href="glib-File-Utilities.html#GFileError" title="enum GFileError"><span class="type">GFileError</span></a> constant based on the passed-in <em class="parameter"><code>err_no</code></em>.
 For example, if you pass in <code class="literal">EEXIST</code> this function returns
-<a class="link" href="glib-File-Utilities.html#G-FILE-ERROR-EXIST:CAPS"><span class="type">G_FILE_ERROR_EXIST</span></a>. Unlike <em class="parameter"><code>errno</code></em> values, you can portably
+<a class="link" href="glib-File-Utilities.html#G-FILE-ERROR-EXIST:CAPS"><span class="type">G_FILE_ERROR_EXIST</span></a>. Unlike <code class="literal">errno</code> values, you can portably
 assume that all <a class="link" href="glib-File-Utilities.html#GFileError" title="enum GFileError"><span class="type">GFileError</span></a> values will exist.
 </p>
 <p>
@@ -659,7 +662,7 @@ On Windows, there are no symlinks, so testing for
 <a class="link" href="glib-File-Utilities.html#G-FILE-TEST-IS-SYMLINK:CAPS"><code class="literal">G_FILE_TEST_IS_SYMLINK</code></a> will always return <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a>. Testing for
 <a class="link" href="glib-File-Utilities.html#G-FILE-TEST-IS-EXECUTABLE:CAPS"><code class="literal">G_FILE_TEST_IS_EXECUTABLE</code></a> will just check that the file exists and
 its name indicates that it is executable, checking for well-known
-extensions and those listed in the <code class="literal">PATHEXT</code> environment variable.
+extensions and those listed in the <code class="envar">PATHEXT</code> environment variable.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -855,8 +858,8 @@ or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code
 <hr>
 <div class="refsect2">
 <a name="g-mkdir-with-parents"></a><h3>g_mkdir_with_parents ()</h3>
-<pre class="programlisting"><span class="returnvalue">int</span>                 g_mkdir_with_parents                (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *pathname</code></em>,
-                                                         <em class="parameter"><code><span class="type">int</span> mode</code></em>);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a>                g_mkdir_with_parents                (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *pathname</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> mode</code></em>);</pre>
 <p>
 Create a directory if it doesn't already exist. Create intermediate
 parent directories as needed, too.
@@ -915,7 +918,7 @@ returned and <code class="literal">errno</code> will be set.</td>
 </tr>
 </tbody>
 </table></div>
-<p class="since">Since 2.26</p>
+<p class="since">Since 2.30</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -956,7 +959,7 @@ returned, and <code class="literal">errno</code> will be set.</td>
 </tr>
 </tbody>
 </table></div>
-<p class="since">Since 2.26</p>
+<p class="since">Since 2.30</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -1179,6 +1182,52 @@ with <a class="link" href="glib-File-Utilities.html#g-mapped-file-unref" title="
 </tbody>
 </table></div>
 <p class="since">Since 2.8</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-mapped-file-new-from-fd"></a><h3>g_mapped_file_new_from_fd ()</h3>
+<pre class="programlisting"><a class="link" href="glib-File-Utilities.html#GMappedFile" title="GMappedFile"><span class="returnvalue">GMappedFile</span></a> *       g_mapped_file_new_from_fd           (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> fd</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="type">gboolean</span></a> writable</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+<p>
+Maps a file into memory. On UNIX, this is using the <code class="function">mmap()</code> function.
+</p>
+<p>
+If <em class="parameter"><code>writable</code></em> is <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a>, the mapped buffer may be modified, otherwise
+it is an error to modify the mapped buffer. Modifications to the buffer
+are not visible to other processes mapping the same file, and are not
+written back to the file.
+</p>
+<p>
+Note that modifications of the underlying file might affect the contents
+of the <a class="link" href="glib-File-Utilities.html#GMappedFile" title="GMappedFile"><span class="type">GMappedFile</span></a>. Therefore, mapping should only be used if the file
+will not be modified, or if all modifications of the file are done
+atomically (e.g. using <a class="link" href="glib-File-Utilities.html#g-file-set-contents" title="g_file_set_contents ()"><code class="function">g_file_set_contents()</code></a>).
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>fd</code></em> :</span></p></td>
+<td>The file descriptor of the file to load</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>writable</code></em> :</span></p></td>
+<td>whether the mapping should be writable</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>a newly allocated <a class="link" href="glib-File-Utilities.html#GMappedFile" title="GMappedFile"><span class="type">GMappedFile</span></a> which must be unref'd
+with <a class="link" href="glib-File-Utilities.html#g-mapped-file-unref" title="g_mapped_file_unref ()"><code class="function">g_mapped_file_unref()</code></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> if the mapping failed.</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.32</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -1692,12 +1741,12 @@ opened</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>stream</code></em> :</span></p></td>
-<td>an existing stream which will be reused, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td>an existing stream which will be reused, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>A <span class="type">FILE</span> pointer if the file was successfully
+<td>A <code class="literal">FILE</code> pointer if the file was successfully
 opened, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> if an error occurred.</td>
 </tr>
 </tbody>

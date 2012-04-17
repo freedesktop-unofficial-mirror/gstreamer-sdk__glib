@@ -163,7 +163,6 @@ DBUS1_CFLAGS = @DBUS1_CFLAGS@
 DBUS1_LIBS = @DBUS1_LIBS@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
-DISABLE_MEM_POOLS = @DISABLE_MEM_POOLS@
 DLLTOOL = @DLLTOOL@
 DSYMUTIL = @DSYMUTIL@
 DTRACE = @DTRACE@
@@ -180,6 +179,7 @@ GIO = @GIO@
 GIO_MODULE_DIR = @GIO_MODULE_DIR@
 GLIBC21 = @GLIBC21@
 GLIB_BINARY_AGE = @GLIB_BINARY_AGE@
+GLIB_COMPILE_RESOURCES = @GLIB_COMPILE_RESOURCES@
 GLIB_COMPILE_SCHEMAS = @GLIB_COMPILE_SCHEMAS@
 GLIB_DEBUG_FLAGS = @GLIB_DEBUG_FLAGS@
 GLIB_EXTRA_CFLAGS = @GLIB_EXTRA_CFLAGS@
@@ -189,7 +189,6 @@ GLIB_LINK_FLAGS = @GLIB_LINK_FLAGS@
 GLIB_MAJOR_VERSION = @GLIB_MAJOR_VERSION@
 GLIB_MICRO_VERSION = @GLIB_MICRO_VERSION@
 GLIB_MINOR_VERSION = @GLIB_MINOR_VERSION@
-GLIB_RT_LIBS = @GLIB_RT_LIBS@
 GLIB_RUNTIME_LIBDIR = @GLIB_RUNTIME_LIBDIR@
 GLIB_VERSION = @GLIB_VERSION@
 GLIB_WIN32_STATIC_COMPILATION_DEFINE = @GLIB_WIN32_STATIC_COMPILATION_DEFINE@
@@ -229,6 +228,8 @@ INSTOBJEXT = @INSTOBJEXT@
 INTLLIBS = @INTLLIBS@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
+LIBELF_CFLAGS = @LIBELF_CFLAGS@
+LIBELF_LIBS = @LIBELF_LIBS@
 LIBFFI_CFLAGS = @LIBFFI_CFLAGS@
 LIBFFI_LIBS = @LIBFFI_LIBS@
 LIBOBJS = @LIBOBJS@
@@ -402,7 +403,7 @@ lib_LTLIBRARIES = libgmodule-2.0.la
 @MS_LIB_AVAILABLE_TRUE@@OS_WIN32_AND_DLL_COMPILATION_TRUE@install_ms_lib_cmd = $(INSTALL) gmodule-2.0.lib $(DESTDIR)$(libdir)
 @MS_LIB_AVAILABLE_TRUE@@OS_WIN32_AND_DLL_COMPILATION_TRUE@uninstall_ms_lib_cmd = -rm $(DESTDIR)$(libdir)/gmodule-2.0.lib
 @PLATFORM_WIN32_TRUE@no_undefined = -no-undefined
-@OS_WIN32_AND_DLL_COMPILATION_TRUE@export_symbols = -export-symbols gmodule.def
+@OS_WIN32_AND_DLL_COMPILATION_TRUE@export_symbols = -export-symbols $(builddir)/gmodule.def
 @OS_WIN32_AND_DLL_COMPILATION_TRUE@gmodule_def = gmodule.def
 @OS_WIN32_AND_DLL_COMPILATION_TRUE@gmodule_win32_res = gmodule-win32-res.o
 @OS_WIN32_AND_DLL_COMPILATION_TRUE@gmodule_win32_res_ldflag = -Wl,$(gmodule_win32_res)
@@ -776,7 +777,7 @@ test: test-nonrecursive
 
 # test-nonrecursive: run tests only in cwd
 @OS_UNIX_TRUE@test-nonrecursive: ${TEST_PROGS}
-@OS_UNIX_TRUE@	@test -z "${TEST_PROGS}" || MALLOC_CHECK_=2 MALLOC_PERTURB_=$$(($${RANDOM:-256} % 256)) ${GTESTER} --verbose ${TEST_PROGS}
+@OS_UNIX_TRUE@	@test -z "${TEST_PROGS}" || G_DEBUG=gc-friendly MALLOC_CHECK_=2 MALLOC_PERTURB_=$$(($${RANDOM:-256} % 256)) ${GTESTER} --verbose ${TEST_PROGS}
 @OS_UNIX_FALSE@test-nonrecursive:
 
 # test-report: run tests in subdirs and generate report
@@ -851,7 +852,7 @@ lcov-clean:
 check-local: test-nonrecursive
 
 gmodule.def: gmodule.symbols
-	$(AM_V_GEN) (echo EXPORTS; $(CPP) -P - <$(srcdir)/gmodule.symbols | sed -e '/^$$/d' -e 's/^/	/') > gmodule.def
+	$(AM_V_GEN) (echo EXPORTS; $(CPP) -P - <$(srcdir)/gmodule.symbols | sed -e '/^$$/d' -e 's/^/	/') > $(builddir)/gmodule.def
 gmoduleconf.h:	gmoduleconf.h.in
 
 install-ms-lib:
@@ -861,7 +862,7 @@ uninstall-ms-lib:
 	$(uninstall_ms_lib_cmd)
 
 @OS_WIN32_AND_DLL_COMPILATION_TRUE@install-def-file:
-@OS_WIN32_AND_DLL_COMPILATION_TRUE@	$(INSTALL) gmodule.def $(DESTDIR)$(libdir)/gmodule-2.0.def
+@OS_WIN32_AND_DLL_COMPILATION_TRUE@	$(INSTALL) $(builddir)/gmodule.def $(DESTDIR)$(libdir)/gmodule-2.0.def
 
 @OS_WIN32_AND_DLL_COMPILATION_TRUE@uninstall-def-file:
 @OS_WIN32_AND_DLL_COMPILATION_TRUE@	-rm $(DESTDIR)$(libdir)/gmodule-2.0.def
@@ -872,7 +873,7 @@ gmodule-win32-res.o: gmodule.rc
 	$(AM_V_GEN) $(WINDRES) gmodule.rc $@
 
 gmodule-2.0.lib: libgmodule-2.0.la gmodule.def
-	lib -machine:@LIB_EXE_MACHINE_FLAG@ -name:libgmodule-2.0-$(LT_CURRENT_MINUS_AGE).dll -def:gmodule.def -out:$@
+	lib -machine:@LIB_EXE_MACHINE_FLAG@ -name:libgmodule-2.0-$(LT_CURRENT_MINUS_AGE).dll -def:$(builddir)/gmodule.def -out:$@
 
 .PHONY: files release
 

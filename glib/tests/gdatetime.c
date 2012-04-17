@@ -114,6 +114,7 @@ test_GDateTime_new_from_unix (void)
   tm.tm_hour = 0;
   tm.tm_min = 0;
   tm.tm_sec = 0;
+  tm.tm_isdst = -1;
   t = mktime (&tm);
 
   dt = g_date_time_new_from_unix_local (t);
@@ -308,6 +309,31 @@ test_GDateTime_new_from_timeval (void)
 
   g_get_current_time (&tv);
   dt = g_date_time_new_from_timeval_local (&tv);
+
+  if (g_test_verbose ())
+    g_print ("\nDT%04d-%02d-%02dT%02d:%02d:%02d%s\n",
+             g_date_time_get_year (dt),
+             g_date_time_get_month (dt),
+             g_date_time_get_day_of_month (dt),
+             g_date_time_get_hour (dt),
+             g_date_time_get_minute (dt),
+             g_date_time_get_second (dt),
+             g_date_time_get_timezone_abbreviation (dt));
+
+  g_date_time_to_timeval (dt, &tv2);
+  g_assert_cmpint (tv.tv_sec, ==, tv2.tv_sec);
+  g_assert_cmpint (tv.tv_usec, ==, tv2.tv_usec);
+  g_date_time_unref (dt);
+}
+
+static void
+test_GDateTime_new_from_timeval_utc (void)
+{
+  GDateTime *dt;
+  GTimeVal   tv, tv2;
+
+  g_get_current_time (&tv);
+  dt = g_date_time_new_from_timeval_utc (&tv);
 
   if (g_test_verbose ())
     g_print ("\nDT%04d-%02d-%02dT%02d:%02d:%02d%s\n",
@@ -724,7 +750,7 @@ test_GDateTime_to_utc (void)
     memcpy (&tm, tmp, sizeof (struct tm));
   }
 #endif
-  dt2 = g_date_time_new_now_local ();
+  dt2 = g_date_time_new_from_unix_local (t);
   dt = g_date_time_to_utc (dt2);
   g_assert_cmpint (tm.tm_year + 1900, ==, g_date_time_get_year (dt));
   g_assert_cmpint (tm.tm_mon + 1, ==, g_date_time_get_month (dt));
@@ -856,6 +882,7 @@ test_non_utf8_printf (void)
   if (strstr (setlocale (LC_ALL, NULL), "ja_JP") == NULL)
     {
       g_test_message ("locale ja_JP.eucjp not available, skipping non-UTF8 tests");
+      g_free (oldlocale);
       return;
     }
 
@@ -1229,6 +1256,7 @@ main (gint   argc,
   g_test_add_func ("/GDateTime/new_from_unix", test_GDateTime_new_from_unix);
   g_test_add_func ("/GDateTime/new_from_unix_utc", test_GDateTime_new_from_unix_utc);
   g_test_add_func ("/GDateTime/new_from_timeval", test_GDateTime_new_from_timeval);
+  g_test_add_func ("/GDateTime/new_from_timeval_utc", test_GDateTime_new_from_timeval_utc);
   g_test_add_func ("/GDateTime/new_full", test_GDateTime_new_full);
   g_test_add_func ("/GDateTime/now", test_GDateTime_now);
   g_test_add_func ("/GDateTime/printf", test_GDateTime_printf);

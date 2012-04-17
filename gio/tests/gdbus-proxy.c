@@ -280,7 +280,7 @@ test_properties (GDBusProxy *proxy)
    */
   result = g_dbus_proxy_call_sync (proxy,
                                    "FrobInvalidateProperty",
-                                   NULL,
+                                   g_variant_new ("(s)", "OMGInvalidated"),
                                    G_DBUS_CALL_FLAGS_NONE,
                                    -1,
                                    NULL,
@@ -294,6 +294,51 @@ test_properties (GDBusProxy *proxy)
   /* ... and now we finally, check that the cached value has been invalidated */
   variant = g_dbus_proxy_get_cached_property (proxy, "PropertyThatWillBeInvalidated");
   g_assert (variant == NULL);
+
+  /* Now test that G_DBUS_PROXY_FLAGS_GET_INVALIDATED_PROPERTIES works - we need a new proxy for that */
+  gchar *name_owner;
+  GDBusProxy *proxy2;
+  error = NULL;
+  proxy2 = g_dbus_proxy_new_sync (g_dbus_proxy_get_connection (proxy),
+                                  G_DBUS_PROXY_FLAGS_GET_INVALIDATED_PROPERTIES,
+                                  NULL,                      /* GDBusInterfaceInfo */
+                                  "com.example.TestService", /* name */
+                                  "/com/example/TestObject", /* object path */
+                                  "com.example.Frob",        /* interface */
+                                  NULL, /* GCancellable */
+                                  &error);
+  g_assert_no_error (error);
+
+  name_owner = g_dbus_proxy_get_name_owner (proxy2);
+  g_assert (name_owner != NULL);
+  g_free (name_owner);
+
+  variant = g_dbus_proxy_get_cached_property (proxy2, "PropertyThatWillBeInvalidated");
+  g_assert (variant != NULL);
+  g_assert_cmpstr (g_variant_get_string (variant, NULL), ==, "OMGInvalidated"); /* from previous test */
+  g_variant_unref (variant);
+
+  result = g_dbus_proxy_call_sync (proxy2,
+                                   "FrobInvalidateProperty",
+                                   g_variant_new ("(s)", "OMGInvalidated2"),
+                                   G_DBUS_CALL_FLAGS_NONE,
+                                   -1,
+                                   NULL,
+                                   &error);
+  g_assert_no_error (error);
+  g_assert (result != NULL);
+  g_assert_cmpstr (g_variant_get_type_string (result), ==, "()");
+  g_variant_unref (result);
+
+  /* this time we should get the ::g-properties-changed _with_ the value */
+  _g_assert_signal_received (proxy2, "g-properties-changed");
+
+  variant = g_dbus_proxy_get_cached_property (proxy2, "PropertyThatWillBeInvalidated");
+  g_assert (variant != NULL);
+  g_assert_cmpstr (g_variant_get_string (variant, NULL), ==, "OMGInvalidated2");
+  g_variant_unref (variant);
+
+  g_object_unref (proxy2);
 }
 
 /* ---------------------------------------------------------------------------------------------------- */
@@ -441,6 +486,7 @@ test_bogus_method_return (GDBusProxy *proxy)
   g_assert (result == NULL);
 }
 
+#if 0 /* Disabled: see https://bugzilla.gnome.org/show_bug.cgi?id=658999 */
 static void
 test_bogus_signal (GDBusProxy *proxy)
 {
@@ -516,6 +562,7 @@ test_bogus_property (GDBusProxy *proxy)
   _g_assert_signal_received (proxy, "g-properties-changed");
   g_dbus_proxy_set_interface_info (proxy, old_iface_info);
 }
+#endif /* Disabled: see https://bugzilla.gnome.org/show_bug.cgi?id=658999 */
 
 /* ---------------------------------------------------------------------------------------------------- */
 
@@ -565,29 +612,37 @@ test_expected_interface (GDBusProxy *proxy)
 
   /* And also where we deliberately set the expected interface definition incorrectly */
   test_bogus_method_return (proxy);
+  /* Disabled: see https://bugzilla.gnome.org/show_bug.cgi?id=658999
   test_bogus_signal (proxy);
   test_bogus_property (proxy);
+  */
 
-  /* Also check that we complain if setting a cached property of the wrong type */
-  if (g_test_trap_fork (0, G_TEST_TRAP_SILENCE_STDOUT | G_TEST_TRAP_SILENCE_STDERR))
+  if (g_test_undefined ())
     {
-      g_dbus_proxy_set_cached_property (proxy, "y", g_variant_new_string ("error_me_out!"));
+      /* Also check that we complain if setting a cached property of the wrong type */
+      if (g_test_trap_fork (0, G_TEST_TRAP_SILENCE_STDOUT | G_TEST_TRAP_SILENCE_STDERR))
+        {
+          g_dbus_proxy_set_cached_property (proxy, "y", g_variant_new_string ("error_me_out!"));
+        }
+      g_test_trap_assert_stderr ("*Trying to set property y of type s but according to the expected interface the type is y*");
+      g_test_trap_assert_failed();
     }
-  g_test_trap_assert_stderr ("*Trying to set property y of type s but according to the expected interface the type is y*");
-  g_test_trap_assert_failed();
 
   /* this should work, however (since the type is correct) */
   g_dbus_proxy_set_cached_property (proxy, "y", g_variant_new_byte (42));
 
-  /* Try to get the value of a property where the type we expect is different from
-   * what we have in our cache (e.g. what the service returned)
-   */
-  if (g_test_trap_fork (0, G_TEST_TRAP_SILENCE_STDOUT | G_TEST_TRAP_SILENCE_STDERR))
+  if (g_test_undefined ())
     {
-      value = g_dbus_proxy_get_cached_property (proxy, "i");
+      /* Try to get the value of a property where the type we expect is different from
+       * what we have in our cache (e.g. what the service returned)
+       */
+      if (g_test_trap_fork (0, G_TEST_TRAP_SILENCE_STDOUT | G_TEST_TRAP_SILENCE_STDERR))
+        {
+          value = g_dbus_proxy_get_cached_property (proxy, "i");
+        }
+      g_test_trap_assert_stderr ("*Trying to get property i with type i but according to the expected interface the type is u*");
+      g_test_trap_assert_failed();
     }
-  g_test_trap_assert_stderr ("*Trying to get property i with type i but according to the expected interface the type is u*");
-  g_test_trap_assert_failed();
 
   /* Even if a property does not exist in expected_interface, looking it
    * up, or setting it, should never fail. Because it could be that the
@@ -781,6 +836,47 @@ test_no_properties (void)
   g_object_unref (proxy);
 }
 
+static gboolean
+fail_test (gpointer user_data)
+{
+  g_assert_not_reached ();
+}
+
+static void
+check_error (GObject      *source,
+             GAsyncResult *result,
+             gpointer      user_data)
+{
+  GError *error = NULL;
+  GVariant *reply;
+
+  reply = g_dbus_proxy_call_finish (G_DBUS_PROXY (source), result, &error);
+  g_assert_error (error, G_IO_ERROR, G_IO_ERROR_FAILED);
+  g_assert (reply == NULL);
+  g_error_free (error);
+
+  g_main_loop_quit (loop);
+}
+
+static void
+test_wellknown_noauto (void)
+{
+  GError *error = NULL;
+  GDBusProxy *proxy;
+
+  proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
+                                         G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
+                                         NULL, "some.name.that.does.not.exist",
+                                         "/", "some.interface", NULL, &error);
+  g_assert_no_error (error);
+  g_assert (proxy != NULL);
+
+  g_dbus_proxy_call (proxy, "method", NULL, G_DBUS_CALL_FLAGS_NONE, -1, NULL, check_error, NULL);
+  g_timeout_add (10000, fail_test, NULL);
+  g_main_loop_run (loop);
+  g_object_unref (proxy);
+}
+
 int
 main (int   argc,
       char *argv[])
@@ -805,8 +901,9 @@ main (int   argc,
   g_setenv ("DBUS_SESSION_BUS_ADDRESS", session_bus_get_temporary_address (), TRUE);
 
   g_test_add_func ("/gdbus/proxy", test_proxy);
-  g_test_add_func ("/gdbus/proxy/async", test_async);
   g_test_add_func ("/gdbus/proxy/no-properties", test_no_properties);
+  g_test_add_func ("/gdbus/proxy/wellknown-noauto", test_wellknown_noauto);
+  g_test_add_func ("/gdbus/proxy/async", test_async);
 
   ret = g_test_run();
 

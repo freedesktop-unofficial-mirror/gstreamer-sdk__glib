@@ -118,6 +118,7 @@ enum                <a class="link" href="GMount.html#GMountUnmountFlags" title=
 <a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GMount.html#g-mount-is-shadowed" title="g_mount_is_shadowed ()">g_mount_is_shadowed</a>                 (<em class="parameter"><code><a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a> *mount</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GMount.html#g-mount-shadow" title="g_mount_shadow ()">g_mount_shadow</a>                      (<em class="parameter"><code><a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a> *mount</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GMount.html#g-mount-unshadow" title="g_mount_unshadow ()">g_mount_unshadow</a>                    (<em class="parameter"><code><a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a> *mount</code></em>);
+const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *       <a class="link" href="GMount.html#g-mount-get-sort-key" title="g_mount_get_sort_key ()">g_mount_get_sort_key</a>                (<em class="parameter"><code><a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a> *mount</code></em>);
 </pre>
 </div>
 <div class="refsect1">
@@ -155,8 +156,8 @@ might not be related to a volume object.
 </p>
 <p>
 Unmounting a <a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a> instance is an asynchronous operation. For
-more information about asynchronous operations, see <span class="type">GAsyncReady</span>
-and <span class="type">GSimpleAsyncReady</span>. To unmount a <a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a> instance, first call
+more information about asynchronous operations, see <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a>
+and <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>. To unmount a <a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a> instance, first call
 <a class="link" href="GMount.html#g-mount-unmount-with-operation" title="g_mount_unmount_with_operation ()"><code class="function">g_mount_unmount_with_operation()</code></a> with (at least) the <a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a> instance and a
 <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a>.  The callback will be fired when the
 operation has resolved (either with success or failure), and a
@@ -262,6 +263,8 @@ A handle to an object implementing the <a class="link" href="GMount.html#GMountI
                                              GAsyncResult        *result,
                                              GError             **error);
   GFile     * (* get_default_location)      (GMount              *mount);
+
+  const gchar * (* get_sort_key)            (GMount              *mount);
 };
 </pre>
 <p>
@@ -346,7 +349,7 @@ type guessing. This operation was added in 2.18.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GMountIface.guess-content-type-finish"></a>guess_content_type_finish</code></em> ()</span></p></td>
-<td>Finishes a contenet type guessing operation. Added in 2.18.</td>
+<td>Finishes a content type guessing operation. Added in 2.18.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GMountIface.guess-content-type-sync"></a>guess_content_type_sync</code></em> ()</span></p></td>
@@ -354,7 +357,7 @@ type guessing. This operation was added in 2.18.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GMountIface.pre-unmount"></a>pre_unmount</code></em> ()</span></p></td>
-<td>The pre_unmout signal that is emitted when the <a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a> will soon be emitted. If the recipient is somehow holding the mount open by keeping an open file on it it should close the file.</td>
+<td>The ::pre-unmount signal that is emitted when the <a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a> will soon be emitted. If the recipient is somehow holding the mount open by keeping an open file on it it should close the file.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GMountIface.unmount-with-operation"></a>unmount_with_operation</code></em> ()</span></p></td>
@@ -375,6 +378,10 @@ type guessing. This operation was added in 2.18.</td>
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GMountIface.get-default-location"></a>get_default_location</code></em> ()</span></p></td>
 <td>Gets a <a class="link" href="GFile.html" title="GFile"><span class="type">GFile</span></a> indication a start location that can be use as the entry point for this mount. Since 2.24.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="structfield"><code><a name="GMountIface.get-sort-key"></a>get_sort_key</code></em> ()</span></p></td>
+<td>Gets a key used for sorting <a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a> instance or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if no such key exists. Since 2.32.</td>
 </tr>
 </tbody>
 </table></div>
@@ -1300,6 +1307,28 @@ will need to emit the <a class="link" href="GMount.html#GMount-changed" title='T
 </table></div>
 <p class="since">Since 2.20</p>
 </div>
+<hr>
+<div class="refsect2">
+<a name="g-mount-get-sort-key"></a><h3>g_mount_get_sort_key ()</h3>
+<pre class="programlisting">const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *       g_mount_get_sort_key                (<em class="parameter"><code><a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a> *mount</code></em>);</pre>
+<p>
+Gets the sort key for <em class="parameter"><code>mount</code></em>, if any.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>mount</code></em> :</span></p></td>
+<td>A <a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>Sorting key for <em class="parameter"><code>mount</code></em> or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if no such key is available.</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.32</p>
+</div>
 </div>
 <div class="refsect1">
 <a name="GMount.signal-details"></a><h2>Signal Details</h2>
@@ -1376,7 +1405,7 @@ finalized.
 </div>
 <div class="refsect1">
 <a name="GMount.see-also"></a><h2>See Also</h2>
-GVolume, GUnixMount
+GVolume, GUnixMountEntry, GUnixMountPoint
 </div>
 </div>
 <div class="footer">

@@ -95,7 +95,6 @@ DBUS1_CFLAGS = @DBUS1_CFLAGS@
 DBUS1_LIBS = @DBUS1_LIBS@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
-DISABLE_MEM_POOLS = @DISABLE_MEM_POOLS@
 DLLTOOL = @DLLTOOL@
 DSYMUTIL = @DSYMUTIL@
 DTRACE = @DTRACE@
@@ -112,6 +111,7 @@ GIO = @GIO@
 GIO_MODULE_DIR = @GIO_MODULE_DIR@
 GLIBC21 = @GLIBC21@
 GLIB_BINARY_AGE = @GLIB_BINARY_AGE@
+GLIB_COMPILE_RESOURCES = @GLIB_COMPILE_RESOURCES@
 GLIB_COMPILE_SCHEMAS = @GLIB_COMPILE_SCHEMAS@
 GLIB_DEBUG_FLAGS = @GLIB_DEBUG_FLAGS@
 GLIB_EXTRA_CFLAGS = @GLIB_EXTRA_CFLAGS@
@@ -121,7 +121,6 @@ GLIB_LINK_FLAGS = @GLIB_LINK_FLAGS@
 GLIB_MAJOR_VERSION = @GLIB_MAJOR_VERSION@
 GLIB_MICRO_VERSION = @GLIB_MICRO_VERSION@
 GLIB_MINOR_VERSION = @GLIB_MINOR_VERSION@
-GLIB_RT_LIBS = @GLIB_RT_LIBS@
 GLIB_RUNTIME_LIBDIR = @GLIB_RUNTIME_LIBDIR@
 GLIB_VERSION = @GLIB_VERSION@
 GLIB_WIN32_STATIC_COMPILATION_DEFINE = @GLIB_WIN32_STATIC_COMPILATION_DEFINE@
@@ -161,6 +160,8 @@ INSTOBJEXT = @INSTOBJEXT@
 INTLLIBS = @INTLLIBS@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
+LIBELF_CFLAGS = @LIBELF_CFLAGS@
+LIBELF_LIBS = @LIBELF_LIBS@
 LIBFFI_CFLAGS = @LIBFFI_CFLAGS@
 LIBFFI_LIBS = @LIBFFI_LIBS@
 LIBOBJS = @LIBOBJS@
@@ -307,8 +308,7 @@ GTESTER = $(top_builddir)/glib/gtester			# for the GLIB package
 GTESTER_REPORT = $(top_builddir)/glib/gtester-report	# for the GLIB package
 
 # initialize variables for unconditional += appending
-EXTRA_DIST = update.sh Makefile.am-1 Makefile.am-2 digitab.patch \
-	memory.patch pcre_ucp_searchfuncs.c pcre_valid_utf8.c
+EXTRA_DIST = update.sh digitab.patch memory.patch
 TEST_PROGS = 
 all: all-am
 
@@ -514,7 +514,7 @@ test: test-nonrecursive
 
 # test-nonrecursive: run tests only in cwd
 @OS_UNIX_TRUE@test-nonrecursive: ${TEST_PROGS}
-@OS_UNIX_TRUE@	@test -z "${TEST_PROGS}" || MALLOC_CHECK_=2 MALLOC_PERTURB_=$$(($${RANDOM:-256} % 256)) ${GTESTER} --verbose ${TEST_PROGS}
+@OS_UNIX_TRUE@	@test -z "${TEST_PROGS}" || G_DEBUG=gc-friendly MALLOC_CHECK_=2 MALLOC_PERTURB_=$$(($${RANDOM:-256} % 256)) ${GTESTER} --verbose ${TEST_PROGS}
 @OS_UNIX_FALSE@test-nonrecursive:
 
 # test-report: run tests in subdirs and generate report

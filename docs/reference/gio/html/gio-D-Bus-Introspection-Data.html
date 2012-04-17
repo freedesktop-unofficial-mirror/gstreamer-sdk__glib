@@ -134,7 +134,7 @@ used when registering objects with <a class="link" href="GDBusConnection.html#g-
 </p>
 <p>
 The format of D-Bus introspection XML is specified in the
-D-Bus specification.
+<a class="ulink" href="http://dbus.freedesktop.org/doc/dbus-specification.html#introspection-format" target="_top">D-Bus specification</a>.
 </p>
 </div>
 <div class="refsect1">
@@ -480,7 +480,8 @@ This cost of this function is O(n) in number of annotations.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>annotations</code></em> :</span></p></td>
-<td>A <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>-terminated array of annotations or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.</td>
+<td>A <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>-terminated array of annotations or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> zero-terminated=1][<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
@@ -679,6 +680,11 @@ method.
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Parses <em class="parameter"><code>xml_data</code></em> and returns a <a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusNodeInfo"><span class="type">GDBusNodeInfo</span></a> representing the data.
+</p>
+<p>
+Note that this routine is using a
+<a href="./../glib/glib/glib-Simple-XML-Subset-Parser.html#glib-Simple-XML-Subset-Parser.description">GMarkup</a>-based
+parser that only accepts a subset of valid XML documents.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">

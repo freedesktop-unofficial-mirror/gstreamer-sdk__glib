@@ -65,63 +65,52 @@ am__EXEEXT_1 = closures$(EXEEXT) objects$(EXEEXT) objects2$(EXEEXT) \
 closures_SOURCES = closures.c
 closures_OBJECTS = closures.$(OBJEXT)
 closures_LDADD = $(LDADD)
-am__DEPENDENCIES_1 =
-closures_DEPENDENCIES = $(libglib) $(libgobject) $(libgthread) \
-	$(am__DEPENDENCIES_1)
+closures_DEPENDENCIES = $(libglib) $(libgobject)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
 objects_SOURCES = objects.c
 objects_OBJECTS = objects.$(OBJEXT)
 objects_LDADD = $(LDADD)
-objects_DEPENDENCIES = $(libglib) $(libgobject) $(libgthread) \
-	$(am__DEPENDENCIES_1)
+objects_DEPENDENCIES = $(libglib) $(libgobject)
 objects2_SOURCES = objects2.c
 objects2_OBJECTS = objects2.$(OBJEXT)
 objects2_LDADD = $(LDADD)
-objects2_DEPENDENCIES = $(libglib) $(libgobject) $(libgthread) \
-	$(am__DEPENDENCIES_1)
+objects2_DEPENDENCIES = $(libglib) $(libgobject)
 properties_SOURCES = properties.c
 properties_OBJECTS = properties.$(OBJEXT)
 properties_LDADD = $(LDADD)
-properties_DEPENDENCIES = $(libglib) $(libgobject) $(libgthread) \
-	$(am__DEPENDENCIES_1)
+properties_DEPENDENCIES = $(libglib) $(libgobject)
 properties2_SOURCES = properties2.c
 properties2_OBJECTS = properties2.$(OBJEXT)
 properties2_LDADD = $(LDADD)
-properties2_DEPENDENCIES = $(libglib) $(libgobject) $(libgthread) \
-	$(am__DEPENDENCIES_1)
+properties2_DEPENDENCIES = $(libglib) $(libgobject)
 properties3_SOURCES = properties3.c
 properties3_OBJECTS = properties3.$(OBJEXT)
 properties3_LDADD = $(LDADD)
-properties3_DEPENDENCIES = $(libglib) $(libgobject) $(libgthread) \
-	$(am__DEPENDENCIES_1)
+properties3_DEPENDENCIES = $(libglib) $(libgobject)
 properties4_SOURCES = properties4.c
 properties4_OBJECTS = properties4.$(OBJEXT)
 properties4_LDADD = $(LDADD)
-properties4_DEPENDENCIES = $(libglib) $(libgobject) $(libgthread) \
-	$(am__DEPENDENCIES_1)
+properties4_DEPENDENCIES = $(libglib) $(libgobject)
 am_signal1_OBJECTS = signal1-signals.$(OBJEXT)
 signal1_OBJECTS = $(am_signal1_OBJECTS)
 signal1_LDADD = $(LDADD)
-signal1_DEPENDENCIES = $(libglib) $(libgobject) $(libgthread) \
-	$(am__DEPENDENCIES_1)
+signal1_DEPENDENCIES = $(libglib) $(libgobject)
 signal1_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(signal1_CFLAGS) \
 	$(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
 am_signal2_OBJECTS = signal2-signals.$(OBJEXT)
 signal2_OBJECTS = $(am_signal2_OBJECTS)
 signal2_LDADD = $(LDADD)
-signal2_DEPENDENCIES = $(libglib) $(libgobject) $(libgthread) \
-	$(am__DEPENDENCIES_1)
+signal2_DEPENDENCIES = $(libglib) $(libgobject)
 signal2_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(signal2_CFLAGS) \
 	$(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
 am_signal3_OBJECTS = signal3-signals.$(OBJEXT)
 signal3_OBJECTS = $(am_signal3_OBJECTS)
 signal3_LDADD = $(LDADD)
-signal3_DEPENDENCIES = $(libglib) $(libgobject) $(libgthread) \
-	$(am__DEPENDENCIES_1)
+signal3_DEPENDENCIES = $(libglib) $(libgobject)
 signal3_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(signal3_CFLAGS) \
 	$(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
@@ -192,7 +181,6 @@ DBUS1_CFLAGS = @DBUS1_CFLAGS@
 DBUS1_LIBS = @DBUS1_LIBS@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
-DISABLE_MEM_POOLS = @DISABLE_MEM_POOLS@
 DLLTOOL = @DLLTOOL@
 DSYMUTIL = @DSYMUTIL@
 DTRACE = @DTRACE@
@@ -209,6 +197,7 @@ GIO = @GIO@
 GIO_MODULE_DIR = @GIO_MODULE_DIR@
 GLIBC21 = @GLIBC21@
 GLIB_BINARY_AGE = @GLIB_BINARY_AGE@
+GLIB_COMPILE_RESOURCES = @GLIB_COMPILE_RESOURCES@
 GLIB_COMPILE_SCHEMAS = @GLIB_COMPILE_SCHEMAS@
 GLIB_DEBUG_FLAGS = @GLIB_DEBUG_FLAGS@
 GLIB_EXTRA_CFLAGS = @GLIB_EXTRA_CFLAGS@
@@ -218,7 +207,6 @@ GLIB_LINK_FLAGS = @GLIB_LINK_FLAGS@
 GLIB_MAJOR_VERSION = @GLIB_MAJOR_VERSION@
 GLIB_MICRO_VERSION = @GLIB_MICRO_VERSION@
 GLIB_MINOR_VERSION = @GLIB_MINOR_VERSION@
-GLIB_RT_LIBS = @GLIB_RT_LIBS@
 GLIB_RUNTIME_LIBDIR = @GLIB_RUNTIME_LIBDIR@
 GLIB_VERSION = @GLIB_VERSION@
 GLIB_WIN32_STATIC_COMPILATION_DEFINE = @GLIB_WIN32_STATIC_COMPILATION_DEFINE@
@@ -258,6 +246,8 @@ INSTOBJEXT = @INSTOBJEXT@
 INTLLIBS = @INTLLIBS@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
+LIBELF_CFLAGS = @LIBELF_CFLAGS@
+LIBELF_LIBS = @LIBELF_LIBS@
 LIBFFI_CFLAGS = @LIBFFI_CFLAGS@
 LIBFFI_LIBS = @LIBFFI_LIBS@
 LIBOBJS = @LIBOBJS@
@@ -408,13 +398,13 @@ EXTRA_DIST =
 TEST_PROGS = 
 INCLUDES = \
 	$(gmodule_INCLUDES) 			\
+	-DGLIB_DISABLE_DEPRECATION_WARNINGS	\
 	$(GLIB_DEBUG_FLAGS)
 
 libglib = $(top_builddir)/glib/libglib-2.0.la
-libgthread = $(top_builddir)/gthread/libgthread-2.0.la
 libgmodule = $(top_builddir)/gmodule/libgmodule-2.0.la
 libgobject = $(top_builddir)/gobject/libgobject-2.0.la
-LDADD = $(libglib) $(libgobject) $(libgthread) $(G_THREAD_LIBS)
+LDADD = $(libglib) $(libgobject)
 test_programs = \
 	closures				\
 	objects					\
@@ -907,7 +897,7 @@ test: test-nonrecursive
 
 # test-nonrecursive: run tests only in cwd
 @OS_UNIX_TRUE@test-nonrecursive: ${TEST_PROGS}
-@OS_UNIX_TRUE@	@test -z "${TEST_PROGS}" || MALLOC_CHECK_=2 MALLOC_PERTURB_=$$(($${RANDOM:-256} % 256)) ${GTESTER} --verbose ${TEST_PROGS}
+@OS_UNIX_TRUE@	@test -z "${TEST_PROGS}" || G_DEBUG=gc-friendly MALLOC_CHECK_=2 MALLOC_PERTURB_=$$(($${RANDOM:-256} % 256)) ${GTESTER} --verbose ${TEST_PROGS}
 @OS_UNIX_FALSE@test-nonrecursive:
 
 # test-report: run tests in subdirs and generate report

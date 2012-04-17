@@ -86,6 +86,8 @@ struct              <a class="link" href="glib-Arrays.html#GArray" title="struct
                                                          i)
 <a class="link" href="glib-Arrays.html#GArray" title="struct GArray"><span class="returnvalue">GArray</span></a> *            <a class="link" href="glib-Arrays.html#g-array-set-size" title="g_array_set_size ()">g_array_set_size</a>                    (<em class="parameter"><code><a class="link" href="glib-Arrays.html#GArray" title="struct GArray"><span class="type">GArray</span></a> *array</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> length</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Arrays.html#g-array-set-clear-func" title="g_array_set_clear_func ()">g_array_set_clear_func</a>              (<em class="parameter"><code><a class="link" href="glib-Arrays.html#GArray" title="struct GArray"><span class="type">GArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="type">GDestroyNotify</span></a> clear_func</code></em>);
 <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             <a class="link" href="glib-Arrays.html#g-array-free" title="g_array_free ()">g_array_free</a>                        (<em class="parameter"><code><a class="link" href="glib-Arrays.html#GArray" title="struct GArray"><span class="type">GArray</span></a> *array</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="type">gboolean</span></a> free_segment</code></em>);
 </pre>
@@ -121,7 +123,7 @@ To free an array, use <a class="link" href="glib-Arrays.html#g-array-free" title
 <p>
 </p>
 <div class="example">
-<a name="id910068"></a><p class="title"><b>Example 20. Using a <a class="link" href="glib-Arrays.html#GArray" title="struct GArray"><span class="type">GArray</span></a> to store <a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> values</b></p>
+<a name="id847191"></a><p class="title"><b>Example 14. Using a <a class="link" href="glib-Arrays.html#GArray" title="struct GArray"><span class="type">GArray</span></a> to store <a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> values</b></p>
 <div class="example-contents">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -650,11 +652,7 @@ than second arg, zero for equal, greater zero if first arg is
 greater than second arg).
 </p>
 <p>
-If two array elements compare equal, their order in the sorted array
-is undefined. If you want equal elements to keep their order &amp;<span class="type">8211</span>; i.e.
-you want a stable sort &amp;<span class="type">8211</span>; you can write a comparison function that,
-if two elements would otherwise compare equal, compares them by
-their addresses.
+This is guaranteed to be a stable sort since version 2.32.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -679,6 +677,14 @@ their addresses.
 <p>
 Like <a class="link" href="glib-Arrays.html#g-array-sort" title="g_array_sort ()"><code class="function">g_array_sort()</code></a>, but the comparison function receives an extra
 user data argument.
+</p>
+<p>
+This is guaranteed to be a stable sort since version 2.32.
+</p>
+<p>
+There used to be a comment here about making the sort stable by
+using the addresses of the elements in the comparison function.
+This did not actually work, so any such code should be removed.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -709,7 +715,7 @@ value is cast to the given type.
 <p>
 </p>
 <div class="example">
-<a name="id942676"></a><p class="title"><b>Example 21. Getting a pointer to an element in a <a class="link" href="glib-Arrays.html#GArray" title="struct GArray"><span class="type">GArray</span></a></b></p>
+<a name="id871802"></a><p class="title"><b>Example 15. Getting a pointer to an element in a <a class="link" href="glib-Arrays.html#GArray" title="struct GArray"><span class="type">GArray</span></a></b></p>
 <div class="example-contents">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -778,6 +784,41 @@ was created with <em class="parameter"><code>clear_</code></em> set to <a class=
 </tr>
 </tbody>
 </table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-array-set-clear-func"></a><h3>g_array_set_clear_func ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_array_set_clear_func              (<em class="parameter"><code><a class="link" href="glib-Arrays.html#GArray" title="struct GArray"><span class="type">GArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="type">GDestroyNotify</span></a> clear_func</code></em>);</pre>
+<p>
+Sets a function to clear an element of <em class="parameter"><code>array</code></em>.
+</p>
+<p>
+The <em class="parameter"><code>clear_func</code></em> will be called when an element in the array
+data segment is removed and when the array is freed and data
+segment is deallocated as well.
+</p>
+<p>
+Note that in contrast with other uses of <a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="type">GDestroyNotify</span></a>
+functions, <em class="parameter"><code>clear_func</code></em> is expected to clear the contents of
+the array element it is given, but not free the element itself.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>array</code></em> :</span></p></td>
+<td>A <a class="link" href="glib-Arrays.html#GArray" title="struct GArray"><span class="type">GArray</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>clear_func</code></em> :</span></p></td>
+<td>a function to clear an element of <em class="parameter"><code>array</code></em>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.32</p>
 </div>
 <hr>
 <div class="refsect2">

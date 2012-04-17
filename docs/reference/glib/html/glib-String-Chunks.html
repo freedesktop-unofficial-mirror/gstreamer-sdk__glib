@@ -92,8 +92,8 @@ not possible to free individual strings.
 <a name="GStringChunk"></a><h3>GStringChunk</h3>
 <pre class="programlisting">typedef struct _GStringChunk GStringChunk;</pre>
 <p>
-An opaque data structure representing String Chunks. It should only
-be accessed by using the following functions.
+An opaque data structure representing String Chunks.
+It should only be accessed by using the following functions.
 </p>
 </div>
 <hr>
@@ -128,16 +128,16 @@ memory will be allocated for it.</td>
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *string</code></em>);</pre>
 <p>
 Adds a copy of <em class="parameter"><code>string</code></em> to the <a class="link" href="glib-String-Chunks.html#GStringChunk" title="GStringChunk"><span class="type">GStringChunk</span></a>.
-It returns a pointer to the new copy of the string 
-in the <a class="link" href="glib-String-Chunks.html#GStringChunk" title="GStringChunk"><span class="type">GStringChunk</span></a>. The characters in the string 
-can be changed, if necessary, though you should not 
+It returns a pointer to the new copy of the string
+in the <a class="link" href="glib-String-Chunks.html#GStringChunk" title="GStringChunk"><span class="type">GStringChunk</span></a>. The characters in the string
+can be changed, if necessary, though you should not
 change anything after the end of the string.
 </p>
 <p>
-Unlike <a class="link" href="glib-String-Chunks.html#g-string-chunk-insert-const" title="g_string_chunk_insert_const ()"><code class="function">g_string_chunk_insert_const()</code></a>, this function 
-does not check for duplicates. Also strings added 
-with <a class="link" href="glib-String-Chunks.html#g-string-chunk-insert" title="g_string_chunk_insert ()"><code class="function">g_string_chunk_insert()</code></a> will not be searched 
-by <a class="link" href="glib-String-Chunks.html#g-string-chunk-insert-const" title="g_string_chunk_insert_const ()"><code class="function">g_string_chunk_insert_const()</code></a> when looking for 
+Unlike <a class="link" href="glib-String-Chunks.html#g-string-chunk-insert-const" title="g_string_chunk_insert_const ()"><code class="function">g_string_chunk_insert_const()</code></a>, this function
+does not check for duplicates. Also strings added
+with <a class="link" href="glib-String-Chunks.html#g-string-chunk-insert" title="g_string_chunk_insert ()"><code class="function">g_string_chunk_insert()</code></a> will not be searched
+by <a class="link" href="glib-String-Chunks.html#g-string-chunk-insert-const" title="g_string_chunk_insert_const ()"><code class="function">g_string_chunk_insert_const()</code></a> when looking for
 duplicates.
 </p>
 <div class="variablelist"><table border="0">

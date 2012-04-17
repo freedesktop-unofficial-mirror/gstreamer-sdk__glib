@@ -27,6 +27,7 @@ enum
   PROP_SOURCE_TOGGLE
 };
 
+static GType binding_source_get_type (void);
 G_DEFINE_TYPE (BindingSource, binding_source, G_TYPE_OBJECT);
 
 static void
@@ -148,6 +149,7 @@ enum
   PROP_TARGET_TOGGLE
 };
 
+static GType binding_target_get_type (void);
 G_DEFINE_TYPE (BindingTarget, binding_target, G_TYPE_OBJECT);
 
 static void
@@ -561,6 +563,9 @@ binding_same_object (void)
   g_object_set (source, "foo", 10, NULL);
   g_assert_cmpint (source->foo, ==, 10);
   g_assert_cmpint (source->bar, ==, 10);
+  g_object_set (source, "bar", 30, NULL);
+  g_assert_cmpint (source->foo, ==, 30);
+  g_assert_cmpint (source->bar, ==, 30);
 
   g_object_unref (source);
 }

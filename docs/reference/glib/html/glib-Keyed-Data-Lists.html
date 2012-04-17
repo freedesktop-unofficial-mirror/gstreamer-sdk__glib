@@ -96,8 +96,8 @@ The <a class="link" href="glib-Quarks.html#GQuark" title="GQuark"><span class="t
 converted to <a href="glib-Quarks.html#GQuark"><span class="type">GQuarks</span></a> anyway.
 </p>
 <p>
-Data lists are used for associating arbitrary data with <a href="./../gobject/gobject/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObjects</span></a>,
-using <a href="./../gobject/gobject/gobject-The-Base-Object-Type.html#g-object-set-data"><code class="function">g_object_set_data()</code></a> and related functions.
+Data lists are used for associating arbitrary data with <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObjects</span></a>,
+using <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-set-data"><code class="function">g_object_set_data()</code></a> and related functions.
 </p>
 <p>
 To create a datalist, use <a class="link" href="glib-Keyed-Data-Lists.html#g-datalist-init" title="g_datalist_init ()"><code class="function">g_datalist_init()</code></a>.
@@ -172,7 +172,8 @@ called.
 <tr>
 <td><p><span class="term"><em class="parameter"><code>d</code></em> :</span></p></td>
 <td>the data element, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> to remove any previous element
-corresponding to <em class="parameter"><code>q</code></em>.</td>
+corresponding to <em class="parameter"><code>q</code></em>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
 </tr>
 </tbody>
 </table></div>
@@ -204,7 +205,8 @@ function is called.
 <tr>
 <td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
 <td>the data element or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> to remove any previous element
-corresponding to <em class="parameter"><code>key_id</code></em>.</td>
+corresponding to <em class="parameter"><code>key_id</code></em>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>destroy_func</code></em> :</span></p></td>
@@ -312,7 +314,8 @@ Sets the data element corresponding to the given string identifier.
 <tr>
 <td><p><span class="term"><em class="parameter"><code>d</code></em> :</span></p></td>
 <td>the data element, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> to remove any previous element
-corresponding to <em class="parameter"><code>k</code></em>.</td>
+corresponding to <em class="parameter"><code>k</code></em>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
 </tr>
 </tbody>
 </table></div>
@@ -339,7 +342,8 @@ and the function to be called when the data element is removed.
 <tr>
 <td><p><span class="term"><em class="parameter"><code>d</code></em> :</span></p></td>
 <td>the data element, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> to remove any previous element
-corresponding to <em class="parameter"><code>k</code></em>.</td>
+corresponding to <em class="parameter"><code>k</code></em>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>f</code></em> :</span></p></td>
@@ -357,7 +361,7 @@ also be <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL">
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>            g_datalist_get_data                 (<em class="parameter"><code><a class="link" href="glib-Keyed-Data-Lists.html#GData" title="GData"><span class="type">GData</span></a> **datalist</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *key</code></em>);</pre>
 <p>
-Gets a data element, using its string identifer. This is slower than
+Gets a data element, using its string identifier. This is slower than
 <a class="link" href="glib-Keyed-Data-Lists.html#g-datalist-id-get-data" title="g_datalist_id_get_data ()"><code class="function">g_datalist_id_get_data()</code></a> because it compares strings.
 </p>
 <div class="variablelist"><table border="0">
@@ -480,7 +484,7 @@ Turns on flag values for a data list. This function is used
 to keep a small number of boolean flags in an object with
 a data list without using any additional space. It is
 not generally useful except in circumstances where space
-is very tight. (It is used in the base <a href="./../gobject/gobject/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> type, for
+is very tight. (It is used in the base <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> type, for
 example.)
 </p>
 <div class="variablelist"><table border="0">

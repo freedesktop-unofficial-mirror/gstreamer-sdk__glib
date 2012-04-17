@@ -162,8 +162,8 @@ error domain:
 <span class="normal">  </span><span class="function"><a href="gio-GDBusError.html#g-dbus-error-register-error-domain">g_dbus_error_register_error_domain</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"foo-bar-error-quark"</span><span class="symbol">,</span>
 <span class="normal">                                      </span><span class="symbol">&amp;</span><span class="normal">quark_volatile</span><span class="symbol">,</span>
 <span class="normal">                                      foo_bar_error_entries</span><span class="symbol">,</span>
-<span class="normal">                                      </span><span class="function"><a href="./../glib/glib/glib-Miscellaneous-Macros.html#G-N-ELEMENTS:CAPS">G_N_ELEMENTS</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">foo_bar_error_entries</span><span class="symbol">));</span>
-<span class="normal">  </span><span class="function"><a href="./../glib/glib/glib-Miscellaneous-Macros.html#G-STATIC-ASSERT:CAPS">G_STATIC_ASSERT</a></span><span class="normal"> </span><span class="symbol">(</span><span class="function"><a href="./../glib/glib/glib-Miscellaneous-Macros.html#G-N-ELEMENTS:CAPS">G_N_ELEMENTS</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">foo_bar_error_entries</span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">-</span><span class="normal"> </span><span class="number">1</span><span class="normal"> </span><span class="symbol">==</span><span class="normal"> FOO_BAR_ERROR_SOME_THIRD_ERROR</span><span class="symbol">);</span>
+<span class="normal">                                      </span><span class="function"><a href="./../glib/glib/glib-Standard-Macros.html#G-N-ELEMENTS:CAPS">G_N_ELEMENTS</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">foo_bar_error_entries</span><span class="symbol">));</span>
+<span class="normal">  </span><span class="function"><a href="./../glib/glib/glib-Miscellaneous-Macros.html#G-STATIC-ASSERT:CAPS">G_STATIC_ASSERT</a></span><span class="normal"> </span><span class="symbol">(</span><span class="function"><a href="./../glib/glib/glib-Standard-Macros.html#G-N-ELEMENTS:CAPS">G_N_ELEMENTS</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">foo_bar_error_entries</span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">-</span><span class="normal"> </span><span class="number">1</span><span class="normal"> </span><span class="symbol">==</span><span class="normal"> FOO_BAR_ERROR_SOME_THIRD_ERROR</span><span class="symbol">);</span>
 <span class="normal">  </span><span class="keyword">return</span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="./../glib/glib/glib-Quarks.html#GQuark">GQuark</a></span><span class="symbol">)</span><span class="normal"> quark_volatile</span><span class="symbol">;</span>
 <span class="cbracket">}</span></pre></td>
       </tr>
@@ -778,7 +778,9 @@ with <em class="parameter"><code>dbus_error_message</code></em> prepend with <em
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>format</code></em> :</span></p></td>
-<td>printf()-style format to prepend to <em class="parameter"><code>dbus_error_message</code></em> or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.</td>
+<td>
+<code class="function">printf()</code>-style format to prepend to <em class="parameter"><code>dbus_error_message</code></em> or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
@@ -816,7 +818,9 @@ Like <a class="link" href="gio-GDBusError.html#g-dbus-error-set-dbus-error" titl
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>format</code></em> :</span></p></td>
-<td>printf()-style format to prepend to <em class="parameter"><code>dbus_error_message</code></em> or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.</td>
+<td>
+<code class="function">printf()</code>-style format to prepend to <em class="parameter"><code>dbus_error_message</code></em> or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>var_args</code></em> :</span></p></td>

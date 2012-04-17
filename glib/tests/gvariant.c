@@ -2831,6 +2831,9 @@ do_failed_test (const gchar *pattern)
 static void
 test_invalid_varargs (void)
 {
+  if (!g_test_undefined ())
+    return;
+
   if (do_failed_test ("*GVariant format string*"))
     {
       g_variant_new ("z");
@@ -3727,8 +3730,9 @@ test_parses (void)
         GError *error = NULL;
         value = g_variant_parse (NULL, tests[i], NULL, NULL, &error);
         printed = g_variant_print (value, FALSE);
-        g_assert_cmpstr (tests[i], ==, printed);
+        g_assert (g_str_has_prefix (printed, tests[i]));
         g_free (printed);
+        g_variant_unref (value);
       }
   }
 
@@ -3870,22 +3874,25 @@ test_parse_positional (void)
   check_and_free (value, "[('one', 1), ('two', 2), ('three', 3)]");
   check_and_free (g_variant_new_parsed ("{%s:%i}", "one", 1), "{'one': 1}");
 
-  if (do_failed_test ("*GVariant format string*"))
+  if (g_test_undefined ())
     {
-      g_variant_new_parsed ("%z");
-      abort ();
-    }
+      if (do_failed_test ("*GVariant format string*"))
+        {
+          g_variant_new_parsed ("%z");
+          abort ();
+        }
 
-  if (do_failed_test ("*can not parse as*"))
-    {
-      g_variant_new_parsed ("uint32 %i", 2);
-      abort ();
-    }
+      if (do_failed_test ("*can not parse as*"))
+        {
+          g_variant_new_parsed ("uint32 %i", 2);
+          abort ();
+        }
 
-  if (do_failed_test ("*expected GVariant of type `i'*"))
-    {
-      g_variant_new_parsed ("%@i", g_variant_new_uint32 (2));
-      abort ();
+      if (do_failed_test ("*expected GVariant of type `i'*"))
+        {
+          g_variant_new_parsed ("%@i", g_variant_new_uint32 (2));
+          abort ();
+        }
     }
 }
 
@@ -4078,15 +4085,29 @@ static void
 test_fixed_array (void)
 {
   GVariant *a;
+  gint32 values[5];
   const gint32 *elts;
   gsize n_elts;
   gint i;
 
+  n_elts = 0;
   a = g_variant_new_parsed ("[1,2,3,4,5]");
   elts = g_variant_get_fixed_array (a, &n_elts, sizeof (gint32));
   g_assert (n_elts == 5);
   for (i = 0; i < 5; i++)
-    g_assert (elts[i] == i + 1);
+    g_assert_cmpint (elts[i], ==, i + 1);
+  g_variant_unref (a);
+
+  n_elts = 0;
+  for (i = 0; i < 5; i++)
+    values[i] = i + 1;
+  a = g_variant_new_fixed_array (G_VARIANT_TYPE_INT32, values,
+                                 G_N_ELEMENTS (values), sizeof (values[0]));
+  g_assert_cmpstr (g_variant_get_type_string (a), ==, "ai");
+  elts = g_variant_get_fixed_array (a, &n_elts, sizeof (gint32));
+  g_assert (n_elts == 5);
+  for (i = 0; i < 5; i++)
+    g_assert_cmpint (elts[i], ==, i + 1);
   g_variant_unref (a);
 }
 

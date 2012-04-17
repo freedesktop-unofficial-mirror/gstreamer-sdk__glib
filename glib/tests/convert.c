@@ -193,6 +193,7 @@ check_utf8_to_ucs4 (const char     *utf8,
       g_assert (result);
       for (i = 0; i <= items_written; i++)
 	g_assert (result[i] == ucs4[i]);
+      g_error_free (error3);
     }
   else if (error_pos)
     {
@@ -333,6 +334,7 @@ check_utf8_to_utf16 (const char      *utf8,
       g_assert (result);
       for (i = 0; i <= items_written; i++)
 	g_assert (result[i] == utf16[i]);
+      g_error_free (error3);
     }
   else if (error_pos)
     {
@@ -407,6 +409,7 @@ check_utf16_to_utf8 (const gunichar2 *utf16,
       g_assert (items_written == utf8_len);
       g_assert (result);
       g_assert (strcmp (result, utf8) == 0);
+      g_error_free (error3);
     }
   else if (error_pos)
     {
@@ -549,6 +552,7 @@ check_utf16_to_ucs4 (const gunichar2 *utf16,
       g_assert (result);
       for (i = 0; i <= items_written; i++)
 	g_assert (result[i] == ucs4[i]);
+      g_error_free (error3);
     }
   else if (error_pos)
     {
@@ -681,11 +685,28 @@ test_filename_display (void)
   g_free (display);
 }
 
+static void
+test_no_conv (void)
+{
+  gchar *in = "";
+  gchar *out G_GNUC_UNUSED;
+  gsize bytes_read = 0;
+  gsize bytes_written = 0;
+  GError *error = NULL;
+
+  out = g_convert (in, -1, "XXX", "UVZ",
+                   &bytes_read, &bytes_written, &error);
+
+  /* error code is unreliable, since we mishandle errno there */
+  g_assert (error && error->domain == G_CONVERT_ERROR);
+}
+
 int
 main (int argc, char *argv[])
 {
   g_test_init (&argc, &argv, NULL);
 
+  g_test_add_func ("/conversion/no-conv", test_no_conv);
   g_test_add_func ("/conversion/iconv-state", test_iconv_state);
   g_test_add_func ("/conversion/illegal-sequence", test_one_half);
   g_test_add_func ("/conversion/byte-order", test_byte_order);

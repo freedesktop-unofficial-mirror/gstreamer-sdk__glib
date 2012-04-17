@@ -14,7 +14,7 @@ DOC_SOURCE_DIR=$(top_srcdir)/gobject
 
 # Extra options to supply to gtkdoc-scan
 SCAN_OPTIONS=--deprecated-guards="G_DISABLE_DEPRECATED" \
-	--ignore-decorators=G_GNUC_INTERNAL
+             --ignore-decorators="G_GNUC_INTERNAL|G_GNUC_WARN_UNUSED_RESULT"
 
 # Extra options to supply to gtkdoc-mkdb
 MKDB_OPTIONS=--sgml-mode --output-format=xml --name-space=g
@@ -97,7 +97,7 @@ MAINTAINERCLEANFILES = $(man_MANS) $(BUILT_SOURCES)
 
 EXTRA_DIST += $(man_MANS)
 
-dist-hook-local: dist-local-check-mans-enabled gobject-docs-clean all-local
+dist-hook-local: dist-local-check-mans-enabled all-local
 
 gobject-docs-clean: clean
 	cd $(srcdir) && rm -rf xml html

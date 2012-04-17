@@ -240,7 +240,6 @@ DBUS1_CFLAGS = @DBUS1_CFLAGS@
 DBUS1_LIBS = @DBUS1_LIBS@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
-DISABLE_MEM_POOLS = @DISABLE_MEM_POOLS@
 DLLTOOL = @DLLTOOL@
 DSYMUTIL = @DSYMUTIL@
 DTRACE = @DTRACE@
@@ -257,6 +256,7 @@ GIO = @GIO@
 GIO_MODULE_DIR = @GIO_MODULE_DIR@
 GLIBC21 = @GLIBC21@
 GLIB_BINARY_AGE = @GLIB_BINARY_AGE@
+GLIB_COMPILE_RESOURCES = @GLIB_COMPILE_RESOURCES@
 GLIB_COMPILE_SCHEMAS = @GLIB_COMPILE_SCHEMAS@
 GLIB_DEBUG_FLAGS = @GLIB_DEBUG_FLAGS@
 GLIB_EXTRA_CFLAGS = @GLIB_EXTRA_CFLAGS@
@@ -266,7 +266,6 @@ GLIB_LINK_FLAGS = @GLIB_LINK_FLAGS@
 GLIB_MAJOR_VERSION = @GLIB_MAJOR_VERSION@
 GLIB_MICRO_VERSION = @GLIB_MICRO_VERSION@
 GLIB_MINOR_VERSION = @GLIB_MINOR_VERSION@
-GLIB_RT_LIBS = @GLIB_RT_LIBS@
 GLIB_RUNTIME_LIBDIR = @GLIB_RUNTIME_LIBDIR@
 GLIB_VERSION = @GLIB_VERSION@
 GLIB_WIN32_STATIC_COMPILATION_DEFINE = @GLIB_WIN32_STATIC_COMPILATION_DEFINE@
@@ -306,6 +305,8 @@ INSTOBJEXT = @INSTOBJEXT@
 INTLLIBS = @INTLLIBS@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
+LIBELF_CFLAGS = @LIBELF_CFLAGS@
+LIBELF_LIBS = @LIBELF_LIBS@
 LIBFFI_CFLAGS = @LIBFFI_CFLAGS@
 LIBFFI_LIBS = @LIBFFI_LIBS@
 LIBOBJS = @LIBOBJS@
@@ -466,14 +467,12 @@ TEST_PROGS =
 #
 SUBDIRS = . tests
 BUILT_SOURCES = $(am__append_1)
-CLEANFILES = $(am__append_2) gobject-public-headers.txt $(gen_sources)
-@HAVE_THREADS_TRUE@THREAD_FLAGS = -DG_THREADS_MANDATORY
+CLEANFILES = $(am__append_2) gobject-public-headers.txt $(gen_sources) \
+	libgobject-gdb.py
 AM_CPPFLAGS = \
 	-DG_LOG_DOMAIN=\"GLib-GObject\"		\
 	$(gthread_INCLUDES) 			\
 	$(GLIB_DEBUG_FLAGS)			\
-	$(THREAD_FLAGS)				\
-	-DG_DISABLE_DEPRECATED			\
 	-DGOBJECT_COMPILATION
 
 @HAVE_GNUC_VISIBILITY_TRUE@@OS_LINUX_TRUE@TESTS = abicheck.sh
@@ -486,7 +485,7 @@ lib_LTLIBRARIES = libgobject-2.0.la
 @MS_LIB_AVAILABLE_TRUE@@OS_WIN32_AND_DLL_COMPILATION_TRUE@uninstall_ms_lib_cmd = -rm $(DESTDIR)$(libdir)/gobject-2.0.lib
 @PLATFORM_WIN32_TRUE@no_undefined = -no-undefined
 @OS_WIN32_AND_DLL_COMPILATION_FALSE@export_symbols = $(LIBTOOL_EXPORT_OPTIONS)
-@OS_WIN32_AND_DLL_COMPILATION_TRUE@export_symbols = -export-symbols gobject.def
+@OS_WIN32_AND_DLL_COMPILATION_TRUE@export_symbols = -export-symbols $(builddir)/gobject.def
 @OS_WIN32_AND_DLL_COMPILATION_TRUE@gobject_def = gobject.def
 @OS_WIN32_AND_DLL_COMPILATION_TRUE@gobject_win32_res = gobject-win32-res.o
 @OS_WIN32_AND_DLL_COMPILATION_TRUE@gobject_win32_res_ldflag = -Wl,$(gobject_win32_res)
@@ -1475,7 +1474,7 @@ test: test-nonrecursive
 
 # test-nonrecursive: run tests only in cwd
 @OS_UNIX_TRUE@test-nonrecursive: ${TEST_PROGS}
-@OS_UNIX_TRUE@	@test -z "${TEST_PROGS}" || MALLOC_CHECK_=2 MALLOC_PERTURB_=$$(($${RANDOM:-256} % 256)) ${GTESTER} --verbose ${TEST_PROGS}
+@OS_UNIX_TRUE@	@test -z "${TEST_PROGS}" || G_DEBUG=gc-friendly MALLOC_CHECK_=2 MALLOC_PERTURB_=$$(($${RANDOM:-256} % 256)) ${GTESTER} --verbose ${TEST_PROGS}
 @OS_UNIX_FALSE@test-nonrecursive:
 
 # test-report: run tests in subdirs and generate report
@@ -1550,7 +1549,7 @@ lcov-clean:
 check-local: test-nonrecursive
 
 gobject.def: gobject.symbols
-	$(AM_V_GEN) (echo EXPORTS; $(CPP) -P -DINCLUDE_VARIABLES -DINCLUDE_INTERNAL_SYMBOLS -DG_OS_WIN32 -DALL_FILES - <$(srcdir)/gobject.symbols | $(SED) -e '/^$$/d' -e 's/^/	/' -e 's/G_GNUC_[^ ]*//g' | sort) > gobject.def
+	$(AM_V_GEN) (echo EXPORTS; $(CPP) -P -DINCLUDE_VARIABLES -DINCLUDE_INTERNAL_SYMBOLS -DG_OS_WIN32 -DALL_FILES - <$(srcdir)/gobject.symbols | $(SED) -e '/^$$/d' -e 's/^/	/' -e 's/G_GNUC_[^ ]*//g' | sort) > $(builddir)/gobject.def
 
 install-ms-lib:
 	$(install_ms_lib_cmd)
@@ -1559,7 +1558,7 @@ uninstall-ms-lib:
 	$(uninstall_ms_lib_cmd)
 
 @OS_WIN32_AND_DLL_COMPILATION_TRUE@install-def-file:
-@OS_WIN32_AND_DLL_COMPILATION_TRUE@	$(INSTALL) gobject.def $(DESTDIR)$(libdir)/gobject-2.0.def
+@OS_WIN32_AND_DLL_COMPILATION_TRUE@	$(INSTALL) $(builddir)/gobject.def $(DESTDIR)$(libdir)/gobject-2.0.def
 
 @OS_WIN32_AND_DLL_COMPILATION_TRUE@uninstall-def-file:
 @OS_WIN32_AND_DLL_COMPILATION_TRUE@	-rm $(DESTDIR)$(libdir)/gobject-2.0.def
@@ -1597,7 +1596,7 @@ gobject-win32-res.o: gobject.rc
 	$(AM_V_GEN) $(WINDRES) gobject.rc $@
 
 gobject-2.0.lib: libgobject-2.0.la gobject.def
-	lib -machine:@LIB_EXE_MACHINE_FLAG@ -name:libgobject-2.0-$(LT_CURRENT_MINUS_AGE).dll -def:gobject.def -out:$@
+	lib -machine:@LIB_EXE_MACHINE_FLAG@ -name:libgobject-2.0-$(LT_CURRENT_MINUS_AGE).dll -def:$(builddir)/gobject.def -out:$@
 
 dist-hook: $(BUILT_EXTRA_DIST) ../build/win32/vs9/gobject.vcproj ../build/win32/vs10/gobject.vcxproj ../build/win32/vs10/gobject.vcxproj.filters
 	files='$(BUILT_EXTRA_DIST)'; \
@@ -1642,18 +1641,17 @@ uninstall-local: uninstall-ms-lib uninstall-def-file uninstall-gdb
 distclean-local:
 	if test $(srcdir) = .; then :; else \
 	    rm -f $(BUILT_EXTRA_DIST); \
-	    rm -f libgobject-gdb.py; \
 	fi
 
 libgobject-gdb.py: libgobject-gdb.py.in
-	$(AM_V_GEN) $(SED) -e "s|\@datadir\@|$(datadir)|" $(srcdir)/libgobject-gdb.py.in > libgobject-gdb.py
+	$(AM_V_GEN) $(SED) -e "s|\@datadir\@|$(datadir)|" $(srcdir)/libgobject-gdb.py.in > $(builddir)/libgobject-gdb.py
 
 uninstall-gdb:
 	-rm -r $(DESTDIR)$(datadir)/gdb
 
 install-data-hook: libgobject-gdb.py
 	mkdir -p $(DESTDIR)$(datadir)/gdb/auto-load/$(ABS_GLIB_RUNTIME_LIBDIR)
-	$(INSTALL) libgobject-gdb.py $(DESTDIR)$(datadir)/gdb/auto-load/$(ABS_GLIB_RUNTIME_LIBDIR)/libgobject-2.0.so.0.$(LT_CURRENT).$(LT_REVISION)-gdb.py
+	$(INSTALL) $(builddir)/libgobject-gdb.py $(DESTDIR)$(datadir)/gdb/auto-load/$(ABS_GLIB_RUNTIME_LIBDIR)/libgobject-2.0.so.0.$(LT_CURRENT).$(LT_REVISION)-gdb.py
 @HAVE_GLIB_RUNTIME_LIBDIR_TRUE@	mkdir -p $(DESTDIR)$(libdir)/$(GLIB_RUNTIME_LIBDIR)
 @HAVE_GLIB_RUNTIME_LIBDIR_TRUE@	mv $(DESTDIR)$(libdir)/libgobject-2.0.so.0 $(DESTDIR)$(libdir)/$(GLIB_RUNTIME_LIBDIR)
 @HAVE_GLIB_RUNTIME_LIBDIR_TRUE@	mv $(DESTDIR)$(libdir)/libgobject-2.0.so.0.$(LT_CURRENT).$(LT_REVISION) $(DESTDIR)$(libdir)/$(GLIB_RUNTIME_LIBDIR)

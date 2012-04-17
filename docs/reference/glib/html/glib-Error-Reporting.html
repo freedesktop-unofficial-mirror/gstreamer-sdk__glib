@@ -533,7 +533,7 @@ Error domains and codes are conventionally named as follows:
 <li class="listitem"><p>
   The quark function for the error domain is called
   <code class="literal">&lt;namespace&gt;_&lt;module&gt;_error_quark</code>,
-  for example <code class="function">g_spawn_error_quark()</code> or %<code class="function">g_thread_error_quark()</code>.
+  for example <code class="function">g_spawn_error_quark()</code> or <code class="function">g_thread_error_quark()</code>.
 </p></li>
 <li class="listitem"><p>
   The error codes are in an enumeration called
@@ -549,7 +549,7 @@ Error domains and codes are conventionally named as follows:
   If there's a "generic" or "unknown" error code for unrecoverable
   errors it doesn't make sense to distinguish with specific codes,
   it should be called <code class="literal">&lt;NAMESPACE&gt;_&lt;MODULE&gt;_ERROR_FAILED</code>,
-  for example <a class="link" href="glib-Spawning-Processes.html#G-SPAWN-ERROR-FAILED:CAPS"><code class="literal">G_SPAWN_ERROR_FAILED</code></a> or <code class="literal">G_THREAD_ERROR_FAILED</code>.
+  for example <a class="link" href="glib-Spawning-Processes.html#G-SPAWN-ERROR-FAILED:CAPS"><code class="literal">G_SPAWN_ERROR_FAILED</code></a>.
 </p></li>
 </ul></div>
 <p>
@@ -584,6 +584,10 @@ Summary of rules for use of <a class="link" href="glib-Error-Reporting.html#GErr
   then you handled it and you should not report it. If it was fatal,
   then you must report it and discontinue whatever you were doing
   immediately.
+</p></li>
+<li class="listitem"><p>
+  If a <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> is reported, out parameters are not guaranteed to
+  be set to any defined value.
 </p></li>
 <li class="listitem"><p>
   A <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a>* must be initialized to <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> before passing its address
@@ -822,7 +826,7 @@ be returned.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td>a <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
@@ -858,7 +862,7 @@ must be <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>err</code></em> :</span></p></td>
-<td>a return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td>a return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
@@ -900,7 +904,7 @@ that could include <code class="function">printf()</code> escape sequences.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>err</code></em> :</span></p></td>
-<td>a return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td>a return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
@@ -982,7 +986,7 @@ to you.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>err</code></em> :</span></p></td>
-<td>a return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td>a return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>

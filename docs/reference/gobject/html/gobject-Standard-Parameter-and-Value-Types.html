@@ -69,6 +69,9 @@ struct              <a class="link" href="gobject-Standard-Parameter-and-Value-T
 <span class="returnvalue">void</span>                <a class="link" href="gobject-Standard-Parameter-and-Value-Types.html#g-value-set-char" title="g_value_set_char ()">g_value_set_char</a>                    (<em class="parameter"><code><a class="link" href="gobject-Generic-values.html#GValue" title="GValue"><span class="type">GValue</span></a> *value</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> v_char</code></em>);
 <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a>               <a class="link" href="gobject-Standard-Parameter-and-Value-Types.html#g-value-get-char" title="g_value_get_char ()">g_value_get_char</a>                    (<em class="parameter"><code>const <a class="link" href="gobject-Generic-values.html#GValue" title="GValue"><span class="type">GValue</span></a> *value</code></em>);
+<a href="./../glib/glib/glib-Basic-Types.html#gint8"><span class="returnvalue">gint8</span></a>               <a class="link" href="gobject-Standard-Parameter-and-Value-Types.html#g-value-get-schar" title="g_value_get_schar ()">g_value_get_schar</a>                   (<em class="parameter"><code>const <a class="link" href="gobject-Generic-values.html#GValue" title="GValue"><span class="type">GValue</span></a> *value</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="gobject-Standard-Parameter-and-Value-Types.html#g-value-set-schar" title="g_value_set_schar ()">g_value_set_schar</a>                   (<em class="parameter"><code><a class="link" href="gobject-Generic-values.html#GValue" title="GValue"><span class="type">GValue</span></a> *value</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gint8"><span class="type">gint8</span></a> v_char</code></em>);
 
 #define             <a class="link" href="gobject-Standard-Parameter-and-Value-Types.html#G-IS-PARAM-SPEC-UCHAR:CAPS" title="G_IS_PARAM_SPEC_UCHAR()">G_IS_PARAM_SPEC_UCHAR</a>               (pspec)
 #define             <a class="link" href="gobject-Standard-Parameter-and-Value-Types.html#G-PARAM-SPEC-UCHAR:CAPS" title="G_PARAM_SPEC_UCHAR()">G_PARAM_SPEC_UCHAR</a>                  (pspec)
@@ -767,6 +770,10 @@ Creates a new <a class="link" href="gobject-Standard-Parameter-and-Value-Types.h
 <a name="g-value-set-char"></a><h3>g_value_set_char ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_value_set_char                    (<em class="parameter"><code><a class="link" href="gobject-Generic-values.html#GValue" title="GValue"><span class="type">GValue</span></a> *value</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> v_char</code></em>);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">g_value_set_char</code> has been deprecated since version 2.32 and should not be used in newly-written code. This function's input type is broken, see <a class="link" href="gobject-Standard-Parameter-and-Value-Types.html#g-value-set-schar" title="g_value_set_schar ()"><code class="function">g_value_set_schar()</code></a></p>
+</div>
 <p>
 Set the contents of a <a class="link" href="gobject-Type-Information.html#G-TYPE-CHAR:CAPS" title="G_TYPE_CHAR"><code class="literal">G_TYPE_CHAR</code></a> <a class="link" href="gobject-Generic-values.html#GValue" title="GValue"><span class="type">GValue</span></a> to <em class="parameter"><code>v_char</code></em>.
 </p>
@@ -789,6 +796,14 @@ Set the contents of a <a class="link" href="gobject-Type-Information.html#G-TYPE
 <div class="refsect2">
 <a name="g-value-get-char"></a><h3>g_value_get_char ()</h3>
 <pre class="programlisting"><a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a>               g_value_get_char                    (<em class="parameter"><code>const <a class="link" href="gobject-Generic-values.html#GValue" title="GValue"><span class="type">GValue</span></a> *value</code></em>);</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">g_value_get_char</code> has been deprecated since version 2.32 and should not be used in newly-written code. This function's return type is broken, see <a class="link" href="gobject-Standard-Parameter-and-Value-Types.html#g-value-get-schar" title="g_value_get_schar ()"><code class="function">g_value_get_schar()</code></a></p>
+</div>
+<p>
+Do not use this function; it is broken on platforms where the <code class="literal">char</code>
+type is unsigned, such as ARM and PowerPC.  See <a class="link" href="gobject-Standard-Parameter-and-Value-Types.html#g-value-get-schar" title="g_value_get_schar ()"><code class="function">g_value_get_schar()</code></a>.
+</p>
 <p>
 Get the contents of a <a class="link" href="gobject-Type-Information.html#G-TYPE-CHAR:CAPS" title="G_TYPE_CHAR"><code class="literal">G_TYPE_CHAR</code></a> <a class="link" href="gobject-Generic-values.html#GValue" title="GValue"><span class="type">GValue</span></a>.
 </p>
@@ -807,6 +822,54 @@ Get the contents of a <a class="link" href="gobject-Type-Information.html#G-TYPE
 </tr>
 </tbody>
 </table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-value-get-schar"></a><h3>g_value_get_schar ()</h3>
+<pre class="programlisting"><a href="./../glib/glib/glib-Basic-Types.html#gint8"><span class="returnvalue">gint8</span></a>               g_value_get_schar                   (<em class="parameter"><code>const <a class="link" href="gobject-Generic-values.html#GValue" title="GValue"><span class="type">GValue</span></a> *value</code></em>);</pre>
+<p>
+Get the contents of a <a class="link" href="gobject-Type-Information.html#G-TYPE-CHAR:CAPS" title="G_TYPE_CHAR"><code class="literal">G_TYPE_CHAR</code></a> <a class="link" href="gobject-Generic-values.html#GValue" title="GValue"><span class="type">GValue</span></a>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td>a valid <a class="link" href="gobject-Generic-values.html#GValue" title="GValue"><span class="type">GValue</span></a> of type <a class="link" href="gobject-Type-Information.html#G-TYPE-CHAR:CAPS" title="G_TYPE_CHAR"><code class="literal">G_TYPE_CHAR</code></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>signed 8 bit integer contents of <em class="parameter"><code>value</code></em>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.32</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-value-set-schar"></a><h3>g_value_set_schar ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_value_set_schar                   (<em class="parameter"><code><a class="link" href="gobject-Generic-values.html#GValue" title="GValue"><span class="type">GValue</span></a> *value</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gint8"><span class="type">gint8</span></a> v_char</code></em>);</pre>
+<p>
+Set the contents of a <a class="link" href="gobject-Type-Information.html#G-TYPE-CHAR:CAPS" title="G_TYPE_CHAR"><code class="literal">G_TYPE_CHAR</code></a> <a class="link" href="gobject-Generic-values.html#GValue" title="GValue"><span class="type">GValue</span></a> to <em class="parameter"><code>v_char</code></em>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td>a valid <a class="link" href="gobject-Generic-values.html#GValue" title="GValue"><span class="type">GValue</span></a> of type <a class="link" href="gobject-Type-Information.html#G-TYPE-CHAR:CAPS" title="G_TYPE_CHAR"><code class="literal">G_TYPE_CHAR</code></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>v_char</code></em> :</span></p></td>
+<td>signed 8 bit integer to be set</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.32</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -4532,6 +4595,10 @@ See <a class="link" href="gobject-GParamSpec.html#g-param-spec-internal" title="
 <a name="G-IS-PARAM-SPEC-VALUE-ARRAY:CAPS"></a><h3>G_IS_PARAM_SPEC_VALUE_ARRAY()</h3>
 <pre class="programlisting">#define G_IS_PARAM_SPEC_VALUE_ARRAY(pspec) (G_TYPE_CHECK_INSTANCE_TYPE ((pspec), G_TYPE_PARAM_VALUE_ARRAY))
 </pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">G_IS_PARAM_SPEC_VALUE_ARRAY</code> has been deprecated since version 2.32 and should not be used in newly-written code. Use <a href="./../glib/glib/glib-Arrays.html#GArray"><span class="type">GArray</span></a> instead of <a class="link" href="gobject-Value-arrays.html#GValueArray" title="struct GValueArray"><span class="type">GValueArray</span></a></p>
+</div>
 <p>
 Checks whether the given <a class="link" href="gobject-GParamSpec.html#GParamSpec" title="struct GParamSpec"><span class="type">GParamSpec</span></a> is of type <a class="link" href="gobject-Standard-Parameter-and-Value-Types.html#G-TYPE-PARAM-VALUE-ARRAY:CAPS" title="G_TYPE_PARAM_VALUE_ARRAY"><code class="literal">G_TYPE_PARAM_VALUE_ARRAY</code></a>.
 </p>
@@ -4555,6 +4622,10 @@ Checks whether the given <a class="link" href="gobject-GParamSpec.html#GParamSpe
 <a name="G-PARAM-SPEC-VALUE-ARRAY:CAPS"></a><h3>G_PARAM_SPEC_VALUE_ARRAY()</h3>
 <pre class="programlisting">#define G_PARAM_SPEC_VALUE_ARRAY(pspec)    (G_TYPE_CHECK_INSTANCE_CAST ((pspec), G_TYPE_PARAM_VALUE_ARRAY, GParamSpecValueArray))
 </pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">G_PARAM_SPEC_VALUE_ARRAY</code> has been deprecated since version 2.32 and should not be used in newly-written code. Use <a href="./../glib/glib/glib-Arrays.html#GArray"><span class="type">GArray</span></a> instead of <a class="link" href="gobject-Value-arrays.html#GValueArray" title="struct GValueArray"><span class="type">GValueArray</span></a></p>
+</div>
 <p>
 Cast a <a class="link" href="gobject-GParamSpec.html#GParamSpec" title="struct GParamSpec"><span class="type">GParamSpec</span></a> instance into a <a class="link" href="gobject-Standard-Parameter-and-Value-Types.html#GParamSpecValueArray" title="struct GParamSpecValueArray"><span class="type">GParamSpecValueArray</span></a>.
 </p>
@@ -4571,6 +4642,10 @@ Cast a <a class="link" href="gobject-GParamSpec.html#GParamSpec" title="struct G
 <a name="G-TYPE-PARAM-VALUE-ARRAY:CAPS"></a><h3>G_TYPE_PARAM_VALUE_ARRAY</h3>
 <pre class="programlisting">#define G_TYPE_PARAM_VALUE_ARRAY	   (g_param_spec_types[18])
 </pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">G_TYPE_PARAM_VALUE_ARRAY</code> has been deprecated since version 2.32 and should not be used in newly-written code. Use <a href="./../glib/glib/glib-Arrays.html#GArray"><span class="type">GArray</span></a> instead of <a class="link" href="gobject-Value-arrays.html#GValueArray" title="struct GValueArray"><span class="type">GValueArray</span></a></p>
+</div>
 <p>
 The <a class="link" href="gobject-Type-Information.html#GType" title="GType"><span class="type">GType</span></a> of <a class="link" href="gobject-Standard-Parameter-and-Value-Types.html#GParamSpecValueArray" title="struct GParamSpecValueArray"><span class="type">GParamSpecValueArray</span></a>.
 </p>

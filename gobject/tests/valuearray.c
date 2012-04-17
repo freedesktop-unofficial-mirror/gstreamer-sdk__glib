@@ -1,3 +1,4 @@
+#define GLIB_VERSION_MIN_REQUIRED       GLIB_VERSION_2_30
 #include <glib-object.h>
 
 static gint
@@ -14,7 +15,7 @@ test_basic (void)
 {
   GValueArray *a;
   GValueArray *a2;
-  GValue v = { 0, };
+  GValue v = G_VALUE_INIT;
   GValue *p;
   gint i;
 

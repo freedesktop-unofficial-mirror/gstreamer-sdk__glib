@@ -1,3 +1,5 @@
+#define GLIB_DISABLE_DEPRECATION_WARNINGS
+
 #include <glib-object.h>
 
 typedef struct _MyBoxed MyBoxed;
@@ -34,6 +36,7 @@ my_boxed_free (gpointer orig)
   my_boxed_free_count++;
 }
 
+static GType my_boxed_get_type (void);
 #define MY_TYPE_BOXED (my_boxed_get_type ())
 
 G_DEFINE_BOXED_TYPE (MyBoxed, my_boxed, my_boxed_copy, my_boxed_free)
@@ -53,12 +56,14 @@ test_define_boxed (void)
   g_assert_cmpstr (b->bla, ==, "bla");
 
   g_boxed_free (MY_TYPE_BOXED, b);
+
+  g_free (a.bla);
 }
 
 static void
 test_boxed_ownership (void)
 {
-  GValue value = { 0, };
+  GValue value = G_VALUE_INIT;
   static MyBoxed boxed = { 10, "bla" };
 
   g_value_init (&value, MY_TYPE_BOXED);
@@ -101,7 +106,7 @@ test_boxed_closure (void)
 {
   GClosure *closure;
   GClosure *closure2;
-  GValue value = { 0, };
+  GValue value = G_VALUE_INIT;
 
   g_value_init (&value, G_TYPE_CLOSURE);
   g_assert (G_VALUE_HOLDS_BOXED (&value));
@@ -125,7 +130,7 @@ test_boxed_date (void)
 {
   GDate *date;
   GDate *date2;
-  GValue value = { 0, };
+  GValue value = G_VALUE_INIT;
 
   g_value_init (&value, G_TYPE_DATE);
   g_assert (G_VALUE_HOLDS_BOXED (&value));
@@ -147,9 +152,9 @@ test_boxed_date (void)
 static void
 test_boxed_value (void)
 {
-  GValue value1 = { 0, };
+  GValue value1 = G_VALUE_INIT;
   GValue *value2;
-  GValue value = { 0, };
+  GValue value = G_VALUE_INIT;
 
   g_value_init (&value, G_TYPE_VALUE);
   g_assert (G_VALUE_HOLDS_BOXED (&value));
@@ -176,7 +181,7 @@ test_boxed_string (void)
 {
   GString *v;
   GString *v2;
-  GValue value = { 0, };
+  GValue value = G_VALUE_INIT;
 
   g_value_init (&value, G_TYPE_GSTRING);
   g_assert (G_VALUE_HOLDS_BOXED (&value));
@@ -200,7 +205,7 @@ test_boxed_hashtable (void)
 {
   GHashTable *v;
   GHashTable *v2;
-  GValue value = { 0, };
+  GValue value = G_VALUE_INIT;
 
   g_value_init (&value, G_TYPE_HASH_TABLE);
   g_assert (G_VALUE_HOLDS_BOXED (&value));
@@ -223,7 +228,7 @@ test_boxed_array (void)
 {
   GArray *v;
   GArray *v2;
-  GValue value = { 0, };
+  GValue value = G_VALUE_INIT;
 
   g_value_init (&value, G_TYPE_ARRAY);
   g_assert (G_VALUE_HOLDS_BOXED (&value));
@@ -246,7 +251,7 @@ test_boxed_ptrarray (void)
 {
   GPtrArray *v;
   GPtrArray *v2;
-  GValue value = { 0, };
+  GValue value = G_VALUE_INIT;
 
   g_value_init (&value, G_TYPE_PTR_ARRAY);
   g_assert (G_VALUE_HOLDS_BOXED (&value));
@@ -269,7 +274,7 @@ test_boxed_regex (void)
 {
   GRegex *v;
   GRegex *v2;
-  GValue value = { 0, };
+  GValue value = G_VALUE_INIT;
 
   g_value_init (&value, G_TYPE_REGEX);
   g_assert (G_VALUE_HOLDS_BOXED (&value));
@@ -288,11 +293,38 @@ test_boxed_regex (void)
 }
 
 static void
+test_boxed_matchinfo (void)
+{
+  GRegex *r;
+  GMatchInfo *info, *info2;
+  gboolean ret;
+  GValue value = G_VALUE_INIT;
+
+  g_value_init (&value, G_TYPE_MATCH_INFO);
+  g_assert (G_VALUE_HOLDS_BOXED (&value));
+
+  r = g_regex_new ("ab", 0, 0, NULL);
+  ret = g_regex_match (r, "blabla abab bla", 0, &info);
+  g_assert (ret);
+  g_value_take_boxed (&value, info);
+
+  info2 = g_value_get_boxed (&value);
+  g_assert (info == info2);
+
+  info2 = g_value_dup_boxed (&value);
+  g_assert (info == info2);  /* matchinfo uses ref/unref for copy/free */
+  g_match_info_unref (info2);
+
+  g_value_unset (&value);
+  g_regex_unref (r);
+}
+
+static void
 test_boxed_varianttype (void)
 {
   GVariantType *v;
   GVariantType *v2;
-  GValue value = { 0, };
+  GValue value = G_VALUE_INIT;
 
   g_value_init (&value, G_TYPE_VARIANT_TYPE);
   g_assert (G_VALUE_HOLDS_BOXED (&value));
@@ -316,7 +348,7 @@ test_boxed_datetime (void)
 {
   GDateTime *v;
   GDateTime *v2;
-  GValue value = { 0, };
+  GValue value = G_VALUE_INIT;
 
   g_value_init (&value, G_TYPE_DATE_TIME);
   g_assert (G_VALUE_HOLDS_BOXED (&value));
@@ -339,7 +371,7 @@ test_boxed_error (void)
 {
   GError *v;
   GError *v2;
-  GValue value = { 0, };
+  GValue value = G_VALUE_INIT;
 
   g_value_init (&value, G_TYPE_ERROR);
   g_assert (G_VALUE_HOLDS_BOXED (&value));
@@ -358,6 +390,116 @@ test_boxed_error (void)
   g_assert_cmpint (v->code, ==, v2->code);
   g_assert_cmpstr (v->message, ==, v2->message);
   g_error_free (v2);
+
+  g_value_unset (&value);
+}
+
+static void
+test_boxed_keyfile (void)
+{
+  GKeyFile *k, *k2;
+  GValue value = G_VALUE_INIT;
+
+  g_value_init (&value, G_TYPE_KEY_FILE);
+  g_assert (G_VALUE_HOLDS_BOXED (&value));
+
+  k = g_key_file_new ();
+  g_value_take_boxed (&value, k);
+
+  k2 = g_value_get_boxed (&value);
+  g_assert (k == k2);
+
+  k2 = g_value_dup_boxed (&value);
+  g_assert (k == k2);  /* keyfile uses ref/unref for copy/free */
+  g_key_file_unref (k2);
+
+  g_value_unset (&value);
+}
+
+static void
+test_boxed_mainloop (void)
+{
+  GMainLoop *l, *l2;
+  GValue value = G_VALUE_INIT;
+
+  g_value_init (&value, G_TYPE_MAIN_LOOP);
+  g_assert (G_VALUE_HOLDS_BOXED (&value));
+
+  l = g_main_loop_new (NULL, FALSE);
+  g_value_take_boxed (&value, l);
+
+  l2 = g_value_get_boxed (&value);
+  g_assert (l == l2);
+
+  l2 = g_value_dup_boxed (&value);
+  g_assert (l == l2);  /* mainloop uses ref/unref for copy/free */
+  g_main_loop_unref (l2);
+
+  g_value_unset (&value);
+}
+
+static void
+test_boxed_maincontext (void)
+{
+  GMainContext *c, *c2;
+  GValue value = G_VALUE_INIT;
+
+  g_value_init (&value, G_TYPE_MAIN_CONTEXT);
+  g_assert (G_VALUE_HOLDS_BOXED (&value));
+
+  c = g_main_context_new ();
+  g_value_take_boxed (&value, c);
+
+  c2 = g_value_get_boxed (&value);
+  g_assert (c == c2);
+
+  c2 = g_value_dup_boxed (&value);
+  g_assert (c == c2);  /* maincontext uses ref/unref for copy/free */
+  g_main_context_unref (c2);
+
+  g_value_unset (&value);
+}
+
+static void
+test_boxed_source (void)
+{
+  GSource *s, *s2;
+  GValue value = G_VALUE_INIT;
+
+  g_value_init (&value, G_TYPE_SOURCE);
+  g_assert (G_VALUE_HOLDS_BOXED (&value));
+
+  s = g_idle_source_new ();
+  g_value_take_boxed (&value, s);
+
+  s2 = g_value_get_boxed (&value);
+  g_assert (s == s2);
+
+  s2 = g_value_dup_boxed (&value);
+  g_assert (s == s2);  /* source uses ref/unref for copy/free */
+  g_source_unref (s2);
+
+  g_value_unset (&value);
+}
+
+static void
+test_boxed_variantbuilder (void)
+{
+  GVariantBuilder *v, *v2;
+  GValue value = G_VALUE_INIT;
+
+  g_value_init (&value, G_TYPE_VARIANT_BUILDER);
+  g_assert (G_VALUE_HOLDS_BOXED (&value));
+
+  v = g_variant_builder_new (G_VARIANT_TYPE_OBJECT_PATH_ARRAY);
+  g_value_take_boxed (&value, v);
+
+  v2 = g_value_get_boxed (&value);
+  g_assert (v == v2);
+
+  v2 = g_value_dup_boxed (&value);
+  g_assert (v == v2);  /* variantbuilder uses ref/unref for copy/free */
+  g_variant_builder_unref (v2);
 
   g_value_unset (&value);
 }
@@ -381,6 +523,12 @@ main (int argc, char *argv[])
   g_test_add_func ("/boxed/varianttype", test_boxed_varianttype);
   g_test_add_func ("/boxed/error", test_boxed_error);
   g_test_add_func ("/boxed/datetime", test_boxed_datetime);
+  g_test_add_func ("/boxed/matchinfo", test_boxed_matchinfo);
+  g_test_add_func ("/boxed/keyfile", test_boxed_keyfile);
+  g_test_add_func ("/boxed/mainloop", test_boxed_mainloop);
+  g_test_add_func ("/boxed/maincontext", test_boxed_maincontext);
+  g_test_add_func ("/boxed/source", test_boxed_source);
+  g_test_add_func ("/boxed/variantbuilder", test_boxed_variantbuilder);
 
   return g_test_run ();
 }

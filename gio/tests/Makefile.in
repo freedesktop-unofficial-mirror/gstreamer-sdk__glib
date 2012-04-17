@@ -18,6 +18,7 @@
 # GLIB - Library of useful C routines
 
 
+
 VPATH = @srcdir@
 pkgdatadir = $(datadir)/@PACKAGE@
 pkgincludedir = $(includedir)/@PACKAGE@
@@ -40,16 +41,17 @@ host_triplet = @host@
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
 	$(top_srcdir)/Makefile.decl
 noinst_PROGRAMS = $(am__EXEEXT_5) $(am__EXEEXT_7)
-@OS_UNIX_TRUE@am__append_1 = gdbus-close-pending gdbus-connection \
-@OS_UNIX_TRUE@	gdbus-connection-flush gdbus-connection-loss \
-@OS_UNIX_TRUE@	gdbus-connection-slow gdbus-names gdbus-proxy \
-@OS_UNIX_TRUE@	gdbus-proxy-threads gdbus-proxy-well-known-name \
-@OS_UNIX_TRUE@	gdbus-introspection gdbus-threading gdbus-export \
-@OS_UNIX_TRUE@	gdbus-error gdbus-peer gdbus-exit-on-close \
-@OS_UNIX_TRUE@	gdbus-non-socket gdbus-bz627724 appinfo \
-@OS_UNIX_TRUE@	contenttype file $(NULL) live-g-file \
-@OS_UNIX_TRUE@	desktop-app-info unix-fd unix-streams \
-@OS_UNIX_TRUE@	gapplication gdbus-test-codegen $(NULL)
+@OS_UNIX_TRUE@am__append_1 = actions gdbus-close-pending \
+@OS_UNIX_TRUE@	gdbus-connection gdbus-connection-flush \
+@OS_UNIX_TRUE@	gdbus-connection-loss gdbus-connection-slow \
+@OS_UNIX_TRUE@	gdbus-names gdbus-proxy gdbus-proxy-threads \
+@OS_UNIX_TRUE@	gdbus-proxy-well-known-name gdbus-introspection \
+@OS_UNIX_TRUE@	gdbus-threading gdbus-export gdbus-error \
+@OS_UNIX_TRUE@	gdbus-peer gdbus-exit-on-close gdbus-non-socket \
+@OS_UNIX_TRUE@	gdbus-bz627724 appinfo contenttype mimeapps file \
+@OS_UNIX_TRUE@	$(NULL) live-g-file desktop-app-info unix-fd \
+@OS_UNIX_TRUE@	unix-streams gapplication basic-application \
+@OS_UNIX_TRUE@	gdbus-test-codegen $(NULL)
 @OS_UNIX_TRUE@am__append_2 = \
 @OS_UNIX_TRUE@	gdbus-example-unix-fd-client 		\
 @OS_UNIX_TRUE@	gdbus-example-objectmanager-server 	\
@@ -78,8 +80,21 @@ mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
+LTLIBRARIES = $(noinst_LTLIBRARIES)
+libresourceplugin_la_DEPENDENCIES = $(progs_ldadd)
+am_libresourceplugin_la_OBJECTS = resourceplugin.lo \
+	plugin_resources.lo
+libresourceplugin_la_OBJECTS = $(am_libresourceplugin_la_OBJECTS)
+AM_V_lt = $(am__v_lt_@AM_V@)
+am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
+am__v_lt_0 = --silent
+libresourceplugin_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
+	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CCLD) \
+	$(AM_CFLAGS) $(CFLAGS) $(libresourceplugin_la_LDFLAGS) \
+	$(LDFLAGS) -o $@
 am__EXEEXT_1 =
-@OS_UNIX_TRUE@am__EXEEXT_2 = gdbus-close-pending$(EXEEXT) \
+@OS_UNIX_TRUE@am__EXEEXT_2 = actions$(EXEEXT) \
+@OS_UNIX_TRUE@	gdbus-close-pending$(EXEEXT) \
 @OS_UNIX_TRUE@	gdbus-connection$(EXEEXT) \
 @OS_UNIX_TRUE@	gdbus-connection-flush$(EXEEXT) \
 @OS_UNIX_TRUE@	gdbus-connection-loss$(EXEEXT) \
@@ -93,28 +108,30 @@ am__EXEEXT_1 =
 @OS_UNIX_TRUE@	gdbus-exit-on-close$(EXEEXT) \
 @OS_UNIX_TRUE@	gdbus-non-socket$(EXEEXT) \
 @OS_UNIX_TRUE@	gdbus-bz627724$(EXEEXT) appinfo$(EXEEXT) \
-@OS_UNIX_TRUE@	contenttype$(EXEEXT) file$(EXEEXT) \
-@OS_UNIX_TRUE@	$(am__EXEEXT_1) live-g-file$(EXEEXT) \
-@OS_UNIX_TRUE@	desktop-app-info$(EXEEXT) unix-fd$(EXEEXT) \
-@OS_UNIX_TRUE@	unix-streams$(EXEEXT) gapplication$(EXEEXT) \
+@OS_UNIX_TRUE@	contenttype$(EXEEXT) mimeapps$(EXEEXT) \
+@OS_UNIX_TRUE@	file$(EXEEXT) $(am__EXEEXT_1) \
+@OS_UNIX_TRUE@	live-g-file$(EXEEXT) desktop-app-info$(EXEEXT) \
+@OS_UNIX_TRUE@	unix-fd$(EXEEXT) unix-streams$(EXEEXT) \
+@OS_UNIX_TRUE@	gapplication$(EXEEXT) basic-application$(EXEEXT) \
 @OS_UNIX_TRUE@	gdbus-test-codegen$(EXEEXT) $(am__EXEEXT_1)
 @OS_WIN32_TRUE@am__EXEEXT_3 = win32-streams$(EXEEXT)
 @HAVE_DBUS1_TRUE@am__EXEEXT_4 = gdbus-serialization$(EXEEXT)
-am__EXEEXT_5 = io-stream$(EXEEXT) actions$(EXEEXT) \
-	memory-input-stream$(EXEEXT) memory-output-stream$(EXEEXT) \
-	readwrite$(EXEEXT) g-file$(EXEEXT) g-file-info$(EXEEXT) \
-	converter-stream$(EXEEXT) data-input-stream$(EXEEXT) \
-	data-output-stream$(EXEEXT) g-icon$(EXEEXT) \
-	buffered-input-stream$(EXEEXT) buffered-output-stream$(EXEEXT) \
-	sleepy-stream$(EXEEXT) filter-streams$(EXEEXT) \
-	volumemonitor$(EXEEXT) simple-async-result$(EXEEXT) \
-	srvtarget$(EXEEXT) contexts$(EXEEXT) gsettings$(EXEEXT) \
-	gschema-compile$(EXEEXT) async-close-output-stream$(EXEEXT) \
-	gdbus-addresses$(EXEEXT) network-address$(EXEEXT) \
-	gdbus-message$(EXEEXT) socket$(EXEEXT) pollable$(EXEEXT) \
-	tls-certificate$(EXEEXT) tls-interaction$(EXEEXT) \
-	cancellable$(EXEEXT) $(am__EXEEXT_1) $(am__EXEEXT_2) \
-	$(am__EXEEXT_3) $(am__EXEEXT_4)
+am__EXEEXT_5 = io-stream$(EXEEXT) memory-input-stream$(EXEEXT) \
+	memory-output-stream$(EXEEXT) readwrite$(EXEEXT) \
+	g-file$(EXEEXT) g-file-info$(EXEEXT) converter-stream$(EXEEXT) \
+	data-input-stream$(EXEEXT) data-output-stream$(EXEEXT) \
+	g-icon$(EXEEXT) buffered-input-stream$(EXEEXT) \
+	buffered-output-stream$(EXEEXT) sleepy-stream$(EXEEXT) \
+	filter-streams$(EXEEXT) volumemonitor$(EXEEXT) \
+	simple-async-result$(EXEEXT) srvtarget$(EXEEXT) \
+	contexts$(EXEEXT) gsettings$(EXEEXT) gschema-compile$(EXEEXT) \
+	async-close-output-stream$(EXEEXT) gdbus-addresses$(EXEEXT) \
+	network-address$(EXEEXT) gdbus-message$(EXEEXT) \
+	socket$(EXEEXT) pollable$(EXEEXT) tls-certificate$(EXEEXT) \
+	tls-interaction$(EXEEXT) cancellable$(EXEEXT) vfs$(EXEEXT) \
+	network-monitor$(EXEEXT) fileattributematcher$(EXEEXT) \
+	gmenumodel$(EXEEXT) resources$(EXEEXT) $(am__EXEEXT_1) \
+	$(am__EXEEXT_2) $(am__EXEEXT_3) $(am__EXEEXT_4)
 @OS_UNIX_TRUE@am__EXEEXT_6 = gdbus-example-unix-fd-client$(EXEEXT) \
 @OS_UNIX_TRUE@	gdbus-example-objectmanager-server$(EXEEXT) \
 @OS_UNIX_TRUE@	gdbus-example-objectmanager-client$(EXEEXT) \
@@ -136,12 +153,9 @@ am__EXEEXT_7 = resolver$(EXEEXT) socket-server$(EXEEXT) \
 	gapplication-example-actions$(EXEEXT) $(am__EXEEXT_1) \
 	$(am__EXEEXT_6)
 PROGRAMS = $(noinst_PROGRAMS)
-actions_SOURCES = actions.c
-actions_OBJECTS = actions.$(OBJEXT)
+am_actions_OBJECTS = actions.$(OBJEXT) gdbus-sessionbus.$(OBJEXT)
+actions_OBJECTS = $(am_actions_OBJECTS)
 actions_DEPENDENCIES = $(progs_ldadd)
-AM_V_lt = $(am__v_lt_@AM_V@)
-am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
-am__v_lt_0 = --silent
 am_appinfo_OBJECTS = appinfo.$(OBJEXT)
 appinfo_OBJECTS = $(am_appinfo_OBJECTS)
 appinfo_DEPENDENCIES = $(progs_ldadd)
@@ -153,6 +167,9 @@ am_async_close_output_stream_OBJECTS =  \
 async_close_output_stream_OBJECTS =  \
 	$(am_async_close_output_stream_OBJECTS)
 async_close_output_stream_DEPENDENCIES = $(progs_ldadd)
+basic_application_SOURCES = basic-application.c
+basic_application_OBJECTS = basic-application.$(OBJEXT)
+basic_application_DEPENDENCIES = $(progs_ldadd)
 am_buffered_input_stream_OBJECTS = buffered-input-stream.$(OBJEXT)
 buffered_input_stream_OBJECTS = $(am_buffered_input_stream_OBJECTS)
 buffered_input_stream_DEPENDENCIES = $(progs_ldadd)
@@ -188,6 +205,9 @@ echo_server_DEPENDENCIES = $(progs_ldadd) \
 am_file_OBJECTS = file.$(OBJEXT)
 file_OBJECTS = $(am_file_OBJECTS)
 file_DEPENDENCIES = $(progs_ldadd)
+am_fileattributematcher_OBJECTS = fileattributematcher.$(OBJEXT)
+fileattributematcher_OBJECTS = $(am_fileattributematcher_OBJECTS)
+fileattributematcher_DEPENDENCIES = $(progs_ldadd)
 am_filter_cat_OBJECTS = filter-cat.$(OBJEXT)
 filter_cat_OBJECTS = $(am_filter_cat_OBJECTS)
 filter_cat_DEPENDENCIES = $(progs_ldadd)
@@ -204,7 +224,7 @@ am_g_icon_OBJECTS = g-icon.$(OBJEXT)
 g_icon_OBJECTS = $(am_g_icon_OBJECTS)
 g_icon_DEPENDENCIES = $(progs_ldadd)
 am_gapplication_OBJECTS = gapplication.$(OBJEXT) \
-	gdbus-sessionbus.$(OBJEXT)
+	gdbus-sessionbus.$(OBJEXT) gdbus-tests.$(OBJEXT)
 gapplication_OBJECTS = $(am_gapplication_OBJECTS)
 gapplication_DEPENDENCIES = $(progs_ldadd)
 am_gapplication_example_actions_OBJECTS =  \
@@ -351,9 +371,15 @@ am_gdbus_non_socket_OBJECTS = gdbus-non-socket.$(OBJEXT) \
 	test-pipe-unix.$(OBJEXT) $(am__objects_1)
 gdbus_non_socket_OBJECTS = $(am_gdbus_non_socket_OBJECTS)
 gdbus_non_socket_DEPENDENCIES = $(progs_ldadd)
-am_gdbus_peer_OBJECTS = gdbus-peer.$(OBJEXT) gdbus-tests.$(OBJEXT)
+am__gdbus_peer_SOURCES_DIST = gdbus-peer.c gdbus-tests.h gdbus-tests.c
+@OS_UNIX_TRUE@am_gdbus_peer_OBJECTS = gdbus_peer-gdbus-peer.$(OBJEXT) \
+@OS_UNIX_TRUE@	gdbus_peer-gdbus-tests.$(OBJEXT)
 gdbus_peer_OBJECTS = $(am_gdbus_peer_OBJECTS)
-gdbus_peer_DEPENDENCIES = $(progs_ldadd)
+@OS_UNIX_TRUE@gdbus_peer_DEPENDENCIES = $(top_builddir)/gio/tests/gdbus-object-manager-example/libgdbus-example-objectmanager.la \
+@OS_UNIX_TRUE@	$(progs_ldadd)
+gdbus_peer_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(gdbus_peer_CFLAGS) \
+	$(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
 am_gdbus_proxy_OBJECTS = gdbus-proxy.$(OBJEXT) \
 	gdbus-sessionbus.$(OBJEXT) gdbus-tests.$(OBJEXT)
 gdbus_proxy_OBJECTS = $(am_gdbus_proxy_OBJECTS)
@@ -394,6 +420,10 @@ am_gdbus_threading_OBJECTS = gdbus-threading.$(OBJEXT) \
 	gdbus-sessionbus.$(OBJEXT) gdbus-tests.$(OBJEXT)
 gdbus_threading_OBJECTS = $(am_gdbus_threading_OBJECTS)
 gdbus_threading_DEPENDENCIES = $(progs_ldadd)
+am_gmenumodel_OBJECTS = gmenumodel.$(OBJEXT) \
+	gdbus-sessionbus.$(OBJEXT)
+gmenumodel_OBJECTS = $(am_gmenumodel_OBJECTS)
+gmenumodel_DEPENDENCIES = $(progs_ldadd)
 am_gschema_compile_OBJECTS = gschema-compile.$(OBJEXT)
 gschema_compile_OBJECTS = $(am_gschema_compile_OBJECTS)
 gschema_compile_DEPENDENCIES = $(progs_ldadd)
@@ -416,9 +446,15 @@ memory_input_stream_DEPENDENCIES = $(progs_ldadd)
 am_memory_output_stream_OBJECTS = memory-output-stream.$(OBJEXT)
 memory_output_stream_OBJECTS = $(am_memory_output_stream_OBJECTS)
 memory_output_stream_DEPENDENCIES = $(progs_ldadd)
+am_mimeapps_OBJECTS = mimeapps.$(OBJEXT)
+mimeapps_OBJECTS = $(am_mimeapps_OBJECTS)
+mimeapps_DEPENDENCIES = $(progs_ldadd)
 network_address_SOURCES = network-address.c
 network_address_OBJECTS = network-address.$(OBJEXT)
 network_address_DEPENDENCIES = $(progs_ldadd)
+network_monitor_SOURCES = network-monitor.c
+network_monitor_OBJECTS = network-monitor.$(OBJEXT)
+network_monitor_DEPENDENCIES = $(progs_ldadd)
 pollable_SOURCES = pollable.c
 pollable_OBJECTS = pollable.$(OBJEXT)
 pollable_DEPENDENCIES = $(progs_ldadd)
@@ -433,6 +469,9 @@ am_resolver_OBJECTS = resolver.$(OBJEXT)
 resolver_OBJECTS = $(am_resolver_OBJECTS)
 resolver_DEPENDENCIES = $(progs_ldadd) \
 	$(top_builddir)/gthread/libgthread-2.0.la
+am_resources_OBJECTS = resources.$(OBJEXT) test_resources.$(OBJEXT) \
+	test_resources2.$(OBJEXT)
+resources_OBJECTS = $(am_resources_OBJECTS)
 am_send_data_OBJECTS = send-data.$(OBJEXT)
 send_data_OBJECTS = $(am_send_data_OBJECTS)
 send_data_DEPENDENCIES = $(progs_ldadd) \
@@ -472,6 +511,9 @@ am_unix_streams_OBJECTS = unix-streams.$(OBJEXT)
 unix_streams_OBJECTS = $(am_unix_streams_OBJECTS)
 unix_streams_DEPENDENCIES = $(progs_ldadd) \
 	$(top_builddir)/gthread/libgthread-2.0.la
+vfs_SOURCES = vfs.c
+vfs_OBJECTS = vfs.$(OBJEXT)
+vfs_DEPENDENCIES = $(progs_ldadd)
 am_volumemonitor_OBJECTS = volumemonitor.$(OBJEXT)
 volumemonitor_OBJECTS = $(am_volumemonitor_OBJECTS)
 volumemonitor_DEPENDENCIES = $(progs_ldadd)
@@ -505,14 +547,16 @@ am__v_CCLD_0 = @echo "  CCLD  " $@;
 AM_V_GEN = $(am__v_GEN_@AM_V@)
 am__v_GEN_ = $(am__v_GEN_@AM_DEFAULT_V@)
 am__v_GEN_0 = @echo "  GEN   " $@;
-SOURCES = actions.c $(appinfo_SOURCES) $(appinfo_test_SOURCES) \
-	$(async_close_output_stream_SOURCES) \
+SOURCES = $(libresourceplugin_la_SOURCES) $(actions_SOURCES) \
+	$(appinfo_SOURCES) $(appinfo_test_SOURCES) \
+	$(async_close_output_stream_SOURCES) basic-application.c \
 	$(buffered_input_stream_SOURCES) \
 	$(buffered_output_stream_SOURCES) cancellable.c \
 	$(contenttype_SOURCES) $(contexts_SOURCES) \
 	$(converter_stream_SOURCES) $(data_input_stream_SOURCES) \
 	$(data_output_stream_SOURCES) $(desktop_app_info_SOURCES) \
-	$(echo_server_SOURCES) $(file_SOURCES) $(filter_cat_SOURCES) \
+	$(echo_server_SOURCES) $(file_SOURCES) \
+	$(fileattributematcher_SOURCES) $(filter_cat_SOURCES) \
 	$(filter_streams_SOURCES) $(g_file_SOURCES) \
 	$(g_file_info_SOURCES) $(g_icon_SOURCES) \
 	$(gapplication_SOURCES) \
@@ -545,25 +589,28 @@ SOURCES = actions.c $(appinfo_SOURCES) $(appinfo_test_SOURCES) \
 	$(gdbus_proxy_threads_SOURCES) \
 	$(gdbus_proxy_well_known_name_SOURCES) \
 	$(gdbus_serialization_SOURCES) $(gdbus_test_codegen_SOURCES) \
-	$(gdbus_threading_SOURCES) $(gschema_compile_SOURCES) \
-	$(gsettings_SOURCES) $(httpd_SOURCES) $(io_stream_SOURCES) \
-	$(live_g_file_SOURCES) $(memory_input_stream_SOURCES) \
-	$(memory_output_stream_SOURCES) network-address.c pollable.c \
-	$(proxy_SOURCES) $(readwrite_SOURCES) $(resolver_SOURCES) \
-	$(send_data_SOURCES) $(simple_async_result_SOURCES) \
-	$(sleepy_stream_SOURCES) socket.c $(socket_client_SOURCES) \
-	$(socket_server_SOURCES) $(srvtarget_SOURCES) \
-	$(tls_certificate_SOURCES) tls-interaction.c \
-	$(unix_fd_SOURCES) $(unix_streams_SOURCES) \
-	$(volumemonitor_SOURCES) $(win32_streams_SOURCES)
-DIST_SOURCES = actions.c $(appinfo_SOURCES) $(appinfo_test_SOURCES) \
-	$(async_close_output_stream_SOURCES) \
+	$(gdbus_threading_SOURCES) $(gmenumodel_SOURCES) \
+	$(gschema_compile_SOURCES) $(gsettings_SOURCES) \
+	$(httpd_SOURCES) $(io_stream_SOURCES) $(live_g_file_SOURCES) \
+	$(memory_input_stream_SOURCES) $(memory_output_stream_SOURCES) \
+	$(mimeapps_SOURCES) network-address.c network-monitor.c \
+	pollable.c $(proxy_SOURCES) $(readwrite_SOURCES) \
+	$(resolver_SOURCES) $(resources_SOURCES) $(send_data_SOURCES) \
+	$(simple_async_result_SOURCES) $(sleepy_stream_SOURCES) \
+	socket.c $(socket_client_SOURCES) $(socket_server_SOURCES) \
+	$(srvtarget_SOURCES) $(tls_certificate_SOURCES) \
+	tls-interaction.c $(unix_fd_SOURCES) $(unix_streams_SOURCES) \
+	vfs.c $(volumemonitor_SOURCES) $(win32_streams_SOURCES)
+DIST_SOURCES = $(libresourceplugin_la_SOURCES) $(actions_SOURCES) \
+	$(appinfo_SOURCES) $(appinfo_test_SOURCES) \
+	$(async_close_output_stream_SOURCES) basic-application.c \
 	$(buffered_input_stream_SOURCES) \
 	$(buffered_output_stream_SOURCES) cancellable.c \
 	$(contenttype_SOURCES) $(contexts_SOURCES) \
 	$(converter_stream_SOURCES) $(data_input_stream_SOURCES) \
 	$(data_output_stream_SOURCES) $(desktop_app_info_SOURCES) \
-	$(echo_server_SOURCES) $(file_SOURCES) $(filter_cat_SOURCES) \
+	$(echo_server_SOURCES) $(file_SOURCES) \
+	$(fileattributematcher_SOURCES) $(filter_cat_SOURCES) \
 	$(filter_streams_SOURCES) $(g_file_SOURCES) \
 	$(g_file_info_SOURCES) $(g_icon_SOURCES) \
 	$(gapplication_SOURCES) \
@@ -592,22 +639,23 @@ DIST_SOURCES = actions.c $(appinfo_SOURCES) $(appinfo_test_SOURCES) \
 	$(gdbus_exit_on_close_SOURCES) $(gdbus_export_SOURCES) \
 	$(gdbus_introspection_SOURCES) $(gdbus_message_SOURCES) \
 	$(gdbus_names_SOURCES) $(gdbus_non_socket_SOURCES) \
-	$(gdbus_peer_SOURCES) $(gdbus_proxy_SOURCES) \
+	$(am__gdbus_peer_SOURCES_DIST) $(gdbus_proxy_SOURCES) \
 	$(gdbus_proxy_threads_SOURCES) \
 	$(gdbus_proxy_well_known_name_SOURCES) \
 	$(am__gdbus_serialization_SOURCES_DIST) \
 	$(am__gdbus_test_codegen_SOURCES_DIST) \
-	$(gdbus_threading_SOURCES) $(gschema_compile_SOURCES) \
-	$(gsettings_SOURCES) $(httpd_SOURCES) $(io_stream_SOURCES) \
-	$(live_g_file_SOURCES) $(memory_input_stream_SOURCES) \
-	$(memory_output_stream_SOURCES) network-address.c pollable.c \
-	$(proxy_SOURCES) $(readwrite_SOURCES) $(resolver_SOURCES) \
-	$(send_data_SOURCES) $(simple_async_result_SOURCES) \
-	$(sleepy_stream_SOURCES) socket.c $(socket_client_SOURCES) \
-	$(socket_server_SOURCES) $(srvtarget_SOURCES) \
-	$(tls_certificate_SOURCES) tls-interaction.c \
-	$(unix_fd_SOURCES) $(unix_streams_SOURCES) \
-	$(volumemonitor_SOURCES) $(win32_streams_SOURCES)
+	$(gdbus_threading_SOURCES) $(gmenumodel_SOURCES) \
+	$(gschema_compile_SOURCES) $(gsettings_SOURCES) \
+	$(httpd_SOURCES) $(io_stream_SOURCES) $(live_g_file_SOURCES) \
+	$(memory_input_stream_SOURCES) $(memory_output_stream_SOURCES) \
+	$(mimeapps_SOURCES) network-address.c network-monitor.c \
+	pollable.c $(proxy_SOURCES) $(readwrite_SOURCES) \
+	$(resolver_SOURCES) $(resources_SOURCES) $(send_data_SOURCES) \
+	$(simple_async_result_SOURCES) $(sleepy_stream_SOURCES) \
+	socket.c $(socket_client_SOURCES) $(socket_server_SOURCES) \
+	$(srvtarget_SOURCES) $(tls_certificate_SOURCES) \
+	tls-interaction.c $(unix_fd_SOURCES) $(unix_streams_SOURCES) \
+	vfs.c $(volumemonitor_SOURCES) $(win32_streams_SOURCES)
 RECURSIVE_TARGETS = all-recursive check-recursive dvi-recursive \
 	html-recursive info-recursive install-data-recursive \
 	install-dvi-recursive install-exec-recursive \
@@ -680,7 +728,6 @@ DBUS1_CFLAGS = @DBUS1_CFLAGS@
 DBUS1_LIBS = @DBUS1_LIBS@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
-DISABLE_MEM_POOLS = @DISABLE_MEM_POOLS@
 DLLTOOL = @DLLTOOL@
 DSYMUTIL = @DSYMUTIL@
 DTRACE = @DTRACE@
@@ -697,6 +744,7 @@ GIO = @GIO@
 GIO_MODULE_DIR = @GIO_MODULE_DIR@
 GLIBC21 = @GLIBC21@
 GLIB_BINARY_AGE = @GLIB_BINARY_AGE@
+GLIB_COMPILE_RESOURCES = @GLIB_COMPILE_RESOURCES@
 GLIB_COMPILE_SCHEMAS = @GLIB_COMPILE_SCHEMAS@
 GLIB_DEBUG_FLAGS = @GLIB_DEBUG_FLAGS@
 GLIB_EXTRA_CFLAGS = @GLIB_EXTRA_CFLAGS@
@@ -706,7 +754,6 @@ GLIB_LINK_FLAGS = @GLIB_LINK_FLAGS@
 GLIB_MAJOR_VERSION = @GLIB_MAJOR_VERSION@
 GLIB_MICRO_VERSION = @GLIB_MICRO_VERSION@
 GLIB_MINOR_VERSION = @GLIB_MINOR_VERSION@
-GLIB_RT_LIBS = @GLIB_RT_LIBS@
 GLIB_RUNTIME_LIBDIR = @GLIB_RUNTIME_LIBDIR@
 GLIB_VERSION = @GLIB_VERSION@
 GLIB_WIN32_STATIC_COMPILATION_DEFINE = @GLIB_WIN32_STATIC_COMPILATION_DEFINE@
@@ -746,6 +793,8 @@ INSTOBJEXT = @INSTOBJEXT@
 INTLLIBS = @INTLLIBS@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
+LIBELF_CFLAGS = @LIBELF_CFLAGS@
+LIBELF_LIBS = @LIBELF_LIBS@
 LIBFFI_CFLAGS = @LIBFFI_CFLAGS@
 LIBFFI_LIBS = @LIBFFI_LIBS@
 LIBOBJS = @LIBOBJS@
@@ -887,7 +936,8 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 NULL = 
-BUILT_SOURCES = $(am__append_5)
+BUILT_SOURCES = $(am__append_5) test_resources.c test_resources2.c \
+	test_resources2.h
 
 #GTESTER = gtester 			# for non-GLIB packages
 GTESTER = $(top_builddir)/glib/gtester			# for the GLIB package
@@ -898,20 +948,24 @@ GTESTER_REPORT = $(top_builddir)/glib/gtester-report	# for the GLIB package
 # -----------------------------------------------------------------------------
 EXTRA_DIST = socket-common.c org.gtk.test.gschema \
 	org.gtk.test.gschema.xml testenum.h enums.xml.template de.po \
-	$(schema_tests) appinfo-test.desktop appinfo-test2.desktop \
+	$(schema_tests) org.gtk.schemasourcecheck.gschema.xml \
+	appinfo-test.desktop appinfo-test2.desktop \
 	appinfo-test-gnome.desktop appinfo-test-notgnome.desktop \
 	gdbus-testserver.py test-codegen.xml cert1.pem cert2.pem \
-	cert3.pem key.pem key-cert.pem cert-key.pem cert-list.pem \
-	nothing.pem $(NULL)
-TEST_PROGS = io-stream actions memory-input-stream \
-	memory-output-stream readwrite g-file g-file-info \
-	converter-stream data-input-stream data-output-stream g-icon \
+	cert3.pem key.pem key8.pem key-cert.pem cert-key.pem \
+	cert-list.pem nothing.pem test.gresource.xml test1.txt \
+	test2.gresource.xml test2.txt test3.gresource.xml test3.txt \
+	test4.gresource.xml $(NULL)
+TEST_PROGS = io-stream memory-input-stream memory-output-stream \
+	readwrite g-file g-file-info converter-stream \
+	data-input-stream data-output-stream g-icon \
 	buffered-input-stream buffered-output-stream sleepy-stream \
 	filter-streams volumemonitor simple-async-result srvtarget \
 	contexts gsettings gschema-compile async-close-output-stream \
 	gdbus-addresses network-address gdbus-message socket pollable \
-	tls-certificate tls-interaction cancellable $(NULL) \
-	$(am__append_1) $(am__append_3) $(am__append_4)
+	tls-certificate tls-interaction cancellable vfs \
+	network-monitor fileattributematcher gmenumodel resources \
+	$(NULL) $(am__append_1) $(am__append_3) $(am__append_4)
 SUBDIRS = gdbus-object-manager-example
 INCLUDES = \
 	-g 			\
@@ -942,6 +996,7 @@ SAMPLE_PROGS = resolver socket-server socket-client echo-server httpd \
 	$(NULL) $(am__append_2)
 io_stream_SOURCES = io-stream.c
 io_stream_LDADD = $(progs_ldadd)
+actions_SOURCES = actions.c gdbus-sessionbus.c gdbus-sessionbus.h
 actions_LDADD = $(progs_ldadd)
 memory_input_stream_SOURCES = memory-input-stream.c
 memory_input_stream_LDADD = $(progs_ldadd)
@@ -1082,8 +1137,6 @@ gdbus_export_SOURCES = gdbus-export.c gdbus-sessionbus.c gdbus-sessionbus.h gdbu
 gdbus_export_LDADD = $(progs_ldadd)
 gdbus_error_SOURCES = gdbus-error.c gdbus-sessionbus.c gdbus-sessionbus.h gdbus-tests.h gdbus-tests.c
 gdbus_error_LDADD = $(progs_ldadd)
-gdbus_peer_SOURCES = gdbus-peer.c gdbus-tests.h gdbus-tests.c
-gdbus_peer_LDADD = $(progs_ldadd)
 gdbus_non_socket_SOURCES = \
 	gdbus-non-socket.c \
 	gdbus-tests.c \
@@ -1119,14 +1172,22 @@ gdbus_connection_flush_helper_SOURCES = gdbus-connection-flush-helper.c
 gdbus_connection_flush_helper_LDADD = $(progs_ldadd)
 appinfo_SOURCES = appinfo.c
 appinfo_LDADD = $(progs_ldadd)
+resources_SOURCES = resources.c test_resources.c test_resources2.c test_resources2.h
+resources_DEPENDENCIES = test.gresource
+resources_LDADD = $(progs_ldadd)
 appinfo_test_SOURCES = appinfo-test.c
 appinfo_test_LDADD = $(progs_ldadd)
 contenttype_SOURCES = contenttype.c
 contenttype_LDADD = $(progs_ldadd)
+mimeapps_SOURCES = mimeapps.c
+mimeapps_LDADD = $(progs_ldadd)
 file_SOURCES = file.c
 file_LDADD = $(progs_ldadd)
-gapplication_SOURCES = gapplication.c gdbus-sessionbus.c
+fileattributematcher_SOURCES = fileattributematcher.c
+fileattributematcher_LDADD = $(progs_ldadd)
+gapplication_SOURCES = gapplication.c gdbus-sessionbus.h gdbus-sessionbus.c gdbus-tests.h gdbus-tests.c
 gapplication_LDADD = $(progs_ldadd)
+basic_application_LDADD = $(progs_ldadd)
 gapplication_example_open_SOURCES = gapplication-example-open.c
 gapplication_example_open_LDADD = $(progs_ldadd)
 gapplication_example_cmdline_SOURCES = gapplication-example-cmdline.c
@@ -1137,6 +1198,8 @@ gapplication_example_cmdline3_SOURCES = gapplication-example-cmdline3.c
 gapplication_example_cmdline3_LDADD = $(progs_ldadd)
 gapplication_example_actions_SOURCES = gapplication-example-actions.c
 gapplication_example_actions_LDADD = $(progs_ldadd)
+gmenumodel_SOURCES = gmenumodel.c gdbus-sessionbus.h gdbus-sessionbus.c
+gmenumodel_LDADD = $(progs_ldadd)
 schema_tests = \
 	schema-tests/array-default-not-in-choices.gschema.xml		\
 	schema-tests/bad-choice.gschema.xml				\
@@ -1218,6 +1281,8 @@ tls_certificate_SOURCES = tls-certificate.c gtesttlsbackend.c gtesttlsbackend.h
 tls_certificate_LDADD = $(progs_ldadd)
 tls_interaction_LDADD = $(progs_ldadd)
 cancellable_LDADD = $(progs_ldadd)
+vfs_LDADD = $(progs_ldadd)
+network_monitor_LDADD = $(progs_ldadd)
 
 # -----------------------------------------------------------------------------
 @OS_UNIX_TRUE@gdbus_example_objectmanager_server_SOURCES = gdbus-example-objectmanager-server.c
@@ -1226,15 +1291,27 @@ cancellable_LDADD = $(progs_ldadd)
 @OS_UNIX_TRUE@gdbus_example_objectmanager_client_SOURCES = gdbus-example-objectmanager-client.c
 @OS_UNIX_TRUE@gdbus_example_objectmanager_client_CFLAGS = -I$(top_builddir)/gio/tests/gdbus-object-manager-example
 @OS_UNIX_TRUE@gdbus_example_objectmanager_client_LDADD = $(top_builddir)/gio/tests/gdbus-object-manager-example/libgdbus-example-objectmanager.la $(progs_ldadd)
-MISC_STUFF = test.mo
-CLEANFILES = gdbus-test-codegen-generated.[ch] gdbus-test-codegen-generated-doc-*.xml
+@OS_UNIX_TRUE@gdbus_peer_SOURCES = gdbus-peer.c gdbus-tests.h gdbus-tests.c
+@OS_UNIX_TRUE@gdbus_peer_CFLAGS = -I$(top_builddir)/gio/tests/gdbus-object-manager-example
+@OS_UNIX_TRUE@gdbus_peer_LDADD = $(top_builddir)/gio/tests/gdbus-object-manager-example/libgdbus-example-objectmanager.la $(progs_ldadd)
+MISC_STUFF = test.mo test.gresource
+@CROSS_COMPILING_FALSE@glib_compile_resources = $(top_builddir)/gio/glib-compile-resources
+@CROSS_COMPILING_TRUE@glib_compile_resources = $(GLIB_COMPILE_RESOURCES)
+noinst_LTLIBRARIES = libresourceplugin.la
+libresourceplugin_la_SOURCES = resourceplugin.c plugin_resources.c
+libresourceplugin_la_LDFLAGS = -avoid-version -module $(no_undefined) -rpath $(libdir)
+libresourceplugin_la_LIBADD = $(progs_ldadd)
+CLEANFILES = gdbus-test-codegen-generated.[ch] gdbus-test-codegen-generated-doc-*.xml test_resources2.[ch] plugin_resources.c
 DISTCLEANFILES = \
 	applications/mimeinfo.cache	\
 	org.gtk.test.enums.xml		\
 	de/LC_MESSAGES/test.mo		\
 	test.mo				\
+	test.gresource			\
+	test_resources.c		\
 	gsettings.store			\
-	gschemas.compiled
+	gschemas.compiled 		\
+	schema-source/gschemas.compiled
 
 all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
@@ -1273,6 +1350,17 @@ $(ACLOCAL_M4): @MAINTAINER_MODE_TRUE@ $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(am__aclocal_m4_deps):
 
+clean-noinstLTLIBRARIES:
+	-test -z "$(noinst_LTLIBRARIES)" || rm -f $(noinst_LTLIBRARIES)
+	@list='$(noinst_LTLIBRARIES)'; for p in $$list; do \
+	  dir="`echo $$p | sed -e 's|/[^/]*$$||'`"; \
+	  test "$$dir" != "$$p" || dir=.; \
+	  echo "rm -f \"$${dir}/so_locations\""; \
+	  rm -f "$${dir}/so_locations"; \
+	done
+libresourceplugin.la: $(libresourceplugin_la_OBJECTS) $(libresourceplugin_la_DEPENDENCIES) $(EXTRA_libresourceplugin_la_DEPENDENCIES) 
+	$(AM_V_CCLD)$(libresourceplugin_la_LINK)  $(libresourceplugin_la_OBJECTS) $(libresourceplugin_la_LIBADD) $(LIBS)
+
 clean-noinstPROGRAMS:
 	@list='$(noinst_PROGRAMS)'; test -n "$$list" || exit 0; \
 	echo " rm -f" $$list; \
@@ -1293,6 +1381,9 @@ appinfo-test$(EXEEXT): $(appinfo_test_OBJECTS) $(appinfo_test_DEPENDENCIES) $(EX
 async-close-output-stream$(EXEEXT): $(async_close_output_stream_OBJECTS) $(async_close_output_stream_DEPENDENCIES) $(EXTRA_async_close_output_stream_DEPENDENCIES) 
 	@rm -f async-close-output-stream$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(async_close_output_stream_OBJECTS) $(async_close_output_stream_LDADD) $(LIBS)
+basic-application$(EXEEXT): $(basic_application_OBJECTS) $(basic_application_DEPENDENCIES) $(EXTRA_basic_application_DEPENDENCIES) 
+	@rm -f basic-application$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(basic_application_OBJECTS) $(basic_application_LDADD) $(LIBS)
 buffered-input-stream$(EXEEXT): $(buffered_input_stream_OBJECTS) $(buffered_input_stream_DEPENDENCIES) $(EXTRA_buffered_input_stream_DEPENDENCIES) 
 	@rm -f buffered-input-stream$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(buffered_input_stream_OBJECTS) $(buffered_input_stream_LDADD) $(LIBS)
@@ -1326,6 +1417,9 @@ echo-server$(EXEEXT): $(echo_server_OBJECTS) $(echo_server_DEPENDENCIES) $(EXTRA
 file$(EXEEXT): $(file_OBJECTS) $(file_DEPENDENCIES) $(EXTRA_file_DEPENDENCIES) 
 	@rm -f file$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(file_OBJECTS) $(file_LDADD) $(LIBS)
+fileattributematcher$(EXEEXT): $(fileattributematcher_OBJECTS) $(fileattributematcher_DEPENDENCIES) $(EXTRA_fileattributematcher_DEPENDENCIES) 
+	@rm -f fileattributematcher$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(fileattributematcher_OBJECTS) $(fileattributematcher_LDADD) $(LIBS)
 filter-cat$(EXEEXT): $(filter_cat_OBJECTS) $(filter_cat_DEPENDENCIES) $(EXTRA_filter_cat_DEPENDENCIES) 
 	@rm -f filter-cat$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(filter_cat_OBJECTS) $(filter_cat_LDADD) $(LIBS)
@@ -1439,7 +1533,7 @@ gdbus-non-socket$(EXEEXT): $(gdbus_non_socket_OBJECTS) $(gdbus_non_socket_DEPEND
 	$(AM_V_CCLD)$(LINK) $(gdbus_non_socket_OBJECTS) $(gdbus_non_socket_LDADD) $(LIBS)
 gdbus-peer$(EXEEXT): $(gdbus_peer_OBJECTS) $(gdbus_peer_DEPENDENCIES) $(EXTRA_gdbus_peer_DEPENDENCIES) 
 	@rm -f gdbus-peer$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(gdbus_peer_OBJECTS) $(gdbus_peer_LDADD) $(LIBS)
+	$(AM_V_CCLD)$(gdbus_peer_LINK) $(gdbus_peer_OBJECTS) $(gdbus_peer_LDADD) $(LIBS)
 gdbus-proxy$(EXEEXT): $(gdbus_proxy_OBJECTS) $(gdbus_proxy_DEPENDENCIES) $(EXTRA_gdbus_proxy_DEPENDENCIES) 
 	@rm -f gdbus-proxy$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(gdbus_proxy_OBJECTS) $(gdbus_proxy_LDADD) $(LIBS)
@@ -1458,6 +1552,9 @@ gdbus-test-codegen$(EXEEXT): $(gdbus_test_codegen_OBJECTS) $(gdbus_test_codegen_
 gdbus-threading$(EXEEXT): $(gdbus_threading_OBJECTS) $(gdbus_threading_DEPENDENCIES) $(EXTRA_gdbus_threading_DEPENDENCIES) 
 	@rm -f gdbus-threading$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(gdbus_threading_OBJECTS) $(gdbus_threading_LDADD) $(LIBS)
+gmenumodel$(EXEEXT): $(gmenumodel_OBJECTS) $(gmenumodel_DEPENDENCIES) $(EXTRA_gmenumodel_DEPENDENCIES) 
+	@rm -f gmenumodel$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(gmenumodel_OBJECTS) $(gmenumodel_LDADD) $(LIBS)
 gschema-compile$(EXEEXT): $(gschema_compile_OBJECTS) $(gschema_compile_DEPENDENCIES) $(EXTRA_gschema_compile_DEPENDENCIES) 
 	@rm -f gschema-compile$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(gschema_compile_OBJECTS) $(gschema_compile_LDADD) $(LIBS)
@@ -1479,9 +1576,15 @@ memory-input-stream$(EXEEXT): $(memory_input_stream_OBJECTS) $(memory_input_stre
 memory-output-stream$(EXEEXT): $(memory_output_stream_OBJECTS) $(memory_output_stream_DEPENDENCIES) $(EXTRA_memory_output_stream_DEPENDENCIES) 
 	@rm -f memory-output-stream$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(memory_output_stream_OBJECTS) $(memory_output_stream_LDADD) $(LIBS)
+mimeapps$(EXEEXT): $(mimeapps_OBJECTS) $(mimeapps_DEPENDENCIES) $(EXTRA_mimeapps_DEPENDENCIES) 
+	@rm -f mimeapps$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(mimeapps_OBJECTS) $(mimeapps_LDADD) $(LIBS)
 network-address$(EXEEXT): $(network_address_OBJECTS) $(network_address_DEPENDENCIES) $(EXTRA_network_address_DEPENDENCIES) 
 	@rm -f network-address$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(network_address_OBJECTS) $(network_address_LDADD) $(LIBS)
+network-monitor$(EXEEXT): $(network_monitor_OBJECTS) $(network_monitor_DEPENDENCIES) $(EXTRA_network_monitor_DEPENDENCIES) 
+	@rm -f network-monitor$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(network_monitor_OBJECTS) $(network_monitor_LDADD) $(LIBS)
 pollable$(EXEEXT): $(pollable_OBJECTS) $(pollable_DEPENDENCIES) $(EXTRA_pollable_DEPENDENCIES) 
 	@rm -f pollable$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(pollable_OBJECTS) $(pollable_LDADD) $(LIBS)
@@ -1494,6 +1597,9 @@ readwrite$(EXEEXT): $(readwrite_OBJECTS) $(readwrite_DEPENDENCIES) $(EXTRA_readw
 resolver$(EXEEXT): $(resolver_OBJECTS) $(resolver_DEPENDENCIES) $(EXTRA_resolver_DEPENDENCIES) 
 	@rm -f resolver$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(resolver_OBJECTS) $(resolver_LDADD) $(LIBS)
+resources$(EXEEXT): $(resources_OBJECTS) $(resources_DEPENDENCIES) $(EXTRA_resources_DEPENDENCIES) 
+	@rm -f resources$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(resources_OBJECTS) $(resources_LDADD) $(LIBS)
 send-data$(EXEEXT): $(send_data_OBJECTS) $(send_data_DEPENDENCIES) $(EXTRA_send_data_DEPENDENCIES) 
 	@rm -f send-data$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(send_data_OBJECTS) $(send_data_LDADD) $(LIBS)
@@ -1527,6 +1633,9 @@ unix-fd$(EXEEXT): $(unix_fd_OBJECTS) $(unix_fd_DEPENDENCIES) $(EXTRA_unix_fd_DEP
 unix-streams$(EXEEXT): $(unix_streams_OBJECTS) $(unix_streams_DEPENDENCIES) $(EXTRA_unix_streams_DEPENDENCIES) 
 	@rm -f unix-streams$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(unix_streams_OBJECTS) $(unix_streams_LDADD) $(LIBS)
+vfs$(EXEEXT): $(vfs_OBJECTS) $(vfs_DEPENDENCIES) $(EXTRA_vfs_DEPENDENCIES) 
+	@rm -f vfs$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(vfs_OBJECTS) $(vfs_LDADD) $(LIBS)
 volumemonitor$(EXEEXT): $(volumemonitor_OBJECTS) $(volumemonitor_DEPENDENCIES) $(EXTRA_volumemonitor_DEPENDENCIES) 
 	@rm -f volumemonitor$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(volumemonitor_OBJECTS) $(volumemonitor_LDADD) $(LIBS)
@@ -1544,6 +1653,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/appinfo-test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/appinfo.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/async-close-output-stream.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/basic-application.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/buffered-input-stream.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/buffered-output-stream.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cancellable.Po@am__quote@
@@ -1555,6 +1665,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/desktop-app-info.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/echo-server.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/file.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fileattributematcher.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/filter-cat.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/filter-streams.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/g-file-info.Po@am__quote@
@@ -1590,7 +1701,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus-message.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus-names.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus-non-socket.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus-peer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus-proxy-threads.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus-proxy-well-known-name.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus-proxy.Po@am__quote@
@@ -1601,8 +1711,11 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus-threading.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus_example_objectmanager_client-gdbus-example-objectmanager-client.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus_example_objectmanager_server-gdbus-example-objectmanager-server.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus_peer-gdbus-peer.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus_peer-gdbus-tests.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus_serialization-gdbus-serialization.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus_serialization-gdbus-tests.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gmenumodel.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gschema-compile.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gsettings.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtesttlsbackend.Po@am__quote@
@@ -1612,11 +1725,16 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/live-g-file.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/memory-input-stream.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/memory-output-stream.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mimeapps.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/network-address.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/network-monitor.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/plugin_resources.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/pollable.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/proxy.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/readwrite.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/resolver.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/resourceplugin.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/resources.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/send-data.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/simple-async-result.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/sleepy-stream.Po@am__quote@
@@ -1626,10 +1744,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/srvtarget.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-io-stream.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-pipe-unix.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_resources.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_resources2.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tls-certificate.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tls-interaction.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/unix-fd.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/unix-streams.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/vfs.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/volumemonitor.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/win32-streams.Po@am__quote@
 
@@ -1681,6 +1802,34 @@ gdbus_example_objectmanager_server-gdbus-example-objectmanager-server.obj: gdbus
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gdbus-example-objectmanager-server.c' object='gdbus_example_objectmanager_server-gdbus-example-objectmanager-server.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gdbus_example_objectmanager_server_CFLAGS) $(CFLAGS) -c -o gdbus_example_objectmanager_server-gdbus-example-objectmanager-server.obj `if test -f 'gdbus-example-objectmanager-server.c'; then $(CYGPATH_W) 'gdbus-example-objectmanager-server.c'; else $(CYGPATH_W) '$(srcdir)/gdbus-example-objectmanager-server.c'; fi`
+
+gdbus_peer-gdbus-peer.o: gdbus-peer.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gdbus_peer_CFLAGS) $(CFLAGS) -MT gdbus_peer-gdbus-peer.o -MD -MP -MF $(DEPDIR)/gdbus_peer-gdbus-peer.Tpo -c -o gdbus_peer-gdbus-peer.o `test -f 'gdbus-peer.c' || echo '$(srcdir)/'`gdbus-peer.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/gdbus_peer-gdbus-peer.Tpo $(DEPDIR)/gdbus_peer-gdbus-peer.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gdbus-peer.c' object='gdbus_peer-gdbus-peer.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gdbus_peer_CFLAGS) $(CFLAGS) -c -o gdbus_peer-gdbus-peer.o `test -f 'gdbus-peer.c' || echo '$(srcdir)/'`gdbus-peer.c
+
+gdbus_peer-gdbus-peer.obj: gdbus-peer.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gdbus_peer_CFLAGS) $(CFLAGS) -MT gdbus_peer-gdbus-peer.obj -MD -MP -MF $(DEPDIR)/gdbus_peer-gdbus-peer.Tpo -c -o gdbus_peer-gdbus-peer.obj `if test -f 'gdbus-peer.c'; then $(CYGPATH_W) 'gdbus-peer.c'; else $(CYGPATH_W) '$(srcdir)/gdbus-peer.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/gdbus_peer-gdbus-peer.Tpo $(DEPDIR)/gdbus_peer-gdbus-peer.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gdbus-peer.c' object='gdbus_peer-gdbus-peer.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gdbus_peer_CFLAGS) $(CFLAGS) -c -o gdbus_peer-gdbus-peer.obj `if test -f 'gdbus-peer.c'; then $(CYGPATH_W) 'gdbus-peer.c'; else $(CYGPATH_W) '$(srcdir)/gdbus-peer.c'; fi`
+
+gdbus_peer-gdbus-tests.o: gdbus-tests.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gdbus_peer_CFLAGS) $(CFLAGS) -MT gdbus_peer-gdbus-tests.o -MD -MP -MF $(DEPDIR)/gdbus_peer-gdbus-tests.Tpo -c -o gdbus_peer-gdbus-tests.o `test -f 'gdbus-tests.c' || echo '$(srcdir)/'`gdbus-tests.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/gdbus_peer-gdbus-tests.Tpo $(DEPDIR)/gdbus_peer-gdbus-tests.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gdbus-tests.c' object='gdbus_peer-gdbus-tests.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gdbus_peer_CFLAGS) $(CFLAGS) -c -o gdbus_peer-gdbus-tests.o `test -f 'gdbus-tests.c' || echo '$(srcdir)/'`gdbus-tests.c
+
+gdbus_peer-gdbus-tests.obj: gdbus-tests.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gdbus_peer_CFLAGS) $(CFLAGS) -MT gdbus_peer-gdbus-tests.obj -MD -MP -MF $(DEPDIR)/gdbus_peer-gdbus-tests.Tpo -c -o gdbus_peer-gdbus-tests.obj `if test -f 'gdbus-tests.c'; then $(CYGPATH_W) 'gdbus-tests.c'; else $(CYGPATH_W) '$(srcdir)/gdbus-tests.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/gdbus_peer-gdbus-tests.Tpo $(DEPDIR)/gdbus_peer-gdbus-tests.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gdbus-tests.c' object='gdbus_peer-gdbus-tests.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gdbus_peer_CFLAGS) $(CFLAGS) -c -o gdbus_peer-gdbus-tests.obj `if test -f 'gdbus-tests.c'; then $(CYGPATH_W) 'gdbus-tests.c'; else $(CYGPATH_W) '$(srcdir)/gdbus-tests.c'; fi`
 
 gdbus_serialization-gdbus-serialization.o: gdbus-serialization.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gdbus_serialization_CFLAGS) $(CFLAGS) -MT gdbus_serialization-gdbus-serialization.o -MD -MP -MF $(DEPDIR)/gdbus_serialization-gdbus-serialization.Tpo -c -o gdbus_serialization-gdbus-serialization.o `test -f 'gdbus-serialization.c' || echo '$(srcdir)/'`gdbus-serialization.c
@@ -1913,7 +2062,7 @@ check-am: all-am
 	$(MAKE) $(AM_MAKEFLAGS) check-local
 check: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) check-recursive
-all-am: Makefile $(PROGRAMS) $(DATA)
+all-am: Makefile $(LTLIBRARIES) $(PROGRAMS) $(DATA)
 installdirs: installdirs-recursive
 installdirs-am:
 install: $(BUILT_SOURCES)
@@ -1952,14 +2101,14 @@ maintainer-clean-generic:
 	-test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
 clean: clean-recursive
 
-clean-am: clean-generic clean-libtool clean-noinstPROGRAMS \
-	mostlyclean-am
+clean-am: clean-generic clean-libtool clean-noinstLTLIBRARIES \
+	clean-noinstPROGRAMS mostlyclean-am
 
 distclean: distclean-recursive
 	-rm -rf ./$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
-	distclean-tags
+	distclean-local distclean-tags
 
 dvi: dvi-recursive
 
@@ -2027,18 +2176,19 @@ uninstall-am:
 
 .PHONY: $(RECURSIVE_CLEAN_TARGETS) $(RECURSIVE_TARGETS) CTAGS GTAGS \
 	all all-am check check-am check-local clean clean-generic \
-	clean-libtool clean-noinstPROGRAMS ctags ctags-recursive \
-	distclean distclean-compile distclean-generic \
-	distclean-libtool distclean-tags distdir dvi dvi-am html \
-	html-am info info-am install install-am install-data \
-	install-data-am install-dvi install-dvi-am install-exec \
-	install-exec-am install-html install-html-am install-info \
-	install-info-am install-man install-pdf install-pdf-am \
-	install-ps install-ps-am install-strip installcheck \
-	installcheck-am installdirs installdirs-am maintainer-clean \
-	maintainer-clean-generic mostlyclean mostlyclean-compile \
-	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
-	tags tags-recursive uninstall uninstall-am
+	clean-libtool clean-noinstLTLIBRARIES clean-noinstPROGRAMS \
+	ctags ctags-recursive distclean distclean-compile \
+	distclean-generic distclean-libtool distclean-local \
+	distclean-tags distdir dvi dvi-am html html-am info info-am \
+	install install-am install-data install-data-am install-dvi \
+	install-dvi-am install-exec install-exec-am install-html \
+	install-html-am install-info install-info-am install-man \
+	install-pdf install-pdf-am install-ps install-ps-am \
+	install-strip installcheck installcheck-am installdirs \
+	installdirs-am maintainer-clean maintainer-clean-generic \
+	mostlyclean mostlyclean-compile mostlyclean-generic \
+	mostlyclean-libtool pdf pdf-am ps ps-am tags tags-recursive \
+	uninstall uninstall-am
 
 
 ### testing rules
@@ -2052,7 +2202,7 @@ test: test-nonrecursive
 
 # test-nonrecursive: run tests only in cwd
 @OS_UNIX_TRUE@test-nonrecursive: ${TEST_PROGS}
-@OS_UNIX_TRUE@	@test -z "${TEST_PROGS}" || MALLOC_CHECK_=2 MALLOC_PERTURB_=$$(($${RANDOM:-256} % 256)) ${GTESTER} --verbose ${TEST_PROGS}
+@OS_UNIX_TRUE@	@test -z "${TEST_PROGS}" || G_DEBUG=gc-friendly MALLOC_CHECK_=2 MALLOC_PERTURB_=$$(($${RANDOM:-256} % 256)) ${GTESTER} --verbose ${TEST_PROGS}
 @OS_UNIX_FALSE@test-nonrecursive:
 
 # test-report: run tests in subdirs and generate report
@@ -2150,6 +2300,20 @@ test.mo: de.po
 	$(MSGFMT) -o test.mo $(srcdir)/de.po; \
 	$(MKDIR_P) de/LC_MESSAGES; \
 	cp -f test.mo de/LC_MESSAGES
+test_resources.c: test2.gresource.xml Makefile $(shell $(glib_compile_resources) --generate-dependencies $(srcdir)/test2.gresource.xml)
+	$(AM_V_GEN) $(glib_compile_resources) --target=$@ --sourcedir=$(srcdir) --generate-source --c-name _g_test1 $<
+
+test_resources2.h test_resources2.c: test3.gresource.xml Makefile $(shell $(glib_compile_resources) --generate-dependencies $(srcdir)/test3.gresource.xml)
+	$(AM_V_GEN) $(glib_compile_resources) --target=$@ --sourcedir=$(srcdir) --generate --c-name _g_test2 --manual-register $<
+
+plugin_resources.c: test4.gresource.xml Makefile $(shell $(glib_compile_resources) --generate-dependencies $(srcdir)/test4.gresource.xml)
+	$(AM_V_GEN) $(glib_compile_resources) --target=$@ --sourcedir=$(srcdir) --generate-source --c-name _g_plugin $<
+
+test.gresource: test.gresource.xml Makefile $(shell $(glib_compile_resources) --generate-dependencies $(srcdir)/test.gresource.xml)
+	$(AM_V_GEN) $(glib_compile_resources) --target=$@ --sourcedir=$(srcdir) $<
+
+distclean-local:
+	rm -rf xdgdatahome xdgdatadir
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

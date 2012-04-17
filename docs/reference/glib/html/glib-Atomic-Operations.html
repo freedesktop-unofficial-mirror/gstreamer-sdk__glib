@@ -40,6 +40,8 @@
 <pre class="synopsis">
 #include &lt;glib.h&gt;
 
+#define             <a class="link" href="glib-Atomic-Operations.html#G-ATOMIC-LOCK-FREE:CAPS" title="G_ATOMIC_LOCK_FREE">G_ATOMIC_LOCK_FREE</a>
+
 <a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a>                <a class="link" href="glib-Atomic-Operations.html#g-atomic-int-get" title="g_atomic_int_get ()">g_atomic_int_get</a>                    (<em class="parameter"><code>volatile <a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> *atomic</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="glib-Atomic-Operations.html#g-atomic-int-set" title="g_atomic_int_set ()">g_atomic_int_set</a>                    (<em class="parameter"><code>volatile <a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> *atomic</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> newval</code></em>);
@@ -105,25 +107,6 @@ hardware memory barrier.  Acquire and release or producer and
 consumer barrier semantics are not available through this API.
 </p>
 <p>
-On GCC, these macros are implemented using GCC intrinsic operations.
-On non-GCC compilers they will evaluate to function calls to
-functions implemented by GLib.
-</p>
-<p>
-If GLib itself was compiled with GCC then these functions will again
-be implemented by the GCC intrinsics.  On Windows without GCC, the
-interlocked API is used to implement the functions.
-</p>
-<p>
-With non-GCC compilers on non-Windows systems, the functions are
-currently incapable of implementing true atomic operations --
-instead, they fallback to holding a global lock while performing the
-operation.  This provides atomicity between the threads of one
-process, but not between separate processes.  For this reason, one
-should exercise caution when attempting to use these options on
-shared memory regions.
-</p>
-<p>
 It is very important that all accesses to a particular integer or
 pointer be performed using only this API and that different sizes of
 operation are not mixed or used on overlapping memory regions.  Never
@@ -143,6 +126,23 @@ perform the operations normally and then release the lock.
 </div>
 <div class="refsect1">
 <a name="glib-Atomic-Operations.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="G-ATOMIC-LOCK-FREE:CAPS"></a><h3>G_ATOMIC_LOCK_FREE</h3>
+<pre class="programlisting">#define G_ATOMIC_LOCK_FREE
+</pre>
+<p>
+This macro is defined if the atomic operations of GLib are
+implemented using real hardware atomic operations.  This means that
+the GLib atomic API can be used between processes and safely mixed
+with other (hardware) atomic APIs.
+</p>
+<p>
+If this macro is not defined, the atomic operations may be
+emulated using a mutex.  In that case, the GLib atomic operations are
+only atomic relative to themselves and within a single process.
+</p>
+</div>
+<hr>
 <div class="refsect2">
 <a name="g-atomic-int-get"></a><h3>g_atomic_int_get ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a>                g_atomic_int_get                    (<em class="parameter"><code>volatile <a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> *atomic</code></em>);</pre>
@@ -718,7 +718,7 @@ compatibility reasons.  Don't use this function in new code.
 </div>
 <div class="refsect1">
 <a name="glib-Atomic-Operations.see-also"></a><h2>See Also</h2>
-<a class="link" href="glib-Threads.html#GMutex" title="GMutex"><span class="type">GMutex</span></a>
+<a class="link" href="glib-Threads.html#GMutex" title="union GMutex"><span class="type">GMutex</span></a>
 </div>
 </div>
 <div class="footer">

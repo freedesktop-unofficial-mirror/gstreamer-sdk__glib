@@ -5,9 +5,9 @@
 <title>GInetAddress</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="GIO Reference Manual">
-<link rel="up" href="networking.html" title="Lowlevel network support">
+<link rel="up" href="networking.html" title="Low-level network support">
 <link rel="prev" href="GSocket.html" title="GSocket">
-<link rel="next" href="GSocketAddress.html" title="GSocketAddress">
+<link rel="next" href="gio-GInetAddressMask.html" title="GInetAddressMask">
 <meta name="generator" content="GTK-Doc V1.18 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
@@ -18,7 +18,7 @@
 <td><a accesskey="u" href="networking.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
 <th width="100%" align="center">GIO Reference Manual</th>
-<td><a accesskey="n" href="GSocketAddress.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+<td><a accesskey="n" href="gio-GInetAddressMask.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr>
 <tr><td colspan="5" class="shortcuts">
 <a href="#GInetAddress.synopsis" class="shortcut">Top</a>
@@ -144,15 +144,16 @@ Parses <em class="parameter"><code>string</code></em> as an IP address and creat
                                                          <em class="parameter"><code><a class="link" href="GSocketAddress.html#GSocketFamily" title="enum GSocketFamily"><span class="type">GSocketFamily</span></a> family</code></em>);</pre>
 <p>
 Creates a new <a class="link" href="GInetAddress.html" title="GInetAddress"><span class="type">GInetAddress</span></a> from the given <em class="parameter"><code>family</code></em> and <em class="parameter"><code>bytes</code></em>.
-<em class="parameter"><code>bytes</code></em> should be 4 bytes for <code class="literal">G_INET_ADDRESS_IPV4</code> and 16 bytes for
-<code class="literal">G_INET_ADDRESS_IPV6</code>.
+<em class="parameter"><code>bytes</code></em> should be 4 bytes for <a class="link" href="GSocketAddress.html#G-SOCKET-FAMILY-IPV4:CAPS"><code class="literal">G_SOCKET_FAMILY_IPV4</code></a> and 16 bytes for
+<a class="link" href="GSocketAddress.html#G-SOCKET-FAMILY-IPV6:CAPS"><code class="literal">G_SOCKET_FAMILY_IPV6</code></a>.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>bytes</code></em> :</span></p></td>
-<td>raw address data</td>
+<td>raw address data. <span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym>][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> guint8]</span>
+</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>family</code></em> :</span></p></td>

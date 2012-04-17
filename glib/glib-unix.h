@@ -38,6 +38,8 @@
 #error "This header may only be used on UNIX"
 #endif
 
+G_BEGIN_DECLS
+
 /**
  * G_UNIX_ERROR:
  *
@@ -50,8 +52,8 @@
  * It is expected that most code will not look at %errno from these
  * APIs. Important cases where one would want to differentiate between
  * errors are already covered by existing cross-platform GLib API,
- * such as e.g. #GFile wrapping %ENOENT.  However, it is provided for
- * completeness, at least.
+ * such as e.g. #GFile wrapping <literal>ENOENT</literal>.  However, it is
+ * provided for completeness, at least.
  */
 #define G_UNIX_ERROR (g_unix_error_quark())
 
@@ -77,4 +79,6 @@ guint    g_unix_signal_add         (gint        signum,
                                     GSourceFunc handler,
                                     gpointer    user_data);
 
-#endif
+G_END_DECLS
+
+#endif  /* __G_UNIX_H__ */

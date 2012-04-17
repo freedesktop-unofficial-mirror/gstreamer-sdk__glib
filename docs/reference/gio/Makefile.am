@@ -10,7 +10,8 @@ DOC_MODULE=gio
 DOC_MAIN_SGML_FILE=gio-docs.xml
 
 # Extra options to supply to gtkdoc-scan
-SCAN_OPTIONS=--deprecated-guards="G_DISABLE_DEPRECATED"
+SCAN_OPTIONS=--deprecated-guards="G_DISABLE_DEPRECATED" \
+             --ignore-decorators="G_GNUC_WARN_UNUSED_RESULT"
 
 # The directory containing the source code. Relative to $(srcdir)
 DOC_SOURCE_DIR=$(top_srcdir)/gio
@@ -55,12 +56,15 @@ IGNORE_HFILES = \
 	glocalfileoutputstream.h	\
 	glocalvfs.h			\
 	gmountprivate.h			\
+	gnativevolumemonitor.h		\
 	gnetworkingprivate.h		\
+	gnetworkmonitorbase.h		\
+	gnetworkmonitornetlink.h	\
 	gpollfilemonitor.h		\
 	gregistrysettingsbackend.h	\
 	gsettingsbackendinternal.h	\
 	gsettings-mapping.h		\
-	gsettingsschema.h		\
+	gsettingsschema-internal.h	\
 	gsocketinputstream.h		\
 	gsocketoutputstream.h		\
 	gsocks4aproxy.h			\
@@ -97,7 +101,9 @@ MKDB_OPTIONS = --output-format=xml --sgml-mode --name-space=g \
 
 # Images to copy into HTML directory
 HTML_IMAGES =			\
-	gvfs-overview.png
+	gvfs-overview.png	\
+	menu-example.png	\
+	menu-model.png
 
 content_files =			\
 	version.xml		\
@@ -108,7 +114,9 @@ content_files =			\
 	migrating-gdbus.xml	\
 	gio-querymodules.xml	\
 	glib-compile-schemas.xml\
+	glib-compile-resources.xml	\
 	gsettings.xml		\
+	gresource.xml		\
 	gdbus.xml		\
 	gdbus-codegen.xml	\
 	$(NULL)
@@ -137,7 +145,9 @@ EXTRA_DIST +=			\
 man_MANS =			\
 	gio-querymodules.1	\
 	glib-compile-schemas.1	\
+	glib-compile-resources.1	\
 	gsettings.1		\
+	gresource.1		\
 	gdbus.1			\
 	gdbus-codegen.1
 
@@ -165,7 +175,7 @@ MAINTAINERCLEANFILES = $(man_MANS) $(BUILT_SOURCES)
 
 EXTRA_DIST += $(man_MANS)
 
-dist-hook-local: dist-local-check-mans-enabled gio-docs-clean all-local
+dist-hook-local: dist-local-check-mans-enabled all-local
 
 gio-docs-clean: clean
 	cd $(srcdir) && rm -rf xml html

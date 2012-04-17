@@ -40,21 +40,24 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-DIST_COMMON = $(am__glibsubinclude_HEADERS_DIST) $(dist_gdb_SCRIPTS) \
-	$(glibinclude_HEADERS) $(srcdir)/Makefile.am \
-	$(srcdir)/Makefile.in $(srcdir)/glib.rc.in \
-	$(srcdir)/glib.stp.in $(srcdir)/glibconfig.h.win32.in \
-	$(srcdir)/makefile.msc.in $(top_srcdir)/Makefile.decl
+DIST_COMMON = $(deprecatedinclude_HEADERS) $(dist_gdb_SCRIPTS) \
+	$(glibinclude_HEADERS) $(glibsubinclude_HEADERS) \
+	$(srcdir)/Makefile.am $(srcdir)/Makefile.in \
+	$(srcdir)/glib.rc.in $(srcdir)/glib.stp.in \
+	$(srcdir)/glibconfig.h.win32.in $(srcdir)/makefile.msc.in \
+	$(top_srcdir)/Makefile.decl
 @OS_UNIX_TRUE@am__append_1 = glib-unix.c
-@ENABLE_DTRACE_TRUE@am__append_2 = glib_probes.h glib_probes.o
-@ENABLE_DTRACE_TRUE@am__append_3 = glib_probes.h glib_probes.h.tmp
-@ENABLE_DTRACE_TRUE@am__append_4 = glib_probes.o
-@ENABLE_SYSTEMTAP_TRUE@am__append_5 = $(tapset_in_files)
-@OS_WIN32_TRUE@@OS_WIN32_X64_TRUE@am__append_6 = gspawn-win64-helper gspawn-win64-helper-console
-@OS_WIN32_TRUE@@OS_WIN32_X64_FALSE@am__append_7 = gspawn-win32-helper gspawn-win32-helper-console
+@OS_WIN32_TRUE@am__append_2 = gthread-win32.c
+@OS_WIN32_FALSE@am__append_3 = gthread-posix.c
+@ENABLE_DTRACE_TRUE@am__append_4 = glib_probes.h glib_probes.o
+@ENABLE_DTRACE_TRUE@am__append_5 = glib_probes.h glib_probes.h.tmp
+@ENABLE_DTRACE_TRUE@am__append_6 = glib_probes.o
+@ENABLE_SYSTEMTAP_TRUE@am__append_7 = $(tapset_in_files)
+@OS_WIN32_TRUE@@OS_WIN32_X64_TRUE@am__append_8 = gspawn-win64-helper gspawn-win64-helper-console
+@OS_WIN32_TRUE@@OS_WIN32_X64_FALSE@am__append_9 = gspawn-win32-helper gspawn-win32-helper-console
 bin_PROGRAMS = $(am__EXEEXT_4)
-@OS_UNIX_TRUE@am__append_8 = gtester
-@OS_UNIX_TRUE@am__append_9 = ${auto_config_binscripts}
+@OS_UNIX_TRUE@am__append_10 = gtester
+@OS_UNIX_TRUE@am__append_11 = ${auto_config_binscripts}
 subdir = glib
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4macros/gtk-doc.m4 \
@@ -103,52 +106,61 @@ am__uninstall_files_from_dir = { \
   }
 am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)" \
 	"$(DESTDIR)$(bindir)" "$(DESTDIR)$(gdbdir)" \
-	"$(DESTDIR)$(tapsetdir)" "$(DESTDIR)$(glibincludedir)" \
-	"$(DESTDIR)$(glibsubincludedir)" \
+	"$(DESTDIR)$(tapsetdir)" "$(DESTDIR)$(deprecatedincludedir)" \
+	"$(DESTDIR)$(glibincludedir)" "$(DESTDIR)$(glibsubincludedir)" \
 	"$(DESTDIR)$(configexecincludedir)"
 LTLIBRARIES = $(lib_LTLIBRARIES)
 am__DEPENDENCIES_1 =
-@ENABLE_REGEX_TRUE@@USE_SYSTEM_PCRE_FALSE@am__DEPENDENCIES_2 =  \
-@ENABLE_REGEX_TRUE@@USE_SYSTEM_PCRE_FALSE@	pcre/libpcre.la
-@ENABLE_REGEX_TRUE@@USE_SYSTEM_PCRE_TRUE@am__DEPENDENCIES_2 = $(am__DEPENDENCIES_1)
-am__libglib_2_0_la_SOURCES_DIST = glib_probes.d garray.c gasyncqueue.c \
-	gatomic.c gbacktrace.c gbase64.c gbitlock.c gbookmarkfile.c \
-	gbsearcharray.h gbuffer.c gbufferprivate.h gcache.c \
-	gchecksum.c gcompletion.c gconvert.c gdataset.c \
-	gdatasetprivate.h gdate.c gdatetime.c gdir.c gerror.c \
-	gfileutils.c ghash.c ghmac.c ghook.c ghostutils.c giochannel.c \
-	gkeyfile.c glibintl.h glib_trace.h glist.c gmain-internal.h \
-	gmain.c gmappedfile.c gmarkup.c gmem.c gmessages.c \
-	gmirroringtable.h gnode.c goption.c gpattern.c gpoll.c \
-	gprimes.c gqsort.c gqueue.c grel.c grand.c gregex.c gscanner.c \
-	gscripttable.h gsequence.c gshell.c gslice.c gslist.c gstdio.c \
-	gstrfuncs.c gstring.c gtestutils.c gthread.c gthreadprivate.h \
-	gthreadpool.c gtimer.c gtimezone.c gtree.c guniprop.c gutf8.c \
+@USE_SYSTEM_PCRE_FALSE@am__DEPENDENCIES_2 = pcre/libpcre.la
+@USE_SYSTEM_PCRE_TRUE@am__DEPENDENCIES_2 = $(am__DEPENDENCIES_1)
+am__libglib_2_0_la_SOURCES_DIST = deprecated/gallocator.c \
+	deprecated/gcache.c deprecated/gcompletion.c deprecated/grel.c \
+	deprecated/gthread-deprecated.c glib_probes.d garray.c \
+	gasyncqueue.c gasyncqueueprivate.h gatomic.c gbacktrace.c \
+	gbase64.c gbitlock.c gbookmarkfile.c gbsearcharray.h gbytes.c \
+	gbytes.h gcharset.c gchecksum.c gconvert.c gdataset.c \
+	gdatasetprivate.h gdate.c gdatetime.c gdir.c genviron.c \
+	gerror.c gfileutils.c ggettext.c ghash.c ghmac.c ghook.c \
+	ghostutils.c giochannel.c gkeyfile.c glibintl.h glib_trace.h \
+	glib-init.h glib-init.c glib-private.h glib-private.c glist.c \
+	gmain-internal.h gmain.c gmappedfile.c gmarkup.c gmem.c \
+	gmessages.c gmirroringtable.h gnode.c goption.c gpattern.c \
+	gpoll.c gprimes.c gqsort.c gqueue.c grand.c gregex.c \
+	gscanner.c gscripttable.h gsequence.c gshell.c gslice.c \
+	gslist.c gstdio.c gstrfuncs.c gstring.c gstringchunk.c \
+	gtestutils.c gthread.c gthreadprivate.h gthreadpool.c gtimer.c \
+	gtimezone.c gtrashstack.c gtree.c guniprop.c gutf8.c \
 	gunibreak.h gunibreak.c gunichartables.h gunicollate.c \
 	gunicomp.h gunidecomp.h gunidecomp.c gunicodeprivate.h \
 	gurifuncs.c gutils.c gvariant.h gvariant.c gvariant-core.h \
 	gvariant-core.c gvariant-internal.h gvariant-parser.c \
 	gvariant-serialiser.h gvariant-serialiser.c gvarianttypeinfo.h \
-	gvarianttypeinfo.c gvarianttype.c gwakeup.h gwakeup.c gdebug.h \
-	gprintf.c gprintfint.h glib-unix.c
-@ENABLE_REGEX_TRUE@am__objects_1 = gregex.lo
+	gvarianttypeinfo.c gvarianttype.c gversion.c gwakeup.h \
+	gwakeup.c gprintf.c gprintfint.h glib-unix.c gthread-win32.c \
+	gthread-posix.c
+am__objects_1 = gallocator.lo gcache.lo gcompletion.lo grel.lo \
+	gthread-deprecated.lo
 @OS_UNIX_TRUE@am__objects_2 = glib-unix.lo
-am_libglib_2_0_la_OBJECTS = garray.lo gasyncqueue.lo gatomic.lo \
-	gbacktrace.lo gbase64.lo gbitlock.lo gbookmarkfile.lo \
-	gbuffer.lo gcache.lo gchecksum.lo gcompletion.lo gconvert.lo \
-	gdataset.lo gdate.lo gdatetime.lo gdir.lo gerror.lo \
-	gfileutils.lo ghash.lo ghmac.lo ghook.lo ghostutils.lo \
-	giochannel.lo gkeyfile.lo glist.lo gmain.lo gmappedfile.lo \
+@OS_WIN32_TRUE@am__objects_3 = gthread-win32.lo
+@OS_WIN32_FALSE@am__objects_4 = gthread-posix.lo
+am_libglib_2_0_la_OBJECTS = $(am__objects_1) garray.lo gasyncqueue.lo \
+	gatomic.lo gbacktrace.lo gbase64.lo gbitlock.lo \
+	gbookmarkfile.lo gbytes.lo gcharset.lo gchecksum.lo \
+	gconvert.lo gdataset.lo gdate.lo gdatetime.lo gdir.lo \
+	genviron.lo gerror.lo gfileutils.lo ggettext.lo ghash.lo \
+	ghmac.lo ghook.lo ghostutils.lo giochannel.lo gkeyfile.lo \
+	glib-init.lo glib-private.lo glist.lo gmain.lo gmappedfile.lo \
 	gmarkup.lo gmem.lo gmessages.lo gnode.lo goption.lo \
-	gpattern.lo gpoll.lo gprimes.lo gqsort.lo gqueue.lo grel.lo \
-	grand.lo $(am__objects_1) gscanner.lo gsequence.lo gshell.lo \
-	gslice.lo gslist.lo gstdio.lo gstrfuncs.lo gstring.lo \
+	gpattern.lo gpoll.lo gprimes.lo gqsort.lo gqueue.lo grand.lo \
+	gregex.lo gscanner.lo gsequence.lo gshell.lo gslice.lo \
+	gslist.lo gstdio.lo gstrfuncs.lo gstring.lo gstringchunk.lo \
 	gtestutils.lo gthread.lo gthreadpool.lo gtimer.lo gtimezone.lo \
-	gtree.lo guniprop.lo gutf8.lo gunibreak.lo gunicollate.lo \
-	gunidecomp.lo gurifuncs.lo gutils.lo gvariant.lo \
-	gvariant-core.lo gvariant-parser.lo gvariant-serialiser.lo \
-	gvarianttypeinfo.lo gvarianttype.lo gwakeup.lo gprintf.lo \
-	$(am__objects_2)
+	gtrashstack.lo gtree.lo guniprop.lo gutf8.lo gunibreak.lo \
+	gunicollate.lo gunidecomp.lo gurifuncs.lo gutils.lo \
+	gvariant.lo gvariant-core.lo gvariant-parser.lo \
+	gvariant-serialiser.lo gvarianttypeinfo.lo gvarianttype.lo \
+	gversion.lo gwakeup.lo gprintf.lo $(am__objects_2) \
+	$(am__objects_3) $(am__objects_4)
 libglib_2_0_la_OBJECTS = $(am_libglib_2_0_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -237,21 +249,8 @@ RECURSIVE_TARGETS = all-recursive check-recursive dvi-recursive \
 	installcheck-recursive installdirs-recursive pdf-recursive \
 	ps-recursive uninstall-recursive
 DATA = $(noinst_DATA) $(tapset_DATA)
-am__glibsubinclude_HEADERS_DIST = galloca.h garray.h gasyncqueue.h \
-	gatomic.h gbacktrace.h gbase64.h gbitlock.h gbookmarkfile.h \
-	gcache.h gchecksum.h gcompletion.h gconvert.h gdataset.h \
-	gdate.h gdatetime.h gdir.h gerror.h gfileutils.h ghash.h \
-	ghmac.h ghook.h ghostutils.h gi18n.h gi18n-lib.h giochannel.h \
-	gkeyfile.h glist.h gmacros.h gmain.h gmappedfile.h gmarkup.h \
-	gmem.h gmessages.h gnode.h goption.h gpattern.h gpoll.h \
-	gprimes.h gqsort.h gquark.h gqueue.h grand.h gregex.h grel.h \
-	gscanner.h gsequence.h gshell.h gslice.h gslist.h gspawn.h \
-	gstdio.h gstrfuncs.h gtestutils.h gstring.h gthread.h \
-	gthreadpool.h gtimer.h gtimezone.h gtree.h gtypes.h gunicode.h \
-	gurifuncs.h gutils.h gvarianttype.h gvariant.h gwin32.h \
-	gprintf.h
-HEADERS = $(glibinclude_HEADERS) $(glibsubinclude_HEADERS) \
-	$(nodist_configexecinclude_HEADERS)
+HEADERS = $(deprecatedinclude_HEADERS) $(glibinclude_HEADERS) \
+	$(glibsubinclude_HEADERS) $(nodist_configexecinclude_HEADERS)
 RECURSIVE_CLEAN_TARGETS = mostlyclean-recursive clean-recursive	\
   distclean-recursive maintainer-clean-recursive
 AM_RECURSIVE_TARGETS = $(RECURSIVE_TARGETS:-recursive=) \
@@ -317,7 +316,6 @@ DBUS1_CFLAGS = @DBUS1_CFLAGS@
 DBUS1_LIBS = @DBUS1_LIBS@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
-DISABLE_MEM_POOLS = @DISABLE_MEM_POOLS@
 DLLTOOL = @DLLTOOL@
 DSYMUTIL = @DSYMUTIL@
 DTRACE = @DTRACE@
@@ -334,6 +332,7 @@ GIO = @GIO@
 GIO_MODULE_DIR = @GIO_MODULE_DIR@
 GLIBC21 = @GLIBC21@
 GLIB_BINARY_AGE = @GLIB_BINARY_AGE@
+GLIB_COMPILE_RESOURCES = @GLIB_COMPILE_RESOURCES@
 GLIB_COMPILE_SCHEMAS = @GLIB_COMPILE_SCHEMAS@
 GLIB_DEBUG_FLAGS = @GLIB_DEBUG_FLAGS@
 GLIB_EXTRA_CFLAGS = @GLIB_EXTRA_CFLAGS@
@@ -343,7 +342,6 @@ GLIB_LINK_FLAGS = @GLIB_LINK_FLAGS@
 GLIB_MAJOR_VERSION = @GLIB_MAJOR_VERSION@
 GLIB_MICRO_VERSION = @GLIB_MICRO_VERSION@
 GLIB_MINOR_VERSION = @GLIB_MINOR_VERSION@
-GLIB_RT_LIBS = @GLIB_RT_LIBS@
 GLIB_RUNTIME_LIBDIR = @GLIB_RUNTIME_LIBDIR@
 GLIB_VERSION = @GLIB_VERSION@
 GLIB_WIN32_STATIC_COMPILATION_DEFINE = @GLIB_WIN32_STATIC_COMPILATION_DEFINE@
@@ -383,6 +381,8 @@ INSTOBJEXT = @INSTOBJEXT@
 INTLLIBS = @INTLLIBS@
 LD = @LD@
 LDFLAGS = @LDFLAGS@
+LIBELF_CFLAGS = @LIBELF_CFLAGS@
+LIBELF_LIBS = @LIBELF_LIBS@
 LIBFFI_CFLAGS = @LIBFFI_CFLAGS@
 LIBFFI_LIBS = @LIBFFI_LIBS@
 LIBOBJS = @LIBOBJS@
@@ -535,10 +535,10 @@ GTESTER_REPORT = $(top_builddir)/glib/gtester-report	# for the GLIB package
 EXTRA_DIST = makefile.msc.in glib.rc.in gen-iswide-table.py \
 	gen-unicode-tables.pl gen-script-table.pl \
 	glibconfig.h.win32.in abicheck.sh glib.symbols gregex.c \
-	gregex.h win_iconv.c libglib-gdb.py.in $(MIRRORING_TAB_SOURCE) \
-	$(am__append_5) $(am__append_9)
+	gregex.h win_iconv.c libglib-gdb.py.in docs.c gconstructor.h \
+	$(MIRRORING_TAB_SOURCE) $(am__append_7) $(am__append_11)
 TEST_PROGS = 
-BUILT_SOURCES = glibconfig-stamp $(am__append_2)
+BUILT_SOURCES = glibconfig-stamp $(am__append_4)
 
 #
 # Generate glibconfig.h
@@ -549,16 +549,12 @@ BUILT_SOURCES = glibconfig-stamp $(am__append_2)
 # avoid touching its timestamp (in order not to rebuild the whole tree).
 #
 DISTCLEANFILES = glibconfig-stamp glibconfig.h
-CLEANFILES = glib-public-headers.txt $(am__append_3)
+CLEANFILES = libglib-gdb.py glib-public-headers.txt $(am__append_5)
 configexecincludedir = $(libdir)/glib-2.0/include
 nodist_configexecinclude_HEADERS = glibconfig.h
 @HAVE_GOOD_PRINTF_FALSE@PRINTF_SUBDIR = gnulib
 @HAVE_GOOD_PRINTF_FALSE@printf_la = gnulib/libgnulib.la
-@ENABLE_REGEX_TRUE@@USE_SYSTEM_PCRE_FALSE@MAYBE_PCRE = pcre 
-@ENABLE_REGEX_FALSE@gregex_c = 
-@ENABLE_REGEX_TRUE@gregex_c = gregex.c
-@ENABLE_REGEX_FALSE@gregex_h = 
-@ENABLE_REGEX_TRUE@gregex_h = gregex.h
+@USE_SYSTEM_PCRE_FALSE@MAYBE_PCRE = pcre 
 SUBDIRS = libcharset $(PRINTF_SUBDIR) $(MAYBE_PCRE) update-pcre . tests
 DIST_SUBDIRS = libcharset gnulib pcre update-pcre tests
 AM_CPPFLAGS = \
@@ -566,7 +562,6 @@ AM_CPPFLAGS = \
 	$(pcre_inc) 			\
 	-DG_LOG_DOMAIN=\"GLib\" 	\
 	$(GLIB_DEBUG_FLAGS) 		\
-	-DG_DISABLE_DEPRECATED 		\
 	-DGLIB_COMPILATION 		\
 	-DPCRE_STATIC
 
@@ -589,26 +584,36 @@ lib_LTLIBRARIES = libglib-2.0.la
 @MS_LIB_AVAILABLE_TRUE@@OS_WIN32_AND_DLL_COMPILATION_TRUE@noinst_DATA = glib-2.0.lib
 @MS_LIB_AVAILABLE_TRUE@@OS_WIN32_AND_DLL_COMPILATION_TRUE@install_ms_lib_cmd = $(INSTALL) glib-2.0.lib $(DESTDIR)$(libdir)
 @MS_LIB_AVAILABLE_TRUE@@OS_WIN32_AND_DLL_COMPILATION_TRUE@uninstall_ms_lib_cmd = -rm $(DESTDIR)$(libdir)/glib-2.0.lib
-libglib_2_0_la_SOURCES = glib_probes.d garray.c gasyncqueue.c \
-	gatomic.c gbacktrace.c gbase64.c gbitlock.c gbookmarkfile.c \
-	gbsearcharray.h gbuffer.c gbufferprivate.h gcache.c \
-	gchecksum.c gcompletion.c gconvert.c gdataset.c \
-	gdatasetprivate.h gdate.c gdatetime.c gdir.c gerror.c \
-	gfileutils.c ghash.c ghmac.c ghook.c ghostutils.c giochannel.c \
-	gkeyfile.c glibintl.h glib_trace.h glist.c gmain-internal.h \
-	gmain.c gmappedfile.c gmarkup.c gmem.c gmessages.c \
-	gmirroringtable.h gnode.c goption.c gpattern.c gpoll.c \
-	gprimes.c gqsort.c gqueue.c grel.c grand.c $(gregex_c) \
+deprecated_sources = \
+	deprecated/gallocator.c		\
+	deprecated/gcache.c		\
+	deprecated/gcompletion.c	\
+	deprecated/grel.c		\
+	deprecated/gthread-deprecated.c
+
+libglib_2_0_la_SOURCES = $(deprecated_sources) glib_probes.d garray.c \
+	gasyncqueue.c gasyncqueueprivate.h gatomic.c gbacktrace.c \
+	gbase64.c gbitlock.c gbookmarkfile.c gbsearcharray.h gbytes.c \
+	gbytes.h gcharset.c gchecksum.c gconvert.c gdataset.c \
+	gdatasetprivate.h gdate.c gdatetime.c gdir.c genviron.c \
+	gerror.c gfileutils.c ggettext.c ghash.c ghmac.c ghook.c \
+	ghostutils.c giochannel.c gkeyfile.c glibintl.h glib_trace.h \
+	glib-init.h glib-init.c glib-private.h glib-private.c glist.c \
+	gmain-internal.h gmain.c gmappedfile.c gmarkup.c gmem.c \
+	gmessages.c gmirroringtable.h gnode.c goption.c gpattern.c \
+	gpoll.c gprimes.c gqsort.c gqueue.c grand.c gregex.c \
 	gscanner.c gscripttable.h gsequence.c gshell.c gslice.c \
-	gslist.c gstdio.c gstrfuncs.c gstring.c gtestutils.c gthread.c \
-	gthreadprivate.h gthreadpool.c gtimer.c gtimezone.c gtree.c \
-	guniprop.c gutf8.c gunibreak.h gunibreak.c gunichartables.h \
-	gunicollate.c gunicomp.h gunidecomp.h gunidecomp.c \
-	gunicodeprivate.h gurifuncs.c gutils.c gvariant.h gvariant.c \
-	gvariant-core.h gvariant-core.c gvariant-internal.h \
-	gvariant-parser.c gvariant-serialiser.h gvariant-serialiser.c \
-	gvarianttypeinfo.h gvarianttypeinfo.c gvarianttype.c gwakeup.h \
-	gwakeup.c gdebug.h gprintf.c gprintfint.h $(am__append_1)
+	gslist.c gstdio.c gstrfuncs.c gstring.c gstringchunk.c \
+	gtestutils.c gthread.c gthreadprivate.h gthreadpool.c gtimer.c \
+	gtimezone.c gtrashstack.c gtree.c guniprop.c gutf8.c \
+	gunibreak.h gunibreak.c gunichartables.h gunicollate.c \
+	gunicomp.h gunidecomp.h gunidecomp.c gunicodeprivate.h \
+	gurifuncs.c gutils.c gvariant.h gvariant.c gvariant-core.h \
+	gvariant-core.c gvariant-internal.h gvariant-parser.c \
+	gvariant-serialiser.h gvariant-serialiser.c gvarianttypeinfo.h \
+	gvarianttypeinfo.c gvarianttype.c gversion.c gwakeup.h \
+	gwakeup.c gprintf.c gprintfint.h $(am__append_1) \
+	$(am__append_2) $(am__append_3)
 EXTRA_libglib_2_0_la_SOURCES = \
 	giounix.c	\
 	giowin32.c	\
@@ -622,6 +627,15 @@ glibinclude_HEADERS = \
 	glib-object.h	\
 	glib.h
 
+deprecatedincludedir = $(includedir)/glib-2.0/glib/deprecated
+deprecatedinclude_HEADERS = \
+	deprecated/gallocator.h		\
+	deprecated/gcache.h		\
+	deprecated/gcompletion.h	\
+	deprecated/gmain.h		\
+	deprecated/grel.h		\
+	deprecated/gthread.h
+
 glibsubincludedir = $(includedir)/glib-2.0/glib
 glibsubinclude_HEADERS = \
 	galloca.h	\
@@ -631,17 +645,19 @@ glibsubinclude_HEADERS = \
 	gbacktrace.h	\
 	gbase64.h	\
 	gbitlock.h	\
-	gbookmarkfile.h \
-	gcache.h	\
+	gbookmarkfile.h	\
+	gbytes.h	\
+	gcharset.h	\
 	gchecksum.h	\
-	gcompletion.h	\
 	gconvert.h	\
 	gdataset.h	\
 	gdate.h		\
-	gdatetime.h     \
+	gdatetime.h	\
 	gdir.h		\
+	genviron.h	\
 	gerror.h	\
 	gfileutils.h	\
+	ggettext.h	\
 	ghash.h		\
 	ghmac.h		\
 	ghook.h		\
@@ -666,8 +682,7 @@ glibsubinclude_HEADERS = \
 	gquark.h	\
 	gqueue.h	\
 	grand.h		\
-	$(gregex_h)	\
-	grel.h		\
+	gregex.h	\
 	gscanner.h	\
 	gsequence.h	\
 	gshell.h	\
@@ -678,10 +693,12 @@ glibsubinclude_HEADERS = \
 	gstrfuncs.h	\
 	gtestutils.h	\
 	gstring.h	\
+	gstringchunk.h	\
 	gthread.h	\
 	gthreadpool.h	\
 	gtimer.h	\
 	gtimezone.h	\
+	gtrashstack.h	\
 	gtree.h		\
 	gtypes.h	\
 	gunicode.h	\
@@ -689,31 +706,32 @@ glibsubinclude_HEADERS = \
 	gutils.h	\
 	gvarianttype.h	\
 	gvariant.h	\
+	gversion.h	\
+	gversionmacros.h \
 	gwin32.h	\
 	gprintf.h
 
 @PLATFORM_WIN32_TRUE@no_undefined = -no-undefined
 @OS_WIN32_AND_DLL_COMPILATION_FALSE@export_symbols = $(LIBTOOL_EXPORT_OPTIONS)
-@OS_WIN32_AND_DLL_COMPILATION_TRUE@export_symbols = -export-symbols glib.def
+@OS_WIN32_AND_DLL_COMPILATION_TRUE@export_symbols = -export-symbols $(builddir)/glib.def
 @OS_WIN32_AND_DLL_COMPILATION_TRUE@glib_win32_res = glib-win32-res.o
 @OS_WIN32_AND_DLL_COMPILATION_TRUE@glib_win32_res_ldflag = -Wl,$(glib_win32_res)
 @OS_WIN32_AND_DLL_COMPILATION_TRUE@glib_def = glib.def
-@ENABLE_REGEX_FALSE@pcre_lib = 
-@ENABLE_REGEX_TRUE@@USE_SYSTEM_PCRE_FALSE@pcre_lib = pcre/libpcre.la
-@ENABLE_REGEX_TRUE@@USE_SYSTEM_PCRE_TRUE@pcre_lib = $(PCRE_LIBS)
-@ENABLE_REGEX_FALSE@pcre_inc = 
-@ENABLE_REGEX_TRUE@@USE_SYSTEM_PCRE_FALSE@pcre_inc = 
-@ENABLE_REGEX_TRUE@@USE_SYSTEM_PCRE_TRUE@pcre_inc = $(PCRE_CFLAGS)
+@USE_SYSTEM_PCRE_FALSE@pcre_lib = pcre/libpcre.la
+@USE_SYSTEM_PCRE_TRUE@pcre_lib = $(PCRE_LIBS)
+@USE_SYSTEM_PCRE_FALSE@pcre_inc = 
+@USE_SYSTEM_PCRE_TRUE@pcre_inc = $(PCRE_CFLAGS)
 libglib_2_0_la_LIBADD = libcharset/libcharset.la $(printf_la) @GIO@ \
 	@GSPAWN@ @PLATFORMDEP@ @ICONV_LIBS@ @G_LIBS_EXTRA@ $(pcre_lib) \
-	$(GLIB_RT_LIBS) $(am__append_4)
+	$(G_THREAD_LIBS_EXTRA) $(G_THREAD_LIBS_FOR_GTHREAD) \
+	$(am__append_6)
 libglib_2_0_la_DEPENDENCIES = libcharset/libcharset.la $(printf_la) @GIO@ @GSPAWN@ @PLATFORMDEP@ $(glib_win32_res) $(glib_def)
 libglib_2_0_la_LDFLAGS = $(GLIB_LINK_FLAGS) \
 	 $(glib_win32_res_ldflag) \
 	-version-info $(LT_CURRENT):$(LT_REVISION):$(LT_AGE) \
 	-export-dynamic $(no_undefined) $(export_symbols)
 
-INSTALL_PROGS = $(am__append_6) $(am__append_7) $(am__append_8)
+INSTALL_PROGS = $(am__append_8) $(am__append_9) $(am__append_10)
 @ENABLE_SYSTEMTAP_TRUE@tapset_in_files = glib.stp.in
 @ENABLE_SYSTEMTAP_TRUE@tapsetdir = @ABS_TAPSET_DIR@
 @ENABLE_SYSTEMTAP_TRUE@tapset_DATA = $(tapset_in_files:.stp.in=.stp)
@@ -941,6 +959,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gallocator.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/garray.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gasyncqueue.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gatomic.Plo@am__quote@
@@ -948,8 +967,9 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gbase64.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gbitlock.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gbookmarkfile.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gbuffer.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gbytes.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gcache.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gcharset.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gchecksum.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gcompletion.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gconvert.Plo@am__quote@
@@ -957,8 +977,10 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdate.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdatetime.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdir.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/genviron.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gerror.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gfileutils.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ggettext.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ghash.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ghmac.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ghook.Plo@am__quote@
@@ -967,6 +989,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/giounix.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/giowin32.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gkeyfile.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/glib-init.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/glib-private.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/glib-unix.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/glist.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gmain.Plo@am__quote@
@@ -999,12 +1023,17 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gstdio.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gstrfuncs.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gstring.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gstringchunk.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtester.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtestutils.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gthread-deprecated.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gthread-posix.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gthread-win32.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gthread.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gthreadpool.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtimer.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtimezone.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtrashstack.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtree.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gunibreak.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gunicollate.Plo@am__quote@
@@ -1019,6 +1048,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gvariant.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gvarianttype.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gvarianttypeinfo.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gversion.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gwakeup.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gwin32.Plo@am__quote@
 
@@ -1043,6 +1073,41 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
 
+gallocator.lo: deprecated/gallocator.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gallocator.lo -MD -MP -MF $(DEPDIR)/gallocator.Tpo -c -o gallocator.lo `test -f 'deprecated/gallocator.c' || echo '$(srcdir)/'`deprecated/gallocator.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/gallocator.Tpo $(DEPDIR)/gallocator.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='deprecated/gallocator.c' object='gallocator.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gallocator.lo `test -f 'deprecated/gallocator.c' || echo '$(srcdir)/'`deprecated/gallocator.c
+
+gcache.lo: deprecated/gcache.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gcache.lo -MD -MP -MF $(DEPDIR)/gcache.Tpo -c -o gcache.lo `test -f 'deprecated/gcache.c' || echo '$(srcdir)/'`deprecated/gcache.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/gcache.Tpo $(DEPDIR)/gcache.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='deprecated/gcache.c' object='gcache.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gcache.lo `test -f 'deprecated/gcache.c' || echo '$(srcdir)/'`deprecated/gcache.c
+
+gcompletion.lo: deprecated/gcompletion.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gcompletion.lo -MD -MP -MF $(DEPDIR)/gcompletion.Tpo -c -o gcompletion.lo `test -f 'deprecated/gcompletion.c' || echo '$(srcdir)/'`deprecated/gcompletion.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/gcompletion.Tpo $(DEPDIR)/gcompletion.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='deprecated/gcompletion.c' object='gcompletion.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gcompletion.lo `test -f 'deprecated/gcompletion.c' || echo '$(srcdir)/'`deprecated/gcompletion.c
+
+grel.lo: deprecated/grel.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT grel.lo -MD -MP -MF $(DEPDIR)/grel.Tpo -c -o grel.lo `test -f 'deprecated/grel.c' || echo '$(srcdir)/'`deprecated/grel.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/grel.Tpo $(DEPDIR)/grel.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='deprecated/grel.c' object='grel.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o grel.lo `test -f 'deprecated/grel.c' || echo '$(srcdir)/'`deprecated/grel.c
+
+gthread-deprecated.lo: deprecated/gthread-deprecated.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gthread-deprecated.lo -MD -MP -MF $(DEPDIR)/gthread-deprecated.Tpo -c -o gthread-deprecated.lo `test -f 'deprecated/gthread-deprecated.c' || echo '$(srcdir)/'`deprecated/gthread-deprecated.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/gthread-deprecated.Tpo $(DEPDIR)/gthread-deprecated.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='deprecated/gthread-deprecated.c' object='gthread-deprecated.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gthread-deprecated.lo `test -f 'deprecated/gthread-deprecated.c' || echo '$(srcdir)/'`deprecated/gthread-deprecated.c
+
 mostlyclean-libtool:
 	-rm -f *.lo
 
@@ -1066,6 +1131,24 @@ uninstall-tapsetDATA:
 	@list='$(tapset_DATA)'; test -n "$(tapsetdir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
 	dir='$(DESTDIR)$(tapsetdir)'; $(am__uninstall_files_from_dir)
+install-deprecatedincludeHEADERS: $(deprecatedinclude_HEADERS)
+	@$(NORMAL_INSTALL)
+	test -z "$(deprecatedincludedir)" || $(MKDIR_P) "$(DESTDIR)$(deprecatedincludedir)"
+	@list='$(deprecatedinclude_HEADERS)'; test -n "$(deprecatedincludedir)" || list=; \
+	for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  echo "$$d$$p"; \
+	done | $(am__base_list) | \
+	while read files; do \
+	  echo " $(INSTALL_HEADER) $$files '$(DESTDIR)$(deprecatedincludedir)'"; \
+	  $(INSTALL_HEADER) $$files "$(DESTDIR)$(deprecatedincludedir)" || exit $$?; \
+	done
+
+uninstall-deprecatedincludeHEADERS:
+	@$(NORMAL_UNINSTALL)
+	@list='$(deprecatedinclude_HEADERS)'; test -n "$(deprecatedincludedir)" || list=; \
+	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
+	dir='$(DESTDIR)$(deprecatedincludedir)'; $(am__uninstall_files_from_dir)
 install-glibincludeHEADERS: $(glibinclude_HEADERS)
 	@$(NORMAL_INSTALL)
 	test -z "$(glibincludedir)" || $(MKDIR_P) "$(DESTDIR)$(glibincludedir)"
@@ -1420,7 +1503,7 @@ install-binPROGRAMS: install-libLTLIBRARIES
 
 installdirs: installdirs-recursive
 installdirs-am:
-	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(gdbdir)" "$(DESTDIR)$(tapsetdir)" "$(DESTDIR)$(glibincludedir)" "$(DESTDIR)$(glibsubincludedir)" "$(DESTDIR)$(configexecincludedir)"; do \
+	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(gdbdir)" "$(DESTDIR)$(tapsetdir)" "$(DESTDIR)$(deprecatedincludedir)" "$(DESTDIR)$(glibincludedir)" "$(DESTDIR)$(glibsubincludedir)" "$(DESTDIR)$(configexecincludedir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: $(BUILT_SOURCES)
@@ -1467,7 +1550,7 @@ distclean: distclean-recursive
 	-rm -rf ./$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
-	distclean-local distclean-tags
+	distclean-tags
 
 dvi: dvi-recursive
 
@@ -1481,9 +1564,9 @@ info: info-recursive
 
 info-am:
 
-install-data-am: install-data-local install-dist_gdbSCRIPTS \
-	install-glibincludeHEADERS install-glibsubincludeHEADERS \
-	install-tapsetDATA
+install-data-am: install-data-local install-deprecatedincludeHEADERS \
+	install-dist_gdbSCRIPTS install-glibincludeHEADERS \
+	install-glibsubincludeHEADERS install-tapsetDATA
 	@$(NORMAL_INSTALL)
 	$(MAKE) $(AM_MAKEFLAGS) install-data-hook
 install-dvi: install-dvi-recursive
@@ -1533,10 +1616,10 @@ ps: ps-recursive
 ps-am:
 
 uninstall-am: uninstall-binPROGRAMS uninstall-binSCRIPTS \
-	uninstall-dist_gdbSCRIPTS uninstall-glibincludeHEADERS \
-	uninstall-glibsubincludeHEADERS uninstall-libLTLIBRARIES \
-	uninstall-local uninstall-nodist_configexecincludeHEADERS \
-	uninstall-tapsetDATA
+	uninstall-deprecatedincludeHEADERS uninstall-dist_gdbSCRIPTS \
+	uninstall-glibincludeHEADERS uninstall-glibsubincludeHEADERS \
+	uninstall-libLTLIBRARIES uninstall-local \
+	uninstall-nodist_configexecincludeHEADERS uninstall-tapsetDATA
 
 .MAKE: $(RECURSIVE_CLEAN_TARGETS) $(RECURSIVE_TARGETS) all check \
 	check-am ctags-recursive install install-am install-data-am \
@@ -1547,22 +1630,23 @@ uninstall-am: uninstall-binPROGRAMS uninstall-binSCRIPTS \
 	clean clean-binPROGRAMS clean-generic clean-libLTLIBRARIES \
 	clean-libtool ctags ctags-recursive dist-hook distclean \
 	distclean-compile distclean-generic distclean-libtool \
-	distclean-local distclean-tags distdir dvi dvi-am html html-am \
-	info info-am install install-am install-binPROGRAMS \
-	install-binSCRIPTS install-data install-data-am \
-	install-data-hook install-data-local install-dist_gdbSCRIPTS \
-	install-dvi install-dvi-am install-exec install-exec-am \
-	install-exec-hook install-glibincludeHEADERS \
-	install-glibsubincludeHEADERS install-html install-html-am \
-	install-info install-info-am install-libLTLIBRARIES \
-	install-man install-nodist_configexecincludeHEADERS \
-	install-pdf install-pdf-am install-ps install-ps-am \
-	install-strip install-tapsetDATA installcheck installcheck-am \
-	installdirs installdirs-am maintainer-clean \
-	maintainer-clean-generic mostlyclean mostlyclean-compile \
-	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
-	tags tags-recursive uninstall uninstall-am \
-	uninstall-binPROGRAMS uninstall-binSCRIPTS \
+	distclean-tags distdir dvi dvi-am html html-am info info-am \
+	install install-am install-binPROGRAMS install-binSCRIPTS \
+	install-data install-data-am install-data-hook \
+	install-data-local install-deprecatedincludeHEADERS \
+	install-dist_gdbSCRIPTS install-dvi install-dvi-am \
+	install-exec install-exec-am install-exec-hook \
+	install-glibincludeHEADERS install-glibsubincludeHEADERS \
+	install-html install-html-am install-info install-info-am \
+	install-libLTLIBRARIES install-man \
+	install-nodist_configexecincludeHEADERS install-pdf \
+	install-pdf-am install-ps install-ps-am install-strip \
+	install-tapsetDATA installcheck installcheck-am installdirs \
+	installdirs-am maintainer-clean maintainer-clean-generic \
+	mostlyclean mostlyclean-compile mostlyclean-generic \
+	mostlyclean-libtool pdf pdf-am ps ps-am tags tags-recursive \
+	uninstall uninstall-am uninstall-binPROGRAMS \
+	uninstall-binSCRIPTS uninstall-deprecatedincludeHEADERS \
 	uninstall-dist_gdbSCRIPTS uninstall-glibincludeHEADERS \
 	uninstall-glibsubincludeHEADERS uninstall-libLTLIBRARIES \
 	uninstall-local uninstall-nodist_configexecincludeHEADERS \
@@ -1580,7 +1664,7 @@ test: test-nonrecursive
 
 # test-nonrecursive: run tests only in cwd
 @OS_UNIX_TRUE@test-nonrecursive: ${TEST_PROGS}
-@OS_UNIX_TRUE@	@test -z "${TEST_PROGS}" || MALLOC_CHECK_=2 MALLOC_PERTURB_=$$(($${RANDOM:-256} % 256)) ${GTESTER} --verbose ${TEST_PROGS}
+@OS_UNIX_TRUE@	@test -z "${TEST_PROGS}" || G_DEBUG=gc-friendly MALLOC_CHECK_=2 MALLOC_PERTURB_=$$(($${RANDOM:-256} % 256)) ${GTESTER} --verbose ${TEST_PROGS}
 @OS_UNIX_FALSE@test-nonrecursive:
 
 # test-report: run tests in subdirs and generate report
@@ -1659,7 +1743,7 @@ glibconfig-stamp: ../config.status
 	@touch glibconfig-stamp
 
 glib.def: glib.symbols
-	$(AM_V_GEN) (echo EXPORTS; $(CPP) -P -DG_OS_WIN32 - <$(srcdir)/glib.symbols | sed -e '/^$$/d' -e 's/^/	/') > glib.def
+	$(AM_V_GEN) (echo EXPORTS; $(CPP) -P -DG_OS_WIN32 - <$(srcdir)/glib.symbols | sed -e '/^$$/d' -e 's/^/	/') > $(builddir)/glib.def
 
 install-ms-lib:
 	$(install_ms_lib_cmd)
@@ -1680,10 +1764,10 @@ install-data-local: install-ms-lib install-def-file
 	  false ;									\
 	fi
 
-uninstall-local: uninstall-ms-lib uninstall-def-file
+uninstall-local: uninstall-ms-lib uninstall-def-file uninstall-gdb
 
 @OS_WIN32_AND_DLL_COMPILATION_TRUE@install-def-file:
-@OS_WIN32_AND_DLL_COMPILATION_TRUE@	$(INSTALL) glib.def $(DESTDIR)$(libdir)/glib-2.0.def
+@OS_WIN32_AND_DLL_COMPILATION_TRUE@	$(INSTALL) $(builddir)/glib.def $(DESTDIR)$(libdir)/glib-2.0.def
 
 @OS_WIN32_AND_DLL_COMPILATION_TRUE@uninstall-def-file:
 @OS_WIN32_AND_DLL_COMPILATION_TRUE@	-rm $(DESTDIR)$(libdir)/glib-2.0.def
@@ -1722,7 +1806,7 @@ glib-win32-res.o: glib.rc
 @OS_UNIX_TRUE@	done
 
 glib-2.0.lib: libglib-2.0.la glib.def
-	lib -machine:@LIB_EXE_MACHINE_FLAG@ -name:libglib-2.0-$(LT_CURRENT_MINUS_AGE).dll -def:glib.def -out:$@
+	lib -machine:@LIB_EXE_MACHINE_FLAG@ -name:libglib-2.0-$(LT_CURRENT_MINUS_AGE).dll -def:$(builddir)/glib.def -out:$@
 
 dist-hook: $(BUILT_EXTRA_DIST) ../build/win32/vs9/glib.vcproj ../build/win32/vs10/glib.vcxproj ../build/win32/vs10/glib.vcxproj.filters
 	files='$(BUILT_EXTRA_DIST)'; \
@@ -1731,9 +1815,9 @@ dist-hook: $(BUILT_EXTRA_DIST) ../build/win32/vs9/glib.vcproj ../build/win32/vs1
 	  cp $$d/$$f $(distdir) || exit 1; done
 
 ../build/win32/vs9/glib.vcproj: $(top_srcdir)/build/win32/vs9/glib.vcprojin
-	for F in $(libglib_2_0_la_SOURCES); do \
+	for F in `echo $(libglib_2_0_la_SOURCES) | tr '/' '\\'`; do \
 		case $$F in \
-		*-gcc.c|*-unix.c) \
+		*-unix.c|gthread-*.c) \
 			;; \
 		*.c)	echo '   <File RelativePath="..\..\..\glib\'$$F'" />' \
 			;; \
@@ -1743,9 +1827,9 @@ dist-hook: $(BUILT_EXTRA_DIST) ../build/win32/vs9/glib.vcproj ../build/win32/vs1
 	rm libglib.sourcefiles
 
 ../build/win32/vs10/glib.vcxproj: $(top_srcdir)/build/win32/vs10/glib.vcxprojin
-	for F in $(libglib_2_0_la_SOURCES); do \
+	for F in `echo $(libglib_2_0_la_SOURCES) | tr '/' '\\'`; do \
 		case $$F in \
-		*-gcc.c|*-unix.c) \
+		*-unix.c|gthread-*.c) \
 			;; \
 		*.c) echo '    <ClCompile Include="..\..\..\glib\'$$F'" />' \
 		     ;; \
@@ -1755,9 +1839,9 @@ dist-hook: $(BUILT_EXTRA_DIST) ../build/win32/vs9/glib.vcproj ../build/win32/vs1
 	rm libglib.vs10.sourcefiles
 
 ../build/win32/vs10/glib.vcxproj.filters: $(top_srcdir)/build/win32/vs10/glib.vcxproj.filtersin
-	for F in $(libglib_2_0_la_SOURCES); do \
+	for F in `echo $(libglib_2_0_la_SOURCES) | tr '/' '\\'`; do \
 		case $$F in \
-		*-gcc.c|*-unix.c) \
+		*-unix.c|gthread-*.c) \
 			;; \
 		*.c) echo '    <ClCompile Include="..\..\..\glib\'$$F'"><Filter>Source Files</Filter></ClCompile>' \
 		     ;; \
@@ -1766,22 +1850,20 @@ dist-hook: $(BUILT_EXTRA_DIST) ../build/win32/vs9/glib.vcproj ../build/win32/vs1
 	$(CPP) -P - <$(top_srcdir)/build/win32/vs10/glib.vcxproj.filtersin >$@	
 	rm libglib.vs10.sourcefiles.filters
 
-distclean-local:
-	if test $(srcdir) = .; then :; else \
-	    rm -f libglib-gdb.py; \
-	fi
-
 libglib-gdb.py: libglib-gdb.py.in
-	$(AM_V_GEN) $(SED) -e "s|\@datadir\@|$(datadir)|" $(srcdir)/libglib-gdb.py.in > libglib-gdb.py
+	$(AM_V_GEN) $(SED) -e "s|\@datadir\@|$(datadir)|" $(srcdir)/libglib-gdb.py.in > $(builddir)/libglib-gdb.py
 
 install-data-hook: libglib-gdb.py
 	mkdir -p $(DESTDIR)$(datadir)/gdb/auto-load$(ABS_GLIB_RUNTIME_LIBDIR)
-	$(INSTALL) libglib-gdb.py $(DESTDIR)$(datadir)/gdb/auto-load$(ABS_GLIB_RUNTIME_LIBDIR)/libglib-2.0.so.0.$(LT_CURRENT).$(LT_REVISION)-gdb.py
+	$(INSTALL) $(builddir)/libglib-gdb.py $(DESTDIR)$(datadir)/gdb/auto-load$(ABS_GLIB_RUNTIME_LIBDIR)/libglib-2.0.so.0.$(LT_CURRENT).$(LT_REVISION)-gdb.py
 @HAVE_GLIB_RUNTIME_LIBDIR_TRUE@	mkdir -p $(DESTDIR)$(libdir)/$(GLIB_RUNTIME_LIBDIR)
 @HAVE_GLIB_RUNTIME_LIBDIR_TRUE@	mv $(DESTDIR)$(libdir)/libglib-2.0.so.0 $(DESTDIR)$(libdir)/$(GLIB_RUNTIME_LIBDIR)
 @HAVE_GLIB_RUNTIME_LIBDIR_TRUE@	mv $(DESTDIR)$(libdir)/libglib-2.0.so.0.$(LT_CURRENT).$(LT_REVISION) $(DESTDIR)$(libdir)/$(GLIB_RUNTIME_LIBDIR)
 @HAVE_GLIB_RUNTIME_LIBDIR_TRUE@	rm -f $(DESTDIR)$(libdir)/libglib-2.0.so
 @HAVE_GLIB_RUNTIME_LIBDIR_TRUE@	ln -s $(GLIB_RUNTIME_LIBDIR)/libglib-2.0.so.0.$(LT_CURRENT).$(LT_REVISION) $(DESTDIR)$(libdir)/libglib-2.0.so
+
+uninstall-gdb:
+	-rm -r $(DESTDIR)$(datadir)/gdb
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

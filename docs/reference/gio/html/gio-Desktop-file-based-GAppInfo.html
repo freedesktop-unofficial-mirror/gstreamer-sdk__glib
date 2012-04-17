@@ -58,6 +58,7 @@ const <span class="returnvalue">char</span> *        <a class="link" href="gio-D
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *desktop_env</code></em>);
 const <span class="returnvalue">char</span> *        <a class="link" href="gio-Desktop-file-based-GAppInfo.html#g-desktop-app-info-get-generic-name" title="g_desktop_app_info_get_generic_name ()">g_desktop_app_info_get_generic_name</a> (<em class="parameter"><code><a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppInfo"><span class="type">GDesktopAppInfo</span></a> *info</code></em>);
 const <span class="returnvalue">char</span> *        <a class="link" href="gio-Desktop-file-based-GAppInfo.html#g-desktop-app-info-get-categories" title="g_desktop_app_info_get_categories ()">g_desktop_app_info_get_categories</a>   (<em class="parameter"><code><a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppInfo"><span class="type">GDesktopAppInfo</span></a> *info</code></em>);
+const <span class="returnvalue">char</span> * const * <a class="link" href="gio-Desktop-file-based-GAppInfo.html#g-desktop-app-info-get-keywords" title="g_desktop_app_info_get_keywords ()">g_desktop_app_info_get_keywords</a>    (<em class="parameter"><code><a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppInfo"><span class="type">GDesktopAppInfo</span></a> *info</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="gio-Desktop-file-based-GAppInfo.html#g-desktop-app-info-set-desktop-env" title="g_desktop_app_info_set_desktop_env ()">g_desktop_app_info_set_desktop_env</a>  (<em class="parameter"><code>const <span class="type">char</span> *desktop_env</code></em>);
 <span class="returnvalue">void</span>                (<a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppLaunchCallback" title="GDesktopAppLaunchCallback ()">*GDesktopAppLaunchCallback</a>)        (<em class="parameter"><code><a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppInfo"><span class="type">GDesktopAppInfo</span></a> *appinfo</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-The-Main-Event-Loop.html#GPid"><span class="type">GPid</span></a> pid</code></em>,
@@ -352,6 +353,30 @@ i.e. no attempt is made to split it by ';' or validate it.</td>
 </div>
 <hr>
 <div class="refsect2">
+<a name="g-desktop-app-info-get-keywords"></a><h3>g_desktop_app_info_get_keywords ()</h3>
+<pre class="programlisting">const <span class="returnvalue">char</span> * const * g_desktop_app_info_get_keywords    (<em class="parameter"><code><a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppInfo"><span class="type">GDesktopAppInfo</span></a> *info</code></em>);</pre>
+<p>
+Gets the keywords from the desktop file.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>info</code></em> :</span></p></td>
+<td>a <a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppInfo"><span class="type">GDesktopAppInfo</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>The value of the Keywords key. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.32</p>
+</div>
+<hr>
+<div class="refsect2">
 <a name="g-desktop-app-info-set-desktop-env"></a><h3>g_desktop_app_info_set_desktop_env ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_desktop_app_info_set_desktop_env  (<em class="parameter"><code>const <span class="type">char</span> *desktop_env</code></em>);</pre>
 <p>
@@ -393,10 +418,6 @@ Should be called only once; subsequent calls are ignored.
 <pre class="programlisting"><span class="returnvalue">void</span>                (*GDesktopAppLaunchCallback)        (<em class="parameter"><code><a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppInfo"><span class="type">GDesktopAppInfo</span></a> *appinfo</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-The-Main-Event-Loop.html#GPid"><span class="type">GPid</span></a> pid</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
-<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
-<h3 class="title">Warning</h3>
-<p><code class="literal">GDesktopAppLaunchCallback</code> is deprecated and should not be used in newly-written code.</p>
-</div>
 <p>
 During invocation, <a class="link" href="gio-Desktop-file-based-GAppInfo.html#g-desktop-app-info-launch-uris-as-manager" title="g_desktop_app_info_launch_uris_as_manager ()"><code class="function">g_desktop_app_info_launch_uris_as_manager()</code></a> may
 create one or more child processes.  This callback is invoked once
@@ -434,10 +455,6 @@ for each, providing the process ID.
                                                          <em class="parameter"><code><a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppLaunchCallback" title="GDesktopAppLaunchCallback ()"><span class="type">GDesktopAppLaunchCallback</span></a> pid_callback</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> pid_callback_data</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
-<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
-<h3 class="title">Warning</h3>
-<p><code class="literal">g_desktop_app_info_launch_uris_as_manager</code> is deprecated and should not be used in newly-written code.</p>
-</div>
 <p>
 This function performs the equivalent of <a class="link" href="GAppInfo.html#g-app-info-launch-uris" title="g_app_info_launch_uris ()"><code class="function">g_app_info_launch_uris()</code></a>,
 but is intended primarily for operating system components that
@@ -452,9 +469,9 @@ calls.
 <p>
 This guarantee allows additional control over the exact environment
 of the child processes, which is provided via a setup function
-<em class="parameter"><code>setup</code></em>, as well as the process identifier of each child process via
-<em class="parameter"><code>pid_callback</code></em>.  See <a href="./../glib/glib/glib-Spawning-Processes.html#g-spawn-async"><code class="function">g_spawn_async()</code></a> for more information about the
-semantics of the <em class="parameter"><code>setup</code></em> function.
+<em class="parameter"><code>user_setup</code></em>, as well as the process identifier of each child process
+via <em class="parameter"><code>pid_callback</code></em>. See <a href="./../glib/glib/glib-Spawning-Processes.html#g-spawn-async"><code class="function">g_spawn_async()</code></a> for more information about the
+semantics of the <em class="parameter"><code>user_setup</code></em> function.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">

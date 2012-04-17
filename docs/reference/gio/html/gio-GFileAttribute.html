@@ -71,15 +71,15 @@ using wildcards, e.g. "standard::*" will return all of the keys in the
 "standard" namespace.
 </p>
 <p>
-Values are stored within the list in <span class="type">GFileAttributeValue</span> structures.
-Values can store different types, listed in the enum <a class="link" href="gio-GFileAttribute.html#GFileAttributeType" title="enum GFileAttributeType"><span class="type">GFileAttributeType</span></a>.
-Upon creation of a <span class="type">GFileAttributeValue</span>, the type will be set to
-<a class="link" href="gio-GFileAttribute.html#G-FILE-ATTRIBUTE-TYPE-INVALID:CAPS"><code class="literal">G_FILE_ATTRIBUTE_TYPE_INVALID</code></a>.
-</p>
-<p>
 The list of possible attributes for a filesystem (pointed to by a <a class="link" href="GFile.html" title="GFile"><span class="type">GFile</span></a>) is
 available as a <a class="link" href="gio-GFileAttribute.html#GFileAttributeInfoList" title="GFileAttributeInfoList"><span class="type">GFileAttributeInfoList</span></a>. This list is queryable by key names
 as indicated earlier.
+</p>
+<p>
+Information is stored within the list in <a class="link" href="gio-GFileAttribute.html#GFileAttributeInfo" title="GFileAttributeInfo"><span class="type">GFileAttributeInfo</span></a> structures.
+The info structure can store different types, listed in the enum
+<a class="link" href="gio-GFileAttribute.html#GFileAttributeType" title="enum GFileAttributeType"><span class="type">GFileAttributeType</span></a>. Upon creation of a <a class="link" href="gio-GFileAttribute.html#GFileAttributeInfo" title="GFileAttributeInfo"><span class="type">GFileAttributeInfo</span></a>, the type will
+be set to <a class="link" href="gio-GFileAttribute.html#G-FILE-ATTRIBUTE-TYPE-INVALID:CAPS"><code class="literal">G_FILE_ATTRIBUTE_TYPE_INVALID</code></a>.
 </p>
 <p>
 Classes that implement <a class="link" href="GFile.html#GFileIface" title="struct GFileIface"><span class="type">GFileIface</span></a> will create a <a class="link" href="gio-GFileAttribute.html#GFileAttributeInfoList" title="GFileAttributeInfoList"><span class="type">GFileAttributeInfoList</span></a> and
@@ -92,7 +92,7 @@ attribute key will be registered for the user id for a given file).
 <p>
 </p>
 <div class="table">
-<a name="id553794"></a><p class="title"><b>Table 1. GFileAttributes Default Namespaces</b></p>
+<a name="id602311"></a><p class="title"><b>Table 1. GFileAttributes Default Namespaces</b></p>
 <div class="table-contents"><table summary="GFileAttributes Default Namespaces" border="1">
 <colgroup>
 <col>
@@ -219,7 +219,7 @@ For more information about writing GIO modules, see <a class="link" href="GIOMod
 <p>
 </p>
 <div class="table">
-<a name="id561090"></a><p class="title"><b>Table 2. GFileAttributes Built-in Keys and Value Types</b></p>
+<a name="id618301"></a><p class="title"><b>Table 2. GFileAttributes Built-in Keys and Value Types</b></p>
 <div class="table-contents"><table summary="GFileAttributes Built-in Keys and Value Types" border="1">
 <colgroup>
 <col>
@@ -525,6 +525,11 @@ For more information about writing GIO modules, see <a class="link" href="GIOMod
 <tr>
 <td align="left"><a class="link" href="GFileInfo.html#G-FILE-ATTRIBUTE-FILESYSTEM-FREE:CAPS" title="G_FILE_ATTRIBUTE_FILESYSTEM_FREE"><code class="literal">G_FILE_ATTRIBUTE_FILESYSTEM_FREE</code></a></td>
 <td align="left">filesystem::free</td>
+<td align="left">uint64</td>
+</tr>
+<tr>
+<td align="left"><a class="link" href="GFileInfo.html#G-FILE-ATTRIBUTE-FILESYSTEM-USED:CAPS" title="G_FILE_ATTRIBUTE_FILESYSTEM_USED"><code class="literal">G_FILE_ATTRIBUTE_FILESYSTEM_USED</code></a></td>
+<td align="left">filesystem::used</td>
 <td align="left">uint64</td>
 </tr>
 <tr>

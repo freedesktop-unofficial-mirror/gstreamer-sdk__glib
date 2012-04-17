@@ -105,7 +105,9 @@ Abstract base class for TLS certificate types.
 <p>
 Creates a new <a class="link" href="GTlsCertificate.html" title="GTlsCertificate"><span class="type">GTlsCertificate</span></a> from the PEM-encoded data in <em class="parameter"><code>data</code></em>.
 If <em class="parameter"><code>data</code></em> includes both a certificate and a private key, then the
-returned certificate will include the private key data as well.
+returned certificate will include the private key data as well. (See
+the <a class="link" href="GTlsCertificate.html#GTlsCertificate--private-key-pem" title='The "private-key-pem" property'><span class="type">"private-key-pem"</span></a> property for information about
+supported formats.)
 </p>
 <p>
 If <em class="parameter"><code>data</code></em> includes multiple certificates, only the first one will be
@@ -143,7 +145,8 @@ parsed.
 <p>
 Creates a <a class="link" href="GTlsCertificate.html" title="GTlsCertificate"><span class="type">GTlsCertificate</span></a> from the PEM-encoded data in <em class="parameter"><code>file</code></em>. If
 <em class="parameter"><code>file</code></em> cannot be read or parsed, the function will return <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> and
-set <em class="parameter"><code>error</code></em>. Otherwise, this behaves like <code class="function">g_tls_certificate_new()</code>.
+set <em class="parameter"><code>error</code></em>. Otherwise, this behaves like
+<a class="link" href="GTlsCertificate.html#g-tls-certificate-new-from-pem" title="g_tls_certificate_new_from_pem ()"><code class="function">g_tls_certificate_new_from_pem()</code></a>.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -175,7 +178,7 @@ set <em class="parameter"><code>error</code></em>. Otherwise, this behaves like 
 Creates a <a class="link" href="GTlsCertificate.html" title="GTlsCertificate"><span class="type">GTlsCertificate</span></a> from the PEM-encoded data in <em class="parameter"><code>cert_file</code></em>
 and <em class="parameter"><code>key_file</code></em>. If either file cannot be read or parsed, the
 function will return <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> and set <em class="parameter"><code>error</code></em>. Otherwise, this behaves
-like <code class="function">g_tls_certificate_new()</code>.
+like <a class="link" href="GTlsCertificate.html#g-tls-certificate-new-from-pem" title="g_tls_certificate_new_from_pem ()"><code class="function">g_tls_certificate_new_from_pem()</code></a>.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -364,9 +367,15 @@ available.
 <pre class="programlisting">  "private-key"              <a href="./../glib/glib/glib-Byte-Arrays.html#GByteArray"><span class="type">GByteArray</span></a>*           : Write / Construct Only</pre>
 <p>
 The DER (binary) encoded representation of the certificate's
-private key. This property (or the
-<a class="link" href="GTlsCertificate.html#GTlsCertificate--private-key-pem" title='The "private-key-pem" property'><span class="type">"private-key-pem"</span></a> property) can be set when
-constructing a key (eg, from a file), but cannot be read.
+private key, in either PKCS#1 format or unencrypted PKCS#8
+format. This property (or the <a class="link" href="GTlsCertificate.html#GTlsCertificate--private-key-pem" title='The "private-key-pem" property'><span class="type">"private-key-pem"</span></a>
+property) can be set when constructing a key (eg, from a file),
+but cannot be read.
+</p>
+<p>
+PKCS#8 format is supported since 2.32; earlier releases only
+support PKCS#1. You can use the <code class="literal">openssl rsa</code>
+tool to convert PKCS#8 keys to PKCS#1.
 </p>
 <p class="since">Since 2.28</p>
 </div>
@@ -376,9 +385,16 @@ constructing a key (eg, from a file), but cannot be read.
 <pre class="programlisting">  "private-key-pem"          <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>*                : Write / Construct Only</pre>
 <p>
 The PEM (ASCII) encoded representation of the certificate's
-private key. This property (or the <a class="link" href="GTlsCertificate.html#GTlsCertificate--private-key" title='The "private-key" property'><span class="type">"private-key"</span></a>
-property) can be set when constructing a key (eg, from a file),
-but cannot be read.
+private key in either PKCS#1 format ("<code class="literal">BEGIN RSA PRIVATE
+KEY</code>") or unencrypted PKCS#8 format ("<code class="literal">BEGIN
+PRIVATE KEY</code>"). This property (or the
+<a class="link" href="GTlsCertificate.html#GTlsCertificate--private-key" title='The "private-key" property'><span class="type">"private-key"</span></a> property) can be set when
+constructing a key (eg, from a file), but cannot be read.
+</p>
+<p>
+PKCS#8 format is supported since 2.32; earlier releases only
+support PKCS#1. You can use the <code class="literal">openssl rsa</code>
+tool to convert PKCS#8 keys to PKCS#1.
 </p>
 <p>Default value: NULL</p>
 <p class="since">Since 2.28</p>

@@ -60,6 +60,7 @@ test_error (void)
   g_assert_cmpint (errno, ==, EBADF);
   g_assert (!res);
   g_assert_error (error, G_UNIX_ERROR, 0);
+  g_clear_error (&error);
 }
 
 static gboolean sig_received = FALSE;
@@ -70,7 +71,7 @@ on_sig_received (gpointer user_data)
   GMainLoop *loop = user_data;
   g_main_loop_quit (loop);
   sig_received = TRUE;
-  return FALSE;
+  return G_SOURCE_REMOVE;
 }
 
 static gboolean
@@ -79,7 +80,7 @@ sig_not_received (gpointer data)
   GMainLoop *loop = data;
   (void) loop;
   g_error ("Timed out waiting for signal");
-  return FALSE;
+  return G_SOURCE_REMOVE;
 }
 
 static gboolean
@@ -87,7 +88,7 @@ exit_mainloop (gpointer data)
 {
   GMainLoop *loop = data;
   g_main_loop_quit (loop);
-  return FALSE;
+  return G_SOURCE_REMOVE;
 }
 
 static void
@@ -110,6 +111,7 @@ test_signal (int signum)
   g_timeout_add (500, exit_mainloop, mainloop);
   g_main_loop_run (mainloop);
   g_assert (!sig_received);
+  g_main_loop_unref (mainloop);
 
 }
 
@@ -138,6 +140,7 @@ test_sighup_add_remove (void)
   g_source_remove (id);
   kill (getpid (), SIGHUP);
   g_assert (!sig_received);
+  g_main_loop_unref (mainloop);
 
 }
 
@@ -146,10 +149,6 @@ main (int   argc,
       char *argv[])
 {
   g_test_init (&argc, &argv, NULL);
-
-#ifdef TEST_THREADED
-  g_thread_init (NULL);
-#endif
 
   g_test_add_func ("/glib-unix/pipe", test_pipe);
   g_test_add_func ("/glib-unix/error", test_error);

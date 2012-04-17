@@ -6,7 +6,7 @@
 <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="GLib Reference Manual">
 <link rel="up" href="glib-core.html" title="GLib Core Application Support">
-<link rel="prev" href="glib-Memory-Allocation.html" title="Memory Allocation">
+<link rel="prev" href="glib-Memory-Slices.html" title="Memory Slices">
 <link rel="next" href="glib-Error-Reporting.html" title="Error Reporting">
 <meta name="generator" content="GTK-Doc V1.18 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
@@ -14,7 +14,7 @@
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
 <tr valign="middle">
-<td><a accesskey="p" href="glib-Memory-Allocation.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="p" href="glib-Memory-Slices.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
 <td><a accesskey="u" href="glib-core.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
 <th width="100%" align="center">GLib Reference Manual</th>
@@ -560,12 +560,12 @@ If a <em class="parameter"><code>length</code></em> of zero is returned, this wi
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>length</code></em> :</span></p></td>
-<td>location to store length of the read data, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td>location to store length of the read data, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>terminator_pos</code></em> :</span></p></td>
-<td>location to store position of line terminator, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td>location to store position of line terminator, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
@@ -607,7 +607,7 @@ be overwritten.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>terminator_pos</code></em> :</span></p></td>
-<td>location to store position of line terminator, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td>location to store position of line terminator, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
@@ -1473,7 +1473,7 @@ Gets the current flags for a <a class="link" href="glib-IO-Channels.html#GIOChan
 flags such as <a class="link" href="glib-IO-Channels.html#G-IO-FLAG-IS-READABLE:CAPS"><code class="literal">G_IO_FLAG_IS_READABLE</code></a>.
 </p>
 <p>
-The values of the flags <a class="link" href="glib-IO-Channels.html#G-IO-FLAG-IS-READABLE:CAPS"><code class="literal">G_IO_FLAG_IS_READABLE</code></a> and <a class="link" href="glib-IO-Channels.html#G-IO-FLAG-IS-WRITEABLE:CAPS"><code class="literal">G_IO_FLAG_IS_WRITEABLE</code></a>
+The values of the flags <a class="link" href="glib-IO-Channels.html#G-IO-FLAG-IS-READABLE:CAPS"><code class="literal">G_IO_FLAG_IS_READABLE</code></a> and <a class="link" href="glib-IO-Channels.html#G-IO-FLAG-IS-WRITABLE:CAPS"><code class="literal">G_IO_FLAG_IS_WRITABLE</code></a>
 are cached for internal use by the channel when it is created.
 If they should change at some later point (e.g. partial shutdown
 of a socket with the UNIX <code class="function">shutdown()</code> function), the user
@@ -1502,7 +1502,7 @@ the internal values of these flags.
                                                          <em class="parameter"><code><a class="link" href="glib-IO-Channels.html#GIOFlags" title="enum GIOFlags"><span class="type">GIOFlags</span></a> flags</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
-Sets the (writeable) flags in <em class="parameter"><code>channel</code></em> to (<em class="parameter"><code>flags</code></em> &amp; <code class="literal">G_IO_CHANNEL_SET_MASK</code>).
+Sets the (writeable) flags in <em class="parameter"><code>channel</code></em> to (<em class="parameter"><code>flags</code></em> &amp; <a class="link" href="glib-IO-Channels.html#G-IO-FLAG-SET-MASK:CAPS"><code class="literal">G_IO_FLAG_SET_MASK</code></a>).
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -1535,7 +1535,7 @@ Sets the (writeable) flags in <em class="parameter"><code>channel</code></em> to
   G_IO_FLAG_APPEND = 1 &lt;&lt; 0,
   G_IO_FLAG_NONBLOCK = 1 &lt;&lt; 1,
   G_IO_FLAG_IS_READABLE = 1 &lt;&lt; 2, /* Read only flag */
-  G_IO_FLAG_IS_WRITEABLE = 1 &lt;&lt; 3, /* Read only flag */
+  G_IO_FLAG_IS_WRITABLE = 1 &lt;&lt; 3, /* Read only flag */
   G_IO_FLAG_IS_SEEKABLE = 1 &lt;&lt; 4, /* Read only flag */
   G_IO_FLAG_MASK = (1 &lt;&lt; 5) - 1,
   G_IO_FLAG_GET_MASK = G_IO_FLAG_MASK,
@@ -1560,8 +1560,8 @@ read with <a class="link" href="glib-IO-Channels.html#g-io-channel-get-flags" ti
 <tr>
 <td><p><a name="G-IO-FLAG-NONBLOCK:CAPS"></a><span class="term"><code class="literal">G_IO_FLAG_NONBLOCK</code></span></p></td>
 <td>turns on nonblocking mode, corresponds to
-                     <code class="literal">O_NONBLOCK</code>/<code class="literal">O_NDELAY</code> (see the documentation of
-                     the UNIX <code class="function">open()</code> syscall).
+                     <code class="literal">O_NONBLOCK</code>/<code class="literal">O_NDELAY</code>
+                     (see the documentation of the UNIX <code class="function">open()</code> syscall).
 </td>
 </tr>
 <tr>
@@ -1571,7 +1571,7 @@ read with <a class="link" href="glib-IO-Channels.html#g-io-channel-get-flags" ti
 </td>
 </tr>
 <tr>
-<td><p><a name="G-IO-FLAG-IS-WRITEABLE:CAPS"></a><span class="term"><code class="literal">G_IO_FLAG_IS_WRITEABLE</code></span></p></td>
+<td><p><a name="G-IO-FLAG-IS-WRITABLE:CAPS"></a><span class="term"><code class="literal">G_IO_FLAG_IS_WRITABLE</code></span></p></td>
 <td>indicates that the io channel is writable.
                          This flag cannot be changed.
 </td>

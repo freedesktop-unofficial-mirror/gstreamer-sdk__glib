@@ -39,13 +39,14 @@
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
 <h2><span class="refentrytitle"><a name="GAction.top_of_page"></a>GAction</span></h2>
-<p>GAction — An action</p>
+<p>GAction — An action interface</p>
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
 <div class="refsynopsisdiv">
 <a name="GAction.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">                    <a class="link" href="GAction.html#GAction-struct" title="GAction">GAction</a>;
+struct              <a class="link" href="GAction.html#GActionInterface" title="struct GActionInterface">GActionInterface</a>;
 
 const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *       <a class="link" href="GAction.html#g-action-get-name" title="g_action_get_name ()">g_action_get_name</a>                   (<em class="parameter"><code><a class="link" href="GAction.html" title="GAction"><span class="type">GAction</span></a> *action</code></em>);
 const <a href="./../glib/glib/glib-GVariantType.html#GVariantType"><span class="returnvalue">GVariantType</span></a> * <a class="link" href="GAction.html#g-action-get-parameter-type" title="g_action_get_parameter_type ()">g_action_get_parameter_type</a>        (<em class="parameter"><code><a class="link" href="GAction.html" title="GAction"><span class="type">GAction</span></a> *action</code></em>);
@@ -115,7 +116,7 @@ range.
 <p>
 <a class="link" href="GAction.html" title="GAction"><span class="type">GAction</span></a> is merely the interface to the concept of an action, as
 described above.  Various implementations of actions exist, including
-<a class="link" href="GSimpleAction.html" title="GSimpleAction"><span class="type">GSimpleAction</span></a> and <a href="http://library.gnome.org/devel/gtk/GtkAction.html"><span class="type">GtkAction</span></a>.
+<a class="link" href="GSimpleAction.html" title="GSimpleAction"><span class="type">GSimpleAction</span></a> and <a href="http://developer.gnome.org/devel/gtk/GtkAction.html"><span class="type">GtkAction</span></a>.
 </p>
 <p>
 In all cases, the implementing class is responsible for storing the
@@ -135,8 +136,81 @@ inside of a <a class="link" href="GSimpleActionGroup.html" title="GSimpleActionG
 <div class="refsect2">
 <a name="GAction-struct"></a><h3>GAction</h3>
 <pre class="programlisting">typedef struct _GAction GAction;</pre>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GActionInterface"></a><h3>struct GActionInterface</h3>
+<pre class="programlisting">struct GActionInterface {
+  GTypeInterface g_iface;
+
+  /* virtual functions */
+  const gchar *        (* get_name)             (GAction  *action);
+  const GVariantType * (* get_parameter_type)   (GAction  *action);
+  const GVariantType * (* get_state_type)       (GAction  *action);
+  GVariant *           (* get_state_hint)       (GAction  *action);
+
+  gboolean             (* get_enabled)          (GAction  *action);
+  GVariant *           (* get_state)            (GAction  *action);
+
+  void                 (* change_state)         (GAction  *action,
+                                                 GVariant *value);
+  void                 (* activate)             (GAction  *action,
+                                                 GVariant *parameter);
+};
+</pre>
 <p>
+The virtual function table for <a class="link" href="GAction.html" title="GAction"><span class="type">GAction</span></a>.
 </p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><a href="./../gobject/gobject/gobject-Type-Information.html#GTypeInterface"><span class="type">GTypeInterface</span></a> <em class="structfield"><code><a name="GActionInterface.g-iface"></a>g_iface</code></em>;</span></p></td>
+<td></td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="structfield"><code><a name="GActionInterface.get-name"></a>get_name</code></em> ()</span></p></td>
+<td>the virtual function pointer for <a class="link" href="GAction.html#g-action-get-name" title="g_action_get_name ()"><code class="function">g_action_get_name()</code></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="structfield"><code><a name="GActionInterface.get-parameter-type"></a>get_parameter_type</code></em> ()</span></p></td>
+<td>the virtual function pointer for <a class="link" href="GAction.html#g-action-get-parameter-type" title="g_action_get_parameter_type ()"><code class="function">g_action_get_parameter_type()</code></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="structfield"><code><a name="GActionInterface.get-state-type"></a>get_state_type</code></em> ()</span></p></td>
+<td>the virtual function pointer for <a class="link" href="GAction.html#g-action-get-state-type" title="g_action_get_state_type ()"><code class="function">g_action_get_state_type()</code></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="structfield"><code><a name="GActionInterface.get-state-hint"></a>get_state_hint</code></em> ()</span></p></td>
+<td>the virtual function pointer for <a class="link" href="GAction.html#g-action-get-state-hint" title="g_action_get_state_hint ()"><code class="function">g_action_get_state_hint()</code></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="structfield"><code><a name="GActionInterface.get-enabled"></a>get_enabled</code></em> ()</span></p></td>
+<td>the virtual function pointer for <a class="link" href="GAction.html#g-action-get-enabled" title="g_action_get_enabled ()"><code class="function">g_action_get_enabled()</code></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="structfield"><code><a name="GActionInterface.get-state"></a>get_state</code></em> ()</span></p></td>
+<td>the virtual function pointer for <a class="link" href="GAction.html#g-action-get-state" title="g_action_get_state ()"><code class="function">g_action_get_state()</code></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="structfield"><code><a name="GActionInterface.change-state"></a>change_state</code></em> ()</span></p></td>
+<td>the virtual function pointer for <a class="link" href="GAction.html#g-action-change-state" title="g_action_change_state ()"><code class="function">g_action_change_state()</code></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="structfield"><code><a name="GActionInterface.activate"></a>activate</code></em> ()</span></p></td>
+<td>the virtual function pointer for <a class="link" href="GAction.html#g-action-activate" title="g_action_activate ()"><code class="function">g_action_activate()</code></a>.  Note that <a class="link" href="GAction.html" title="GAction"><span class="type">GAction</span></a> does not have an
+'activate' signal but that implementations of it may have one.</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.28</p>
 </div>
 <hr>
 <div class="refsect2">

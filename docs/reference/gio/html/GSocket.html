@@ -5,8 +5,8 @@
 <title>GSocket</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="GIO Reference Manual">
-<link rel="up" href="networking.html" title="Lowlevel network support">
-<link rel="prev" href="networking.html" title="Lowlevel network support">
+<link rel="up" href="networking.html" title="Low-level network support">
+<link rel="prev" href="networking.html" title="Low-level network support">
 <link rel="next" href="GInetAddress.html" title="GInetAddress">
 <meta name="generator" content="GTK-Doc V1.18 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
@@ -145,6 +145,12 @@ struct              <a class="link" href="GSocket.html#GOutputVector" title="str
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-IO-Channels.html#GIOCondition"><span class="type">GIOCondition</span></a> condition</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
+<a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GSocket.html#g-socket-condition-timed-wait" title="g_socket_condition_timed_wait ()">g_socket_condition_timed_wait</a>       (<em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-IO-Channels.html#GIOCondition"><span class="type">GIOCondition</span></a> condition</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gint64"><span class="type">gint64</span></a> timeout</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
+<a href="./../glib/glib/glib-Basic-Types.html#gssize"><span class="returnvalue">gssize</span></a>              <a class="link" href="GSocket.html#g-socket-get-available-bytes" title="g_socket_get_available_bytes ()">g_socket_get_available_bytes</a>        (<em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GSocket.html#g-socket-set-listen-backlog" title="g_socket_set_listen_backlog ()">g_socket_set_listen_backlog</a>         (<em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a> backlog</code></em>);
 <a href="./../glib/glib/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>                <a class="link" href="GSocket.html#g-socket-get-listen-backlog" title="g_socket_get_listen_backlog ()">g_socket_get_listen_backlog</a>         (<em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>);
@@ -157,6 +163,12 @@ struct              <a class="link" href="GSocket.html#GOutputVector" title="str
 <a href="./../glib/glib/glib-Basic-Types.html#guint"><span class="returnvalue">guint</span></a>               <a class="link" href="GSocket.html#g-socket-get-timeout" title="g_socket_get_timeout ()">g_socket_get_timeout</a>                (<em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GSocket.html#g-socket-set-timeout" title="g_socket_set_timeout ()">g_socket_set_timeout</a>                (<em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a> timeout</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GSocket.html#g-socket-set-ttl" title="g_socket_set_ttl ()">g_socket_set_ttl</a>                    (<em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a> ttl</code></em>);
+<a href="./../glib/glib/glib-Basic-Types.html#guint"><span class="returnvalue">guint</span></a>               <a class="link" href="GSocket.html#g-socket-get-ttl" title="g_socket_get_ttl ()">g_socket_get_ttl</a>                    (<em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>);
+<a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GSocket.html#g-socket-get-broadcast" title="g_socket_get_broadcast ()">g_socket_get_broadcast</a>              (<em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GSocket.html#g-socket-set-broadcast" title="g_socket_set_broadcast ()">g_socket_set_broadcast</a>              (<em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> broadcast</code></em>);
 <a class="link" href="GSocketAddress.html#GSocketFamily" title="enum GSocketFamily"><span class="returnvalue">GSocketFamily</span></a>       <a class="link" href="GSocket.html#g-socket-get-family" title="g_socket_get_family ()">g_socket_get_family</a>                 (<em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>);
 <span class="returnvalue">int</span>                 <a class="link" href="GSocket.html#g-socket-get-fd" title="g_socket_get_fd ()">g_socket_get_fd</a>                     (<em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>);
 <a class="link" href="GSocketAddress.html" title="GSocketAddress"><span class="returnvalue">GSocketAddress</span></a> *    <a class="link" href="GSocket.html#g-socket-get-local-address" title="g_socket_get_local_address ()">g_socket_get_local_address</a>          (<em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>,
@@ -168,6 +180,23 @@ struct              <a class="link" href="GSocket.html#GOutputVector" title="str
 <a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GSocket.html#g-socket-speaks-ipv4" title="g_socket_speaks_ipv4 ()">g_socket_speaks_ipv4</a>                (<em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>);
 <a class="link" href="GCredentials.html" title="GCredentials"><span class="returnvalue">GCredentials</span></a> *      <a class="link" href="GSocket.html#g-socket-get-credentials" title="g_socket_get_credentials ()">g_socket_get_credentials</a>            (<em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
+
+<a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GSocket.html#g-socket-join-multicast-group" title="g_socket_join_multicast_group ()">g_socket_join_multicast_group</a>       (<em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GInetAddress.html" title="GInetAddress"><span class="type">GInetAddress</span></a> *group</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> source_specific</code></em>,
+                                                         <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *iface</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
+<a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GSocket.html#g-socket-leave-multicast-group" title="g_socket_leave_multicast_group ()">g_socket_leave_multicast_group</a>      (<em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GInetAddress.html" title="GInetAddress"><span class="type">GInetAddress</span></a> *group</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> source_specific</code></em>,
+                                                         <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *iface</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
+<a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GSocket.html#g-socket-get-multicast-loopback" title="g_socket_get_multicast_loopback ()">g_socket_get_multicast_loopback</a>     (<em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GSocket.html#g-socket-set-multicast-loopback" title="g_socket_set_multicast_loopback ()">g_socket_set_multicast_loopback</a>     (<em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> loopback</code></em>);
+<a href="./../glib/glib/glib-Basic-Types.html#guint"><span class="returnvalue">guint</span></a>               <a class="link" href="GSocket.html#g-socket-get-multicast-ttl" title="g_socket_get_multicast_ttl ()">g_socket_get_multicast_ttl</a>          (<em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GSocket.html#g-socket-set-multicast-ttl" title="g_socket_set_multicast_ttl ()">g_socket_set_multicast_ttl</a>          (<em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a> ttl</code></em>);
 </pre>
 </div>
 <div class="refsect1">
@@ -187,14 +216,18 @@ GSocket implements
 <a name="GSocket.properties"></a><h2>Properties</h2>
 <pre class="synopsis">
   "<a class="link" href="GSocket.html#GSocket--blocking" title='The "blocking" property'>blocking</a>"                 <a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read / Write
+  "<a class="link" href="GSocket.html#GSocket--broadcast" title='The "broadcast" property'>broadcast</a>"                <a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read / Write
   "<a class="link" href="GSocket.html#GSocket--family" title='The "family" property'>family</a>"                   <a class="link" href="GSocketAddress.html#GSocketFamily" title="enum GSocketFamily"><span class="type">GSocketFamily</span></a>         : Read / Write / Construct Only
   "<a class="link" href="GSocket.html#GSocket--fd" title='The "fd" property'>fd</a>"                       <a href="./../glib/glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a>                  : Read / Write / Construct Only
   "<a class="link" href="GSocket.html#GSocket--keepalive" title='The "keepalive" property'>keepalive</a>"                <a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read / Write
   "<a class="link" href="GSocket.html#GSocket--listen-backlog" title='The "listen-backlog" property'>listen-backlog</a>"           <a href="./../glib/glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a>                  : Read / Write
   "<a class="link" href="GSocket.html#GSocket--local-address" title='The "local-address" property'>local-address</a>"            <a class="link" href="GSocketAddress.html" title="GSocketAddress"><span class="type">GSocketAddress</span></a>*       : Read
+  "<a class="link" href="GSocket.html#GSocket--multicast-loopback" title='The "multicast-loopback" property'>multicast-loopback</a>"       <a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read / Write
+  "<a class="link" href="GSocket.html#GSocket--multicast-ttl" title='The "multicast-ttl" property'>multicast-ttl</a>"            <a href="./../glib/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a>                 : Read / Write
   "<a class="link" href="GSocket.html#GSocket--protocol" title='The "protocol" property'>protocol</a>"                 <a class="link" href="GSocket.html#GSocketProtocol" title="enum GSocketProtocol"><span class="type">GSocketProtocol</span></a>       : Read / Write / Construct Only
   "<a class="link" href="GSocket.html#GSocket--remote-address" title='The "remote-address" property'>remote-address</a>"           <a class="link" href="GSocketAddress.html" title="GSocketAddress"><span class="type">GSocketAddress</span></a>*       : Read
   "<a class="link" href="GSocket.html#GSocket--timeout" title='The "timeout" property'>timeout</a>"                  <a href="./../glib/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a>                 : Read / Write
+  "<a class="link" href="GSocket.html#GSocket--ttl" title='The "ttl" property'>ttl</a>"                      <a href="./../glib/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a>                 : Read / Write
   "<a class="link" href="GSocket.html#GSocket--type" title='The "type" property'>type</a>"                     <a class="link" href="GSocket.html#GSocketType" title="enum GSocketType"><span class="type">GSocketType</span></a>           : Read / Write / Construct Only
 </pre>
 </div>
@@ -924,13 +957,15 @@ See <a class="link" href="GSocket.html#g-socket-receive" title="g_socket_receive
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>address</code></em> :</span></p></td>
-<td>a pointer to a <a class="link" href="GSocketAddress.html" title="GSocketAddress"><span class="type">GSocketAddress</span></a> pointer, or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+<td>a pointer to a <a class="link" href="GSocketAddress.html" title="GSocketAddress"><span class="type">GSocketAddress</span></a>
+pointer, or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>][<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>buffer</code></em> :</span></p></td>
-<td>a buffer to read data into (which should be at least <em class="parameter"><code>size</code></em>
-bytes long).</td>
+<td>a buffer to
+read data into (which should be at least <em class="parameter"><code>size</code></em> bytes long). <span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=size][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> guint8]</span>
+</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>size</code></em> :</span></p></td>
@@ -1046,7 +1081,8 @@ On error -1 is returned and <em class="parameter"><code>error</code></em> is set
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>address</code></em> :</span></p></td>
-<td>a pointer to a <a class="link" href="GSocketAddress.html" title="GSocketAddress"><span class="type">GSocketAddress</span></a> pointer, or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+<td>a pointer to a <a class="link" href="GSocketAddress.html" title="GSocketAddress"><span class="type">GSocketAddress</span></a>
+pointer, or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>][<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
@@ -1183,7 +1219,8 @@ On error -1 is returned and <em class="parameter"><code>error</code></em> is set
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>buffer</code></em> :</span></p></td>
-<td>the buffer containing the data to send. <span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=size]</span>
+<td>the buffer
+containing the data to send. <span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=size][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> guint8]</span>
 </td>
 </tr>
 <tr>
@@ -1236,12 +1273,13 @@ See <a class="link" href="GSocket.html#g-socket-send" title="g_socket_send ()"><
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>address</code></em> :</span></p></td>
-<td>a <a class="link" href="GSocketAddress.html" title="GSocketAddress"><span class="type">GSocketAddress</span></a>, or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+<td>a <a class="link" href="GSocketAddress.html" title="GSocketAddress"><span class="type">GSocketAddress</span></a>, or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>buffer</code></em> :</span></p></td>
-<td>the buffer containing the data to send. <span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=size]</span>
+<td>the buffer
+containing the data to send. <span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=size][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> guint8]</span>
 </td>
 </tr>
 <tr>
@@ -1334,7 +1372,7 @@ On error -1 is returned and <em class="parameter"><code>error</code></em> is set
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>address</code></em> :</span></p></td>
-<td>a <a class="link" href="GSocketAddress.html" title="GSocketAddress"><span class="type">GSocketAddress</span></a>, or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+<td>a <a class="link" href="GSocketAddress.html" title="GSocketAddress"><span class="type">GSocketAddress</span></a>, or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
@@ -1403,7 +1441,8 @@ the <em class="parameter"><code>blocking</code></em> argument rather than by <em
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>buffer</code></em> :</span></p></td>
-<td>the buffer containing the data to send. <span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=size]</span>
+<td>the buffer
+containing the data to send. <span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=size][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> guint8]</span>
 </td>
 </tr>
 <tr>
@@ -1721,6 +1760,9 @@ met, then <a href="./../glib/glib/glib-Standard-Macros.html#FALSE:CAPS"><code cl
 the appropriate value (<a class="link" href="gio-GIOError.html#G-IO-ERROR-CANCELLED:CAPS"><code class="literal">G_IO_ERROR_CANCELLED</code></a> or
 <a class="link" href="gio-GIOError.html#G-IO-ERROR-TIMED-OUT:CAPS"><code class="literal">G_IO_ERROR_TIMED_OUT</code></a>).
 </p>
+<p>
+See also <a class="link" href="GSocket.html#g-socket-condition-timed-wait" title="g_socket_condition_timed_wait ()"><code class="function">g_socket_condition_timed_wait()</code></a>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
@@ -1751,6 +1793,94 @@ the appropriate value (<a class="link" href="gio-GIOError.html#G-IO-ERROR-CANCEL
 </tbody>
 </table></div>
 <p class="since">Since 2.22</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-socket-condition-timed-wait"></a><h3>g_socket_condition_timed_wait ()</h3>
+<pre class="programlisting"><a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_socket_condition_timed_wait       (<em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-IO-Channels.html#GIOCondition"><span class="type">GIOCondition</span></a> condition</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gint64"><span class="type">gint64</span></a> timeout</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+<p>
+Waits for up to <em class="parameter"><code>timeout</code></em> microseconds for <em class="parameter"><code>condition</code></em> to become true
+on <em class="parameter"><code>socket</code></em>. If the condition is met, <a href="./../glib/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> is returned.
+</p>
+<p>
+If <em class="parameter"><code>cancellable</code></em> is cancelled before the condition is met, or if
+<em class="parameter"><code>timeout</code></em> (or the socket's <a class="link" href="GSocket.html#GSocket--timeout" title='The "timeout" property'><span class="type">"timeout"</span></a>) is reached before the
+condition is met, then <a href="./../glib/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> is returned and <em class="parameter"><code>error</code></em>, if non-<a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>,
+is set to the appropriate value (<a class="link" href="gio-GIOError.html#G-IO-ERROR-CANCELLED:CAPS"><code class="literal">G_IO_ERROR_CANCELLED</code></a> or
+<a class="link" href="gio-GIOError.html#G-IO-ERROR-TIMED-OUT:CAPS"><code class="literal">G_IO_ERROR_TIMED_OUT</code></a>).
+</p>
+<p>
+If you don't want a timeout, use <a class="link" href="GSocket.html#g-socket-condition-wait" title="g_socket_condition_wait ()"><code class="function">g_socket_condition_wait()</code></a>.
+(Alternatively, you can pass -1 for <em class="parameter"><code>timeout</code></em>.)
+</p>
+<p>
+Note that although <em class="parameter"><code>timeout</code></em> is in microseconds for consistency with
+other GLib APIs, this function actually only has millisecond
+resolution, and the behavior is undefined if <em class="parameter"><code>timeout</code></em> is not an
+exact number of milliseconds.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>socket</code></em> :</span></p></td>
+<td>a <a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>condition</code></em> :</span></p></td>
+<td>a <a href="./../glib/glib/glib-IO-Channels.html#GIOCondition"><span class="type">GIOCondition</span></a> mask to wait for</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>timeout</code></em> :</span></p></td>
+<td>the maximum time (in microseconds) to wait, or -1</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
+<td>a <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a>, or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td>a <a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> pointer, or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+<a href="./../glib/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the condition was met, <a href="./../glib/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.32</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-socket-get-available-bytes"></a><h3>g_socket_get_available_bytes ()</h3>
+<pre class="programlisting"><a href="./../glib/glib/glib-Basic-Types.html#gssize"><span class="returnvalue">gssize</span></a>              g_socket_get_available_bytes        (<em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>);</pre>
+<p>
+Get the amount of data pending in the OS input buffer.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>socket</code></em> :</span></p></td>
+<td>a <a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the number of bytes that can be read from the socket
+without blocking or -1 on error.</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.32</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -1994,6 +2124,105 @@ cause the timeout to be reset.
 </div>
 <hr>
 <div class="refsect2">
+<a name="g-socket-set-ttl"></a><h3>g_socket_set_ttl ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_socket_set_ttl                    (<em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a> ttl</code></em>);</pre>
+<p>
+Sets the time-to-live for outgoing unicast packets on <em class="parameter"><code>socket</code></em>.
+By default the platform-specific default value is used.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>socket</code></em> :</span></p></td>
+<td>a <a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ttl</code></em> :</span></p></td>
+<td>the time-to-live value for all unicast packets on <em class="parameter"><code>socket</code></em>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.32</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-socket-get-ttl"></a><h3>g_socket_get_ttl ()</h3>
+<pre class="programlisting"><a href="./../glib/glib/glib-Basic-Types.html#guint"><span class="returnvalue">guint</span></a>               g_socket_get_ttl                    (<em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>);</pre>
+<p>
+Gets the unicast time-to-live setting on <em class="parameter"><code>socket</code></em>; see
+<a class="link" href="GSocket.html#g-socket-set-ttl" title="g_socket_set_ttl ()"><code class="function">g_socket_set_ttl()</code></a> for more details.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>socket</code></em> :</span></p></td>
+<td>a <a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the time-to-live setting on <em class="parameter"><code>socket</code></em>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.32</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-socket-get-broadcast"></a><h3>g_socket_get_broadcast ()</h3>
+<pre class="programlisting"><a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_socket_get_broadcast              (<em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>);</pre>
+<p>
+Gets the broadcast setting on <em class="parameter"><code>socket</code></em>; if <a href="./../glib/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a>,
+it is possible to send packets to broadcast
+addresses or receive from broadcast addresses.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>socket</code></em> :</span></p></td>
+<td>a <a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the broadcast setting on <em class="parameter"><code>socket</code></em>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.32</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-socket-set-broadcast"></a><h3>g_socket_set_broadcast ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_socket_set_broadcast              (<em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> broadcast</code></em>);</pre>
+<p>
+Sets whether <em class="parameter"><code>socket</code></em> should allow sending to and receiving from
+broadcast addresses. This is <a href="./../glib/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> by default.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>socket</code></em> :</span></p></td>
+<td>a <a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>broadcast</code></em> :</span></p></td>
+<td>whether <em class="parameter"><code>socket</code></em> should allow sending to and receiving
+from broadcast addresses</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.32</p>
+</div>
+<hr>
+<div class="refsect2">
 <a name="g-socket-get-family"></a><h3>g_socket_get_family ()</h3>
 <pre class="programlisting"><a class="link" href="GSocketAddress.html#GSocketFamily" title="enum GSocketFamily"><span class="returnvalue">GSocketFamily</span></a>       g_socket_get_family                 (<em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>);</pre>
 <p>
@@ -2228,6 +2457,217 @@ that must be freed with <a href="./../gobject/gobject/gobject-The-Base-Object-Ty
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
+<hr>
+<div class="refsect2">
+<a name="g-socket-join-multicast-group"></a><h3>g_socket_join_multicast_group ()</h3>
+<pre class="programlisting"><a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_socket_join_multicast_group       (<em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GInetAddress.html" title="GInetAddress"><span class="type">GInetAddress</span></a> *group</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> source_specific</code></em>,
+                                                         <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *iface</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+<p>
+Registers <em class="parameter"><code>socket</code></em> to receive multicast messages sent to <em class="parameter"><code>group</code></em>.
+<em class="parameter"><code>socket</code></em> must be a <a class="link" href="GSocket.html#G-SOCKET-TYPE-DATAGRAM:CAPS"><code class="literal">G_SOCKET_TYPE_DATAGRAM</code></a> socket, and must have
+been bound to an appropriate interface and port with
+<a class="link" href="GSocket.html#g-socket-bind" title="g_socket_bind ()"><code class="function">g_socket_bind()</code></a>.
+</p>
+<p>
+If <em class="parameter"><code>iface</code></em> is <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>, the system will automatically pick an interface
+to bind to based on <em class="parameter"><code>group</code></em>.
+</p>
+<p>
+If <em class="parameter"><code>source_specific</code></em> is <a href="./../glib/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a>, source-specific multicast as defined
+in RFC 4604 is used. Note that on older platforms this may fail
+with a <a class="link" href="gio-GIOError.html#G-IO-ERROR-NOT-SUPPORTED:CAPS"><code class="literal">G_IO_ERROR_NOT_SUPPORTED</code></a> error.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>socket</code></em> :</span></p></td>
+<td>a <a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>group</code></em> :</span></p></td>
+<td>a <a class="link" href="GInetAddress.html" title="GInetAddress"><span class="type">GInetAddress</span></a> specifying the group address to join.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>iface</code></em> :</span></p></td>
+<td>Name of the interface to use, or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>source_specific</code></em> :</span></p></td>
+<td>
+<a href="./../glib/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if source-specific multicast should be used</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td>
+<a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> for error reporting, or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+<a href="./../glib/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> on success, <a href="./../glib/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> on error.</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.32</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-socket-leave-multicast-group"></a><h3>g_socket_leave_multicast_group ()</h3>
+<pre class="programlisting"><a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_socket_leave_multicast_group      (<em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GInetAddress.html" title="GInetAddress"><span class="type">GInetAddress</span></a> *group</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> source_specific</code></em>,
+                                                         <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *iface</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+<p>
+Removes <em class="parameter"><code>socket</code></em> from the multicast group defined by <em class="parameter"><code>group</code></em>, <em class="parameter"><code>iface</code></em>,
+and <em class="parameter"><code>source_specific</code></em> (which must all have the same values they had
+when you joined the group).
+</p>
+<p>
+<em class="parameter"><code>socket</code></em> remains bound to its address and port, and can still receive
+unicast messages after calling this.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>socket</code></em> :</span></p></td>
+<td>a <a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>group</code></em> :</span></p></td>
+<td>a <a class="link" href="GInetAddress.html" title="GInetAddress"><span class="type">GInetAddress</span></a> specifying the group address to leave.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>iface</code></em> :</span></p></td>
+<td>Interface used. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>source_specific</code></em> :</span></p></td>
+<td>
+<a href="./../glib/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if source-specific multicast was used</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td>
+<a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> for error reporting, or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+<a href="./../glib/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> on success, <a href="./../glib/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> on error.</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.32</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-socket-get-multicast-loopback"></a><h3>g_socket_get_multicast_loopback ()</h3>
+<pre class="programlisting"><a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_socket_get_multicast_loopback     (<em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>);</pre>
+<p>
+Gets the multicast loopback setting on <em class="parameter"><code>socket</code></em>; if <a href="./../glib/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> (the
+default), outgoing multicast packets will be looped back to
+multicast listeners on the same host.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>socket</code></em> :</span></p></td>
+<td>a <a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the multicast loopback setting on <em class="parameter"><code>socket</code></em>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.32</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-socket-set-multicast-loopback"></a><h3>g_socket_set_multicast_loopback ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_socket_set_multicast_loopback     (<em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> loopback</code></em>);</pre>
+<p>
+Sets whether outgoing multicast packets will be received by sockets
+listening on that multicast address on the same host. This is <a href="./../glib/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a>
+by default.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>socket</code></em> :</span></p></td>
+<td>a <a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>loopback</code></em> :</span></p></td>
+<td>whether <em class="parameter"><code>socket</code></em> should receive messages sent to its
+multicast groups from the local host</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.32</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-socket-get-multicast-ttl"></a><h3>g_socket_get_multicast_ttl ()</h3>
+<pre class="programlisting"><a href="./../glib/glib/glib-Basic-Types.html#guint"><span class="returnvalue">guint</span></a>               g_socket_get_multicast_ttl          (<em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>);</pre>
+<p>
+Gets the multicast time-to-live setting on <em class="parameter"><code>socket</code></em>; see
+<a class="link" href="GSocket.html#g-socket-set-multicast-ttl" title="g_socket_set_multicast_ttl ()"><code class="function">g_socket_set_multicast_ttl()</code></a> for more details.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>socket</code></em> :</span></p></td>
+<td>a <a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the multicast time-to-live setting on <em class="parameter"><code>socket</code></em>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.32</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-socket-set-multicast-ttl"></a><h3>g_socket_set_multicast_ttl ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_socket_set_multicast_ttl          (<em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a> ttl</code></em>);</pre>
+<p>
+Sets the time-to-live for outgoing multicast datagrams on <em class="parameter"><code>socket</code></em>.
+By default, this is 1, meaning that multicast packets will not leave
+the local network.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>socket</code></em> :</span></p></td>
+<td>a <a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ttl</code></em> :</span></p></td>
+<td>the time-to-live value for all multicast datagrams on <em class="parameter"><code>socket</code></em>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.32</p>
+</div>
 </div>
 <div class="refsect1">
 <a name="GSocket.property-details"></a><h2>Property Details</h2>
@@ -2236,6 +2676,16 @@ that must be freed with <a href="./../gobject/gobject/gobject-The-Base-Object-Ty
 <pre class="programlisting">  "blocking"                 <a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read / Write</pre>
 <p>Whether or not I/O on this socket is blocking.</p>
 <p>Default value: TRUE</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GSocket--broadcast"></a><h3>The <code class="literal">"broadcast"</code> property</h3>
+<pre class="programlisting">  "broadcast"                <a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read / Write</pre>
+<p>
+Whether the socket should allow sending to and receiving from broadcast addresses.
+</p>
+<p>Default value: FALSE</p>
+<p class="since">Since 2.32</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -2274,6 +2724,26 @@ that must be freed with <a href="./../gobject/gobject/gobject-The-Base-Object-Ty
 </div>
 <hr>
 <div class="refsect2">
+<a name="GSocket--multicast-loopback"></a><h3>The <code class="literal">"multicast-loopback"</code> property</h3>
+<pre class="programlisting">  "multicast-loopback"       <a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read / Write</pre>
+<p>
+Whether outgoing multicast packets loop back to the local host.
+</p>
+<p>Default value: TRUE</p>
+<p class="since">Since 2.32</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GSocket--multicast-ttl"></a><h3>The <code class="literal">"multicast-ttl"</code> property</h3>
+<pre class="programlisting">  "multicast-ttl"            <a href="./../glib/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a>                 : Read / Write</pre>
+<p>
+Time-to-live out outgoing multicast packets
+</p>
+<p>Default value: 1</p>
+<p class="since">Since 2.32</p>
+</div>
+<hr>
+<div class="refsect2">
 <a name="GSocket--protocol"></a><h3>The <code class="literal">"protocol"</code> property</h3>
 <pre class="programlisting">  "protocol"                 <a class="link" href="GSocket.html#GSocketProtocol" title="enum GSocketProtocol"><span class="type">GSocketProtocol</span></a>       : Read / Write / Construct Only</pre>
 <p>The id of the protocol to use, or -1 for unknown.</p>
@@ -2294,6 +2764,16 @@ The timeout in seconds on socket I/O
 </p>
 <p>Default value: 0</p>
 <p class="since">Since 2.26</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GSocket--ttl"></a><h3>The <code class="literal">"ttl"</code> property</h3>
+<pre class="programlisting">  "ttl"                      <a href="./../glib/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a>                 : Read / Write</pre>
+<p>
+Time-to-live for outgoing unicast packets
+</p>
+<p>Default value: 0</p>
+<p class="since">Since 2.32</p>
 </div>
 <hr>
 <div class="refsect2">
