@@ -302,7 +302,9 @@ giowin32include_HEADERS = \
 
 endif
 
+if OS_UNIX
 SUBDIRS += tests
+endif
 
 libgio_2_0_la_SOURCES =		\
 	gappinfo.c 		\
