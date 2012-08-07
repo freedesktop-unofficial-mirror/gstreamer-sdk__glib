@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Closures</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.77.1">
 <link rel="home" href="index.html" title="GObject Reference Manual">
 <link rel="up" href="rn01.html" title="API Reference">
 <link rel="prev" href="gobject-Signals.html" title="Signals">
@@ -287,7 +287,7 @@ data pair.
 Using closures has a number of important advantages over a simple
 callback function/data pointer combination:
 </p>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem"><p>
 Closures allow the callee to get the types of the callback parameters,
 which means that language bindings don't have to write individual glue
@@ -315,8 +315,11 @@ automatically removed when the objects they point to go away.
 <p>
 Check if the closure still needs a marshaller. See <a class="link" href="gobject-Closures.html#g-closure-set-marshal" title="g_closure_set_marshal ()"><code class="function">g_closure_set_marshal()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
@@ -343,8 +346,11 @@ and the marshal guards. Note that each guard counts as two notifiers.
 See <a class="link" href="gobject-Closures.html#g-closure-set-meta-marshal" title="g_closure_set_meta_marshal ()"><code class="function">g_closure_set_meta_marshal()</code></a>, <a class="link" href="gobject-Closures.html#g-closure-add-finalize-notifier" title="g_closure_add_finalize_notifier ()"><code class="function">g_closure_add_finalize_notifier()</code></a>,
 <a class="link" href="gobject-Closures.html#g-closure-add-invalidate-notifier" title="g_closure_add_invalidate_notifier ()"><code class="function">g_closure_add_invalidate_notifier()</code></a> and <a class="link" href="gobject-Closures.html#g-closure-add-marshal-guards" title="g_closure_add_marshal_guards ()"><code class="function">g_closure_add_marshal_guards()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cl</code></em> :</span></p></td>
@@ -367,8 +373,11 @@ See <a class="link" href="gobject-Closures.html#g-closure-set-meta-marshal" titl
 Checks whether the user data of the <a class="link" href="gobject-Closures.html#GCClosure" title="struct GCClosure"><span class="type">GCClosure</span></a> should be passed as the
 first parameter to the callback. See <a class="link" href="gobject-Closures.html#g-cclosure-new-swap" title="g_cclosure_new_swap ()"><code class="function">g_cclosure_new_swap()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cclosure</code></em> :</span></p></td>
@@ -391,8 +400,11 @@ first parameter to the callback. See <a class="link" href="gobject-Closures.html
 <p>
 Cast a function pointer to a <a class="link" href="gobject-Closures.html#GCallback" title="GCallback ()"><span class="type">GCallback</span></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>f</code></em> :</span></p></td>
 <td>a function pointer.</td>
@@ -422,8 +434,11 @@ is connected). Use <a class="link" href="gobject-Closures.html#G-CALLBACK:CAPS" 
 <p>
 A <a class="link" href="gobject-Closures.html#GClosure" title="struct GClosure"><span class="type">GClosure</span></a> represents a callback supplied by the programmer.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term">volatile       	<a href="./../glib/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a> <em class="structfield"><code><a name="GClosure.in-marshal"></a>in_marshal</code></em> : 1;</span></p></td>
@@ -460,8 +475,11 @@ The <a class="link" href="gobject-Type-Information.html#GType" title="GType"><sp
 <p>
 A <a class="link" href="gobject-Closures.html#GCClosure" title="struct GCClosure"><span class="type">GCClosure</span></a> is a specialization of <a class="link" href="gobject-Closures.html#GClosure" title="struct GClosure"><span class="type">GClosure</span></a> for C function callbacks.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><a class="link" href="gobject-Closures.html#GClosure" title="struct GClosure"><span class="type">GClosure</span></a> <em class="structfield"><code><a name="GCClosure.closure"></a>closure</code></em>;</span></p></td>
@@ -487,8 +505,11 @@ A <a class="link" href="gobject-Closures.html#GCClosure" title="struct GCClosure
 <p>
 The type used for marshaller functions.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
@@ -537,8 +558,11 @@ registering the marshaller, see <a class="link" href="gobject-Closures.html#g-cl
 The type used for the various notification callbacks which can be registered
 on closures.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
@@ -561,8 +585,11 @@ on closures.
 Creates a new closure which invokes <em class="parameter"><code>callback_func</code></em> with <em class="parameter"><code>user_data</code></em> as
 the last parameter.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>callback_func</code></em> :</span></p></td>
@@ -595,8 +622,11 @@ the last parameter.
 Creates a new closure which invokes <em class="parameter"><code>callback_func</code></em> with <em class="parameter"><code>user_data</code></em> as
 the first parameter.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>callback_func</code></em> :</span></p></td>
@@ -631,8 +661,11 @@ closure. This function is useful when you have a callback closely
 associated with a <a class="link" href="gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a>, and want the callback to no longer run
 after the object is is freed.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>callback_func</code></em> :</span></p></td>
@@ -663,8 +696,11 @@ closure. This function is useful when you have a callback closely
 associated with a <a class="link" href="gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a>, and want the callback to no longer run
 after the object is is freed.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>callback_func</code></em> :</span></p></td>
@@ -695,8 +731,11 @@ after the object is is freed.
 <p>
 A generic marshaller function implemented via <a class="ulink" href="http://sourceware.org/libffi/" target="_top">libffi</a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
@@ -743,8 +782,11 @@ A variant of <a class="link" href="gobject-Closures.html#g-closure-new-simple" t
 <em class="parameter"><code>object</code></em> and the created closure. This function is mainly useful
 when implementing new types of closures.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>sizeof_closure</code></em> :</span></p></td>
@@ -774,8 +816,11 @@ allocated <a class="link" href="gobject-Closures.html#GClosure" title="struct GC
 Increments the reference count on a closure to force it staying
 alive while the caller holds a pointer to it.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
@@ -882,8 +927,11 @@ Because <a class="link" href="gobject-Closures.html#g-closure-sink" title="g_clo
 (if it hasn't been called on <em class="parameter"><code>closure</code></em> yet) just like <a class="link" href="gobject-Closures.html#g-closure-unref" title="g_closure_unref ()"><code class="function">g_closure_unref()</code></a>,
 <a class="link" href="gobject-Closures.html#g-closure-ref" title="g_closure_ref ()"><code class="function">g_closure_ref()</code></a> should be called prior to this function.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
 <td>
@@ -901,8 +949,11 @@ Decrements the reference count of a closure after it was previously
 incremented by the same caller. If no other callers are using the
 closure, then the closure will be destroyed and freed.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
 <td>
@@ -921,8 +972,11 @@ closure, then the closure will be destroyed and freed.
 <p>
 Invokes the closure, i.e. executes the callback represented by the <em class="parameter"><code>closure</code></em>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
@@ -975,8 +1029,11 @@ Note that <a class="link" href="gobject-Closures.html#g-closure-invalidate" titl
 reference count of a closure drops to zero (unless it has already
 been invalidated before).
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
 <td>GClosure to invalidate</td>
@@ -997,8 +1054,11 @@ a single call to <a class="link" href="gobject-Closures.html#g-closure-unref" ti
 both invalidated and finalized, then the invalidate notifiers will
 be run before the finalize notifiers.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
@@ -1029,8 +1089,11 @@ Registers an invalidation notifier which will be called when the
 notifiers are invoked before finalization notifiers, in an
 unspecified order.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
@@ -1061,8 +1124,11 @@ Removes a finalization notifier.
 <p>
 Notice that notifiers are automatically removed after they are run.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
@@ -1095,8 +1161,11 @@ Removes an invalidation notifier.
 <p>
 Notice that notifiers are automatically removed after they are run.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
@@ -1199,8 +1268,11 @@ implementing new types of closures.
 
 <p>
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>sizeof_closure</code></em> :</span></p></td>
@@ -1234,8 +1306,11 @@ GObject's C predefined marshallers (the g_cclosure_marshal_*()
 functions), what it provides is a callback function to use instead of
 <em class="parameter"><code>closure-&gt;callback</code></em>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
@@ -1263,8 +1338,11 @@ closure callback, respectively. This is typically used to protect
 the extra arguments for the duration of the callback. See
 <a class="link" href="gobject-The-Base-Object-Type.html#g-object-watch-closure" title="g_object_watch_closure ()"><code class="function">g_object_watch_closure()</code></a> for an example of marshal guards.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
@@ -1315,8 +1393,11 @@ fixed offset in the class structure.  The meta marshaller retrieves
 the right callback and passes it to the marshaller as the
 <em class="parameter"><code>marshal_data</code></em> argument.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
@@ -1348,8 +1429,11 @@ If the source is not one of the standard GLib types, the <em class="parameter"><
 and <em class="parameter"><code>closure_marshal</code></em> fields of the <a href="./../glib/glib/glib-The-Main-Event-Loop.html#GSourceFuncs"><span class="type">GSourceFuncs</span></a> structure must have been
 filled in with pointers to appropriate functions.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>source</code></em> :</span></p></td>
@@ -1380,8 +1464,11 @@ If the source is not one of the standard GLib types, the
 structure must have been filled in with pointers to appropriate
 functions.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>source</code></em> :</span></p></td>
 <td>the source</td>
@@ -1401,8 +1488,11 @@ functions.
 A marshaller for a <a class="link" href="gobject-Closures.html#GCClosure" title="struct GCClosure"><span class="type">GCClosure</span></a> with a callback of type
 <code class="literal">void (*callback) (gpointer instance, gpointer user_data)</code>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
@@ -1446,8 +1536,11 @@ to <a class="link" href="gobject-Closures.html#g-closure-invoke" title="g_closur
 A marshaller for a <a class="link" href="gobject-Closures.html#GCClosure" title="struct GCClosure"><span class="type">GCClosure</span></a> with a callback of type
 <code class="literal">void (*callback) (gpointer instance, gboolean arg1, gpointer user_data)</code>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
@@ -1491,8 +1584,11 @@ to <a class="link" href="gobject-Closures.html#g-closure-invoke" title="g_closur
 A marshaller for a <a class="link" href="gobject-Closures.html#GCClosure" title="struct GCClosure"><span class="type">GCClosure</span></a> with a callback of type
 <code class="literal">void (*callback) (gpointer instance, gchar arg1, gpointer user_data)</code>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
@@ -1536,8 +1632,11 @@ to <a class="link" href="gobject-Closures.html#g-closure-invoke" title="g_closur
 A marshaller for a <a class="link" href="gobject-Closures.html#GCClosure" title="struct GCClosure"><span class="type">GCClosure</span></a> with a callback of type
 <code class="literal">void (*callback) (gpointer instance, guchar arg1, gpointer user_data)</code>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
@@ -1581,8 +1680,11 @@ to <a class="link" href="gobject-Closures.html#g-closure-invoke" title="g_closur
 A marshaller for a <a class="link" href="gobject-Closures.html#GCClosure" title="struct GCClosure"><span class="type">GCClosure</span></a> with a callback of type
 <code class="literal">void (*callback) (gpointer instance, gint arg1, gpointer user_data)</code>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
@@ -1626,8 +1728,11 @@ to <a class="link" href="gobject-Closures.html#g-closure-invoke" title="g_closur
 A marshaller for a <a class="link" href="gobject-Closures.html#GCClosure" title="struct GCClosure"><span class="type">GCClosure</span></a> with a callback of type
 <code class="literal">void (*callback) (gpointer instance, guint arg1, gpointer user_data)</code>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
@@ -1671,8 +1776,11 @@ to <a class="link" href="gobject-Closures.html#g-closure-invoke" title="g_closur
 A marshaller for a <a class="link" href="gobject-Closures.html#GCClosure" title="struct GCClosure"><span class="type">GCClosure</span></a> with a callback of type
 <code class="literal">void (*callback) (gpointer instance, glong arg1, gpointer user_data)</code>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
@@ -1716,8 +1824,11 @@ to <a class="link" href="gobject-Closures.html#g-closure-invoke" title="g_closur
 A marshaller for a <a class="link" href="gobject-Closures.html#GCClosure" title="struct GCClosure"><span class="type">GCClosure</span></a> with a callback of type
 <code class="literal">void (*callback) (gpointer instance, gulong arg1, gpointer user_data)</code>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
@@ -1761,8 +1872,11 @@ to <a class="link" href="gobject-Closures.html#g-closure-invoke" title="g_closur
 A marshaller for a <a class="link" href="gobject-Closures.html#GCClosure" title="struct GCClosure"><span class="type">GCClosure</span></a> with a callback of type
 <code class="literal">void (*callback) (gpointer instance, gint arg1, gpointer user_data)</code> where the <a href="./../glib/glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a> parameter denotes an enumeration type..
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
@@ -1806,8 +1920,11 @@ to <a class="link" href="gobject-Closures.html#g-closure-invoke" title="g_closur
 A marshaller for a <a class="link" href="gobject-Closures.html#GCClosure" title="struct GCClosure"><span class="type">GCClosure</span></a> with a callback of type
 <code class="literal">void (*callback) (gpointer instance, gint arg1, gpointer user_data)</code> where the <a href="./../glib/glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a> parameter denotes a flags type.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
@@ -1851,8 +1968,11 @@ to <a class="link" href="gobject-Closures.html#g-closure-invoke" title="g_closur
 A marshaller for a <a class="link" href="gobject-Closures.html#GCClosure" title="struct GCClosure"><span class="type">GCClosure</span></a> with a callback of type
 <code class="literal">void (*callback) (gpointer instance, gfloat arg1, gpointer user_data)</code>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
@@ -1896,8 +2016,11 @@ to <a class="link" href="gobject-Closures.html#g-closure-invoke" title="g_closur
 A marshaller for a <a class="link" href="gobject-Closures.html#GCClosure" title="struct GCClosure"><span class="type">GCClosure</span></a> with a callback of type
 <code class="literal">void (*callback) (gpointer instance, gdouble arg1, gpointer user_data)</code>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
@@ -1941,8 +2064,11 @@ to <a class="link" href="gobject-Closures.html#g-closure-invoke" title="g_closur
 A marshaller for a <a class="link" href="gobject-Closures.html#GCClosure" title="struct GCClosure"><span class="type">GCClosure</span></a> with a callback of type
 <code class="literal">void (*callback) (gpointer instance, const gchar *arg1, gpointer user_data)</code>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
@@ -1986,8 +2112,11 @@ to <a class="link" href="gobject-Closures.html#g-closure-invoke" title="g_closur
 A marshaller for a <a class="link" href="gobject-Closures.html#GCClosure" title="struct GCClosure"><span class="type">GCClosure</span></a> with a callback of type
 <code class="literal">void (*callback) (gpointer instance, GParamSpec *arg1, gpointer user_data)</code>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
@@ -2031,8 +2160,11 @@ to <a class="link" href="gobject-Closures.html#g-closure-invoke" title="g_closur
 A marshaller for a <a class="link" href="gobject-Closures.html#GCClosure" title="struct GCClosure"><span class="type">GCClosure</span></a> with a callback of type
 <code class="literal">void (*callback) (gpointer instance, GBoxed *arg1, gpointer user_data)</code>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
@@ -2076,8 +2208,11 @@ to <a class="link" href="gobject-Closures.html#g-closure-invoke" title="g_closur
 A marshaller for a <a class="link" href="gobject-Closures.html#GCClosure" title="struct GCClosure"><span class="type">GCClosure</span></a> with a callback of type
 <code class="literal">void (*callback) (gpointer instance, gpointer arg1, gpointer user_data)</code>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
@@ -2121,8 +2256,11 @@ to <a class="link" href="gobject-Closures.html#g-closure-invoke" title="g_closur
 A marshaller for a <a class="link" href="gobject-Closures.html#GCClosure" title="struct GCClosure"><span class="type">GCClosure</span></a> with a callback of type
 <code class="literal">void (*callback) (gpointer instance, GObject *arg1, gpointer user_data)</code>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
@@ -2166,8 +2304,11 @@ to <a class="link" href="gobject-Closures.html#g-closure-invoke" title="g_closur
 A marshaller for a <a class="link" href="gobject-Closures.html#GCClosure" title="struct GCClosure"><span class="type">GCClosure</span></a> with a callback of type
 <code class="literal">void (*callback) (gpointer instance, GVariant *arg1, gpointer user_data)</code>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
@@ -2213,8 +2354,11 @@ to <a class="link" href="gobject-Closures.html#g-closure-invoke" title="g_closur
 A marshaller for a <a class="link" href="gobject-Closures.html#GCClosure" title="struct GCClosure"><span class="type">GCClosure</span></a> with a callback of type
 <code class="literal">gchar* (*callback) (gpointer instance, GObject *arg1, gpointer arg2, gpointer user_data)</code>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
@@ -2259,8 +2403,11 @@ to <a class="link" href="gobject-Closures.html#g-closure-invoke" title="g_closur
 A marshaller for a <a class="link" href="gobject-Closures.html#GCClosure" title="struct GCClosure"><span class="type">GCClosure</span></a> with a callback of type
 <code class="literal">void (*callback) (gpointer instance, guint arg1, gpointer arg2, gpointer user_data)</code>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>
@@ -2305,8 +2452,11 @@ A marshaller for a <a class="link" href="gobject-Closures.html#GCClosure" title=
 <code class="literal">gboolean (*callback) (gpointer instance, gint arg1, gpointer user_data)</code> where the <a href="./../glib/glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a> parameter
 denotes a flags type.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>closure</code></em> :</span></p></td>

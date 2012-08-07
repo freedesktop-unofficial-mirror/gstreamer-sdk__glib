@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GMemoryOutputStream</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.77.1">
 <link rel="home" href="index.html" title="GIO Reference Manual">
 <link rel="up" href="streaming.html" title="Streaming I/O">
 <link rel="prev" href="GMemoryInputStream.html" title="GMemoryInputStream">
@@ -104,8 +104,11 @@ Changes the size of the memory block pointed to by <em class="parameter"><code>d
 <p>
 The function should have the same semantics as <code class="function">realloc()</code>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
@@ -177,8 +180,11 @@ pass <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="l
 
 <p>
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
@@ -220,8 +226,11 @@ Gets any loaded data from the <em class="parameter"><code>ostream</code></em>.
 Note that the returned pointer may become invalid on the next
 write or truncate operation on the stream.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>ostream</code></em> :</span></p></td>
@@ -255,8 +264,11 @@ the next write or truncate operation on the stream.
 If you want the number of bytes currently written to the stream, use
 <a class="link" href="GMemoryOutputStream.html#g-memory-output-stream-get-data-size" title="g_memory_output_stream_get_data_size ()"><code class="function">g_memory_output_stream_get_data_size()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>ostream</code></em> :</span></p></td>
@@ -280,8 +292,11 @@ Returns the number of bytes from the start up
 to including the last byte written in the stream
 that has not been truncated away.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>ostream</code></em> :</span></p></td>
@@ -309,8 +324,11 @@ freed using the free function set in <em class="parameter"><code>ostream</code><
 <p>
 <em class="parameter"><code>ostream</code></em> must be closed before calling this function.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>ostream</code></em> :</span></p></td>

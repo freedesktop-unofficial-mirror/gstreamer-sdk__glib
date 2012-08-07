@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Migrating to GDBus</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.77.1">
 <link rel="home" href="index.html" title="GIO Reference Manual">
 <link rel="up" href="migrating.html" title="Part III. Migrating to GIO">
 <link rel="prev" href="ch29s07.html" title="Data conversion">
@@ -21,9 +21,9 @@
 </tr></table>
 <div class="chapter">
 <div class="titlepage"><div><div><h2 class="title">
-<a name="id628960"></a>Migrating to GDBus</h2></div></div></div>
+<a name="id408750"></a>Migrating to GDBus</h2></div></div></div>
 <div class="toc"><dl>
-<dt><span class="section"><a href="ch30.html#id1153996">Conceptual differences</a></span></dt>
+<dt><span class="section"><a href="ch30.html#id972455">Conceptual differences</a></span></dt>
 <dt><span class="section"><a href="ch30s02.html">API comparison</a></span></dt>
 <dt><span class="section"><a href="ch30s03.html">Owning bus names</a></span></dt>
 <dt><span class="section"><a href="ch30s04.html">Creating proxies for well-known names</a></span></dt>
@@ -52,14 +52,14 @@
 </dl></div>
 <div class="section">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
-<a name="id1153996"></a>Conceptual differences</h2></div></div></div>
+<a name="id972455"></a>Conceptual differences</h2></div></div></div>
 <p>
       The central concepts of D-Bus are modelled in a very similar way
       in dbus-glib and GDBus. Both have a objects representing connections,
       proxies and method invocations. But there are some important
       differences:
       </p>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem"><p>
           dbus-glib uses the <a class="ulink" href="http://www.freedesktop.org/wiki/Software/dbus#ReferenceImplementation.28dbus-daemonandlibdbus.29" target="_top">libdbus
           reference implementation</a>, GDBus doesn't. Instead, it

@@ -1821,6 +1821,7 @@ test_strings (void)
     { is_nval,     13, "hello world\0" },
     { is_nval,     13, "hello\0world!" },
     { is_nval,     12, "hello world!" },
+    { is_nval,     13, "hello world!\xff" },
 
     { is_objpath,   2, "/" },
     { is_objpath,   3, "/a" },
@@ -4076,6 +4077,11 @@ test_compare (void)
   g_variant_unref (b);
   a = g_variant_new_string ("abc");
   b = g_variant_new_string ("abd");
+  g_assert (g_variant_compare (a, b) < 0);
+  g_variant_unref (a);
+  g_variant_unref (b);
+  a = g_variant_new_boolean (FALSE);
+  b = g_variant_new_boolean (TRUE);
   g_assert (g_variant_compare (a, b) < 0);
   g_variant_unref (a);
   g_variant_unref (b);

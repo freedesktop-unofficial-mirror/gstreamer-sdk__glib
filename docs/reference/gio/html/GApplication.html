@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GApplication</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.77.1">
 <link rel="home" href="index.html" title="GIO Reference Manual">
 <link rel="up" href="application.html" title="Application support">
 <link rel="prev" href="application.html" title="Application support">
@@ -130,36 +130,37 @@ GApplication implements
 <div class="refsect1">
 <a name="GApplication.description"></a><h2>Description</h2>
 <p>
-A <a class="link" href="GApplication.html" title="GApplication"><span class="type">GApplication</span></a> is the foundation of an application, unique for a
-given application identifier.  The GApplication class wraps some
+A <a class="link" href="GApplication.html" title="GApplication"><span class="type">GApplication</span></a> is the foundation of an application.  It wraps some
 low-level platform-specific services and is intended to act as the
 foundation for higher-level application classes such as
-<a href="http://developer.gnome.org/devel/gtk/GtkApplication.html"><span class="type">GtkApplication</span></a> or <a href="/usr/share/gtk-doc/html/mx/MxApplication.html"><span class="type">MxApplication</span></a>.  In general, you should not use
+<span class="type">GtkApplication</span> or <span class="type">MxApplication</span>.  In general, you should not use
 this class outside of a higher level framework.
-</p>
-<p>
-One of the core features that GApplication provides is process
-uniqueness, in the context of a "session".  The session concept is
-platform-dependent, but corresponds roughly to a graphical desktop
-login.  When your application is launched again, its arguments
-are passed through platform communication to the already running
-program. The already running instance of the program is called the
-<em class="firstterm">primary instance</em>. On Linux, the D-Bus session
-bus is used for communication.
 </p>
 <p>
 GApplication provides convenient life cycle management by maintaining
 a <em class="firstterm">use count</em> for the primary application instance.
 The use count can be changed using <a class="link" href="GApplication.html#g-application-hold" title="g_application_hold ()"><code class="function">g_application_hold()</code></a> and
 <a class="link" href="GApplication.html#g-application-release" title="g_application_release ()"><code class="function">g_application_release()</code></a>. If it drops to zero, the application exits.
-Higher-level classes such as <a href="http://developer.gnome.org/devel/gtk/GtkApplication.html"><span class="type">GtkApplication</span></a> employ the use count to
+Higher-level classes such as <span class="type">GtkApplication</span> employ the use count to
 ensure that the application stays alive as long as it has any opened
 windows.
 </p>
 <p>
-Before using GApplication, you must choose an "application identifier".
-The expected form of an application identifier is very close to that of
-of a <a class="ulink" href="http://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-names-interface" target="_top">DBus bus name</a>.
+Another feature that GApplication (optionally) provides is process
+uniqueness.  Applications can make use of this functionality by
+providing a unique application ID.  If given, only one application
+with this ID can be running at a time per session.  The session
+concept is platform-dependent, but corresponds roughly to a graphical
+desktop login.  When your application is launched again, its
+arguments are passed through platform communication to the already
+running program.  The already running instance of the program is
+called the <em class="firstterm">primary instance</em>. On Linux, the
+D-Bus session bus is used for communication.
+</p>
+<p>
+If used, the expected form of an application identifier is very close
+to that of of a
+<a class="ulink" href="http://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-names-interface" target="_top">DBus bus name</a>.
 Examples include: "com.example.MyApp", "org.example.internal-apps.Calculator".
 For details on valid application identifiers, see <a class="link" href="GApplication.html#g-application-id-is-valid" title="g_application_id_is_valid ()"><code class="function">g_application_id_is_valid()</code></a>.
 </p>
@@ -190,7 +191,7 @@ for remote access to exported <a href="GMenuModel.html"><span class="type">GMenu
 <p>
 There is a number of different entry points into a GApplication:
 </p>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">via 'Activate' (i.e. just starting the application)</li>
 <li class="listitem">via 'Open' (i.e. opening some files)</li>
 <li class="listitem">by handling a command-line</li>
@@ -220,7 +221,7 @@ variables and their values) of the calling process (key "environ").
 The environment is only added to the platform data if the
 <a class="link" href="GApplication.html#G-APPLICATION-SEND-ENVIRONMENT:CAPS"><code class="literal">G_APPLICATION_SEND_ENVIRONMENT</code></a> flag is set. <a class="link" href="GApplication.html" title="GApplication"><span class="type">GApplication</span></a> subclasses
 can add their own platform data by overriding the <em class="parameter"><code>add_platform_data</code></em>
-virtual function. For instance, <a href="http://developer.gnome.org/devel/gtk/GtkApplication.html"><span class="type">GtkApplication</span></a> adds startup notification
+virtual function. For instance, <span class="type">GtkApplication</span> adds startup notification
 data in this way.
 </p>
 <p>
@@ -617,24 +618,6 @@ respectively.
 </div>
 <p><br class="example-break">
 </p>
-<p>
-</p>
-<div class="example">
-<a name="gapplication-example-menu"></a><p class="title"><b>Example 16. A GApplication with menus</b></p>
-<div class="example-contents">
-  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
-    <tbody>
-      <tr>
-        <td class="listing_lines" align="right"><pre>1</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="normal">FIXME</span><span class="symbol">:</span><span class="normal"> MISSING XINCLUDE CONTENT</span></pre></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-</div>
-<p><br class="example-break">
-</p>
 </div>
 <div class="refsect1">
 <a name="GApplication.details"></a><h2>Details</h2>
@@ -679,8 +662,11 @@ respectively.
 <p>
 Virtual function table for <a class="link" href="GApplication.html" title="GApplication"><span class="type">GApplication</span></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GApplicationClass.startup"></a>startup</code></em> ()</span></p></td>
@@ -764,8 +750,11 @@ after the main loop terminates</td>
 <p>
 Flags used to define the behaviour of a <a class="link" href="GApplication.html" title="GApplication"><span class="type">GApplication</span></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><a name="G-APPLICATION-FLAGS-NONE:CAPS"></a><span class="term"><code class="literal">G_APPLICATION_FLAGS_NONE</code></span></p></td>
@@ -816,10 +805,11 @@ Flags used to define the behaviour of a <a class="link" href="GApplication.html"
 <tr>
 <td><p><a name="G-APPLICATION-NON-UNIQUE:CAPS"></a><span class="term"><code class="literal">G_APPLICATION_NON_UNIQUE</code></span></p></td>
 <td>Make no attempts to do any of the typical
-    single-instance application negotiation.  The application neither
-    attempts to become the owner of the application ID nor does it
-    check if an existing owner already exists.  Everything occurs in
-    the local process.  Since: 2.30.
+    single-instance application negotiation, even if the application
+    ID is given.  The application neither attempts to become the
+    owner of the application ID nor does it check if an existing
+    owner already exists.  Everything occurs in the local process.
+    Since: 2.30.
 </td>
 </tr>
 </tbody>
@@ -841,7 +831,7 @@ A valid ID is required for calls to <a class="link" href="GApplication.html#g-ap
 For convenience, the restrictions on application identifiers are
 reproduced here:
 </p>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">Application identifiers must contain only the ASCII characters "[A-Z][a-z][0-9]_-." and must not begin with a digit.</li>
 <li class="listitem">Application identifiers must contain at least one '.' (period) character (and thus at least three elements).</li>
 <li class="listitem">Application identifiers must not begin or end with a '.' (period) character.</li>
@@ -850,8 +840,11 @@ reproduced here:
 </ul></div>
 <p>
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>application_id</code></em> :</span></p></td>
@@ -877,14 +870,23 @@ Creates a new <a class="link" href="GApplication.html" title="GApplication"><spa
 This function calls <a href="./../gobject/gobject/gobject-Type-Information.html#g-type-init"><code class="function">g_type_init()</code></a> for you.
 </p>
 <p>
-The application id must be valid.  See <a class="link" href="GApplication.html#g-application-id-is-valid" title="g_application_id_is_valid ()"><code class="function">g_application_id_is_valid()</code></a>.
+If non-<a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>, the application id must be valid.  See
+<a class="link" href="GApplication.html#g-application-id-is-valid" title="g_application_id_is_valid ()"><code class="function">g_application_id_is_valid()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<p>
+If no application ID is given then some features of <a class="link" href="GApplication.html" title="GApplication"><span class="type">GApplication</span></a>
+(most notably application uniqueness) will be disabled.
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>application_id</code></em> :</span></p></td>
-<td>the application id</td>
+<td>the application id. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
@@ -904,8 +906,11 @@ The application id must be valid.  See <a class="link" href="GApplication.html#g
 <p>
 Gets the unique identifier for <em class="parameter"><code>application</code></em>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>application</code></em> :</span></p></td>
@@ -934,10 +939,14 @@ The application id can only be modified if <em class="parameter"><code>applicati
 been registered.
 </p>
 <p>
-The application id must be valid.  See <a class="link" href="GApplication.html#g-application-id-is-valid" title="g_application_id_is_valid ()"><code class="function">g_application_id_is_valid()</code></a>.
+If non-<a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>, the application id must be valid.  See
+<a class="link" href="GApplication.html#g-application-id-is-valid" title="g_application_id_is_valid ()"><code class="function">g_application_id_is_valid()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>application</code></em> :</span></p></td>
@@ -946,7 +955,7 @@ The application id must be valid.  See <a class="link" href="GApplication.html#g
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>application_id</code></em> :</span></p></td>
-<td>the identifier for <em class="parameter"><code>application</code></em>
+<td>the identifier for <em class="parameter"><code>application</code></em>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -965,8 +974,11 @@ Gets the current inactivity timeout for the application.
 This is the amount of time (in milliseconds) after the last call to
 <a class="link" href="GApplication.html#g-application-release" title="g_application_release ()"><code class="function">g_application_release()</code></a> before the application stops running.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>application</code></em> :</span></p></td>
@@ -999,8 +1011,11 @@ This call has no side effects of its own.  The value set here is only
 used for next time <a class="link" href="GApplication.html#g-application-release" title="g_application_release ()"><code class="function">g_application_release()</code></a> drops the use count to
 zero.  Any timeouts currently in progress are not impacted.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>application</code></em> :</span></p></td>
@@ -1025,8 +1040,11 @@ Gets the flags for <em class="parameter"><code>application</code></em>.
 <p>
 See <a class="link" href="GApplication.html#GApplicationFlags" title="enum GApplicationFlags"><span class="type">GApplicationFlags</span></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>application</code></em> :</span></p></td>
@@ -1057,8 +1075,11 @@ registered.
 <p>
 See <a class="link" href="GApplication.html#GApplicationFlags" title="enum GApplicationFlags"><span class="type">GApplicationFlags</span></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>application</code></em> :</span></p></td>
@@ -1091,8 +1112,11 @@ action group), so you should really use <a class="link" href="GActionMap.html" t
 This used to be how actions were associated with a <a class="link" href="GApplication.html" title="GApplication"><span class="type">GApplication</span></a>.
 Now there is <a class="link" href="GActionMap.html" title="GActionMap"><span class="type">GActionMap</span></a> for that.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>application</code></em> :</span></p></td>
@@ -1119,8 +1143,11 @@ Checks if <em class="parameter"><code>application</code></em> is registered.
 An application is registered if <a class="link" href="GApplication.html#g-application-register" title="g_application_register ()"><code class="function">g_application_register()</code></a> has been
 successfully called.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>application</code></em> :</span></p></td>
@@ -1154,8 +1181,11 @@ The value of this property cannot be accessed before
 <a class="link" href="GApplication.html#g-application-register" title="g_application_register ()"><code class="function">g_application_register()</code></a> has been called.  See
 <a class="link" href="GApplication.html#g-application-get-is-registered" title="g_application_get_is_registered ()"><code class="function">g_application_get_is_registered()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>application</code></em> :</span></p></td>
@@ -1188,6 +1218,10 @@ application identifier as a unique bus name on the session bus using
 GDBus.
 </p>
 <p>
+If there is no application ID or if <a class="link" href="GApplication.html#G-APPLICATION-NON-UNIQUE:CAPS"><code class="literal">G_APPLICATION_NON_UNIQUE</code></a> was
+given, then this process will always become the primary instance.
+</p>
+<p>
 Due to the internal architecture of GDBus, method calls can be
 dispatched at any time (even if a main loop is not running).  For
 this reason, you must ensure that any object paths that you wish to
@@ -1199,7 +1233,8 @@ returned with no work performed.
 </p>
 <p>
 The <a class="link" href="GApplication.html#GApplication-startup" title='The "startup" signal'><span class="type">"startup"</span></a> signal is emitted if registration succeeds
-and <em class="parameter"><code>application</code></em> is the primary instance.
+and <em class="parameter"><code>application</code></em> is the primary instance (including the non-unique
+case).
 </p>
 <p>
 In the event of an error (such as <em class="parameter"><code>cancellable</code></em> being cancelled, or a
@@ -1211,8 +1246,11 @@ Note: the return value of this function is not an indicator that this
 instance is or is not the primary instance of the application.  See
 <a class="link" href="GApplication.html#g-application-get-is-remote" title="g_application_get_is_remote ()"><code class="function">g_application_get_is_remote()</code></a> for that.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>application</code></em> :</span></p></td>
@@ -1253,8 +1291,11 @@ when a toplevel window is on the screen.
 <p>
 To cancel the hold, call <a class="link" href="GApplication.html#g-application-release" title="g_application_release ()"><code class="function">g_application_release()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>application</code></em> :</span></p></td>
 <td>a <a class="link" href="GApplication.html" title="GApplication"><span class="type">GApplication</span></a>
@@ -1276,8 +1317,11 @@ When the use count reaches zero, the application will stop running.
 Never call this function except to cancel the effect of a previous
 call to <a class="link" href="GApplication.html#g-application-hold" title="g_application_hold ()"><code class="function">g_application_hold()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>application</code></em> :</span></p></td>
 <td>a <a class="link" href="GApplication.html" title="GApplication"><span class="type">GApplication</span></a>
@@ -1303,8 +1347,11 @@ The hold count is ignored.
 The result of calling <a class="link" href="GApplication.html#g-application-run" title="g_application_run ()"><code class="function">g_application_run()</code></a> again after it returns is
 unspecified.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>application</code></em> :</span></p></td>
 <td>a <a class="link" href="GApplication.html" title="GApplication"><span class="type">GApplication</span></a>
@@ -1327,8 +1374,11 @@ emitted in the primary instance.
 <p>
 The application must be registered before calling this function.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>application</code></em> :</span></p></td>
 <td>a <a class="link" href="GApplication.html" title="GApplication"><span class="type">GApplication</span></a>
@@ -1364,8 +1414,11 @@ for this functionality, you should use "".
 The application must be registered before calling this function
 and it must have the <a class="link" href="GApplication.html#G-APPLICATION-HANDLES-OPEN:CAPS"><code class="literal">G_APPLICATION_HANDLES_OPEN</code></a> flag set.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>application</code></em> :</span></p></td>
@@ -1411,7 +1464,7 @@ First, the <code class="function">local_command_line()</code> virtual function i
 This function always runs on the local instance. It gets passed a pointer
 to a <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>-terminated copy of <em class="parameter"><code>argv</code></em> and is expected to remove the arguments
 that it handled (shifting up remaining arguments). See
-<a class="xref" href="GApplicationCommandLine.html#gapplication-example-cmdline2" title="Example 18. Split commandline handling">Example 18, “Split commandline handling”</a> for an example of
+<a class="xref" href="GApplicationCommandLine.html#gapplication-example-cmdline2" title="Example 17. Split commandline handling">Example 17, “Split commandline handling”</a> for an example of
 parsing <em class="parameter"><code>argv</code></em> manually. Alternatively, you may use the <a href="./../glib/glib/glib-Commandline-option-parser.html#GOptionContext"><span class="type">GOptionContext</span></a> API,
 after setting <code class="literal">argc = g_strv_length (argv);</code>.
 </p>
@@ -1462,7 +1515,7 @@ commandline then you should implement your own <a class="link" href="GApplicatio
 and override <code class="function">local_command_line()</code>. In this case, you most likely want
 to return <a href="./../glib/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> from your <code class="function">local_command_line()</code> implementation to
 suppress the default handling. See
-<a class="xref" href="GApplicationCommandLine.html#gapplication-example-cmdline2" title="Example 18. Split commandline handling">Example 18, “Split commandline handling”</a> for an example.
+<a class="xref" href="GApplicationCommandLine.html#gapplication-example-cmdline2" title="Example 17. Split commandline handling">Example 17, “Split commandline handling”</a> for an example.
 </p>
 <p>
 If, after the above is done, the use count of the application is zero
@@ -1475,8 +1528,11 @@ If the <a class="link" href="GApplication.html#G-APPLICATION-IS-SERVICE:CAPS"><c
 use count of zero is delayed for a while (ie: the instance stays
 around to provide its <span class="emphasis"><em>service</em></span> to others).
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>application</code></em> :</span></p></td>
@@ -1513,8 +1569,11 @@ This function does not take its own reference on <em class="parameter"><code>app
 <em class="parameter"><code>application</code></em> is destroyed then the default application will revert
 back to <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>application</code></em> :</span></p></td>
 <td>the application to set as default, or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
@@ -1538,8 +1597,11 @@ this by using <a class="link" href="GApplication.html#g-application-set-default"
 <p>
 If there is no default application then <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> is returned.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody><tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>the default application for this process, or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
@@ -1601,8 +1663,11 @@ If there is no default application then <a href="./../glib/glib/glib-Standard-Ma
 The ::activate signal is emitted on the primary instance when an
 activation occurs. See <a class="link" href="GApplication.html#g-application-activate" title="g_application_activate ()"><code class="function">g_application_activate()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>application</code></em> :</span></p></td>
@@ -1626,8 +1691,11 @@ The ::command-line signal is emitted on the primary instance when
 a commandline is not handled locally. See <a class="link" href="GApplication.html#g-application-run" title="g_application_run ()"><code class="function">g_application_run()</code></a> and
 the <a class="link" href="GApplicationCommandLine.html" title="GApplicationCommandLine"><span class="type">GApplicationCommandLine</span></a> documentation for more information.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>application</code></em> :</span></p></td>
@@ -1662,8 +1730,11 @@ process. See <a class="link" href="GApplicationCommandLine.html#g-application-co
 The ::open signal is emitted on the primary instance when there are
 files to open. See <a class="link" href="GApplication.html#g-application-open" title="g_application_open ()"><code class="function">g_application_open()</code></a> for more information.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>application</code></em> :</span></p></td>
@@ -1699,8 +1770,11 @@ files to open. See <a class="link" href="GApplication.html#g-application-open" t
 The ::shutdown signal is emitted only on the registered primary instance
 immediately after the main loop terminates.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>application</code></em> :</span></p></td>
@@ -1722,8 +1796,11 @@ immediately after the main loop terminates.
 The ::startup signal is emitted on the primary instance immediately
 after registration. See <a class="link" href="GApplication.html#g-application-register" title="g_application_register ()"><code class="function">g_application_register()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>application</code></em> :</span></p></td>

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GBufferedInputStream</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.77.1">
 <link rel="home" href="index.html" title="GIO Reference Manual">
 <link rel="up" href="streaming.html" title="Streaming I/O">
 <link rel="prev" href="GMemoryOutputStream.html" title="GMemoryOutputStream">
@@ -134,8 +134,11 @@ Implements <a class="link" href="GFilterInputStream.html" title="GFilterInputStr
 Creates a new <a class="link" href="GInputStream.html" title="GInputStream"><span class="type">GInputStream</span></a> from the given <em class="parameter"><code>base_stream</code></em>, with
 a buffer set to the default size (4 kilobytes).
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>base_stream</code></em> :</span></p></td>
@@ -158,8 +161,11 @@ a buffer set to the default size (4 kilobytes).
 Creates a new <a class="link" href="GBufferedInputStream.html" title="GBufferedInputStream"><span class="type">GBufferedInputStream</span></a> from the given <em class="parameter"><code>base_stream</code></em>,
 with a buffer set to <em class="parameter"><code>size</code></em>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>base_stream</code></em> :</span></p></td>
@@ -186,8 +192,11 @@ with a buffer set to <em class="parameter"><code>size</code></em>.
 <p>
 Gets the size of the input buffer.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>stream</code></em> :</span></p></td>
@@ -212,8 +221,11 @@ Sets the size of the internal buffer of <em class="parameter"><code>stream</code
 size of the contents of the buffer. The buffer can never be resized
 smaller than its current contents.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>stream</code></em> :</span></p></td>
@@ -236,8 +248,11 @@ smaller than its current contents.
 <p>
 Gets the size of the available data within the stream.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>stream</code></em> :</span></p></td>
@@ -260,8 +275,11 @@ Returns the buffer with the currently available bytes. The returned
 buffer must not be modified and will become invalid when reading from
 the stream or filling the buffer.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>stream</code></em> :</span></p></td>
@@ -292,8 +310,11 @@ the stream or filling the buffer.
 Peeks in the buffer, copying data of size <em class="parameter"><code>count</code></em> into <em class="parameter"><code>buffer</code></em>,
 offset <em class="parameter"><code>offset</code></em> bytes.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>stream</code></em> :</span></p></td>
@@ -362,8 +383,11 @@ On error -1 is returned and <em class="parameter"><code>error</code></em> is set
 For the asynchronous, non-blocking, version of this function, see
 <a class="link" href="GBufferedInputStream.html#g-buffered-input-stream-fill-async" title="g_buffered_input_stream_fill_async ()"><code class="function">g_buffered_input_stream_fill_async()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>stream</code></em> :</span></p></td>
@@ -409,8 +433,11 @@ version of this function, see <a class="link" href="GBufferedInputStream.html#g-
 If <em class="parameter"><code>count</code></em> is -1 then the attempted read size is equal to the number
 of bytes that are required to fill the buffer.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>stream</code></em> :</span></p></td>
@@ -453,8 +480,11 @@ of the request</td>
 <p>
 Finishes an asynchronous read.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>stream</code></em> :</span></p></td>
@@ -502,8 +532,11 @@ partial result will be returned, without an error.
 <p>
 On error -1 is returned and <em class="parameter"><code>error</code></em> is set accordingly.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>stream</code></em> :</span></p></td>

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>How to create and use signals</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.77.1">
 <link rel="home" href="index.html" title="GObject Reference Manual">
 <link rel="up" href="pt02.html" title="Part IV. Tutorial">
 <link rel="prev" href="howto-interface-properties.html" title="Interface Properties">
@@ -28,7 +28,7 @@
     flexible: it is possible for its users to connect at runtime any
     number of callbacks (implemented in any language for which a binding
     exists)
-    <sup>[<a name="id650512" href="#ftn.id650512" class="footnote">14</a>]</sup>
+    <a href="#ftn.id622636" class="footnote"><sup class="footnote"><a name="id622636"></a>[14]</sup></a>
     to any signal and to stop the emission of any signal at any 
     state of the signal emission process. This flexibility makes it
     possible to use GSignal for much more than just emit signals which
@@ -108,8 +108,8 @@ maman_file_write (MamanFile    *self,
     </p>
 </div>
 <div class="footnotes">
-<br><hr width="100" align="left">
-<div class="footnote"><p><sup>[<a id="ftn.id650512" href="#id650512" class="para">14</a>] </sup>A Python callback can be connected to any signal on any
+<br><hr style="width:100; align:left;">
+<div id="ftn.id622636" class="footnote"><p><a href="#id622636" class="para"><sup class="para">[14] </sup></a>A Python callback can be connected to any signal on any
       C-based GObject.
       </p></div>
 </div>

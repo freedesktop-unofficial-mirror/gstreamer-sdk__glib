@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GAsyncResult</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.77.1">
 <link rel="home" href="index.html" title="GIO Reference Manual">
 <link rel="up" href="async.html" title="Asynchronous I/O">
 <link rel="prev" href="GCancellable.html" title="GCancellable">
@@ -155,7 +155,7 @@ Example of a typical asynchronous operation flow:
 <span class="normal">                                  </span><span class="usertype">GAsyncReadyCallback</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">cb</span><span class="symbol">,</span>
 <span class="normal">                                  </span><span class="usertype">gpointer</span><span class="normal">             u</span><span class="symbol">);</span>
 
-<span class="normal"><a href="./../glib/glib/glib-Basic-Types.html#gboolean">gboolean</a> </span><span class="function">_theoretical_frobnitz_finish</span><span class="normal"> </span><span class="symbol">(</span><span class="usertype">Theoretical</span><span class="normal">   </span><span class="symbol">*</span><span class="normal">t</span><span class="symbol">,</span>
+<span class="usertype">gboolean</span><span class="normal"> </span><span class="function">_theoretical_frobnitz_finish</span><span class="normal"> </span><span class="symbol">(</span><span class="usertype">Theoretical</span><span class="normal">   </span><span class="symbol">*</span><span class="normal">t</span><span class="symbol">,</span>
 <span class="normal">                                       </span><span class="usertype">GAsyncResult</span><span class="normal">  </span><span class="symbol">*</span><span class="normal">res</span><span class="symbol">,</span>
 <span class="normal">                                       </span><span class="usertype">GError</span><span class="normal">       </span><span class="symbol">**</span><span class="normal">e</span><span class="symbol">);</span>
 
@@ -226,8 +226,11 @@ usually passed directly to a asynchronous <code class="function">_finish()</code
 <p>
 Interface definition for <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><a href="./../gobject/gobject/gobject-Type-Information.html#GTypeInterface"><span class="type">GTypeInterface</span></a> <em class="structfield"><code><a name="GAsyncResultIface.g-iface"></a>g_iface</code></em>;</span></p></td>
@@ -254,8 +257,11 @@ Interface definition for <a class="link" href="GAsyncResult.html" title="GAsyncR
 Type definition for a function that will be called back when an asynchronous
 operation within GIO has been completed.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>source_object</code></em> :</span></p></td>
@@ -279,8 +285,11 @@ operation within GIO has been completed.
 <p>
 Gets the user data from a <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>res</code></em> :</span></p></td>
@@ -301,8 +310,11 @@ Gets the user data from a <a class="link" href="GAsyncResult.html" title="GAsync
 <p>
 Gets the source object from a <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>res</code></em> :</span></p></td>

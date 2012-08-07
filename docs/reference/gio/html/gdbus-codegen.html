@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>gdbus-codegen</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.77.1">
 <link rel="home" href="index.html" title="GIO Reference Manual">
 <link rel="up" href="tools.html" title="GIO Tools">
 <link rel="prev" href="gdbus.html" title="gdbus">
@@ -40,7 +40,7 @@
     ]</p></div>
 </div>
 <div class="refsect1">
-<a name="id597372"></a><h2>Description</h2>
+<a name="id459117"></a><h2>Description</h2>
 <p>
     <span class="command"><strong>gdbus-codegen</strong></span> is used to generate code and/or
     documentation for one or more D-Bus interfaces. The tool reads
@@ -52,7 +52,7 @@
   </p>
 </div>
 <div class="refsect1">
-<a name="id831460"></a><h2>Generating C code</h2>
+<a name="id415676"></a><h2>Generating C code</h2>
 <p>
     When generating C code, a
     <span class="type">GInterface</span>-derived type is generated for each D-Bus
@@ -108,7 +108,7 @@
   </p>
 </div>
 <div class="refsect1">
-<a name="id605481"></a><h2>Generating Docbook documentation</h2>
+<a name="id786288"></a><h2>Generating Docbook documentation</h2>
 <p>
     Each generated Docbook XML file (see the
     <code class="option">--generate-docbook</code> option for details) is a <a class="ulink" href="http://www.docbook.org/tdg/en/html/refentry.html" target="_top"><code class="literal">RefEntry</code></a>
@@ -116,12 +116,15 @@
   </p>
 </div>
 <div class="refsect1">
-<a name="id599129"></a><h2>Options</h2>
+<a name="id425326"></a><h2>Options</h2>
 <p>
     The following options are supported:
   </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><code class="option">--interface-prefix</code> <em class="replaceable"><code>org.project.Prefix.</code></em></span></p></td>
@@ -221,13 +224,16 @@
 </table></div>
 </div>
 <div class="refsect1">
-<a name="id643829"></a><h2>Supported D-Bus Annotations</h2>
+<a name="id549001"></a><h2>Supported D-Bus Annotations</h2>
 <p>
     The following D-Bus annotations are supported by
     <span class="command"><strong>gdbus-codegen</strong></span>:
   </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><code class="literal">org.freedesktop.DBus.Deprecated</code></span></p></td>
@@ -444,7 +450,7 @@
   </p>
 </div>
 <div class="refsect1">
-<a name="id917094"></a><h2>Example</h2>
+<a name="id445259"></a><h2>Example</h2>
 <p>
     Consider the following D-Bus Introspection XML.
   </p>
@@ -774,7 +780,7 @@
 </tbody>
 </table></div>
 <div class="refsect2">
-<a name="id612334"></a><h3>Client-side usage</h3>
+<a name="id569416"></a><h3>Client-side usage</h3>
 <p>
       You can use the generated proxy type with the generated
       constructors:
@@ -842,7 +848,7 @@
 </div>
 <hr>
 <div class="refsect2">
-<a name="id737980"></a><h3>Server-side usage</h3>
+<a name="id891805"></a><h3>Server-side usage</h3>
 <p>
       The generated <span class="type">MyAppFrobber</span> interface is designed so
       it is easy to implement it in a <a href="./../gobject/gobject/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a>
@@ -915,7 +921,8 @@
 40
 41
 42
-43</pre></td>
+43
+44</pre></td>
         <td class="listing_code"><pre class="programlisting"><span class="keyword">static</span><span class="normal"> <a href="./../glib/glib/glib-Basic-Types.html#gboolean">gboolean</a></span>
 <span class="function">on_handle_hello_world</span><span class="normal"> </span><span class="symbol">(</span><span class="usertype">MyAppFrobber</span><span class="normal">           </span><span class="symbol">*</span><span class="normal">interface</span><span class="symbol">,</span>
 <span class="normal">                       </span><span class="usertype">GDBusMethodInvocation</span><span class="normal">  </span><span class="symbol">*</span><span class="normal">invocation</span><span class="symbol">,</span>
@@ -931,7 +938,8 @@
 <span class="normal">    </span><span class="cbracket">}</span>
 <span class="normal">  </span><span class="keyword">else</span>
 <span class="normal">    </span><span class="cbracket">{</span>
-<span class="normal">      </span><span class="function"><a href="GDBusMethodInvocation.html#g-dbus-method-invocation-return-error">g_dbus_method_invocation_return_error</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">MY_APP_ERROR</span><span class="symbol">,</span>
+<span class="normal">      </span><span class="function"><a href="GDBusMethodInvocation.html#g-dbus-method-invocation-return-error">g_dbus_method_invocation_return_error</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">invocation</span><span class="symbol">,</span>
+<span class="normal">                 MY_APP_ERROR</span><span class="symbol">,</span>
 <span class="normal">                 MY_APP_ERROR_NO_WHINING</span><span class="symbol">,</span>
 <span class="normal">                 </span><span class="string">"Hey, %s, there will be no whining!"</span><span class="symbol">,</span>
 <span class="normal">                 </span><span class="function"><a href="GDBusMethodInvocation.html#g-dbus-method-invocation-get-sender">g_dbus_method_invocation_get_sender</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">invocation</span><span class="symbol">));</span>
@@ -981,7 +989,7 @@
 </div>
 </div>
 <div class="refsect1">
-<a name="id959638"></a><h2>C Type Mapping</h2>
+<a name="id459076"></a><h2>C Type Mapping</h2>
 <p>
     Scalar types
     (type-strings
@@ -1051,14 +1059,14 @@
   </p>
 </div>
 <div class="refsect1">
-<a name="id789558"></a><h2>Author</h2>
+<a name="id446730"></a><h2>Author</h2>
 <p>
     Written by David Zeuthen <code class="email">&lt;<a class="email" href="mailto:zeuthen@gmail.com">zeuthen@gmail.com</a>&gt;</code> with
     a lot of help from many others.
   </p>
 </div>
 <div class="refsect1">
-<a name="id743771"></a><h2>Bugs</h2>
+<a name="id418716"></a><h2>Bugs</h2>
 <p>
     Please send bug reports to either the distribution bug tracker
     or the upstream bug tracker at
@@ -1066,7 +1074,7 @@
   </p>
 </div>
 <div class="refsect1">
-<a name="id1031539"></a><h2>See also</h2>
+<a name="id767353"></a><h2>See also</h2>
 <p>
     <span class="citerefentry"><span class="refentrytitle">gdbus</span>(1)</span>
   </p>

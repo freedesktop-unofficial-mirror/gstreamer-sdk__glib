@@ -802,6 +802,12 @@ DllMain (HINSTANCE hinstDLL,
   return TRUE;
 }
 
+void *
+_g_io_win32_get_module (void)
+{
+  return gio_dll;
+}
+
 #endif
 
 #undef GIO_MODULE_DIR

@@ -1306,7 +1306,8 @@ _g_desktop_app_info_launch_uris_internal (GAppInfo                   *appinfo,
           display = g_app_launch_context_get_display (launch_context,
                                                       appinfo,
                                                       launched_files);
-          envp = g_environ_setenv (envp, "DISPLAY", display, TRUE);
+          if (display)
+            envp = g_environ_setenv (envp, "DISPLAY", display, TRUE);
 
           if (info->startup_notify)
             {
@@ -2126,6 +2127,12 @@ g_desktop_app_info_delete (GAppInfo *appinfo)
  * @error: a #GError location to store the error occurring, %NULL to ignore.
  *
  * Creates a new #GAppInfo from the given information.
+ *
+ * Note that for @commandline, the quoting rules of the Exec key of the
+ * <ulink url="http://freedesktop.org/Standards/desktop-entry-spec">freedesktop.org Desktop
+ * Entry Specification</ulink> are applied. For example, if the @commandline contains
+ * percent-encoded URIs, the percent-character must be doubled in order to prevent it from
+ * being swallowed by Exec key unquoting. See the specification for exact quoting rules.
  *
  * Returns: (transfer full): new #GAppInfo for given command.
  **/
@@ -3267,6 +3274,7 @@ get_all_desktop_entries_for_mime_type (const char  *base_mime_type,
   char **mime_types;
   char **default_entries;
   char **removed_associations;
+  gboolean already_found_handler;
   int i, j, k;
   GPtrArray *array;
   char **anc;
@@ -3318,6 +3326,11 @@ get_all_desktop_entries_for_mime_type (const char  *base_mime_type,
     {
       mime_type = mime_types[i];
 
+      /* This is true if we already found a handler for a more specific
+         mimetype. If its set we ignore any defaults for the less specific
+         mimetypes. */
+      already_found_handler = (desktop_entries != NULL);
+
       /* Go through all apps listed in user and system dirs */
       for (dir_list = mime_info_cache->dirs;
 	   dir_list != NULL;
@@ -3328,7 +3341,7 @@ get_all_desktop_entries_for_mime_type (const char  *base_mime_type,
           /* Pick the explicit default application if we got no result earlier
            * (ie, for more specific mime types)
            */
-          if (desktop_entries == NULL)
+          if (!already_found_handler)
             {
               entry = g_hash_table_lookup (dir->mimeapps_list_defaults_map, mime_type);
 
@@ -3354,7 +3367,7 @@ get_all_desktop_entries_for_mime_type (const char  *base_mime_type,
 	  default_entries = g_hash_table_lookup (dir->defaults_list_map, mime_type);
 	  for (j = 0; default_entries != NULL && default_entries[j] != NULL; j++)
             {
-              if (default_entry == NULL && old_default_entry == NULL)
+              if (default_entry == NULL && old_default_entry == NULL && !already_found_handler)
                 old_default_entry = g_strdup (default_entries[j]);
 
               desktop_entries = append_desktop_entry (desktop_entries, default_entries[j], removed_entries);

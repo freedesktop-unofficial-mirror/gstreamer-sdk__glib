@@ -95,6 +95,19 @@ gdbus_sources = 							\
 	gdbusobjectmanagerserver.h	gdbusobjectmanagerserver.c	\
 	$(NULL)
 
+# These are not built into the library yet
+EXTRA_DIST += gdbusdaemon.c gdbusdaemon.h dbus-daemon.xml
+
+gdbus-daemon-generated.h gdbus-daemon-generated.c: $(srcdir)/dbus-daemon.xml $(srcdir)/gdbus-2.0/codegen/gdbus-codegen.in
+	$(AM_V_GEN) UNINSTALLED_GLIB_SRCDIR=$(top_srcdir) \
+		UNINSTALLED_GLIB_BUILDDIR=$(top_builddir) \
+		$(PYTHON) $(srcdir)/gdbus-2.0/codegen/gdbus-codegen.in \
+		--interface-prefix org. \
+		--generate-c-code gdbus-daemon-generated \
+		--c-namespace _G \
+		$(srcdir)/dbus-daemon.xml \
+		$(NULL)
+
 settings_headers = \
 	gsettingsbackend.h		\
 	gsettingsschema.h		\
@@ -270,7 +283,15 @@ unix_sources +=			 \
 endif
 endif
 
+gdbus_daemon_sources = \
+	gdbusdaemon.c \
+	gdbusdaemon.h \
+	gdbus-daemon-generated.c \
+	gdbus-daemon-generated.h \
+	$(NULL)
+
 win32_actual_sources = \
+	$(gdbus_daemon_sources) \
 	gwin32mount.c \
 	gwin32mount.h \
 	gwin32volumemonitor.c \
@@ -606,6 +627,8 @@ BUILT_SOURCES = 		\
 	gconstructor_as_data.h	\
 	gioenumtypes.h		\
 	gioenumtypes.c		\
+	gdbus-daemon-generated.c \
+	gdbus-daemon-generated.h \
 	$(NULL)
 
 EXTRA_DIST += 			\
@@ -625,9 +648,9 @@ BUILT_EXTRA_DIST = 		\
 
 # This is read by gobject-introspection/misc/ and gtk-doc
 gio-public-headers.txt: Makefile
-	echo $(gioinclude_HEADERS) $(giowin32include_HEADERS) $(giounixinclude_HEADERS) > $@.tmp && mv $@.tmp $@
+	$(AM_V_GEN) echo $(gioinclude_HEADERS) $(giowin32include_HEADERS) $(giounixinclude_HEADERS) > $@.tmp && mv $@.tmp $@
 
-CLEANFILES = gio-public-headers.txt gconstructor_as_data.h
+CLEANFILES = gdbus-daemon-generated.c gdbus-daemon-generated.h gio-public-headers.txt gconstructor_as_data.h
 
 all-local: gio-public-headers.txt
 
@@ -694,11 +717,11 @@ gdbus_LDADD = libgio-2.0.la \
 	$(top_builddir)/glib/libglib-2.0.la 		\
 	$(top_builddir)/gobject/libgobject-2.0.la
 
-completiondir = $(sysconfdir)/bash_completion.d
+completiondir = $(datadir)/bash-completion/completions
 completion_DATA = \
-	gdbus-bash-completion.sh		\
-	gsettings-bash-completion.sh		\
-	gresource-bash-completion.sh
+	completion/gdbus				\
+	completion/gsettings				\
+	completion/gresource
 EXTRA_DIST += $(completion_DATA)
 
 # ------------------------------------------------------------------------

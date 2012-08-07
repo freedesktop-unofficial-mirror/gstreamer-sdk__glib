@@ -119,12 +119,12 @@
     <sub name="Annotation Glossary" link="annotation-glossary.html"/>
   </chapters>
   <functions>
-    <keyword type="" name="Environment variables" link="glib-running.html#id509282"/>
+    <keyword type="" name="Environment variables" link="glib-running.html#id530042"/>
     <keyword type="" name="Locale" link="glib-running.html#setlocale"/>
-    <keyword type="" name="Traps and traces" link="glib-running.html#id486406"/>
-    <keyword type="" name="Gdb debugging macros" link="glib-running.html#id486489"/>
-    <keyword type="" name="SystemTap" link="glib-running.html#id486524"/>
-    <keyword type="" name="Memory statistics" link="glib-running.html#id486560"/>
+    <keyword type="" name="Traps and traces" link="glib-running.html#id559645"/>
+    <keyword type="" name="Gdb debugging macros" link="glib-running.html#id559728"/>
+    <keyword type="" name="SystemTap" link="glib-running.html#id559763"/>
+    <keyword type="" name="Memory statistics" link="glib-running.html#id559799"/>
     <keyword type="variable" name="glib_major_version" link="glib-Version-Information.html#glib-major-version"/>
     <keyword type="variable" name="glib_minor_version" link="glib-Version-Information.html#glib-minor-version"/>
     <keyword type="variable" name="glib_micro_version" link="glib-Version-Information.html#glib-micro-version"/>
@@ -377,8 +377,8 @@
     <keyword type="function" name="g_atomic_pointer_or ()" link="glib-Atomic-Operations.html#g-atomic-pointer-or" since="2.30"/>
     <keyword type="function" name="g_atomic_pointer_xor ()" link="glib-Atomic-Operations.html#g-atomic-pointer-xor" since="2.30"/>
     <keyword type="function" name="g_atomic_int_exchange_and_add ()" link="glib-Atomic-Operations.html#g-atomic-int-exchange-and-add" deprecated="2.30: Use g_atomic_int_add() instead." since="2.4"/>
-    <keyword type="" name="Creating new source types" link="glib-The-Main-Event-Loop.html#id570633"/>
-    <keyword type="" name="Customizing the main loop iteration" link="glib-The-Main-Event-Loop.html#id570702"/>
+    <keyword type="" name="Creating new source types" link="glib-The-Main-Event-Loop.html#id606541"/>
+    <keyword type="" name="Customizing the main loop iteration" link="glib-The-Main-Event-Loop.html#id606610"/>
     <keyword type="struct" name="GMainLoop" link="glib-The-Main-Event-Loop.html#GMainLoop"/>
     <keyword type="function" name="g_main_loop_new ()" link="glib-The-Main-Event-Loop.html#g-main-loop-new"/>
     <keyword type="function" name="g_main_loop_ref ()" link="glib-The-Main-Event-Loop.html#g-main-loop-ref"/>
@@ -397,8 +397,8 @@
     <keyword type="macro" name="G_PRIORITY_HIGH_IDLE" link="glib-The-Main-Event-Loop.html#G-PRIORITY-HIGH-IDLE:CAPS"/>
     <keyword type="macro" name="G_PRIORITY_DEFAULT_IDLE" link="glib-The-Main-Event-Loop.html#G-PRIORITY-DEFAULT-IDLE:CAPS"/>
     <keyword type="macro" name="G_PRIORITY_LOW" link="glib-The-Main-Event-Loop.html#G-PRIORITY-LOW:CAPS"/>
-    <keyword type="macro" name="G_SOURCE_CONTINUE" link="glib-The-Main-Event-Loop.html#G-SOURCE-CONTINUE:CAPS" since="2.28"/>
-    <keyword type="macro" name="G_SOURCE_REMOVE" link="glib-The-Main-Event-Loop.html#G-SOURCE-REMOVE:CAPS" since="2.28"/>
+    <keyword type="macro" name="G_SOURCE_CONTINUE" link="glib-The-Main-Event-Loop.html#G-SOURCE-CONTINUE:CAPS" since="2.32"/>
+    <keyword type="macro" name="G_SOURCE_REMOVE" link="glib-The-Main-Event-Loop.html#G-SOURCE-REMOVE:CAPS" since="2.32"/>
     <keyword type="struct" name="GMainContext" link="glib-The-Main-Event-Loop.html#GMainContext"/>
     <keyword type="function" name="g_main_context_new ()" link="glib-The-Main-Event-Loop.html#g-main-context-new"/>
     <keyword type="function" name="g_main_context_ref ()" link="glib-The-Main-Event-Loop.html#g-main-context-ref"/>
@@ -591,10 +591,10 @@
     <keyword type="struct" name="GModule" link="glib-Dynamic-Loading-of-Modules.html#GModule"/>
     <keyword type="function" name="g_module_supported ()" link="glib-Dynamic-Loading-of-Modules.html#g-module-supported"/>
     <keyword type="function" name="g_module_build_path ()" link="glib-Dynamic-Loading-of-Modules.html#g-module-build-path"/>
-    <keyword type="macro" name="g_module_open" link="glib-Dynamic-Loading-of-Modules.html#g-module-open"/>
+    <keyword type="function" name="g_module_open ()" link="glib-Dynamic-Loading-of-Modules.html#g-module-open"/>
     <keyword type="enum" name="enum GModuleFlags" link="glib-Dynamic-Loading-of-Modules.html#GModuleFlags"/>
     <keyword type="function" name="g_module_symbol ()" link="glib-Dynamic-Loading-of-Modules.html#g-module-symbol"/>
-    <keyword type="macro" name="g_module_name" link="glib-Dynamic-Loading-of-Modules.html#g-module-name"/>
+    <keyword type="function" name="g_module_name ()" link="glib-Dynamic-Loading-of-Modules.html#g-module-name"/>
     <keyword type="function" name="g_module_make_resident ()" link="glib-Dynamic-Loading-of-Modules.html#g-module-make-resident"/>
     <keyword type="function" name="g_module_close ()" link="glib-Dynamic-Loading-of-Modules.html#g-module-close"/>
     <keyword type="function" name="g_module_error ()" link="glib-Dynamic-Loading-of-Modules.html#g-module-error"/>
@@ -1401,20 +1401,20 @@
     <keyword type="function" name="g_match_info_fetch_named ()" link="glib-Perl-compatible-regular-expressions.html#g-match-info-fetch-named" since="2.14"/>
     <keyword type="function" name="g_match_info_fetch_named_pos ()" link="glib-Perl-compatible-regular-expressions.html#g-match-info-fetch-named-pos" since="2.14"/>
     <keyword type="function" name="g_match_info_fetch_all ()" link="glib-Perl-compatible-regular-expressions.html#g-match-info-fetch-all" since="2.14"/>
-    <keyword type="" name="Non-printing characters" link="glib-regex-syntax.html#id760580"/>
-    <keyword type="" name="Absolute and relative back references" link="glib-regex-syntax.html#id758626"/>
-    <keyword type="" name="Generic character types" link="glib-regex-syntax.html#id758639"/>
-    <keyword type="" name="Newline sequences" link="glib-regex-syntax.html#id758789"/>
-    <keyword type="" name="Unicode character properties" link="glib-regex-syntax.html#id758804"/>
-    <keyword type="" name="Simple assertions" link="glib-regex-syntax.html#id759103"/>
-    <keyword type="" name="Lookahead assertions" link="glib-regex-syntax.html#id764931"/>
-    <keyword type="" name="Lookbehind assertions" link="glib-regex-syntax.html#id764982"/>
-    <keyword type="" name="Using multiple assertions" link="glib-regex-syntax.html#id765096"/>
-    <keyword type="" name="Checking for a used subpattern by number" link="glib-regex-syntax.html#id765186"/>
-    <keyword type="" name="Checking for a used subpattern by name" link="glib-regex-syntax.html#id765222"/>
-    <keyword type="" name="Checking for pattern recursion" link="glib-regex-syntax.html#id765247"/>
-    <keyword type="" name="Defining subpatterns for use by reference only" link="glib-regex-syntax.html#id765276"/>
-    <keyword type="" name="Assertion conditions" link="glib-regex-syntax.html#id765308"/>
+    <keyword type="" name="Non-printing characters" link="glib-regex-syntax.html#id791491"/>
+    <keyword type="" name="Absolute and relative back references" link="glib-regex-syntax.html#id799519"/>
+    <keyword type="" name="Generic character types" link="glib-regex-syntax.html#id799532"/>
+    <keyword type="" name="Newline sequences" link="glib-regex-syntax.html#id799682"/>
+    <keyword type="" name="Unicode character properties" link="glib-regex-syntax.html#id799697"/>
+    <keyword type="" name="Simple assertions" link="glib-regex-syntax.html#id799996"/>
+    <keyword type="" name="Lookahead assertions" link="glib-regex-syntax.html#id794481"/>
+    <keyword type="" name="Lookbehind assertions" link="glib-regex-syntax.html#id794532"/>
+    <keyword type="" name="Using multiple assertions" link="glib-regex-syntax.html#id794646"/>
+    <keyword type="" name="Checking for a used subpattern by number" link="glib-regex-syntax.html#id794736"/>
+    <keyword type="" name="Checking for a used subpattern by name" link="glib-regex-syntax.html#id794772"/>
+    <keyword type="" name="Checking for pattern recursion" link="glib-regex-syntax.html#id794796"/>
+    <keyword type="" name="Defining subpatterns for use by reference only" link="glib-regex-syntax.html#id794825"/>
+    <keyword type="" name="Assertion conditions" link="glib-regex-syntax.html#id794858"/>
     <keyword type="enum" name="enum GMarkupError" link="glib-Simple-XML-Subset-Parser.html#GMarkupError"/>
     <keyword type="macro" name="G_MARKUP_ERROR" link="glib-Simple-XML-Subset-Parser.html#G-MARKUP-ERROR:CAPS"/>
     <keyword type="enum" name="enum GMarkupParseFlags" link="glib-Simple-XML-Subset-Parser.html#GMarkupParseFlags"/>
@@ -2102,7 +2102,7 @@
     <keyword type="function" name="g_variant_type_next ()" link="glib-GVariantType.html#g-variant-type-next"/>
     <keyword type="function" name="g_variant_type_key ()" link="glib-GVariantType.html#g-variant-type-key"/>
     <keyword type="function" name="g_variant_type_value ()" link="glib-GVariantType.html#g-variant-type-value"/>
-    <keyword type="" name="Memory Use" link="glib-GVariant.html#id934962"/>
+    <keyword type="" name="Memory Use" link="glib-GVariant.html#id971240"/>
     <keyword type="struct" name="GVariant" link="glib-GVariant.html#GVariant" since="2.24"/>
     <keyword type="function" name="g_variant_unref ()" link="glib-GVariant.html#g-variant-unref" since="2.24"/>
     <keyword type="function" name="g_variant_ref ()" link="glib-GVariant.html#g-variant-ref" since="2.24"/>
@@ -2313,9 +2313,9 @@
     <keyword type="function" name="g_completion_set_compare ()" link="glib-Automatic-String-Completion.html#g-completion-set-compare" deprecated="2.26: Rarely used API"/>
     <keyword type="function" name="GCompletionStrncmpFunc ()" link="glib-Automatic-String-Completion.html#GCompletionStrncmpFunc"/>
     <keyword type="function" name="g_completion_free ()" link="glib-Automatic-String-Completion.html#g-completion-free" deprecated="2.26: Rarely used API"/>
-    <keyword type="" name="Options" link="glib-gettextize.html#id495086"/>
-    <keyword type="" name="Options" link="gtester.html#id487044"/>
-    <keyword type="" name="Options" link="gtester-report.html#id511075"/>
+    <keyword type="" name="Options" link="glib-gettextize.html#id538047"/>
+    <keyword type="" name="Options" link="gtester.html#id646222"/>
+    <keyword type="" name="Options" link="gtester-report.html#id816369"/>
     <keyword type="constant" name="G_THREAD_ERROR_AGAIN" link="glib-Threads.html#G-THREAD-ERROR-AGAIN:CAPS"/>
     <keyword type="constant" name="G_ONCE_STATUS_NOTCALLED" link="glib-Threads.html#G-ONCE-STATUS-NOTCALLED:CAPS"/>
     <keyword type="constant" name="G_ONCE_STATUS_PROGRESS" link="glib-Threads.html#G-ONCE-STATUS-PROGRESS:CAPS"/>

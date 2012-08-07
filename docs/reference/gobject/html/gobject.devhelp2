@@ -5,7 +5,7 @@
     <sub name="Introduction" link="pr01.html"/>
     <sub name="Concepts" link="pt01.html">
       <sub name="Background" link="chapter-intro.html">
-        <sub name="Data types and programming" link="chapter-intro.html#id552662"/>
+        <sub name="Data types and programming" link="chapter-intro.html#id550983"/>
         <sub name="Exporting a C API" link="ch01s02.html"/>
       </sub>
       <sub name="The GLib Dynamic Type System" link="chapter-gtype.html">
@@ -776,13 +776,13 @@
     <keyword type="property" name="The &quot;source-property&quot; property" link="GBinding.html#GBinding--source-property"/>
     <keyword type="property" name="The &quot;target&quot; property" link="GBinding.html#GBinding--target"/>
     <keyword type="property" name="The &quot;target-property&quot; property" link="GBinding.html#GBinding--target-property"/>
-    <keyword type="" name="Options" link="glib-mkenums.html#id559060"/>
-    <keyword type="" name="Production text substitutions" link="glib-mkenums.html#id566713"/>
-    <keyword type="" name="Trigraph extensions" link="glib-mkenums.html#id536088"/>
-    <keyword type="" name="Options" link="glib-genmarshal.html#id547780"/>
-    <keyword type="" name="Marshaller list format" link="glib-genmarshal.html#id554126"/>
-    <keyword type="" name="Parameter types" link="glib-genmarshal.html#id544793"/>
-    <keyword type="" name="Options" link="gobject-query.html#id558247"/>
+    <keyword type="" name="Options" link="glib-mkenums.html#id547304"/>
+    <keyword type="" name="Production text substitutions" link="glib-mkenums.html#id580305"/>
+    <keyword type="" name="Trigraph extensions" link="glib-mkenums.html#id585099"/>
+    <keyword type="" name="Options" link="glib-genmarshal.html#id585474"/>
+    <keyword type="" name="Marshaller list format" link="glib-genmarshal.html#id550900"/>
+    <keyword type="" name="Parameter types" link="glib-genmarshal.html#id540251"/>
+    <keyword type="" name="Options" link="gobject-query.html#id553842"/>
     <keyword type="constant" name="G_TYPE_DEBUG_NONE" link="gobject-Type-Information.html#G-TYPE-DEBUG-NONE:CAPS"/>
     <keyword type="constant" name="G_TYPE_DEBUG_OBJECTS" link="gobject-Type-Information.html#G-TYPE-DEBUG-OBJECTS:CAPS"/>
     <keyword type="constant" name="G_TYPE_DEBUG_SIGNALS" link="gobject-Type-Information.html#G-TYPE-DEBUG-SIGNALS:CAPS"/>

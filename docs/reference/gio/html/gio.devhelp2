@@ -203,12 +203,12 @@
         <sub name="Migrating from POSIX to GIO" link="ch27.html"/>
       </sub>
       <sub name="Migrating from GnomeVFS to GIO" link="ch28.html">
-        <sub name="Trash handling" link="ch28.html#id762424"/>
+        <sub name="Trash handling" link="ch28.html#id445704"/>
         <sub name="Operations on multiple files" link="ch28s02.html"/>
         <sub name="Mime monitoring" link="ch28s03.html"/>
       </sub>
       <sub name="Migrating from GConf to GSettings" link="ch29.html">
-        <sub name="Before you start" link="ch29.html#id616384"/>
+        <sub name="Before you start" link="ch29.html#id734552"/>
         <sub name="Conceptual differences" link="ch29s02.html"/>
         <sub name="GConfClient (and GConfBridge) API conversion" link="ch29s03.html"/>
         <sub name="Change notification" link="ch29s04.html"/>
@@ -217,7 +217,7 @@
         <sub name="Data conversion" link="ch29s07.html"/>
       </sub>
       <sub name="Migrating to GDBus" link="ch30.html">
-        <sub name="Conceptual differences" link="ch30.html#id1153996"/>
+        <sub name="Conceptual differences" link="ch30.html#id972455"/>
         <sub name="API comparison" link="ch30s02.html"/>
         <sub name="Owning bus names" link="ch30s03.html"/>
         <sub name="Creating proxies for well-known names" link="ch30s04.html"/>
@@ -2022,8 +2022,8 @@
     <keyword type="property" name="The &quot;object-path&quot; property" link="GDBusObjectManagerClient.html#GDBusObjectManagerClient--object-path"/>
     <keyword type="signal" name="The &quot;interface-proxy-properties-changed&quot; signal" link="GDBusObjectManagerClient.html#GDBusObjectManagerClient-interface-proxy-properties-changed"/>
     <keyword type="signal" name="The &quot;interface-proxy-signal&quot; signal" link="GDBusObjectManagerClient.html#GDBusObjectManagerClient-interface-proxy-signal"/>
-    <keyword type="" name="Vendor overrides" link="GSettings.html#id1018242"/>
-    <keyword type="" name="Binding" link="GSettings.html#id1018286"/>
+    <keyword type="" name="Vendor overrides" link="GSettings.html#id837731"/>
+    <keyword type="" name="Binding" link="GSettings.html#id837775"/>
     <keyword type="struct" name="GSettings" link="GSettings.html#GSettings-struct"/>
     <keyword type="function" name="g_settings_new ()" link="GSettings.html#g-settings-new" since="2.26"/>
     <keyword type="function" name="g_settings_new_with_path ()" link="GSettings.html#g-settings-new-with-path" since="2.26"/>
@@ -2355,14 +2355,14 @@
     <keyword type="function" name="g_io_extension_point_register ()" link="gio-Extension-Points.html#g-io-extension-point-register"/>
     <keyword type="function" name="g_io_extension_point_set_required_type ()" link="gio-Extension-Points.html#g-io-extension-point-set-required-type"/>
     <keyword type="function" name="g_io_extension_ref_class ()" link="gio-Extension-Points.html#g-io-extension-ref-class"/>
-    <keyword type="" name="Commands" link="gsettings-tool.html#id590507"/>
-    <keyword type="" name="Options" link="glib-compile-schemas.html#id1006407"/>
-    <keyword type="" name="Options" link="glib-compile-resources.html#id661730"/>
-    <keyword type="" name="Environment Variables" link="glib-compile-resources.html#id1020199"/>
-    <keyword type="" name="Commands" link="gdbus.html#id616778"/>
-    <keyword type="" name="Client-side usage" link="gdbus-codegen.html#id612334"/>
-    <keyword type="" name="Server-side usage" link="gdbus-codegen.html#id737980"/>
-    <keyword type="" name="Commands" link="gresource-tool.html#id588078"/>
+    <keyword type="" name="Commands" link="gsettings-tool.html#id419688"/>
+    <keyword type="" name="Options" link="glib-compile-schemas.html#id558111"/>
+    <keyword type="" name="Options" link="glib-compile-resources.html#id426201"/>
+    <keyword type="" name="Environment Variables" link="glib-compile-resources.html#id375026"/>
+    <keyword type="" name="Commands" link="gdbus.html#id689730"/>
+    <keyword type="" name="Client-side usage" link="gdbus-codegen.html#id569416"/>
+    <keyword type="" name="Server-side usage" link="gdbus-codegen.html#id891805"/>
+    <keyword type="" name="Commands" link="gresource-tool.html#id405905"/>
     <keyword type="method" name="The Poke() method" link="gdbus-org.gtk.GDBus.Example.ObjectManager.Animal.html#gdbus-method-org-gtk-GDBus-Example-ObjectManager-Animal.Poke"/>
     <keyword type="signal" name="The &quot;Jumped&quot; signal" link="gdbus-org.gtk.GDBus.Example.ObjectManager.Animal.html#gdbus-signal-org-gtk-GDBus-Example-ObjectManager-Animal.Jumped"/>
     <keyword type="property" name="The &quot;Mood&quot; property" link="gdbus-org.gtk.GDBus.Example.ObjectManager.Animal.html#gdbus-property-org-gtk-GDBus-Example-ObjectManager-Animal.Mood"/>

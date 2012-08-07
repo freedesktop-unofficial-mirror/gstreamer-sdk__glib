@@ -207,8 +207,10 @@ typedef enum
   G_FORMAT_SIZE_IEC_UNITS   = 1 << 1
 } GFormatSizeFlags;
 
+GLIB_AVAILABLE_IN_2_30
 gchar *g_format_size_full   (guint64          size,
                              GFormatSizeFlags flags);
+GLIB_AVAILABLE_IN_2_30
 gchar *g_format_size        (guint64          size);
 
 GLIB_DEPRECATED_FOR(g_format_size)
@@ -304,7 +306,7 @@ g_bit_storage (gulong number)
 {
 #if defined(__GNUC__) && (__GNUC__ >= 4) && defined(__OPTIMIZE__)
   return G_LIKELY (number) ?
-	   ((GLIB_SIZEOF_LONG * 8U - 1) ^ __builtin_clzl(number)) + 1 : 1;
+	   ((GLIB_SIZEOF_LONG * 8U - 1) ^ (guint) __builtin_clzl(number)) + 1 : 1;
 #else
   register guint n_bits = 0;
   

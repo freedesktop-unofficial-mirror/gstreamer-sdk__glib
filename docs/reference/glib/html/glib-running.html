@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Running GLib Applications</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.77.1">
 <link rel="home" href="index.html" title="GLib Reference Manual">
 <link rel="up" href="glib.html" title="GLib Overview">
 <link rel="prev" href="glib-compiling.html" title="Compiling GLib Applications">
@@ -31,9 +31,9 @@ How to run and debug your GLib application
 <td valign="top" align="right"></td>
 </tr></table></div>
 <div class="refsect1">
-<a name="id515687"></a><h2>Running and debugging GLib Applications</h2>
+<a name="id543335"></a><h2>Running and debugging GLib Applications</h2>
 <div class="refsect2">
-<a name="id509282"></a><h3>Environment variables</h3>
+<a name="id530042"></a><h3>Environment variables</h3>
 <p>
   The runtime behaviour of GLib applications can be influenced by a
   number of environment variables.
@@ -94,8 +94,11 @@ How to run and debug your GLib application
     This environment variable can be set to a list of debug options,
     which cause GLib to print out different types of debugging information.
     </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term">fatal-warnings</span></p></td>
@@ -136,8 +139,11 @@ How to run and debug your GLib application
     This environment variable allows reconfiguration of the GSlice
     memory allocator.
     </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term">always-malloc</span></p></td>
@@ -230,7 +236,7 @@ returned by functions like <code class="function">strftime()</code>.
 </div>
 <hr>
 <div class="refsect2">
-<a name="id486406"></a><h3>Traps and traces</h3>
+<a name="id559645"></a><h3>Traps and traces</h3>
 <p>
 
 
@@ -271,7 +277,7 @@ is 20.
 </div>
 <hr>
 <div class="refsect2">
-<a name="id486489"></a><h3>Gdb debugging macros</h3>
+<a name="id559728"></a><h3>Gdb debugging macros</h3>
 <p>
 glib ships with a set of python macros for the gdb debugger. These includes pretty
 printers for lists, hashtables and gobject types. It also has a backtrace filter
@@ -302,7 +308,7 @@ Which would print the contents of each widget in a list of widgets.
 </div>
 <hr>
 <div class="refsect2">
-<a name="id486524"></a><h3>SystemTap</h3>
+<a name="id559763"></a><h3>SystemTap</h3>
 <p>
 <a class="ulink" href="http://sourceware.org/systemtap/" target="_top">SystemTap</a> is a dynamic whole-system
 analysis toolkit.  GLib ships with a file <code class="filename">glib.stp</code> which defines a
@@ -313,7 +319,7 @@ are in your shared SystemTap scripts directory.
 </div>
 <hr>
 <div class="refsect2">
-<a name="id486560"></a><h3>Memory statistics</h3>
+<a name="id559799"></a><h3>Memory statistics</h3>
 <p>
 g_mem_profile() will output a summary g_malloc() memory usage, if memory
 profiling has been enabled by calling
