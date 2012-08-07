@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GDBusConnection</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.77.1">
 <link rel="home" href="index.html" title="GIO Reference Manual">
 <link rel="up" href="gdbus-lowlevel.html" title="Lowlevel D-Bus Support">
 <link rel="prev" href="GDBusMessage.html" title="GDBusMessage">
@@ -361,7 +361,7 @@ an D-Bus client, it is often easier to use the <a class="link" href="gio-Owning-
 <p>
 As an exception to the usual GLib rule that a particular object must not be
 used by two threads at the same time, <a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a>'s methods may be
-called from any thread<sup>[<a name="id978594" href="#ftn.id978594" class="footnote">1</a>]</sup>.
+called from any thread<a href="#ftn.id795966" class="footnote"><sup class="footnote"><a name="id795966"></a>[1]</sup></a>.
 </p>
 <p>
 Most of the ways to obtain a <a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a> automatically initialize it
@@ -946,7 +946,7 @@ free it with <a href="./../gobject/gobject/gobject-The-Base-Object-Type.html#g-o
 <span class="normal">    </span><span class="cbracket">}</span>
 <span class="cbracket">}</span>
 
-<span class="keyword">static</span><span class="normal"> <a href="./../glib/glib/glib-Basic-Types.html#gchar">gchar</a> </span><span class="symbol">*</span><span class="normal">_global_title </span><span class="symbol">=</span><span class="normal"> <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">;</span>
+<span class="keyword">static</span><span class="normal"> </span><span class="usertype">gchar</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">_global_title </span><span class="symbol">=</span><span class="normal"> <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">;</span>
 
 <span class="keyword">static</span><span class="normal"> </span><span class="usertype">gboolean</span><span class="normal"> swap_a_and_b </span><span class="symbol">=</span><span class="normal"> <a href="./../glib/glib/glib-Standard-Macros.html#FALSE:CAPS">FALSE</a></span><span class="symbol">;</span>
 
@@ -2984,8 +2984,11 @@ free it with <a href="./../gobject/gobject/gobject-The-Base-Object-Type.html#g-o
 <p>
 An enumeration for well-known message buses.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><a name="G-BUS-TYPE-STARTER:CAPS"></a><span class="term"><code class="literal">G_BUS_TYPE_STARTER</code></span></p></td>
@@ -3029,8 +3032,11 @@ then call <a class="link" href="GDBusConnection.html#g-bus-get-finish" title="g_
 This is a asynchronous failable function. See <a class="link" href="GDBusConnection.html#g-bus-get-sync" title="g_bus_get_sync ()"><code class="function">g_bus_get_sync()</code></a> for
 the synchronous version.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>bus_type</code></em> :</span></p></td>
@@ -3072,8 +3078,11 @@ event that you need a private message bus connection, use
 Note that the returned <a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a> object will (usually) have
 the <a class="link" href="GDBusConnection.html#GDBusConnection--exit-on-close" title='The "exit-on-close" property'><span class="type">"exit-on-close"</span></a> property set to <a href="./../glib/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>res</code></em> :</span></p></td>
@@ -3119,8 +3128,11 @@ event that you need a private message bus connection, use
 Note that the returned <a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a> object will (usually) have
 the <a class="link" href="GDBusConnection.html#GDBusConnection--exit-on-close" title='The "exit-on-close" property'><span class="type">"exit-on-close"</span></a> property set to <a href="./../glib/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>bus_type</code></em> :</span></p></td>
@@ -3169,8 +3181,11 @@ should only be accessed using the provided API.
 <p>
 Flags used when creating a new <a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><a name="G-DBUS-CONNECTION-FLAGS-NONE:CAPS"></a><span class="term"><code class="literal">G_DBUS_CONNECTION_FLAGS_NONE</code></span></p></td>
@@ -3247,8 +3262,11 @@ This is a asynchronous failable constructor. See
 <a class="link" href="GDBusConnection.html#g-dbus-connection-new-sync" title="g_dbus_connection_new_sync ()"><code class="function">g_dbus_connection_new_sync()</code></a> for the synchronous
 version.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>stream</code></em> :</span></p></td>
@@ -3293,8 +3311,11 @@ version.
 <p>
 Finishes an operation started with <a class="link" href="GDBusConnection.html#g-dbus-connection-new" title="g_dbus_connection_new ()"><code class="function">g_dbus_connection_new()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>res</code></em> :</span></p></td>
@@ -3342,8 +3363,11 @@ authentication process.
 This is a synchronous failable constructor. See
 <a class="link" href="GDBusConnection.html#g-dbus-connection-new" title="g_dbus_connection_new ()"><code class="function">g_dbus_connection_new()</code></a> for the asynchronous version.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>stream</code></em> :</span></p></td>
@@ -3415,8 +3439,11 @@ This is a asynchronous failable constructor. See
 <a class="link" href="GDBusConnection.html#g-dbus-connection-new-for-address-sync" title="g_dbus_connection_new_for_address_sync ()"><code class="function">g_dbus_connection_new_for_address_sync()</code></a> for the synchronous
 version.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>address</code></em> :</span></p></td>
@@ -3457,8 +3484,11 @@ version.
 <p>
 Finishes an operation started with <a class="link" href="GDBusConnection.html#g-dbus-connection-new-for-address" title="g_dbus_connection_new_for_address ()"><code class="function">g_dbus_connection_new_for_address()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>res</code></em> :</span></p></td>
@@ -3505,8 +3535,11 @@ This is a synchronous failable constructor. See
 If <em class="parameter"><code>observer</code></em> is not <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> it may be used to control the
 authentication process.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>address</code></em> :</span></p></td>
@@ -3549,8 +3582,11 @@ If <em class="parameter"><code>connection</code></em> was created with
 starts processing messages. Does nothing on if <em class="parameter"><code>connection</code></em> wasn't
 created with this flag or if the method has already been called.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
 <td>A <a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a>.</td>
@@ -3593,8 +3629,11 @@ then call <a class="link" href="GDBusConnection.html#g-dbus-connection-close-fin
 operation.  See <a class="link" href="GDBusConnection.html#g-dbus-connection-close-sync" title="g_dbus_connection_close_sync ()"><code class="function">g_dbus_connection_close_sync()</code></a> for the synchronous
 version.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -3628,8 +3667,11 @@ satisfied or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code 
 <p>
 Finishes an operation started with <a class="link" href="GDBusConnection.html#g-dbus-connection-close" title="g_dbus_connection_close ()"><code class="function">g_dbus_connection_close()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -3664,8 +3706,11 @@ until this is done. See <a class="link" href="GDBusConnection.html#g-dbus-connec
 asynchronous version of this method and more details about what it
 does.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -3696,8 +3741,11 @@ does.
 <p>
 Gets whether <em class="parameter"><code>connection</code></em> is closed.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -3736,8 +3784,11 @@ then call <a class="link" href="GDBusConnection.html#g-dbus-connection-flush-fin
 operation.  See <a class="link" href="GDBusConnection.html#g-dbus-connection-flush-sync" title="g_dbus_connection_flush_sync ()"><code class="function">g_dbus_connection_flush_sync()</code></a> for the synchronous
 version.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -3771,8 +3822,11 @@ satisfied or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code 
 <p>
 Finishes an operation started with <a class="link" href="GDBusConnection.html#g-dbus-connection-flush" title="g_dbus_connection_flush ()"><code class="function">g_dbus_connection_flush()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -3807,8 +3861,11 @@ until this is done. See <a class="link" href="GDBusConnection.html#g-dbus-connec
 asynchronous version of this method and more details about what it
 does.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -3841,8 +3898,11 @@ Gets whether the process is terminated when <em class="parameter"><code>connecti
 closed by the remote peer. See
 <a class="link" href="GDBusConnection.html#GDBusConnection--exit-on-close" title='The "exit-on-close" property'><span class="type">"exit-on-close"</span></a> for more details.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -3875,8 +3935,11 @@ If you are setting <em class="parameter"><code>exit_on_close</code></em> to <a h
 bus connection, you should make sure that your application exits
 when the user session ends.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -3903,8 +3966,11 @@ While the <a class="link" href="GDBusConnection.html" title="GDBusConnection"><s
 stream from a worker thread, so it is not safe to interact with
 the stream directly.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -3928,8 +3994,11 @@ the stream directly.
 The GUID of the peer performing the role of server when
 authenticating. See <a class="link" href="GDBusConnection.html#GDBusConnection--guid" title='The "guid" property'><span class="type">"guid"</span></a> for more details.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -3953,8 +4022,11 @@ Gets the unique name of <em class="parameter"><code>connection</code></em> as as
 bus. This can also be used to figure out if <em class="parameter"><code>connection</code></em> is a
 message bus connection.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -3981,8 +4053,11 @@ bus connection. Do not free this string, it is owned by
 <p>
 Capabilities negotiated with the remote peer.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><a name="G-DBUS-CAPABILITY-FLAGS-NONE:CAPS"></a><span class="term"><code class="literal">G_DBUS_CAPABILITY_FLAGS_NONE</code></span></p></td>
@@ -4006,8 +4081,11 @@ supports exchanging UNIX file descriptors with the remote peer.
 <p>
 Gets the capabilities negotiated with the remote peer
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -4038,8 +4116,11 @@ In a message bus setup, the message bus is always the server and
 each application is a client. So this method will always return
 <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> for message bus clients.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -4066,8 +4147,11 @@ this object, it is owned by <em class="parameter"><code>connection</code></em>. 
 <p>
 Flags used in <a class="link" href="GDBusConnection.html#g-dbus-connection-call" title="g_dbus_connection_call ()"><code class="function">g_dbus_connection_call()</code></a> and similar APIs.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><a name="G-DBUS-CALL-FLAGS-NONE:CAPS"></a><span class="term"><code class="literal">G_DBUS_CALL_FLAGS_NONE</code></span></p></td>
@@ -4172,8 +4256,11 @@ function.
 If <em class="parameter"><code>callback</code></em> is <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> then the D-Bus method call message will be sent with
 the <a class="link" href="GDBusMessage.html#G-DBUS-MESSAGE-FLAGS-NO-REPLY-EXPECTED:CAPS"><code class="literal">G_DBUS_MESSAGE_FLAGS_NO_REPLY_EXPECTED</code></a> flag set.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -4246,8 +4333,11 @@ method invocation. <span class="annotation">[<acronym title="NULL is ok, both fo
 <p>
 Finishes an operation started with <a class="link" href="GDBusConnection.html#g-dbus-connection-call" title="g_dbus_connection_call ()"><code class="function">g_dbus_connection_call()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -4349,8 +4439,11 @@ The calling thread is blocked until a reply is received. See
 <a class="link" href="GDBusConnection.html#g-dbus-connection-call" title="g_dbus_connection_call ()"><code class="function">g_dbus_connection_call()</code></a> for the asynchronous version of
 this method.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -4434,8 +4527,11 @@ Like <a class="link" href="GDBusConnection.html#g-dbus-connection-call" title="g
 <p>
 This method is only available on UNIX.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -4515,8 +4611,11 @@ method invocation. <span class="annotation">[<acronym title="NULL is ok, both fo
 <p>
 Finishes an operation started with <a class="link" href="GDBusConnection.html#g-dbus-connection-call-with-unix-fd-list" title="g_dbus_connection_call_with_unix_fd_list ()"><code class="function">g_dbus_connection_call_with_unix_fd_list()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -4568,8 +4667,11 @@ Like <a class="link" href="GDBusConnection.html#g-dbus-connection-call-sync" tit
 <p>
 This method is only available on UNIX.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -4659,8 +4761,11 @@ If the parameters GVariant is floating, it is consumed.
 <p>
 This can only fail if <em class="parameter"><code>parameters</code></em> is not compatible with the D-Bus protocol.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -4714,8 +4819,11 @@ or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="lit
 <p>
 Flags used when subscribing to signals via <a class="link" href="GDBusConnection.html#g-dbus-connection-signal-subscribe" title="g_dbus_connection_signal_subscribe ()"><code class="function">g_dbus_connection_signal_subscribe()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><a name="G-DBUS-SIGNAL-FLAGS-NONE:CAPS"></a><span class="term"><code class="literal">G_DBUS_SIGNAL_FLAGS_NONE</code></span></p></td>
@@ -4746,8 +4854,11 @@ over which match rules you add (but you must add them manually).
 <p>
 Signature for callback function used in <a class="link" href="GDBusConnection.html#g-dbus-connection-signal-subscribe" title="g_dbus_connection_signal_subscribe ()"><code class="function">g_dbus_connection_signal_subscribe()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -4812,8 +4923,11 @@ name. As such, to avoid certain race conditions, users should be
 tracking the name owner of the well-known name and use that when
 processing the received signal.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -4882,8 +4996,11 @@ subscription is removed or <a href="./../glib/glib/glib-Standard-Macros.html#NUL
 <p>
 Unsubscribes from signals.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -4908,8 +5025,11 @@ Unsubscribes from signals.
 <p>
 Flags used when sending <a class="link" href="GDBusMessage.html" title="GDBusMessage"><span class="type">GDBusMessage</span></a>s on a <a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><a name="G-DBUS-SEND-MESSAGE-FLAGS-NONE:CAPS"></a><span class="term"><code class="literal">G_DBUS_SEND_MESSAGE_FLAGS_NONE</code></span></p></td>
@@ -4959,8 +5079,11 @@ low-level API to send and receive UNIX file descriptors.
 Note that <em class="parameter"><code>message</code></em> must be unlocked, unless <em class="parameter"><code>flags</code></em> contain the
 <a class="link" href="GDBusConnection.html#G-DBUS-SEND-MESSAGE-FLAGS-PRESERVE-SERIAL:CAPS"><code class="literal">G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL</code></a> flag.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -5039,8 +5162,11 @@ Note that <em class="parameter"><code>message</code></em> must be unlocked, unle
 See <a class="xref" href="GDBusConnection.html#gdbus-server" title="Example 2. D-Bus server example">Example 2, “D-Bus server example”</a> and <a class="xref" href="GDBusConnection.html#gdbus-unix-fd-client" title="Example 4. D-Bus UNIX File Descriptor example">Example 4, “D-Bus UNIX File Descriptor example”</a> for an example of how to use this
 low-level API to send and receive UNIX file descriptors.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -5104,8 +5230,11 @@ be of type <a class="link" href="GDBusMessage.html#G-DBUS-MESSAGE-TYPE-ERROR:CAP
 See <a class="xref" href="GDBusConnection.html#gdbus-server" title="Example 2. D-Bus server example">Example 2, “D-Bus server example”</a> and <a class="xref" href="GDBusConnection.html#gdbus-unix-fd-client" title="Example 4. D-Bus UNIX File Descriptor example">Example 4, “D-Bus UNIX File Descriptor example”</a> for an example of how to use this
 low-level API to send and receive UNIX file descriptors.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -5174,8 +5303,11 @@ low-level API to send and receive UNIX file descriptors.
 Note that <em class="parameter"><code>message</code></em> must be unlocked, unless <em class="parameter"><code>flags</code></em> contain the
 <a class="link" href="GDBusConnection.html#G-DBUS-SEND-MESSAGE-FLAGS-PRESERVE-SERIAL:CAPS"><code class="literal">G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL</code></a> flag.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -5354,8 +5486,11 @@ logged to <span class="emphasis"><em>standard error</em></span>. Applications ca
 check this ahead of time using <a class="link" href="GDBusMessage.html#g-dbus-message-to-blob" title="g_dbus_message_to_blob ()"><code class="function">g_dbus_message_to_blob()</code></a> passing a
 <a class="link" href="GDBusConnection.html#GDBusCapabilityFlags" title="enum GDBusCapabilityFlags"><span class="type">GDBusCapabilityFlags</span></a> value obtained from <em class="parameter"><code>connection</code></em>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -5419,8 +5554,11 @@ dispatched anywhere else - not even the standard dispatch machinery
 message. Similary, if a filter consumes an outgoing message, the
 message will not be sent to the other peer.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -5456,8 +5594,11 @@ is removed or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code
 <p>
 Removes a filter.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -5491,8 +5632,11 @@ If you want to handle getting/setting D-Bus properties asynchronously, simply
 register an object with the <code class="literal">org.freedesktop.DBus.Properties</code>
 D-Bus interface using <a class="link" href="GDBusConnection.html#g-dbus-connection-register-object" title="g_dbus_connection_register_object ()"><code class="function">g_dbus_connection_register_object()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><a class="link" href="GDBusConnection.html#GDBusInterfaceMethodCallFunc" title="GDBusInterfaceMethodCallFunc ()"><span class="type">GDBusInterfaceMethodCallFunc</span></a> <em class="structfield"><code><a name="GDBusInterfaceVTable.method-call"></a>method_call</code></em>;</span></p></td>
@@ -5524,8 +5668,11 @@ D-Bus interface using <a class="link" href="GDBusConnection.html#g-dbus-connecti
 <p>
 The type of the <em class="parameter"><code>method_call</code></em> function in <a class="link" href="GDBusConnection.html#GDBusInterfaceVTable" title="GDBusInterfaceVTable"><span class="type">GDBusInterfaceVTable</span></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -5576,8 +5723,11 @@ The type of the <em class="parameter"><code>method_call</code></em> function in 
 <p>
 The type of the <em class="parameter"><code>get_property</code></em> function in <a class="link" href="GDBusConnection.html#GDBusInterfaceVTable" title="GDBusInterfaceVTable"><span class="type">GDBusInterfaceVTable</span></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -5631,8 +5781,11 @@ consumed - otherwise its reference count is decreased by one.</td>
 <p>
 The type of the <em class="parameter"><code>set_property</code></em> function in <a class="link" href="GDBusConnection.html#GDBusInterfaceVTable" title="GDBusInterfaceVTable"><span class="type">GDBusInterfaceVTable</span></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -5733,8 +5886,11 @@ as the object is exported. Also note that <em class="parameter"><code>vtable</co
 <p>
 See <a class="xref" href="GDBusConnection.html#gdbus-server" title="Example 2. D-Bus server example">Example 2, “D-Bus server example”</a> for an example of how to use this method.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -5783,8 +5939,11 @@ that can be used with <a class="link" href="GDBusConnection.html#g-dbus-connecti
 <p>
 Unregisters an object.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -5815,8 +5974,11 @@ Unregisters an object.
 <p>
 Virtual table for handling subtrees registered with <a class="link" href="GDBusConnection.html#g-dbus-connection-register-subtree" title="g_dbus_connection_register_subtree ()"><code class="function">g_dbus_connection_register_subtree()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><a class="link" href="GDBusConnection.html#GDBusSubtreeEnumerateFunc" title="GDBusSubtreeEnumerateFunc ()"><span class="type">GDBusSubtreeEnumerateFunc</span></a> <em class="structfield"><code><a name="GDBusSubtreeVTable.enumerate"></a>enumerate</code></em>;</span></p></td>
@@ -5857,8 +6019,11 @@ contain the '/' character.
 <p>
 The return value will be freed with <a href="./../glib/glib/glib-String-Utility-Functions.html#g-strfreev"><code class="function">g_strfreev()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -5916,8 +6081,11 @@ items is that the standard DBus interfaces will returned to the
 remote introspector in the empty array case, but not in the <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
 case.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -5965,8 +6133,11 @@ The type of the <em class="parameter"><code>dispatch</code></em> function in <a 
 Subtrees are flat.  <em class="parameter"><code>node</code></em>, if non-<a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>, is always exactly one
 segment of the object path (ie: it never contains a slash).
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -6015,8 +6186,11 @@ segment of the object path (ie: it never contains a slash).
 <p>
 Flags passed to <a class="link" href="GDBusConnection.html#g-dbus-connection-register-subtree" title="g_dbus_connection_register_subtree ()"><code class="function">g_dbus_connection_register_subtree()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><a name="G-DBUS-SUBTREE-FLAGS-NONE:CAPS"></a><span class="term"><code class="literal">G_DBUS_SUBTREE_FLAGS_NONE</code></span></p></td>
@@ -6086,8 +6260,11 @@ registration.
 <p>
 See <a class="xref" href="GDBusConnection.html#gdbus-subtree-server" title="Example 3. D-Bus subtree example">Example 3, “D-Bus subtree example”</a> for an example of how to use this method.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -6135,8 +6312,11 @@ that can be used with <a class="link" href="GDBusConnection.html#g-dbus-connecti
 <p>
 Unregisters a subtree.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -6290,7 +6470,7 @@ Emitted when the connection is closed.
 <p>
 The cause of this event can be
 </p>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem"><p>
    If <a class="link" href="GDBusConnection.html#g-dbus-connection-close" title="g_dbus_connection_close ()"><code class="function">g_dbus_connection_close()</code></a> is called. In this case
    <em class="parameter"><code>remote_peer_vanished</code></em> is set to <a href="./../glib/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> and <em class="parameter"><code>error</code></em> is <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.
@@ -6312,8 +6492,11 @@ Upon receiving this signal, you should give up your reference to
 <em class="parameter"><code>connection</code></em>. You are guaranteed that this signal is emitted only
 once.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
@@ -6327,7 +6510,8 @@ remote peer closed its end of the connection.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>A <a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> with more details about the event or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.</td>
+<td>A <a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> with more details about the event or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
@@ -6339,8 +6523,8 @@ remote peer closed its end of the connection.</td>
 </div>
 </div>
 <div class="footnotes">
-<br><hr width="100" align="left">
-<div class="footnote"><p><sup>[<a id="ftn.id978594" href="#id978594" class="para">1</a>] </sup>
+<br><hr style="width:100; align:left;">
+<div id="ftn.id795966" class="footnote"><p><a href="#id795966" class="para"><sup class="para">[1] </sup></a>
   This is so that <a class="link" href="GDBusConnection.html#g-bus-get" title="g_bus_get ()"><code class="function">g_bus_get()</code></a> and <a class="link" href="GDBusConnection.html#g-bus-get-sync" title="g_bus_get_sync ()"><code class="function">g_bus_get_sync()</code></a> can safely return the
   same <a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a> when called from any thread.
 </p></div>

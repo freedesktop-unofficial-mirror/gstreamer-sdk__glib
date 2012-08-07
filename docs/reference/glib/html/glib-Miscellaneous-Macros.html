@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Miscellaneous Macros</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.77.1">
 <link rel="home" href="index.html" title="GLib Reference Manual">
 <link rel="up" href="glib-fundamentals.html" title="GLib Fundamentals">
 <link rel="prev" href="glib-Numerical-Definitions.html" title="Numerical Definitions">
@@ -178,8 +178,11 @@ In order to use this function, you must include
 use <code class="function">memmove()</code> and GLib does not include <code class="filename">string.h</code>
 for you.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>ap1</code></em> :</span></p></td>
@@ -237,8 +240,11 @@ is transformed by the preprocessor into (code equivalent to):
 
 <p>
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>macro_or_string</code></em> :</span></p></td>
 <td>a macro or a string</td>
@@ -295,8 +301,11 @@ is transformed by the preprocessor into:
 
 <p>
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>identifier1</code></em> :</span></p></td>
@@ -338,8 +347,11 @@ blocks of code.
 <p>
 The macro should only be used once per source code line.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>expr</code></em> :</span></p></td>
 <td>a constant expression</td>
@@ -381,8 +393,11 @@ the first argument of a comma expression.
 
 <p>
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>expr</code></em> :</span></p></td>
 <td>a constant expression</td>
@@ -466,8 +481,11 @@ tells the compiler that the function returns a pointer to memory of a
 size that is specified by the <em class="parameter"><code>x</code></em>th function parameter.
 See the GNU C documentation for details.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>x</code></em> :</span></p></td>
 <td>the index of the argument specifying the allocation size</td>
@@ -487,8 +505,11 @@ tells the compiler that the function returns a pointer to memory of a
 size that is specified by the product of two function parameters.
 See the GNU C documentation for details.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>x</code></em> :</span></p></td>
@@ -531,8 +552,11 @@ Note that if <em class="parameter"><code>f</code></em> is a macro, it will be ex
 You can enclose it in quotes to prevent this. (The quotes will show up
 in the warning, but it's better than showing the macro expansion.)
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>f</code></em> :</span></p></td>
 <td>the intended replacement for the deprecated symbol,
@@ -634,8 +658,11 @@ passed to the function. See the GNU C documentation for details.
 
 <p>
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>format_idx</code></em> :</span></p></td>
@@ -660,8 +687,11 @@ functions which take a variable number of arguments, with the same
 syntax as <code class="function">scanf()</code>. It allows the compiler to type-check the arguments
 passed to the function. See the GNU C documentation for details.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>format_idx</code></em> :</span></p></td>
@@ -704,8 +734,11 @@ string). See the GNU C documentation for details.
 
 <p>
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>arg_idx</code></em> :</span></p></td>
 <td>the index of the argument</td>
@@ -911,8 +944,11 @@ a true value. The compiler may use this information for optimizations.
 
 <p>
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>expr</code></em> :</span></p></td>
@@ -953,8 +989,11 @@ a true value. The compiler may use this information for optimizations.
 
 <p>
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>expr</code></em> :</span></p></td>

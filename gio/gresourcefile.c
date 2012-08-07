@@ -465,6 +465,7 @@ g_resource_file_query_info (GFile                *file,
   info = g_file_info_new ();
   base = g_resource_file_get_basename (file);
   g_file_info_set_name (info, base);
+  g_file_info_set_display_name (info, base);
 
   _g_file_info_set_attribute_boolean_by_id (info, G_FILE_ATTRIBUTE_ID_ACCESS_CAN_READ, TRUE);
   _g_file_info_set_attribute_boolean_by_id (info, G_FILE_ATTRIBUTE_ID_ACCESS_CAN_WRITE, FALSE);
@@ -827,9 +828,9 @@ g_resource_file_input_stream_close (GInputStream  *stream,
 static goffset
 g_resource_file_input_stream_tell (GFileInputStream *stream)
 {
-  GResourceFileInputStream *file = G_RESOURCE_FILE_INPUT_STREAM (stream);;
+  GResourceFileInputStream *file = G_RESOURCE_FILE_INPUT_STREAM (stream);
 
-  if (!G_IS_SEEKABLE (file->stream));
+  if (!G_IS_SEEKABLE (file->stream))
       return 0;
 
   return g_seekable_tell (G_SEEKABLE (file->stream));

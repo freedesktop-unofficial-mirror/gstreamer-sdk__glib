@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Varargs Value Collection</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.77.1">
 <link rel="home" href="index.html" title="GObject Reference Manual">
 <link rel="up" href="rn01.html" title="API Reference">
 <link rel="prev" href="gobject-GParamSpec.html" title="GParamSpec">
@@ -83,8 +83,11 @@ types and pointers.
 <p>
 A union holding one collected value.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><a href="./../glib/glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a> <em class="structfield"><code><a name="GTypeCValue.v-int"></a>v_int</code></em>;</span></p></td>
@@ -118,8 +121,11 @@ Collects a variable argument value from a va_list. We have to
 implement the varargs collection as a macro, because on some systems
 va_list variables cannot be passed by reference.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
@@ -161,8 +167,11 @@ Note: If you are creating the <em class="parameter"><code>value</code></em> argu
 you should use the <a class="link" href="gobject-Varargs-Value-Collection.html#G-VALUE-COLLECT-INIT:CAPS" title="G_VALUE_COLLECT_INIT()"><span class="type">G_VALUE_COLLECT_INIT</span></a> variant and pass the unitialized
 <a class="link" href="gobject-Generic-values.html#GValue" title="GValue"><span class="type">GValue</span></a>. That variant is faster than <a class="link" href="gobject-Varargs-Value-Collection.html#G-VALUE-COLLECT:CAPS" title="G_VALUE_COLLECT()"><span class="type">G_VALUE_COLLECT</span></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
@@ -194,8 +203,11 @@ allocated error messages if something fails</td>
 Collects a value's variable argument locations from a va_list. Usage is
 analogous to <a class="link" href="gobject-Varargs-Value-Collection.html#G-VALUE-COLLECT:CAPS" title="G_VALUE_COLLECT()"><code class="function">G_VALUE_COLLECT()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>

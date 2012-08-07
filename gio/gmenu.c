@@ -255,7 +255,7 @@ g_menu_new (void)
  * @detailed_action: (allow-none): the detailed action string, or %NULL
  *
  * Convenience function for inserting a normal menu item into @menu.
- * Combine g_menu_new() and g_menu_insert_item() for a more flexible
+ * Combine g_menu_item_new() and g_menu_insert_item() for a more flexible
  * alternative.
  *
  * Since: 2.32
@@ -280,7 +280,7 @@ g_menu_insert (GMenu       *menu,
  * @detailed_action: (allow-none): the detailed action string, or %NULL
  *
  * Convenience function for prepending a normal menu item to the start
- * of @menu.  Combine g_menu_new() and g_menu_insert_item() for a more
+ * of @menu.  Combine g_menu_item_new() and g_menu_insert_item() for a more
  * flexible alternative.
  *
  * Since: 2.32
@@ -300,7 +300,7 @@ g_menu_prepend (GMenu       *menu,
  * @detailed_action: (allow-none): the detailed action string, or %NULL
  *
  * Convenience function for appending a normal menu item to the end of
- * @menu.  Combine g_menu_new() and g_menu_insert_item() for a more
+ * @menu.  Combine g_menu_item_new() and g_menu_insert_item() for a more
  * flexible alternative.
  *
  * Since: 2.32
@@ -451,7 +451,7 @@ g_menu_clear_item (struct item *item)
 {
   if (item->attributes != NULL)
     g_hash_table_unref (item->attributes);
-  if (item->links != NULL);
+  if (item->links != NULL)
     g_hash_table_unref (item->links);
 }
 

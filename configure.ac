@@ -31,8 +31,8 @@ m4_define(glib_configure_ac)
 
 m4_define([glib_major_version], [2])
 m4_define([glib_minor_version], [32])
-m4_define([glib_micro_version], [1])
-m4_define([glib_interface_age], [1])
+m4_define([glib_micro_version], [4])
+m4_define([glib_interface_age], [4])
 m4_define([glib_binary_age],
           [m4_eval(100 * glib_minor_version + glib_micro_version)])
 m4_define([glib_version],
@@ -178,7 +178,10 @@ AC_MSG_RESULT([$glib_have_carbon])
 glib_have_cocoa=no
 AC_MSG_CHECKING([for Mac OS X Cocoa support])
 AC_TRY_CPP([
-#include <Foundation/Foundation.h>
+#include <Cocoa/Cocoa.h>
+#ifdef GNUSTEP_BASE_VERSION
+#error "Detected GNUstep, not Cocoa"
+#endif
 ], glib_have_cocoa=yes)
 
 AC_MSG_RESULT([$glib_have_cocoa])
@@ -1813,17 +1816,19 @@ dnl ************************
 dnl *** check for libelf ***
 dnl ************************
 
-PKG_CHECK_MODULES([LIBELF], [libelf], [have_libelf=yes], [have_libelf=maybe])
+PKG_CHECK_MODULES([LIBELF], [libelf >= 0.8.12], [have_libelf=yes], [have_libelf=maybe])
 
 if test $have_libelf = maybe; then
+  glib_save_LIBS=$LIBS
   AC_CHECK_LIB([elf], [elf_begin], , [have_libelf=no])
   AC_CHECK_LIB([elf], [elf_getshdrstrndx], , [have_libelf=no])
   AC_CHECK_LIB([elf], [elf_getshdrnum], , [have_libelf=no])
   AC_CHECK_HEADER([libelf.h], , [have_libelf=no])
+  LIBS=$glib_save_LIBS
 
   if test $have_libelf != no; then
     LIBELF_LIBS=-lelf
-    have_libelf = yes
+    have_libelf=yes
   fi
 fi
 
@@ -3440,10 +3445,13 @@ $ac_cv_sizeof___int64)
   ;;
 esac
 
+AC_CHECK_TYPE([guint32],,,[typedef unsigned $gint32 guint32;])
 AC_CHECK_ALIGNOF([guint32], [AC_INCLUDES_DEFAULT
 typedef unsigned $gint32 guint32;])
+AC_CHECK_TYPE([guint64],,,[typedef unsigned $gint64 guint64;])
 AC_CHECK_ALIGNOF([guint64], [AC_INCLUDES_DEFAULT
 typedef unsigned $gint64 guint64;])
+AC_CHECK_TYPE([unsigned long])
 AC_CHECK_ALIGNOF([unsigned long])
 
 # Check for libdbus1 - Optional - is only used in the GDBus test cases

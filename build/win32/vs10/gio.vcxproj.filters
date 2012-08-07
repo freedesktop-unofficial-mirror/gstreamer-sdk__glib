@@ -46,6 +46,8 @@
     <ClCompile Include="..\..\..\gio\gdbusauthmechanismsha1.c"><Filter>Source Files</Filter></ClCompile>
     <ClCompile Include="..\..\..\gio\gdbusauthobserver.c"><Filter>Source Files</Filter></ClCompile>
     <ClCompile Include="..\..\..\gio\gdbusconnection.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="..\..\..\gio\gdbusdaemon.c"><Filter>Source Files</Filter></ClCompile>
+    <ClCompile Include="..\..\..\gio\gdbus-daemon-generated.c"><Filter>Source Files</Filter></ClCompile>
     <ClCompile Include="..\..\..\gio\gdbuserror.c"><Filter>Source Files</Filter></ClCompile>
     <ClCompile Include="..\..\..\gio\gdbusinterface.c"><Filter>Source Files</Filter></ClCompile>
     <ClCompile Include="..\..\..\gio\gdbusinterfaceskeleton.c"><Filter>Source Files</Filter></ClCompile>

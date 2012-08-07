@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Strings</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.77.1">
 <link rel="home" href="index.html" title="GLib Reference Manual">
 <link rel="up" href="glib-data-types.html" title="GLib Data Types">
 <link rel="prev" href="glib-Hash-Tables.html" title="Hash Tables">
@@ -146,8 +146,11 @@ by the GString <em class="parameter"><code>string</code></em>, simply use <em cl
 <p>
 The GString struct contains the public fields of a GString.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *<em class="structfield"><code><a name="GString.str"></a>str</code></em>;</span></p></td>
@@ -175,8 +178,11 @@ string before it needs to be reallocated. May be larger than <em class="paramete
 <p>
 Creates a new <a class="link" href="glib-Strings.html#GString" title="struct GString"><span class="type">GString</span></a>, initialized with the given string.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>init</code></em> :</span></p></td>
@@ -205,8 +211,11 @@ Since this function does not stop at nul bytes, it is the caller's
 responsibility to ensure that <em class="parameter"><code>init</code></em> has at least <em class="parameter"><code>len</code></em> addressable
 bytes.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>init</code></em> :</span></p></td>
@@ -234,8 +243,11 @@ bytes. This is useful if you are going to add a lot of
 text to the string and don't want it to be reallocated
 too often.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>dfl_size</code></em> :</span></p></td>
@@ -261,8 +273,11 @@ destroying any previous contents. It is rather like
 the standard <code class="function">strcpy()</code> function, except that you do not
 have to worry about having enough space to copy the string.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
@@ -296,8 +311,11 @@ except that the <a class="link" href="glib-Strings.html#GString" title="struct G
 to contain the results. The previous contents of the
 <a class="link" href="glib-Strings.html#GString" title="struct GString"><span class="type">GString</span></a> are destroyed.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
@@ -328,8 +346,11 @@ Appends a formatted string onto the end of a <a class="link" href="glib-Strings.
 This function is similar to <a class="link" href="glib-Strings.html#g-string-sprintf" title="g_string_sprintf"><code class="function">g_string_sprintf()</code></a> except that
 the text is appended to the <a class="link" href="glib-Strings.html#GString" title="struct GString"><span class="type">GString</span></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
@@ -358,8 +379,11 @@ Writes a formatted string into a <a class="link" href="glib-Strings.html#GString
 This function is similar to <a class="link" href="glib-Strings.html#g-string-printf" title="g_string_printf ()"><code class="function">g_string_printf()</code></a> except that
 the arguments to the format string are passed as a va_list.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
@@ -390,8 +414,11 @@ This function is similar to <a class="link" href="glib-Strings.html#g-string-app
 except that the arguments to the format string are passed
 as a va_list.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
@@ -423,8 +450,11 @@ except that the <a class="link" href="glib-Strings.html#GString" title="struct G
 to contain the results. The previous contents of the
 <a class="link" href="glib-Strings.html#GString" title="struct GString"><span class="type">GString</span></a> are destroyed.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
@@ -453,8 +483,11 @@ Appends a formatted string onto the end of a <a class="link" href="glib-Strings.
 This function is similar to <a class="link" href="glib-Strings.html#g-string-printf" title="g_string_printf ()"><code class="function">g_string_printf()</code></a> except
 that the text is appended to the <a class="link" href="glib-Strings.html#GString" title="struct GString"><span class="type">GString</span></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
@@ -481,8 +514,11 @@ that the text is appended to the <a class="link" href="glib-Strings.html#GString
 Adds a string onto the end of a <a class="link" href="glib-Strings.html#GString" title="struct GString"><span class="type">GString</span></a>, expanding
 it if necessary.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
@@ -510,8 +546,11 @@ it if necessary.
 Adds a byte onto the end of a <a class="link" href="glib-Strings.html#GString" title="struct GString"><span class="type">GString</span></a>, expanding
 it if necessary.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
@@ -539,8 +578,11 @@ it if necessary.
 Converts a Unicode character into UTF-8, and appends it
 to the string.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
@@ -574,8 +616,11 @@ Since this function does not stop at nul bytes, it is
 the caller's responsibility to ensure that <em class="parameter"><code>val</code></em> has at
 least <em class="parameter"><code>len</code></em> addressable bytes.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
@@ -608,8 +653,11 @@ least <em class="parameter"><code>len</code></em> addressable bytes.
 Appends <em class="parameter"><code>unescaped</code></em> to <em class="parameter"><code>string</code></em>, escaped any characters that
 are reserved in URIs using URI-style escape sequences.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
@@ -647,8 +695,11 @@ to be used, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title=
 Adds a string on to the start of a <a class="link" href="glib-Strings.html#GString" title="struct GString"><span class="type">GString</span></a>,
 expanding it if necessary.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
@@ -676,8 +727,11 @@ expanding it if necessary.
 Adds a byte onto the start of a <a class="link" href="glib-Strings.html#GString" title="struct GString"><span class="type">GString</span></a>,
 expanding it if necessary.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
@@ -705,8 +759,11 @@ expanding it if necessary.
 Converts a Unicode character into UTF-8, and prepends it
 to the string.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
@@ -740,8 +797,11 @@ Since this function does not stop at nul bytes,
 it is the caller's responsibility to ensure that
 <em class="parameter"><code>val</code></em> has at least <em class="parameter"><code>len</code></em> addressable bytes.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
@@ -773,8 +833,11 @@ it is the caller's responsibility to ensure that
 Inserts a copy of a string into a <a class="link" href="glib-Strings.html#GString" title="struct GString"><span class="type">GString</span></a>,
 expanding it if necessary.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
@@ -805,8 +868,11 @@ expanding it if necessary.
 <p>
 Inserts a byte into a <a class="link" href="glib-Strings.html#GString" title="struct GString"><span class="type">GString</span></a>, expanding it if necessary.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
@@ -838,8 +904,11 @@ Inserts a byte into a <a class="link" href="glib-Strings.html#GString" title="st
 Converts a Unicode character into UTF-8, and insert it
 into the string at the given position.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
@@ -880,8 +949,11 @@ Since this function does not stop at nul bytes, it is
 the caller's responsibility to ensure that <em class="parameter"><code>val</code></em> has at
 least <em class="parameter"><code>len</code></em> addressable bytes.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
@@ -917,8 +989,11 @@ happen, or -1 for at the end</td>
 <p>
 Overwrites part of a string, lengthening it if necessary.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
@@ -953,8 +1028,11 @@ Overwrites part of a string, lengthening it if necessary.
 Overwrites part of a string, lengthening it if necessary.
 This function will work with embedded nuls.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
@@ -993,8 +1071,11 @@ This function will work with embedded nuls.
 Removes <em class="parameter"><code>len</code></em> bytes from a <a class="link" href="glib-Strings.html#GString" title="struct GString"><span class="type">GString</span></a>, starting at position <em class="parameter"><code>pos</code></em>.
 The rest of the <a class="link" href="glib-Strings.html#GString" title="struct GString"><span class="type">GString</span></a> is shifted down to fill the gap.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
@@ -1025,8 +1106,11 @@ following bytes</td>
 <p>
 Cuts off the end of the GString, leaving the first <em class="parameter"><code>len</code></em> bytes.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
@@ -1057,8 +1141,11 @@ length is greater than the current length, the contents
 of the newly added area are undefined. (However, as
 always, string-&gt;str[string-&gt;len] will be a nul byte.)
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
@@ -1087,8 +1174,11 @@ If <em class="parameter"><code>free_segment</code></em> is <a class="link" href=
 it's <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a>, the caller gains ownership of the buffer and must
 free it after use with <a class="link" href="glib-Memory-Allocation.html#g-free" title="g_free ()"><code class="function">g_free()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
@@ -1120,8 +1210,11 @@ free it after use with <a class="link" href="glib-Memory-Allocation.html#g-free"
 <p>
 Converts a <a class="link" href="glib-Strings.html#GString" title="struct GString"><span class="type">GString</span></a> to uppercase.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
@@ -1148,8 +1241,11 @@ Converts a <a class="link" href="glib-Strings.html#GString" title="struct GStrin
 <p>
 Converts a <a class="link" href="glib-Strings.html#GString" title="struct GString"><span class="type">GString</span></a> to lowercase.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
@@ -1171,8 +1267,11 @@ Converts a <a class="link" href="glib-Strings.html#GString" title="struct GStrin
 <p>
 Creates a hash code for <em class="parameter"><code>str</code></em>; for use with <a class="link" href="glib-Hash-Tables.html#GHashTable" title="GHashTable"><span class="type">GHashTable</span></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>str</code></em> :</span></p></td>
@@ -1195,8 +1294,11 @@ Creates a hash code for <em class="parameter"><code>str</code></em>; for use wit
 Compares two strings for equality, returning <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if they are equal.
 For use with <a class="link" href="glib-Hash-Tables.html#GHashTable" title="GHashTable"><span class="type">GHashTable</span></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>v</code></em> :</span></p></td>

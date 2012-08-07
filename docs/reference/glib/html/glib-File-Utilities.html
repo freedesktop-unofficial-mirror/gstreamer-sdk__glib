@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>File Utilities</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.77.1">
 <link rel="home" href="index.html" title="GLib Reference Manual">
 <link rel="up" href="glib-utilities.html" title="GLib Utilities">
 <link rel="prev" href="glib-Spawning-Processes.html" title="Spawning Processes">
@@ -200,8 +200,11 @@ which errors will be returned from a given operation. Some errors
 don't occur on some systems, etc., sometimes there are subtle
 differences in when a system will report a given error, etc.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><a name="G-FILE-ERROR-EXIST:CAPS"></a><span class="term"><code class="literal">G_FILE_ERROR_EXIST</code></span></p></td>
@@ -398,8 +401,11 @@ on error domains.
 <p>
 A test to perform on a file using <a class="link" href="glib-File-Utilities.html#g-file-test" title="g_file_test ()"><code class="function">g_file_test()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><a name="G-FILE-TEST-IS-REGULAR:CAPS"></a><span class="term"><code class="literal">G_FILE_TEST_IS_REGULAR</code></span></p></td>
@@ -452,8 +458,11 @@ Normally a <a class="link" href="glib-File-Utilities.html#GFileError" title="enu
 from a function that manipulates files. So you would use
 <a class="link" href="glib-File-Utilities.html#g-file-error-from-errno" title="g_file_error_from_errno ()"><code class="function">g_file_error_from_errno()</code></a> when constructing a <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>err_no</code></em> :</span></p></td>
@@ -488,8 +497,11 @@ stored in <em class="parameter"><code>contents</code></em> will be nul-terminate
 codes are those in the <a class="link" href="glib-File-Utilities.html#GFileError" title="enum GFileError"><span class="type">GFileError</span></a> enumeration. In the error case,
 <em class="parameter"><code>contents</code></em> is set to <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> and <em class="parameter"><code>length</code></em> is set to zero.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>filename</code></em> :</span></p></td>
@@ -535,7 +547,7 @@ If a file called <em class="parameter"><code>filename</code></em> already exists
 This write is atomic in the sense that it is first written to a temporary
 file which is then renamed to the final name. Notes:
 </p>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">
    On Unix, if <em class="parameter"><code>filename</code></em> already exists hard links to <em class="parameter"><code>filename</code></em> will break.
    Also since the file is recreated, existing permissions, access control
@@ -564,8 +576,11 @@ Possible error codes are those in the <a class="link" href="glib-File-Utilities.
 Note that the name for the temporary file is constructed by appending up
 to 7 characters to <em class="parameter"><code>filename</code></em>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>filename</code></em> :</span></p></td>
@@ -664,8 +679,11 @@ On Windows, there are no symlinks, so testing for
 its name indicates that it is executable, checking for well-known
 extensions and those listed in the <code class="envar">PATHEXT</code> environment variable.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>filename</code></em> :</span></p></td>
@@ -700,8 +718,11 @@ The X string will be modified to form the name of a file that
 didn't exist. The string should be in the GLib file name encoding.
 Most importantly, on Windows it should be in UTF-8.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>tmpl</code></em> :</span></p></td>
@@ -739,8 +760,11 @@ string will be modified to form the name of a file that didn't exist.
 The string should be in the GLib file name encoding. Most importantly,
 on Windows it should be in UTF-8.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>tmpl</code></em> :</span></p></td>
@@ -794,8 +818,11 @@ is returned in <em class="parameter"><code>name_used</code></em>. This string sh
 when not needed any longer. The returned name is in the GLib file
 name encoding.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>tmpl</code></em> :</span></p></td>
@@ -834,8 +861,11 @@ Reads the contents of the symbolic link <em class="parameter"><code>filename</co
 <code class="function">readlink()</code> function.  The returned string is in the encoding used
 for filenames. Use <a class="link" href="glib-Character-Set-Conversion.html#g-filename-to-utf8" title="g_filename_to_utf8 ()"><code class="function">g_filename_to_utf8()</code></a> to convert it to UTF-8.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>filename</code></em> :</span></p></td>
@@ -864,8 +894,11 @@ or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code
 Create a directory if it doesn't already exist. Create intermediate
 parent directories as needed, too.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>pathname</code></em> :</span></p></td>
@@ -902,8 +935,11 @@ be modified to form the name of a directory that didn't exist.
 The string should be in the GLib file name encoding. Most importantly,
 on Windows it should be in UTF-8.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>tmpl</code></em> :</span></p></td>
@@ -939,8 +975,11 @@ the name of a directory that didn't exist. The string should be
 in the GLib file name encoding. Most importantly, on Windows it
 should be in UTF-8.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>tmpl</code></em> :</span></p></td>
@@ -981,8 +1020,11 @@ basename, no directory components are allowed. If template is
 Note that in contrast to <a class="link" href="glib-File-Utilities.html#g-mkdtemp" title="g_mkdtemp ()"><code class="function">g_mkdtemp()</code></a> (and <code class="function">mkdtemp()</code>) <em class="parameter"><code>tmpl</code></em> is not
 modified, and might thus be a read-only literal string.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>tmpl</code></em> :</span></p></td>
@@ -1026,8 +1068,11 @@ Opens a directory for reading. The names of the files in the
 directory can then be retrieved using <a class="link" href="glib-File-Utilities.html#g-dir-read-name" title="g_dir_read_name ()"><code class="function">g_dir_read_name()</code></a>.  Note
 that the ordering is not defined.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
@@ -1061,7 +1106,12 @@ when you are finished with it.</td>
 Retrieves the name of another entry in the directory, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
 The order of entries returned from this function is not defined,
 and may vary by file system or other operating-system dependent
-factors. 
+factors.
+</p>
+<p>
+<a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> may also be returned in case of errors. On Unix, you can
+check <code class="literal">errno</code> to find out if <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> was returned
+because of an error.
 </p>
 <p>
 On Unix, the '.' and '..' entries are omitted, and the returned
@@ -1071,8 +1121,11 @@ name is in the on-disk encoding.
 On Windows, as is true of all GLib functions which operate on
 filenames, the returned name is in UTF-8.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>dir</code></em> :</span></p></td>
@@ -1096,8 +1149,11 @@ must not be modified or freed.</td>
 Resets the given directory. The next call to <a class="link" href="glib-File-Utilities.html#g-dir-read-name" title="g_dir_read_name ()"><code class="function">g_dir_read_name()</code></a>
 will return the first entry again.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>dir</code></em> :</span></p></td>
 <td>a <a class="link" href="glib-File-Utilities.html#GDir" title="GDir"><span class="type">GDir</span></a>* created by <a class="link" href="glib-File-Utilities.html#g-dir-open" title="g_dir_open ()"><code class="function">g_dir_open()</code></a>
@@ -1112,8 +1168,11 @@ will return the first entry again.
 <p>
 Closes the directory and deallocates all related resources.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>dir</code></em> :</span></p></td>
 <td>a <a class="link" href="glib-File-Utilities.html#GDir" title="GDir"><span class="type">GDir</span></a>* created by <a class="link" href="glib-File-Utilities.html#g-dir-open" title="g_dir_open ()"><code class="function">g_dir_open()</code></a>
@@ -1158,8 +1217,11 @@ will successfully return an empty <a class="link" href="glib-File-Utilities.html
 size 0 (e.g. device files such as /dev/null), <em class="parameter"><code>error</code></em> will be set
 to the <a class="link" href="glib-File-Utilities.html#GFileError" title="enum GFileError"><span class="type">GFileError</span></a> value <a class="link" href="glib-File-Utilities.html#G-FILE-ERROR-INVAL:CAPS"><span class="type">G_FILE_ERROR_INVAL</span></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>filename</code></em> :</span></p></td>
@@ -1204,8 +1266,11 @@ of the <a class="link" href="glib-File-Utilities.html#GMappedFile" title="GMappe
 will not be modified, or if all modifications of the file are done
 atomically (e.g. using <a class="link" href="glib-File-Utilities.html#g-file-set-contents" title="g_file_set_contents ()"><code class="function">g_file_set_contents()</code></a>).
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>fd</code></em> :</span></p></td>
@@ -1237,8 +1302,11 @@ with <a class="link" href="glib-File-Utilities.html#g-mapped-file-unref" title="
 Increments the reference count of <em class="parameter"><code>file</code></em> by one.  It is safe to call
 this function from any thread.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>file</code></em> :</span></p></td>
@@ -1267,8 +1335,11 @@ It is safe to call this function from any thread.
 <p>
 Since 2.22
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>file</code></em> :</span></p></td>
 <td>a <a class="link" href="glib-File-Utilities.html#GMappedFile" title="GMappedFile"><span class="type">GMappedFile</span></a>
@@ -1288,8 +1359,11 @@ Since 2.22
 This call existed before <a class="link" href="glib-File-Utilities.html#GMappedFile" title="GMappedFile"><span class="type">GMappedFile</span></a> had refcounting and is currently
 exactly the same as <a class="link" href="glib-File-Utilities.html#g-mapped-file-unref" title="g_mapped_file_unref ()"><code class="function">g_mapped_file_unref()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>file</code></em> :</span></p></td>
 <td>a <a class="link" href="glib-File-Utilities.html#GMappedFile" title="GMappedFile"><span class="type">GMappedFile</span></a>
@@ -1305,8 +1379,11 @@ exactly the same as <a class="link" href="glib-File-Utilities.html#g-mapped-file
 <p>
 Returns the length of the contents of a <a class="link" href="glib-File-Utilities.html#GMappedFile" title="GMappedFile"><span class="type">GMappedFile</span></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>file</code></em> :</span></p></td>
@@ -1335,8 +1412,11 @@ even if the <a class="link" href="glib-File-Utilities.html#GMappedFile" title="G
 <p>
 If the file is empty then <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> is returned.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>file</code></em> :</span></p></td>
@@ -1380,8 +1460,11 @@ or <code class="function">read()</code>.
 <p>
 See your C library manual for more details about <code class="function">open()</code>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>filename</code></em> :</span></p></td>
@@ -1420,8 +1503,11 @@ See your C library manual for more details about how <code class="function">rena
 on your system. It is not possible in general on Windows to rename
 a file that is open to some process.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>oldfilename</code></em> :</span></p></td>
@@ -1452,8 +1538,11 @@ The mode argument is ignored on Windows.
 <p>
 See your C library manual for more details about <code class="function">mkdir()</code>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>filename</code></em> :</span></p></td>
@@ -1516,8 +1605,11 @@ is just "struct stat", but note that even on POSIX platforms,
 <p>
 See your C library manual for more details about <code class="function">stat()</code>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>filename</code></em> :</span></p></td>
@@ -1552,8 +1644,11 @@ is identical to <a class="link" href="glib-File-Utilities.html#g-stat" title="g_
 <p>
 See your C library manual for more details about <code class="function">lstat()</code>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>filename</code></em> :</span></p></td>
@@ -1588,8 +1683,11 @@ See your C library manual for more details about <code class="function">unlink()
 that on Windows, it is in general not possible to delete files that
 are open to some process, or mapped into memory.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>filename</code></em> :</span></p></td>
@@ -1628,8 +1726,11 @@ errno value. <code class="function">rmdir()</code> is tried regardless of what c
 fail. Any errno value set by <code class="function">remove()</code> will be overwritten by that
 set by <code class="function">rmdir()</code>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>filename</code></em> :</span></p></td>
@@ -1656,8 +1757,11 @@ deletes a directory from the filesystem.
 See your C library manual for more details about how <code class="function">rmdir()</code> works
 on your system.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>filename</code></em> :</span></p></td>
@@ -1693,8 +1797,11 @@ passed to C library functions like <code class="function">fprintf()</code> or <c
 <p>
 See your C library manual for more details about <code class="function">fopen()</code>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>filename</code></em> :</span></p></td>
@@ -1727,8 +1834,11 @@ opens a file and associates it with an existing stream.
 <p>
 See your C library manual for more details about <code class="function">freopen()</code>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>filename</code></em> :</span></p></td>
@@ -1772,8 +1882,11 @@ exactly should use the Win32 API.
 <p>
 See your C library manual for more details about <code class="function">chmod()</code>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>filename</code></em> :</span></p></td>
@@ -1813,8 +1926,11 @@ more exactly should use the Win32 API.
 <p>
 See your C library manual for more details about <code class="function">access()</code>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>filename</code></em> :</span></p></td>
@@ -1864,8 +1980,11 @@ or <code class="function">read()</code>.
 <p>
 See your C library manual for more details about <code class="function">creat()</code>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>filename</code></em> :</span></p></td>
@@ -1896,8 +2015,11 @@ current directory of the process to <em class="parameter"><code>path</code></em>
 <p>
 See your C library manual for more details about <code class="function">chdir()</code>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
@@ -1924,8 +2046,11 @@ sets the access and modification timestamps of a file.
 See your C library manual for more details about how <code class="function">utime()</code> works
 on your system.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>filename</code></em> :</span></p></td>

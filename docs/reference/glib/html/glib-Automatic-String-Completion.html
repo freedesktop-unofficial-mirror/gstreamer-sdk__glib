@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Automatic String Completion</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.77.1">
 <link rel="home" href="index.html" title="GLib Reference Manual">
 <link rel="up" href="deprecated.html" title="Deprecated APIs">
 <link rel="prev" href="glib-Relations-and-Tuples.html" title="Relations and Tuples">
@@ -107,8 +107,11 @@ used and not very actively maintained.
 <p>
 The data structure used for automatic completion.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><a class="link" href="glib-Doubly-Linked-Lists.html#GList" title="struct GList"><span class="type">GList</span></a> *<em class="structfield"><code><a name="GCompletion.items"></a>items</code></em>;</span></p></td>
@@ -143,8 +146,11 @@ target item. It is <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" ti
 <p>
 Creates a new <a class="link" href="glib-Automatic-String-Completion.html#GCompletion" title="struct GCompletion"><span class="type">GCompletion</span></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>func</code></em> :</span></p></td>
@@ -168,8 +174,11 @@ Specifies the type of the function passed to <a class="link" href="glib-Automati
 should return the string corresponding to the given target item.
 This is used when you use data structures as <a class="link" href="glib-Automatic-String-Completion.html#GCompletion" title="struct GCompletion"><span class="type">GCompletion</span></a> items.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>Param1</code></em> :</span></p></td>
@@ -194,8 +203,11 @@ This is used when you use data structures as <a class="link" href="glib-Automati
 <p>
 Adds items to the <a class="link" href="glib-Automatic-String-Completion.html#GCompletion" title="struct GCompletion"><span class="type">GCompletion</span></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cmp</code></em> :</span></p></td>
@@ -220,8 +232,11 @@ Adds items to the <a class="link" href="glib-Automatic-String-Completion.html#GC
 <p>
 Removes items from a <a class="link" href="glib-Automatic-String-Completion.html#GCompletion" title="struct GCompletion"><span class="type">GCompletion</span></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cmp</code></em> :</span></p></td>
@@ -245,8 +260,11 @@ Removes items from a <a class="link" href="glib-Automatic-String-Completion.html
 <p>
 Removes all items from the <a class="link" href="glib-Automatic-String-Completion.html#GCompletion" title="struct GCompletion"><span class="type">GCompletion</span></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>cmp</code></em> :</span></p></td>
 <td>the <a class="link" href="glib-Automatic-String-Completion.html#GCompletion" title="struct GCompletion"><span class="type">GCompletion</span></a>.</td>
@@ -267,8 +285,11 @@ Removes all items from the <a class="link" href="glib-Automatic-String-Completio
 Attempts to complete the string <em class="parameter"><code>prefix</code></em> using the <a class="link" href="glib-Automatic-String-Completion.html#GCompletion" title="struct GCompletion"><span class="type">GCompletion</span></a>
 target items.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cmp</code></em> :</span></p></td>
@@ -314,8 +335,11 @@ character.
 You should use this function instead of <a class="link" href="glib-Automatic-String-Completion.html#g-completion-complete" title="g_completion_complete ()"><code class="function">g_completion_complete()</code></a> if your 
 items are UTF-8 strings.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cmp</code></em> :</span></p></td>
@@ -356,8 +380,11 @@ not be changed. <span class="annotation">[<acronym title="Generics and defining 
 Sets the function to use for string comparisons. The default string
 comparison function is <code class="function">strncmp()</code>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cmp</code></em> :</span></p></td>
@@ -381,8 +408,11 @@ Specifies the type of the function passed to
 <a class="link" href="glib-Automatic-String-Completion.html#g-completion-set-compare" title="g_completion_set_compare ()"><code class="function">g_completion_set_compare()</code></a>. This is used when you use strings as
 <a class="link" href="glib-Automatic-String-Completion.html#GCompletion" title="struct GCompletion"><span class="type">GCompletion</span></a> items.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>s1</code></em> :</span></p></td>
@@ -417,8 +447,11 @@ bytes of <em class="parameter"><code>s2</code></em>.</td>
 <p>
 Frees all memory used by the <a class="link" href="glib-Automatic-String-Completion.html#GCompletion" title="struct GCompletion"><span class="type">GCompletion</span></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>cmp</code></em> :</span></p></td>
 <td>the <a class="link" href="glib-Automatic-String-Completion.html#GCompletion" title="struct GCompletion"><span class="type">GCompletion</span></a>.</td>

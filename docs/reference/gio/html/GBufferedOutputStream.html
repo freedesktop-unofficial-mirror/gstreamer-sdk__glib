@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GBufferedOutputStream</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.77.1">
 <link rel="home" href="index.html" title="GIO Reference Manual">
 <link rel="up" href="streaming.html" title="Streaming I/O">
 <link rel="prev" href="GBufferedInputStream.html" title="GBufferedInputStream">
@@ -114,8 +114,11 @@ An implementation of <a class="link" href="GFilterOutputStream.html" title="GFil
 <p>
 Creates a new buffered output stream for a base stream.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>base_stream</code></em> :</span></p></td>
@@ -136,8 +139,11 @@ Creates a new buffered output stream for a base stream.
 <p>
 Creates a new buffered output stream with a given buffer size.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>base_stream</code></em> :</span></p></td>
@@ -162,8 +168,11 @@ Creates a new buffered output stream with a given buffer size.
 <p>
 Gets the size of the buffer in the <em class="parameter"><code>stream</code></em>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>stream</code></em> :</span></p></td>
@@ -185,8 +194,11 @@ Gets the size of the buffer in the <em class="parameter"><code>stream</code></em
 <p>
 Sets the size of the internal buffer to <em class="parameter"><code>size</code></em>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>stream</code></em> :</span></p></td>
@@ -207,8 +219,11 @@ Sets the size of the internal buffer to <em class="parameter"><code>size</code><
 <p>
 Checks if the buffer automatically grows as data is added.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>stream</code></em> :</span></p></td>
@@ -235,8 +250,11 @@ If <em class="parameter"><code>auto_grow</code></em> is true, then each write wi
 larger, and you must manually flush the buffer to actually write out
 the data to the underlying stream.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>stream</code></em> :</span></p></td>

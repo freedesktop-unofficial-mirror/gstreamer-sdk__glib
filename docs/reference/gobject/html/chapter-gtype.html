@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>The GLib Dynamic Type System</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.77.1">
 <link rel="home" href="index.html" title="GObject Reference Manual">
 <link rel="up" href="pt01.html" title="Part I. Concepts">
 <link rel="prev" href="ch01s02.html" title="Exporting a C API">
@@ -84,7 +84,7 @@ GType g_type_register_fundamental (GType                       type_id,
         <code class="function"><a class="link" href="gobject-Type-Information.html#g-type-register-fundamental" title="g_type_register_fundamental ()">g_type_register_fundamental</a></code> (you have to be Tim Janik 
         to do that) but in case you want to, the last chapter explains how to create
         new fundamental types.
-        <sup>[<a name="id561043" href="#ftn.id561043" class="footnote">2</a>]</sup>
+        <a href="#ftn.id418451" class="footnote"><sup class="footnote"><a name="id418451"></a>[2]</sup></a>
       </p>
 <p>
         Fundamental types are top-level types which do not derive from any other type 
@@ -97,7 +97,7 @@ GType g_type_register_fundamental (GType                       type_id,
 <p>
         Fundamental and non-fundamental types are defined by:
         </p>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem"><p>
             class size: the class_size field in <a class="link" href="gobject-Type-Information.html#GTypeInfo" title="struct GTypeInfo"><span class="type">GTypeInfo</span></a>.
           </p></li>
@@ -247,8 +247,8 @@ struct _GTypeValueTable
         </p>
 </div>
 <div class="footnotes">
-<br><hr width="100" align="left">
-<div class="footnote"><p><sup>[<a id="ftn.id561043" href="#id561043" class="para">2</a>] </sup>
+<br><hr style="width:100; align:left;">
+<div id="ftn.id418451" class="footnote"><p><a href="#id418451" class="para"><sup class="para">[2] </sup></a>
             Please note that there exists another registration function: the 
             <code class="function"><a class="link" href="gobject-Type-Information.html#g-type-register-dynamic" title="g_type_register_dynamic ()">g_type_register_dynamic</a></code>. We will not discuss this
             function here since its use is very similar to the <code class="function">_static</code> 
