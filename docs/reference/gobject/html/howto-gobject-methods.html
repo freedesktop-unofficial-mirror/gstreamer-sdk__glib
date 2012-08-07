@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Object methods</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.77.1">
 <link rel="home" href="index.html" title="GObject Reference Manual">
 <link rel="up" href="howto-gobject.html" title="How to define and implement a new GObject">
 <link rel="prev" href="howto-gobject-destruction.html" title="Object Destruction">
@@ -30,7 +30,7 @@
       <a class="ulink" href="http://www.cplusplus.com/doc/tutorial/" target="_top">http://www.cplusplus.com/doc/tutorial/</a> to refresh
       their memories.)
       </p>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem"><p>
             non-virtual public methods,
           </p></li>
@@ -45,7 +45,7 @@
     </p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="id649912"></a>Non-virtual public methods</h3></div></div></div>
+<a name="id639074"></a>Non-virtual public methods</h3></div></div></div>
 <p>
         These are the simplest: you want to provide a simple method which
         can act on your object. All you need to do is to provide a function
@@ -71,7 +71,7 @@ maman_bar_do_action (MamanBar *self, /* parameters */)
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="id628523"></a>Virtual public methods</h3></div></div></div>
+<a name="id639099"></a>Virtual public methods</h3></div></div></div>
 <p>
         This is the preferred way to create polymorphic GObjects. All you
         need to do is to define the common method and its class function in
@@ -169,7 +169,7 @@ maman_bar_do_action_two (MamanBar *self, /* parameters */)
 </div>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
-<a name="id628606"></a>Virtual private Methods</h3></div></div></div>
+<a name="id639183"></a>Virtual private Methods</h3></div></div></div>
 <p>
         These are very similar to Virtual Public methods. They just don't
         have a public function to call the function directly. The header

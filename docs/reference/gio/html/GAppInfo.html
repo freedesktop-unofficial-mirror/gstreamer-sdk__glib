@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GAppInfo</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.77.1">
 <link rel="home" href="index.html" title="GIO Reference Manual">
 <link rel="up" href="types.html" title="File types and applications">
 <link rel="prev" href="gio-GContentType.html" title="GContentType">
@@ -224,8 +224,11 @@ managers) may have different ideas of what a given URI means.
 <p>
 Flags used when creating a <a class="link" href="GAppInfo.html" title="GAppInfo"><span class="type">GAppInfo</span></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><a name="G-APP-INFO-CREATE-NONE:CAPS"></a><span class="term"><code class="literal">G_APP_INFO_CREATE_NONE</code></span></p></td>
@@ -313,8 +316,11 @@ it (with file arguments).
 <p>
 Application Information interface, for operating system portability.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><a href="./../gobject/gobject/gobject-Type-Information.html#GTypeInterface"><span class="type">GTypeInterface</span></a> <em class="structfield"><code><a name="GAppInfoIface.g-iface"></a>g_iface</code></em>;</span></p></td>
@@ -433,8 +439,18 @@ on the same screen as the launching window.
 <p>
 Creates a new <a class="link" href="GAppInfo.html" title="GAppInfo"><span class="type">GAppInfo</span></a> from the given information.
 </p>
-<div class="variablelist"><table border="0">
+<p>
+Note that for <em class="parameter"><code>commandline</code></em>, the quoting rules of the Exec key of the
+<a class="ulink" href="http://freedesktop.org/Standards/desktop-entry-spec" target="_top">freedesktop.org Desktop
+Entry Specification</a> are applied. For example, if the <em class="parameter"><code>commandline</code></em> contains
+percent-encoded URIs, the percent-character must be doubled in order to prevent it from
+being swallowed by Exec key unquoting. See the specification for exact quoting rules.
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>commandline</code></em> :</span></p></td>
@@ -469,8 +485,11 @@ Creates a new <a class="link" href="GAppInfo.html" title="GAppInfo"><span class=
 <p>
 Creates a duplicate of a <a class="link" href="GAppInfo.html" title="GAppInfo"><span class="type">GAppInfo</span></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>appinfo</code></em> :</span></p></td>
@@ -492,8 +511,11 @@ Creates a duplicate of a <a class="link" href="GAppInfo.html" title="GAppInfo"><
 <p>
 Checks if two <a class="link" href="GAppInfo.html" title="GAppInfo"><span class="type">GAppInfo</span></a>s are equal.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>appinfo1</code></em> :</span></p></td>
@@ -525,8 +547,11 @@ desktop file id from the xdg menu specification.
 Note that the returned ID may be <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>, depending on how
 the <em class="parameter"><code>appinfo</code></em> has been constructed.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>appinfo</code></em> :</span></p></td>
@@ -546,8 +571,11 @@ the <em class="parameter"><code>appinfo</code></em> has been constructed.
 <p>
 Gets the installed name of the application.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>appinfo</code></em> :</span></p></td>
@@ -568,8 +596,11 @@ Gets the installed name of the application.
 Gets the display name of the application. The display name is often more
 descriptive to the user than the name itself.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>appinfo</code></em> :</span></p></td>
@@ -591,8 +622,11 @@ no display name is available.</td>
 <p>
 Gets a human-readable description of an installed application.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>appinfo</code></em> :</span></p></td>
@@ -613,8 +647,11 @@ application <em class="parameter"><code>appinfo</code></em>, or <a href="./../gl
 <p>
 Gets the executable's name for the installed application.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>appinfo</code></em> :</span></p></td>
@@ -637,8 +674,11 @@ binaries name</td>
 Gets the commandline with which the application will be
 started.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>appinfo</code></em> :</span></p></td>
@@ -661,8 +701,11 @@ or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="lit
 <p>
 Gets the icon for the application.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>appinfo</code></em> :</span></p></td>
@@ -719,8 +762,11 @@ by further processes. The <code class="envar">DISPLAY</code> and
 <code class="envar">DESKTOP_STARTUP_ID</code> environment variables are also
 set, based on information provided in <em class="parameter"><code>launch_context</code></em>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>appinfo</code></em> :</span></p></td>
@@ -757,8 +803,11 @@ set, based on information provided in <em class="parameter"><code>launch_context
 <p>
 Checks if the application accepts files as arguments.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>appinfo</code></em> :</span></p></td>
@@ -779,8 +828,11 @@ Checks if the application accepts files as arguments.
 <p>
 Checks if the application supports reading files and directories from URIs.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>appinfo</code></em> :</span></p></td>
@@ -815,8 +867,11 @@ Note that even if the launch is successful the application launched
 can fail to start if it runs into problems during startup. There is
 no way to detect this.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>appinfo</code></em> :</span></p></td>
@@ -854,8 +909,11 @@ no way to detect this.
 Checks if the application info should be shown in menus that 
 list available applications.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>appinfo</code></em> :</span></p></td>
@@ -877,8 +935,11 @@ list available applications.
 Obtains the information whether the <a class="link" href="GAppInfo.html" title="GAppInfo"><span class="type">GAppInfo</span></a> can be deleted.
 See <a class="link" href="GAppInfo.html#g-app-info-delete" title="g_app_info_delete ()"><code class="function">g_app_info_delete()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>appinfo</code></em> :</span></p></td>
@@ -909,8 +970,11 @@ cannot. See <a class="link" href="GAppInfo.html#g-app-info-can-delete" title="g_
 <p>
 Virtual: do_delete
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>appinfo</code></em> :</span></p></td>
@@ -937,8 +1001,11 @@ Removes all changes to the type associations done by
 <a class="link" href="GAppInfo.html#g-app-info-add-supports-type" title="g_app_info_add_supports_type ()"><code class="function">g_app_info_add_supports_type()</code></a> or
 <a class="link" href="GAppInfo.html#g-app-info-remove-supports-type" title="g_app_info_remove_supports_type ()"><code class="function">g_app_info_remove_supports_type()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>content_type</code></em> :</span></p></td>
 <td>a content type</td>
@@ -955,8 +1022,11 @@ Removes all changes to the type associations done by
 <p>
 Sets the application as the default handler for a given type.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>appinfo</code></em> :</span></p></td>
@@ -988,8 +1058,11 @@ Sets the application as the default handler for a given type.
 <p>
 Sets the application as the default handler for the given file extension.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>appinfo</code></em> :</span></p></td>
@@ -1024,8 +1097,11 @@ This will make the application appear as first in the list returned
 by <a class="link" href="GAppInfo.html#g-app-info-get-recommended-for-type" title="g_app_info_get_recommended_for_type ()"><code class="function">g_app_info_get_recommended_for_type()</code></a>, regardless of the default
 application for that content type.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>appinfo</code></em> :</span></p></td>
@@ -1057,8 +1133,11 @@ application for that content type.
 Adds a content type to the application information to indicate the 
 application is capable of opening files with the given content type.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>appinfo</code></em> :</span></p></td>
@@ -1087,8 +1166,11 @@ application is capable of opening files with the given content type.
 <p>
 Checks if a supported content type can be removed from an application.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>appinfo</code></em> :</span></p></td>
@@ -1112,8 +1194,11 @@ content types from a given <em class="parameter"><code>appinfo</code></em>, <a h
 <p>
 Removes a supported type from an application, if possible.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>appinfo</code></em> :</span></p></td>
@@ -1151,8 +1236,11 @@ display by means of <code class="literal">OnlyShowIn</code> or
 The returned list does not include applications which have
 the <code class="literal">Hidden</code> key set.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody><tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>a newly allocated <a href="./../glib/glib/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> of references to <a class="link" href="GAppInfo.html" title="GAppInfo"><span class="type">GAppInfo</span></a>s. <span class="annotation">[<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> GAppInfo][<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
@@ -1170,8 +1258,11 @@ including the recommended and fallback <a href="GAppInfo.html"><span class="type
 <a class="link" href="GAppInfo.html#g-app-info-get-recommended-for-type" title="g_app_info_get_recommended_for_type ()"><code class="function">g_app_info_get_recommended_for_type()</code></a> and
 <a class="link" href="GAppInfo.html#g-app-info-get-fallback-for-type" title="g_app_info_get_fallback_for_type ()"><code class="function">g_app_info_get_fallback_for_type()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>content_type</code></em> :</span></p></td>
@@ -1195,8 +1286,11 @@ for given <em class="parameter"><code>content_type</code></em> or <a href="./../
 <p>
 Gets the default <a class="link" href="GAppInfo.html" title="GAppInfo"><span class="type">GAppInfo</span></a> for a given content type.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>content_type</code></em> :</span></p></td>
@@ -1228,8 +1322,11 @@ the given URI scheme. A URI scheme is the initial part
 of the URI, up to but not including the ':', e.g. "http",
 "ftp" or "sip".
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>uri_scheme</code></em> :</span></p></td>
@@ -1253,8 +1350,11 @@ Gets a list of fallback <a href="GAppInfo.html"><span class="type">GAppInfos</sp
 those applications which claim to support the given content type
 by MIME type subclassing and not directly.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>content_type</code></em> :</span></p></td>
@@ -1283,8 +1383,11 @@ Note that the first application of the list is the last used one, i.e.
 the last one for which <a class="link" href="GAppInfo.html#g-app-info-set-as-last-used-for-type" title="g_app_info_set_as_last_used_for_type ()"><code class="function">g_app_info_set_as_last_used_for_type()</code></a> has been
 called.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>content_type</code></em> :</span></p></td>
@@ -1313,8 +1416,11 @@ registered to handle the specified uri. Synchronous I/O
 is done on the uri to detect the type of the file if
 required.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>uri</code></em> :</span></p></td>
@@ -1347,8 +1453,11 @@ required.
 Arranges for <em class="parameter"><code>variable</code></em> to be set to <em class="parameter"><code>value</code></em> in the child's
 environment when <em class="parameter"><code>context</code></em> is used to launch an application.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>context</code></em> :</span></p></td>
@@ -1376,8 +1485,11 @@ environment when <em class="parameter"><code>context</code></em> is used to laun
 Arranges for <em class="parameter"><code>variable</code></em> to be unset in the child's environment
 when <em class="parameter"><code>context</code></em> is used to launch an application.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>context</code></em> :</span></p></td>
@@ -1403,8 +1515,11 @@ the child process when <em class="parameter"><code>context</code></em> is used t
 This is a <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>-terminated array of strings, where each string has
 the form <code class="literal">KEY=VALUE</code>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>context</code></em> :</span></p></td>
@@ -1432,8 +1547,11 @@ Gets the display string for the <em class="parameter"><code>context</code></em>.
 applications are started on the same display as the launching
 application, by setting the <code class="envar">DISPLAY</code> environment variable.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>context</code></em> :</span></p></td>
@@ -1473,8 +1591,11 @@ if supported.
 Startup notification IDs are defined in the <a class="ulink" href="http://standards.freedesktop.org/startup-notification-spec/startup-notification-latest.txt" target="_top">
 FreeDesktop.Org Startup Notifications standard</a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>context</code></em> :</span></p></td>
@@ -1508,8 +1629,11 @@ not supported.</td>
 Called when an application has failed to launch, so that it can cancel
 the application startup notification started in <a class="link" href="GAppInfo.html#g-app-launch-context-get-startup-notify-id" title="g_app_launch_context_get_startup_notify_id ()"><code class="function">g_app_launch_context_get_startup_notify_id()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>context</code></em> :</span></p></td>
@@ -1528,10 +1652,13 @@ the application startup notification started in <a class="link" href="GAppInfo.h
 <pre class="programlisting"><a class="link" href="GAppInfo.html#GAppLaunchContext"><span class="returnvalue">GAppLaunchContext</span></a> * g_app_launch_context_new            (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
 Creates a new application launch context. This is not normally used,
-instead you instantiate a subclass of this, such as <a href="http://developer.gnome.org/devel/gdk/gdk3-Application-launching.html#GdkAppLaunchContext"><span class="type">GdkAppLaunchContext</span></a>.
+instead you instantiate a subclass of this, such as <span class="type">GdkAppLaunchContext</span>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody><tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>a <a class="link" href="GAppInfo.html#GAppLaunchContext"><span class="type">GAppLaunchContext</span></a>.</td>

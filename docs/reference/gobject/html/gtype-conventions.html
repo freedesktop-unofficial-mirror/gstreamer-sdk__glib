@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Conventions</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.77.1">
 <link rel="home" href="index.html" title="GObject Reference Manual">
 <link rel="up" href="chapter-gtype.html" title="The GLib Dynamic Type System">
 <link rel="prev" href="chapter-gtype.html" title="The GLib Dynamic Type System">
@@ -26,7 +26,7 @@
         There are a number of conventions users are expected to follow when creating new types
         which are to be exported in a header file:
         </p>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem"><p>
             Use the <code class="function">object_method</code> pattern for function names: to invoke
             the method named foo on an instance of object type bar, call 
@@ -34,7 +34,7 @@
           </p></li>
 <li class="listitem"><p>Use prefixing to avoid namespace conflicts with other projects.
             If your library (or application) is named <span class="emphasis"><em>Maman</em></span>,
-            <sup>[<a name="id541780" href="#ftn.id541780" class="footnote">3</a>]</sup>
+            <a href="#ftn.id538037" class="footnote"><sup class="footnote"><a name="id538037"></a>[3]</sup></a>
             
             prefix all your function names with <span class="emphasis"><em>maman_</em></span>.
             For example: <code class="function">maman_object_method</code>.
@@ -129,8 +129,8 @@ G_DEFINE_TYPE (MamanBar, maman_bar, G_TYPE_OBJECT)
 <p>
       </p>
 <div class="footnotes">
-<br><hr width="100" align="left">
-<div class="footnote"><p><sup>[<a id="ftn.id541780" href="#id541780" class="para">3</a>] </sup>
+<br><hr style="width:100; align:left;">
+<div id="ftn.id538037" class="footnote"><p><a href="#id538037" class="para"><sup class="para">[3] </sup></a>
                 <span class="emphasis"><em>Maman</em></span> is the French word for <span class="emphasis"><em>mum</em></span>
                 or <span class="emphasis"><em>mother</em></span> - nothing more and nothing less.
               </p></div>

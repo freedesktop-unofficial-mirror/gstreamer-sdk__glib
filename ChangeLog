@@ -1,13 +1,1842 @@
-commit 16aa0887536d6c6439bb170d5f3b17d587b4f2cb
+commit 780a6771007d23af3ad6be8a2c1255b9c5915d76
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Sat Jul 14 17:44:17 2012 -0400
+
+    Updates for 2.32.4
+
+ NEWS |   41 +++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 41 insertions(+)
+
+commit be0bef91de9598df5e1883a62078a96a7e80ba42
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Sat Jul 14 18:02:15 2012 -0400
+
+    GApplication: remove reference to non-existing example
+
+    There's no example called gapplication-example-menu.c in
+    the gio/tests/ directory.
+
+ gio/gapplication.c |    8 --------
+ 1 file changed, 8 deletions(-)
+
+commit ddd7f7475a3ddffa04bdbac1e34569660bb9a0f8
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Sat Jul 14 16:50:35 2012 -0400
+
+    Fix contenttype tests
+
+ gio/tests/contenttype.c |   11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
+
+commit 069f4299900e3cc0ffa73539e7d41a781f98ce9b
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Fri Jul 13 17:37:37 2012 -0400
+
+    Fix GModule documentation a bit
+
+    The documentation for g_module_make_resident was for some reason
+    in the doc comment for g_module_name.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=679813
+
+ gmodule/gmodule.c |   16 +++++++++++++---
+ gmodule/gmodule.h |    2 ++
+ 2 files changed, 15 insertions(+), 3 deletions(-)
+
+commit aa6239d9998995a69cb65c6ea9ad2723a39e1cf8
+Author: Rui Matos <tiagomatos@gmail.com>
+Date:   Tue Jul 10 11:38:34 2012 +0200
+
+    GDBusNodeInfo: remove a spurious for loop
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=679671
+
+ gio/gdbusintrospection.c |    7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
+
+commit f0fe7d5ec9d2a13b22db93a2e7a1b079f45ff979
+Author: Rui Matos <tiagomatos@gmail.com>
+Date:   Tue Jul 10 11:37:56 2012 +0200
+
+    GDBusNodeInfo: the XML string must contain exactly one node element
+
+    Make the documentation clear about this.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=679671
+
+ gio/gdbusintrospection.c |    3 +++
+ 1 file changed, 3 insertions(+)
+
+commit 3f0ed5c26b6adbda0d5384c897a3b3d6e9858536
+Author: Ryan Lortie <desrt@desrt.ca>
+Date:   Mon Jul 9 12:43:50 2012 -0400
+
+    GVariant: fix string validation
+
+    String validation was done by checking if the string was valid
+    utf8 and
+    ensuring that the first non-utf8 character was the last character (ie:
+    the nul terminator).
+
+    No check was actually done to make sure that this byte actually
+    contained a nul, however, so it was possible that you could have a
+    string like "hello\xff" with length 6 that would correctly validate.
+
+    Fix that, and test it.
+
+ glib/gvariant-serialiser.c |   11 ++++++++++-
+ glib/tests/gvariant.c      |    1 +
+ 2 files changed, 11 insertions(+), 1 deletion(-)
+
+commit c9b399365fa6da2341b28912b29e2053f6fe62db
+Author: Antoine Jacoutot <ajacoutot@gnome.org>
+Date:   Mon Jul 9 18:17:01 2012 +0200
+
+    goptions: use G_N_ELEMENTS instead of nitems
+
+ glib/goption.c |    6 +-----
+ 1 file changed, 1 insertion(+), 5 deletions(-)
+
+commit 9e0ea405371c24cbcf0af4228e141bef4e8a2fbf
+Author: Antoine Jacoutot <ajacoutot@gnome.org>
+Date:   Sun Jul 8 19:23:18 2012 +0200
+
+    OpenBSD: explicitely define nitems
+
+    nitems is never guaranteed to be defined in sys/params.h as it
+    is meant
+    to be defined within a protected ifdef __KERNEL condition.
+
+ glib/goption.c |    4 ++++
+ 1 file changed, 4 insertions(+)
+
+commit f6b98fe7a7213ac53d166298740eec68e2dbba43
+Author: Ryan Lortie <desrt@desrt.ca>
+Date:   Fri Jul 6 17:27:54 2012 -0400
+
+    GVariant: support comparing booleans
+
+    g_variant_compare() is documented as working on booleans but somehow
+    this case was missed.  Add it and test it.
+
+    Problem discovered by Charles Kerr.
+
+ glib/gvariant.c       |    4 ++++
+ glib/tests/gvariant.c |    5 +++++
+ 2 files changed, 9 insertions(+)
+
+commit e6f659a898595ba944bd02f0509b14694d1c26e7
+Author: Ryan Lortie <desrt@desrt.ca>
+Date:   Fri Jul 6 13:43:17 2012 -0400
+
+    GSettings: be more careful about keys names with /
+
+    Prevent attempts to access keys ending with slashes that exist in the
+    schema file as references to child schemas.
+
+    Also: don't emit change signals for these same keys.
+
+ gio/gsettings.c       |   20 ++++++++++++++++----
+ gio/gsettingsschema.c |    2 +-
+ 2 files changed, 17 insertions(+), 5 deletions(-)
+
+commit 6f2b9223be0919d4ea7dfde89c1877c6acba7843
+Author: Emmanuele Bassi <ebassi@linux.intel.com>
+Date:   Wed Mar 7 12:54:04 2012 +0000
+
+    Constify collect and lcopy strings in GTypeValueTable
+
+    This avoids warnings when creating idiomatic value tables, like:
+
+      static const GTypeValueTable _clutter_shader_float_value_table = {
+        clutter_value_init_shader_float,
+        clutter_value_free_shader_float,
+        clutter_value_copy_shader_float,
+        clutter_value_peek_pointer,
+        "ip",
+        clutter_value_collect_shader_float,
+        "pp",
+        clutter_value_lcopy_shader_float
+      };
+
+    Because the strings are literals. And, really: nobody should be using
+    allocated values for the collection and lcopy strings.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=671545
+
+ gobject/gtype.h           |    4 ++--
+ gobject/gvaluecollector.h |    6 +++---
+ 2 files changed, 5 insertions(+), 5 deletions(-)
+
+commit 89c5e035b3f0c6eea4467b4dac881ef3d6cdae5e
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Thu Jul 5 22:25:49 2012 -0400
+
+    Improve the g_dir_read_name documentation
+
+    This function can return NULL in error cases as well. Document
+    this, and explain how to discriminate the cases.
+    https://bugzilla.gnome.org/show_bug.cgi?id=639771
+
+ glib/gdir.c |    8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+commit 1eea903dcf1a11da8ab462d796e499af0ff5cc64
+Author: Neil Roberts <neil@linux.intel.com>
+Date:   Mon Jul 2 13:41:32 2012 +0100
+
+    Fix the 'Since' tag for G_SOURCE_{REMOVE,CONTINUE}
+
+    The Since tag for these was saying 2.28 but it was actually added in
+    2.31. It looks like all of the Since tags list stable version numbers
+    so this patch bumps that up to 2.32.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=679258
+
+ glib/gmain.h |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 33f886995a11bac353e15a9ed20caccfc9798fbf
+Author: Simon Feltman <s.feltman@gmail.com>
+Date:   Wed Jun 13 23:20:17 2012 -0700
+
+    Updated codegen to work with python3.
+
+    Most changes were just replacing usage of "has_key" with "in".
+    Also updated the sorting function which was simplified and
+    changed to a "key" function instead of "cmp" (which is no longer
+    supported in python3. Verified everything builds with
+    python 2.7 and 3.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=678066
+
+ gio/gdbus-2.0/codegen/codegen.py         |   15 +++++----------
+ gio/gdbus-2.0/codegen/codegen_docbook.py |    8 +++-----
+ gio/gdbus-2.0/codegen/codegen_main.py    |    4 ++--
+ gio/gdbus-2.0/codegen/parser.py          |   22 +++++++++++-----------
+ gio/gdbus-2.0/codegen/utils.py           |   17 +++++------------
+ 5 files changed, 26 insertions(+), 40 deletions(-)
+
+commit c147bd5b1a0462fc9b107d1718826c6cad2a8ba5
+Author: Johan Dahlin <johan@gnome.org>
+Date:   Fri Jun 29 11:59:23 2012 -0300
+
+    Use the same Python as we found in configure
+
+    Don't assume /usr/bin/python is python 2.x, on newer Ubuntu versions
+    it's actually python 3.x.
+
+ gio/gdbus-2.0/codegen/Makefile.am      |    2 +-
+ gio/gdbus-2.0/codegen/gdbus-codegen.in |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+commit 4b8c6f9d026c343a7381c1004364bfa0175e1281
+Author: Martin Pitt <martinpitt@gnome.org>
+Date:   Wed Jun 27 16:30:38 2012 +0200
+
+    Fix /contenttype/guess test
+
+    After fixing bug 674452 this test case now reliably fails, as "ABC
+    abc" is text
+    and definitively not PowerPoint. It previously worked as
+    g_content_type_guess()
+    was reading beyond the boundary of the data due to specifying -1
+    as data
+    length.
+
+    Update that test case to expect a PO template instead, and add two
+    more with a
+    definitive PO template syntax and some binary data. We do not
+    currently have a
+    MIME magic for PowerPoint, so we cannot actually detect it with
+    certainty, but
+    at least make sure that the returned MIME type is correct.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=678941
+
+ gio/tests/contenttype.c |   19 ++++++++++++++++++-
+ 1 file changed, 18 insertions(+), 1 deletion(-)
+
+commit e58a2996ba6f0c46862f2bcd24b0796e1cf48454
+Author: Alexander Larsson <alexl@redhat.com>
+Date:   Thu Jun 28 15:38:06 2012 +0200
+
+    Fix the mimetype default fix
+
+    We need to ignore the defaults.list item only when there
+    was a mimetype handler found in a previous mimetype, not
+    if one was found for the same mimetype as the one that
+    is listed in defaults.list (same for the new-style defaults).
+
+ gio/gdesktopappinfo.c |   10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
+
+commit 8d0f19de81aa125231507cc44597c41a73ab7dd2
+Author: Alexander Larsson <alexl@redhat.com>
+Date:   Thu Jun 28 14:50:37 2012 +0200
+
+    Fix default app lookup wrt parent types and defaults.list
+
+    There was an issue when looking up the default handler
+    for a type where a supertype was listed in defaults.list.
+    We would pick the default for the parent type even if
+    there was a handler for the more specific type.
+
+    In the case of the new-style defaults marking (
+    "Default Applications" in mimeapps.list) we were already
+    checking for a more specific handler befor using a default,
+    but we also need to do a similar check for the defaults.list
+    case.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=678944
+
+ gio/gdesktopappinfo.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 5bf587caa061aad77d046c170a822c5b1e0624dd
+Author: Stef Walter <stefw@gnome.org>
+Date:   Thu Jun 28 14:41:39 2012 +0200
+
+    GTlsInteraction: Fix incorrect locking of mutex
+
+     * Fix incorrect locking of mutex in
+     g_tls_interaction_invoke_ask_password()
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=678758
+
+ gio/gtlsinteraction.c |    9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
+
+commit c1aac005d208d1a3225b8011169c857916006a6f
+Author: Martin Pitt <martinpitt@gnome.org>
+Date:   Wed Jun 27 09:25:37 2012 +0200
+
+    gio/tests/contenttype: Call g_content_type_guess() with valid data len
+
+    g_content_type_guess() requires specifying a valid data length. Fixes
+    a
+    segfault when running the test.
+
+    Also add an explicit check for this and return XDG_MIME_TYPE_UNKNOWN
+    when
+    data_size is specified as -1, to avoid crashing.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=674452
+
+ gio/gcontenttype.c      |    8 ++++++++
+ gio/tests/contenttype.c |    4 ++--
+ 2 files changed, 10 insertions(+), 2 deletions(-)
+
+commit 7f3295b3b3c8b00ff7ec007fe139da318cf043ab
+Author: Martin Pitt <martinpitt@gnome.org>
+Date:   Wed Jun 27 11:46:28 2012 +0200
+
+    /mainloop/timeouts test: Reduce race condition
+
+    Due to load, particular traits of the architecture, or other
+    circumstances, the
+    /mainloop/timeouts sometimes manages to call the "every
+    100 ms" timer loop only 9 times in 1050 ms.
+
+    This is an inherent race-condition in the test; allow it some slack
+    and accept
+    9 times as well.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=678959
+
+ glib/tests/mainloop.c |    5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+commit 567f4d0d120a75cc6208e36c3a606492efbed0a8
+Author: Philipp Kern <pkern@debian.org>
+Date:   Wed Jun 27 10:57:50 2012 +0200
+
+    valuetransform: Fix definition of ulong_bool
+
+    On big endian 64 bit machines such as s390x, an uint is too small
+    to hold a
+    ulong_bool; it needs to be an actual ulong.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=678949
+    http://bugs.debian.org/662057
+
+ gobject/gvaluetransform.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 2e76d87bead9bce4bcd55fb7e113a9c04cbbfdd2
+Author: Martin Pitt <martinpitt@gnome.org>
+Date:   Tue Jun 26 18:32:29 2012 +0200
+
+    Allow slightly too small poll duration in /socket/timed_wait test
+
+    Sometimes the poll duration in the /socket/timed_wait test is
+    slightly lower
+    than the requested 100000, causing failures like
+
+    ERROR:/build/buildd/glib2.0-2.33.2/./gio/tests/socket.c:619:test_timed_wait:
+      assertion failed (poll_duration > = 100000): (99240 >= 100000)
+    FAIL
+
+    Adjust the test to also allow some jitter in the "too small"
+    direction, similar
+    to the already existing span for "slightly too large".
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=678881
+
+ gio/tests/socket.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 1da11292daf96ddeb2c9ac899b2b04ecc9554781
+Author: Lars Uebernickel <lars@uebernic.de>
+Date:   Mon Jun 25 18:29:01 2012 +0200
+
+    GDbusActionGroup: always set strict when _query_action fails
+
+ gio/gdbusactiongroup.c |    1 +
+ 1 file changed, 1 insertion(+)
+
+commit 086603c602ff823940d750ec24d506513c31b948
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Sat Jun 23 17:58:51 2012 -0400
+
+    Remove a few redundant ;s
+
+ gio/gdbusobjectmanagerclient.c |    2 +-
+ gio/gresourcefile.c            |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+commit e0281b2762cdaa118ed3b003d90537ee0bba0ef4
+Author: Phil Clayton <phil.clayton@lineone.net>
+Date:   Tue Jun 12 16:09:19 2012 +0100
+
+    Add missing annotation to GDBusConnection::closed
+
+    Add annotation (allow-none) to the parameter error.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=677952
+
+ gio/gdbusconnection.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 945b507d6da34179a3aee273b8827859f0d9b8b0
+Author: Emmanuele Bassi <ebassi@gnome.org>
+Date:   Thu May 31 23:48:35 2012 +0100
+
+    Update the comment in gmarshal.list
+
+    The current note makes it look like the marshaller code generation has
+    been deprecated in favour of the libffi-based generic marshaller; this
+    is not the case, so we should probably clarify the point a bit.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=677235
+
+ gobject/gmarshal.list |    7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+commit 5468b7a59de14316e37bee81f604905c788d0add
+Author: Christian Persch <chpe@gnome.org>
+Date:   Sun Jun 17 22:51:44 2012 +0200
+
+    regex: Fix unicode othercasing
+
+    The old _pcre_ucp_othercase() function was wrong in returning
+    NOTACHAR (0xffffffff) for characters that aren't changed by upper-
+    and lower-casing. This led to PCRE internally using incorrect (or
+    at least inefficient) character classes when using G_REGEX_CASELESS.
+
+    E.g. [Z-\x{100}] turned into:
+
+    [Z\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{39c}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{fffe}\x{178}z-\x{101}]
+
+    instead of the expected and efficient
+
+    [Z\x{39c}\x{178}z-\x{101}]
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=678273
+
+ glib/pcre/pcre_tables.c |   17 +++++++----------
+ 1 file changed, 7 insertions(+), 10 deletions(-)
+
+commit 09aa6d3668956339d5b6217c0c2f77e348a57bd3
+Author: Colin Walters <walters@verbum.org>
+Date:   Thu Jun 21 15:44:16 2012 -0400
+
+    GRand: Check return value of fopen directly
+
+    This doesn't fix anything, it should just silence some static analysis
+    tools.
+
+ glib/grand.c |    5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+commit fd8056b5328e3b399561d55985e27e2a0c47c656
+Author: Colin Walters <walters@verbum.org>
+Date:   Thu Jun 21 15:37:39 2012 -0400
+
+    gspawn: Abort if we can't open /dev/null
+
+    This really "shouldn't happen", but if we have an assertion here, it
+    will help static analysis tools know we're not hitting undefined
+    state.
+
+ glib/gspawn.c |    2 ++
+ 1 file changed, 2 insertions(+)
+
+commit 2143e799f4f55c8bc9eca2ff1e5650bc09b74d0f
+Author: Colin Walters <walters@verbum.org>
+Date:   Thu Jun 21 15:33:51 2012 -0400
+
+    tests/unix: Ensure buffer is NUL terminated
+
+ glib/tests/unix.c |    1 +
+ 1 file changed, 1 insertion(+)
+
+commit 6fe87988d18542f31bbac289276981b76161c838
+Author: Colin Walters <walters@verbum.org>
+Date:   Thu Jun 21 12:12:53 2012 -0400
+
+    gsignal: Properly handle NULL nodes
+
+ gobject/gsignal.c |   10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
+
+commit 94201b9ba859c86e9a3839a24cd5887038c6c053
+Author: Colin Walters <walters@verbum.org>
+Date:   Thu Jun 21 12:12:33 2012 -0400
+
+    gresourcefile.c: Remove stray semicolon
+
+ gio/gresourcefile.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 773f515220c8ce93041c624f5b9477793d963826
+Author: Colin Walters <walters@verbum.org>
+Date:   Thu Jun 21 12:08:05 2012 -0400
+
+    gmenu: Remove stray semicolon in g_menu_clear_item()
+
+ gio/gmenu.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit cbe331450f9e1f07caaad160633d3e5880568ad3
+Author: Colin Walters <walters@verbum.org>
+Date:   Thu Jun 21 12:06:34 2012 -0400
+
+    tests: Add missing initializer for return value
+
+ gio/tests/test-pipe-unix.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 9f45f340ed9c66edbdf0b9fe8be0476427c2b33d
+Author: Colin Walters <walters@verbum.org>
+Date:   Thu Jun 21 12:05:39 2012 -0400
+
+    tests: Add missing va_end()
+
+ gio/tests/gapplication.c |    2 ++
+ 1 file changed, 2 insertions(+)
+
+commit e713de67807a0d4bf90f99f334a31a378842c5ce
+Author: Colin Walters <walters@verbum.org>
+Date:   Thu Jun 21 12:00:04 2012 -0400
+
+    gfileutils: Remove extra fclose()
+
+    This is a regression introduced by:
+    commit 6ac8e6108cf15884e28fe1ecd3042dfce0e11dfd
+    Author: Matthias Clasen <mclasen@redhat.com>
+    Date:   Tue Jun 14 10:12:46 2011 -0400
+
+        Don't leak resources in error cases
+
+ glib/gfileutils.c |    1 -
+ 1 file changed, 1 deletion(-)
+
+commit 894cf926505c595c96d96d0c2345417e9eeefd4c
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Thu Jun 21 06:11:58 2012 -0400
+
+    Install bash completion files in /usr/share/
+
+    The bash-completion code nowadays expects completion files to
+    be installed in  /usr/share/bash-completion/completions, and
+    expects them to be named like the command they are completing
+    for.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=677782
+
+ gio/Makefile.am                  |    8 ++--
+ gio/completion/gdbus             |   33 +++++++++++++++
+ gio/completion/gresource         |   58 ++++++++++++++++++++++++++
+ gio/completion/gsettings         |   84
+ ++++++++++++++++++++++++++++++++++++++
+ gio/gdbus-bash-completion.sh     |   33 ---------------
+ gio/gresource-bash-completion.sh |   58 --------------------------
+ gio/gsettings-bash-completion.sh |   84
+ --------------------------------------
+ 7 files changed, 179 insertions(+), 179 deletions(-)
+
+commit 6a9668af931799d1c13aff65b22c479bd277c311
+Author: Dan Winship <danw@gnome.org>
+Date:   Mon Jun 18 15:31:47 2012 -0400
+
+    gdbus: fix generated code to not warn under -Wfloat-equal
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=678333
+
+ gio/gdbus-2.0/codegen/codegen.py |   11 +++++++++--
+ gio/tests/gdbus-test-codegen.c   |   31 +++++++++++++++++++++++++++++++
+ 2 files changed, 40 insertions(+), 2 deletions(-)
+
+commit 8f46e27c35613e03109616a19c3928b28506cdd9
+Author: Martin Pitt <martinpitt@gnome.org>
+Date:   Mon Jun 18 07:39:23 2012 +0200
+
+    Fix g_utf8_validate() out argument transfer mode
+
+    The "end" argument is unusual in g_utf8_validate(): it's not a
+    classic out
+    argument which gets allocated by the called function, but merely
+    points into
+    one of its input arguments. Thus it is "transfer none".
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=672889
+
+ glib/gutf8.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 7934d64837dcba1d94a46ded76b5ef2cdd8534a3
+Author: Dan Winship <danw@gnome.org>
+Date:   Sat Jun 16 10:38:45 2012 -0400
+
+    docs: fix an example
+
+ docs/reference/gio/gdbus-codegen.xml |    3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+commit f03dbdc365b7d95637570f1e3fe80597654501ab
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Fri Jun 15 18:53:09 2012 -0400
+
+    GKeyFile: Deal better with blank lines
+
+    There is no need to store a has_trailing_blank_line boolean for
+    each group, we can just check this at the time we assemble the data.
+
+    This fixes a problem without roundtrips where we would sometimes
+    add an extra blank line between groups.
+
+    The testcase here is inspired by
+    https://bugzilla.gnome.org/show_bug.cgi?id=677817
+
+ glib/gkeyfile.c      |   12 +++---------
+ glib/tests/keyfile.c |   26 ++++++++++++++++++++++++++
+ 2 files changed, 29 insertions(+), 9 deletions(-)
+
+commit 747e651697e1bd31225b8fa49c06db840912dca0
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Fri Jun 15 15:16:13 2012 -0400
+
+    GWakeup: Avoid extraneous wakeups
+
+    We were checking the wrong number here, and waking up unnecessarily.
+    https://bugzilla.gnome.org/show_bug.cgi?id=678052
+
+ glib/gmain.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 45ff6099c68a6a58e4e6aba491e4182253ff0ee3
+Author: Paolo Borelli <pborelli@gnome.org>
+Date:   Fri Jun 15 14:41:20 2012 +0200
+
+    Improve g_find_program_in_path documentation
+
+    Document that g_find_program_in_path returns a newly-allocated string
+
+ glib/gutils.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit d98eed087d62a4633a2fe3c4fb4fa55b67d48d82
+Author: Benjamin Otte <otte@redhat.com>
+Date:   Wed Jun 13 17:33:01 2012 +0200
+
+    glib-compile-resources: Forward errors from spawned processes
+
+    We just grab stderr from gdk-pixbuf-to-csource and xmllint and include
+    it in the error message. It's the best we can do.
+
+ gio/glib-compile-resources.c |   22 ++++++++++++----------
+ 1 file changed, 12 insertions(+), 10 deletions(-)
+
+commit 0a22710d67714bc0d438f952283851aa6e9fea06
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Mon Jun 11 10:24:03 2012 -0400
+
+    Correct the docs for g_time_zone_adjust_time
+
+    March 13, 2010 is very ordinary.
+    March 14, 2010 is the special day.
+
+ glib/gtimezone.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 654125685941febfeac25453c1c6808ac7e8d94e
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Mon Jun 11 07:18:29 2012 -0400
+
+    Fix a typo
+
+    It is 'entries', not 'entires'.
+
+ glib/goption.c |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit c6a5b5d71922e7cfc9545d16f910c20580e25555
+Author: Daniel Macks <dmacks@netspace.org>
+Date:   Tue Jun 5 14:16:24 2012 -0400
+
+    configure: Require libelf 0.8.12
+
+    Older versions don't have the required API.
+
+    (Commit message written by Colin Walters <walters@verbum.org>)
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=673253
+
+ configure.ac |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit c149b7ecb0bbb9f80312999adfcfcba863e53227
+Author: Martin Pitt <martinpitt@gnome.org>
+Date:   Tue Jun 5 18:50:36 2012 +0200
+
+    g_dbus_gvariant_to_gvalue(): Add missing out annotation
+
+ gio/gdbusutils.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 57214e812d6279490d794902d44180bf25d877da
+Author: Marc-Antoine Perennou <Marc-Antoine@Perennou.com>
+Date:   Tue May 22 21:56:10 2012 +0200
+
+    glib: fix g_reload_user_special_dirs_cache
+
+    We handle a special case for G_USER_DIRECTORY_DESKTOP
+    when we init the values but drop it when we reload them.
+    Fix this by preferring old values to NULL
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=676594
+
+    Signed-off-by: Marc-Antoine Perennou <Marc-Antoine@Perennou.com>
+
+ glib/gutils.c |   16 ++++++++++------
+ 1 file changed, 10 insertions(+), 6 deletions(-)
+
+commit d43c89c286df794e9e73b9f58c91912dd4b68046
+Author: Christian Persch <chpe@gnome.org>
+Date:   Tue May 29 19:10:57 2012 +0200
+
+    build: Add missing AM_V_GEN to silence the build
+
+ gio/Makefile.am |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 8dbf5a86e17783848bd5cd4980cf76f0ad1bd02e
+Author: Guillaume Desmottes <guillaume.desmottes@collabora.co.uk>
+Date:   Fri Apr 27 10:02:54 2012 +0200
+
+    Link to gvariant-format-strings-pointers in getter API
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=674777
+
+ glib/gvariant.c |   30 +++++++++++++++++++++++++++++-
+ 1 file changed, 29 insertions(+), 1 deletion(-)
+
+commit 9851202b159f507bc4fac0624d310df4bcb4eefc
+Author: Colin Walters <walters@verbum.org>
+Date:   Sat May 26 11:53:14 2012 -0400
+
+    gappinfo: Fix uninitialized-variable gcc warning
+
+ gio/gappinfo.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 9b9e99e6c8113b8bb319c58453dd570cab7dbc0a
+Author: Colin Walters <walters@verbum.org>
+Date:   Fri May 25 08:59:09 2012 -0400
+
+    Annotate API introduced for 2.32 with GLIB_AVAILABLE_IN_2_32
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=676816
+
+ gio/gactiongroup.h         |    1 +
+ gio/gactiongroupexporter.h |    2 ++
+ gio/gactionmap.h           |    3 +--
+ gio/gappinfo.h             |    3 +++
+ gio/gapplication.h         |    2 ++
+ gio/gdbusactiongroup.h     |    1 +
+ gio/gdbusinterface.h       |    1 +
+ gio/gdrive.h               |    1 +
+ gio/gfile.h                |    1 +
+ gio/gfileinfo.h            |    1 +
+ gio/ginetaddressmask.h     |    3 +++
+ gio/ginetsocketaddress.h   |    2 ++
+ gio/gmenu.h                |    2 ++
+ gio/gmenuexporter.h        |    2 ++
+ gio/gnetworkmonitor.h      |    2 ++
+ gio/gnetworkmonitorbase.h  |    2 ++
+ gio/gremoteactiongroup.h   |    3 +++
+ gio/gresource.h            |   17 +++++++++++++++++
+ gio/gsettings.h            |    2 ++
+ gio/gsettingsschema.h      |    7 +++++++
+ gio/gsimpleasyncresult.h   |    1 +
+ gio/gsocket.h              |   11 +++++++++++
+ gio/gsocketconnection.h    |    4 ++++
+ gio/gunixconnection.h      |    4 ++++
+ gio/gunixmounts.h          |    1 +
+ gio/gvolume.h              |    1 +
+ 26 files changed, 78 insertions(+), 2 deletions(-)
+
+commit c1faabde814d39a428dd3d5eae0fef5189cfac4a
+Author: Colin Walters <walters@verbum.org>
+Date:   Fri May 25 08:42:50 2012 -0400
+
+    Annotate API introduced for 2.30 with GLIB_AVAILABLE_IN_2_30
+
+    I didn't do this comprehensively, since there's a lot of it, mainly
+    due to the GDBus object manager stuff, but anyone trying to use
+    that would fail fast due to lack of the gdbus code generator.
+
+    My main goal was to get API additions to existing classes like
+    g_data_input_stream_read_line_utf8(), as well as the lower level new
+    API like glib-unix.h.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=676816
+
+ gio/gaction.h          |    1 +
+ gio/gdatainputstream.h |    2 ++
+ gio/gdbusconnection.h  |    3 +++
+ glib/gatomic.h         |    4 ++++
+ glib/gfileutils.h      |    3 +++
+ glib/ghash.h           |    1 +
+ glib/ghmac.h           |    9 +++++++++
+ glib/glib-unix.h       |    6 ++++++
+ glib/gunicode.h        |    1 +
+ glib/gutils.h          |    2 ++
+ glib/gvariant.h        |    2 ++
+ gobject/glib-types.h   |    4 ++++
+ 12 files changed, 38 insertions(+)
+
+commit 98ae46c618feb0a534575d1d67d82c539273bdbf
+Author: Christian Persch <chpe@gnome.org>
+Date:   Sat May 5 17:29:44 2012 +0200
+
+    application: Save a few bytes in the library
+
+    There's really no need to put useless whitespace into the .so.
+
+ gio/gapplicationimpl-dbus.c |   48
+ +++++++++++++++++++++----------------------
+ 1 file changed, 24 insertions(+), 24 deletions(-)
+
+commit 8906b1f66b96d6895095560f026cf43aeabfca37
+Author: Marc-Antoine Perennou <Marc-Antoine@Perennou.com>
+Date:   Tue May 22 20:38:52 2012 +0200
+
+    glib: fix build
+
+    Signed-off-by: Marc-Antoine Perennou <Marc-Antoine@Perennou.com>
+
+ glib/genviron.c |    5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
+
+commit 47fdbf894847cd7df814e4d1fcdb7fd518399421
+Author: Christian Persch <chpe@gnome.org>
+Date:   Sat May 19 23:59:01 2012 +0200
+
+    environ: Allow NULL envp
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=676397
+
+ glib/genviron.c          |   31 ++++++++++++++++++++-----------
+ glib/tests/environment.c |   20 ++++++++++++++++++++
+ 2 files changed, 40 insertions(+), 11 deletions(-)
+
+commit 3d35cbfae9ea1a923f88581ec9a6c7304ddefbc1
+Author: Dan Winship <danw@gnome.org>
+Date:   Wed Mar 21 09:22:38 2012 -0400
+
+    g_utf8_validate: @str shouldn't end up annotated as utf8
+
+    In order for this function to have any point, it has to be possible to
+    pass non-UTF-8 data to it, so annotate @str as being array-of-guint8
+    instead of utf8.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=672548
+
+ glib/gutf8.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 12ac7ddd6da475be2215af1f39ffab2f64d2f4a0
+Author: Dan Winship <danw@gnome.org>
+Date:   Fri May 18 08:49:05 2012 -0400
+
+    g_app_info_launch_default_for_uri: don't use GFile if we don't have to
+
+    GFile doesn't handle some "real" URIs, so check if there's a default
+    handler for the URI scheme first, and only use g_file_new_for_uri()
+    and g_file_query_default_handler() if not. Eg, this fixes the case of
+    opening http URIs with "%2F" in the path.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=666386
+
+ gio/gappinfo.c |   36 ++++++++++++++++++++++++++----------
+ 1 file changed, 26 insertions(+), 10 deletions(-)
+
+commit fcdf7790169b108941c9890ad2acc31b81416ee1
+Author: Holger Berndt <hb@gnome.org>
+Date:   Thu May 17 22:24:10 2012 +0200
+
+    Document that g_app_info_create_from_commandline() does unquoting
+    according to fd.o
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=676277
+
+ gio/gdesktopappinfo.c |    6 ++++++
+ 1 file changed, 6 insertions(+)
+
+commit a9435d59b4878f0bed744de6b61aeb867b15d5a7
+Author: Dan Winship <danw@gnome.org>
+Date:   Thu May 17 13:48:21 2012 -0400
+
+    gnetworkmonitornetlink: don't leak the list of networks
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=676265
+
+ gio/gnetworkmonitornetlink.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit e5ca9ed5c9d753c223e6f960e3ce7f7bae1fdf7f
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Thu May 17 00:44:36 2012 -0400
+
+    gsettings: add reset-recursively to bash completion
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=675832
+
+ gio/gsettings-bash-completion.sh |    6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+commit 421a44711fb947c17f51ec0a92b32229ec21c554
+Author: Ravi Sankar Guntur <ravi.g@samsung.com>
+Date:   Mon Mar 19 21:17:32 2012 +0530
+
+    glib: fix memory leaks in gutils, protocol, and strfuncs tests
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=672329
+
+    Signed-off-by: Ravi Sankar Guntur <ravi.g@samsung.com>
+
+ glib/gutils.c         |   26 ++++++++++++++++++++------
+ glib/tests/protocol.c |    6 +++++-
+ glib/tests/strfuncs.c |   42 +++++++++++++++++++++++++++++++++---------
+ 3 files changed, 58 insertions(+), 16 deletions(-)
+
+commit d1f1389649890b25c44d08b6b32e9e79c395b543
+Author: Paolo Borelli <pborelli@gnome.org>
+Date:   Tue May 15 17:38:44 2012 +0200
+
+    gfile: add g_return_if_fail to g_file_make_directory_with_parents()
+
+ gio/gfile.c |    2 ++
+ 1 file changed, 2 insertions(+)
+
+commit cd49c0973ddb91c749693f7c1852d9b2fd138d1b
+Author: Colin Walters <walters@verbum.org>
+Date:   Fri May 4 10:03:12 2012 -0400
+
+    gfile: Plug memory leak in g_file_make_directory_with_parents()
+
+    The logic here is pretty twisted, but basically we were leaking a ref
+    for each non-existent parent.  The clearest way to fix this was to
+    move to more explicit refcounting logic; when a variable is pointing
+    to an object, it holds a ref.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=675446
+
+ gio/gfile.c |   23 ++++++++++++++++-------
+ 1 file changed, 16 insertions(+), 7 deletions(-)
+
+commit a2fd72d95844a3f74d43491a724b99e2bd8f8ff5
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Sun May 13 00:46:39 2012 -0400
+
+    Use non-deprecated api in tests
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=660851
+
+ glib/tests/rec-mutex.c |    4 ++--
+ glib/tests/rwlock.c    |    6 +++---
+ 2 files changed, 5 insertions(+), 5 deletions(-)
+
+commit 146343054cf298509956268db72c6f54ebdd2633
+Author: Jasper St. Pierre <jstpierre@mecheye.net>
+Date:   Wed May 2 12:53:27 2012 -0400
+
+    gkeyfile: Fix annotations for g_key_file_load_from_data
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=675309
+
+ glib/gkeyfile.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 4e718cf4cf7a33e57cbb17898644216976329c86
+Author: Lars Uebernickel <lars@uebernic.de>
+Date:   Thu May 10 09:35:03 2012 -0700
+
+    docs: reference g_menu_item_new in gmenu convenience menuitem API
+
+ gio/gmenu.c |    6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+commit fd8d17726f8a16f50b6afe6e6bb58958daf64c1b
+Author: Chun-wei Fan <fanchunwei@src.gnome.org>
+Date:   Wed Jun 20 10:19:14 2012 +0800
+
+    msvc_recommended_pragmas.h: Re-enable C4819 warnings
+
+    Apparently the C4819 warnings appear due to a bug on Visual C++
+    on DBCS
+    locales, so re-enable this.
+
+    Add a note in the Visual C++ Readme.txt's regarding this.
+
+ build/win32/vs10/README.txt |    7 +++++++
+ build/win32/vs9/README.txt  |    7 +++++++
+ msvc_recommended_pragmas.h  |    3 ---
+ 3 files changed, 14 insertions(+), 3 deletions(-)
+
+commit 09e28631b0729efe202de45bde68f02513754006
+Author: Nilamdyuti Goswami <nilamdyuti@gmail.com>
+Date:   Tue Jun 19 18:41:23 2012 +0530
+
+    Assamese translation reviewed
+
+ po/as.po | 1139
+ +++++++++++++++++++++++++++++++-------------------------------
+ 1 file changed, 565 insertions(+), 574 deletions(-)
+
+commit 667284a19de10618cd37f88ad25f1cb0a7dac517
+Author: David Zeuthen <zeuthen@gmail.com>
+Date:   Fri Jun 8 13:30:48 2012 -0400
+
+    GDBusProxy: Treat org.freedesktop.systemd1.Masked error as non-fatal
+
+    This is useful otherwise we'll fail if a systemd service is
+    masked. See bug 677718 for details.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=677718
+
+    Signed-off-by: David Zeuthen <zeuthen@gmail.com>
+
+ gio/gdbusproxy.c |   34 ++++++++++++++++++++++++++--------
+ 1 file changed, 26 insertions(+), 8 deletions(-)
+
+commit deccfdc2569214da81b2c76a6c5102bbb6f4129b
+Author: Rūdolfs Mazurs <rudolfsm@src.gnome.org>
+Date:   Tue Jun 5 17:27:15 2012 +0300
+
+    Updated Latvian translation
+
+ po/lv.po |  479
+ +++++++++++++++++++++++++++-----------------------------------
+ 1 file changed, 211 insertions(+), 268 deletions(-)
+
+commit 200b390d83d160ec95f8305ac7362e2a302ba1c9
+Author: Debarshi Ray <debarshir@gnome.org>
+Date:   Thu May 17 06:43:54 2012 +0200
+
+    gio: The tmpl parameter to g_file_new_tmp can be NULL
+
+    Fixes: https://bugzilla.gnome.org/676208
+
+ gio/gfile.c |    1 -
+ 1 file changed, 1 deletion(-)
+
+commit 90d9567c993cd3c5dbe5ca637f57c05fd0d71edf
+Author: Daniel Nylander <po@danielnylander.se>
+Date:   Fri May 18 10:02:20 2012 +0200
+
+    Updated Swedish translation
+
+ po/sv.po |  324
+ +++++++++++++++++++++++++++++++++-----------------------------
+ 1 file changed, 172 insertions(+), 152 deletions(-)
+
+commit 83c58bfe77a53f4f6cd55548afb28dae322e4120
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Mon May 14 19:52:34 2012 -0400
+
+    bump version
+
+ configure.ac |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 5cd829c9245d9441bba03bb137a0ec218f927007
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Mon May 14 18:06:02 2012 -0400
+
+    Keep interface age in sync with micro
+
+ configure.ac |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 1f55caae10274d38d29bc21670087f01ed1be76f
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Mon May 14 18:05:48 2012 -0400
+
+    Updates
+
+ NEWS |   20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+
+commit d3268cda0aabece89e720f4968279bd4b0bc9647
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Mon May 14 18:02:59 2012 -0400
+
+    NEWS: correct title
+
+ NEWS |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 6799e4a73a93c4c6c2e3fbfbd44f05e5a5e26bcf
+Author: Dan Winship <danw@gnome.org>
+Date:   Tue Apr 17 11:46:50 2012 -0400
+
+    GConverterInputStream: fix an infinite loop when fill_buffer returns
+    an error
+
+    The loop was using a GConverterResult variable where it meant to use a
+    gssize, and since GConverterResult was ending up as an unsigned type,
+    this meant the (res < 0) check always failed.
+
+ gio/gconverterinputstream.c |   12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+commit b62b5a3d8c67e3245e6d642207d07cafe3943fc2
+Author: Dan Winship <danw@gnome.org>
+Date:   Sun Apr 22 15:20:14 2012 -0400
+
+    gio: fix error handling in async case of GProxyAddressEnumerator
+
+    In the async case, a failed DNS lookup was causing the proxy
+    resolution to bail out immediately, rather than just moving on to the
+    next potential proxy (which might not need us to do the DNS lookup
+    beforehand). Fix that.
+
+ gio/gproxyaddressenumerator.c |   95
+ +++++++++++++++++++++++++----------------
+ 1 file changed, 58 insertions(+), 37 deletions(-)
+
+commit 6ab3affcc99066828a36c05be49a9c366c52edff
+Author: Sasi Bhushan <sasi@swecha.net>
+Date:   Mon May 14 13:32:06 2012 +0530
+
+    Updated Telugu Translations
+
+ po/te.po |  234
+ +++++++++++++++++++++++++++++++++-----------------------------
+ 1 file changed, 124 insertions(+), 110 deletions(-)
+
+commit 86ee75adb3e6035ec9d53edcb9d86ab556d33a90
+Author: Jiro Matsuzawa <jmatsuzawa@gnome.org>
+Date:   Sun May 13 19:22:24 2012 +0900
+
+    [l10n] Update Japanese translation
+
+ po/ja.po |  637
+ +++++++++++++++-----------------------------------------------
+ 1 file changed, 155 insertions(+), 482 deletions(-)
+
+commit 64924095a36ea500ed060d094caf0549753dbec0
+Author: Christian Kirbach <Christian.Kirbach@googlemail.com>
+Date:   Tue May 8 19:15:09 2012 +0200
+
+    [l10n] Updated German translation
+
+ po/de.po |  108
+ ++++++++++++++++++++++++++++++++++++--------------------------
+ 1 file changed, 62 insertions(+), 46 deletions(-)
+
+commit 59d6312637e32eafc71b10bb8ffd481d2acbaf4a
+Author: Jiro Matsuzawa <jmatsuzawa@gnome.org>
+Date:   Tue May 8 20:24:53 2012 +0900
+
+    [l10n] Update Japanese translation
+
+ po/ja.po | 6155
+ +++++++++++++++++++++++++++++++++-----------------------------
+ 1 file changed, 3275 insertions(+), 2880 deletions(-)
+
+commit 227d978b7a0592d9a6c1181255bf173aa72fcfc9
+Author: Alexander Shopov <ash@kambanaria.org>
+Date:   Sat Apr 28 07:55:20 2012 +0300
+
+    Updated Bulgarian translation
+
+ po/bg.po |  209
+ +++++++++++++++++++++++++++++++++-----------------------------
+ 1 file changed, 113 insertions(+), 96 deletions(-)
+
+commit e6b86fe4f49a02f70482486dee5bcbf3418a73b1
+Author: Gil Forcada <gforcada@gnome.org>
+Date:   Sun May 6 16:20:22 2012 +0200
+
+    [l10n] Updated Catalan translation
+
+ po/ca.po |  252
+ +++++++++++++++++++++++++++++++++++---------------------------
+ 1 file changed, 144 insertions(+), 108 deletions(-)
+
+commit 430ed69af0530e2b5d85925741aaeea043dc083b
+Author: Matej Urbančič <mateju@svn.gnome.org>
+Date:   Fri May 4 13:42:36 2012 +0200
+
+    Updated Slovenian translation
+
+ po/sl.po |  266
+ +++++++++++++++++++++++++++++++++-----------------------------
+ 1 file changed, 141 insertions(+), 125 deletions(-)
+
+commit 5ae043e9ec34e1805d6c3b2a42058b8ca7529b27
+Author: Marek Černocký <marek@manet.cz>
+Date:   Fri May 4 09:32:11 2012 +0200
+
+    Updated Czech translation
+
+ po/cs.po |  459
+ +++++++++++++++++++++++++++-----------------------------------
+ 1 file changed, 201 insertions(+), 258 deletions(-)
+
+commit e59a29eb9a86ec2c2430df549c10d6f7bb0cc199
+Author: Chun-wei Fan <fanchunwei@src.gnome.org>
+Date:   Wed May 2 11:06:14 2012 +0800
+
+    Fix GIO/GObject Visual C++ projects
+
+    -Make up for the missed DLL_EXPORT-it's actually needed for all
+    GLib DLL
+     builds, omitting this caused problems to surface due to recent
+     works to
+     make GDBus work on Windows.
+    -Also use the FFI_BULIDING macro for GObject builds as the suggessted
+     workaround for using static LibFFI builds (as we do now)-please see
+     ffi.h.in.  This will fix the build of GObject against LibFFI
+     3.0.11, but
+     it is probable that this will change at some point for LibFFI.
+
+ build/win32/vs10/gio.vcxprojin     |    8 ++++----
+ build/win32/vs10/gobject.vcxprojin |    8 ++++----
+ build/win32/vs9/gio.vcprojin       |    8 ++++----
+ build/win32/vs9/gobject.vcprojin   |    8 ++++----
+ 4 files changed, 16 insertions(+), 16 deletions(-)
+
+commit 7fe1f97a128be5f48dcd1232250e96bd581a35c1
+Author: Michael Biebl <biebl@debian.org>
+Date:   Tue May 1 18:42:12 2012 +0200
+
+    configure: Reset LIBS after ELF check
+
+    If action-if-found is not specified, AC_CHECK_LIB will append
+    the library
+    to LIBS. As we don't want to link everything against libelf,
+    reset LIBS
+    after doing the checks.
+
+ configure.ac |    2 ++
+ 1 file changed, 2 insertions(+)
+
+commit 9ab02c1428385c30b13e24872960474d44b6866b
+Author: Rafał Mużyło <galtgendo@o2.pl>
+Date:   Sun Apr 15 11:17:07 2012 -0400
+
+    configure: Fix typo in ELF check
+
+    Signed-off-by: Colin Walters <walters@verbum.org>
+
+ configure.ac |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 2343f6ecc81b60d0fe2d6b9e91c2eff6d0da915a
+Author: Ryan Lortie <desrt@desrt.ca>
+Date:   Tue May 1 01:18:04 2012 -0400
+
+    bump version
+
+ configure.ac |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 2afebe2541dc5dfcbdd4e4e7f9a3e04ccf6b32cd
+Author: Ryan Lortie <desrt@desrt.ca>
+Date:   Tue May 1 01:04:49 2012 -0400
+
+    GLib 2.32.2
+
+ NEWS |   55 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 55 insertions(+)
+
+commit b6031518d051160d36aef4bc24b4a0b3fad7c5ca
+Author: Alexander Larsson <alexl@redhat.com>
+Date:   Thu Apr 26 10:05:41 2012 +0200
+
+    Dist gio/dbus-daemon.xml and fix dependency for builddir != srcdir
+
+ gio/Makefile.am |    6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+commit 485c5fcf4880f3a6d92d4b0160e34253418a739c
+Author: Cosimo Cecchi <cosimoc@gnome.org>
+Date:   Mon Apr 16 10:45:12 2012 -0400
+
+    tests/date: force English locale running the GDateTime tests
+
+    The parsing test needs to make some assumption about the locale
+    representation of the string to be parsed, so we need to explicitly
+    override the locale here.
+
+ glib/tests/date.c |    1 +
+ 1 file changed, 1 insertion(+)
+
+commit 7e9306e84e3cfc9b9e43991bd6d1978a77463349
+Author: Ryan Lortie <desrt@desrt.ca>
+Date:   Sat Mar 3 11:31:05 2012 -0500
+
+    GApplication: allow null application_id
+
+    GApplication application ID is now permitted to be NULL, in which case
+    G_APPLICATION_NON_UNIQUE will be implicitly enabled.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=671249
+
+ gio/gapplication.c          |   57
+ ++++++++++++++++++++++++++-----------------
+ gio/gapplicationimpl-dbus.c |    6 +++++
+ gio/gioenums.h              |    9 ++++---
+ 3 files changed, 45 insertions(+), 27 deletions(-)
+
+commit 33f52e58e9d4f82524c20b23daa240b72f01230c
+Author: Bruno Brouard <annoa.b@gmail.com>
+Date:   Mon Apr 30 21:54:22 2012 +0200
+
+    Updated French translation
+
+ po/fr.po |  171
+ ++++++++++++++++++++++++++++++++++----------------------------
+ 1 file changed, 93 insertions(+), 78 deletions(-)
+
+commit d92736ab032bb650b1d115042e2a0ff965175940
+Author: Xavier Claessens <xavier.claessens@collabora.co.uk>
+Date:   Wed Apr 25 15:02:25 2012 +0200
+
+    Fix g_clear_object macro with C++ compilers
+
+    In C++ it is invalid to cast a void* to void**.
+
+    Also add a static check to ensure
+    sizeof(*object_ptr) == sizeof (gpointer).
+    This avoid common mistake of missing '&'
+    in g_clear_object(&obj);
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=674634
+
+ gobject/gobject.h |    4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+commit 9e4b28051db5eb402d1cd6d881302e8714009010
+Author: Fran Diéguez <fran.dieguez@mabishu.com>
+Date:   Mon Apr 30 16:22:09 2012 +0200
+
+    Updated Galician translations
+
+ po/gl.po |  205
+ +++++++++++++++++++++++++++++++++-----------------------------
+ 1 file changed, 110 insertions(+), 95 deletions(-)
+
+commit dfd4bab41bba9b5b270d6c72a438e67c998a5a49
+Author: Luca Ferretti <lferrett@gnome.org>
+Date:   Mon Apr 30 15:41:08 2012 +0200
+
+    l10n: Updated Italian translation
+
+ po/it.po |  319
+ +++++++++++++++++++++++++++++++++-----------------------------
+ 1 file changed, 169 insertions(+), 150 deletions(-)
+
+commit 1c7878d7f14e0c67cc6fa560e92f4b0d882247a3
+Author: Мирослав Николић <miroslavnikolic@rocketmail.com>
+Date:   Sun Apr 29 12:08:04 2012 +0200
+
+    Updated Serbian translation
+
+ po/sr.po       |  257
+ ++++++++++++++++++++++++++++++--------------------------
+ po/sr@latin.po |  257
+ ++++++++++++++++++++++++++++++--------------------------
+ 2 files changed, 272 insertions(+), 242 deletions(-)
+
+commit 2c245e702e4cb61ce6917a028d5e4fabb2780b89
+Author: Piotr Drąg <piotrdrag@gmail.com>
+Date:   Sat Apr 28 18:03:13 2012 +0200
+
+    Updated Polish translation
+
+ po/pl.po |  109
+ ++++++++++++++++++++++++++++++++++++--------------------------
+ 1 file changed, 63 insertions(+), 46 deletions(-)
+
+commit ae2dd455bc3c70865f62e2663c23852be18e4bdf
+Author: Jonh Wendell <jwendell@gnome.org>
+Date:   Sat Apr 28 10:11:25 2012 -0300
+
+    Updated Brazilian Portuguese translation
+
+ po/pt_BR.po |  375
+ +++++++++++++++++++++++++++++++----------------------------
+ 1 file changed, 197 insertions(+), 178 deletions(-)
+
+commit 171f97aacc361ead17be90b0dc29bc9075d5d83b
+Author: Daniel Mustieles <daniel.mustieles@gmail.com>
+Date:   Sat Apr 28 11:30:41 2012 +0200
+
+    Updated Spanish translation
+
+ po/es.po |  350
+ +++++++++++++++++++++++++++++++++-----------------------------
+ 1 file changed, 187 insertions(+), 163 deletions(-)
+
+commit 5b29f72c3dd17367f4d7302aca419de6605521cc
+Author: Aurimas Černius <aurisc4@gmail.com>
+Date:   Fri Apr 27 22:17:10 2012 +0300
+
+    Updated Lithuanian translation
+
+ po/lt.po |  265
+ +++++++++++++++++++++++++++++++++-----------------------------
+ 1 file changed, 140 insertions(+), 125 deletions(-)
+
+commit 9926b9315c3f74a9b0b54fb29cd6495dd363fd54
+Author: Debarshi Ray <debarshir@gnome.org>
+Date:   Mon Apr 16 23:00:01 2012 +0200
+
+    GAppInfo: overwrite the DISPLAY only if it is set in the launch
+    context
+
+    If the launch context is a GAppLaunchContext, and not a
+    GdkAppLaunchContext, then g_app_launch_context_get_display will return
+    NULL because the get_display virtual method is undefined. The DISPLAY
+    might still be inherited from the parent process, in which case
+    overwriting it with NULL breaks the launch.
+
+    This is a regression introduced in:
+    de834bed306565c0652050665eafff4dfcdf0d8b
+
+    Fixes: https://bugzilla.gnome.org/672786
+
+ gio/gdesktopappinfo.c |    3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+commit a7a1a50d6a8eb8387cce1756f3c38abf36f281b4
+Author: Michael Olbrich <m.olbrich@pengutronix.de>
+Date:   Wed Apr 25 09:46:35 2012 +0200
+
+    make sure configure fails if AC_CHECK_ALIGNOF cannot detect the
+    alignment
+
+    When cross-compiling with gcc >= 4.5 AC_CHECK_ALIGNOF fails to
+    detect the
+    correct alignment. Without a previous AC_CHECK_TYPE for the same
+    type, the
+    alignment is silently set to '0'.
+    This makes sure that configure fails and reports the problem.
+
+    Signed-off-by: Michael Olbrich <m.olbrich@pengutronix.de>
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=674483
+
+ configure.ac |    3 +++
+ 1 file changed, 3 insertions(+)
+
+commit 8f2c2eef3ca53c7534e462453fd54321677904d9
+Author: Alexander Larsson <alexl@redhat.com>
+Date:   Tue Apr 24 14:53:49 2012 +0200
+
+    win32: Fix build with srcdir != builddir
+
+    Missed this part in the last commit
+    (cherry picked from commit 62905cda0b42163bbd582278260f659f94e4d2bf)
+
+ gio/Makefile.am |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 9b588b3e46f08ae4f79f75cc9a8b749c2fba8f9d
+Author: Alexander Larsson <alexl@redhat.com>
+Date:   Tue Apr 24 14:03:38 2012 +0200
+
+    win32: Fix build of gdbus-daemon-generated.[ch]
+
+    gdbus-daemon-generated.[ch] failed to build because it depended
+    on gdbus-2.0/codegen/gdbus-codegen which was build during the
+    SUBDIRS part
+    of the build, however SUBDIRS are done *after* processing
+    BUILT_SOURCES,
+    and these files are in BUILT_SOURCES.
+
+    The fix is simple, instead of running the gdbus-codegen code we
+    run the gdbus-codegen.in code, which works fine for uninstalled
+    execution.
+
+    I also removed Makefile from the dependencies to avoid rebuilding
+    the file
+    in tarballs, as Makefiles are written at configure time. We should
+    be able to
+    ship the prebuilt files in the tarballs.
+    When running uninstalled
+    (cherry picked from commit 88bfc9b289e2b40bd7bff94dcdb06eb0b7b53f67)
+
+ gio/Makefile.am |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit d47f4c4ce6f538eeaca31e2b8e0b394c75851447
+Author: Chun-wei Fan <fanchunwei@src.gnome.org>
+Date:   Tue Apr 24 00:03:33 2012 +0800
+
+    Visual C++ projects: Clean/fix up
+
+    Clean/fix up the Preprocessor Definitions for the various projects,
+    where
+    we purge out the unneeded macros and add _DEBUG to the Debug builds of
+    various projects that somehow lacked this.
+
+    This will also fix the GIO build under Visual C++ 2008, as the
+    _DEBUG macro
+    in the release builds will cause a debug entry to appear in its
+    manifest
+    file during the build, which will cause GIO-using applications to fail
+    to run on systems not running Visual C++/Studio 2008 due to its
+    embedding
+    of a badly-generated manifest file.
+
+ build/win32/vs10/gio.vcxprojin                       |    8 ++++----
+ build/win32/vs10/glib-genmarshal.vcxproj             |    8 ++++----
+ build/win32/vs10/glib.vcxprojin                      |   16
+ ++++++++--------
+ build/win32/vs10/gmodule.vcxproj                     |    8 ++++----
+ build/win32/vs10/gobject.vcxprojin                   |    8 ++++----
+ build/win32/vs10/gspawn-win32-helper-console.vcxproj |    4 ++--
+ build/win32/vs10/gspawn-win32-helper.vcxproj         |    4 ++--
+ build/win32/vs10/gthread.vcxproj                     |    8 ++++----
+ build/win32/vs9/gio.vcprojin                         |    8 ++++----
+ build/win32/vs9/glib-genmarshal.vcproj               |    8 ++++----
+ build/win32/vs9/glib.vcprojin                        |   16
+ ++++++++--------
+ build/win32/vs9/gmodule.vcproj                       |    8 ++++----
+ build/win32/vs9/gobject.vcprojin                     |    8 ++++----
+ build/win32/vs9/gspawn-win32-helper-console.vcproj   |    4 ++--
+ build/win32/vs9/gspawn-win32-helper.vcproj           |    4 ++--
+ build/win32/vs9/gthread.vcproj                       |    8 ++++----
+ 16 files changed, 64 insertions(+), 64 deletions(-)
+
+commit d161fcf3851c7d427deb32abecdd50ce95599a0b
+Author: Alexandre Rostovtsev <tetromino@gentoo.org>
+Date:   Sun Apr 15 22:57:25 2012 -0400
+
+    Do not detect GNUstep as Cocoa
+
+    GNUstep also installs Foundation/Foundation.h
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=674172
+
+    Signed-off-by: William Hua <william@attente.ca>
+
+ configure.ac |    3 +++
+ 1 file changed, 3 insertions(+)
+
+commit 76627dc7b6f128517d7ee5208e8d2c18df779dd7
+Author: William Hua <william@attente.ca>
+Date:   Tue Apr 17 23:49:47 2012 -0400
+
+    Use Cocoa header for Cocoa test instead of Foundation.
+
+ configure.ac |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit d58a42fd38f9c2d39df308a93a1707ee007053c9
+Author: Alexander Larsson <alexl@redhat.com>
+Date:   Tue Apr 17 15:50:01 2012 +0200
+
+    Fix build on win32
+
+    Some errnos don't exist on win32
+    (cherry picked from commit 2414d7d6a197e0c4b184607160d6cd8a378df177)
+
+ glib/tests/fileutils.c |    2 ++
+ 1 file changed, 2 insertions(+)
+
+commit b5a846ca763cf4172b57e93bd16a066b8f3d8696
+Author: Alexander Larsson <alexl@redhat.com>
+Date:   Fri Apr 20 10:23:34 2012 +0200
+
+    win32: Implement _g_dbus_get_machine_id using machine guid
+
+    This is what libdbus uses, so we're compatible.
+    (cherry picked from commit 5fb44f70dcac16ff6f13d3d36c330ddd617a5d97)
+
+ gio/gdbusprivate.c |   42 ++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 42 insertions(+)
+
+commit 5d41a0212550281db91125f11e0a9ba00beb6b73
+Author: Alexander Larsson <alexl@redhat.com>
+Date:   Wed Apr 18 17:09:37 2012 +0200
+
+    win32: Support autolaunching dbus daemon
+    (cherry picked from commit dccce383670592f12510019e92ea91a618a1810c)
+
+ gio/Makefile.am    |    8 ++
+ gio/gdbusaddress.c |  306
+ +++++++++++++++++++++++++++++++++++++++++++++++++++-
+ 2 files changed, 312 insertions(+), 2 deletions(-)
+
+commit cef54a9b8270d35149bf0e1db03045d6cbcea6eb
+Author: Alexander Larsson <alexl@redhat.com>
+Date:   Wed Apr 18 16:25:29 2012 +0200
+
+    Add _g_io_win32_get_module to get the gio HMODULE
+    (cherry picked from commit bd148e127a5863de4aef260cd879e0eda370c711)
+
+ gio/giomodule-priv.h |    4 ++++
+ gio/giomodule.c      |    6 ++++++
+ 2 files changed, 10 insertions(+)
+
+commit 9490d67f3c8a3f8b5d6bb866a139ab6c93df42fd
+Author: Alexander Larsson <alexl@redhat.com>
+Date:   Mon Apr 16 10:16:04 2012 +0200
+
+    Add GDBusDAaemon, an implementation of a message bus
+
+    This is mostly complete, sans support for activation. However, its
+    not as picky as the libdbus implementation in terms like validation
+    and limits checking, nor is it as tested.
+
+    Its can be useful to test gdbus if dbus-daemon is not availible, but
+    its main reason for existance is to implement a default session bus
+    on win32 so that e.g. GApplication is guaranteed to work.
+    (cherry picked from commit 25581738a8d5ee7db2a6d9ebd908d59b2837cd70)
+
+ gio/.gitignore      |    1 +
+ gio/Makefile.am     |   17 +-
+ gio/dbus-daemon.xml |   76 +++
+ gio/gdbusdaemon.c   | 1752
+ +++++++++++++++++++++++++++++++++++++++++++++++++++
+ gio/gdbusdaemon.h   |   19 +
+ 5 files changed, 1864 insertions(+), 1 deletion(-)
+
+commit 27352d96e28cf9e65bce12e2250a679261872aae
+Author: Alexander Larsson <alexl@redhat.com>
+Date:   Tue Apr 17 15:50:53 2012 +0200
+
+    gdbus: Escape nonce files in dbus addressess
+
+    Otherwise the colon in c:\blah made for trouble
+    (cherry picked from commit 82aecce30131e275dff73f23ee91e7c40a9b3f03)
+
+ gio/gdbusserver.c |    5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+commit 5051aaca68eacf280ce48d1500a19cccf2125fc8
+Author: Alexander Larsson <alexl@redhat.com>
+Date:   Mon Apr 16 09:55:29 2012 +0200
+
+    Support initial underscores in dbus codegen namespace
+
+    Before these were considered lowercase and thus got duplicated.
+    (cherry picked from commit ff92fe95935b38eaacedb287f6600df000ed1c1a)
+
+ gio/gdbus-2.0/codegen/utils.py |    7 +++++++
+ 1 file changed, 7 insertions(+)
+
+commit ad35c6cae1ad065bc46968b1169c18e624dd8ada
+Author: Benjamin Otte <otte@redhat.com>
+Date:   Fri Apr 20 14:31:05 2012 +0200
+
+    resourcefile: Set display name
+
+    Fixes resource filenames not being printed in CSS warnings for GTK.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=674345
+
+ gio/gresourcefile.c |    1 +
+ 1 file changed, 1 insertion(+)
+
+commit 153cad8974740b0a32341b7531a0b66be5181c7c
+Author: Hannes Mueller <h.c.f.mueller@gmx.de>
+Date:   Sat Feb 4 10:06:35 2012 +0100
+
+    avoid warning in gutils.h when using gcc with -Wconversion
+
+    Old solution to avoid warning with gcc flag -Wconversion does not
+    work with gcc >=4.3 since the behaviour for that flag has been
+    changed, ref. http://gcc.gnu.org/wiki/NewWconversion. Now cast for
+    __builtin_clzl is required, which itself is declared to return int.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=619026
+
+ glib/gutils.h |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 437b831c76079d53649a363f5401cf98134ae2f8
+Author: Christian Persch <chpe@gnome.org>
+Date:   Mon Apr 9 15:34:10 2012 +0200
+
+    resources: compiler: Fix resources on big endian architectures
+
+    Resources are always little endian, so the gvdb is byteswapped. When
+    looking
+    up the value, it would return a new byteswapped variant, making
+    the data
+    returned from do_lookup() invalid once that variant is unref'd. Since
+    byteswapping doesn't matter for the "ay" data anyway, just use
+    gvdb_table_get_raw_value() instead and only byteswap the length
+    and flag
+    values.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=673409
+    (cherry picked from commit 5ef34e5f11b4f71a66615b6506108ee540cc3420)
+
+ gio/gresource.c |    5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+commit c7db8d989bdbdda4de561ee65693ba538ec0ca2a
+Author: Colin Walters <walters@verbum.org>
+Date:   Mon Apr 16 11:50:05 2012 -0400
+
+    tests/mainloop: Add a test for recursive child sources
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=669260
+
+ glib/tests/mainloop.c |   57
+ +++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 57 insertions(+)
+
+commit a6822b46dba80fa431cef4bccd8c9ae5a1f5d85c
+Author: Dan Winship <danw@gnome.org>
+Date:   Fri Apr 13 11:44:34 2012 -0400
+
+    tests/mainloop: add a test for child sources
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=669260
+
+ glib/tests/mainloop.c |   98
+ +++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 98 insertions(+)
+
+commit b1d447bd664bcbc607811c7920b67856d4f551e6
+Author: Dan Winship <danw@gnome.org>
+Date:   Wed Apr 11 15:21:17 2012 -0400
+
+    gmain: block child sources when blocking the parent
+
+    When blocking a source that has child sources, we need to consider the
+    children blocked as well. Otherwise they will still trigger repeatedly
+    in an inner loop started from the parent source's callback.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=669260
+
+ glib/gmain.c |   35 +++++++++++++++++++++++++++++------
+ 1 file changed, 29 insertions(+), 6 deletions(-)
+
+commit c18ef42c454d57903866ee8103286e342aacf0ac
+Author: Piotr Drąg <piotrdrag@gmail.com>
+Date:   Mon Apr 16 21:19:23 2012 +0200
+
+    Updated Polish translation
+
+ po/pl.po |  104
+ +++++++++++++++++++++++++++++++-------------------------------
+ 1 file changed, 52 insertions(+), 52 deletions(-)
+
+commit 6b4c907cc716b12488cd472aac3024be30f0846a
+Author: Kalev Lember <kalevlember@gmail.com>
+Date:   Sat Apr 14 15:48:13 2012 +0300
+
+    Only build gmenumodel test on unix
+
+    It depends on gdbus-sessionbus.c which only builds on unix.
+
+ gio/tests/Makefile.am |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 274940b2476e99ea850da29215c1ce91d2bb85cf
+Author: Kalev Lember <kalevlember@gmail.com>
+Date:   Sat Apr 14 15:40:17 2012 +0300
+
+    tests/fileutils: Fix Windows build
+
+ glib/tests/fileutils.c |    2 ++
+ 1 file changed, 2 insertions(+)
+
+commit c88c1639a3e4e91076cc68db4bdc782930f66558
+Author: Yinghua Wang <wantinghard@gmail.com>
+Date:   Mon Apr 16 14:06:56 2012 +0800
+
+    update Simplified Chinese (zh_CN) translation
+
+ po/zh_CN.po |  320
+ ++++++++++++++++++++++++++++++-----------------------------
+ 1 file changed, 162 insertions(+), 158 deletions(-)
+
+commit 9b1a9ed4ce326d4ebfca68b2a98ddb4d8110e5e7
+Author: David Zeuthen <davidz@redhat.com>
+Date:   Sat Apr 14 12:29:30 2012 -0400
+
+    GSocketControlMessage: Don't warn about unknown messages
+
+    If we do this, the tests added in bug 673943 will cause warnings.
+
+    Signed-off-by: David Zeuthen <davidz@redhat.com>
+
+ gio/gsocketcontrolmessage.c |   11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
+
+commit 55bbb9fc69856fff853e4f464ac0813e247e78d2
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Fri Apr 13 19:54:42 2012 -0400
+
+    Bump version
+
+ configure.ac |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 2b6cf583d264c101c72f4f7554925a0612b58e08
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Fri Apr 13 19:53:42 2012 -0400
+
+    2.32.1
+
+ NEWS |    9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+commit c1a83a4ac8b0e45bd176ff1334f58ae2d5c33ad2
 Author: Matthias Clasen <mclasen@redhat.com>
 Date:   Fri Apr 13 18:51:23 2012 -0400
 
     Fix distcheck
 
-    I forgot to dist a test script.
+    I forgot to dist a test script, and forgot to look for it
+    in srcdir instead of builddir.
 
- glib/tests/Makefile.am |    3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ glib/tests/Makefile.am          |    3 ++-
+ glib/tests/spawn-singlethread.c |    5 ++++-
+ 2 files changed, 6 insertions(+), 2 deletions(-)
 
 commit 9375212311382679344649b66d5161b25af02724
 Author: Christian Kirbach <Christian.Kirbach@googlemail.com>

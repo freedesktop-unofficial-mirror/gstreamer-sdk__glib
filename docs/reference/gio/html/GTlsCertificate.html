@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GTlsCertificate</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.77.1">
 <link rel="home" href="index.html" title="GIO Reference Manual">
 <link rel="up" href="tls.html" title="TLS (SSL) support">
 <link rel="prev" href="gio-TLS-Overview.html" title="TLS Overview">
@@ -113,8 +113,11 @@ supported formats.)
 If <em class="parameter"><code>data</code></em> includes multiple certificates, only the first one will be
 parsed.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
@@ -148,8 +151,11 @@ Creates a <a class="link" href="GTlsCertificate.html" title="GTlsCertificate"><s
 set <em class="parameter"><code>error</code></em>. Otherwise, this behaves like
 <a class="link" href="GTlsCertificate.html#g-tls-certificate-new-from-pem" title="g_tls_certificate_new_from_pem ()"><code class="function">g_tls_certificate_new_from_pem()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>file</code></em> :</span></p></td>
@@ -180,8 +186,11 @@ and <em class="parameter"><code>key_file</code></em>. If either file cannot be r
 function will return <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> and set <em class="parameter"><code>error</code></em>. Otherwise, this behaves
 like <a class="link" href="GTlsCertificate.html#g-tls-certificate-new-from-pem" title="g_tls_certificate_new_from_pem ()"><code class="function">g_tls_certificate_new_from_pem()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cert_file</code></em> :</span></p></td>
@@ -217,8 +226,11 @@ return <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class=
 PEM-encoded certificates, this will return an empty list and not
 set <em class="parameter"><code>error</code></em>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>file</code></em> :</span></p></td>
@@ -247,8 +259,11 @@ and its contents when you are done with it. <span class="annotation">[<acronym t
 <p>
 Gets the <a class="link" href="GTlsCertificate.html" title="GTlsCertificate"><span class="type">GTlsCertificate</span></a> representing <em class="parameter"><code>cert</code></em>'s issuer, if known
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cert</code></em> :</span></p></td>
@@ -296,8 +311,11 @@ value.
 (All other <a class="link" href="gio-TLS-Overview.html#GTlsCertificateFlags" title="enum GTlsCertificateFlags"><span class="type">GTlsCertificateFlags</span></a> values will always be set or unset
 as appropriate.)
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cert</code></em> :</span></p></td>

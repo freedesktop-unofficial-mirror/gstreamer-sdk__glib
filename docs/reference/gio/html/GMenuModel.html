@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GMenuModel</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.77.1">
 <link rel="home" href="index.html" title="GIO Reference Manual">
 <link rel="up" href="application.html" title="Application support">
 <link rel="prev" href="GDBusActionGroup.html" title="GDBusActionGroup">
@@ -150,7 +150,7 @@ As an example, consider the visible portions of the menu in
 There are 8 "menus" visible in the screenshot: one menubar, two
 submenus and 5 sections:
 </p>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">the toplevel menubar (containing 4 items)</li>
 <li class="listitem">the View submenu (containing 3 sections)</li>
 <li class="listitem">the first section of the View submenu (containing 2 items)</li>
@@ -214,7 +214,7 @@ in the <a class="link" href="GMenuModel.html#G-MENU-ATTRIBUTE-ACTION:CAPS" title
 identifies an action in an action group. Which action group(s) provide
 actions depends on the context in which the menu model is used.
 E.g. when the model is exported as the application menu of a
-<a href="http://developer.gnome.org/devel/gtk/GtkApplication.html"><span class="type">GtkApplication</span></a>, actions can be application-wide or window-specific
+<span class="type">GtkApplication</span>, actions can be application-wide or window-specific
 (and thus come from two different action groups). By convention, the
 application-wide actions have names that start with "app.", while the
 names of window-specific actions start with "win.".
@@ -224,7 +224,7 @@ While a wide variety of stateful actions is possible, the following
 is the minimum that is expected to be supported by all users of exported
 menu information:
 </p>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem">an action with no parameter type and no state</li>
 <li class="listitem">an action with no parameter type and boolean state</li>
 <li class="listitem">an action with string parameter type and string state</li>
@@ -291,8 +291,11 @@ Queries if <em class="parameter"><code>model</code></em> is mutable.
 An immutable <a class="link" href="GMenuModel.html" title="GMenuModel"><span class="type">GMenuModel</span></a> will never emit the <a class="link" href="GMenuModel.html#GMenuModel-items-changed" title='The "items-changed" signal'><span class="type">"items-changed"</span></a>
 signal. Consumers of the model may make optimisations accordingly.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>model</code></em> :</span></p></td>
@@ -316,8 +319,11 @@ emitted).</td>
 <p>
 Query the number of items in <em class="parameter"><code>model</code></em>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>model</code></em> :</span></p></td>
@@ -386,8 +392,11 @@ expected type is unspecified) then the value is returned.
 If the attribute does not exist, or does not match the expected type
 then <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> is returned.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>model</code></em> :</span></p></td>
@@ -439,8 +448,11 @@ If the attribute does not exist, or it does exist but has the wrong
 type, then the positional parameters are ignored and <a href="./../glib/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> is
 returned.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>model</code></em> :</span></p></td>
@@ -488,8 +500,11 @@ specified by <em class="parameter"><code>link</code></em>.
 If the link exists, the linked <a class="link" href="GMenuModel.html" title="GMenuModel"><span class="type">GMenuModel</span></a> is returned.  If the link
 does not exist, <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> is returned.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>model</code></em> :</span></p></td>
@@ -526,8 +541,11 @@ the item at position <em class="parameter"><code>item_index</code></em> in <em c
 <p>
 You must free the iterator with <a href="./../gobject/gobject/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a> when you are done.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>model</code></em> :</span></p></td>
@@ -559,8 +577,11 @@ position <em class="parameter"><code>item_index</code></em> in <em class="parame
 <p>
 You must free the iterator with <a href="./../gobject/gobject/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a> when you are done.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>model</code></em> :</span></p></td>
@@ -607,8 +628,11 @@ entry and not in response to calls -- particularly those from the
 <a class="link" href="GMenuModel.html" title="GMenuModel"><span class="type">GMenuModel</span></a> API.  Said another way: the menu must not change while
 user code is running without returning to the mainloop.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>model</code></em> :</span></p></td>
@@ -667,8 +691,11 @@ The value returned in <em class="parameter"><code>name</code></em> remains valid
 remains at the current position.  The value returned in <em class="parameter"><code>value</code></em> must
 be unreffed using <a href="./../glib/glib/glib-GVariant.html#g-variant-unref"><code class="function">g_variant_unref()</code></a> when it is no longer in use.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>iter</code></em> :</span></p></td>
@@ -706,8 +733,11 @@ a string.
 <p>
 The iterator is not advanced.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>iter</code></em> :</span></p></td>
@@ -732,8 +762,11 @@ Gets the value of the attribute at the current iterator position.
 <p>
 The iterator is not advanced.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>iter</code></em> :</span></p></td>
@@ -766,8 +799,11 @@ You must call this function when you first acquire the iterator
 to advance it to the first attribute (and determine if the first
 attribute exists at all).
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>iter</code></em> :</span></p></td>
@@ -803,8 +839,11 @@ Gets the name of the link at the current iterator position.
 <p>
 The iterator is not advanced.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>iter</code></em> :</span></p></td>
@@ -844,8 +883,11 @@ The value returned in <em class="parameter"><code>out_link</code></em> remains v
 remains at the current position.  The value returned in <em class="parameter"><code>value</code></em> must
 be unreffed using <a href="./../gobject/gobject/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a> when it is no longer in use.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>iter</code></em> :</span></p></td>
@@ -881,8 +923,11 @@ Gets the linked <a class="link" href="GMenuModel.html" title="GMenuModel"><span 
 <p>
 The iterator is not advanced.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>iter</code></em> :</span></p></td>
@@ -914,8 +959,11 @@ You must call this function when you first acquire the iterator to
 advance it to the first link (and determine if the first link exists
 at all).
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>iter</code></em> :</span></p></td>
@@ -967,8 +1015,11 @@ Signal handlers may query the model (particularly the added items)
 and expect to see the results of the modification that is being
 reported.  The signal is emitted after the modification.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>model</code></em> :</span></p></td>

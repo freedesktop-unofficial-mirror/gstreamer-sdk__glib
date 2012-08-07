@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GVariant Format Strings</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.77.1">
 <link rel="home" href="index.html" title="GLib Reference Manual">
 <link rel="up" href="glib-data-types.html" title="GLib Data Types">
 <link rel="prev" href="glib-GVariant.html" title="GVariant">
@@ -29,7 +29,7 @@
 <td valign="top" align="right"></td>
 </tr></table></div>
 <div class="refsect1">
-<a name="id520012"></a><h2>Variable Argument Conversions</h2>
+<a name="id528077"></a><h2>Variable Argument Conversions</h2>
 <p>
    This page attempts to document how to perform variable argument
    conversions with GVariant.
@@ -46,7 +46,7 @@
   </p>
 </div>
 <div class="refsect1">
-<a name="id658669"></a><h2>Syntax</h2>
+<a name="id538752"></a><h2>Syntax</h2>
 <p>
    This section exhaustively describes all possibilities for GVariant format strings.  There are no valid forms of
    format strings other than those described here.  Please note that the format string syntax is likely to expand in the
@@ -55,7 +55,7 @@
 <p>
    Valid format strings have one of the following forms:
   </p>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc">
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
 <li class="listitem"><p>any type string</p></li>
 <li class="listitem"><p>
      a type string prefixed with a '<code class="literal">@</code>'
@@ -78,7 +78,7 @@
 </ul></div>
 </div>
 <div class="refsect1">
-<a name="id694128"></a><h2>Symbols</h2>
+<a name="id600215"></a><h2>Symbols</h2>
 <p>
     The following table describes the rough meaning of symbols that may appear inside a GVariant format string.  Each
     symbol is described in detail in its own section, including usage examples.
@@ -470,7 +470,7 @@
     it operates with pointers.  The pointers must always point to a memory region of exactly the correct size.
    </p>
 <div class="refsect3">
-<a name="id657455"></a><h4>Examples</h4>
+<a name="id527402"></a><h4>Examples</h4>
 <div class="informalexample">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -544,7 +544,7 @@
     string should be ignored (in which case no copy is made).
    </p>
 <div class="refsect3">
-<a name="id558211"></a><h4>Examples</h4>
+<a name="id548612"></a><h4>Examples</h4>
 <div class="informalexample">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -613,7 +613,7 @@
     ignored (in which case no new reference is created).
    </p>
 <div class="refsect3">
-<a name="id657794"></a><h4>Examples</h4>
+<a name="id667478"></a><h4>Examples</h4>
 <div class="informalexample">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -672,7 +672,7 @@
     should be ignored.
    </p>
 <div class="refsect3">
-<a name="id502718"></a><h4>Examples</h4>
+<a name="id712209"></a><h4>Examples</h4>
 <div class="informalexample">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -784,7 +784,7 @@
     but have their values set to binary zero.
    </p>
 <div class="refsect3">
-<a name="id488801"></a><h4>Examples</h4>
+<a name="id757239"></a><h4>Examples</h4>
 <div class="informalexample">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -918,7 +918,7 @@
     Tuples are handled by handling each item in the tuple, in sequence.  Each item is handled in the usual way.
    </p>
 <div class="refsect3">
-<a name="id515968"></a><h4>Examples</h4>
+<a name="id646365"></a><h4>Examples</h4>
 <div class="informalexample">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -972,7 +972,7 @@
     Dictionary entries are handled by handling first the key, then the value.  Each is handled in the usual way.
    </p>
 <div class="refsect3">
-<a name="id516870"></a><h4>Examples</h4>
+<a name="id529607"></a><h4>Examples</h4>
 <div class="informalexample">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -1035,7 +1035,7 @@
     improvements in type safety and code self-documentation.
    </p>
 <div class="refsect3">
-<a name="id495977"></a><h4>Examples</h4>
+<a name="id686069"></a><h4>Examples</h4>
 <div class="informalexample">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -1115,7 +1115,7 @@
     always be properly nul-terminated.
    </p>
 <div class="refsect3">
-<a name="id609637"></a><h4>Examples</h4>
+<a name="id517711"></a><h4>Examples</h4>
 <div class="informalexample">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>

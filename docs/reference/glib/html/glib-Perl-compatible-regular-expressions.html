@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Perl-compatible regular expressions</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.77.1">
 <link rel="home" href="index.html" title="GLib Reference Manual">
 <link rel="up" href="glib-utilities.html" title="GLib Utilities">
 <link rel="prev" href="glib-Glob-style-pattern-matching.html" title="Glob-style pattern matching">
@@ -276,8 +276,11 @@ written by Philip Hazel.
 <p>
 Error codes returned by regular expressions functions.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><a name="G-REGEX-ERROR-COMPILE:CAPS"></a><span class="term"><code class="literal">G_REGEX_ERROR_COMPILE</code></span></p></td>
@@ -562,8 +565,11 @@ error domains.
 <p>
 Flags specifying compile-time options.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><a name="G-REGEX-CASELESS:CAPS"></a><span class="term"><code class="literal">G_REGEX_CASELESS</code></span></p></td>
@@ -699,8 +705,11 @@ Flags specifying compile-time options.
 <p>
 Flags specifying match-time options.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><a name="G-REGEX-MATCH-ANCHORED:CAPS"></a><span class="term"><code class="literal">G_REGEX_MATCH_ANCHORED</code></span></p></td>
@@ -800,8 +809,11 @@ It is called for each occurrence of the pattern in the string passed
 to <a class="link" href="glib-Perl-compatible-regular-expressions.html#g-regex-replace-eval" title="g_regex_replace_eval ()"><code class="function">g_regex_replace_eval()</code></a>, and it should append the replacement to
 <em class="parameter"><code>result</code></em>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>match_info</code></em> :</span></p></td>
@@ -838,8 +850,11 @@ need the <a class="link" href="glib-Perl-compatible-regular-expressions.html#GRe
 Compiles the regular expression to an internal form, and does
 the initial setup of the <a class="link" href="glib-Perl-compatible-regular-expressions.html#GRegex" title="GRegex"><span class="type">GRegex</span></a> structure.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>pattern</code></em> :</span></p></td>
@@ -874,8 +889,11 @@ are done with it</td>
 <p>
 Increases reference count of <em class="parameter"><code>regex</code></em> by 1.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>regex</code></em> :</span></p></td>
@@ -898,8 +916,11 @@ Increases reference count of <em class="parameter"><code>regex</code></em> by 1.
 Decreases reference count of <em class="parameter"><code>regex</code></em> by 1. When reference count drops
 to zero, it frees all the memory associated with the regex structure.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>regex</code></em> :</span></p></td>
 <td>a <a class="link" href="glib-Perl-compatible-regular-expressions.html#GRegex" title="GRegex"><span class="type">GRegex</span></a>
@@ -916,8 +937,11 @@ to zero, it frees all the memory associated with the regex structure.
 Gets the pattern string associated with <em class="parameter"><code>regex</code></em>, i.e. a copy of
 the string passed to <a class="link" href="glib-Perl-compatible-regular-expressions.html#g-regex-new" title="g_regex_new ()"><code class="function">g_regex_new()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>regex</code></em> :</span></p></td>
@@ -941,8 +965,11 @@ Returns the number of the highest back reference
 in the pattern, or 0 if the pattern does not contain
 back references.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>regex</code></em> :</span></p></td>
@@ -964,8 +991,11 @@ back references.
 <p>
 Returns the number of capturing subpatterns in the pattern.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>regex</code></em> :</span></p></td>
@@ -988,8 +1018,11 @@ Returns the number of capturing subpatterns in the pattern.
 <p>
 Retrieves the number of the subexpression named <em class="parameter"><code>name</code></em>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>regex</code></em> :</span></p></td>
@@ -1016,8 +1049,11 @@ does not exists</td>
 <p>
 Returns the compile options that <em class="parameter"><code>regex</code></em> was created with.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>regex</code></em> :</span></p></td>
@@ -1040,8 +1076,11 @@ Returns the compile options that <em class="parameter"><code>regex</code></em> w
 <p>
 Returns the match options that <em class="parameter"><code>regex</code></em> was created with.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>regex</code></em> :</span></p></td>
@@ -1072,8 +1111,11 @@ function is useful to dynamically generate regular expressions.
 in this case remember to specify the correct length of <em class="parameter"><code>string</code></em>
 in <em class="parameter"><code>length</code></em>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
@@ -1105,8 +1147,11 @@ to compile a regex with embedded nul characters.
 For completeness, <em class="parameter"><code>length</code></em> can be -1 for a nul-terminated string.
 In this case the output string will be of course equal to <em class="parameter"><code>string</code></em>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
@@ -1146,8 +1191,11 @@ If this function is to be called on the same <em class="parameter"><code>pattern
 once, it's more efficient to compile the pattern once with
 <a class="link" href="glib-Perl-compatible-regular-expressions.html#g-regex-new" title="g_regex_new ()"><code class="function">g_regex_new()</code></a> and then use <a class="link" href="glib-Perl-compatible-regular-expressions.html#g-regex-match" title="g_regex_match ()"><code class="function">g_regex_match()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>pattern</code></em> :</span></p></td>
@@ -1253,8 +1301,11 @@ string you can use <a class="link" href="glib-Perl-compatible-regular-expression
 you use any <a class="link" href="glib-Perl-compatible-regular-expressions.html#GMatchInfo" title="GMatchInfo"><span class="type">GMatchInfo</span></a> method (except <a class="link" href="glib-Perl-compatible-regular-expressions.html#g-match-info-free" title="g_match_info_free ()"><code class="function">g_match_info_free()</code></a>) after
 freeing or modifying <em class="parameter"><code>string</code></em> then the behaviour is undefined.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>regex</code></em> :</span></p></td>
@@ -1384,8 +1435,11 @@ string you can use <a class="link" href="glib-Perl-compatible-regular-expression
 
 <p>
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>regex</code></em> :</span></p></td>
@@ -1453,8 +1507,11 @@ matched.
 you use any <a class="link" href="glib-Perl-compatible-regular-expressions.html#GMatchInfo" title="GMatchInfo"><span class="type">GMatchInfo</span></a> method (except <a class="link" href="glib-Perl-compatible-regular-expressions.html#g-match-info-free" title="g_match_info_free ()"><code class="function">g_match_info_free()</code></a>) after
 freeing or modifying <em class="parameter"><code>string</code></em> then the behaviour is undefined.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>regex</code></em> :</span></p></td>
@@ -1538,8 +1595,11 @@ matched.
 you use any <a class="link" href="glib-Perl-compatible-regular-expressions.html#GMatchInfo" title="GMatchInfo"><span class="type">GMatchInfo</span></a> method (except <a class="link" href="glib-Perl-compatible-regular-expressions.html#g-match-info-free" title="g_match_info_free ()"><code class="function">g_match_info_free()</code></a>) after
 freeing or modifying <em class="parameter"><code>string</code></em> then the behaviour is undefined.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>regex</code></em> :</span></p></td>
@@ -1622,8 +1682,11 @@ separate characters wherever it matches the empty string between
 characters. For example splitting "ab c" using as a separator
 "\s*", you will get "a", "b" and "c".
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>pattern</code></em> :</span></p></td>
@@ -1677,8 +1740,11 @@ characters wherever it matches the empty string between characters.
 For example splitting "ab c" using as a separator "\s*", you will get
 "a", "b" and "c".
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>regex</code></em> :</span></p></td>
@@ -1737,8 +1803,11 @@ Setting <em class="parameter"><code>start_position</code></em> differs from just
 string and setting <a class="link" href="glib-Perl-compatible-regular-expressions.html#G-REGEX-MATCH-NOTBOL:CAPS"><span class="type">G_REGEX_MATCH_NOTBOL</span></a> in the case of a pattern
 that begins with any kind of lookbehind assertion, such as "\b".
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>regex</code></em> :</span></p></td>
@@ -1802,8 +1871,11 @@ There are also escapes that changes the case of the following text:
 </p>
 <p>
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term">\l</span></p></td>
@@ -1842,8 +1914,11 @@ Setting <em class="parameter"><code>start_position</code></em> differs from just
 string and setting <a class="link" href="glib-Perl-compatible-regular-expressions.html#G-REGEX-MATCH-NOTBOL:CAPS"><span class="type">G_REGEX_MATCH_NOTBOL</span></a> in the case of a pattern that
 begins with any kind of lookbehind assertion, such as "\b".
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>regex</code></em> :</span></p></td>
@@ -1903,8 +1978,11 @@ shortened string and setting <a class="link" href="glib-Perl-compatible-regular-
 case of a pattern that begins with any kind of lookbehind
 assertion, such as "\b".
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>regex</code></em> :</span></p></td>
@@ -2046,8 +2124,11 @@ strings at once:
 
 <p>
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>regex</code></em> :</span></p></td>
@@ -2109,8 +2190,11 @@ does not contain references and may be evaluated without information
 about actual match, but '\0\1' (whole match followed by first
 subpattern) requires valid <a class="link" href="glib-Perl-compatible-regular-expressions.html#GMatchInfo" title="GMatchInfo"><span class="type">GMatchInfo</span></a> object.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>replacement</code></em> :</span></p></td>
@@ -2148,8 +2232,11 @@ Returns <a class="link" href="glib-Perl-compatible-regular-expressions.html#GReg
 and must not be freed. Use <a class="link" href="glib-Perl-compatible-regular-expressions.html#g-regex-ref" title="g_regex_ref ()"><code class="function">g_regex_ref()</code></a> if you need to keep it
 after you free <em class="parameter"><code>match_info</code></em> object.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>match_info</code></em> :</span></p></td>
@@ -2175,8 +2262,11 @@ Returns the string searched with <em class="parameter"><code>match_info</code></
 string passed to <a class="link" href="glib-Perl-compatible-regular-expressions.html#g-regex-match" title="g_regex_match ()"><code class="function">g_regex_match()</code></a> or <a class="link" href="glib-Perl-compatible-regular-expressions.html#g-regex-replace" title="g_regex_replace ()"><code class="function">g_regex_replace()</code></a> so
 you may not free it before calling this function.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>match_info</code></em> :</span></p></td>
@@ -2199,8 +2289,11 @@ you may not free it before calling this function.
 <p>
 Increases reference count of <em class="parameter"><code>match_info</code></em> by 1.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>match_info</code></em> :</span></p></td>
@@ -2223,8 +2316,11 @@ Increases reference count of <em class="parameter"><code>match_info</code></em> 
 Decreases reference count of <em class="parameter"><code>match_info</code></em> by 1. When reference count drops
 to zero, it frees all the memory associated with the match_info structure.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>match_info</code></em> :</span></p></td>
 <td>a <a class="link" href="glib-Perl-compatible-regular-expressions.html#GMatchInfo" title="GMatchInfo"><span class="type">GMatchInfo</span></a>
@@ -2241,8 +2337,11 @@ to zero, it frees all the memory associated with the match_info structure.
 If <em class="parameter"><code>match_info</code></em> is not <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>, calls <a class="link" href="glib-Perl-compatible-regular-expressions.html#g-match-info-unref" title="g_match_info_unref ()"><code class="function">g_match_info_unref()</code></a>; otherwise does
 nothing.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>match_info</code></em> :</span></p></td>
 <td>a <a class="link" href="glib-Perl-compatible-regular-expressions.html#GMatchInfo" title="GMatchInfo"><span class="type">GMatchInfo</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
@@ -2258,8 +2357,11 @@ nothing.
 <p>
 Returns whether the previous match operation succeeded.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>match_info</code></em> :</span></p></td>
@@ -2289,8 +2391,11 @@ call to <a class="link" href="glib-Perl-compatible-regular-expressions.html#g-re
 The match is done on the string passed to the match function, so you
 cannot free it before calling this function.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>match_info</code></em> :</span></p></td>
@@ -2324,8 +2429,11 @@ using <a class="link" href="glib-Perl-compatible-regular-expressions.html#g-rege
 count is not that of the number of capturing parentheses but that of
 the number of matched substrings.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>match_info</code></em> :</span></p></td>
@@ -2381,8 +2489,11 @@ coded thus "(a){2,4}" and "(\d)+". If <a class="link" href="glib-Perl-compatible
 for a pattern that does not conform to the restrictions, matching
 functions return an error.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>match_info</code></em> :</span></p></td>
@@ -2425,8 +2536,11 @@ while to expand "\0" (whole match) one needs the result of a match.
 Use <a class="link" href="glib-Perl-compatible-regular-expressions.html#g-regex-check-replacement" title="g_regex_check_replacement ()"><code class="function">g_regex_check_replacement()</code></a> to find out whether <em class="parameter"><code>string_to_expand</code></em>
 contains references.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>match_info</code></em> :</span></p></td>
@@ -2476,8 +2590,11 @@ substring. Substrings are matched in reverse order of length, so
 The string is fetched from the string passed to the match function,
 so you cannot call this function after freeing the string.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>match_info</code></em> :</span></p></td>
@@ -2522,8 +2639,11 @@ position is not that of a set of parentheses but that of a matched
 substring. Substrings are matched in reverse order of length, so
 0 is the longest match.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>match_info</code></em> :</span></p></td>
@@ -2574,8 +2694,11 @@ then an empty string is returned.
 The string is fetched from the string passed to the match function,
 so you cannot call this function after freeing the string.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>match_info</code></em> :</span></p></td>
@@ -2611,8 +2734,11 @@ If <em class="parameter"><code>name</code></em> is a valid sub pattern name but 
 (e.g. sub pattern "X", matching "b" against "(?P&lt;X&gt;a)?b")
 then <em class="parameter"><code>start_pos</code></em> and <em class="parameter"><code>end_pos</code></em> are set to -1 and <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> is returned.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>match_info</code></em> :</span></p></td>
@@ -2671,8 +2797,11 @@ so the first one is the longest match.
 The strings are fetched from the string passed to the match function,
 so you cannot call this function after freeing the string.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>match_info</code></em> :</span></p></td>

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GDrive</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.77.1">
 <link rel="home" href="index.html" title="GIO Reference Manual">
 <link rel="up" href="volume_mon.html" title="Volumes and Drives">
 <link rel="prev" href="GMount.html" title="GMount">
@@ -261,8 +261,11 @@ Opaque drive object.
 <p>
 Interface for creating <a class="link" href="GDrive.html" title="GDrive"><span class="type">GDrive</span></a> implementations.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><a href="./../gobject/gobject/gobject-Type-Information.html#GTypeInterface"><span class="type">GTypeInterface</span></a> <em class="structfield"><code><a name="GDriveIface.g-iface"></a>g_iface</code></em>;</span></p></td>
@@ -403,8 +406,11 @@ of identifiers which the <a class="link" href="GDrive.html" title="GDrive"><span
 <p>
 Flags used when starting a drive.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody><tr>
 <td><p><a name="G-DRIVE-START-NONE:CAPS"></a><span class="term"><code class="literal">G_DRIVE_START_NONE</code></span></p></td>
 <td>No flags set.
@@ -427,8 +433,11 @@ Flags used when starting a drive.
 <p>
 Enumeration describing how a drive can be started/stopped.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><a name="G-DRIVE-START-STOP-TYPE-UNKNOWN:CAPS"></a><span class="term"><code class="literal">G_DRIVE_START_STOP_TYPE_UNKNOWN</code></span></p></td>
@@ -474,8 +483,11 @@ Enumeration describing how a drive can be started/stopped.
 <p>
 Gets the name of <em class="parameter"><code>drive</code></em>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>drive</code></em> :</span></p></td>
@@ -496,8 +508,11 @@ string should be freed when no longer needed.</td>
 <p>
 Gets the icon for <em class="parameter"><code>drive</code></em>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>drive</code></em> :</span></p></td>
@@ -520,8 +535,11 @@ Free the returned object with <a href="./../gobject/gobject/gobject-The-Base-Obj
 <p>
 Check if <em class="parameter"><code>drive</code></em> has any mountable volumes.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>drive</code></em> :</span></p></td>
@@ -546,8 +564,11 @@ Get a list of mountable volumes for <em class="parameter"><code>drive</code></em
 The returned list should be freed with <a href="./../glib/glib/glib-Doubly-Linked-Lists.html#g-list-free"><code class="function">g_list_free()</code></a>, after
 its elements have been unreffed with <a href="./../gobject/gobject/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>drive</code></em> :</span></p></td>
@@ -569,8 +590,11 @@ its elements have been unreffed with <a href="./../gobject/gobject/gobject-The-B
 <p>
 Checks if a drive can be ejected.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>drive</code></em> :</span></p></td>
@@ -591,8 +615,11 @@ Checks if a drive can be ejected.
 <p>
 Gets a hint about how a drive can be started/stopped.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>drive</code></em> :</span></p></td>
@@ -613,8 +640,11 @@ Gets a hint about how a drive can be started/stopped.
 <p>
 Checks if a drive can be started.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>drive</code></em> :</span></p></td>
@@ -636,8 +666,11 @@ Checks if a drive can be started.
 <p>
 Checks if a drive can be started degraded.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>drive</code></em> :</span></p></td>
@@ -659,8 +692,11 @@ Checks if a drive can be started degraded.
 <p>
 Checks if a drive can be stopped.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>drive</code></em> :</span></p></td>
@@ -682,8 +718,11 @@ Checks if a drive can be stopped.
 <p>
 Checks if a drive can be polled for media changes.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>drive</code></em> :</span></p></td>
@@ -713,8 +752,11 @@ When the operation is finished, <em class="parameter"><code>callback</code></em>
 You can then call <a class="link" href="GDrive.html#g-drive-poll-for-media-finish" title="g_drive_poll_for_media_finish ()"><code class="function">g_drive_poll_for_media_finish()</code></a> to obtain the
 result of the operation.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>drive</code></em> :</span></p></td>
@@ -747,8 +789,11 @@ result of the operation.
 <p>
 Finishes an operation started with <a class="link" href="GDrive.html#g-drive-poll-for-media" title="g_drive_poll_for_media ()"><code class="function">g_drive_poll_for_media()</code></a> on a drive.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>drive</code></em> :</span></p></td>
@@ -781,8 +826,11 @@ Checks if the <em class="parameter"><code>drive</code></em> has media. Note that
 the drive for media changes; see <a class="link" href="GDrive.html#g-drive-is-media-check-automatic" title="g_drive_is_media_check_automatic ()"><code class="function">g_drive_is_media_check_automatic()</code></a>
 for more details.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>drive</code></em> :</span></p></td>
@@ -803,8 +851,11 @@ for more details.
 <p>
 Checks if <em class="parameter"><code>drive</code></em> is capabable of automatically detecting media changes.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>drive</code></em> :</span></p></td>
@@ -826,8 +877,11 @@ media changes, <a href="./../glib/glib/glib-Standard-Macros.html#FALSE:CAPS"><co
 <p>
 Checks if the <em class="parameter"><code>drive</code></em> supports removable media.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>drive</code></em> :</span></p></td>
@@ -861,8 +915,11 @@ When the operation is finished, <em class="parameter"><code>callback</code></em>
 You can then call <a class="link" href="GDrive.html#g-drive-eject-finish" title="g_drive_eject_finish ()"><code class="function">g_drive_eject_finish()</code></a> to obtain the
 result of the operation.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>drive</code></em> :</span></p></td>
@@ -903,8 +960,11 @@ result of the operation.
 <p>
 Finishes ejecting a drive.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>drive</code></em> :</span></p></td>
@@ -942,8 +1002,11 @@ Ejects a drive. This is an asynchronous operation, and is
 finished by calling <a class="link" href="GDrive.html#g-drive-eject-with-operation-finish" title="g_drive_eject_with_operation_finish ()"><code class="function">g_drive_eject_with_operation_finish()</code></a> with the <em class="parameter"><code>drive</code></em>
 and <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> data returned in the <em class="parameter"><code>callback</code></em>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>drive</code></em> :</span></p></td>
@@ -987,8 +1050,11 @@ user interaction. <span class="annotation">[<acronym title="NULL is ok, both for
 Finishes ejecting a drive. If any errors occurred during the operation,
 <em class="parameter"><code>error</code></em> will be set to contain the errors and <a href="./../glib/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> will be returned.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>drive</code></em> :</span></p></td>
@@ -1029,8 +1095,11 @@ When the operation is finished, <em class="parameter"><code>callback</code></em>
 You can then call <a class="link" href="GDrive.html#g-drive-start-finish" title="g_drive_start_finish ()"><code class="function">g_drive_start_finish()</code></a> to obtain the
 result of the operation.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>drive</code></em> :</span></p></td>
@@ -1074,8 +1143,11 @@ user interaction. <span class="annotation">[<acronym title="NULL is ok, both for
 <p>
 Finishes starting a drive.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>drive</code></em> :</span></p></td>
@@ -1117,8 +1189,11 @@ When the operation is finished, <em class="parameter"><code>callback</code></em>
 You can then call <a class="link" href="GDrive.html#g-drive-stop-finish" title="g_drive_stop_finish ()"><code class="function">g_drive_stop_finish()</code></a> to obtain the
 result of the operation.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>drive</code></em> :</span></p></td>
@@ -1162,8 +1237,11 @@ user interaction. <span class="annotation">[<acronym title="NULL is ok, both for
 <p>
 Finishes stopping a drive.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>drive</code></em> :</span></p></td>
@@ -1197,8 +1275,11 @@ Gets the kinds of identifiers that <em class="parameter"><code>drive</code></em>
 Use <a class="link" href="GDrive.html#g-drive-get-identifier" title="g_drive_get_identifier ()"><code class="function">g_drive_get_identifier()</code></a> to obtain the identifiers
 themselves.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>drive</code></em> :</span></p></td>
@@ -1223,8 +1304,11 @@ to free. <span class="annotation">[<acronym title="Free data after the code is d
 <p>
 Gets the identifier of the given kind for <em class="parameter"><code>drive</code></em>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>drive</code></em> :</span></p></td>
@@ -1251,8 +1335,11 @@ doesn't have this kind of identifier.</td>
 <p>
 Gets the sort key for <em class="parameter"><code>drive</code></em>, if any.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>drive</code></em> :</span></p></td>
@@ -1276,8 +1363,11 @@ Gets the sort key for <em class="parameter"><code>drive</code></em>, if any.
 <p>
 Emitted when the drive's state has changed.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>drive</code></em> :</span></p></td>
@@ -1301,8 +1391,11 @@ disconnected. If the recipient is holding references to the
 object they should release them so the object can be
 finalized.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>drive</code></em> :</span></p></td>
@@ -1324,8 +1417,11 @@ finalized.
 Emitted when the physical eject button (if any) of a drive has
 been pressed.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>drive</code></em> :</span></p></td>
@@ -1347,8 +1443,11 @@ been pressed.
 Emitted when the physical stop button (if any) of a drive has
 been pressed.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>drive</code></em> :</span></p></td>

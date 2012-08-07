@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GVolume</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.77.1">
 <link rel="home" href="index.html" title="GIO Reference Manual">
 <link rel="up" href="volume_mon.html" title="Volumes and Drives">
 <link rel="prev" href="GVolumeMonitor.html" title="GVolumeMonitor">
@@ -240,8 +240,11 @@ Opaque mountable volume object.
 <p>
 Interface for implementing operations for mountable volumes.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><a href="./../gobject/gobject/gobject-Type-Information.html#GTypeInterface"><span class="type">GTypeInterface</span></a> <em class="structfield"><code><a name="GVolumeIface.g-iface"></a>g_iface</code></em>;</span></p></td>
@@ -343,8 +346,11 @@ it is not known.</td>
 <p>
 Gets the name of <em class="parameter"><code>volume</code></em>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
@@ -368,8 +374,11 @@ the file system UUID for the volume in question and should be
 considered an opaque string. Returns <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if there is no UUID
 available.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
@@ -391,8 +400,11 @@ when no longer needed.</td>
 <p>
 Gets the icon for <em class="parameter"><code>volume</code></em>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
@@ -415,8 +427,11 @@ when no longer needed. <span class="annotation">[<acronym title="Free data after
 <p>
 Gets the drive for the <em class="parameter"><code>volume</code></em>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
@@ -439,8 +454,11 @@ when no longer needed. <span class="annotation">[<acronym title="Free data after
 <p>
 Gets the mount for the <em class="parameter"><code>volume</code></em>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
@@ -463,8 +481,11 @@ when no longer needed. <span class="annotation">[<acronym title="Free data after
 <p>
 Checks if a volume can be mounted.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
@@ -485,8 +506,11 @@ Checks if a volume can be mounted.
 <p>
 Returns whether the volume should be automatically mounted.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
@@ -545,8 +569,11 @@ Activation roots are typically used in <a class="link" href="GVolumeMonitor.html
 implementations to find the underlying mount to shadow, see
 <a class="link" href="GMount.html#g-mount-is-shadowed" title="g_mount_is_shadowed ()"><code class="function">g_mount_is_shadowed()</code></a> for more details.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
@@ -580,8 +607,11 @@ and <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="t
 <p>
 Virtual: mount_fn
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
@@ -630,8 +660,11 @@ is guaranteed to return the mount right after calling this
 function; there's no need to listen for the 'mount-added' signal on
 <a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
@@ -662,8 +695,11 @@ function; there's no need to listen for the 'mount-added' signal on
 <p>
 Checks if a volume can be ejected.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
@@ -694,8 +730,11 @@ Ejects a volume. This is an asynchronous operation, and is
 finished by calling <a class="link" href="GVolume.html#g-volume-eject-finish" title="g_volume_eject_finish ()"><code class="function">g_volume_eject_finish()</code></a> with the <em class="parameter"><code>volume</code></em>
 and <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> returned in the <em class="parameter"><code>callback</code></em>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
@@ -737,8 +776,11 @@ and <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="t
 Finishes ejecting a volume. If any errors occurred during the operation,
 <em class="parameter"><code>error</code></em> will be set to contain the errors and <a href="./../glib/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> will be returned.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
@@ -774,8 +816,11 @@ Ejects a volume. This is an asynchronous operation, and is
 finished by calling <a class="link" href="GVolume.html#g-volume-eject-with-operation-finish" title="g_volume_eject_with_operation_finish ()"><code class="function">g_volume_eject_with_operation_finish()</code></a> with the <em class="parameter"><code>volume</code></em>
 and <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> data returned in the <em class="parameter"><code>callback</code></em>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
@@ -820,8 +865,11 @@ avoid user interaction. <span class="annotation">[<acronym title="NULL is ok, bo
 Finishes ejecting a volume. If any errors occurred during the operation,
 <em class="parameter"><code>error</code></em> will be set to contain the errors and <a href="./../glib/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> will be returned.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
@@ -921,8 +969,11 @@ Gets the kinds of <a class="link" href="GVolume.html#volume-identifier">identifi
 that <em class="parameter"><code>volume</code></em> has. Use <a class="link" href="GVolume.html#g-volume-get-identifier" title="g_volume_get_identifier ()"><code class="function">g_volume_get_identifier()</code></a> to obtain
 the identifiers themselves.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
@@ -948,8 +999,11 @@ Gets the identifier of the given kind for <em class="parameter"><code>volume</co
 See the <a class="link" href="GVolume.html#volume-identifier">introduction</a>
 for more information about volume identifiers.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
@@ -976,8 +1030,11 @@ doesn't have this kind of identifier</td>
 <p>
 Gets the sort key for <em class="parameter"><code>volume</code></em>, if any.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
@@ -1001,8 +1058,11 @@ Gets the sort key for <em class="parameter"><code>volume</code></em>, if any.
 <p>
 Emitted when the volume has been changed.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
 <td>user data set when the signal handler was connected.</td>
@@ -1019,8 +1079,11 @@ This signal is emitted when the <a class="link" href="GVolume.html" title="GVolu
 the recipient is holding references to the object they should
 release them so the object can be finalized.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
 <td>user data set when the signal handler was connected.</td>

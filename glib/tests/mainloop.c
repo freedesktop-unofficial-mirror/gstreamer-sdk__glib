@@ -179,7 +179,10 @@ test_timeouts (void)
 
   g_main_loop_run (loop);
 
-  g_assert_cmpint (a, ==, 10);
+  /* this is a race condition; under some circumstances we might not get 10
+   * 100ms runs in 1050 ms, so consider 9 as "close enough" */
+  g_assert_cmpint (a, >=, 9);
+  g_assert_cmpint (a, <=, 10);
   g_assert_cmpint (b, ==, 4);
   g_assert_cmpint (c, ==, 3);
 
@@ -312,6 +315,159 @@ test_invoke (void)
   g_assert_cmpint (count, ==, 3);
 }
 
+static gboolean
+run_inner_loop (gpointer user_data)
+{
+  GMainContext *ctx = user_data;
+  GMainLoop *inner;
+  GSource *timeout;
+
+  a++;
+
+  inner = g_main_loop_new (ctx, FALSE);
+  timeout = g_timeout_source_new (100);
+  g_source_set_callback (timeout, (GSourceFunc)g_main_loop_quit, inner, NULL);
+  g_source_attach (timeout, ctx);
+
+  g_main_loop_run (inner);
+  g_main_loop_unref (inner);
+
+  return TRUE;
+}
+
+static void
+test_child_sources (void)
+{
+  GMainContext *ctx;
+  GMainLoop *loop;
+  GSource *parent, *child_b, *child_c, *end;
+
+  ctx = g_main_context_new ();
+  loop = g_main_loop_new (ctx, FALSE);
+
+  a = b = c = 0;
+
+  parent = g_timeout_source_new (2000);
+  g_source_set_callback (parent, run_inner_loop, ctx, NULL);
+  g_source_set_priority (parent, G_PRIORITY_LOW);
+  g_source_attach (parent, ctx);
+
+  child_b = g_timeout_source_new (250);
+  g_source_set_callback (child_b, count_calls, &b, NULL);
+  g_source_add_child_source (parent, child_b);
+
+  child_c = g_timeout_source_new (330);
+  g_source_set_callback (child_c, count_calls, &c, NULL);
+  g_source_set_priority (child_c, G_PRIORITY_HIGH);
+  g_source_add_child_source (parent, child_c);
+
+  /* Child sources always have the priority of the parent */
+  g_assert_cmpint (g_source_get_priority (parent), ==, G_PRIORITY_LOW);
+  g_assert_cmpint (g_source_get_priority (child_b), ==, G_PRIORITY_LOW);
+  g_assert_cmpint (g_source_get_priority (child_c), ==, G_PRIORITY_LOW);
+  g_source_set_priority (parent, G_PRIORITY_DEFAULT);
+  g_assert_cmpint (g_source_get_priority (parent), ==, G_PRIORITY_DEFAULT);
+  g_assert_cmpint (g_source_get_priority (child_b), ==, G_PRIORITY_DEFAULT);
+  g_assert_cmpint (g_source_get_priority (child_c), ==, G_PRIORITY_DEFAULT);
+
+  end = g_timeout_source_new (1050);
+  g_source_set_callback (end, (GSourceFunc)g_main_loop_quit, loop, NULL);
+  g_source_attach (end, ctx);
+  g_source_unref (end);
+
+  g_main_loop_run (loop);
+
+  /* The parent source's own timeout will never trigger, so "a" will
+   * only get incremented when "b" or "c" does. And when timeouts get
+   * blocked, they still wait the full interval next time rather than
+   * "catching up". So the timing is:
+   *
+   *  250 - b++ -> a++, run_inner_loop
+   *  330 - (c is blocked)
+   *  350 - inner_loop ends
+   *  350 - c++ belatedly -> a++, run_inner_loop
+   *  450 - inner loop ends
+   *  500 - b++ -> a++, run_inner_loop
+   *  600 - inner_loop ends
+   *  680 - c++ -> a++, run_inner_loop
+   *  750 - (b is blocked)
+   *  780 - inner loop ends
+   *  780 - b++ belatedly -> a++, run_inner_loop
+   *  880 - inner loop ends
+   * 1010 - c++ -> a++, run_inner_loop
+   * 1030 - (b is blocked)
+   * 1050 - end runs, quits outer loop, which has no effect yet
+   * 1110 - inner loop ends, a returns, outer loop exits
+   */
+
+  g_assert_cmpint (a, ==, 6);
+  g_assert_cmpint (b, ==, 3);
+  g_assert_cmpint (c, ==, 3);
+
+  g_source_unref (parent);
+  g_source_unref (child_b);
+  g_source_unref (child_c);
+
+  g_main_loop_unref (loop);
+  g_main_context_unref (ctx);
+}
+
+static void
+test_recursive_child_sources (void)
+{
+  GMainContext *ctx;
+  GMainLoop *loop;
+  GSource *parent, *child_b, *child_c, *end;
+
+  ctx = g_main_context_new ();
+  loop = g_main_loop_new (ctx, FALSE);
+
+  a = b = c = 0;
+
+  parent = g_timeout_source_new (500);
+  g_source_set_callback (parent, count_calls, &a, NULL);
+
+  child_b = g_timeout_source_new (220);
+  g_source_set_callback (child_b, count_calls, &b, NULL);
+  g_source_add_child_source (parent, child_b);
+
+  child_c = g_timeout_source_new (430);
+  g_source_set_callback (child_c, count_calls, &c, NULL);
+  g_source_add_child_source (child_b, child_c);
+
+  g_source_attach (parent, ctx);
+
+  end = g_timeout_source_new (2010);
+  g_source_set_callback (end, (GSourceFunc)g_main_loop_quit, loop, NULL);
+  g_source_attach (end, ctx);
+  g_source_unref (end);
+
+  g_main_loop_run (loop);
+
+  /* Sequence of events:
+   * 220 b (b = 440, a = 720)
+   * 430 c (c = 860, b = 650, a = 930)
+   * 650 b (b = 870, a = 1150)
+   * 860 c (c = 1290, b = 1080, a = 1360)
+   * 1080 b (b = 1300, a = 1580)
+   * 1290 c (c = 1720, b = 1510, a = 1790)
+   * 1510 b (b = 1730, a = 2010)
+   * 1720 c (c = 2150, b = 1940, a = 2220)
+   * 1940 b (b = 2160, a = 2440)
+   */
+
+  g_assert_cmpint (a, ==, 9);
+  g_assert_cmpint (b, ==, 9);
+  g_assert_cmpint (c, ==, 4);
+
+  g_source_unref (parent);
+  g_source_unref (child_b);
+  g_source_unref (child_c);
+
+  g_main_loop_unref (loop);
+  g_main_context_unref (ctx);
+}
+
 int
 main (int argc, char *argv[])
 {
@@ -322,6 +478,8 @@ main (int argc, char *argv[])
   g_test_add_func ("/mainloop/timeouts", test_timeouts);
   g_test_add_func ("/mainloop/priorities", test_priorities);
   g_test_add_func ("/mainloop/invoke", test_invoke);
+  g_test_add_func ("/mainloop/child_sources", test_child_sources);
+  g_test_add_func ("/mainloop/recursive_child_sources", test_recursive_child_sources);
 
   return g_test_run ();
 }

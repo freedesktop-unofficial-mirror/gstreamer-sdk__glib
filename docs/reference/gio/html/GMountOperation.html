@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GMountOperation</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.77.1">
 <link rel="home" href="index.html" title="GIO Reference Manual">
 <link rel="up" href="file_ops.html" title="File Operations">
 <link rel="prev" href="gio-GIOError.html" title="GIOError">
@@ -118,7 +118,7 @@ objects – for example it is also used in <a class="link" href="GDrive.html#g-d
 <p>
 Users should instantiate a subclass of this that implements all the
 various callbacks to show the required dialogs, such as
-<a href="http://developer.gnome.org/devel/gtk/gtk3-Filesystem-utilities.html#GtkMountOperation"><span class="type">GtkMountOperation</span></a>. If no user interaction is desired (for example
+<span class="type">GtkMountOperation</span>. If no user interaction is desired (for example
 when automounting filesystems at login time), usually <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> can be
 passed, see each method taking a <a class="link" href="GMountOperation.html" title="GMountOperation"><span class="type">GMountOperation</span></a> for details.
 </p>
@@ -140,8 +140,11 @@ passed, see each method taking a <a class="link" href="GMountOperation.html" tit
 user, or to notify the user of their choices in an authentication
 situation.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><a name="G-ASK-PASSWORD-NEED-PASSWORD:CAPS"></a><span class="term"><code class="literal">G_ASK_PASSWORD_NEED_PASSWORD</code></span></p></td>
@@ -187,8 +190,11 @@ situation.
 <span class="type">Gvfs</span> stores passwords in the Gnome keyring when this flag allows it
 to, and later retrieves it again from there.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><a name="G-PASSWORD-SAVE-NEVER:CAPS"></a><span class="term"><code class="literal">G_PASSWORD_SAVE_NEVER</code></span></p></td>
@@ -230,8 +236,11 @@ such as mounting a file locally, or authenticating with a server.
 <a class="link" href="GMountOperation.html#GMountOperationResult" title="enum GMountOperationResult"><span class="type">GMountOperationResult</span></a> is returned as a result when a request for
 information is send by the mounting operation.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><a name="G-MOUNT-OPERATION-HANDLED:CAPS"></a><span class="term"><code class="literal">G_MOUNT_OPERATION_HANDLED</code></span></p></td>
@@ -261,8 +270,11 @@ information is send by the mounting operation.
 <p>
 Creates a new mount operation.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody><tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>a <a class="link" href="GMountOperation.html" title="GMountOperation"><span class="type">GMountOperation</span></a>.</td>
@@ -276,8 +288,11 @@ Creates a new mount operation.
 <p>
 Get the user name from the mount operation.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>op</code></em> :</span></p></td>
@@ -298,8 +313,11 @@ Get the user name from the mount operation.
 <p>
 Sets the user name within <em class="parameter"><code>op</code></em> to <em class="parameter"><code>username</code></em>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>op</code></em> :</span></p></td>
@@ -319,8 +337,11 @@ Sets the user name within <em class="parameter"><code>op</code></em> to <em clas
 <p>
 Gets a password from the mount operation.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>op</code></em> :</span></p></td>
@@ -341,8 +362,11 @@ Gets a password from the mount operation.
 <p>
 Sets the mount operation's password to <em class="parameter"><code>password</code></em>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>op</code></em> :</span></p></td>
@@ -363,8 +387,11 @@ Sets the mount operation's password to <em class="parameter"><code>password</cod
 Check to see whether the mount operation is being used 
 for an anonymous user.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>op</code></em> :</span></p></td>
@@ -386,8 +413,11 @@ for an anonymous user.
 <p>
 Sets the mount operation to use an anonymous user if <em class="parameter"><code>anonymous</code></em> is <a href="./../glib/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>op</code></em> :</span></p></td>
@@ -407,8 +437,11 @@ Sets the mount operation to use an anonymous user if <em class="parameter"><code
 <p>
 Gets the domain of the mount operation.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>op</code></em> :</span></p></td>
@@ -429,8 +462,11 @@ Gets the domain of the mount operation.
 <p>
 Sets the mount operation's domain.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>op</code></em> :</span></p></td>
@@ -450,8 +486,11 @@ Sets the mount operation's domain.
 <p>
 Gets the state of saving passwords for the mount operation.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>op</code></em> :</span></p></td>
@@ -472,8 +511,11 @@ Gets the state of saving passwords for the mount operation.
 <p>
 Sets the state of saving passwords for the mount operation.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>op</code></em> :</span></p></td>
@@ -493,8 +535,11 @@ Sets the state of saving passwords for the mount operation.
 <p>
 Gets a choice from the mount operation.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>op</code></em> :</span></p></td>
@@ -516,8 +561,11 @@ the choice's list, or <code class="literal">0</code>.</td>
 <p>
 Sets a default choice for the mount operation.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>op</code></em> :</span></p></td>
@@ -538,8 +586,11 @@ Sets a default choice for the mount operation.
 <p>
 Emits the <a class="link" href="GMountOperation.html#GMountOperation-reply" title='The "reply" signal'><span class="type">"reply"</span></a> signal.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>op</code></em> :</span></p></td>
@@ -629,8 +680,11 @@ while a mount operation is in progress.
 Implementations of GMountOperation should handle this signal
 by dismissing open password dialogs.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
 <td>user data set when the signal handler was connected.</td>
@@ -653,10 +707,13 @@ Emitted when a mount operation asks the user for a password.
 <p>
 If the message contains a line break, the first line should be
 presented as a heading. For example, it may be used as the
-primary text in a <a href="http://developer.gnome.org/devel/gtk/GtkMessageDialog.html"><span class="type">GtkMessageDialog</span></a>.
+primary text in a <span class="type">GtkMessageDialog</span>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>op</code></em> :</span></p></td>
@@ -699,10 +756,13 @@ choices for the user to choose from.
 <p>
 If the message contains a line break, the first line should be
 presented as a heading. For example, it may be used as the
-primary text in a <a href="http://developer.gnome.org/devel/gtk/GtkMessageDialog.html"><span class="type">GtkMessageDialog</span></a>.
+primary text in a <span class="type">GtkMessageDialog</span>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>op</code></em> :</span></p></td>
@@ -732,8 +792,11 @@ primary text in a <a href="http://developer.gnome.org/devel/gtk/GtkMessageDialog
 <p>
 Emitted when the user has replied to the mount operation.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>op</code></em> :</span></p></td>
@@ -772,10 +835,13 @@ the user made).
 <p>
 If the message contains a line break, the first line should be
 presented as a heading. For example, it may be used as the
-primary text in a <a href="http://developer.gnome.org/devel/gtk/GtkMessageDialog.html"><span class="type">GtkMessageDialog</span></a>.
+primary text in a <span class="type">GtkMessageDialog</span>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>op</code></em> :</span></p></td>

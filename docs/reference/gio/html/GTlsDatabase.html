@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GTlsDatabase</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.77.1">
 <link rel="home" href="index.html" title="GIO Reference Manual">
 <link rel="up" href="tls.html" title="TLS (SSL) support">
 <link rel="prev" href="GTlsBackend.html" title="GTlsBackend">
@@ -176,8 +176,11 @@ Abstract base class for the backend-specific database types.
 <p>
 Flags for <a class="link" href="GTlsDatabase.html#g-tls-database-verify-chain" title="g_tls_database_verify_chain ()"><code class="function">g_tls_database_verify_chain()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody><tr>
 <td><p><a name="G-TLS-DATABASE-VERIFY-NONE:CAPS"></a><span class="term"><code class="literal">G_TLS_DATABASE_VERIFY_NONE</code></span></p></td>
 <td>No verification flags
@@ -248,8 +251,11 @@ used.
 This function can block, use <a class="link" href="GTlsDatabase.html#g-tls-database-verify-chain-async" title="g_tls_database_verify_chain_async ()"><code class="function">g_tls_database_verify_chain_async()</code></a> to perform
 the verification operation asynchronously.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>self</code></em> :</span></p></td>
@@ -314,8 +320,11 @@ Asynchronously verify's a certificate chain after looking up and adding
 any missing certificates to the chain. See <a class="link" href="GTlsDatabase.html#g-tls-database-verify-chain" title="g_tls_database_verify_chain ()"><code class="function">g_tls_database_verify_chain()</code></a>
 for more information.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>self</code></em> :</span></p></td>
@@ -371,8 +380,11 @@ for more information.
 Finish an asynchronous verify chain operation. See
 <a class="link" href="GTlsDatabase.html#g-tls-database-verify-chain" title="g_tls_database_verify_chain ()"><code class="function">g_tls_database_verify_chain()</code></a> for more information. *
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>self</code></em> :</span></p></td>
@@ -410,8 +422,11 @@ Flags for <code class="function">g_tls_database_lookup_certificate_handle()</cod
 <a class="link" href="GTlsDatabase.html#g-tls-database-lookup-certificate-issuer" title="g_tls_database_lookup_certificate_issuer ()"><code class="function">g_tls_database_lookup_certificate_issuer()</code></a>,
 and <a class="link" href="GTlsDatabase.html#g-tls-database-lookup-certificates-issued-by" title="g_tls_database_lookup_certificates_issued_by ()"><code class="function">g_tls_database_lookup_certificates_issued_by()</code></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><a name="G-TLS-DATABASE-LOOKUP-NONE:CAPS"></a><span class="term"><code class="literal">G_TLS_DATABASE_LOOKUP_NONE</code></span></p></td>
@@ -450,8 +465,11 @@ into a chain.
 This function can block, use <a class="link" href="GTlsDatabase.html#g-tls-database-lookup-certificate-issuer-async" title="g_tls_database_lookup_certificate_issuer_async ()"><code class="function">g_tls_database_lookup_certificate_issuer_async()</code></a> to perform
 the lookup operation asynchronously.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>self</code></em> :</span></p></td>
@@ -507,8 +525,11 @@ or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="lit
 Asynchronously lookup the issuer of <em class="parameter"><code>certificate</code></em> in the database. See
 <a class="link" href="GTlsDatabase.html#g-tls-database-lookup-certificate-issuer" title="g_tls_database_lookup_certificate_issuer ()"><code class="function">g_tls_database_lookup_certificate_issuer()</code></a> for more information.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>self</code></em> :</span></p></td>
@@ -557,8 +578,11 @@ Asynchronously lookup the issuer of <em class="parameter"><code>certificate</cod
 Finish an asynchronous lookup issuer operation. See
 <a class="link" href="GTlsDatabase.html#g-tls-database-lookup-certificate-issuer" title="g_tls_database_lookup_certificate_issuer ()"><code class="function">g_tls_database_lookup_certificate_issuer()</code></a> for more information.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>self</code></em> :</span></p></td>
@@ -601,8 +625,11 @@ Lookup certificates issued by this issuer in the database.
 This function can block, use <a class="link" href="GTlsDatabase.html#g-tls-database-lookup-certificates-issued-by-async" title="g_tls_database_lookup_certificates_issued_by_async ()"><code class="function">g_tls_database_lookup_certificates_issued_by_async()</code></a> to perform
 the lookup operation asynchronously.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>self</code></em> :</span></p></td>
@@ -662,8 +689,11 @@ The database may choose to hold a reference to the issuer byte array for the dur
 of of this asynchronous operation. The byte array should not be modified during
 this time.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>self</code></em> :</span></p></td>
@@ -711,8 +741,11 @@ this time.
 Finish an asynchronous lookup of certificates. See
 <a class="link" href="GTlsDatabase.html#g-tls-database-lookup-certificates-issued-by" title="g_tls_database_lookup_certificates_issued_by ()"><code class="function">g_tls_database_lookup_certificates_issued_by()</code></a> for more information.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>self</code></em> :</span></p></td>
@@ -755,8 +788,11 @@ This handle should be stable across various instances of the application,
 and between applications. If a certificate is modified in the database,
 then it is not guaranteed that this handle will continue to point to it.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>self</code></em> :</span></p></td>
@@ -803,8 +839,11 @@ this database, then <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"
 This function can block, use <a class="link" href="GTlsDatabase.html#g-tls-database-lookup-certificate-for-handle-async" title="g_tls_database_lookup_certificate_for_handle_async ()"><code class="function">g_tls_database_lookup_certificate_for_handle_async()</code></a> to perform
 the lookup operation asynchronously.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>self</code></em> :</span></p></td>
@@ -859,8 +898,11 @@ the lookup operation asynchronously.
 Asynchronously lookup a certificate by its handle in the database. See
 <a class="link" href="GTlsDatabase.html#g-tls-database-lookup-certificate-for-handle" title="g_tls_database_lookup_certificate_for_handle ()"><code class="function">g_tls_database_lookup_certificate_for_handle()</code></a> for more information.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>self</code></em> :</span></p></td>
@@ -912,8 +954,11 @@ Finish an asynchronous lookup of a certificate by its handle. See
 If the handle is no longer valid, or does not point to a certificate in
 this database, then <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> will be returned.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>self</code></em> :</span></p></td>

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GDBusObjectManagerServer</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.77.1">
 <link rel="home" href="index.html" title="GIO Reference Manual">
 <link rel="up" href="gdbus-convenience.html" title="Highlevel D-Bus Support">
 <link rel="prev" href="GDBusObjectManager.html" title="GDBusObjectManager">
@@ -124,8 +124,11 @@ only be accessed using the provided API.
 <p>
 Class structure for <a class="link" href="GDBusObjectManagerServer.html" title="GDBusObjectManagerServer"><span class="type">GDBusObjectManagerServer</span></a>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody><tr>
 <td><p><span class="term"><a href="./../gobject/gobject/gobject-The-Base-Object-Type.html#GObjectClass"><span class="type">GObjectClass</span></a> <em class="structfield"><code><a name="GDBusObjectManagerServerClass.parent-class"></a>parent_class</code></em>;</span></p></td>
 <td>The parent class.</td>
@@ -147,8 +150,11 @@ use <a class="link" href="GDBusObjectManagerServer.html#g-dbus-object-manager-se
 want to export all of your objects before doing so to avoid <a class="ulink" href="http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-objectmanager" target="_top">InterfacesAdded</a>
 signals being emitted.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>object_path</code></em> :</span></p></td>
@@ -170,8 +176,11 @@ signals being emitted.
 <p>
 Gets the <a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a> used by <em class="parameter"><code>manager</code></em>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>manager</code></em> :</span></p></td>
@@ -199,8 +208,11 @@ be freed with <a href="./../gobject/gobject/gobject-The-Base-Object-Type.html#g-
 Exports all objects managed by <em class="parameter"><code>manager</code></em> on <em class="parameter"><code>connection</code></em>. If
 <em class="parameter"><code>connection</code></em> is <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>, stops exporting objects.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>manager</code></em> :</span></p></td>
@@ -234,8 +246,11 @@ object path for <em class="parameter"><code>manager</code></em>.
 Note that <em class="parameter"><code>manager</code></em> will take a reference on <em class="parameter"><code>object</code></em> for as long as
 it is exported.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>manager</code></em> :</span></p></td>
@@ -262,8 +277,11 @@ the form <code class="literal">_N</code> (with N being a natural number) to
 already exists. As such, the <a class="link" href="GDBusObjectProxy.html#GDBusObjectProxy--g-object-path" title='The "g-object-path" property'><span class="type">"g-object-path"</span></a> property
 of <em class="parameter"><code>object</code></em> may be modified.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>manager</code></em> :</span></p></td>
@@ -291,8 +309,11 @@ does nothing.
 Note that <em class="parameter"><code>object_path</code></em> must be in the hierarchy rooted by the
 object path for <em class="parameter"><code>manager</code></em>.
 </p>
-<div class="variablelist"><table border="0">
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
 <col align="left" valign="top">
+<col>
+</colgroup>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>manager</code></em> :</span></p></td>
