@@ -52,6 +52,8 @@
 
 #include <windows.h>
 
+#define XDG_MIME_TYPE_UNKNOWN "application/octet-stream"
+
 static char *
 get_registry_classes_key (const char    *subdir,
                           const wchar_t *key_name)
