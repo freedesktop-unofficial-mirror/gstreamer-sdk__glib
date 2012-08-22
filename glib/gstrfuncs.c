@@ -695,7 +695,9 @@ g_ascii_strtod (const gchar *nptr,
 
   gchar *fail_pos;
   gdouble val;
+#ifndef __BIONIC__
   struct lconv *locale_data;
+#endif
   const char *decimal_point;
   int decimal_point_len;
   const char *p, *decimal_point_pos;
@@ -706,9 +708,14 @@ g_ascii_strtod (const gchar *nptr,
 
   fail_pos = NULL;
 
+#ifndef __BIONIC__
   locale_data = localeconv ();
   decimal_point = locale_data->decimal_point;
   decimal_point_len = strlen (decimal_point);
+#else
+  decimal_point = ".";
+  decimal_point_len = 1;
+#endif
 
   g_assert (decimal_point_len != 0);
 
@@ -899,7 +906,9 @@ g_ascii_formatd (gchar       *buffer,
 
   return buffer;
 #else
+#ifndef __BIONIC__
   struct lconv *locale_data;
+#endif
   const char *decimal_point;
   int decimal_point_len;
   gchar *p;
@@ -930,9 +939,14 @@ g_ascii_formatd (gchar       *buffer,
 
   _g_snprintf (buffer, buf_len, format, d);
 
+#ifndef __BIONIC__
   locale_data = localeconv ();
   decimal_point = locale_data->decimal_point;
   decimal_point_len = strlen (decimal_point);
+#else
+  decimal_point = ".";
+  decimal_point_len = 1;
+#endif
 
   g_assert (decimal_point_len != 0);
 

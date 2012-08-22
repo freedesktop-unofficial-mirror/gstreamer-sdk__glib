@@ -190,7 +190,9 @@ g_resolver_maybe_reload (GResolver *resolver)
       if (st.st_mtime != resolver->priv->resolv_conf_timestamp)
         {
           resolver->priv->resolv_conf_timestamp = st.st_mtime;
+#ifndef __BIONIC__
           res_init ();
+#endif
           g_signal_emit (resolver, signals[RELOAD], 0);
         }
     }
@@ -819,6 +821,74 @@ _g_resolver_name_from_nameinfo (GInetAddress  *address,
 
   return g_strdup (name);
 }
+
+#ifdef __BIONIC__
+/* Copy from bionic/libc/private/arpa_nameser_compat.h
+ * and bionic/libc/private/arpa_nameser.h */
+typedef struct {
+	unsigned	id :16;		/* query identification number */
+#if BYTE_ORDER == BIG_ENDIAN
+			/* fields in third byte */
+	unsigned	qr: 1;		/* response flag */
+	unsigned	opcode: 4;	/* purpose of message */
+	unsigned	aa: 1;		/* authoritive answer */
+	unsigned	tc: 1;		/* truncated message */
+	unsigned	rd: 1;		/* recursion desired */
+			/* fields in fourth byte */
+	unsigned	ra: 1;		/* recursion available */
+	unsigned	unused :1;	/* unused bits (MBZ as of 4.9.3a3) */
+	unsigned	ad: 1;		/* authentic data from named */
+	unsigned	cd: 1;		/* checking disabled by resolver */
+	unsigned	rcode :4;	/* response code */
+#endif
+#if BYTE_ORDER == LITTLE_ENDIAN || BYTE_ORDER == PDP_ENDIAN
+			/* fields in third byte */
+	unsigned	rd :1;		/* recursion desired */
+	unsigned	tc :1;		/* truncated message */
+	unsigned	aa :1;		/* authoritive answer */
+	unsigned	opcode :4;	/* purpose of message */
+	unsigned	qr :1;		/* response flag */
+			/* fields in fourth byte */
+	unsigned	rcode :4;	/* response code */
+	unsigned	cd: 1;		/* checking disabled by resolver */
+	unsigned	ad: 1;		/* authentic data from named */
+	unsigned	unused :1;	/* unused bits (MBZ as of 4.9.3a3) */
+	unsigned	ra :1;		/* recursion available */
+#endif
+			/* remaining bytes */
+	unsigned	qdcount :16;	/* number of question entries */
+	unsigned	ancount :16;	/* number of answer entries */
+	unsigned	nscount :16;	/* number of authority entries */
+	unsigned	arcount :16;	/* number of resource entries */
+} HEADER;
+
+#define NS_INT32SZ	4	/* #/bytes of data in a uint32_t */
+#define NS_INT16SZ	2	/* #/bytes of data in a uint16_t */
+
+#define NS_GET16(s, cp) do { \
+	const u_char *t_cp = (const u_char *)(cp); \
+	(s) = ((uint16_t)t_cp[0] << 8) \
+	    | ((uint16_t)t_cp[1]) \
+	    ; \
+	(cp) += NS_INT16SZ; \
+} while (/*CONSTCOND*/0)
+
+#define NS_GET32(l, cp) do { \
+	const u_char *t_cp = (const u_char *)(cp); \
+	(l) = ((uint32_t)t_cp[0] << 24) \
+	    | ((uint32_t)t_cp[1] << 16) \
+	    | ((uint32_t)t_cp[2] << 8) \
+	    | ((uint32_t)t_cp[3]) \
+	    ; \
+	(cp) += NS_INT32SZ; \
+} while (/*CONSTCOND*/0)
+
+#define	GETSHORT		NS_GET16
+#define	GETLONG			NS_GET32
+
+#define C_IN 1
+
+#endif
 
 #if defined(G_OS_UNIX)
 /* Private method to process a res_query response into GSrvTargets */

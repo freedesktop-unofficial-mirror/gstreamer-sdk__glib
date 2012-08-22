@@ -527,6 +527,9 @@ do_lookup_service (GThreadedResolverRequest *req,
 #endif
 
 #if defined(G_OS_UNIX)
+#ifdef __BIONIC__
+#define C_IN 1
+#endif
   len = res_query (req->u.service.rrname, C_IN, T_SRV, answer, sizeof (answer));
   herr = h_errno;
   req->u.service.targets = _g_resolver_targets_from_res_query (req->u.service.rrname, answer, len, herr, error);
