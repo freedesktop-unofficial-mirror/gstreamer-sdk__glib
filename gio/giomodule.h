@@ -73,6 +73,9 @@ GLIB_AVAILABLE_IN_2_30
 GList             *g_io_modules_load_all_in_directory_with_scope   (const gchar       *dirname,
                                                                     GIOModuleScope    *scope);
 
+GLIB_AVAILABLE_IN_2_36
+gboolean              g_io_module_load_static_module              (const char *name);
+
 GLIB_AVAILABLE_IN_ALL
 GIOExtensionPoint *g_io_extension_point_register              (const char        *name);
 GLIB_AVAILABLE_IN_ALL
@@ -162,6 +165,36 @@ void   g_io_module_unload (GIOModule *module);
 GLIB_AVAILABLE_IN_ALL
 char **g_io_module_query (void);
 
-G_END_DECLS
+#define G_IO_MODULE_DECLARE(name) \
+extern gboolean G_PASTE(g_io_module_, G_PASTE(name, _load_static)) (void);
 
+#define G_IO_MODULE_LOAD(name) \
+G_PASTE(g_io_module_, G_PASTE(name, _load_static)) ()
+
+#ifdef G_IO_MODULE_BUILD_STATIC
+#define G_IO_MODULE_DEFINE(name) \
+G_BEGIN_DECLS \
+void G_PASTE(g_io_module_, G_PASTE(name, _load_static)) (void); \
+void G_PASTE(g_io_module_, G_PASTE(name, _load_static)) (void) \
+{g_io_module_load_static_module (#name);} \
+void G_PASTE(g_io_module_, G_PASTE(name, _load)) (GIOModule *module); \
+void G_PASTE(g_io_module_, G_PASTE(name, _unload)) (GIOModule *module); \
+gchar ** G_PASTE(g_io_module_, G_PASTE(name, _query)) (void); \
+void G_PASTE(g_io_module_, G_PASTE(name, _load)) (GIOModule *module) \
+{_g_io_module_load(module);} \
+void G_PASTE(g_io_module_, G_PASTE(name, _unload)) (GIOModule *module) \
+{_g_io_module_unload(module);} \
+gchar ** G_PASTE(g_io_module_, G_PASTE(name, _query)) (void) \
+{return _g_io_module_query();} \
+G_END_DECLS
+#else
+#define G_IO_MODULE_DEFINE(name) \
+G_BEGIN_DECLS \
+g_io_module_load(GIOModule *module) { _g_io_module_load(module);} \
+g_io_module_unload(GIOModule *module) { _g_io_module_unload(module);} \
+gchar ** g_io_module_query(void) {return _g_io_module_query();} \
+G_END_DECLS
+#endif
+
+G_END_DECLS
 #endif /* __G_IO_MODULE_H__ */
