@@ -46,6 +46,7 @@
 #include "gdesktopappinfo.h"
 #endif
 
+
 /**
  * SECTION:giomodule
  * @short_description: Loadable GIO Modules
@@ -210,6 +211,7 @@ struct _GIOModule {
   gchar       *filename;
   GModule     *library;
   gboolean     initialized; /* The module was loaded at least once */
+  gboolean     is_static;
 
   void (* load)   (GIOModule *module);
   void (* unload) (GIOModule *module);
@@ -224,6 +226,7 @@ struct _GIOModuleClass
 static void      g_io_module_finalize      (GObject      *object);
 static gboolean  g_io_module_load_module   (GTypeModule  *gmodule);
 static void      g_io_module_unload_module (GTypeModule  *gmodule);
+static GIOModule * g_io_module_new_static (const gchar *name);
 
 struct _GIOExtension {
   char *name;
@@ -274,40 +277,57 @@ static gboolean
 g_io_module_load_module (GTypeModule *gmodule)
 {
   GIOModule *module = G_IO_MODULE (gmodule);
+  gchar *load_func_name = NULL;
+  gchar *unload_func_name = NULL;
+  gboolean ret = FALSE;
 
-  if (!module->filename)
+  if (module->is_static)
     {
-      g_warning ("GIOModule path not set");
-      return FALSE;
+      load_func_name = g_strdup_printf("g_io_module_%s_load", gmodule->name);
+      unload_func_name = g_strdup_printf("g_io_module_%s_unload", gmodule->name);
+      module->library = g_module_open (NULL, G_MODULE_BIND_LAZY | G_MODULE_BIND_LOCAL);
     }
-
-  module->library = g_module_open (module->filename, G_MODULE_BIND_LAZY | G_MODULE_BIND_LOCAL);
+  else
+    {
+      if (!module->filename)
+        {
+          g_warning ("GIOModule path not set");
+          goto quit;
+        }
+      load_func_name = g_strdup("g_io_module_load");
+      unload_func_name = g_strdup("g_io_module_unload");
+      module->library = g_module_open (module->filename, G_MODULE_BIND_LAZY | G_MODULE_BIND_LOCAL);
+    }
 
   if (!module->library)
     {
       g_printerr ("%s\n", g_module_error ());
-      return FALSE;
+      goto quit;
     }
 
   /* Make sure that the loaded library contains the required methods */
-  if (! g_module_symbol (module->library,
-                         "g_io_module_load",
+  if (! g_module_symbol (module->library, load_func_name,
                          (gpointer) &module->load) ||
-      ! g_module_symbol (module->library,
-                         "g_io_module_unload",
+      ! g_module_symbol (module->library, unload_func_name,
                          (gpointer) &module->unload))
     {
       g_printerr ("%s\n", g_module_error ());
       g_module_close (module->library);
 
-      return FALSE;
+      goto quit;
     }
 
   /* Initialize the loaded module */
   module->load (module);
   module->initialized = TRUE;
+  ret = TRUE;
 
-  return TRUE;
+quit:
+  {
+    g_free(load_func_name);
+    g_free(unload_func_name);
+    return ret;
+  }
 }
 
 static void
@@ -322,6 +342,44 @@ g_io_module_unload_module (GTypeModule *gmodule)
 
   module->load   = NULL;
   module->unload = NULL;
+}
+
+/*
+ * g_io_module_load_static_module:
+ * @name: the name of the module to be loaded
+ *
+ * Loads a module that has been linked statically.
+ * This module must define the load and unload functions
+ * suffixed with the module name, eg:
+ * g_io_module_load_gnutls
+ * g_io_module_unload_gnutls
+ *
+ * Since: 2.34
+ */
+gboolean
+g_io_module_load_static_module (const gchar *name)
+{
+  GIOModule * module;
+
+  _g_io_modules_ensure_extension_points_registered ();
+
+  module = g_io_module_new_static(name);
+  return g_io_module_load_module(G_TYPE_MODULE(module));
+}
+
+static GIOModule *
+g_io_module_new_static (const gchar *name)
+{
+  GIOModule *module;
+
+  g_return_val_if_fail (name != NULL, NULL);
+
+  module = g_object_new (G_IO_TYPE_MODULE, NULL);
+  module->filename = g_strdup_printf("libgio%s.so", name);
+  module->is_static = TRUE;
+  g_type_module_set_name(G_TYPE_MODULE(module), name);
+
+  return module;
 }
 
 /**
@@ -343,6 +401,7 @@ g_io_module_new (const gchar *filename)
 
   module = g_object_new (G_IO_TYPE_MODULE, NULL);
   module->filename = g_strdup (filename);
+  module->is_static = FALSE;
 
   return module;
 }

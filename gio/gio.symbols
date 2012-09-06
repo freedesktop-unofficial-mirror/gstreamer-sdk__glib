@@ -513,6 +513,7 @@ g_io_error_from_errno
 g_io_error_from_win32_error
 #endif
 g_io_module_get_type
+g_io_module_load_static_module
 g_io_module_new
 g_io_module_scope_block
 g_io_module_scope_flags_get_type
