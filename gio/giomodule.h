@@ -64,7 +64,6 @@ void               g_io_modules_scan_all_in_directory_with_scope   (const gchar 
 GList             *g_io_modules_load_all_in_directory_with_scope   (const gchar       *dirname,
                                                                     GIOModuleScope    *scope);
 
-GLIB_AVAILABLE_IN_2_34
 gboolean              g_io_module_load_static_module              (const char *name);
 
 GIOExtensionPoint *g_io_extension_point_register              (const char        *name);
