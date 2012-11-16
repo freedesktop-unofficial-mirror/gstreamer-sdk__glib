@@ -1048,6 +1048,7 @@ typedef struct {
 #ifdef __BIONIC__
 /* From bionic/libc/private/resolv_private.h */
 int dn_expand(const u_char *, const u_char *, const u_char *, char *, int);
+#define dn_skipname __dn_skipname
 int dn_skipname(const u_char *, const u_char *);
 
 /* From bionic/libc/private/arpa_nameser_compat.h */
