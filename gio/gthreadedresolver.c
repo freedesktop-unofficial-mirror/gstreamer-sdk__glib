@@ -521,6 +521,7 @@ do_lookup_records (GThreadedResolverRequest  *req,
 #if defined(G_OS_UNIX)
 #ifdef __BIONIC__
 #define C_IN 1
+int res_query(const char *, int, int, u_char *, int);
 #endif
   gint len = 512;
   gint herr;
