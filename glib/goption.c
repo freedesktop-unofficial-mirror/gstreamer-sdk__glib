@@ -261,7 +261,6 @@ static glong
 _g_utf8_strwidth (const gchar *p)
 {
   glong len = 0;
-  const gchar *start = p;
   g_return_val_if_fail (p != NULL, 0);
 
   while (*p)
@@ -273,12 +272,7 @@ _g_utf8_strwidth (const gchar *p)
   return len;
 }
 
-
-GQuark
-g_option_error_quark (void)
-{
-  return g_quark_from_static_string ("g-option-context-error-quark");
-}
+G_DEFINE_QUARK (g-option-context-error-quark, g_option_error)
 
 /**
  * g_option_context_new:
@@ -639,6 +633,8 @@ group_has_visible_entries (GOptionContext *context,
       entry = &group->entries[i];
 
       if (main_entries && !main_group && !(entry->flags & G_OPTION_FLAG_IN_MAIN))
+        continue;
+      if (entry->long_name[0] == 0) /* ignore rest entry */
         continue;
       if (!(entry->flags & reject_filter))
         return TRUE;

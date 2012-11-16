@@ -133,7 +133,10 @@ error domain:
 29
 30
 31
-32</pre></td>
+32
+33
+34
+35</pre></td>
         <td class="listing_code"><pre class="programlisting"><span class="comment">/* foo-bar-error.h: */</span>
 
 <span class="preproc">#define</span><span class="normal"> </span><span class="function">FOO_BAR_ERROR</span><span class="normal"> </span><span class="symbol">(</span><span class="function">foo_bar_error_quark</span><span class="normal"> </span><span class="symbol">())</span>
@@ -144,6 +147,7 @@ error domain:
 <span class="normal">  FOO_BAR_ERROR_FAILED</span><span class="symbol">,</span>
 <span class="normal">  FOO_BAR_ERROR_ANOTHER_ERROR</span><span class="symbol">,</span>
 <span class="normal">  FOO_BAR_ERROR_SOME_THIRD_ERROR</span><span class="symbol">,</span>
+<span class="normal">  FOO_BAR_N_ERRORS </span><span class="comment">/*&lt; skip &gt;*/</span>
 <span class="cbracket">}</span><span class="normal"> FooBarError</span><span class="symbol">;</span>
 
 <span class="comment">/* foo-bar-error.c: */</span>
@@ -155,6 +159,9 @@ error domain:
 <span class="normal">  </span><span class="cbracket">{</span><span class="normal">FOO_BAR_ERROR_SOME_THIRD_ERROR</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"org.project.Foo.Bar.Error.SomeThirdError"</span><span class="cbracket">}</span><span class="symbol">,</span>
 <span class="cbracket">}</span><span class="symbol">;</span>
 
+<span class="comment">/* Ensure that every error code has an associated D-Bus error name */</span>
+<span class="function"><a href="./../glib/glib/glib-Miscellaneous-Macros.html#G-STATIC-ASSERT:CAPS">G_STATIC_ASSERT</a></span><span class="normal"> </span><span class="symbol">(</span><span class="function"><a href="./../glib/glib/glib-Standard-Macros.html#G-N-ELEMENTS:CAPS">G_N_ELEMENTS</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">foo_bar_error_entries</span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">==</span><span class="normal"> FOO_BAR_N_ERRORS</span><span class="symbol">);</span>
+
 <span class="normal"><a href="./../glib/glib/glib-Quarks.html#GQuark">GQuark</a></span>
 <span class="function">foo_bar_error_quark</span><span class="normal"> </span><span class="symbol">(</span><span class="type">void</span><span class="symbol">)</span>
 <span class="cbracket">{</span>
@@ -163,7 +170,6 @@ error domain:
 <span class="normal">                                      </span><span class="symbol">&amp;</span><span class="normal">quark_volatile</span><span class="symbol">,</span>
 <span class="normal">                                      foo_bar_error_entries</span><span class="symbol">,</span>
 <span class="normal">                                      </span><span class="function"><a href="./../glib/glib/glib-Standard-Macros.html#G-N-ELEMENTS:CAPS">G_N_ELEMENTS</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">foo_bar_error_entries</span><span class="symbol">));</span>
-<span class="normal">  </span><span class="function"><a href="./../glib/glib/glib-Miscellaneous-Macros.html#G-STATIC-ASSERT:CAPS">G_STATIC_ASSERT</a></span><span class="normal"> </span><span class="symbol">(</span><span class="function"><a href="./../glib/glib/glib-Standard-Macros.html#G-N-ELEMENTS:CAPS">G_N_ELEMENTS</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">foo_bar_error_entries</span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">-</span><span class="normal"> </span><span class="number">1</span><span class="normal"> </span><span class="symbol">==</span><span class="normal"> FOO_BAR_ERROR_SOME_THIRD_ERROR</span><span class="symbol">);</span>
 <span class="normal">  </span><span class="keyword">return</span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="./../glib/glib/glib-Quarks.html#GQuark">GQuark</a></span><span class="symbol">)</span><span class="normal"> quark_volatile</span><span class="symbol">;</span>
 <span class="cbracket">}</span></pre></td>
       </tr>

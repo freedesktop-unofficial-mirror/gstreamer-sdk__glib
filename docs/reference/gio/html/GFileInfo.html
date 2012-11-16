@@ -55,6 +55,7 @@ enum                <a class="link" href="GFileInfo.html#GFileType" title="enum 
 #define             <a class="link" href="GFileInfo.html#G-FILE-ATTRIBUTE-STANDARD-EDIT-NAME:CAPS" title="G_FILE_ATTRIBUTE_STANDARD_EDIT_NAME">G_FILE_ATTRIBUTE_STANDARD_EDIT_NAME</a>
 #define             <a class="link" href="GFileInfo.html#G-FILE-ATTRIBUTE-STANDARD-COPY-NAME:CAPS" title="G_FILE_ATTRIBUTE_STANDARD_COPY_NAME">G_FILE_ATTRIBUTE_STANDARD_COPY_NAME</a>
 #define             <a class="link" href="GFileInfo.html#G-FILE-ATTRIBUTE-STANDARD-ICON:CAPS" title="G_FILE_ATTRIBUTE_STANDARD_ICON">G_FILE_ATTRIBUTE_STANDARD_ICON</a>
+#define             <a class="link" href="GFileInfo.html#G-FILE-ATTRIBUTE-STANDARD-SYMBOLIC-ICON:CAPS" title="G_FILE_ATTRIBUTE_STANDARD_SYMBOLIC_ICON">G_FILE_ATTRIBUTE_STANDARD_SYMBOLIC_ICON</a>
 #define             <a class="link" href="GFileInfo.html#G-FILE-ATTRIBUTE-STANDARD-CONTENT-TYPE:CAPS" title="G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE">G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE</a>
 #define             <a class="link" href="GFileInfo.html#G-FILE-ATTRIBUTE-STANDARD-FAST-CONTENT-TYPE:CAPS" title="G_FILE_ATTRIBUTE_STANDARD_FAST_CONTENT_TYPE">G_FILE_ATTRIBUTE_STANDARD_FAST_CONTENT_TYPE</a>
 #define             <a class="link" href="GFileInfo.html#G-FILE-ATTRIBUTE-STANDARD-SIZE:CAPS" title="G_FILE_ATTRIBUTE_STANDARD_SIZE">G_FILE_ATTRIBUTE_STANDARD_SIZE</a>
@@ -207,6 +208,7 @@ const <span class="returnvalue">char</span> *        <a class="link" href="GFile
 const <span class="returnvalue">char</span> *        <a class="link" href="GFileInfo.html#g-file-info-get-display-name" title="g_file_info_get_display_name ()">g_file_info_get_display_name</a>        (<em class="parameter"><code><a class="link" href="GFileInfo.html" title="GFileInfo"><span class="type">GFileInfo</span></a> *info</code></em>);
 const <span class="returnvalue">char</span> *        <a class="link" href="GFileInfo.html#g-file-info-get-edit-name" title="g_file_info_get_edit_name ()">g_file_info_get_edit_name</a>           (<em class="parameter"><code><a class="link" href="GFileInfo.html" title="GFileInfo"><span class="type">GFileInfo</span></a> *info</code></em>);
 <a class="link" href="GIcon.html" title="GIcon"><span class="returnvalue">GIcon</span></a> *             <a class="link" href="GFileInfo.html#g-file-info-get-icon" title="g_file_info_get_icon ()">g_file_info_get_icon</a>                (<em class="parameter"><code><a class="link" href="GFileInfo.html" title="GFileInfo"><span class="type">GFileInfo</span></a> *info</code></em>);
+<a class="link" href="GIcon.html" title="GIcon"><span class="returnvalue">GIcon</span></a> *             <a class="link" href="GFileInfo.html#g-file-info-get-symbolic-icon" title="g_file_info_get_symbolic_icon ()">g_file_info_get_symbolic_icon</a>       (<em class="parameter"><code><a class="link" href="GFileInfo.html" title="GFileInfo"><span class="type">GFileInfo</span></a> *info</code></em>);
 const <span class="returnvalue">char</span> *        <a class="link" href="GFileInfo.html#g-file-info-get-content-type" title="g_file_info_get_content_type ()">g_file_info_get_content_type</a>        (<em class="parameter"><code><a class="link" href="GFileInfo.html" title="GFileInfo"><span class="type">GFileInfo</span></a> *info</code></em>);
 <a href="./../glib/glib/glib-Basic-Types.html#goffset"><span class="returnvalue">goffset</span></a>             <a class="link" href="GFileInfo.html#g-file-info-get-size" title="g_file_info_get_size ()">g_file_info_get_size</a>                (<em class="parameter"><code><a class="link" href="GFileInfo.html" title="GFileInfo"><span class="type">GFileInfo</span></a> *info</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GFileInfo.html#g-file-info-get-modification-time" title="g_file_info_get_modification_time ()">g_file_info_get_modification_time</a>   (<em class="parameter"><code><a class="link" href="GFileInfo.html" title="GFileInfo"><span class="type">GFileInfo</span></a> *info</code></em>,
@@ -230,6 +232,8 @@ const <span class="returnvalue">char</span> *        <a class="link" href="GFile
 <span class="returnvalue">void</span>                <a class="link" href="GFileInfo.html#g-file-info-set-edit-name" title="g_file_info_set_edit_name ()">g_file_info_set_edit_name</a>           (<em class="parameter"><code><a class="link" href="GFileInfo.html" title="GFileInfo"><span class="type">GFileInfo</span></a> *info</code></em>,
                                                          <em class="parameter"><code>const <span class="type">char</span> *edit_name</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GFileInfo.html#g-file-info-set-icon" title="g_file_info_set_icon ()">g_file_info_set_icon</a>                (<em class="parameter"><code><a class="link" href="GFileInfo.html" title="GFileInfo"><span class="type">GFileInfo</span></a> *info</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GIcon.html" title="GIcon"><span class="type">GIcon</span></a> *icon</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GFileInfo.html#g-file-info-set-symbolic-icon" title="g_file_info_set_symbolic_icon ()">g_file_info_set_symbolic_icon</a>       (<em class="parameter"><code><a class="link" href="GFileInfo.html" title="GFileInfo"><span class="type">GFileInfo</span></a> *info</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GIcon.html" title="GIcon"><span class="type">GIcon</span></a> *icon</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GFileInfo.html#g-file-info-set-content-type" title="g_file_info_set_content_type ()">g_file_info_set_content_type</a>        (<em class="parameter"><code><a class="link" href="GFileInfo.html" title="GFileInfo"><span class="type">GFileInfo</span></a> *info</code></em>,
                                                          <em class="parameter"><code>const <span class="type">char</span> *content_type</code></em>);
@@ -506,6 +510,18 @@ A key in the "standard" namespace for getting the icon for the file.
 Corresponding <a class="link" href="gio-GFileAttribute.html#GFileAttributeType" title="enum GFileAttributeType"><span class="type">GFileAttributeType</span></a> is <a class="link" href="gio-GFileAttribute.html#G-FILE-ATTRIBUTE-TYPE-OBJECT:CAPS"><code class="literal">G_FILE_ATTRIBUTE_TYPE_OBJECT</code></a>.
 The value for this key should contain a <a class="link" href="GIcon.html" title="GIcon"><span class="type">GIcon</span></a>.
 </p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="G-FILE-ATTRIBUTE-STANDARD-SYMBOLIC-ICON:CAPS"></a><h3>G_FILE_ATTRIBUTE_STANDARD_SYMBOLIC_ICON</h3>
+<pre class="programlisting">#define G_FILE_ATTRIBUTE_STANDARD_SYMBOLIC_ICON "standard::symbolic-icon"   /* object (GIcon) */
+</pre>
+<p>
+A key in the "standard" namespace for getting the symbolic icon for the file.
+Corresponding <a class="link" href="gio-GFileAttribute.html#GFileAttributeType" title="enum GFileAttributeType"><span class="type">GFileAttributeType</span></a> is <a class="link" href="gio-GFileAttribute.html#G-FILE-ATTRIBUTE-TYPE-OBJECT:CAPS"><code class="literal">G_FILE_ATTRIBUTE_TYPE_OBJECT</code></a>.
+The value for this key should contain a <a class="link" href="GIcon.html" title="GIcon"><span class="type">GIcon</span></a>.
+</p>
+<p class="since">Since 2.34</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -1235,13 +1251,13 @@ Corresponding <a class="link" href="gio-GFileAttribute.html#GFileAttributeType" 
 <hr>
 <div class="refsect2">
 <a name="G-FILE-ATTRIBUTE-TRASH-ORIG-PATH:CAPS"></a><h3>G_FILE_ATTRIBUTE_TRASH_ORIG_PATH</h3>
-<pre class="programlisting">#define G_FILE_ATTRIBUTE_TRASH_ORIG_PATH "trash::orig-path"     /* string */
+<pre class="programlisting">#define G_FILE_ATTRIBUTE_TRASH_ORIG_PATH "trash::orig-path"     /* byte string */
 </pre>
 <p>
 A key in the "trash" namespace.  When requested against
 items in "trash:///", will return the original path to the file before it
 was trashed. Corresponding <a class="link" href="gio-GFileAttribute.html#GFileAttributeType" title="enum GFileAttributeType"><span class="type">GFileAttributeType</span></a> is
-<a class="link" href="gio-GFileAttribute.html#G-FILE-ATTRIBUTE-TYPE-STRING:CAPS"><code class="literal">G_FILE_ATTRIBUTE_TYPE_STRING</code></a>.
+<a class="link" href="gio-GFileAttribute.html#G-FILE-ATTRIBUTE-TYPE-BYTE-STRING:CAPS"><code class="literal">G_FILE_ATTRIBUTE_TYPE_BYTE_STRING</code></a>.
 </p>
 <p class="since">Since 2.24.</p>
 </div>
@@ -2473,6 +2489,33 @@ Gets the icon for a file.
 </div>
 <hr>
 <div class="refsect2">
+<a name="g-file-info-get-symbolic-icon"></a><h3>g_file_info_get_symbolic_icon ()</h3>
+<pre class="programlisting"><a class="link" href="GIcon.html" title="GIcon"><span class="returnvalue">GIcon</span></a> *             g_file_info_get_symbolic_icon       (<em class="parameter"><code><a class="link" href="GFileInfo.html" title="GFileInfo"><span class="type">GFileInfo</span></a> *info</code></em>);</pre>
+<p>
+Gets the symbolic icon for a file.
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>info</code></em> :</span></p></td>
+<td>a <a class="link" href="GFileInfo.html" title="GFileInfo"><span class="type">GFileInfo</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+<a class="link" href="GIcon.html" title="GIcon"><span class="type">GIcon</span></a> for the given <em class="parameter"><code>info</code></em>. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.34</p>
+</div>
+<hr>
+<div class="refsect2">
 <a name="g-file-info-get-content-type"></a><h3>g_file_info_get_content_type ()</h3>
 <pre class="programlisting">const <span class="returnvalue">char</span> *        g_file_info_get_content_type        (<em class="parameter"><code><a class="link" href="GFileInfo.html" title="GFileInfo"><span class="type">GFileInfo</span></a> *info</code></em>);</pre>
 <p>
@@ -2849,6 +2892,33 @@ See <a class="link" href="GFileInfo.html#G-FILE-ATTRIBUTE-STANDARD-ICON:CAPS" ti
 </div>
 <hr>
 <div class="refsect2">
+<a name="g-file-info-set-symbolic-icon"></a><h3>g_file_info_set_symbolic_icon ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_file_info_set_symbolic_icon       (<em class="parameter"><code><a class="link" href="GFileInfo.html" title="GFileInfo"><span class="type">GFileInfo</span></a> *info</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GIcon.html" title="GIcon"><span class="type">GIcon</span></a> *icon</code></em>);</pre>
+<p>
+Sets the symbolic icon for a given <a class="link" href="GFileInfo.html" title="GFileInfo"><span class="type">GFileInfo</span></a>.
+See <a class="link" href="GFileInfo.html#G-FILE-ATTRIBUTE-STANDARD-SYMBOLIC-ICON:CAPS" title="G_FILE_ATTRIBUTE_STANDARD_SYMBOLIC_ICON"><code class="literal">G_FILE_ATTRIBUTE_STANDARD_SYMBOLIC_ICON</code></a>.
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>info</code></em> :</span></p></td>
+<td>a <a class="link" href="GFileInfo.html" title="GFileInfo"><span class="type">GFileInfo</span></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>icon</code></em> :</span></p></td>
+<td>a <a class="link" href="GIcon.html" title="GIcon"><span class="type">GIcon</span></a>.</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.34</p>
+</div>
+<hr>
+<div class="refsect2">
 <a name="g-file-info-set-content-type"></a><h3>g_file_info_set_content_type ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_file_info_set_content_type        (<em class="parameter"><code><a class="link" href="GFileInfo.html" title="GFileInfo"><span class="type">GFileInfo</span></a> *info</code></em>,
                                                          <em class="parameter"><code>const <span class="type">char</span> *content_type</code></em>);</pre>
@@ -2999,7 +3069,7 @@ The wildcard "*" may be used to match all keys and namespaces, or
 Examples of strings to use:
 </p>
 <div class="table">
-<a name="id469330"></a><p class="title"><b>Table 3. File Attribute Matcher strings and results</b></p>
+<a name="idp39705504"></a><p class="title"><b>Table 3. File Attribute Matcher strings and results</b></p>
 <div class="table-contents"><table summary="File Attribute Matcher strings and results" border="1">
 <colgroup>
 <col>

@@ -575,7 +575,7 @@ Looks whether the string <em class="parameter"><code>str</code></em> ends with <
 <pre class="programlisting"><span class="returnvalue">int</span>                 g_strcmp0                           (<em class="parameter"><code>const <span class="type">char</span> *str1</code></em>,
                                                          <em class="parameter"><code>const <span class="type">char</span> *str2</code></em>);</pre>
 <p>
-Compares <em class="parameter"><code>str1</code></em> and <em class="parameter"><code>str2</code></em> like <code class="function">strcmp()</code>. Handles <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> 
+Compares <em class="parameter"><code>str1</code></em> and <em class="parameter"><code>str2</code></em> like <code class="function">strcmp()</code>. Handles <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
 gracefully by sorting it before non-<a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> strings.
 Comparing two <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> pointers returns 0.
 </p>
@@ -597,7 +597,7 @@ Comparing two <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>-1, 0 or 1, if <em class="parameter"><code>str1</code></em> is &lt;, == or &gt; than <em class="parameter"><code>str2</code></em>.</td>
+<td>an integer less than, equal to, or greater than zero, if <em class="parameter"><code>str1</code></em> is &lt;, == or &gt; than <em class="parameter"><code>str2</code></em>.</td>
 </tr>
 </tbody>
 </table></div>

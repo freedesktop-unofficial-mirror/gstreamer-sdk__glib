@@ -90,10 +90,12 @@ g_mutex_impl_new (void)
     g_thread_abort (errno, "malloc");
 
 #ifdef PTHREAD_ADAPTIVE_MUTEX_INITIALIZER_NP
-  pthread_mutexattr_t attr;
-  pthread_mutexattr_init (&attr);
-  pthread_mutexattr_settype (&attr, PTHREAD_MUTEX_ADAPTIVE_NP);
-  pattr = &attr;
+  {
+    pthread_mutexattr_t attr;
+    pthread_mutexattr_init (&attr);
+    pthread_mutexattr_settype (&attr, PTHREAD_MUTEX_ADAPTIVE_NP);
+    pattr = &attr;
+  }
 #endif
 
   if G_UNLIKELY ((status = pthread_mutex_init (mutex, pattr)) != 0)
@@ -139,7 +141,7 @@ g_mutex_get_impl (GMutex *mutex)
  * This function is useful to initialize a mutex that has been
  * allocated on the stack, or as part of a larger structure.
  * It is not necessary to initialize a mutex that has been
- * created that has been statically allocated.
+ * statically allocated.
  *
  * |[
  *   typedef struct {
@@ -1172,7 +1174,9 @@ void
 g_system_thread_set_name (const gchar *name)
 {
 #ifdef HAVE_SYS_PRCTL_H
+#ifdef PR_SET_NAME
   prctl (PR_SET_NAME, name, 0, 0, 0, 0);
+#endif
 #endif
 }
 

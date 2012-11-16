@@ -1950,7 +1950,10 @@ exact number of milliseconds.
 <a name="g-socket-get-available-bytes"></a><h3>g_socket_get_available_bytes ()</h3>
 <pre class="programlisting"><a href="./../glib/glib/glib-Basic-Types.html#gssize"><span class="returnvalue">gssize</span></a>              g_socket_get_available_bytes        (<em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>);</pre>
 <p>
-Get the amount of data pending in the OS input buffer.
+Get the amount of data that can be read from the socket without
+blocking. In the case of datagram sockets this returns the size
+of the first datagram and not the sum of the sizes of all currently
+queued datagrams.
 </p>
 <div class="variablelist"><table border="0" class="variablelist">
 <colgroup>
@@ -2379,7 +2382,7 @@ Gets the socket family of the socket.
 <pre class="programlisting"><span class="returnvalue">int</span>                 g_socket_get_fd                     (<em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>);</pre>
 <p>
 Returns the underlying OS socket object. On unix this
-is a socket file descriptor, and on windows this is
+is a socket file descriptor, and on Windows this is
 a Winsock2 SOCKET handle. This may be useful for
 doing platform specific or otherwise unusual operations
 on the socket.

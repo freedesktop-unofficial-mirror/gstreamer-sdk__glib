@@ -26,7 +26,6 @@
 #include <errno.h>
 #include <string.h>
 #include <unistd.h>
-#include <sys/wait.h>
 
 #ifdef HAVE_CRT_EXTERNS_H
 #include <crt_externs.h>
@@ -65,6 +64,7 @@
 #define GENERIC_NAME_KEY            "GenericName"
 #define FULL_NAME_KEY               "X-GNOME-FullName"
 #define KEYWORDS_KEY                "Keywords"
+#define STARTUP_WM_CLASS_KEY        "StartupWMClass"
 
 enum {
   PROP_0,
@@ -106,13 +106,14 @@ struct _GDesktopAppInfo
   char *binary;
   char *path;
   char *categories;
+  char *startup_wm_class;
+  char **mime_types;
 
   guint nodisplay       : 1;
   guint hidden          : 1;
   guint terminal        : 1;
   guint startup_notify  : 1;
   guint no_fuse         : 1;
-  /* FIXME: what about StartupWMClass ? */
 };
 
 typedef enum {
@@ -185,6 +186,8 @@ g_desktop_app_info_finalize (GObject *object)
   g_free (info->binary);
   g_free (info->path);
   g_free (info->categories);
+  g_free (info->startup_wm_class);
+  g_strfreev (info->mime_types);
   
   G_OBJECT_CLASS (g_desktop_app_info_parent_class)->finalize (object);
 }
@@ -330,6 +333,8 @@ g_desktop_app_info_load_from_keyfile (GDesktopAppInfo *info,
   info->no_fuse = g_key_file_get_boolean (key_file, G_KEY_FILE_DESKTOP_GROUP, "X-GIO-NoFuse", NULL) != FALSE;
   info->hidden = g_key_file_get_boolean (key_file, G_KEY_FILE_DESKTOP_GROUP, G_KEY_FILE_DESKTOP_KEY_HIDDEN, NULL) != FALSE;
   info->categories = g_key_file_get_string (key_file, G_KEY_FILE_DESKTOP_GROUP, G_KEY_FILE_DESKTOP_KEY_CATEGORIES, NULL);
+  info->startup_wm_class = g_key_file_get_string (key_file, G_KEY_FILE_DESKTOP_GROUP, STARTUP_WM_CLASS_KEY, NULL);
+  info->mime_types = g_key_file_get_string_list (key_file, G_KEY_FILE_DESKTOP_GROUP, G_KEY_FILE_DESKTOP_KEY_MIME_TYPE, NULL, NULL);
   
   info->icon = NULL;
   if (info->icon_name)
@@ -1368,12 +1373,12 @@ _g_desktop_app_info_launch_uris_internal (GAppInfo                   *appinfo,
        * the connection if we were the initial owner.
        */
       g_dbus_connection_flush (session_bus, NULL, NULL, NULL);
-      g_object_unref (session_bus);
     }
 
   completed = TRUE;
 
  out:
+  g_clear_object (&session_bus);
   g_strfreev (argv);
   g_strfreev (envp);
 
@@ -1844,8 +1849,7 @@ update_program_done (GPid     pid,
 		     gpointer data)
 {
   /* Did the application exit correctly */
-  if (WIFEXITED (status) &&
-      WEXITSTATUS (status) == 0)
+  if (g_spawn_check_exit_status (status, NULL))
     {
       /* Here we could clean out any caches in use */
     }
@@ -1978,6 +1982,15 @@ g_desktop_app_info_remove_supports_type (GAppInfo    *appinfo,
                                error);
 }
 
+static const char **
+g_desktop_app_info_get_supported_types (GAppInfo *appinfo)
+{
+  GDesktopAppInfo *info = G_DESKTOP_APP_INFO (appinfo);
+
+  return (const char**) info->mime_types;
+}
+
+
 static gboolean
 g_desktop_app_info_ensure_saved (GDesktopAppInfo  *info,
 				 GError          **error)
@@ -2065,6 +2078,7 @@ g_desktop_app_info_ensure_saved (GDesktopAppInfo  *info,
   close (fd);
   
   res = g_file_set_contents (filename, data, data_size, error);
+  g_free (data);
   if (!res)
     {
       g_free (desktop_id);
@@ -2205,6 +2219,7 @@ g_desktop_app_info_iface_init (GAppInfoIface *iface)
   iface->get_commandline = g_desktop_app_info_get_commandline;
   iface->get_display_name = g_desktop_app_info_get_display_name;
   iface->set_as_last_used_for_type = g_desktop_app_info_set_as_last_used_for_type;
+  iface->get_supported_types = g_desktop_app_info_get_supported_types;
 }
 
 static gboolean
@@ -3458,3 +3473,24 @@ g_desktop_app_info_lookup_get_default_for_uri_scheme (GDesktopAppInfoLookup *loo
 }
 
 G_GNUC_END_IGNORE_DEPRECATIONS
+
+/**
+ * g_desktop_app_info_get_startup_wm_class:
+ * @info: a #GDesktopAppInfo that supports startup notify
+ *
+ * Retrieves the StartupWMClass field from @info. This represents the
+ * WM_CLASS property of the main window of the application, if launched
+ * through @info.
+ *
+ * Returns: (transfer none): the startup WM class, or %NULL if none is set
+ * in the desktop file.
+ *
+ * Since: 2.34
+ */
+const char *
+g_desktop_app_info_get_startup_wm_class (GDesktopAppInfo *info)
+{
+  g_return_val_if_fail (G_IS_DESKTOP_APP_INFO (info), NULL);
+
+  return info->startup_wm_class;
+}

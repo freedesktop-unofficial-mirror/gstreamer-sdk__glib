@@ -214,7 +214,7 @@ in the <a class="link" href="GMenuModel.html#G-MENU-ATTRIBUTE-ACTION:CAPS" title
 identifies an action in an action group. Which action group(s) provide
 actions depends on the context in which the menu model is used.
 E.g. when the model is exported as the application menu of a
-<span class="type">GtkApplication</span>, actions can be application-wide or window-specific
+<a href="http://developer.gnome.org/gtk2/GtkApplication.html"><span class="type">GtkApplication</span></a>, actions can be application-wide or window-specific
 (and thus come from two different action groups). By convention, the
 application-wide actions have names that start with "app.", while the
 names of window-specific actions start with "win.".
@@ -447,6 +447,13 @@ value into the positional parameters and <a href="./../glib/glib/glib-Standard-M
 If the attribute does not exist, or it does exist but has the wrong
 type, then the positional parameters are ignored and <a href="./../glib/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> is
 returned.
+</p>
+<p>
+This function is a mix of <a class="link" href="GMenuModel.html#g-menu-model-get-item-attribute-value" title="g_menu_model_get_item_attribute_value ()"><code class="function">g_menu_model_get_item_attribute_value()</code></a> and
+<a href="./../glib/glib/glib-GVariant.html#g-variant-get"><code class="function">g_variant_get()</code></a>, followed by a <a href="./../glib/glib/glib-GVariant.html#g-variant-unref"><code class="function">g_variant_unref()</code></a>.  As such,
+<em class="parameter"><code>format_string</code></em> must make a complete copy of the data (since the
+<a href="./../glib/glib/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> may go away after the call to <a href="./../glib/glib/glib-GVariant.html#g-variant-unref"><code class="function">g_variant_unref()</code></a>).  In
+particular, no '&amp;' characters are allowed in <em class="parameter"><code>format_string</code></em>.
 </p>
 <div class="variablelist"><table border="0" class="variablelist">
 <colgroup>

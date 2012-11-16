@@ -190,7 +190,7 @@ void g_signal_emitv (const GValue *instance_and_params,
 			no accumulator was specified. If an accumulator was specified during signal creation,
 			this accumulator is used to calculate the return_value as a function of the return
 			values of all the closures invoked during emission. 
-			<a href="#ftn.id547643" class="footnote"><sup class="footnote"><a name="id547643"></a>[8]</sup></a>
+			<a href="#ftn.idp11066896" class="footnote"><sup class="footnote"><a name="idp11066896"></a>[8]</sup></a>
 			If no closure is invoked during
 			emission, the return_value is nonetheless initialized to zero/null.
 			</p></li>
@@ -273,7 +273,7 @@ void g_signal_emitv (const GValue *instance_and_params,
 <p>
 	    Of the three main connection functions,
 		only one has an explicit detail parameter as a <a href="./../glib/glib/glib-Quarks.html#GQuark"><span class="type">GQuark</span></a>
-		<a href="#ftn.id546945" class="footnote"><sup class="footnote"><a name="id546945"></a>[9]</sup></a>:
+		<a href="#ftn.idp10715648" class="footnote"><sup class="footnote"><a name="idp10715648"></a>[9]</sup></a>:
 </p>
 <pre class="programlisting">
 gulong     g_signal_connect_closure_by_id          (gpointer          instance,
@@ -357,7 +357,7 @@ void                  g_signal_emit_by_name (gpointer            instance,
 </div>
 <div class="footnotes">
 <br><hr style="width:100; align:left;">
-<div id="ftn.id547643" class="footnote"><p><a href="#id547643" class="para"><sup class="para">[8] </sup></a>
+<div id="ftn.idp11066896" class="footnote"><p><a href="#idp11066896" class="para"><sup class="para">[8] </sup></a>
 			  James (again!!) gives a few non-trivial examples of accumulators:
 			  <span class="quote">“<span class="quote">
 				For instance, you may have an accumulator that ignores NULL returns from 
@@ -365,7 +365,7 @@ void                  g_signal_emit_by_name (gpointer            instance,
 				to return the list of values returned by the closures.
 			  </span>”</span>
 			</p></div>
-<div id="ftn.id546945" class="footnote"><p><a href="#id546945" class="para"><sup class="para">[9] </sup></a>A GQuark is an integer which uniquely represents a string. It is possible to transform
+<div id="ftn.idp10715648" class="footnote"><p><a href="#idp10715648" class="para"><sup class="para">[9] </sup></a>A GQuark is an integer which uniquely represents a string. It is possible to transform
 		   back and forth between the integer and string representations with the functions 
 		   <code class="function"><a href="./../glib/glib/glib-Quarks.html#g-quark-from-string">g_quark_from_string</a></code> and <code class="function"><a href="./../glib/glib/glib-Quarks.html#g-quark-to-string">g_quark_to_string</a></code>.
 		  </p></div>

@@ -206,6 +206,8 @@ g_socket_connection_connect_async (GSocketConnection   *connection,
     {
       GSource *source;
 
+      g_simple_async_result_set_check_cancellable (simple, cancellable);
+
       g_error_free (tmp_error);
       source = g_socket_create_source (connection->priv->socket,
 				       G_IO_OUT, cancellable);
@@ -602,12 +604,10 @@ g_socket_connection_factory_register_type (GType         g_type,
 static void
 init_builtin_types (void)
 {
-  volatile GType a_type;
 #ifndef G_OS_WIN32
-  a_type = g_unix_connection_get_type ();
+  g_type_ensure (G_TYPE_UNIX_CONNECTION);
 #endif
-  a_type = g_tcp_connection_get_type ();
-  (a_type); /* To avoid -Wunused-but-set-variable */
+  g_type_ensure (G_TYPE_TCP_CONNECTION);
 }
 
 /**

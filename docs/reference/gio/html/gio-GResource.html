@@ -93,7 +93,7 @@ enum                <a class="link" href="gio-GResource.html#GResourceError" tit
 <a name="gio-GResource.description"></a><h2>Description</h2>
 <p>
 Applications and libraries often contain binary or textual data that is really part of the
-application, rather than user data. For instance <span class="type">GtkBuilder</span> .ui files, splashscreen images,
+application, rather than user data. For instance <a href="http://developer.gnome.org/gtk2/GtkBuilder.html"><span class="type">GtkBuilder</span></a> .ui files, splashscreen images,
 GMenu markup xml, CSS files, icons, etc. These are often shipped as files in <code class="filename">$datadir/appname</code>, or
 manually included as literal strings in the code.
 </p>
@@ -672,7 +672,7 @@ Unregisters the resource from the process-global set of resources.
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Looks for a file at the specified <em class="parameter"><code>path</code></em> in the set of
-globally registred resources and returns a <a href="./../glib/glib/glib-Byte-Arrays.html#GBytes"><span class="type">GBytes</span></a> that
+globally registered resources and returns a <a href="./../glib/glib/glib-Byte-Arrays.html#GBytes"><span class="type">GBytes</span></a> that
 lets you directly access the data in memory.
 </p>
 <p>
@@ -728,7 +728,7 @@ Free the returned object with <a href="./../glib/glib/glib-Byte-Arrays.html#g-by
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Looks for a file at the specified <em class="parameter"><code>path</code></em> in the set of
-globally registred resources and returns a <a class="link" href="GInputStream.html" title="GInputStream"><span class="type">GInputStream</span></a>
+globally registered resources and returns a <a class="link" href="GInputStream.html" title="GInputStream"><span class="type">GInputStream</span></a>
 that lets you read the data.
 </p>
 <p>
@@ -773,7 +773,7 @@ Free the returned object with <a href="./../gobject/gobject/gobject-The-Base-Obj
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Returns all the names of children at the specified <em class="parameter"><code>path</code></em> in the set of
-globally registred resources.
+globally registered resources.
 The return result is a <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> terminated list of strings which should
 be released with <a href="./../glib/glib/glib-String-Utility-Functions.html#g-strfreev"><code class="function">g_strfreev()</code></a>.
 </p>
@@ -819,7 +819,7 @@ be released with <a href="./../glib/glib/glib-String-Utility-Functions.html#g-st
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Looks for a file at the specified <em class="parameter"><code>path</code></em> in the set of
-globally registred resources and if found returns information about it.
+globally registered resources and if found returns information about it.
 </p>
 <p>
 <em class="parameter"><code>lookup_flags</code></em> controls the behaviour of the lookup.

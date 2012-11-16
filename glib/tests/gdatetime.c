@@ -885,6 +885,14 @@ test_non_utf8_printf (void)
       g_free (oldlocale);
       return;
     }
+  if (g_get_charset (NULL))
+    {
+      g_test_message ("locale ja_JP.eucjp may be available, but glib seems to think that it's equivalent to UTF-8, skipping non-UTF-8 tests.");
+      g_test_message ("This is a known issue on Darwin");
+      setlocale (LC_ALL, oldlocale);
+      g_free (oldlocale);
+      return;
+    }
 
   /* These are the outputs that ja_JP.UTF-8 generates; if everything
    * is working then ja_JP.eucjp should generate the same.
@@ -1185,12 +1193,13 @@ test_z (void)
 {
   GTimeZone *tz;
   GDateTime *dt;
+  gchar *p;
 
   g_test_bug ("642935");
 
   tz = g_time_zone_new ("-08:00");
   dt = g_date_time_new (tz, 0, 0, 0, 0, 0, 0);
-  gchar *p = g_date_time_format (dt, "%z");
+  p = g_date_time_format (dt, "%z");
   g_assert_cmpstr (p, ==, "-0800");
   g_date_time_unref (dt);
   g_time_zone_unref (tz);
@@ -1220,6 +1229,84 @@ test_strftime (void)
       g_date_time_unref (date_time);
       g_free (dt_str);
     }
+}
+
+static void
+test_find_interval (void)
+{
+  GTimeZone *tz;
+  GDateTime *dt;
+  gint64 u;
+  gint i1, i2;
+
+  tz = g_time_zone_new ("Canada/Eastern");
+  dt = g_date_time_new_utc (2010, 11, 7, 1, 30, 0);
+  u = g_date_time_to_unix (dt);
+
+  i1 = g_time_zone_find_interval (tz, G_TIME_TYPE_STANDARD, u);
+  i2 = g_time_zone_find_interval (tz, G_TIME_TYPE_DAYLIGHT, u);
+
+  g_assert_cmpint (i1, !=, i2);
+
+  g_date_time_unref (dt);
+
+  dt = g_date_time_new_utc (2010, 3, 14, 2, 0, 0);
+  u = g_date_time_to_unix (dt);
+
+  i1 = g_time_zone_find_interval (tz, G_TIME_TYPE_STANDARD, u);
+  g_assert_cmpint (i1, ==, -1);
+
+  g_date_time_unref (dt);
+  g_time_zone_unref (tz);
+}
+
+static void
+test_adjust_time (void)
+{
+  GTimeZone *tz;
+  GDateTime *dt;
+  gint64 u, u2;
+  gint i1, i2;
+
+  tz = g_time_zone_new ("Canada/Eastern");
+  dt = g_date_time_new_utc (2010, 11, 7, 1, 30, 0);
+  u = g_date_time_to_unix (dt);
+  u2 = u;
+
+  i1 = g_time_zone_find_interval (tz, G_TIME_TYPE_DAYLIGHT, u);
+  i2 = g_time_zone_adjust_time (tz, G_TIME_TYPE_DAYLIGHT, &u2);
+
+  g_assert_cmpint (i1, ==, i2);
+  g_assert (u == u2);
+
+  g_date_time_unref (dt);
+
+  dt = g_date_time_new_utc (2010, 3, 14, 2, 30, 0);
+  u2 = g_date_time_to_unix (dt);
+  g_date_time_unref (dt);
+
+  dt = g_date_time_new_utc (2010, 3, 14, 3, 0, 0);
+  u = g_date_time_to_unix (dt);
+  g_date_time_unref (dt);
+
+  i1 = g_time_zone_adjust_time (tz, G_TIME_TYPE_DAYLIGHT, &u2);
+  g_assert (u == u2);
+
+  g_time_zone_unref (tz);
+}
+
+static void
+test_no_header (void)
+{
+  GTimeZone *tz;
+
+  tz = g_time_zone_new ("blabla");
+
+  g_assert_cmpstr (g_time_zone_get_abbreviation (tz, 0), ==, "UTC");
+  g_assert_cmpint (g_time_zone_get_offset (tz, 0), ==, 0);
+  g_assert (!g_time_zone_is_dst (tz, 0));
+
+  g_time_zone_unref (tz);
 }
 
 gint
@@ -1271,6 +1358,9 @@ main (gint   argc,
   g_test_add_func ("/GDateTime/dst", test_GDateTime_dst);
   g_test_add_func ("/GDateTime/test_z", test_z);
   g_test_add_func ("/GDateTime/test-all-dates", test_all_dates);
+  g_test_add_func ("/GTimeZone/find-interval", test_find_interval);
+  g_test_add_func ("/GTimeZone/adjust-time", test_adjust_time);
+  g_test_add_func ("/GTimeZone/no-header", test_no_header);
 
   return g_test_run ();
 }

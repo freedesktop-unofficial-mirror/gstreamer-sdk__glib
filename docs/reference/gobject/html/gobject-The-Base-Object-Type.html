@@ -151,6 +151,16 @@ typedef             <a class="link" href="gobject-The-Base-Object-Type.html#GIni
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Datasets.html#GDestroyNotify"><span class="type">GDestroyNotify</span></a> destroy</code></em>);
 <a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a>            <a class="link" href="gobject-The-Base-Object-Type.html#g-object-steal-data" title="g_object_steal_data ()">g_object_steal_data</a>                 (<em class="parameter"><code><a class="link" href="gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> *object</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>);
+<a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a>            <a class="link" href="gobject-The-Base-Object-Type.html#g-object-dup-data" title="g_object_dup_data ()">g_object_dup_data</a>                   (<em class="parameter"><code><a class="link" href="gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> *object</code></em>,
+                                                         <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Keyed-Data-Lists.html#GDuplicateFunc"><span class="type">GDuplicateFunc</span></a> dup_func</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
+<a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="gobject-The-Base-Object-Type.html#g-object-replace-data" title="g_object_replace_data ()">g_object_replace_data</a>               (<em class="parameter"><code><a class="link" href="gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> *object</code></em>,
+                                                         <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> oldval</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> newval</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Datasets.html#GDestroyNotify"><span class="type">GDestroyNotify</span></a> destroy</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Datasets.html#GDestroyNotify"><span class="type">GDestroyNotify</span></a> *old_destroy</code></em>);
 <a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a>            <a class="link" href="gobject-The-Base-Object-Type.html#g-object-get-qdata" title="g_object_get_qdata ()">g_object_get_qdata</a>                  (<em class="parameter"><code><a class="link" href="gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> *object</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Quarks.html#GQuark"><span class="type">GQuark</span></a> quark</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="gobject-The-Base-Object-Type.html#g-object-set-qdata" title="g_object_set_qdata ()">g_object_set_qdata</a>                  (<em class="parameter"><code><a class="link" href="gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> *object</code></em>,
@@ -162,6 +172,16 @@ typedef             <a class="link" href="gobject-The-Base-Object-Type.html#GIni
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Datasets.html#GDestroyNotify"><span class="type">GDestroyNotify</span></a> destroy</code></em>);
 <a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a>            <a class="link" href="gobject-The-Base-Object-Type.html#g-object-steal-qdata" title="g_object_steal_qdata ()">g_object_steal_qdata</a>                (<em class="parameter"><code><a class="link" href="gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> *object</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Quarks.html#GQuark"><span class="type">GQuark</span></a> quark</code></em>);
+<a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a>            <a class="link" href="gobject-The-Base-Object-Type.html#g-object-dup-qdata" title="g_object_dup_qdata ()">g_object_dup_qdata</a>                  (<em class="parameter"><code><a class="link" href="gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> *object</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Quarks.html#GQuark"><span class="type">GQuark</span></a> quark</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Keyed-Data-Lists.html#GDuplicateFunc"><span class="type">GDuplicateFunc</span></a> dup_func</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
+<a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="gobject-The-Base-Object-Type.html#g-object-replace-qdata" title="g_object_replace_qdata ()">g_object_replace_qdata</a>              (<em class="parameter"><code><a class="link" href="gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> *object</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Quarks.html#GQuark"><span class="type">GQuark</span></a> quark</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> oldval</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> newval</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Datasets.html#GDestroyNotify"><span class="type">GDestroyNotify</span></a> destroy</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Datasets.html#GDestroyNotify"><span class="type">GDestroyNotify</span></a> *old_destroy</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="gobject-The-Base-Object-Type.html#g-object-set-property" title="g_object_set_property ()">g_object_set_property</a>               (<em class="parameter"><code><a class="link" href="gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> *object</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *property_name</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="gobject-Generic-values.html#GValue" title="GValue"><span class="type">GValue</span></a> *value</code></em>);
@@ -280,7 +300,7 @@ expose floating references in their API.
 </p>
 <p>
 Some object implementations may need to save an objects floating state
-across certain code portions (an example is <span class="type">GtkMenu</span>), to achieve this,
+across certain code portions (an example is <a href="http://developer.gnome.org/gtk2/GtkMenu.html"><span class="type">GtkMenu</span></a>), to achieve this,
 the following sequence can be used:
 </p>
 <p>
@@ -364,7 +384,7 @@ The class structure for the <span class="structname">GObject</span> type.
 <p>
 </p>
 <div class="example">
-<a name="id587132"></a><p class="title"><b>Example 1. Implementing singletons using a constructor</b></p>
+<a name="idp13206624"></a><p class="title"><b>Example 1. Implementing singletons using a constructor</b></p>
 <div class="example-contents">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -1969,12 +1989,12 @@ equivalent to <code class="literal">g_signal_connect_object (..., G_CONNECT_SWAP
 7
 8</pre></td>
         <td class="listing_code"><pre class="programlisting"><span class="normal">menu</span><span class="symbol">-&gt;</span><span class="normal">toplevel </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="gobject-The-Base-Object-Type.html#g-object-connect">g_object_connect</a></span><span class="normal"> </span><span class="symbol">(</span><span class="function"><a href="gobject-The-Base-Object-Type.html#g-object-new">g_object_new</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">GTK_TYPE_WINDOW</span><span class="symbol">,</span>
-<span class="normal">                           </span><span class="string">"type"</span><span class="symbol">,</span><span class="normal"> GTK_WINDOW_POPUP</span><span class="symbol">,</span>
+<span class="normal">                           </span><span class="string">"type"</span><span class="symbol">,</span><span class="normal"> <a href="http://developer.gnome.org/gtk2/gtk3-Standard-Enumerations.html#GTK-WINDOW-POPUP:CAPS">GTK_WINDOW_POPUP</a></span><span class="symbol">,</span>
 <span class="normal">                           </span><span class="string">"child"</span><span class="symbol">,</span><span class="normal"> menu</span><span class="symbol">,</span>
 <span class="normal">                           <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">),</span>
 <span class="normal">                     </span><span class="string">"signal::event"</span><span class="symbol">,</span><span class="normal"> gtk_menu_window_event</span><span class="symbol">,</span><span class="normal"> menu</span><span class="symbol">,</span>
 <span class="normal">                     </span><span class="string">"signal::size_request"</span><span class="symbol">,</span><span class="normal"> gtk_menu_window_size_request</span><span class="symbol">,</span><span class="normal"> menu</span><span class="symbol">,</span>
-<span class="normal">                     </span><span class="string">"signal::destroy"</span><span class="symbol">,</span><span class="normal"> gtk_widget_destroyed</span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">&amp;</span><span class="normal">menu</span><span class="symbol">-&gt;</span><span class="normal">toplevel</span><span class="symbol">,</span>
+<span class="normal">                     </span><span class="string">"signal::destroy"</span><span class="symbol">,</span><span class="normal"> <a href="http://developer.gnome.org/gtk2/GtkWidget.html#gtk-widget-destroyed">gtk_widget_destroyed</a></span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">&amp;</span><span class="normal">menu</span><span class="symbol">-&gt;</span><span class="normal">toplevel</span><span class="symbol">,</span>
 <span class="normal">                     <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">);</span></pre></td>
       </tr>
     </tbody>
@@ -2106,7 +2126,7 @@ the type, for instance by calling <a href="./../glib/glib/glib-Memory-Allocation
 <p>
 </p>
 <div class="example">
-<a name="id613836"></a><p class="title"><b>Example 2. Using g_object_get()</b></p>
+<a name="idp18016608"></a><p class="title"><b>Example 2. Using g_object_get()</b></p>
 <div class="example-contents">
 An example of using <a class="link" href="gobject-The-Base-Object-Type.html#g-object-get" title="g_object_get ()"><code class="function">g_object_get()</code></a> to get the contents
 of three properties - one of type <a class="link" href="gobject-Type-Information.html#G-TYPE-INT:CAPS" title="G_TYPE_INT"><span class="type">G_TYPE_INT</span></a>,
@@ -2302,7 +2322,9 @@ and then notify a change on the "foo" property with:
 Increases the freeze count on <em class="parameter"><code>object</code></em>. If the freeze count is
 non-zero, the emission of "notify" signals on <em class="parameter"><code>object</code></em> is
 stopped. The signals are queued until the freeze count is decreased
-to zero.
+to zero. Duplicate notifications are squashed so that at most one
+<a class="link" href="gobject-The-Base-Object-Type.html#GObject-notify" title='The "notify" signal'><span class="type">"notify"</span></a> signal is emitted for each property modified while the
+object is frozen.
 </p>
 <p>
 This is necessary for accessors that modify multiple properties to prevent
@@ -2327,7 +2349,11 @@ premature notification while the object is still being modified.
 <p>
 Reverts the effect of a previous call to
 <a class="link" href="gobject-The-Base-Object-Type.html#g-object-freeze-notify" title="g_object_freeze_notify ()"><code class="function">g_object_freeze_notify()</code></a>. The freeze count is decreased on <em class="parameter"><code>object</code></em>
-and when it reaches zero, all queued "notify" signals are emitted.
+and when it reaches zero, queued "notify" signals are emitted.
+</p>
+<p>
+Duplicate notifications for each property are squashed so that at most one
+<a class="link" href="gobject-The-Base-Object-Type.html#GObject-notify" title='The "notify" signal'><span class="type">"notify"</span></a> signal is emitted for each property.
 </p>
 <p>
 It is an error to call this function when the freeze count is zero.
@@ -2483,6 +2509,135 @@ without invoking the association's destroy handler.
 </tr>
 </tbody>
 </table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-object-dup-data"></a><h3>g_object_dup_data ()</h3>
+<pre class="programlisting"><a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a>            g_object_dup_data                   (<em class="parameter"><code><a class="link" href="gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> *object</code></em>,
+                                                         <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Keyed-Data-Lists.html#GDuplicateFunc"><span class="type">GDuplicateFunc</span></a> dup_func</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
+<p>
+This is a variant of <a class="link" href="gobject-The-Base-Object-Type.html#g-object-get-data" title="g_object_get_data ()"><code class="function">g_object_get_data()</code></a> which returns
+a 'duplicate' of the value. <em class="parameter"><code>dup_func</code></em> defines the
+meaning of 'duplicate' in this context, it could e.g.
+take a reference on a ref-counted object.
+</p>
+<p>
+If the <em class="parameter"><code>key</code></em> is not set on the object then <em class="parameter"><code>dup_func</code></em>
+will be called with a <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> argument.
+</p>
+<p>
+Note that <em class="parameter"><code>dup_func</code></em> is called while user data of <em class="parameter"><code>object</code></em>
+is locked.
+</p>
+<p>
+This function can be useful to avoid races when multiple
+threads are using object data on the same key on the same
+object.
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>object</code></em> :</span></p></td>
+<td>the <a class="link" href="gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> to store user data on</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td>a string, naming the user data pointer</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>dup_func</code></em> :</span></p></td>
+<td>function to dup the value. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>passed as user_data to <em class="parameter"><code>dup_func</code></em>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the result of calling <em class="parameter"><code>dup_func</code></em> on the value
+associated with <em class="parameter"><code>key</code></em> on <em class="parameter"><code>object</code></em>, or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if not set.
+If <em class="parameter"><code>dup_func</code></em> is <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>, the value is returned
+unmodified.</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.34</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-object-replace-data"></a><h3>g_object_replace_data ()</h3>
+<pre class="programlisting"><a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_object_replace_data               (<em class="parameter"><code><a class="link" href="gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> *object</code></em>,
+                                                         <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> oldval</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> newval</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Datasets.html#GDestroyNotify"><span class="type">GDestroyNotify</span></a> destroy</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Datasets.html#GDestroyNotify"><span class="type">GDestroyNotify</span></a> *old_destroy</code></em>);</pre>
+<p>
+Compares the user data for the key <em class="parameter"><code>key</code></em> on <em class="parameter"><code>object</code></em> with
+<em class="parameter"><code>oldval</code></em>, and if they are the same, replaces <em class="parameter"><code>oldval</code></em> with
+<em class="parameter"><code>newval</code></em>.
+</p>
+<p>
+This is like a typical atomic compare-and-exchange
+operation, for user data on an object.
+</p>
+<p>
+If the previous value was replaced then ownership of the
+old value (<em class="parameter"><code>oldval</code></em>) is passed to the caller, including
+the registred destroy notify for it (passed out in <em class="parameter"><code>old_destroy</code></em>).
+Its up to the caller to free this as he wishes, which may
+or may not include using <em class="parameter"><code>old_destroy</code></em> as sometimes replacement
+should not destroy the object in the normal way.
+</p>
+<p>
+Return: <a href="./../glib/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the existing value for <em class="parameter"><code>key</code></em> was replaced
+ by <em class="parameter"><code>newval</code></em>, <a href="./../glib/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise.
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>object</code></em> :</span></p></td>
+<td>the <a class="link" href="gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> to store user data on</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
+<td>a string, naming the user data pointer</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>oldval</code></em> :</span></p></td>
+<td>the old value to compare against. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>newval</code></em> :</span></p></td>
+<td>the new value. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>destroy</code></em> :</span></p></td>
+<td>a destroy notify for the new value. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>old_destroy</code></em> :</span></p></td>
+<td>destroy notify for the existing value. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.34</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -2687,6 +2842,135 @@ and thus the partial string list would have been freed upon
 </tr>
 </tbody>
 </table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-object-dup-qdata"></a><h3>g_object_dup_qdata ()</h3>
+<pre class="programlisting"><a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a>            g_object_dup_qdata                  (<em class="parameter"><code><a class="link" href="gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> *object</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Quarks.html#GQuark"><span class="type">GQuark</span></a> quark</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Keyed-Data-Lists.html#GDuplicateFunc"><span class="type">GDuplicateFunc</span></a> dup_func</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
+<p>
+This is a variant of <a class="link" href="gobject-The-Base-Object-Type.html#g-object-get-qdata" title="g_object_get_qdata ()"><code class="function">g_object_get_qdata()</code></a> which returns
+a 'duplicate' of the value. <em class="parameter"><code>dup_func</code></em> defines the
+meaning of 'duplicate' in this context, it could e.g.
+take a reference on a ref-counted object.
+</p>
+<p>
+If the <em class="parameter"><code>quark</code></em> is not set on the object then <em class="parameter"><code>dup_func</code></em>
+will be called with a <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> argument.
+</p>
+<p>
+Note that <em class="parameter"><code>dup_func</code></em> is called while user data of <em class="parameter"><code>object</code></em>
+is locked.
+</p>
+<p>
+This function can be useful to avoid races when multiple
+threads are using object data on the same key on the same
+object.
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>object</code></em> :</span></p></td>
+<td>the <a class="link" href="gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> to store user data on</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>quark</code></em> :</span></p></td>
+<td>a <a href="./../glib/glib/glib-Quarks.html#GQuark"><span class="type">GQuark</span></a>, naming the user data pointer</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>dup_func</code></em> :</span></p></td>
+<td>function to dup the value. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>passed as user_data to <em class="parameter"><code>dup_func</code></em>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the result of calling <em class="parameter"><code>dup_func</code></em> on the value
+associated with <em class="parameter"><code>quark</code></em> on <em class="parameter"><code>object</code></em>, or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if not set.
+If <em class="parameter"><code>dup_func</code></em> is <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>, the value is returned
+unmodified.</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.34</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-object-replace-qdata"></a><h3>g_object_replace_qdata ()</h3>
+<pre class="programlisting"><a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_object_replace_qdata              (<em class="parameter"><code><a class="link" href="gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> *object</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Quarks.html#GQuark"><span class="type">GQuark</span></a> quark</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> oldval</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> newval</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Datasets.html#GDestroyNotify"><span class="type">GDestroyNotify</span></a> destroy</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Datasets.html#GDestroyNotify"><span class="type">GDestroyNotify</span></a> *old_destroy</code></em>);</pre>
+<p>
+Compares the user data for the key <em class="parameter"><code>quark</code></em> on <em class="parameter"><code>object</code></em> with
+<em class="parameter"><code>oldval</code></em>, and if they are the same, replaces <em class="parameter"><code>oldval</code></em> with
+<em class="parameter"><code>newval</code></em>.
+</p>
+<p>
+This is like a typical atomic compare-and-exchange
+operation, for user data on an object.
+</p>
+<p>
+If the previous value was replaced then ownership of the
+old value (<em class="parameter"><code>oldval</code></em>) is passed to the caller, including
+the registred destroy notify for it (passed out in <em class="parameter"><code>old_destroy</code></em>).
+Its up to the caller to free this as he wishes, which may
+or may not include using <em class="parameter"><code>old_destroy</code></em> as sometimes replacement
+should not destroy the object in the normal way.
+</p>
+<p>
+Return: <a href="./../glib/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the existing value for <em class="parameter"><code>quark</code></em> was replaced
+ by <em class="parameter"><code>newval</code></em>, <a href="./../glib/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise.
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>object</code></em> :</span></p></td>
+<td>the <a class="link" href="gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> to store user data on</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>quark</code></em> :</span></p></td>
+<td>a <a href="./../glib/glib/glib-Quarks.html#GQuark"><span class="type">GQuark</span></a>, naming the user data pointer</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>oldval</code></em> :</span></p></td>
+<td>the old value to compare against. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>newval</code></em> :</span></p></td>
+<td>the new value. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>destroy</code></em> :</span></p></td>
+<td>a destroy notify for the new value. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>old_destroy</code></em> :</span></p></td>
+<td>destroy notify for the existing value. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.34</p>
 </div>
 <hr>
 <div class="refsect2">

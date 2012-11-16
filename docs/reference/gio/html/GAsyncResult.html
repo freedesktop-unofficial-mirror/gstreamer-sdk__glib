@@ -53,6 +53,11 @@ struct              <a class="link" href="GAsyncResult.html#GAsyncResultIface" t
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
 <a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a>            <a class="link" href="GAsyncResult.html#g-async-result-get-user-data" title="g_async_result_get_user_data ()">g_async_result_get_user_data</a>        (<em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *res</code></em>);
 <a href="./../gobject/gobject/gobject-The-Base-Object-Type.html#GObject"><span class="returnvalue">GObject</span></a> *           <a class="link" href="GAsyncResult.html#g-async-result-get-source-object" title="g_async_result_get_source_object ()">g_async_result_get_source_object</a>    (<em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *res</code></em>);
+<a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GAsyncResult.html#g-async-result-is-tagged" title="g_async_result_is_tagged ()">g_async_result_is_tagged</a>            (<em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *res</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> source_tag</code></em>);
+<a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GAsyncResult.html#g-async-result-legacy-propagate-error" title="g_async_result_legacy_propagate_error ()">g_async_result_legacy_propagate_error</a>
+                                                        (<em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *res</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
 </pre>
 </div>
 <div class="refsect1">
@@ -221,6 +226,9 @@ usually passed directly to a asynchronous <code class="function">_finish()</code
 
   gpointer  (* get_user_data)     (GAsyncResult *res);
   GObject * (* get_source_object) (GAsyncResult *res);
+
+  gboolean  (* is_tagged)         (GAsyncResult *res,
+				   gpointer      tag);
 };
 </pre>
 <p>
@@ -243,6 +251,10 @@ Interface definition for <a class="link" href="GAsyncResult.html" title="GAsyncR
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GAsyncResultIface.get-source-object"></a>get_source_object</code></em> ()</span></p></td>
 <td>Gets the source object that issued the asynchronous operation.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="structfield"><code><a name="GAsyncResultIface.is-tagged"></a>is_tagged</code></em> ()</span></p></td>
+<td>Checks if a result is tagged with a particular source.</td>
 </tr>
 </tbody>
 </table></div>
@@ -329,6 +341,86 @@ or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="lit
 </tr>
 </tbody>
 </table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-async-result-is-tagged"></a><h3>g_async_result_is_tagged ()</h3>
+<pre class="programlisting"><a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_async_result_is_tagged            (<em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *res</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> source_tag</code></em>);</pre>
+<p>
+Checks if <em class="parameter"><code>res</code></em> has the given <em class="parameter"><code>source_tag</code></em> (generally a function
+pointer indicating the function <em class="parameter"><code>res</code></em> was created by).
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>res</code></em> :</span></p></td>
+<td>a <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>source_tag</code></em> :</span></p></td>
+<td>an application-defined tag</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+<a href="./../glib/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if <em class="parameter"><code>res</code></em> has the indicated <em class="parameter"><code>source_tag</code></em>, <a href="./../glib/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> if
+not.</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.34</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-async-result-legacy-propagate-error"></a><h3>g_async_result_legacy_propagate_error ()</h3>
+<pre class="programlisting"><a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_async_result_legacy_propagate_error
+                                                        (<em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *res</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+<p>
+If <em class="parameter"><code>res</code></em> is a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>, this is equivalent to
+<a class="link" href="GSimpleAsyncResult.html#g-simple-async-result-propagate-error" title="g_simple_async_result_propagate_error ()"><code class="function">g_simple_async_result_propagate_error()</code></a>. Otherwise it returns
+<a href="./../glib/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a>.
+</p>
+<p>
+This can be used for legacy error handling in async
+<code class="literal"><code class="function">_finish()</code></code> wrapper functions that traditionally
+handled <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a> error returns themselves rather than
+calling into the virtual method. This should not be used in new
+code; <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> errors that are set by virtual methods should
+also be extracted by virtual methods, to enable subclasses to chain
+up correctly.
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>res</code></em> :</span></p></td>
+<td>a <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td>a location to propagate the error to. <span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+<a href="./../glib/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if <em class="parameter"><code>error</code></em> is has been filled in with an error from
+<em class="parameter"><code>res</code></em>, <a href="./../glib/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> if not.</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.34</p>
 </div>
 </div>
 <div class="refsect1">

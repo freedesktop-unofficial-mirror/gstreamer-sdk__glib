@@ -737,8 +737,8 @@ class CodeGenerator:
             self.c.write('static const GDBusAnnotationInfo %s_%d =\n'
                          '{\n'
                          '  -1,\n'
-                         '  "%s",\n'
-                         '  "%s",\n'%(prefix, n, a.key, a.value))
+                         '  (gchar *) "%s",\n'
+                         '  (gchar *) "%s",\n'%(prefix, n, a.key, a.value))
             if len(a.annotations) == 0:
                 self.c.write('  NULL\n')
             else:
@@ -769,8 +769,8 @@ class CodeGenerator:
                          '{\n'
                          '  {\n'
                          '    -1,\n'
-                         '    "%s",\n'
-                         '    "%s",\n'%(prefix, a.name, a.name, a.signature))
+                         '    (gchar *) "%s",\n'
+                         '    (gchar *) "%s",\n'%(prefix, a.name, a.name, a.signature))
             if num_anno == 0:
                 self.c.write('    NULL\n')
             else:
@@ -810,7 +810,7 @@ class CodeGenerator:
                                  '{\n'
                                  '  {\n'
                                  '    -1,\n'
-                                 '    "%s",\n'%(i.name_lower, m.name_lower, m.name))
+                                 '    (gchar *) "%s",\n'%(i.name_lower, m.name_lower, m.name))
                     if len(m.in_args) == 0:
                         self.c.write('    NULL,\n')
                     else:
@@ -849,7 +849,7 @@ class CodeGenerator:
                                  '{\n'
                                  '  {\n'
                                  '    -1,\n'
-                                 '    "%s",\n'%(i.name_lower, s.name_lower, s.name))
+                                 '    (gchar *) "%s",\n'%(i.name_lower, s.name_lower, s.name))
                     if len(s.args) == 0:
                         self.c.write('    NULL,\n')
                     else:
@@ -889,8 +889,8 @@ class CodeGenerator:
                                  '{\n'
                                  '  {\n'
                                  '    -1,\n'
-                                 '    "%s",\n'
-                                 '    "%s",\n'
+                                 '    (gchar *) "%s",\n'
+                                 '    (gchar *) "%s",\n'
                                  '    %s,\n'%(i.name_lower, p.name_lower, p.name, p.arg.signature, access))
                     if num_anno == 0:
                         self.c.write('    NULL\n')
@@ -919,7 +919,7 @@ class CodeGenerator:
                          '{\n'
                          '  {\n'
                          '    -1,\n'
-                         '    "%s",\n'%(i.name_lower, i.name))
+                         '    (gchar *) "%s",\n'%(i.name_lower, i.name))
             if len(i.methods) == 0:
                 self.c.write('    NULL,\n')
             else:
@@ -954,7 +954,7 @@ class CodeGenerator:
             self.c.write('GDBusInterfaceInfo *\n'
                          '%s_interface_info (void)\n'
                          '{\n'
-                         '  return (GDBusInterfaceInfo *) &_%s_interface_info;\n'
+                         '  return (GDBusInterfaceInfo *) &_%s_interface_info.parent_struct;\n'
                          '}\n'
                          '\n'%(i.name_lower, i.name_lower))
 
@@ -1651,7 +1651,7 @@ class CodeGenerator:
                          '    g_variant_new ("(ssv)", "%s", info->parent_struct.name, variant),\n'
                          '    G_DBUS_CALL_FLAGS_NONE,\n'
                          '    -1,\n'
-                         '    NULL, (GAsyncReadyCallback) %s_proxy_set_property_cb, (gpointer) info);\n'
+                         '    NULL, (GAsyncReadyCallback) %s_proxy_set_property_cb, (GDBusPropertyInfo *) &info->parent_struct);\n'
                          '  g_variant_unref (variant);\n'
                          %(len(i.properties), i.name_lower, i.name, i.name_lower))
         self.c.write('}\n'
@@ -1672,7 +1672,7 @@ class CodeGenerator:
                      '  guint n;\n'
                      '  guint signal_id;\n');
         # Note: info could be NULL if we are talking to a newer version of the interface
-        self.c.write('  info = (_ExtendedGDBusSignalInfo *) g_dbus_interface_info_lookup_signal ((GDBusInterfaceInfo *) &_%s_interface_info, signal_name);\n'
+        self.c.write('  info = (_ExtendedGDBusSignalInfo *) g_dbus_interface_info_lookup_signal ((GDBusInterfaceInfo *) &_%s_interface_info.parent_struct, signal_name);\n'
                      '  if (info == NULL)\n'
                      '    return;\n'
                      %(i.name_lower))
@@ -1721,7 +1721,7 @@ class CodeGenerator:
                      '  g_variant_get (changed_properties, "a{sv}", &iter);\n'
                      '  while (g_variant_iter_next (iter, "{&sv}", &key, NULL))\n'
                      '    {\n'
-                     '      info = (_ExtendedGDBusPropertyInfo *) g_dbus_interface_info_lookup_property ((GDBusInterfaceInfo *) &_%s_interface_info, key);\n'
+                     '      info = (_ExtendedGDBusPropertyInfo *) g_dbus_interface_info_lookup_property ((GDBusInterfaceInfo *) &_%s_interface_info.parent_struct, key);\n'
                      '      g_datalist_remove_data (&proxy->priv->qdata, key);\n'
                      '      if (info != NULL)\n'
                      '        g_object_notify (G_OBJECT (proxy), info->hyphen_name);\n'
@@ -1729,7 +1729,7 @@ class CodeGenerator:
                      '  g_variant_iter_free (iter);\n'
                      '  for (n = 0; invalidated_properties[n] != NULL; n++)\n'
                      '    {\n'
-                     '      info = (_ExtendedGDBusPropertyInfo *) g_dbus_interface_info_lookup_property ((GDBusInterfaceInfo *) &_%s_interface_info, invalidated_properties[n]);\n'
+                     '      info = (_ExtendedGDBusPropertyInfo *) g_dbus_interface_info_lookup_property ((GDBusInterfaceInfo *) &_%s_interface_info.parent_struct, invalidated_properties[n]);\n'
                      '      g_datalist_remove_data (&proxy->priv->qdata, invalidated_properties[n]);\n'
                      '      if (info != NULL)\n'
                      '        g_object_notify (G_OBJECT (proxy), info->hyphen_name);\n'
@@ -2157,7 +2157,7 @@ class CodeGenerator:
                      '  GVariant *ret;\n'
                      %(i.name_lower, i.camel_name, i.ns_upper, i.name_upper))
         self.c.write('  ret = NULL;\n'
-                     '  info = (_ExtendedGDBusPropertyInfo *) g_dbus_interface_info_lookup_property ((GDBusInterfaceInfo *) &_%s_interface_info, property_name);\n'
+                     '  info = (_ExtendedGDBusPropertyInfo *) g_dbus_interface_info_lookup_property ((GDBusInterfaceInfo *) &_%s_interface_info.parent_struct, property_name);\n'
                      '  g_assert (info != NULL);\n'
                      '  pspec = g_object_class_find_property (G_OBJECT_GET_CLASS (skeleton), info->hyphen_name);\n'
                      '  if (pspec == NULL)\n'
@@ -2194,7 +2194,7 @@ class CodeGenerator:
                      '  gboolean ret;\n'
                      %(i.name_lower, i.camel_name, i.ns_upper, i.name_upper))
         self.c.write('  ret = FALSE;\n'
-                     '  info = (_ExtendedGDBusPropertyInfo *) g_dbus_interface_info_lookup_property ((GDBusInterfaceInfo *) &_%s_interface_info, property_name);\n'
+                     '  info = (_ExtendedGDBusPropertyInfo *) g_dbus_interface_info_lookup_property ((GDBusInterfaceInfo *) &_%s_interface_info.parent_struct, property_name);\n'
                      '  g_assert (info != NULL);\n'
                      '  pspec = g_object_class_find_property (G_OBJECT_GET_CLASS (skeleton), info->hyphen_name);\n'
                      '  if (pspec == NULL)\n'
@@ -2420,15 +2420,15 @@ class CodeGenerator:
                          '    }\n'
                          '  if (num_changes > 0)\n'
                          '    {\n'
-                         '      GList *connections, *l;\n'
+                         '      GList *connections, *ll;\n'
                          '      GVariant *signal_variant;'
                          '\n'
                          '      signal_variant = g_variant_ref_sink (g_variant_new ("(sa{sv}as)", "%s",\n'
                          '                                           &builder, &invalidated_builder));\n'
                          '      connections = g_dbus_interface_skeleton_get_connections (G_DBUS_INTERFACE_SKELETON (skeleton));\n'
-                         '      for (l = connections; l != NULL; l = l->next)\n'
+                         '      for (ll = connections; ll != NULL; ll = ll->next)\n'
                          '        {\n'
-                         '          GDBusConnection *connection = l->data;\n'
+                         '          GDBusConnection *connection = ll->data;\n'
                          '\n'
                          '          g_dbus_connection_emit_signal (connection,\n'
                          '                                         NULL, g_dbus_interface_skeleton_get_object_path (G_DBUS_INTERFACE_SKELETON (skeleton)),\n'
@@ -3103,7 +3103,7 @@ class CodeGenerator:
                      '      lookup_hash = g_hash_table_new (g_str_hash, g_str_equal);\n'
                      %(self.ns_upper))
         for i in self.ifaces:
-            self.c.write('      g_hash_table_insert (lookup_hash, "%s", GSIZE_TO_POINTER (%sTYPE_%s_PROXY));\n'
+            self.c.write('      g_hash_table_insert (lookup_hash, (gpointer) "%s", GSIZE_TO_POINTER (%sTYPE_%s_PROXY));\n'
                          %(i.name, i.ns_upper, i.name_upper))
         self.c.write('      g_once_init_leave (&once_init_value, 1);\n'
                      '    }\n')

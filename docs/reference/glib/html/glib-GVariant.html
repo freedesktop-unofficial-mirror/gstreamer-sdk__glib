@@ -57,6 +57,9 @@ const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span cla
 <a class="link" href="glib-GVariant.html#GVariantClass" title="enum GVariantClass"><span class="returnvalue">GVariantClass</span></a>       <a class="link" href="glib-GVariant.html#g-variant-classify" title="g_variant_classify ()">g_variant_classify</a>                  (<em class="parameter"><code><a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><span class="type">GVariant</span></a> *value</code></em>);
 enum                <a class="link" href="glib-GVariant.html#GVariantClass" title="enum GVariantClass">GVariantClass</a>;
 
+<a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="glib-GVariant.html#g-variant-check-format-string" title="g_variant_check_format_string ()">g_variant_check_format_string</a>       (<em class="parameter"><code><a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><span class="type">GVariant</span></a> *value</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *format_string</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="type">gboolean</span></a> copy_only</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="glib-GVariant.html#g-variant-get" title="g_variant_get ()">g_variant_get</a>                       (<em class="parameter"><code><a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><span class="type">GVariant</span></a> *value</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *format_string</code></em>,
                                                          <em class="parameter"><code>...</code></em>);
@@ -265,7 +268,7 @@ Serialised <a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><
 <a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><span class="type">GVariant</span></a> is largely compatible with D-Bus.  Almost all types of
 <a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><span class="type">GVariant</span></a> instances can be sent over D-Bus.  See <a class="link" href="glib-GVariantType.html#GVariantType" title="GVariantType"><span class="type">GVariantType</span></a> for
 exceptions.  (However, <a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><span class="type">GVariant</span></a>'s serialisation format is not the same
-as the serialisation format of a D-Bus message body: use <a href="http://library.gnome.org/devel/gio/unstable/GDBusMessage.html"><span class="type">GDBusMessage</span></a>,
+as the serialisation format of a D-Bus message body: use <span class="type">GDBusMessage</span>,
 in the gio library, for those.)
 </p>
 <p>
@@ -296,7 +299,7 @@ with type inferencing.
 <p>
 </p>
 <div class="refsect2">
-<a name="id971240"></a><h3>Memory Use</h3>
+<a name="idp61898912"></a><h3>Memory Use</h3>
 <p>
   <a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><span class="type">GVariant</span></a> tries to be quite efficient with respect to memory use.
   This section gives a rough idea of how much memory is used by the
@@ -378,7 +381,7 @@ with type inferencing.
   </p>
 </div>
 <div class="refsect3">
-<a name="id971340"></a><h4>Type Information Cache</h4>
+<a name="idp61910864"></a><h4>Type Information Cache</h4>
 <p>
    For each GVariant type that currently exists in the program a type
    information structure is kept in the type information cache.  The
@@ -433,7 +436,7 @@ with type inferencing.
   </p>
 </div>
 <div class="refsect3">
-<a name="id971410"></a><h4>Buffer Management Memory</h4>
+<a name="idp61919248"></a><h4>Buffer Management Memory</h4>
 <p>
    <a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><span class="type">GVariant</span></a> uses an internal buffer management structure to deal
    with the various different possible sources of serialised data
@@ -449,7 +452,7 @@ with type inferencing.
   </p>
 </div>
 <div class="refsect3">
-<a name="id971464"></a><h4>GVariant structure</h4>
+<a name="idp61925744"></a><h4>GVariant structure</h4>
 <p>
    The size of a <a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><span class="type">GVariant</span></a> structure is 6 * (void *).  On 32 bit
    systems, that's 24 bytes.
@@ -474,7 +477,7 @@ with type inferencing.
   </p>
 </div>
 <div class="refsect3">
-<a name="id971526"></a><h4>Summary</h4>
+<a name="idp61933136"></a><h4>Summary</h4>
 <p>
    To put the entire example together, for our dictionary mapping
    strings to variants (with two entries, as given above), we are
@@ -1031,6 +1034,59 @@ The range of possible top-level types of <a class="link" href="glib-GVariant.htm
 </tbody>
 </table></div>
 <p class="since">Since 2.24</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-variant-check-format-string"></a><h3>g_variant_check_format_string ()</h3>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_variant_check_format_string       (<em class="parameter"><code><a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><span class="type">GVariant</span></a> *value</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *format_string</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="type">gboolean</span></a> copy_only</code></em>);</pre>
+<p>
+Checks if calling <a class="link" href="glib-GVariant.html#g-variant-get" title="g_variant_get ()"><code class="function">g_variant_get()</code></a> with <em class="parameter"><code>format_string</code></em> on <em class="parameter"><code>value</code></em> would
+be valid from a type-compatibility standpoint.  <em class="parameter"><code>format_string</code></em> is
+assumed to be a valid format string (from a syntactic standpoint).
+</p>
+<p>
+If <em class="parameter"><code>copy_only</code></em> is <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> then this function additionally checks that it
+would be safe to call <a class="link" href="glib-GVariant.html#g-variant-unref" title="g_variant_unref ()"><code class="function">g_variant_unref()</code></a> on <em class="parameter"><code>value</code></em> immediately after
+the call to <a class="link" href="glib-GVariant.html#g-variant-get" title="g_variant_get ()"><code class="function">g_variant_get()</code></a> without invalidating the result.  This is
+only possible if deep copies are made (ie: there are no pointers to
+the data inside of the soon-to-be-freed <a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><span class="type">GVariant</span></a> instance).  If this
+check fails then a <a class="link" href="glib-Message-Logging.html#g-critical" title="g_critical()"><code class="function">g_critical()</code></a> is printed and <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a> is returned.
+</p>
+<p>
+This function is meant to be used by functions that wish to provide
+varargs accessors to <a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><span class="type">GVariant</span></a> values of uncertain values (eg:
+<a class="link" href="glib-GVariant.html#g-variant-lookup" title="g_variant_lookup ()"><code class="function">g_variant_lookup()</code></a> or <code class="function">g_menu_model_get_item_attribute()</code>).
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td>a <a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><span class="type">GVariant</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>format_string</code></em> :</span></p></td>
+<td>a valid <a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><span class="type">GVariant</span></a> format string</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>copy_only</code></em> :</span></p></td>
+<td>
+<a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> to ensure the format string makes deep copies</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+<a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if <em class="parameter"><code>format_string</code></em> is safe to use</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.34</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -3931,7 +3987,7 @@ you no longer need it.
 <p>
 </p>
 <div class="example">
-<a name="id988148"></a><p class="title"><b>Example 18. Iterating with <a class="link" href="glib-GVariant.html#g-variant-iter-next-value" title="g_variant_iter_next_value ()"><code class="function">g_variant_iter_next_value()</code></a></b></p>
+<a name="idp63952544"></a><p class="title"><b>Example 18. Iterating with <a class="link" href="glib-GVariant.html#g-variant-iter-next-value" title="g_variant_iter_next_value ()"><code class="function">g_variant_iter_next_value()</code></a></b></p>
 <div class="example-contents">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -4026,7 +4082,7 @@ Format Strings</GTKDOCLINK>.
 <p>
 </p>
 <div class="example">
-<a name="id988385"></a><p class="title"><b>Example 19. Memory management with <a class="link" href="glib-GVariant.html#g-variant-iter-next" title="g_variant_iter_next ()"><code class="function">g_variant_iter_next()</code></a></b></p>
+<a name="idp63981008"></a><p class="title"><b>Example 19. Memory management with <a class="link" href="glib-GVariant.html#g-variant-iter-next" title="g_variant_iter_next ()"><code class="function">g_variant_iter_next()</code></a></b></p>
 <div class="example-contents">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -4157,7 +4213,7 @@ Format Strings</GTKDOCLINK>.
 <p>
 </p>
 <div class="example">
-<a name="id988737"></a><p class="title"><b>Example 20. Memory management with <a class="link" href="glib-GVariant.html#g-variant-iter-loop" title="g_variant_iter_loop ()"><code class="function">g_variant_iter_loop()</code></a></b></p>
+<a name="idp64023152"></a><p class="title"><b>Example 20. Memory management with <a class="link" href="glib-GVariant.html#g-variant-iter-loop" title="g_variant_iter_loop ()"><code class="function">g_variant_iter_loop()</code></a></b></p>
 <div class="example-contents">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>

@@ -970,15 +970,15 @@ g_ptr_array_set_free_func (GPtrArray        *array,
 
 /**
  * g_ptr_array_ref:
- * @array: A #GArray.
+ * @array: a #GPtrArray
  *
- * Atomically increments the reference count of @array by one. This
- * function is MT-safe and may be called from any thread.
+ * Atomically increments the reference count of @array by one.
+ * This function is thread-safe and may be called from any thread.
  *
- * Returns: The passed in #GPtrArray.
+ * Returns: The passed in #GPtrArray
  *
  * Since: 2.22
- **/
+ */
 GPtrArray *
 g_ptr_array_ref (GPtrArray *array)
 {
@@ -1490,6 +1490,8 @@ g_ptr_array_foreach (GPtrArray *array,
  * @Returns: the new #GByteArray.
  *
  * Creates a new #GByteArray with a reference count of 1.
+ *
+ * Returns: (transfer full): the new #GByteArray.
  **/
 GByteArray* g_byte_array_new (void)
 {
@@ -1498,7 +1500,7 @@ GByteArray* g_byte_array_new (void)
 
 /**
  * g_byte_array_new_take:
- * @data: (array length=len): byte data for the array
+ * @data: (transfer full) (array length=len): byte data for the array
  * @len: length of @data
  *
  * Create byte array containing the data. The data will be owned by the array

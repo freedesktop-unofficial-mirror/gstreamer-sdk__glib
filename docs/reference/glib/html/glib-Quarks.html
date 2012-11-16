@@ -42,6 +42,8 @@
 #include &lt;glib.h&gt;
 
 typedef             <a class="link" href="glib-Quarks.html#GQuark" title="GQuark">GQuark</a>;
+#define             <a class="link" href="glib-Quarks.html#G-DEFINE-QUARK:CAPS" title="G_DEFINE_QUARK()">G_DEFINE_QUARK</a>                      (QN,
+                                                         q_n)
 <a class="link" href="glib-Quarks.html#GQuark" title="GQuark"><span class="returnvalue">GQuark</span></a>              <a class="link" href="glib-Quarks.html#g-quark-from-string" title="g_quark_from_string ()">g_quark_from_string</a>                 (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *string</code></em>);
 <a class="link" href="glib-Quarks.html#GQuark" title="GQuark"><span class="returnvalue">GQuark</span></a>              <a class="link" href="glib-Quarks.html#g-quark-from-static-string" title="g_quark_from_static_string ()">g_quark_from_static_string</a>          (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *string</code></em>);
 const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *       <a class="link" href="glib-Quarks.html#g-quark-to-string" title="g_quark_to_string ()">g_quark_to_string</a>                   (<em class="parameter"><code><a class="link" href="glib-Quarks.html#GQuark" title="GQuark"><span class="type">GQuark</span></a> quark</code></em>);
@@ -91,6 +93,35 @@ pointer comparison, rather than using <code class="function">strcmp()</code>.
 A GQuark is a non-zero integer which uniquely identifies a
 particular string. A GQuark value of zero is associated to <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
 </p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="G-DEFINE-QUARK:CAPS"></a><h3>G_DEFINE_QUARK()</h3>
+<pre class="programlisting">#define             G_DEFINE_QUARK(QN, q_n)</pre>
+<p>
+A convenience macro which defines a function returning the
+<a class="link" href="glib-Quarks.html#GQuark" title="GQuark"><span class="type">GQuark</span></a> for the name <em class="parameter"><code>QN</code></em>. The function will be named
+<em class="parameter"><code>q_n</code></em><code class="function">_quark()</code>.
+Note that the quark name will be stringified automatically in the
+macro, so you shouldn't use double quotes.
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>QN</code></em> :</span></p></td>
+<td>the name to return a <a class="link" href="glib-Quarks.html#GQuark" title="GQuark"><span class="type">GQuark</span></a> for</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>q_n</code></em> :</span></p></td>
+<td>prefix for the function name</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.34</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -177,7 +208,8 @@ Gets the string associated with the given <a class="link" href="glib-Quarks.html
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>the string associated with the <a class="link" href="glib-Quarks.html#GQuark" title="GQuark"><span class="type">GQuark</span></a>.</td>
+<td>the string associated with the <a class="link" href="glib-Quarks.html#GQuark" title="GQuark"><span class="type">GQuark</span></a>
+</td>
 </tr>
 </tbody>
 </table></div>
@@ -218,8 +250,9 @@ use <a class="link" href="glib-Quarks.html#g-quark-from-string" title="g_quark_f
 <a name="g-intern-string"></a><h3>g_intern_string ()</h3>
 <pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *       g_intern_string                     (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *string</code></em>);</pre>
 <p>
-Returns a canonical representation for <em class="parameter"><code>string</code></em>. Interned strings can
-be compared for equality by comparing the pointers, instead of using <code class="function">strcmp()</code>.
+Returns a canonical representation for <em class="parameter"><code>string</code></em>. Interned strings
+can be compared for equality by comparing the pointers, instead of
+using <code class="function">strcmp()</code>.
 </p>
 <div class="variablelist"><table border="0" class="variablelist">
 <colgroup>
@@ -245,10 +278,10 @@ be compared for equality by comparing the pointers, instead of using <code class
 <a name="g-intern-static-string"></a><h3>g_intern_static_string ()</h3>
 <pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *       g_intern_static_string              (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *string</code></em>);</pre>
 <p>
-Returns a canonical representation for <em class="parameter"><code>string</code></em>. Interned strings can
-be compared for equality by comparing the pointers, instead of using <code class="function">strcmp()</code>.
-<a class="link" href="glib-Quarks.html#g-intern-static-string" title="g_intern_static_string ()"><code class="function">g_intern_static_string()</code></a> does not copy the string, therefore <em class="parameter"><code>string</code></em> must
-not be freed or modified.
+Returns a canonical representation for <em class="parameter"><code>string</code></em>. Interned strings
+can be compared for equality by comparing the pointers, instead of
+using <code class="function">strcmp()</code>. <a class="link" href="glib-Quarks.html#g-intern-static-string" title="g_intern_static_string ()"><code class="function">g_intern_static_string()</code></a> does not copy the string,
+therefore <em class="parameter"><code>string</code></em> must not be freed or modified.
 </p>
 <div class="variablelist"><table border="0" class="variablelist">
 <colgroup>

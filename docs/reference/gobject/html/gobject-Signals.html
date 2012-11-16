@@ -47,6 +47,7 @@ struct              <a class="link" href="gobject-Signals.html#GSignalInvocation
                                                          <em class="parameter"><code>const <a class="link" href="gobject-Generic-values.html#GValue" title="GValue"><span class="type">GValue</span></a> *handler_return</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> data</code></em>);
 typedef             <a class="link" href="gobject-Signals.html#GSignalCMarshaller" title="GSignalCMarshaller">GSignalCMarshaller</a>;
+typedef             <a class="link" href="gobject-Signals.html#GSignalCVaMarshaller" title="GSignalCVaMarshaller">GSignalCVaMarshaller</a>;
 <a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            (<a class="link" href="gobject-Signals.html#GSignalEmissionHook" title="GSignalEmissionHook ()">*GSignalEmissionHook</a>)              (<em class="parameter"><code><a class="link" href="gobject-Signals.html#GSignalInvocationHint" title="struct GSignalInvocationHint"><span class="type">GSignalInvocationHint</span></a> *ihint</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a> n_param_values</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="gobject-Generic-values.html#GValue" title="GValue"><span class="type">GValue</span></a> *param_values</code></em>,
@@ -87,6 +88,9 @@ struct              <a class="link" href="gobject-Signals.html#GSignalQuery" tit
                                                          <em class="parameter"><code><a class="link" href="gobject-Type-Information.html#GType" title="GType"><span class="type">GType</span></a> return_type</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a> n_params</code></em>,
                                                          <em class="parameter"><code><span class="type">va_list</span> args</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="gobject-Signals.html#g-signal-set-va-marshaller" title="g_signal_set_va_marshaller ()">g_signal_set_va_marshaller</a>          (<em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a> signal_id</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="gobject-Type-Information.html#GType" title="GType"><span class="type">GType</span></a> instance_type</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="gobject-Signals.html#GSignalCVaMarshaller" title="GSignalCVaMarshaller"><span class="type">GSignalCVaMarshaller</span></a> va_marshaller</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="gobject-Signals.html#g-signal-query" title="g_signal_query ()">g_signal_query</a>                      (<em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a> signal_id</code></em>,
                                                          <em class="parameter"><code><a class="link" href="gobject-Signals.html#GSignalQuery" title="struct GSignalQuery"><span class="type">GSignalQuery</span></a> *query</code></em>);
 <a href="./../glib/glib/glib-Basic-Types.html#guint"><span class="returnvalue">guint</span></a>               <a class="link" href="gobject-Signals.html#g-signal-lookup" title="g_signal_lookup ()">g_signal_lookup</a>                     (<em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *name</code></em>,
@@ -256,7 +260,7 @@ basically they are a per-type facility that is inherited.  A signal
 emission mainly involves invocation of a certain set of callbacks
 in precisely defined manner. There are two main categories of such
 callbacks, per-object 
-<a href="#ftn.id622102" class="footnote"><sup class="footnote"><a name="id622102"></a>[10]</sup></a>
+<a href="#ftn.idp21141648" class="footnote"><sup class="footnote"><a name="idp21141648"></a>[10]</sup></a>
 ones and user provided ones.
 The per-object callbacks are most often referred to as "object method
 handler" or "default (signal) handler", while user provided callbacks are
@@ -422,6 +426,17 @@ arrays of parameter values to signal emissions into C language callback
 invocations. It is merely an alias to <a class="link" href="gobject-Closures.html#GClosureMarshal" title="GClosureMarshal ()"><span class="type">GClosureMarshal</span></a> since the <a class="link" href="gobject-Closures.html#GClosure" title="struct GClosure"><span class="type">GClosure</span></a>
 mechanism takes over responsibility of actual function invocation for the
 signal system.
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GSignalCVaMarshaller"></a><h3>GSignalCVaMarshaller</h3>
+<pre class="programlisting">typedef GVaClosureMarshal		 GSignalCVaMarshaller;
+</pre>
+<p>
+This is the signature of va_list marshaller functions, an optional
+marshaller that can be used in some situations to avoid
+marshalling the signal argument into GValues.
 </p>
 </div>
 <hr>
@@ -663,13 +678,13 @@ signal to be queried was unknown.</td>
 </tr>
 <tr>
 <td><p><span class="term">const <a class="link" href="gobject-Type-Information.html#GType" title="GType"><span class="type">GType</span></a> *<em class="structfield"><code><a name="GSignalQuery.param-types"></a>param_types</code></em>;</span></p></td>
-<td>The individual parameter types for user callbacks, note that the
-effective callback signature is:
+<td>The individual parameter types for
+user callbacks, note that the effective callback signature is:
 <pre class="programlisting">
 @return_type callback (<a href="./../glib/glib/glib-Basic-Types.html#gpointer">gpointer</a>     data1,
 [param_types param_names,]
 gpointer     data2);
-</pre>
+</pre>. <span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=n_params]</span>
 </td>
 </tr>
 </tbody>
@@ -705,7 +720,7 @@ of <a class="link" href="gobject-Signals.html#g-signal-new" title="g_signal_new 
         <td class="listing_code"><pre class="programlisting"><span class="function"><a href="gobject-Signals.html#g-signal-new">g_signal_new</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"size_request"</span><span class="symbol">,</span>
 <span class="normal">  </span><span class="function"><a href="gobject-Type-Information.html#G-TYPE-FROM-CLASS:CAPS">G_TYPE_FROM_CLASS</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">gobject_class</span><span class="symbol">),</span>
 <span class="normal">     <a href="gobject-Signals.html#G-SIGNAL-RUN-FIRST:CAPS">G_SIGNAL_RUN_FIRST</a></span><span class="symbol">,</span>
-<span class="normal">     </span><span class="function"><a href="./../glib/glib/glib-Standard-Macros.html#G-STRUCT-OFFSET:CAPS">G_STRUCT_OFFSET</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">GtkWidgetClass</span><span class="symbol">,</span><span class="normal"> size_request</span><span class="symbol">),</span>
+<span class="normal">     </span><span class="function"><a href="./../glib/glib/glib-Standard-Macros.html#G-STRUCT-OFFSET:CAPS">G_STRUCT_OFFSET</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="http://developer.gnome.org/gtk2/GtkWidget.html#GtkWidgetClass">GtkWidgetClass</a></span><span class="symbol">,</span><span class="normal"> size_request</span><span class="symbol">),</span>
 <span class="normal">     <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span><span class="normal"> <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span>
 <span class="normal">     _gtk_marshal_VOID__BOXED</span><span class="symbol">,</span>
 <span class="normal">     <a href="gobject-Type-Information.html#G-TYPE-NONE:CAPS">G_TYPE_NONE</a></span><span class="symbol">,</span><span class="normal"> </span><span class="number">1</span><span class="symbol">,</span>
@@ -1005,6 +1020,13 @@ without a return value.</td>
 </tr>
 </tbody>
 </table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-signal-set-va-marshaller"></a><h3>g_signal_set_va_marshaller ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_signal_set_va_marshaller          (<em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a> signal_id</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="gobject-Type-Information.html#GType" title="GType"><span class="type">GType</span></a> instance_type</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="gobject-Signals.html#GSignalCVaMarshaller" title="GSignalCVaMarshaller"><span class="type">GSignalCVaMarshaller</span></a> va_marshaller</code></em>);</pre>
 </div>
 <hr>
 <div class="refsect2">
@@ -2795,7 +2817,7 @@ and no further handling is needed.
 </div>
 <div class="footnotes">
 <br><hr style="width:100; align:left;">
-<div id="ftn.id622102" class="footnote"><p><a href="#id622102" class="para"><sup class="para">[10] </sup></a>Although signals can deal with any kind of instantiatable 
+<div id="ftn.idp21141648" class="footnote"><p><a href="#idp21141648" class="para"><sup class="para">[10] </sup></a>Although signals can deal with any kind of instantiatable 
 type, i'm referring to those types as "object types" in the following, 
 simply because that is the context most users will encounter signals in.
 </p></div>

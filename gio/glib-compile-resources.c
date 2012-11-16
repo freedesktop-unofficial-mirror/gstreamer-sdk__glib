@@ -33,9 +33,6 @@
 #ifdef G_OS_WIN32
 #include <io.h>
 #endif
-#ifdef HAVE_SYS_WAIT_H
-#include <sys/wait.h>
-#endif
 
 #include <gio/gmemoryoutputstream.h>
 #include <gio/gzlibcompressor.h>
@@ -272,7 +269,6 @@ end_element (GMarkupParseContext  *context,
       if (state->preproc_options)
         {
           gchar **options;
-          gchar *stderr_child = NULL;
           guint i;
           gboolean xml_stripblanks = FALSE;
           gboolean to_pixdata = FALSE;
@@ -299,6 +295,7 @@ end_element (GMarkupParseContext  *context,
             {
               gchar *argv[8];
               int status, fd, argc;
+              gchar *stderr_child = NULL;
 
               tmp_file = g_strdup ("resource-XXXXXXXX");
               if ((fd = g_mkstemp (tmp_file)) == -1)
@@ -331,14 +328,15 @@ end_element (GMarkupParseContext  *context,
                   g_propagate_error (error, my_error);
                   goto cleanup;
                 }
-#ifdef HAVE_SYS_WAIT_H
-              if (!WIFEXITED (status) || WEXITSTATUS (status) != 0)
+	      
+	      /* Ugly...we shoud probably just let stderr be inherited */
+	      if (!g_spawn_check_exit_status (status, NULL))
                 {
                   g_set_error (error, G_IO_ERROR, G_IO_ERROR_FAILED,
                                _("Error processing input file with xmllint:\n%s"), stderr_child);
+                  g_free (stderr_child);
                   goto cleanup;
                 }
-#endif
 
               g_free (stderr_child);
               g_free (real_file);
@@ -387,14 +385,14 @@ end_element (GMarkupParseContext  *context,
                   g_propagate_error (error, my_error);
                   goto cleanup;
                 }
-#ifdef HAVE_SYS_WAIT_H
-              if (!WIFEXITED (status) || WEXITSTATUS (status) != 0)
+	      
+	      if (!g_spawn_check_exit_status (status, NULL))
                 {
                   g_set_error (error, G_IO_ERROR, G_IO_ERROR_FAILED,
 			       _("Error processing input file with to-pixdata:\n%s"), stderr_child);
+                  g_free (stderr_child);
                   goto cleanup;
                 }
-#endif
 
               g_free (stderr_child);
               g_free (real_file);

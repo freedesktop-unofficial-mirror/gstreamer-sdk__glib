@@ -45,18 +45,18 @@
 </tr></table></div>
 <div class="refsynopsisdiv">
 <a name="GDBusObjectManagerClient.synopsis"></a><h2>Synopsis</h2>
-<pre class="synopsis">
+<a name="GDBusObjectManagerClientFlags"></a><pre class="synopsis">
 #include &lt;gio/gio.h&gt;
 
                     <a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClient-struct" title="GDBusObjectManagerClient">GDBusObjectManagerClient</a>;
 struct              <a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientClass" title="struct GDBusObjectManagerClientClass">GDBusObjectManagerClientClass</a>;
-enum                <a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags" title="enum GDBusObjectManagerClientFlags">GDBusObjectManagerClientFlags</a>;
+enum                <a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags-enum" title="enum GDBusObjectManagerClientFlags">GDBusObjectManagerClientFlags</a>;
 <a href="./../gobject/gobject/gobject-Type-Information.html#GType"><span class="returnvalue">GType</span></a>               (<a class="link" href="GDBusObjectManagerClient.html#GDBusProxyTypeFunc" title="GDBusProxyTypeFunc ()">*GDBusProxyTypeFunc</a>)               (<em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html" title="GDBusObjectManagerClient"><span class="type">GDBusObjectManagerClient</span></a> *manager</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *object_path</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *interface_name</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GDBusObjectManagerClient.html#g-dbus-object-manager-client-new" title="g_dbus_object_manager_client_new ()">g_dbus_object_manager_client_new</a>    (<em class="parameter"><code><a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a> *connection</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags" title="enum GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> flags</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> flags</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *name</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *object_path</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusProxyTypeFunc" title="GDBusProxyTypeFunc ()"><span class="type">GDBusProxyTypeFunc</span></a> get_proxy_type_func</code></em>,
@@ -70,7 +70,7 @@ enum                <a class="link" href="GDBusObjectManagerClient.html#GDBusObj
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
 <a class="link" href="GDBusObjectManager.html" title="GDBusObjectManager"><span class="returnvalue">GDBusObjectManager</span></a> * <a class="link" href="GDBusObjectManagerClient.html#g-dbus-object-manager-client-new-sync" title="g_dbus_object_manager_client_new_sync ()">g_dbus_object_manager_client_new_sync</a>
                                                         (<em class="parameter"><code><a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a> *connection</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags" title="enum GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> flags</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> flags</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *name</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *object_path</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusProxyTypeFunc" title="GDBusProxyTypeFunc ()"><span class="type">GDBusProxyTypeFunc</span></a> get_proxy_type_func</code></em>,
@@ -80,7 +80,7 @@ enum                <a class="link" href="GDBusObjectManagerClient.html#GDBusObj
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GDBusObjectManagerClient.html#g-dbus-object-manager-client-new-for-bus" title="g_dbus_object_manager_client_new_for_bus ()">g_dbus_object_manager_client_new_for_bus</a>
                                                         (<em class="parameter"><code><a class="link" href="GDBusConnection.html#GBusType" title="enum GBusType"><span class="type">GBusType</span></a> bus_type</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags" title="enum GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> flags</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> flags</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *name</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *object_path</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusProxyTypeFunc" title="GDBusProxyTypeFunc ()"><span class="type">GDBusProxyTypeFunc</span></a> get_proxy_type_func</code></em>,
@@ -94,7 +94,7 @@ enum                <a class="link" href="GDBusObjectManagerClient.html#GDBusObj
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
 <a class="link" href="GDBusObjectManager.html" title="GDBusObjectManager"><span class="returnvalue">GDBusObjectManager</span></a> * <a class="link" href="GDBusObjectManagerClient.html#g-dbus-object-manager-client-new-for-bus-sync" title="g_dbus_object_manager_client_new_for_bus_sync ()">g_dbus_object_manager_client_new_for_bus_sync</a>
                                                         (<em class="parameter"><code><a class="link" href="GDBusConnection.html#GBusType" title="enum GBusType"><span class="type">GBusType</span></a> bus_type</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags" title="enum GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> flags</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> flags</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *name</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *object_path</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusProxyTypeFunc" title="GDBusProxyTypeFunc ()"><span class="type">GDBusProxyTypeFunc</span></a> get_proxy_type_func</code></em>,
@@ -104,7 +104,7 @@ enum                <a class="link" href="GDBusObjectManagerClient.html#GDBusObj
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
 <a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="returnvalue">GDBusConnection</span></a> *   <a class="link" href="GDBusObjectManagerClient.html#g-dbus-object-manager-client-get-connection" title="g_dbus_object_manager_client_get_connection ()">g_dbus_object_manager_client_get_connection</a>
                                                         (<em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html" title="GDBusObjectManagerClient"><span class="type">GDBusObjectManagerClient</span></a> *manager</code></em>);
-<a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags" title="enum GDBusObjectManagerClientFlags"><span class="returnvalue">GDBusObjectManagerClientFlags</span></a> <a class="link" href="GDBusObjectManagerClient.html#g-dbus-object-manager-client-get-flags" title="g_dbus_object_manager_client_get_flags ()">g_dbus_object_manager_client_get_flags</a>
+<a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags"><span class="returnvalue">GDBusObjectManagerClientFlags</span></a> <a class="link" href="GDBusObjectManagerClient.html#g-dbus-object-manager-client-get-flags" title="g_dbus_object_manager_client_get_flags ()">g_dbus_object_manager_client_get_flags</a>
                                                         (<em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html" title="GDBusObjectManagerClient"><span class="type">GDBusObjectManagerClient</span></a> *manager</code></em>);
 const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *       <a class="link" href="GDBusObjectManagerClient.html#g-dbus-object-manager-client-get-name" title="g_dbus_object_manager_client_get_name ()">g_dbus_object_manager_client_get_name</a>
                                                         (<em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html" title="GDBusObjectManagerClient"><span class="type">GDBusObjectManagerClient</span></a> *manager</code></em>);
@@ -118,6 +118,10 @@ const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="returnva
   <a href="./../gobject/gobject/gobject-The-Base-Object-Type.html#GObject">GObject</a>
    +----GDBusObjectManagerClient
 </pre>
+<pre class="synopsis">
+  GFlags
+   +----GDBusObjectManagerClientFlags
+</pre>
 </div>
 <div class="refsect1">
 <a name="GDBusObjectManagerClient.implemented-interfaces"></a><h2>Implemented Interfaces</h2>
@@ -130,7 +134,7 @@ GDBusObjectManagerClient implements
 <pre class="synopsis">
   "<a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClient--bus-type" title='The "bus-type" property'>bus-type</a>"                 <a class="link" href="GDBusConnection.html#GBusType" title="enum GBusType"><span class="type">GBusType</span></a>              : Write / Construct Only
   "<a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClient--connection" title='The "connection" property'>connection</a>"               <a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a>*      : Read / Write / Construct Only
-  "<a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClient--flags" title='The "flags" property'>flags</a>"                    <a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags" title="enum GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a>  : Read / Write / Construct Only
+  "<a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClient--flags" title='The "flags" property'>flags</a>"                    <a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a>  : Read / Write / Construct Only
   "<a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClient--get-proxy-type-destroy-notify" title='The "get-proxy-type-destroy-notify" property'>get-proxy-type-destroy-notify</a>" <a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>              : Read / Write / Construct Only
   "<a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClient--get-proxy-type-func" title='The "get-proxy-type-func" property'>get-proxy-type-func</a>"      <a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>              : Read / Write / Construct Only
   "<a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClient--get-proxy-type-user-data" title='The "get-proxy-type-user-data" property'>get-proxy-type-user-data</a>" <a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>              : Read / Write / Construct Only
@@ -291,7 +295,7 @@ Class structure for <a class="link" href="GDBusObjectManagerClient.html" title="
 </div>
 <hr>
 <div class="refsect2">
-<a name="GDBusObjectManagerClientFlags"></a><h3>enum GDBusObjectManagerClientFlags</h3>
+<a name="GDBusObjectManagerClientFlags-enum"></a><h3>enum GDBusObjectManagerClientFlags</h3>
 <pre class="programlisting">typedef enum {
   G_DBUS_OBJECT_MANAGER_CLIENT_FLAGS_NONE = 0,
   G_DBUS_OBJECT_MANAGER_CLIENT_FLAGS_DO_NOT_AUTO_START = (1&lt;&lt;0)
@@ -377,7 +381,7 @@ type.</td>
 <div class="refsect2">
 <a name="g-dbus-object-manager-client-new"></a><h3>g_dbus_object_manager_client_new ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_dbus_object_manager_client_new    (<em class="parameter"><code><a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a> *connection</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags" title="enum GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> flags</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> flags</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *name</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *object_path</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusProxyTypeFunc" title="GDBusProxyTypeFunc ()"><span class="type">GDBusProxyTypeFunc</span></a> get_proxy_type_func</code></em>,
@@ -409,7 +413,7 @@ then call <a class="link" href="GDBusObjectManagerClient.html#g-dbus-object-mana
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
-<td>Zero or more flags from the <a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags" title="enum GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> enumeration.</td>
+<td>Zero or more flags from the <a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> enumeration.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
@@ -489,7 +493,7 @@ with <a href="./../gobject/gobject/gobject-The-Base-Object-Type.html#g-object-un
 <a name="g-dbus-object-manager-client-new-sync"></a><h3>g_dbus_object_manager_client_new_sync ()</h3>
 <pre class="programlisting"><a class="link" href="GDBusObjectManager.html" title="GDBusObjectManager"><span class="returnvalue">GDBusObjectManager</span></a> * g_dbus_object_manager_client_new_sync
                                                         (<em class="parameter"><code><a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a> *connection</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags" title="enum GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> flags</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> flags</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *name</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *object_path</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusProxyTypeFunc" title="GDBusProxyTypeFunc ()"><span class="type">GDBusProxyTypeFunc</span></a> get_proxy_type_func</code></em>,
@@ -517,7 +521,7 @@ for the asynchronous version.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
-<td>Zero or more flags from the <a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags" title="enum GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> enumeration.</td>
+<td>Zero or more flags from the <a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> enumeration.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
@@ -566,7 +570,7 @@ with <a href="./../gobject/gobject/gobject-The-Base-Object-Type.html#g-object-un
 <a name="g-dbus-object-manager-client-new-for-bus"></a><h3>g_dbus_object_manager_client_new_for_bus ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_dbus_object_manager_client_new_for_bus
                                                         (<em class="parameter"><code><a class="link" href="GDBusConnection.html#GBusType" title="enum GBusType"><span class="type">GBusType</span></a> bus_type</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags" title="enum GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> flags</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> flags</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *name</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *object_path</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusProxyTypeFunc" title="GDBusProxyTypeFunc ()"><span class="type">GDBusProxyTypeFunc</span></a> get_proxy_type_func</code></em>,
@@ -599,7 +603,7 @@ then call <a class="link" href="GDBusObjectManagerClient.html#g-dbus-object-mana
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
-<td>Zero or more flags from the <a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags" title="enum GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> enumeration.</td>
+<td>Zero or more flags from the <a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> enumeration.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
@@ -679,7 +683,7 @@ with <a href="./../gobject/gobject/gobject-The-Base-Object-Type.html#g-object-un
 <a name="g-dbus-object-manager-client-new-for-bus-sync"></a><h3>g_dbus_object_manager_client_new_for_bus_sync ()</h3>
 <pre class="programlisting"><a class="link" href="GDBusObjectManager.html" title="GDBusObjectManager"><span class="returnvalue">GDBusObjectManager</span></a> * g_dbus_object_manager_client_new_for_bus_sync
                                                         (<em class="parameter"><code><a class="link" href="GDBusConnection.html#GBusType" title="enum GBusType"><span class="type">GBusType</span></a> bus_type</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags" title="enum GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> flags</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> flags</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *name</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *object_path</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusProxyTypeFunc" title="GDBusProxyTypeFunc ()"><span class="type">GDBusProxyTypeFunc</span></a> get_proxy_type_func</code></em>,
@@ -708,7 +712,7 @@ for the asynchronous version.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
-<td>Zero or more flags from the <a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags" title="enum GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> enumeration.</td>
+<td>Zero or more flags from the <a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> enumeration.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
@@ -784,7 +788,7 @@ the object belongs to <em class="parameter"><code>manager</code></em>. <span cla
 <hr>
 <div class="refsect2">
 <a name="g-dbus-object-manager-client-get-flags"></a><h3>g_dbus_object_manager_client_get_flags ()</h3>
-<pre class="programlisting"><a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags" title="enum GDBusObjectManagerClientFlags"><span class="returnvalue">GDBusObjectManagerClientFlags</span></a> g_dbus_object_manager_client_get_flags
+<pre class="programlisting"><a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags"><span class="returnvalue">GDBusObjectManagerClientFlags</span></a> g_dbus_object_manager_client_get_flags
                                                         (<em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html" title="GDBusObjectManagerClient"><span class="type">GDBusObjectManagerClient</span></a> *manager</code></em>);</pre>
 <p>
 Gets the flags that <em class="parameter"><code>manager</code></em> was constructed with.
@@ -802,7 +806,7 @@ Gets the flags that <em class="parameter"><code>manager</code></em> was construc
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>Zero of more flags from the <a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags" title="enum GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a>
+<td>Zero of more flags from the <a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a>
 enumeration.</td>
 </tr>
 </tbody>
@@ -894,9 +898,9 @@ The <a class="link" href="GDBusConnection.html" title="GDBusConnection"><span cl
 <hr>
 <div class="refsect2">
 <a name="GDBusObjectManagerClient--flags"></a><h3>The <code class="literal">"flags"</code> property</h3>
-<pre class="programlisting">  "flags"                    <a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags" title="enum GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a>  : Read / Write / Construct Only</pre>
+<pre class="programlisting">  "flags"                    <a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a>  : Read / Write / Construct Only</pre>
 <p>
-Flags from the <a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags" title="enum GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> enumeration.
+Flags from the <a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> enumeration.
 </p>
 <p class="since">Since 2.30</p>
 </div>

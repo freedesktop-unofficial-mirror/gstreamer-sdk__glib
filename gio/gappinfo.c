@@ -1,5 +1,5 @@
 /* GIO - GLib Input, Output and Streaming Library
- * 
+ *
  * Copyright (C) 2006-2007 Red Hat, Inc.
  *
  * This library is free software; you can redistribute it and/or
@@ -458,6 +458,37 @@ g_app_info_remove_supports_type (GAppInfo    *appinfo,
   return FALSE;
 }
 
+/**
+ * g_app_info_get_supported_types:
+ * @appinfo: a #GAppInfo that can handle files
+ *
+ * Retrieves the list of content types that @app_info claims to support.
+ * If this information is not provided by the environment, this function
+ * will return %NULL.
+ * This function does not take in consideration associations added with
+ * g_app_info_add_supports_type(), but only those exported directly by
+ * the application.
+ *
+ * Returns: (transfer none) (array zero-terminated=1) (element-type utf8):
+ *    a list of content types.
+ *
+ * Since: 2.34
+ */
+const char **
+g_app_info_get_supported_types (GAppInfo *appinfo)
+{
+  GAppInfoIface *iface;
+
+  g_return_val_if_fail (G_IS_APP_INFO (appinfo), NULL);
+
+  iface = G_APP_INFO_GET_IFACE (appinfo);
+
+  if (iface->get_supported_types)
+    return iface->get_supported_types (appinfo);
+  else
+    return NULL;
+}
+
 
 /**
  * g_app_info_get_icon:
@@ -484,7 +515,7 @@ g_app_info_get_icon (GAppInfo *appinfo)
 /**
  * g_app_info_launch:
  * @appinfo: a #GAppInfo
- * @files: (element-type GFile): a #GList of #GFile objects
+ * @files: (allow-none) (element-type GFile): a #GList of #GFile objects
  * @launch_context: (allow-none): a #GAppLaunchContext or %NULL
  * @error: a #GError
  * 
@@ -580,7 +611,7 @@ g_app_info_supports_files (GAppInfo *appinfo)
 /**
  * g_app_info_launch_uris:
  * @appinfo: a #GAppInfo
- * @uris: (element-type utf8): a #GList containing URIs to launch.
+ * @uris: (allow-none) (element-type utf8): a #GList containing URIs to launch.
  * @launch_context: (allow-none): a #GAppLaunchContext or %NULL
  * @error: a #GError
  * 

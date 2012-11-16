@@ -72,6 +72,9 @@ struct              <a class="link" href="glib-Singly-Linked-Lists.html#GSList" 
 
 <a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a>               <a class="link" href="glib-Singly-Linked-Lists.html#g-slist-length" title="g_slist_length ()">g_slist_length</a>                      (<em class="parameter"><code><a class="link" href="glib-Singly-Linked-Lists.html#GSList" title="struct GSList"><span class="type">GSList</span></a> *list</code></em>);
 <a class="link" href="glib-Singly-Linked-Lists.html#GSList" title="struct GSList"><span class="returnvalue">GSList</span></a> *            <a class="link" href="glib-Singly-Linked-Lists.html#g-slist-copy" title="g_slist_copy ()">g_slist_copy</a>                        (<em class="parameter"><code><a class="link" href="glib-Singly-Linked-Lists.html#GSList" title="struct GSList"><span class="type">GSList</span></a> *list</code></em>);
+<a class="link" href="glib-Singly-Linked-Lists.html#GSList" title="struct GSList"><span class="returnvalue">GSList</span></a> *            <a class="link" href="glib-Singly-Linked-Lists.html#g-slist-copy-deep" title="g_slist_copy_deep ()">g_slist_copy_deep</a>                   (<em class="parameter"><code><a class="link" href="glib-Singly-Linked-Lists.html#GSList" title="struct GSList"><span class="type">GSList</span></a> *list</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-N-ary-Trees.html#GCopyFunc" title="GCopyFunc ()"><span class="type">GCopyFunc</span></a> func</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
 <a class="link" href="glib-Singly-Linked-Lists.html#GSList" title="struct GSList"><span class="returnvalue">GSList</span></a> *            <a class="link" href="glib-Singly-Linked-Lists.html#g-slist-reverse" title="g_slist_reverse ()">g_slist_reverse</a>                     (<em class="parameter"><code><a class="link" href="glib-Singly-Linked-Lists.html#GSList" title="struct GSList"><span class="type">GSList</span></a> *list</code></em>);
 <a class="link" href="glib-Singly-Linked-Lists.html#GSList" title="struct GSList"><span class="returnvalue">GSList</span></a> *            <a class="link" href="glib-Singly-Linked-Lists.html#g-slist-insert-sorted-with-data" title="g_slist_insert_sorted_with_data ()">g_slist_insert_sorted_with_data</a>     (<em class="parameter"><code><a class="link" href="glib-Singly-Linked-Lists.html#GSList" title="struct GSList"><span class="type">GSList</span></a> *list</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> data</code></em>,
@@ -521,6 +524,16 @@ freeing the element. The removed element's next
 link is set to <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>, so that it becomes a
 self-contained list with one element.
 </p>
+<p>
+</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Note</h3>Removing arbitrary nodes from a singly-linked list
+requires time that is proportional to the length of the list
+(ie. O(n)). If you find yourself using <a class="link" href="glib-Singly-Linked-Lists.html#g-slist-remove-link" title="g_slist_remove_link ()"><code class="function">g_slist_remove_link()</code></a>
+frequently, you should consider a different data structure, such
+as the doubly-linked <a class="link" href="glib-Doubly-Linked-Lists.html#GList" title="struct GList"><span class="type">GList</span></a>.</div>
+<p>
+</p>
 <div class="variablelist"><table border="0" class="variablelist">
 <colgroup>
 <col align="left" valign="top">
@@ -553,6 +566,16 @@ self-contained list with one element.
 Removes the node link_ from the list and frees it.
 Compare this to <a class="link" href="glib-Singly-Linked-Lists.html#g-slist-remove-link" title="g_slist_remove_link ()"><code class="function">g_slist_remove_link()</code></a> which removes the node
 without freeing it.
+</p>
+<p>
+</p>
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Note</h3>Removing arbitrary nodes from a singly-linked list
+requires time that is proportional to the length of the list
+(ie. O(n)). If you find yourself using <a class="link" href="glib-Singly-Linked-Lists.html#g-slist-delete-link" title="g_slist_delete_link ()"><code class="function">g_slist_delete_link()</code></a>
+frequently, you should consider a different data structure, such
+as the doubly-linked <a class="link" href="glib-Doubly-Linked-Lists.html#GList" title="struct GList"><span class="type">GList</span></a>.</div>
+<p>
 </p>
 <div class="variablelist"><table border="0" class="variablelist">
 <colgroup>
@@ -750,7 +773,8 @@ Copies a <a class="link" href="glib-Singly-Linked-Lists.html#GSList" title="stru
 <p>
 Note that this is a "shallow" copy. If the list elements
 consist of pointers to data, the pointers are copied but
-the actual data isn't.
+the actual data isn't. See <a class="link" href="glib-Singly-Linked-Lists.html#g-slist-copy-deep" title="g_slist_copy_deep ()"><code class="function">g_slist_copy_deep()</code></a> if you need
+to copy the data as well.
 </p>
 </div>
 <p>
@@ -773,6 +797,84 @@ the actual data isn't.
 </tr>
 </tbody>
 </table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-slist-copy-deep"></a><h3>g_slist_copy_deep ()</h3>
+<pre class="programlisting"><a class="link" href="glib-Singly-Linked-Lists.html#GSList" title="struct GSList"><span class="returnvalue">GSList</span></a> *            g_slist_copy_deep                   (<em class="parameter"><code><a class="link" href="glib-Singly-Linked-Lists.html#GSList" title="struct GSList"><span class="type">GSList</span></a> *list</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-N-ary-Trees.html#GCopyFunc" title="GCopyFunc ()"><span class="type">GCopyFunc</span></a> func</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
+<p>
+Makes a full (deep) copy of a <a class="link" href="glib-Singly-Linked-Lists.html#GSList" title="struct GSList"><span class="type">GSList</span></a>.
+</p>
+<p>
+In contrast with <a class="link" href="glib-Singly-Linked-Lists.html#g-slist-copy" title="g_slist_copy ()"><code class="function">g_slist_copy()</code></a>, this function uses <em class="parameter"><code>func</code></em> to make a copy of
+each list element, in addition to copying the list container itself.
+</p>
+<p>
+<em class="parameter"><code>func</code></em>, as a <a class="link" href="glib-N-ary-Trees.html#GCopyFunc" title="GCopyFunc ()"><span class="type">GCopyFunc</span></a>, takes two arguments, the data to be copied and a user
+pointer. It's safe to pass <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><span class="type">NULL</span></a> as user_data, if the copy function takes only
+one argument.
+</p>
+<p>
+For instance, if <em class="parameter"><code>list</code></em> holds a list of GObjects, you can do:
+</p>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="normal">another_list </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="glib-Singly-Linked-Lists.html#g-slist-copy-deep">g_slist_copy_deep</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">list</span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="glib-N-ary-Trees.html#GCopyFunc">GCopyFunc</a></span><span class="symbol">)</span><span class="normal"> g_object_ref</span><span class="symbol">,</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">);</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p>
+</p>
+<p>
+And, to entirely free the new list, you could do:
+</p>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="function"><a href="glib-Singly-Linked-Lists.html#g-slist-free-full">g_slist_free_full</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">another_list</span><span class="symbol">,</span><span class="normal"> g_object_unref</span><span class="symbol">);</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p>
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>list</code></em> :</span></p></td>
+<td>a <a class="link" href="glib-Singly-Linked-Lists.html#GSList" title="struct GSList"><span class="type">GSList</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>func</code></em> :</span></p></td>
+<td>a copy function used to copy every element in the list</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data passed to the copy function <em class="parameter"><code>func</code></em>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><span class="type">NULL</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>a full copy of <em class="parameter"><code>list</code></em>, use <a class="link" href="glib-Singly-Linked-Lists.html#g-slist-free-full" title="g_slist_free_full ()"><span class="type">g_slist_free_full</span></a> to free it</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.34</p>
 </div>
 <hr>
 <div class="refsect2">
