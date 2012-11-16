@@ -514,17 +514,14 @@ lookup_by_address_finish (GResolver     *resolver,
   return name;
 }
 
-
-#if defined(G_OS_UNIX)
-#ifdef __BIONIC__
-#define C_IN 1
-#endif
-
 static void
 do_lookup_records (GThreadedResolverRequest  *req,
                    GError                   **error)
 {
 #if defined(G_OS_UNIX)
+#ifdef __BIONIC__
+#define C_IN 1
+#endif
   gint len = 512;
   gint herr;
   GByteArray *answer;
