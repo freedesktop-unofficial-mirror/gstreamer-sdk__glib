@@ -329,7 +329,9 @@ giowin32include_HEADERS = \
 endif
 
 if BUILD_MODULAR_TESTS
+if OS_UNIX
 SUBDIRS += tests 
+endif
 endif
 
 libgio_2_0_la_SOURCES =		\
