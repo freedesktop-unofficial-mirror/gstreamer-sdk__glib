@@ -44,6 +44,10 @@
 # include <sys/ioctl.h>
 #endif
 
+#ifdef HAVE_SYS_FILIO_H
+# include <sys/filio.h>
+#endif
+
 #ifdef HAVE_SYS_UIO_H
 #include <sys/uio.h>
 #endif
@@ -500,7 +504,7 @@ g_socket_create_socket (GSocketFamily   family,
       g_assert_not_reached ();
     }
 
-  if (family < 0)
+  if (family <= 0)
     {
       g_set_error (error, G_IO_ERROR, G_IO_ERROR_INVALID_ARGUMENT,
                    _("Unable to create socket: %s"), _("Unknown family was specified"));
@@ -742,11 +746,9 @@ static void
 g_socket_class_init (GSocketClass *klass)
 {
   GObjectClass *gobject_class G_GNUC_UNUSED = G_OBJECT_CLASS (klass);
-  volatile GType type;
 
   /* Make sure winsock has been initialized */
-  type = g_inet_address_get_type ();
-  (type); /* To avoid -Wunused-but-set-variable */
+  g_type_ensure (G_TYPE_INET_ADDRESS);
 
 #ifdef SIGPIPE
   /* There is no portable, thread-safe way to avoid having the process
@@ -1673,7 +1675,7 @@ g_socket_get_protocol (GSocket *socket)
  * @socket: a #GSocket.
  *
  * Returns the underlying OS socket object. On unix this
- * is a socket file descriptor, and on windows this is
+ * is a socket file descriptor, and on Windows this is
  * a Winsock2 SOCKET handle. This may be useful for
  * doing platform specific or otherwise unusual operations
  * on the socket.
@@ -1872,7 +1874,7 @@ g_socket_bind (GSocket         *socket,
   if (!check_socket (socket, error))
     return FALSE;
 
-  /* SO_REUSEADDR on windows means something else and is not what we want.
+  /* SO_REUSEADDR on Windows means something else and is not what we want.
      It always allows the unix variant of SO_REUSEADDR anyway */
 #ifndef G_OS_WIN32
   {
@@ -2366,7 +2368,10 @@ g_socket_check_connect_result (GSocket  *socket,
  * g_socket_get_available_bytes:
  * @socket: a #GSocket
  *
- * Get the amount of data pending in the OS input buffer.
+ * Get the amount of data that can be read from the socket without
+ * blocking. In the case of datagram sockets this returns the size
+ * of the first datagram and not the sum of the sizes of all currently
+ * queued datagrams.
  *
  * Returns: the number of bytes that can be read from the socket
  * without blocking or -1 on error.
@@ -2380,15 +2385,19 @@ g_socket_get_available_bytes (GSocket *socket)
   gulong avail = 0;
 #else
   gint avail = 0;
+  gsize avail_len = sizeof (avail);
 #endif
 
   g_return_val_if_fail (G_IS_SOCKET (socket), -1);
 
-#ifndef G_OS_WIN32
-  if (ioctl (socket->priv->fd, FIONREAD, &avail) < 0)
+#if defined(G_OS_WIN32)
+  if (WSAIoctl (socket->priv->fd, FIONREAD, NULL, 0, &avail, sizeof (avail), 0, 0) == SOCKET_ERROR)
+    return -1;
+#elif defined(SO_NREAD)
+  if (getsockopt (socket->priv->fd, SOL_SOCKET, SO_NREAD, &avail, &avail_len) < 0)
     return -1;
 #else
-  if (ioctlsocket (socket->priv->fd, FIONREAD, &avail) == SOCKET_ERROR)
+  if (ioctl (socket->priv->fd, FIONREAD, &avail) < 0)
     return -1;
 #endif
 
@@ -3386,6 +3395,7 @@ g_socket_condition_check (GSocket      *socket,
     gint result;
     poll_fd.fd = socket->priv->fd;
     poll_fd.events = condition;
+    poll_fd.revents = 0;
 
     do
       result = g_poll (&poll_fd, 1, 0);
@@ -3820,7 +3830,7 @@ g_socket_send_message (GSocket                *socket,
     if (num_messages != 0)
       {
         g_set_error_literal (error, G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED,
-                             _("GSocketControlMessage not supported on windows"));
+                             _("GSocketControlMessage not supported on Windows"));
 	return -1;
       }
 

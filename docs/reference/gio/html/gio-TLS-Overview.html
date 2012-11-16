@@ -24,6 +24,8 @@
 <a href="#gio-TLS-Overview.synopsis" class="shortcut">Top</a>
                    | 
                   <a href="#gio-TLS-Overview.description" class="shortcut">Description</a>
+                   | 
+                  <a href="#gio-TLS-Overview.object-hierarchy" class="shortcut">Object Hierarchy</a>
 </td></tr>
 </table>
 <div class="refentry">
@@ -37,14 +39,21 @@
 </tr></table></div>
 <div class="refsynopsisdiv">
 <a name="gio-TLS-Overview.synopsis"></a><h2>Synopsis</h2>
-<pre class="synopsis">
+<a name="GTlsCertificateFlags"></a><pre class="synopsis">
 #include &lt;gio/gio.h&gt;
 
 #define             <a class="link" href="gio-TLS-Overview.html#G-TLS-ERROR:CAPS" title="G_TLS_ERROR">G_TLS_ERROR</a>
 enum                <a class="link" href="gio-TLS-Overview.html#GTlsError" title="enum GTlsError">GTlsError</a>;
 
 enum                <a class="link" href="gio-TLS-Overview.html#GTlsAuthenticationMode" title="enum GTlsAuthenticationMode">GTlsAuthenticationMode</a>;
-enum                <a class="link" href="gio-TLS-Overview.html#GTlsCertificateFlags" title="enum GTlsCertificateFlags">GTlsCertificateFlags</a>;
+enum                <a class="link" href="gio-TLS-Overview.html#GTlsCertificateFlags-enum" title="enum GTlsCertificateFlags">GTlsCertificateFlags</a>;
+</pre>
+</div>
+<div class="refsect1">
+<a name="gio-TLS-Overview.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  GFlags
+   +----GTlsCertificateFlags
 </pre>
 </div>
 <div class="refsect1">
@@ -197,7 +206,7 @@ The client authentication mode for a <a class="link" href="GTlsServerConnection.
 </div>
 <hr>
 <div class="refsect2">
-<a name="GTlsCertificateFlags"></a><h3>enum GTlsCertificateFlags</h3>
+<a name="GTlsCertificateFlags-enum"></a><h3>enum GTlsCertificateFlags</h3>
 <pre class="programlisting">typedef enum {
   G_TLS_CERTIFICATE_UNKNOWN_CA    = (1 &lt;&lt; 0),
   G_TLS_CERTIFICATE_BAD_IDENTITY  = (1 &lt;&lt; 1),

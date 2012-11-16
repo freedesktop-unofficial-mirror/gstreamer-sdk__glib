@@ -96,6 +96,7 @@ const <span class="returnvalue">char</span> *        <a class="link" href="GAppI
 <a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GAppInfo.html#g-app-info-remove-supports-type" title="g_app_info_remove_supports_type ()">g_app_info_remove_supports_type</a>     (<em class="parameter"><code><a class="link" href="GAppInfo.html" title="GAppInfo"><span class="type">GAppInfo</span></a> *appinfo</code></em>,
                                                          <em class="parameter"><code>const <span class="type">char</span> *content_type</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
+const <span class="returnvalue">char</span> **       <a class="link" href="GAppInfo.html#g-app-info-get-supported-types" title="g_app_info_get_supported_types ()">g_app_info_get_supported_types</a>      (<em class="parameter"><code><a class="link" href="GAppInfo.html" title="GAppInfo"><span class="type">GAppInfo</span></a> *appinfo</code></em>);
 <a href="./../glib/glib/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             <a class="link" href="GAppInfo.html#g-app-info-get-all" title="g_app_info_get_all ()">g_app_info_get_all</a>                  (<em class="parameter"><code><span class="type">void</span></code></em>);
 <a href="./../glib/glib/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             <a class="link" href="GAppInfo.html#g-app-info-get-all-for-type" title="g_app_info_get_all_for_type ()">g_app_info_get_all_for_type</a>         (<em class="parameter"><code>const <span class="type">char</span> *content_type</code></em>);
 <a class="link" href="GAppInfo.html" title="GAppInfo"><span class="returnvalue">GAppInfo</span></a> *          <a class="link" href="GAppInfo.html#g-app-info-get-default-for-type" title="g_app_info_get_default_for_type ()">g_app_info_get_default_for_type</a>     (<em class="parameter"><code>const <span class="type">char</span> *content_type</code></em>,
@@ -311,6 +312,7 @@ it (with file arguments).
   gboolean     (* set_as_last_used_for_type)    (GAppInfo           *appinfo,
                                                  const char         *content_type,
                                                  GError            **error);
+  const char ** (* get_supported_types)         (GAppInfo           *appinfo);
 };
 </pre>
 <p>
@@ -415,6 +417,10 @@ Application Information interface, for operating system portability.
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GAppInfoIface.set-as-last-used-for-type"></a>set_as_last_used_for_type</code></em> ()</span></p></td>
 <td>Sets the application as the last used. See <a class="link" href="GAppInfo.html#g-app-info-set-as-last-used-for-type" title="g_app_info_set_as_last_used_for_type ()"><code class="function">g_app_info_set_as_last_used_for_type()</code></a>.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="structfield"><code><a name="GAppInfoIface.get-supported-types"></a>get_supported_types</code></em> ()</span></p></td>
+<td></td>
 </tr>
 </tbody>
 </table></div>
@@ -775,7 +781,7 @@ set, based on information provided in <em class="parameter"><code>launch_context
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>files</code></em> :</span></p></td>
-<td>a <a href="./../glib/glib/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> of <a class="link" href="GFile.html" title="GFile"><span class="type">GFile</span></a> objects. <span class="annotation">[<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> GFile]</span>
+<td>a <a href="./../glib/glib/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> of <a class="link" href="GFile.html" title="GFile"><span class="type">GFile</span></a> objects. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> GFile]</span>
 </td>
 </tr>
 <tr>
@@ -880,7 +886,7 @@ no way to detect this.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>uris</code></em> :</span></p></td>
-<td>a <a href="./../glib/glib/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> containing URIs to launch. <span class="annotation">[<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> utf8]</span>
+<td>a <a href="./../glib/glib/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> containing URIs to launch. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> utf8]</span>
 </td>
 </tr>
 <tr>
@@ -1219,6 +1225,37 @@ Removes a supported type from an application, if possible.
 </tr>
 </tbody>
 </table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-app-info-get-supported-types"></a><h3>g_app_info_get_supported_types ()</h3>
+<pre class="programlisting">const <span class="returnvalue">char</span> **       g_app_info_get_supported_types      (<em class="parameter"><code><a class="link" href="GAppInfo.html" title="GAppInfo"><span class="type">GAppInfo</span></a> *appinfo</code></em>);</pre>
+<p>
+Retrieves the list of content types that <em class="parameter"><code>app_info</code></em> claims to support.
+If this information is not provided by the environment, this function
+will return <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.
+This function does not take in consideration associations added with
+<a class="link" href="GAppInfo.html#g-app-info-add-supports-type" title="g_app_info_add_supports_type ()"><code class="function">g_app_info_add_supports_type()</code></a>, but only those exported directly by
+the application.
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>appinfo</code></em> :</span></p></td>
+<td>a <a class="link" href="GAppInfo.html" title="GAppInfo"><span class="type">GAppInfo</span></a> that can handle files</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>a list of content types. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>][<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> zero-terminated=1][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> utf8]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.34</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -1652,7 +1689,7 @@ the application startup notification started in <a class="link" href="GAppInfo.h
 <pre class="programlisting"><a class="link" href="GAppInfo.html#GAppLaunchContext"><span class="returnvalue">GAppLaunchContext</span></a> * g_app_launch_context_new            (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
 Creates a new application launch context. This is not normally used,
-instead you instantiate a subclass of this, such as <span class="type">GdkAppLaunchContext</span>.
+instead you instantiate a subclass of this, such as <a href="http://developer.gnome.org/gdk2/gdk3-Application-launching.html#GdkAppLaunchContext"><span class="type">GdkAppLaunchContext</span></a>.
 </p>
 <div class="variablelist"><table border="0" class="variablelist">
 <colgroup>

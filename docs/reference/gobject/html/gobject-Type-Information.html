@@ -196,6 +196,7 @@ enum                <a class="link" href="gobject-Type-Information.html#GTypeFun
 <span class="returnvalue">void</span>                (<a class="link" href="gobject-Type-Information.html#GTypeInterfaceCheckFunc" title="GTypeInterfaceCheckFunc ()">*GTypeInterfaceCheckFunc</a>)          (<em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> check_data</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> g_iface</code></em>);
 <a class="link" href="gobject-Type-Information.html#GTypeValueTable" title="struct GTypeValueTable"><span class="returnvalue">GTypeValueTable</span></a> *   <a class="link" href="gobject-Type-Information.html#g-type-value-table-peek" title="g_type_value_table_peek ()">g_type_value_table_peek</a>             (<em class="parameter"><code><a class="link" href="gobject-Type-Information.html#GType" title="GType"><span class="type">GType</span></a> type</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="gobject-Type-Information.html#g-type-ensure" title="g_type_ensure ()">g_type_ensure</a>                       (<em class="parameter"><code><a class="link" href="gobject-Type-Information.html#GType" title="GType"><span class="type">GType</span></a> type</code></em>);
 #define             <a class="link" href="gobject-Type-Information.html#G-DEFINE-TYPE:CAPS" title="G_DEFINE_TYPE()">G_DEFINE_TYPE</a>                       (TN,
                                                          t_n,
                                                          T_P)
@@ -1672,7 +1673,11 @@ to initialize the type system and assorted other code portions
 system).
 </p>
 <p>
-This function is idempotent.
+This function is idempotent: If you call it multiple times, all but
+the first calls will be silently ignored.
+</p>
+<p>
+There is no way to undo the effect of <a class="link" href="gobject-Type-Information.html#g-type-init" title="g_type_init ()"><code class="function">g_type_init()</code></a>.
 </p>
 <p>
 Since version 2.24 this also initializes the thread system
@@ -3787,6 +3792,37 @@ that implements or has internal knowledge of the implementation of
 </tr>
 </tbody>
 </table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-type-ensure"></a><h3>g_type_ensure ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_type_ensure                       (<em class="parameter"><code><a class="link" href="gobject-Type-Information.html#GType" title="GType"><span class="type">GType</span></a> type</code></em>);</pre>
+<p>
+Ensures that the indicated <em class="parameter"><code>type</code></em> has been registered with the
+type system, and its <code class="function">_class_init()</code> method has been run.
+</p>
+<p>
+In theory, simply calling the type's <code class="function">_get_type()</code> method (or using
+the corresponding macro) is supposed take care of this. However,
+<code class="function">_get_type()</code> methods are often marked <a href="./../glib/glib/glib-Miscellaneous-Macros.html#G-GNUC-CONST:CAPS"><code class="literal">G_GNUC_CONST</code></a> for performance
+reasons, even though this is technically incorrect (since
+<a href="./../glib/glib/glib-Miscellaneous-Macros.html#G-GNUC-CONST:CAPS"><code class="literal">G_GNUC_CONST</code></a> requires that the function not have side effects,
+which <code class="function">_get_type()</code> methods do on the first call). As a result, if
+you write a bare call to a <code class="function">_get_type()</code> macro, it may get optimized
+out by the compiler. Using <a class="link" href="gobject-Type-Information.html#g-type-ensure" title="g_type_ensure ()"><code class="function">g_type_ensure()</code></a> guarantees that the
+type's <code class="function">_get_type()</code> method is called.
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td>a <a class="link" href="gobject-Type-Information.html#GType" title="GType"><span class="type">GType</span></a>.</td>
+</tr></tbody>
+</table></div>
+<p class="since">Since 2.34</p>
 </div>
 <hr>
 <div class="refsect2">

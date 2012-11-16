@@ -34,7 +34,7 @@
           </p></li>
 <li class="listitem"><p>Use prefixing to avoid namespace conflicts with other projects.
             If your library (or application) is named <span class="emphasis"><em>Maman</em></span>,
-            <a href="#ftn.id538037" class="footnote"><sup class="footnote"><a name="id538037"></a>[3]</sup></a>
+            <a href="#ftn.idp9274592" class="footnote"><sup class="footnote"><a name="idp9274592"></a>[3]</sup></a>
             
             prefix all your function names with <span class="emphasis"><em>maman_</em></span>.
             For example: <code class="function">maman_object_method</code>.
@@ -120,8 +120,9 @@ GType maman_bar_get_type (void)
 <p>
       </p>
 <p>
-        When having no special requirements you also can use the <code class="function">G_DEFINE_TYPE</code>
-	macro:
+        If you have no special requirements you can use the
+        <code class="function"><a class="link" href="gobject-Type-Information.html#G-DEFINE-TYPE:CAPS" title="G_DEFINE_TYPE()">G_DEFINE_TYPE</a></code>
+	macro to define a class:
 </p>
 <pre class="programlisting">
 G_DEFINE_TYPE (MamanBar, maman_bar, G_TYPE_OBJECT)
@@ -130,7 +131,7 @@ G_DEFINE_TYPE (MamanBar, maman_bar, G_TYPE_OBJECT)
       </p>
 <div class="footnotes">
 <br><hr style="width:100; align:left;">
-<div id="ftn.id538037" class="footnote"><p><a href="#id538037" class="para"><sup class="para">[3] </sup></a>
+<div id="ftn.idp9274592" class="footnote"><p><a href="#idp9274592" class="para"><sup class="para">[3] </sup></a>
                 <span class="emphasis"><em>Maman</em></span> is the French word for <span class="emphasis"><em>mum</em></span>
                 or <span class="emphasis"><em>mother</em></span> - nothing more and nothing less.
               </p></div>

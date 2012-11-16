@@ -131,14 +131,14 @@ const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="returnva
 const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *       <a class="link" href="GDBusMessage.html#g-dbus-message-get-arg0" title="g_dbus_message_get_arg0 ()">g_dbus_message_get_arg0</a>             (<em class="parameter"><code><a class="link" href="GDBusMessage.html" title="GDBusMessage"><span class="type">GDBusMessage</span></a> *message</code></em>);
 <a href="./../glib/glib/glib-Basic-Types.html#guchar"><span class="returnvalue">guchar</span></a> *            <a class="link" href="GDBusMessage.html#g-dbus-message-to-blob" title="g_dbus_message_to_blob ()">g_dbus_message_to_blob</a>              (<em class="parameter"><code><a class="link" href="GDBusMessage.html" title="GDBusMessage"><span class="type">GDBusMessage</span></a> *message</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gsize"><span class="type">gsize</span></a> *out_size</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GDBusConnection.html#GDBusCapabilityFlags" title="enum GDBusCapabilityFlags"><span class="type">GDBusCapabilityFlags</span></a> capabilities</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GDBusConnection.html#GDBusCapabilityFlags"><span class="type">GDBusCapabilityFlags</span></a> capabilities</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
 <a href="./../glib/glib/glib-Basic-Types.html#gssize"><span class="returnvalue">gssize</span></a>              <a class="link" href="GDBusMessage.html#g-dbus-message-bytes-needed" title="g_dbus_message_bytes_needed ()">g_dbus_message_bytes_needed</a>         (<em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *blob</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gsize"><span class="type">gsize</span></a> blob_len</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
 <a class="link" href="GDBusMessage.html" title="GDBusMessage"><span class="returnvalue">GDBusMessage</span></a> *      <a class="link" href="GDBusMessage.html#g-dbus-message-new-from-blob" title="g_dbus_message_new_from_blob ()">g_dbus_message_new_from_blob</a>        (<em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *blob</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gsize"><span class="type">gsize</span></a> blob_len</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GDBusConnection.html#GDBusCapabilityFlags" title="enum GDBusCapabilityFlags"><span class="type">GDBusCapabilityFlags</span></a> capabilities</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GDBusConnection.html#GDBusCapabilityFlags"><span class="type">GDBusCapabilityFlags</span></a> capabilities</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
 <a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GDBusMessage.html#g-dbus-message-to-gerror" title="g_dbus_message_to_gerror ()">g_dbus_message_to_gerror</a>            (<em class="parameter"><code><a class="link" href="GDBusMessage.html" title="GDBusMessage"><span class="type">GDBusMessage</span></a> *message</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
@@ -1678,7 +1678,7 @@ Convenience to get the first item in the body of <em class="parameter"><code>mes
 <a name="g-dbus-message-to-blob"></a><h3>g_dbus_message_to_blob ()</h3>
 <pre class="programlisting"><a href="./../glib/glib/glib-Basic-Types.html#guchar"><span class="returnvalue">guchar</span></a> *            g_dbus_message_to_blob              (<em class="parameter"><code><a class="link" href="GDBusMessage.html" title="GDBusMessage"><span class="type">GDBusMessage</span></a> *message</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gsize"><span class="type">gsize</span></a> *out_size</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GDBusConnection.html#GDBusCapabilityFlags" title="enum GDBusCapabilityFlags"><span class="type">GDBusCapabilityFlags</span></a> capabilities</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GDBusConnection.html#GDBusCapabilityFlags"><span class="type">GDBusCapabilityFlags</span></a> capabilities</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Serializes <em class="parameter"><code>message</code></em> to a blob. The byte order returned by
@@ -1700,7 +1700,7 @@ Serializes <em class="parameter"><code>message</code></em> to a blob. The byte o
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>capabilities</code></em> :</span></p></td>
-<td>A <a class="link" href="GDBusConnection.html#GDBusCapabilityFlags" title="enum GDBusCapabilityFlags"><span class="type">GDBusCapabilityFlags</span></a> describing what protocol features are supported.</td>
+<td>A <a class="link" href="GDBusConnection.html#GDBusCapabilityFlags"><span class="type">GDBusCapabilityFlags</span></a> describing what protocol features are supported.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
@@ -1761,7 +1761,7 @@ determine the size).</td>
 <a name="g-dbus-message-new-from-blob"></a><h3>g_dbus_message_new_from_blob ()</h3>
 <pre class="programlisting"><a class="link" href="GDBusMessage.html" title="GDBusMessage"><span class="returnvalue">GDBusMessage</span></a> *      g_dbus_message_new_from_blob        (<em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#guchar"><span class="type">guchar</span></a> *blob</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gsize"><span class="type">gsize</span></a> blob_len</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GDBusConnection.html#GDBusCapabilityFlags" title="enum GDBusCapabilityFlags"><span class="type">GDBusCapabilityFlags</span></a> capabilities</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GDBusConnection.html#GDBusCapabilityFlags"><span class="type">GDBusCapabilityFlags</span></a> capabilities</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Creates a new <a class="link" href="GDBusMessage.html" title="GDBusMessage"><span class="type">GDBusMessage</span></a> from the data stored at <em class="parameter"><code>blob</code></em>. The byte
@@ -1785,7 +1785,7 @@ order that the message was in can be retrieved using
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>capabilities</code></em> :</span></p></td>
-<td>A <a class="link" href="GDBusConnection.html#GDBusCapabilityFlags" title="enum GDBusCapabilityFlags"><span class="type">GDBusCapabilityFlags</span></a> describing what protocol features are supported.</td>
+<td>A <a class="link" href="GDBusConnection.html#GDBusCapabilityFlags"><span class="type">GDBusCapabilityFlags</span></a> describing what protocol features are supported.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>

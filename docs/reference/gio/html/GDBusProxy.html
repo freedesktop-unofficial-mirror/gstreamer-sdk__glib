@@ -45,14 +45,14 @@
 </tr></table></div>
 <div class="refsynopsisdiv">
 <a name="GDBusProxy.synopsis"></a><h2>Synopsis</h2>
-<pre class="synopsis">
+<a name="GDBusProxyFlags"></a><pre class="synopsis">
 #include &lt;gio/gio.h&gt;
 
-enum                <a class="link" href="GDBusProxy.html#GDBusProxyFlags" title="enum GDBusProxyFlags">GDBusProxyFlags</a>;
+enum                <a class="link" href="GDBusProxy.html#GDBusProxyFlags-enum" title="enum GDBusProxyFlags">GDBusProxyFlags</a>;
                     <a class="link" href="GDBusProxy.html#GDBusProxy-struct" title="GDBusProxy">GDBusProxy</a>;
 struct              <a class="link" href="GDBusProxy.html#GDBusProxyClass" title="struct GDBusProxyClass">GDBusProxyClass</a>;
 <span class="returnvalue">void</span>                <a class="link" href="GDBusProxy.html#g-dbus-proxy-new" title="g_dbus_proxy_new ()">g_dbus_proxy_new</a>                    (<em class="parameter"><code><a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a> *connection</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GDBusProxy.html#GDBusProxyFlags" title="enum GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> flags</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GDBusProxy.html#GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> flags</code></em>,
                                                          <em class="parameter"><code><a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a> *info</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *name</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *object_path</code></em>,
@@ -63,7 +63,7 @@ struct              <a class="link" href="GDBusProxy.html#GDBusProxyClass" title
 <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="returnvalue">GDBusProxy</span></a> *        <a class="link" href="GDBusProxy.html#g-dbus-proxy-new-finish" title="g_dbus_proxy_new_finish ()">g_dbus_proxy_new_finish</a>             (<em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *res</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
 <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="returnvalue">GDBusProxy</span></a> *        <a class="link" href="GDBusProxy.html#g-dbus-proxy-new-sync" title="g_dbus_proxy_new_sync ()">g_dbus_proxy_new_sync</a>               (<em class="parameter"><code><a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a> *connection</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GDBusProxy.html#GDBusProxyFlags" title="enum GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> flags</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GDBusProxy.html#GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> flags</code></em>,
                                                          <em class="parameter"><code><a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a> *info</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *name</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *object_path</code></em>,
@@ -71,7 +71,7 @@ struct              <a class="link" href="GDBusProxy.html#GDBusProxyClass" title
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GDBusProxy.html#g-dbus-proxy-new-for-bus" title="g_dbus_proxy_new_for_bus ()">g_dbus_proxy_new_for_bus</a>            (<em class="parameter"><code><a class="link" href="GDBusConnection.html#GBusType" title="enum GBusType"><span class="type">GBusType</span></a> bus_type</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GDBusProxy.html#GDBusProxyFlags" title="enum GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> flags</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GDBusProxy.html#GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> flags</code></em>,
                                                          <em class="parameter"><code><a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a> *info</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *name</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *object_path</code></em>,
@@ -82,14 +82,14 @@ struct              <a class="link" href="GDBusProxy.html#GDBusProxyClass" title
 <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="returnvalue">GDBusProxy</span></a> *        <a class="link" href="GDBusProxy.html#g-dbus-proxy-new-for-bus-finish" title="g_dbus_proxy_new_for_bus_finish ()">g_dbus_proxy_new_for_bus_finish</a>     (<em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *res</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
 <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="returnvalue">GDBusProxy</span></a> *        <a class="link" href="GDBusProxy.html#g-dbus-proxy-new-for-bus-sync" title="g_dbus_proxy_new_for_bus_sync ()">g_dbus_proxy_new_for_bus_sync</a>       (<em class="parameter"><code><a class="link" href="GDBusConnection.html#GBusType" title="enum GBusType"><span class="type">GBusType</span></a> bus_type</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GDBusProxy.html#GDBusProxyFlags" title="enum GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> flags</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GDBusProxy.html#GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> flags</code></em>,
                                                          <em class="parameter"><code><a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a> *info</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *name</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *object_path</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *interface_name</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
-<a class="link" href="GDBusProxy.html#GDBusProxyFlags" title="enum GDBusProxyFlags"><span class="returnvalue">GDBusProxyFlags</span></a>     <a class="link" href="GDBusProxy.html#g-dbus-proxy-get-flags" title="g_dbus_proxy_get_flags ()">g_dbus_proxy_get_flags</a>              (<em class="parameter"><code><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> *proxy</code></em>);
+<a class="link" href="GDBusProxy.html#GDBusProxyFlags"><span class="returnvalue">GDBusProxyFlags</span></a>     <a class="link" href="GDBusProxy.html#g-dbus-proxy-get-flags" title="g_dbus_proxy_get_flags ()">g_dbus_proxy_get_flags</a>              (<em class="parameter"><code><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> *proxy</code></em>);
 <a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="returnvalue">GDBusConnection</span></a> *   <a class="link" href="GDBusProxy.html#g-dbus-proxy-get-connection" title="g_dbus_proxy_get_connection ()">g_dbus_proxy_get_connection</a>         (<em class="parameter"><code><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> *proxy</code></em>);
 const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *       <a class="link" href="GDBusProxy.html#g-dbus-proxy-get-name" title="g_dbus_proxy_get_name ()">g_dbus_proxy_get_name</a>               (<em class="parameter"><code><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> *proxy</code></em>);
 <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *             <a class="link" href="GDBusProxy.html#g-dbus-proxy-get-name-owner" title="g_dbus_proxy_get_name_owner ()">g_dbus_proxy_get_name_owner</a>         (<em class="parameter"><code><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> *proxy</code></em>);
@@ -155,6 +155,10 @@ const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="returnva
 <div class="refsect1">
 <a name="GDBusProxy.object-hierarchy"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
+  GFlags
+   +----GDBusProxyFlags
+</pre>
+<pre class="synopsis">
   <a href="./../gobject/gobject/gobject-The-Base-Object-Type.html#GObject">GObject</a>
    +----GDBusProxy
 </pre>
@@ -171,7 +175,7 @@ GDBusProxy implements
   "<a class="link" href="GDBusProxy.html#GDBusProxy--g-bus-type" title='The "g-bus-type" property'>g-bus-type</a>"               <a class="link" href="GDBusConnection.html#GBusType" title="enum GBusType"><span class="type">GBusType</span></a>              : Write / Construct Only
   "<a class="link" href="GDBusProxy.html#GDBusProxy--g-connection" title='The "g-connection" property'>g-connection</a>"             <a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a>*      : Read / Write / Construct Only
   "<a class="link" href="GDBusProxy.html#GDBusProxy--g-default-timeout" title='The "g-default-timeout" property'>g-default-timeout</a>"        <a href="./../glib/glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a>                  : Read / Write / Construct
-  "<a class="link" href="GDBusProxy.html#GDBusProxy--g-flags" title='The "g-flags" property'>g-flags</a>"                  <a class="link" href="GDBusProxy.html#GDBusProxyFlags" title="enum GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a>       : Read / Write / Construct Only
+  "<a class="link" href="GDBusProxy.html#GDBusProxy--g-flags" title='The "g-flags" property'>g-flags</a>"                  <a class="link" href="GDBusProxy.html#GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a>       : Read / Write / Construct Only
   "<a class="link" href="GDBusProxy.html#GDBusProxy--g-interface-info" title='The "g-interface-info" property'>g-interface-info</a>"         <a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a>*   : Read / Write
   "<a class="link" href="GDBusProxy.html#GDBusProxy--g-interface-name" title='The "g-interface-name" property'>g-interface-name</a>"         <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>*                : Read / Write / Construct Only
   "<a class="link" href="GDBusProxy.html#GDBusProxy--g-name" title='The "g-name" property'>g-name</a>"                   <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>*                : Read / Write / Construct Only
@@ -197,7 +201,7 @@ both well-known and unique names.
 By default, <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> will cache all properties (and listen to
 changes) of the remote object, and proxy all signals that gets
 emitted. This behaviour can be changed by passing suitable
-<a class="link" href="GDBusProxy.html#GDBusProxyFlags" title="enum GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> when the proxy is created. If the proxy is for a
+<a class="link" href="GDBusProxy.html#GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> when the proxy is created. If the proxy is for a
 well-known name, the property cache is flushed when the name owner
 vanishes and reloaded when a name owner appears.
 </p>
@@ -219,7 +223,7 @@ The generic <a class="link" href="GDBusProxy.html#GDBusProxy-g-properties-change
 <a class="link" href="GDBusProxy.html#GDBusProxy-g-signal" title='The "g-signal" signal'><span class="type">"g-signal"</span></a> signals are not very convenient to work
 with. Therefore, the recommended way of working with proxies is to
 subclass <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a>, and have more natural properties and signals
-in your derived class. See <a class="xref" href="ch30s05.html#gdbus-example-gdbus-codegen" title="Using gdbus-codegen">the section called “Using gdbus-codegen”</a>
+in your derived class. See <a class="xref" href="ch32s05.html#gdbus-example-gdbus-codegen" title="Using gdbus-codegen">the section called “Using gdbus-codegen”</a>
 for how this can easily be done using the
 <span class="command"><strong><a href="gdbus-codegen.html">gdbus-codegen</a></strong></span>
 tool.
@@ -715,7 +719,7 @@ of the thread where the instance was constructed.
 <div class="refsect1">
 <a name="GDBusProxy.details"></a><h2>Details</h2>
 <div class="refsect2">
-<a name="GDBusProxyFlags"></a><h3>enum GDBusProxyFlags</h3>
+<a name="GDBusProxyFlags-enum"></a><h3>enum GDBusProxyFlags</h3>
 <pre class="programlisting">typedef enum {
   G_DBUS_PROXY_FLAGS_NONE = 0,
   G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES = (1&lt;&lt;0),
@@ -813,7 +817,7 @@ Class structure for <a class="link" href="GDBusProxy.html" title="GDBusProxy"><s
 <div class="refsect2">
 <a name="g-dbus-proxy-new"></a><h3>g_dbus_proxy_new ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_dbus_proxy_new                    (<em class="parameter"><code><a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a> *connection</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GDBusProxy.html#GDBusProxyFlags" title="enum GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> flags</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GDBusProxy.html#GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> flags</code></em>,
                                                          <em class="parameter"><code><a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a> *info</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *name</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *object_path</code></em>,
@@ -934,7 +938,7 @@ Finishes creating a <a class="link" href="GDBusProxy.html" title="GDBusProxy"><s
 <div class="refsect2">
 <a name="g-dbus-proxy-new-sync"></a><h3>g_dbus_proxy_new_sync ()</h3>
 <pre class="programlisting"><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="returnvalue">GDBusProxy</span></a> *        g_dbus_proxy_new_sync               (<em class="parameter"><code><a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a> *connection</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GDBusProxy.html#GDBusProxyFlags" title="enum GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> flags</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GDBusProxy.html#GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> flags</code></em>,
                                                          <em class="parameter"><code><a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a> *info</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *name</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *object_path</code></em>,
@@ -1019,7 +1023,7 @@ See <a class="xref" href="GDBusProxy.html#gdbus-wellknown-proxy" title="Example�
 <div class="refsect2">
 <a name="g-dbus-proxy-new-for-bus"></a><h3>g_dbus_proxy_new_for_bus ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_dbus_proxy_new_for_bus            (<em class="parameter"><code><a class="link" href="GDBusConnection.html#GBusType" title="enum GBusType"><span class="type">GBusType</span></a> bus_type</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GDBusProxy.html#GDBusProxyFlags" title="enum GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> flags</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GDBusProxy.html#GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> flags</code></em>,
                                                          <em class="parameter"><code><a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a> *info</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *name</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *object_path</code></em>,
@@ -1115,7 +1119,7 @@ Finishes creating a <a class="link" href="GDBusProxy.html" title="GDBusProxy"><s
 <div class="refsect2">
 <a name="g-dbus-proxy-new-for-bus-sync"></a><h3>g_dbus_proxy_new_for_bus_sync ()</h3>
 <pre class="programlisting"><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="returnvalue">GDBusProxy</span></a> *        g_dbus_proxy_new_for_bus_sync       (<em class="parameter"><code><a class="link" href="GDBusConnection.html#GBusType" title="enum GBusType"><span class="type">GBusType</span></a> bus_type</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GDBusProxy.html#GDBusProxyFlags" title="enum GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> flags</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GDBusProxy.html#GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> flags</code></em>,
                                                          <em class="parameter"><code><a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a> *info</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *name</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *object_path</code></em>,
@@ -1180,7 +1184,7 @@ that <em class="parameter"><code>proxy</code></em> conforms to or <a href="./../
 <hr>
 <div class="refsect2">
 <a name="g-dbus-proxy-get-flags"></a><h3>g_dbus_proxy_get_flags ()</h3>
-<pre class="programlisting"><a class="link" href="GDBusProxy.html#GDBusProxyFlags" title="enum GDBusProxyFlags"><span class="returnvalue">GDBusProxyFlags</span></a>     g_dbus_proxy_get_flags              (<em class="parameter"><code><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> *proxy</code></em>);</pre>
+<pre class="programlisting"><a class="link" href="GDBusProxy.html#GDBusProxyFlags"><span class="returnvalue">GDBusProxyFlags</span></a>     g_dbus_proxy_get_flags              (<em class="parameter"><code><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> *proxy</code></em>);</pre>
 <p>
 Gets the flags that <em class="parameter"><code>proxy</code></em> was constructed with.
 </p>
@@ -1196,7 +1200,7 @@ Gets the flags that <em class="parameter"><code>proxy</code></em> was constructe
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>Flags from the <a class="link" href="GDBusProxy.html#GDBusProxyFlags" title="enum GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> enumeration.</td>
+<td>Flags from the <a class="link" href="GDBusProxy.html#GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> enumeration.</td>
 </tr>
 </tbody>
 </table></div>
@@ -2121,9 +2125,9 @@ the default timeout (typically 25 seconds) is used. If set to
 <hr>
 <div class="refsect2">
 <a name="GDBusProxy--g-flags"></a><h3>The <code class="literal">"g-flags"</code> property</h3>
-<pre class="programlisting">  "g-flags"                  <a class="link" href="GDBusProxy.html#GDBusProxyFlags" title="enum GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a>       : Read / Write / Construct Only</pre>
+<pre class="programlisting">  "g-flags"                  <a class="link" href="GDBusProxy.html#GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a>       : Read / Write / Construct Only</pre>
 <p>
-Flags from the <a class="link" href="GDBusProxy.html#GDBusProxyFlags" title="enum GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> enumeration.
+Flags from the <a class="link" href="GDBusProxy.html#GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> enumeration.
 </p>
 <p class="since">Since 2.26</p>
 </div>

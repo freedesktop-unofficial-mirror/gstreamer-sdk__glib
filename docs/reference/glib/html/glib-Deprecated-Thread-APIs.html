@@ -489,7 +489,7 @@ which is quadratic in the number of existing threads.
 <pre class="programlisting"><a class="link" href="glib-Threads.html#GMutex" title="union GMutex"><span class="returnvalue">GMutex</span></a> *            g_mutex_new                         ();</pre>
 <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
 <h3 class="title">Warning</h3>
-<p><code class="literal">g_mutex_new</code> has been deprecated since version 3.32 and should not be used in newly-written code. GMutex can now be statically allocated, or embedded
+<p><code class="literal">g_mutex_new</code> has been deprecated since version 2.32 and should not be used in newly-written code. GMutex can now be statically allocated, or embedded
 in structures and initialised with <a class="link" href="glib-Threads.html#g-mutex-init" title="g_mutex_init ()"><code class="function">g_mutex_init()</code></a>.</p>
 </div>
 <p>
@@ -512,7 +512,7 @@ Allocates and initializes a new <a class="link" href="glib-Threads.html#GMutex" 
 <pre class="programlisting"><span class="returnvalue">void</span>                g_mutex_free                        (<em class="parameter"><code><a class="link" href="glib-Threads.html#GMutex" title="union GMutex"><span class="type">GMutex</span></a> *mutex</code></em>);</pre>
 <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
 <h3 class="title">Warning</h3>
-<p><code class="literal">g_mutex_free</code> has been deprecated since version 3.32 and should not be used in newly-written code. GMutex can now be statically allocated, or embedded
+<p><code class="literal">g_mutex_free</code> has been deprecated since version 2.32 and should not be used in newly-written code. GMutex can now be statically allocated, or embedded
 in structures and initialised with <a class="link" href="glib-Threads.html#g-mutex-init" title="g_mutex_init ()"><code class="function">g_mutex_init()</code></a>.</p>
 </div>
 <p>
@@ -540,7 +540,7 @@ in undefined behaviour.
 <pre class="programlisting"><a class="link" href="glib-Threads.html#GCond" title="struct GCond"><span class="returnvalue">GCond</span></a>*              g_cond_new                          ();</pre>
 <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
 <h3 class="title">Warning</h3>
-<p><code class="literal">g_cond_new</code> has been deprecated since version 3.32 and should not be used in newly-written code. GCond can now be statically allocated, or embedded
+<p><code class="literal">g_cond_new</code> has been deprecated since version 2.32 and should not be used in newly-written code. GCond can now be statically allocated, or embedded
 in structures and initialised with <a class="link" href="glib-Threads.html#g-cond-init" title="g_cond_init ()"><code class="function">g_cond_init()</code></a>.</p>
 </div>
 <p>
@@ -564,7 +564,7 @@ Allocates and initializes a new <a class="link" href="glib-Threads.html#GCond" t
 <pre class="programlisting"><span class="returnvalue">void</span>                g_cond_free                         (<em class="parameter"><code><a class="link" href="glib-Threads.html#GCond" title="struct GCond"><span class="type">GCond</span></a> *cond</code></em>);</pre>
 <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
 <h3 class="title">Warning</h3>
-<p><code class="literal">g_cond_free</code> has been deprecated since version 3.32 and should not be used in newly-written code. GCond can now be statically allocated, or embedded
+<p><code class="literal">g_cond_free</code> has been deprecated since version 2.32 and should not be used in newly-written code. GCond can now be statically allocated, or embedded
 in structures and initialised with <a class="link" href="glib-Threads.html#g-cond-init" title="g_cond_init ()"><code class="function">g_cond_init()</code></a>.</p>
 </div>
 <p>
@@ -636,7 +636,7 @@ a GStaticMutex.
 <p>
 </p>
 <div class="example">
-<a name="id950721"></a><p class="title"><b>Example 21. 
+<a name="idp59963024"></a><p class="title"><b>Example 21. 
   Using <span class="structname">GStaticMutex</span>
   to simplify thread-safe programming
  </b></p>
@@ -1178,7 +1178,7 @@ example:
 <p>
 </p>
 <div class="example">
-<a name="id953094"></a><p class="title"><b>Example 22. An array with access functions</b></p>
+<a name="idp60247808"></a><p class="title"><b>Example 22. An array with access functions</b></p>
 <div class="example-contents">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -1569,7 +1569,7 @@ look at our <code class="function"><code class="function">give_me_next_number()<
 <p>
 </p>
 <div class="example">
-<a name="id954594"></a><p class="title"><b>Example 23. Using GStaticPrivate for per-thread data</b></p>
+<a name="idp60427808"></a><p class="title"><b>Example 23. Using GStaticPrivate for per-thread data</b></p>
 <div class="example-contents">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>

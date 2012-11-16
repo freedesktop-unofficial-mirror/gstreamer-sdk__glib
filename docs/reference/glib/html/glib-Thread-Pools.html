@@ -466,6 +466,9 @@ Sets the maximal number of unused threads to <em class="parameter"><code>max_thr
 If <em class="parameter"><code>max_threads</code></em> is -1, no limit is imposed on the number
 of unused threads.
 </p>
+<p>
+The default value is 2.
+</p>
 <div class="variablelist"><table border="0" class="variablelist">
 <colgroup>
 <col align="left" valign="top">
@@ -587,8 +590,7 @@ except this is done on a per thread basis.
 By setting <em class="parameter"><code>interval</code></em> to 0, idle threads will not be stopped.
 </p>
 <p>
-This function makes use of <a class="link" href="glib-Asynchronous-Queues.html#g-async-queue-timed-pop" title="g_async_queue_timed_pop ()"><code class="function">g_async_queue_timed_pop()</code></a> using
-<em class="parameter"><code>interval</code></em>.
+The default value is 15000 (15 seconds).
 </p>
 <div class="variablelist"><table border="0" class="variablelist">
 <colgroup>

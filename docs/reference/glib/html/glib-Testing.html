@@ -64,6 +64,10 @@
 <span class="returnvalue">void</span>                <a class="link" href="glib-Testing.html#g-test-add-data-func" title="g_test_add_data_func ()">g_test_add_data_func</a>                (<em class="parameter"><code>const <span class="type">char</span> *testpath</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gconstpointer" title="gconstpointer"><span class="type">gconstpointer</span></a> test_data</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Testing.html#GTestDataFunc" title="GTestDataFunc ()"><span class="type">GTestDataFunc</span></a> test_func</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Testing.html#g-test-add-data-func-full" title="g_test_add_data_func_full ()">g_test_add_data_func_full</a>           (<em class="parameter"><code>const <span class="type">char</span> *testpath</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> test_data</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Testing.html#GTestDataFunc" title="GTestDataFunc ()"><span class="type">GTestDataFunc</span></a> test_func</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="type">GDestroyNotify</span></a> data_free_func</code></em>);
 #define             <a class="link" href="glib-Testing.html#g-test-add" title="g_test_add()">g_test_add</a>                          (testpath,
                                                          Fixture,
                                                          tdata,
@@ -88,6 +92,10 @@
 <span class="returnvalue">void</span>                <a class="link" href="glib-Testing.html#g-test-queue-destroy" title="g_test_queue_destroy ()">g_test_queue_destroy</a>                (<em class="parameter"><code><a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="type">GDestroyNotify</span></a> destroy_func</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> destroy_data</code></em>);
 #define             <a class="link" href="glib-Testing.html#g-test-queue-unref" title="g_test_queue_unref()">g_test_queue_unref</a>                  (gobject)
+<span class="returnvalue">void</span>                <a class="link" href="glib-Testing.html#g-test-expect-message" title="g_test_expect_message ()">g_test_expect_message</a>               (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *log_domain</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags"><span class="type">GLogLevelFlags</span></a> log_level</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *pattern</code></em>);
+#define             <a class="link" href="glib-Testing.html#g-test-assert-expected-messages" title="g_test_assert_expected_messages">g_test_assert_expected_messages</a>
 enum                <a class="link" href="glib-Testing.html#GTestTrapFlags" title="enum GTestTrapFlags">GTestTrapFlags</a>;
 <a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="glib-Testing.html#g-test-trap-fork" title="g_test_trap_fork ()">g_test_trap_fork</a>                    (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint64" title="guint64"><span class="type">guint64</span></a> usec_timeout</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Testing.html#GTestTrapFlags" title="enum GTestTrapFlags"><span class="type">GTestTrapFlags</span></a> test_trap_flags</code></em>);
@@ -307,34 +315,34 @@ So far, the following arguments are understood:
 <tr>
 <td><p><span class="term"><code class="option">-l</code></span></p></td>
 <td><p>
-      list test cases available in a test executable.
+      List test cases available in a test executable.
     </p></td>
 </tr>
 <tr>
 <td><p><span class="term"><code class="option">--seed=<em class="replaceable"><code>RANDOMSEED</code></em></code></span></p></td>
 <td><p>
-      provide a random seed to reproduce test runs using random numbers.
+      Provide a random seed to reproduce test runs using random numbers.
     </p></td>
 </tr>
 <tr>
 <td><p><span class="term"><code class="option">--verbose</code></span></p></td>
-<td><p>run tests verbosely.</p></td>
+<td><p>Run tests verbosely.</p></td>
 </tr>
 <tr>
 <td><p><span class="term"><code class="option">-q</code>, <code class="option">--quiet</code></span></p></td>
-<td><p>run tests quietly.</p></td>
+<td><p>Run tests quietly.</p></td>
 </tr>
 <tr>
 <td><p><span class="term"><code class="option">-p <em class="replaceable"><code>TESTPATH</code></em></code></span></p></td>
 <td><p>
-        execute all tests matching <em class="replaceable"><code>TESTPATH</code></em>.
+        Execute all tests matching <em class="replaceable"><code>TESTPATH</code></em>.
       </p></td>
 </tr>
 <tr>
 <td><p><span class="term"><code class="option">-m {perf|slow|thorough|quick|undefined|no-undefined}</code></span></p></td>
 <td>
 <p>
-        execute tests according to these test modes:
+        Execute tests according to these test modes:
         </p>
 <div class="variablelist"><table border="0" class="variablelist">
 <colgroup>
@@ -345,26 +353,26 @@ So far, the following arguments are understood:
 <tr>
 <td><p><span class="term">perf</span></p></td>
 <td><p>
-              performance tests, may take long and report results.
+              Performance tests, may take long and report results.
             </p></td>
 </tr>
 <tr>
 <td><p><span class="term">slow, thorough</span></p></td>
 <td><p>
-              slow and thorough tests, may take quite long and 
+              Slow and thorough tests, may take quite long and
               maximize coverage.
             </p></td>
 </tr>
 <tr>
 <td><p><span class="term">quick</span></p></td>
 <td><p>
-              quick tests, should run really quickly and give good coverage.
+              Quick tests, should run really quickly and give good coverage.
             </p></td>
 </tr>
 <tr>
 <td><p><span class="term">undefined</span></p></td>
 <td><p>
-              tests for undefined behaviour, may provoke programming errors
+              Tests for undefined behaviour, may provoke programming errors
               under <a class="link" href="glib-Testing.html#g-test-trap-fork" title="g_test_trap_fork ()"><code class="function">g_test_trap_fork()</code></a> to check that appropriate assertions
               or warnings are given
             </p></td>
@@ -372,7 +380,7 @@ So far, the following arguments are understood:
 <tr>
 <td><p><span class="term">no-undefined</span></p></td>
 <td><p>
-              avoid tests for undefined behaviour
+              Avoid tests for undefined behaviour
             </p></td>
 </tr>
 </tbody>
@@ -383,19 +391,7 @@ So far, the following arguments are understood:
 </tr>
 <tr>
 <td><p><span class="term"><code class="option">--debug-log</code></span></p></td>
-<td><p>debug test logging output.</p></td>
-</tr>
-<tr>
-<td><p><span class="term"><code class="option">-k</code>, <code class="option">--keep-going</code></span></p></td>
-<td><p>gtester-specific argument.</p></td>
-</tr>
-<tr>
-<td><p><span class="term"><code class="option">--GTestLogFD <em class="replaceable"><code>N</code></em></code></span></p></td>
-<td><p>gtester-specific argument.</p></td>
-</tr>
-<tr>
-<td><p><span class="term"><code class="option">--GTestSkipCount <em class="replaceable"><code>N</code></em></code></span></p></td>
-<td><p>gtester-specific argument.</p></td>
+<td><p>Debug test logging output.</p></td>
 </tr>
 </tbody>
 </table></div>
@@ -685,6 +681,44 @@ will be passed as first argument to <em class="parameter"><code>test_func</code>
 </tbody>
 </table></div>
 <p class="since">Since 2.16</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-test-add-data-func-full"></a><h3>g_test_add_data_func_full ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_test_add_data_func_full           (<em class="parameter"><code>const <span class="type">char</span> *testpath</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> test_data</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Testing.html#GTestDataFunc" title="GTestDataFunc ()"><span class="type">GTestDataFunc</span></a> test_func</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="type">GDestroyNotify</span></a> data_free_func</code></em>);</pre>
+<p>
+Create a new test case, as with <a class="link" href="glib-Testing.html#g-test-add-data-func" title="g_test_add_data_func ()"><code class="function">g_test_add_data_func()</code></a>, but freeing
+<em class="parameter"><code>test_data</code></em> after the test run is complete.
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>testpath</code></em> :</span></p></td>
+<td>/-separated test case path name for the test.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>test_data</code></em> :</span></p></td>
+<td>Test data argument for the test function.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>test_func</code></em> :</span></p></td>
+<td>The test function to invoke for this test.</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data_free_func</code></em> :</span></p></td>
+<td>
+<a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="type">GDestroyNotify</span></a> for <em class="parameter"><code>test_data</code></em>.</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.34</p>
 </div>
 <hr>
 <div class="refsect2">
@@ -1025,9 +1059,9 @@ callback A before callback B will cause <code class="function">B()</code> to be 
 <a name="g-test-queue-unref"></a><h3>g_test_queue_unref()</h3>
 <pre class="programlisting">#define             g_test_queue_unref(gobject)</pre>
 <p>
-Enqueue an object to be released with <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a> during
+Enqueue an object to be released with <code class="function">g_object_unref()</code> during
 the next teardown phase. This is equivalent to calling
-<a class="link" href="glib-Testing.html#g-test-queue-destroy" title="g_test_queue_destroy ()"><code class="function">g_test_queue_destroy()</code></a> with a destroy callback of <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>.
+<a class="link" href="glib-Testing.html#g-test-queue-destroy" title="g_test_queue_destroy ()"><code class="function">g_test_queue_destroy()</code></a> with a destroy callback of <code class="function">g_object_unref()</code>.
 </p>
 <div class="variablelist"><table border="0" class="variablelist">
 <colgroup>
@@ -1040,6 +1074,98 @@ the next teardown phase. This is equivalent to calling
 </tr></tbody>
 </table></div>
 <p class="since">Since 2.16</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-test-expect-message"></a><h3>g_test_expect_message ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_test_expect_message               (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *log_domain</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags"><span class="type">GLogLevelFlags</span></a> log_level</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *pattern</code></em>);</pre>
+<p>
+Indicates that a message with the given <em class="parameter"><code>log_domain</code></em> and <em class="parameter"><code>log_level</code></em>,
+with text matching <em class="parameter"><code>pattern</code></em>, is expected to be logged. When this
+message is logged, it will not be printed, and the test case will
+not abort.
+</p>
+<p>
+Use <a class="link" href="glib-Testing.html#g-test-assert-expected-messages" title="g_test_assert_expected_messages"><code class="function">g_test_assert_expected_messages()</code></a> to assert that all
+previously-expected messages have been seen and suppressed.
+</p>
+<p>
+You can call this multiple times in a row, if multiple messages are
+expected as a result of a single call. (The messages must appear in
+the same order as the calls to <a class="link" href="glib-Testing.html#g-test-expect-message" title="g_test_expect_message ()"><code class="function">g_test_expect_message()</code></a>.)
+</p>
+<p>
+For example:
+</p>
+<p>
+</p>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="comment">/* g_main_context_push_thread_default() should fail if the</span>
+<span class="comment"> * context is already owned by another thread.</span>
+<span class="comment"> */</span>
+<span class="function"><a href="glib-Testing.html#g-test-expect-message">g_test_expect_message</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="glib-Message-Logging.html#G-LOG-DOMAIN:CAPS">G_LOG_DOMAIN</a></span><span class="symbol">,</span>
+<span class="normal">                       G_LOG_LEVEL_CRITICIAL</span><span class="symbol">,</span>
+<span class="normal">                       </span><span class="string">"assertion.*acquired_context.*failed"</span><span class="symbol">);</span>
+<span class="function"><a href="glib-The-Main-Event-Loop.html#g-main-context-push-thread-default">g_main_context_push_thread_default</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">bad_context</span><span class="symbol">);</span>
+<span class="function"><a href="glib-Testing.html#g-test-assert-expected-messages">g_test_assert_expected_messages</a></span><span class="normal"> </span><span class="symbol">();</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p>
+</p>
+<p>
+Note that you cannot use this to test <a class="link" href="glib-Message-Logging.html#g-error" title="g_error()"><code class="function">g_error()</code></a> messages, since
+<a class="link" href="glib-Message-Logging.html#g-error" title="g_error()"><code class="function">g_error()</code></a> intentionally never returns even if the program doesn't
+abort; use <a class="link" href="glib-Testing.html#g-test-trap-fork" title="g_test_trap_fork ()"><code class="function">g_test_trap_fork()</code></a> in this case.
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>log_domain</code></em> :</span></p></td>
+<td>the log domain of the message</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>log_level</code></em> :</span></p></td>
+<td>the log level of the message</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pattern</code></em> :</span></p></td>
+<td>a glob-style
+<a class="link" href="glib-Glob-style-pattern-matching.html" title="Glob-style pattern matching">pattern</a>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.34</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-test-assert-expected-messages"></a><h3>g_test_assert_expected_messages</h3>
+<pre class="programlisting">#define             g_test_assert_expected_messages()</pre>
+<p>
+Asserts that all messages previously indicated via
+<a class="link" href="glib-Testing.html#g-test-expect-message" title="g_test_expect_message ()"><code class="function">g_test_expect_message()</code></a> have been seen and suppressed.
+</p>
+<p class="since">Since 2.34</p>
 </div>
 <hr>
 <div class="refsect2">

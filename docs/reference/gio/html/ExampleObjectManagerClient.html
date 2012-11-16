@@ -5,7 +5,7 @@
 <title>ExampleObjectManagerClient</title>
 <meta name="generator" content="DocBook XSL Stylesheets V1.77.1">
 <link rel="home" href="index.html" title="GIO Reference Manual">
-<link rel="up" href="ch30s05.html" title="Generating code and docs">
+<link rel="up" href="ch32s05.html" title="Generating code and docs">
 <link rel="prev" href="ExampleObject.html" title="ExampleObject">
 <link rel="next" href="gio-hierarchy.html" title="Object Hierarchy">
 <meta name="generator" content="GTK-Doc V1.18 (XML mode)">
@@ -15,7 +15,7 @@
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
 <tr valign="middle">
 <td><a accesskey="p" href="ExampleObject.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
-<td><a accesskey="u" href="ch30s05.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="u" href="ch32s05.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
 <th width="100%" align="center">GIO Reference Manual</th>
 <td><a accesskey="n" href="gio-hierarchy.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
@@ -49,7 +49,7 @@ struct              <a class="link" href="ExampleObjectManagerClient.html#Exampl
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *interface_name</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="ExampleObjectManagerClient.html#example-object-manager-client-new" title="example_object_manager_client_new ()">example_object_manager_client_new</a>   (<em class="parameter"><code><a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a> *connection</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags" title="enum GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> flags</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> flags</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *name</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *object_path</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
@@ -60,14 +60,14 @@ struct              <a class="link" href="ExampleObjectManagerClient.html#Exampl
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
 <a class="link" href="GDBusObjectManager.html" title="GDBusObjectManager"><span class="returnvalue">GDBusObjectManager</span></a> * <a class="link" href="ExampleObjectManagerClient.html#example-object-manager-client-new-sync" title="example_object_manager_client_new_sync ()">example_object_manager_client_new_sync</a>
                                                         (<em class="parameter"><code><a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a> *connection</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags" title="enum GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> flags</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> flags</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *name</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *object_path</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="ExampleObjectManagerClient.html#example-object-manager-client-new-for-bus" title="example_object_manager_client_new_for_bus ()">example_object_manager_client_new_for_bus</a>
                                                         (<em class="parameter"><code><a class="link" href="GDBusConnection.html#GBusType" title="enum GBusType"><span class="type">GBusType</span></a> bus_type</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags" title="enum GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> flags</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> flags</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *name</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *object_path</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
@@ -78,7 +78,7 @@ struct              <a class="link" href="ExampleObjectManagerClient.html#Exampl
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
 <a class="link" href="GDBusObjectManager.html" title="GDBusObjectManager"><span class="returnvalue">GDBusObjectManager</span></a> * <a class="link" href="ExampleObjectManagerClient.html#example-object-manager-client-new-for-bus-sync" title="example_object_manager_client_new_for_bus_sync ()">example_object_manager_client_new_for_bus_sync</a>
                                                         (<em class="parameter"><code><a class="link" href="GDBusConnection.html#GBusType" title="enum GBusType"><span class="type">GBusType</span></a> bus_type</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags" title="enum GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> flags</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> flags</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *name</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *object_path</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
@@ -180,7 +180,7 @@ A <a class="link" href="GDBusObjectManagerClient.html#GDBusProxyTypeFunc" title=
 <div class="refsect2">
 <a name="example-object-manager-client-new"></a><h3>example_object_manager_client_new ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                example_object_manager_client_new   (<em class="parameter"><code><a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a> *connection</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags" title="enum GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> flags</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> flags</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *name</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *object_path</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
@@ -208,7 +208,7 @@ See <a class="link" href="ExampleObjectManagerClient.html#example-object-manager
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
-<td>Flags from the <a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags" title="enum GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> enumeration.</td>
+<td>Flags from the <a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> enumeration.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
@@ -272,7 +272,7 @@ Finishes an operation started with <a class="link" href="ExampleObjectManagerCli
 <a name="example-object-manager-client-new-sync"></a><h3>example_object_manager_client_new_sync ()</h3>
 <pre class="programlisting"><a class="link" href="GDBusObjectManager.html" title="GDBusObjectManager"><span class="returnvalue">GDBusObjectManager</span></a> * example_object_manager_client_new_sync
                                                         (<em class="parameter"><code><a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a> *connection</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags" title="enum GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> flags</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> flags</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *name</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *object_path</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
@@ -298,7 +298,7 @@ See <a class="link" href="ExampleObjectManagerClient.html#example-object-manager
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
-<td>Flags from the <a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags" title="enum GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> enumeration.</td>
+<td>Flags from the <a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> enumeration.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
@@ -332,7 +332,7 @@ See <a class="link" href="ExampleObjectManagerClient.html#example-object-manager
 <a name="example-object-manager-client-new-for-bus"></a><h3>example_object_manager_client_new_for_bus ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                example_object_manager_client_new_for_bus
                                                         (<em class="parameter"><code><a class="link" href="GDBusConnection.html#GBusType" title="enum GBusType"><span class="type">GBusType</span></a> bus_type</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags" title="enum GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> flags</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> flags</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *name</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *object_path</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
@@ -360,7 +360,7 @@ See <a class="link" href="ExampleObjectManagerClient.html#example-object-manager
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
-<td>Flags from the <a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags" title="enum GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> enumeration.</td>
+<td>Flags from the <a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> enumeration.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
@@ -423,7 +423,7 @@ Finishes an operation started with <a class="link" href="ExampleObjectManagerCli
 <a name="example-object-manager-client-new-for-bus-sync"></a><h3>example_object_manager_client_new_for_bus_sync ()</h3>
 <pre class="programlisting"><a class="link" href="GDBusObjectManager.html" title="GDBusObjectManager"><span class="returnvalue">GDBusObjectManager</span></a> * example_object_manager_client_new_for_bus_sync
                                                         (<em class="parameter"><code><a class="link" href="GDBusConnection.html#GBusType" title="enum GBusType"><span class="type">GBusType</span></a> bus_type</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags" title="enum GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> flags</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> flags</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *name</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *object_path</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
@@ -449,7 +449,7 @@ See <a class="link" href="ExampleObjectManagerClient.html#example-object-manager
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
-<td>Flags from the <a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags" title="enum GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> enumeration.</td>
+<td>Flags from the <a class="link" href="GDBusObjectManagerClient.html#GDBusObjectManagerClientFlags"><span class="type">GDBusObjectManagerClientFlags</span></a> enumeration.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>

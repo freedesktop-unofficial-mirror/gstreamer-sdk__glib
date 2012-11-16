@@ -59,6 +59,8 @@ const <span class="returnvalue">char</span> *        <a class="link" href="gio-D
 const <span class="returnvalue">char</span> *        <a class="link" href="gio-Desktop-file-based-GAppInfo.html#g-desktop-app-info-get-generic-name" title="g_desktop_app_info_get_generic_name ()">g_desktop_app_info_get_generic_name</a> (<em class="parameter"><code><a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppInfo"><span class="type">GDesktopAppInfo</span></a> *info</code></em>);
 const <span class="returnvalue">char</span> *        <a class="link" href="gio-Desktop-file-based-GAppInfo.html#g-desktop-app-info-get-categories" title="g_desktop_app_info_get_categories ()">g_desktop_app_info_get_categories</a>   (<em class="parameter"><code><a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppInfo"><span class="type">GDesktopAppInfo</span></a> *info</code></em>);
 const <span class="returnvalue">char</span> * const * <a class="link" href="gio-Desktop-file-based-GAppInfo.html#g-desktop-app-info-get-keywords" title="g_desktop_app_info_get_keywords ()">g_desktop_app_info_get_keywords</a>    (<em class="parameter"><code><a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppInfo"><span class="type">GDesktopAppInfo</span></a> *info</code></em>);
+const <span class="returnvalue">char</span> *        <a class="link" href="gio-Desktop-file-based-GAppInfo.html#g-desktop-app-info-get-startup-wm-class" title="g_desktop_app_info_get_startup_wm_class ()">g_desktop_app_info_get_startup_wm_class</a>
+                                                        (<em class="parameter"><code><a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppInfo"><span class="type">GDesktopAppInfo</span></a> *info</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="gio-Desktop-file-based-GAppInfo.html#g-desktop-app-info-set-desktop-env" title="g_desktop_app_info_set_desktop_env ()">g_desktop_app_info_set_desktop_env</a>  (<em class="parameter"><code>const <span class="type">char</span> *desktop_env</code></em>);
 <span class="returnvalue">void</span>                (<a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppLaunchCallback" title="GDesktopAppLaunchCallback ()">*GDesktopAppLaunchCallback</a>)        (<em class="parameter"><code><a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppInfo"><span class="type">GDesktopAppInfo</span></a> *appinfo</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-The-Main-Event-Loop.html#GPid"><span class="type">GPid</span></a> pid</code></em>,
@@ -404,6 +406,36 @@ Gets the keywords from the desktop file.
 </tbody>
 </table></div>
 <p class="since">Since 2.32</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-desktop-app-info-get-startup-wm-class"></a><h3>g_desktop_app_info_get_startup_wm_class ()</h3>
+<pre class="programlisting">const <span class="returnvalue">char</span> *        g_desktop_app_info_get_startup_wm_class
+                                                        (<em class="parameter"><code><a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppInfo"><span class="type">GDesktopAppInfo</span></a> *info</code></em>);</pre>
+<p>
+Retrieves the StartupWMClass field from <em class="parameter"><code>info</code></em>. This represents the
+WM_CLASS property of the main window of the application, if launched
+through <em class="parameter"><code>info</code></em>.
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>info</code></em> :</span></p></td>
+<td>a <a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppInfo"><span class="type">GDesktopAppInfo</span></a> that supports startup notify</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the startup WM class, or <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if none is set
+in the desktop file. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.34</p>
 </div>
 <hr>
 <div class="refsect2">

@@ -414,6 +414,23 @@ g_local_file_get_parse_name (GFile *file)
     }
   else
     {
+#ifdef G_OS_WIN32
+      char *dup_filename, *p, *backslash;
+
+      /* Turn backslashes into forward slashes like
+       * g_filename_to_uri() would do (but we can't use that because
+       * it doesn't output IRIs).
+       */
+      dup_filename = g_strdup (filename);
+      filename = p = dup_filename;
+
+      while ((backslash = strchr (p, '\\')) != NULL)
+	{
+	  *backslash = '/';
+	  p = backslash + 1;
+	}
+#endif
+
       escaped_path = g_uri_escape_string (filename,
 					  G_URI_RESERVED_CHARS_ALLOWED_IN_PATH_ELEMENT "/",
 					  TRUE);
@@ -423,7 +440,9 @@ g_local_file_get_parse_name (GFile *file)
 				NULL);
       
       g_free (escaped_path);
-
+#ifdef G_OS_WIN32
+      g_free (dup_filename);
+#endif
       if (free_utf8_filename)
 	g_free (utf8_filename);
     }
@@ -1715,33 +1734,6 @@ try_make_relative (const char *path,
   return g_strdup (path);
 }
 
-static char *
-escape_trash_name (char *name)
-{
-  GString *str;
-  const gchar hex[16] = "0123456789ABCDEF";
-  
-  str = g_string_new ("");
-
-  while (*name != 0)
-    {
-      char c;
-
-      c = *name++;
-
-      if (g_ascii_isprint (c))
-	g_string_append_c (str, c);
-      else
-	{
-          g_string_append_c (str, '%');
-          g_string_append_c (str, hex[((guchar)c) >> 4]);
-          g_string_append_c (str, hex[((guchar)c) & 0xf]);
-	}
-    }
-
-  return g_string_free (str, FALSE);
-}
-
 gboolean
 _g_local_file_has_trash_dir (const char *dirname, dev_t dir_dev)
 {
@@ -1998,7 +1990,7 @@ g_local_file_trash (GFile         *file,
     infofile = g_build_filename (infodir, infoname, NULL);
     g_free (infoname);
 
-    fd = open (infofile, O_CREAT | O_EXCL, 0666);
+    fd = g_open (infofile, O_CREAT | O_EXCL, 0666);
   } while (fd == -1 && errno == EEXIST);
 
   g_free (basename);
@@ -2068,7 +2060,7 @@ g_local_file_trash (GFile         *file,
     original_name = g_strdup (local->filename);
   else
     original_name = try_make_relative (local->filename, topdir);
-  original_name_escaped = escape_trash_name (original_name);
+  original_name_escaped = g_uri_escape_string (original_name, "/", FALSE);
   
   g_free (original_name);
   g_free (topdir);

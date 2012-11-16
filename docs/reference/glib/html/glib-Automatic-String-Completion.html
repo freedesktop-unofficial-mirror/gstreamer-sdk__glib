@@ -215,7 +215,8 @@ Adds items to the <a class="link" href="glib-Automatic-String-Completion.html#GC
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>items</code></em> :</span></p></td>
-<td>the list of items to add.</td>
+<td>the list of items to add. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
 </tr>
 </tbody>
 </table></div>
@@ -230,7 +231,9 @@ Adds items to the <a class="link" href="glib-Automatic-String-Completion.html#GC
 <p><code class="literal">g_completion_remove_items</code> has been deprecated since version 2.26 and should not be used in newly-written code. Rarely used API</p>
 </div>
 <p>
-Removes items from a <a class="link" href="glib-Automatic-String-Completion.html#GCompletion" title="struct GCompletion"><span class="type">GCompletion</span></a>.
+Removes items from a <a class="link" href="glib-Automatic-String-Completion.html#GCompletion" title="struct GCompletion"><span class="type">GCompletion</span></a>. The items are not freed, so if the memory
+was dynamically allocated, free <em class="parameter"><code>items</code></em> with <a class="link" href="glib-Doubly-Linked-Lists.html#g-list-free-full" title="g_list_free_full ()"><code class="function">g_list_free_full()</code></a> after calling
+this function.
 </p>
 <div class="variablelist"><table border="0" class="variablelist">
 <colgroup>
@@ -244,7 +247,8 @@ Removes items from a <a class="link" href="glib-Automatic-String-Completion.html
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>items</code></em> :</span></p></td>
-<td>the items to remove.</td>
+<td>the items to remove. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
 </tr>
 </tbody>
 </table></div>
@@ -258,7 +262,9 @@ Removes items from a <a class="link" href="glib-Automatic-String-Completion.html
 <p><code class="literal">g_completion_clear_items</code> has been deprecated since version 2.26 and should not be used in newly-written code. Rarely used API</p>
 </div>
 <p>
-Removes all items from the <a class="link" href="glib-Automatic-String-Completion.html#GCompletion" title="struct GCompletion"><span class="type">GCompletion</span></a>.
+Removes all items from the <a class="link" href="glib-Automatic-String-Completion.html#GCompletion" title="struct GCompletion"><span class="type">GCompletion</span></a>. The items are not freed, so if the
+memory was dynamically allocated, it should be freed after calling this
+function.
 </p>
 <div class="variablelist"><table border="0" class="variablelist">
 <colgroup>
@@ -309,8 +315,9 @@ when no longer needed.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>the list of items whose strings begin with <em class="parameter"><code>prefix</code></em>. This
-should not be changed.</td>
+<td>the list of items whose strings begin with
+<em class="parameter"><code>prefix</code></em>. This should not be changed. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
 </tr>
 </tbody>
 </table></div>
@@ -445,7 +452,9 @@ bytes of <em class="parameter"><code>s2</code></em>.</td>
 <p><code class="literal">g_completion_free</code> has been deprecated since version 2.26 and should not be used in newly-written code. Rarely used API</p>
 </div>
 <p>
-Frees all memory used by the <a class="link" href="glib-Automatic-String-Completion.html#GCompletion" title="struct GCompletion"><span class="type">GCompletion</span></a>.
+Frees all memory used by the <a class="link" href="glib-Automatic-String-Completion.html#GCompletion" title="struct GCompletion"><span class="type">GCompletion</span></a>. The items are not freed, so if
+the memory was dynamically allocated, it should be freed after calling this
+function.
 </p>
 <div class="variablelist"><table border="0" class="variablelist">
 <colgroup>

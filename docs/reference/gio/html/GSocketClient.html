@@ -125,7 +125,7 @@ enum                <a class="link" href="GSocketClient.html#GSocketClientEvent"
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> tls</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GSocketClient.html#g-socket-client-set-tls-validation-flags" title="g_socket_client_set_tls_validation_flags ()">g_socket_client_set_tls_validation_flags</a>
                                                         (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="gio-TLS-Overview.html#GTlsCertificateFlags" title="enum GTlsCertificateFlags"><span class="type">GTlsCertificateFlags</span></a> flags</code></em>);
+                                                         <em class="parameter"><code><a class="link" href="gio-TLS-Overview.html#GTlsCertificateFlags"><span class="type">GTlsCertificateFlags</span></a> flags</code></em>);
 <a class="link" href="GSocketAddress.html#GSocketFamily" title="enum GSocketFamily"><span class="returnvalue">GSocketFamily</span></a>       <a class="link" href="GSocketClient.html#g-socket-client-get-family" title="g_socket_client_get_family ()">g_socket_client_get_family</a>          (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>);
 <a class="link" href="GSocketAddress.html" title="GSocketAddress"><span class="returnvalue">GSocketAddress</span></a> *    <a class="link" href="GSocketClient.html#g-socket-client-get-local-address" title="g_socket_client_get_local_address ()">g_socket_client_get_local_address</a>   (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>);
 <a class="link" href="GSocket.html#GSocketProtocol" title="enum GSocketProtocol"><span class="returnvalue">GSocketProtocol</span></a>     <a class="link" href="GSocketClient.html#g-socket-client-get-protocol" title="g_socket_client_get_protocol ()">g_socket_client_get_protocol</a>        (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>);
@@ -133,7 +133,7 @@ enum                <a class="link" href="GSocketClient.html#GSocketClientEvent"
 <a href="./../glib/glib/glib-Basic-Types.html#guint"><span class="returnvalue">guint</span></a>               <a class="link" href="GSocketClient.html#g-socket-client-get-timeout" title="g_socket_client_get_timeout ()">g_socket_client_get_timeout</a>         (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>);
 <a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GSocketClient.html#g-socket-client-get-enable-proxy" title="g_socket_client_get_enable_proxy ()">g_socket_client_get_enable_proxy</a>    (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>);
 <a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GSocketClient.html#g-socket-client-get-tls" title="g_socket_client_get_tls ()">g_socket_client_get_tls</a>             (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>);
-<a class="link" href="gio-TLS-Overview.html#GTlsCertificateFlags" title="enum GTlsCertificateFlags"><span class="returnvalue">GTlsCertificateFlags</span></a> <a class="link" href="GSocketClient.html#g-socket-client-get-tls-validation-flags" title="g_socket_client_get_tls_validation_flags ()">g_socket_client_get_tls_validation_flags</a>
+<a class="link" href="gio-TLS-Overview.html#GTlsCertificateFlags"><span class="returnvalue">GTlsCertificateFlags</span></a> <a class="link" href="GSocketClient.html#g-socket-client-get-tls-validation-flags" title="g_socket_client_get_tls_validation_flags ()">g_socket_client_get_tls_validation_flags</a>
                                                         (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GSocketClient.html#g-socket-client-add-application-proxy" title="g_socket_client_add_application_proxy ()">g_socket_client_add_application_proxy</a>
                                                         (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
@@ -156,7 +156,7 @@ enum                <a class="link" href="GSocketClient.html#GSocketClientEvent"
   "<a class="link" href="GSocketClient.html#GSocketClient--protocol" title='The "protocol" property'>protocol</a>"                 <a class="link" href="GSocket.html#GSocketProtocol" title="enum GSocketProtocol"><span class="type">GSocketProtocol</span></a>       : Read / Write / Construct
   "<a class="link" href="GSocketClient.html#GSocketClient--timeout" title='The "timeout" property'>timeout</a>"                  <a href="./../glib/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a>                 : Read / Write / Construct
   "<a class="link" href="GSocketClient.html#GSocketClient--tls" title='The "tls" property'>tls</a>"                      <a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read / Write / Construct
-  "<a class="link" href="GSocketClient.html#GSocketClient--tls-validation-flags" title='The "tls-validation-flags" property'>tls-validation-flags</a>"     <a class="link" href="gio-TLS-Overview.html#GTlsCertificateFlags" title="enum GTlsCertificateFlags"><span class="type">GTlsCertificateFlags</span></a>  : Read / Write / Construct
+  "<a class="link" href="GSocketClient.html#GSocketClient--tls-validation-flags" title='The "tls-validation-flags" property'>tls-validation-flags</a>"     <a class="link" href="gio-TLS-Overview.html#GTlsCertificateFlags"><span class="type">GTlsCertificateFlags</span></a>  : Read / Write / Construct
   "<a class="link" href="GSocketClient.html#GSocketClient--type" title='The "type" property'>type</a>"                     <a class="link" href="GSocket.html#GSocketType" title="enum GSocketType"><span class="type">GSocketType</span></a>           : Read / Write / Construct
 </pre>
 </div>
@@ -1199,7 +1199,7 @@ starts.
 <a name="g-socket-client-set-tls-validation-flags"></a><h3>g_socket_client_set_tls_validation_flags ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_socket_client_set_tls_validation_flags
                                                         (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="gio-TLS-Overview.html#GTlsCertificateFlags" title="enum GTlsCertificateFlags"><span class="type">GTlsCertificateFlags</span></a> flags</code></em>);</pre>
+                                                         <em class="parameter"><code><a class="link" href="gio-TLS-Overview.html#GTlsCertificateFlags"><span class="type">GTlsCertificateFlags</span></a> flags</code></em>);</pre>
 <p>
 Sets the TLS validation flags used when creating TLS connections
 via <em class="parameter"><code>client</code></em>. The default value is <a class="link" href="gio-TLS-Overview.html#G-TLS-CERTIFICATE-VALIDATE-ALL:CAPS"><code class="literal">G_TLS_CERTIFICATE_VALIDATE_ALL</code></a>.
@@ -1422,7 +1422,7 @@ Gets whether <em class="parameter"><code>client</code></em> creates TLS connecti
 <hr>
 <div class="refsect2">
 <a name="g-socket-client-get-tls-validation-flags"></a><h3>g_socket_client_get_tls_validation_flags ()</h3>
-<pre class="programlisting"><a class="link" href="gio-TLS-Overview.html#GTlsCertificateFlags" title="enum GTlsCertificateFlags"><span class="returnvalue">GTlsCertificateFlags</span></a> g_socket_client_get_tls_validation_flags
+<pre class="programlisting"><a class="link" href="gio-TLS-Overview.html#GTlsCertificateFlags"><span class="returnvalue">GTlsCertificateFlags</span></a> g_socket_client_get_tls_validation_flags
                                                         (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>);</pre>
 <p>
 Gets the TLS validation flags used creating TLS connections via
@@ -1539,7 +1539,7 @@ specific handshake.
 <hr>
 <div class="refsect2">
 <a name="GSocketClient--tls-validation-flags"></a><h3>The <code class="literal">"tls-validation-flags"</code> property</h3>
-<pre class="programlisting">  "tls-validation-flags"     <a class="link" href="gio-TLS-Overview.html#GTlsCertificateFlags" title="enum GTlsCertificateFlags"><span class="type">GTlsCertificateFlags</span></a>  : Read / Write / Construct</pre>
+<pre class="programlisting">  "tls-validation-flags"     <a class="link" href="gio-TLS-Overview.html#GTlsCertificateFlags"><span class="type">GTlsCertificateFlags</span></a>  : Read / Write / Construct</pre>
 <p>TLS validation flags to use.</p>
 <p>Default value: G_TLS_CERTIFICATE_UNKNOWN_CA|G_TLS_CERTIFICATE_BAD_IDENTITY|G_TLS_CERTIFICATE_NOT_ACTIVATED|G_TLS_CERTIFICATE_EXPIRED|G_TLS_CERTIFICATE_REVOKED|G_TLS_CERTIFICATE_INSECURE|G_TLS_CERTIFICATE_GENERIC_ERROR</p>
 </div>

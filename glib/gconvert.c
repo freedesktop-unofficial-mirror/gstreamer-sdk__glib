@@ -194,11 +194,7 @@
  */
 #define NUL_TERMINATOR_LENGTH 4
 
-GQuark 
-g_convert_error_quark (void)
-{
-  return g_quark_from_static_string ("g_convert_error");
-}
+G_DEFINE_QUARK (g_convert_error, g_convert_error)
 
 static gboolean
 try_conversion (const char *to_codeset,
@@ -1500,15 +1496,15 @@ g_filename_to_utf8 (const gchar *opsysstring,
  * @utf8string:    a UTF-8 encoded string.
  * @len:           the length of the string, or -1 if the string is
  *                 nul-terminated.
- * @bytes_read:    location to store the number of bytes in the
- *                 input string that were successfully converted, or %NULL.
+ * @bytes_read:    (out) (allow-none): location to store the number of bytes in
+ *                 the input string that were successfully converted, or %NULL.
  *                 Even if the conversion was successful, this may be 
  *                 less than @len if there were partial characters
  *                 at the end of the input. If the error
  *                 #G_CONVERT_ERROR_ILLEGAL_SEQUENCE occurs, the value
  *                 stored will the byte offset after the last valid
  *                 input sequence.
- * @bytes_written: the number of bytes stored in the output buffer (not 
+ * @bytes_written: (out): the number of bytes stored in the output buffer (not 
  *                 including the terminating nul).
  * @error:         location to store the error occurring, or %NULL to ignore
  *                 errors. Any of the errors in #GConvertError may occur.
@@ -1518,7 +1514,8 @@ g_filename_to_utf8 (const gchar *opsysstring,
  * on other platforms, this function indirectly depends on the 
  * <link linkend="setlocale">current locale</link>.
  * 
- * Return value: The converted string, or %NULL on an error.
+ * Return value: (array length=bytes_written) (element-type guint8) (transfer full):
+ *               The converted string, or %NULL on an error.
  **/
 gchar*
 g_filename_from_utf8 (const gchar *utf8string,
@@ -1838,7 +1835,7 @@ hostname_validate (const char *hostname)
 /**
  * g_filename_from_uri:
  * @uri: a uri describing a filename (escaped, encoded in ASCII).
- * @hostname: (allow-none): Location to store hostname for the URI, or %NULL.
+ * @hostname: (out) (allow-none): Location to store hostname for the URI, or %NULL.
  *            If there is no hostname in the URI, %NULL will be
  *            stored in this location.
  * @error: location to store the error occurring, or %NULL to ignore
@@ -1847,8 +1844,8 @@ hostname_validate (const char *hostname)
  * Converts an escaped ASCII-encoded URI to a local filename in the
  * encoding used for filenames. 
  * 
- * Return value: a newly-allocated string holding the resulting
- *               filename, or %NULL on an error.
+ * Return value: (type filename): a newly-allocated string holding
+ *               the resulting filename, or %NULL on an error.
  **/
 gchar *
 g_filename_from_uri (const gchar *uri,
@@ -2079,9 +2076,9 @@ g_filename_to_uri (const gchar *filename,
  * mime type defined in RFC 2483 into individual URIs,
  * discarding any comments. The URIs are not validated.
  *
- * Returns: a newly allocated %NULL-terminated list of
- *   strings holding the individual URIs. The array should
- *   be freed with g_strfreev().
+ * Returns: (transfer full): a newly allocated %NULL-terminated list
+ *   of strings holding the individual URIs. The array should be freed
+ *   with g_strfreev().
  *
  * Since: 2.6
  */
