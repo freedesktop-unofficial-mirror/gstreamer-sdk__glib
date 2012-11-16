@@ -93,7 +93,7 @@ DIST_COMMON = $(am__giounixinclude_HEADERS_DIST) \
 
 @OS_WIN32_TRUE@am__append_22 = gwin32appinfo.c gwin32appinfo.h
 @OS_WIN32_TRUE@am__append_23 = -lshlwapi -lws2_32 -ldnsapi
-@BUILD_MODULAR_TESTS_TRUE@am__append_24 = tests 
+@BUILD_MODULAR_TESTS_TRUE@@OS_UNIX_TRUE@am__append_24 = tests 
 
 # This is dumb.  The ObjC source file should be properly named .m
 @OS_COCOA_TRUE@am__append_25 = -xobjective-c
