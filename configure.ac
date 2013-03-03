@@ -985,6 +985,11 @@ dnl on AIX with xlc)
 dnl
 AS_IF([test $ac_cv_sizeof_size_t = $ac_cv_sizeof_int &&
        test $ac_cv_sizeof_size_t = $ac_cv_sizeof_long], [
+  case "$host_os" in
+    *android*)
+      glib_size_type=long
+      ;;
+    *)
   GLIB_CHECK_COMPILE_WARNINGS([AC_LANG_SOURCE([[
 #if defined(_AIX) && !defined(__GNUC__)
 #pragma options langlvl=stdc89
@@ -1009,6 +1014,8 @@ int main ()
    return (int)*size_long;
 }
         ]])],glib_size_type=long)])
+    ;;
+  esac
 ])
 
 AC_MSG_RESULT(unsigned $glib_size_type)
