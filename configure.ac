@@ -1048,7 +1048,19 @@ AS_IF([test $ac_cv_sizeof_ssize_t = $ac_cv_sizeof_int &&
 #if defined(_AIX) && !defined(__GNUC__)
 #pragma options langlvl=stdc89
 #endif
-#include <stddef.h> 
+#include <stddef.h>
+#ifdef HAVE_INTTYPES_H
+# include <inttypes.h>
+#endif
+#ifdef HAVE_STDINT_H
+# include <stdint.h>
+#endif
+#ifdef HAVE_UNISTD_H
+# include <unistd.h>
+#endif
+#ifdef HAVE_SYS_TYPES_H
+# include <sys/types.h>
+#endif
 int main ()
 {
   ssize_t s = 1;
@@ -1061,6 +1073,18 @@ int main ()
 #pragma options langlvl=stdc89
 #endif
 #include <stddef.h> 
+#ifdef HAVE_INTTYPES_H
+# include <inttypes.h>
+#endif
+#ifdef HAVE_STDINT_H
+# include <stdint.h>
+#endif
+#ifdef HAVE_UNISTD_H
+# include <unistd.h>
+#endif
+#ifdef HAVE_SYS_TYPES_H
+# include <sys/types.h>
+#endif
 int main ()
 {
    ssize_t s = 1;
