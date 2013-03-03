@@ -956,7 +956,7 @@ AC_CHECK_FUNCS(setlocale)
 # check additional type sizes
 AC_CHECK_SIZEOF(size_t)
 
-dnl Try to figure out whether gsize, gssize should be long or int
+dnl Try to figure out whether gsize should be long or int
 AC_MSG_CHECKING([for the appropriate definition for size_t])
 
 case $ac_cv_sizeof_size_t in
@@ -985,11 +985,6 @@ dnl on AIX with xlc)
 dnl
 AS_IF([test $ac_cv_sizeof_size_t = $ac_cv_sizeof_int &&
        test $ac_cv_sizeof_size_t = $ac_cv_sizeof_long], [
-  case "$host_os" in
-    *android*)
-      glib_size_type=long
-      ;;
-    *)
   GLIB_CHECK_COMPILE_WARNINGS([AC_LANG_SOURCE([[
 #if defined(_AIX) && !defined(__GNUC__)
 #pragma options langlvl=stdc89
@@ -1014,11 +1009,68 @@ int main ()
    return (int)*size_long;
 }
         ]])],glib_size_type=long)])
-    ;;
-  esac
 ])
 
 AC_MSG_RESULT(unsigned $glib_size_type)
+
+AC_CHECK_SIZEOF(ssize_t)
+
+dnl Try to figure out whether gssize should be long or int
+AC_MSG_CHECKING([for the appropriate definition for ssize_t])
+
+case $ac_cv_sizeof_ssize_t in
+  $ac_cv_sizeof_short) 
+      glib_ssize_type=short
+      ;;
+  $ac_cv_sizeof_int) 
+      glib_ssize_type=int
+      ;;
+  $ac_cv_sizeof_long) 
+      glib_ssize_type=long
+      ;;
+  $ac_cv_sizeof_long_long)
+      glib_ssize_type='long long'
+      ;;
+  $ac_cv_sizeof__int64)
+      glib_ssize_type='__int64'
+      ;;
+  *)  AC_MSG_ERROR([No type matching ssize_t in size])
+      ;;
+esac
+
+dnl If int/long are the same size, we see which one produces
+dnl warnings when used in the location as ssize_t. (This matters
+dnl on AIX with xlc)
+dnl
+AS_IF([test $ac_cv_sizeof_ssize_t = $ac_cv_sizeof_int &&
+       test $ac_cv_sizeof_ssize_t = $ac_cv_sizeof_long], [
+  GLIB_CHECK_COMPILE_WARNINGS([AC_LANG_SOURCE([[
+#if defined(_AIX) && !defined(__GNUC__)
+#pragma options langlvl=stdc89
+#endif
+#include <stddef.h> 
+int main ()
+{
+  ssize_t s = 1;
+  int *size_int = &s;
+  return (int)*size_int;
+}
+    ]])],glib_ssize_type=int,
+      [GLIB_CHECK_COMPILE_WARNINGS([AC_LANG_SOURCE([[
+#if defined(_AIX) && !defined(__GNUC__)
+#pragma options langlvl=stdc89
+#endif
+#include <stddef.h> 
+int main ()
+{
+   ssize_t s = 1;
+   long *size_long = &s;
+   return (int)*size_long;
+}
+        ]])],glib_ssize_type=long)])
+])
+
+AC_MSG_RESULT($glib_ssize_type)
 
 # Check for some functions
 AC_CHECK_FUNCS(lstat strerror strsignal memmove vsnprintf stpcpy strcasecmp strncasecmp poll getcwd vasprintf setenv unsetenv getc_unlocked readlink symlink fdwalk memmem)
@@ -2937,19 +2989,21 @@ _______EOF
 #define GLIB_SIZEOF_VOID_P $glib_void_p
 #define GLIB_SIZEOF_LONG   $glib_long
 #define GLIB_SIZEOF_SIZE_T $glib_size_t
+#define GLIB_SIZEOF_SSIZE_T $glib_ssize_t
 
 _______EOF
 
         cat >>$outfile <<_______EOF
-typedef signed $glib_size_type_define gssize;
+typedef signed $glib_ssize_type_define gssize;
 typedef unsigned $glib_size_type_define gsize;
 #define G_GSIZE_MODIFIER $gsize_modifier
-#define G_GSSIZE_FORMAT $gssize_format
+#define G_GSSIZE_MODIFIER $gssize_modifier
 #define G_GSIZE_FORMAT $gsize_format
+#define G_GSSIZE_FORMAT $gssize_format
 
 #define G_MAXSIZE	G_MAXU$glib_msize_type
-#define G_MINSSIZE	G_MIN$glib_msize_type
-#define G_MAXSSIZE	G_MAX$glib_msize_type
+#define G_MINSSIZE	G_MIN$glib_mssize_type
+#define G_MAXSSIZE	G_MAX$glib_mssize_type
 
 typedef gint64 goffset;
 #define G_MINOFFSET	G_MININT64
@@ -3115,9 +3169,9 @@ _______EOF
 #define GINT_TO_BE(val)		((gint) GINT${gintbits}_TO_BE (val))
 #define GUINT_TO_BE(val)	((guint) GUINT${gintbits}_TO_BE (val))
 #define GSIZE_TO_LE(val)	((gsize) GUINT${gsizebits}_TO_LE (val))
-#define GSSIZE_TO_LE(val)	((gssize) GINT${gsizebits}_TO_LE (val))
+#define GSSIZE_TO_LE(val)	((gssize) GINT${gssizebits}_TO_LE (val))
 #define GSIZE_TO_BE(val)	((gsize) GUINT${gsizebits}_TO_BE (val))
-#define GSSIZE_TO_BE(val)	((gssize) GINT${gsizebits}_TO_BE (val))
+#define GSSIZE_TO_BE(val)	((gssize) GINT${gssizebits}_TO_BE (val))
 #define G_BYTE_ORDER $g_byte_order
 
 #define GLIB_SYSDEF_POLLIN =$g_pollin
@@ -3277,7 +3331,9 @@ $ac_cv_sizeof___int64)
   ;;
 esac
 glib_size_t=$ac_cv_sizeof_size_t
+glib_ssize_t=$ac_cv_sizeof_ssize_t
 glib_size_type_define="$glib_size_type"
+glib_ssize_type_define="$glib_ssize_type"
 glib_void_p=$ac_cv_sizeof_void_p
 glib_long=$ac_cv_sizeof_long
 
@@ -3285,32 +3341,52 @@ case "$glib_size_type" in
 short)
   gsize_modifier='"h"'
   gsize_format='"hu"'
-  gssize_format='"hi"'
   glib_msize_type='SHRT'
   ;;
 int)
   gsize_modifier='""'
   gsize_format='"u"'
-  gssize_format='"i"'
   glib_msize_type='INT'
   ;;
 long)
   gsize_modifier='"l"'
   gsize_format='"lu"'
-  gssize_format='"li"'
   glib_msize_type='LONG'
   ;;
 "long long"|__int64)
   gsize_modifier='"I64"'
   gsize_format='"I64u"'
-  gssize_format='"I64i"'
   glib_msize_type='INT64'
+  ;;
+esac
+
+case "$glib_ssize_type" in
+short)
+  gssize_modifier='"h"'
+  gssize_format='"hi"'
+  glib_mssize_type='SHRT'
+  ;;
+int)
+  gssize_modifier='""'
+  gssize_format='"i"'
+  glib_mssize_type='INT'
+  ;;
+long)
+  gssize_modifier='"l"'
+  gssize_format='"li"'
+  glib_mssize_type='LONG'
+  ;;
+"long long"|__int64)
+  gssize_modifier='"I64"'
+  gssize_format='"I64i"'
+  glib_mssize_type='INT64'
   ;;
 esac
 
 gintbits=`expr $ac_cv_sizeof_int \* 8`
 glongbits=`expr $ac_cv_sizeof_long \* 8`
 gsizebits=`expr $ac_cv_sizeof_size_t \* 8`
+gssizebits=`expr $ac_cv_sizeof_ssize_t \* 8`
 
 case $ac_cv_sizeof_void_p in
 $ac_cv_sizeof_int)
