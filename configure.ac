@@ -2408,6 +2408,9 @@ fi
 #  b) FreeBSD doesn't do this either.
 #
 case $host in
+  *android*)
+    G_THREAD_LIBS_FOR_GTHREAD="$G_THREAD_LIBS"
+    ;;
   *-*-freebsd*|*-*-linux*)
     G_THREAD_LIBS_FOR_GTHREAD="`echo $G_THREAD_LIBS | sed s/-pthread/-lpthread/`"
     ;;
