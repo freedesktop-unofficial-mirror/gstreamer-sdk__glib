@@ -53,11 +53,11 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
-	$(top_srcdir)/Makefile.decl $(top_srcdir)/depcomp \
-	$(top_srcdir)/mkinstalldirs
+	$(top_srcdir)/Makefile.decl $(top_srcdir)/depcomp
 subdir = gio/win32
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/m4macros/gtk-doc.m4 \
+am__aclocal_m4_deps = $(top_srcdir)/m4macros/attributes.m4 \
+	$(top_srcdir)/m4macros/gtk-doc.m4 \
 	$(top_srcdir)/m4macros/libtool.m4 \
 	$(top_srcdir)/m4macros/ltoptions.m4 \
 	$(top_srcdir)/m4macros/ltsugar.m4 \
@@ -70,7 +70,7 @@ am__aclocal_m4_deps = $(top_srcdir)/m4macros/gtk-doc.m4 \
 	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
-mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
@@ -186,6 +186,7 @@ GLIB_COMPILE_SCHEMAS = @GLIB_COMPILE_SCHEMAS@
 GLIB_DEBUG_FLAGS = @GLIB_DEBUG_FLAGS@
 GLIB_EXTRA_CFLAGS = @GLIB_EXTRA_CFLAGS@
 GLIB_GENMARSHAL = @GLIB_GENMARSHAL@
+GLIB_HIDDEN_VISIBILITY_CFLAGS = @GLIB_HIDDEN_VISIBILITY_CFLAGS@
 GLIB_INTERFACE_AGE = @GLIB_INTERFACE_AGE@
 GLIB_LINK_FLAGS = @GLIB_LINK_FLAGS@
 GLIB_MAJOR_VERSION = @GLIB_MAJOR_VERSION@
@@ -193,6 +194,7 @@ GLIB_MICRO_VERSION = @GLIB_MICRO_VERSION@
 GLIB_MINOR_VERSION = @GLIB_MINOR_VERSION@
 GLIB_RUNTIME_LIBDIR = @GLIB_RUNTIME_LIBDIR@
 GLIB_VERSION = @GLIB_VERSION@
+GLIB_WARN_CFLAGS = @GLIB_WARN_CFLAGS@
 GLIB_WIN32_STATIC_COMPILATION_DEFINE = @GLIB_WIN32_STATIC_COMPILATION_DEFINE@
 GMOFILES = @GMOFILES@
 GMSGFMT = @GMSGFMT@
@@ -237,7 +239,6 @@ LIBFFI_LIBS = @LIBFFI_LIBS@
 LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
 LIBTOOL = @LIBTOOL@
-LIBTOOL_EXPORT_OPTIONS = @LIBTOOL_EXPORT_OPTIONS@
 LIB_EXE_MACHINE_FLAG = @LIB_EXE_MACHINE_FLAG@
 LIPO = @LIPO@
 LN_S = @LN_S@
@@ -256,6 +257,7 @@ MKDIR_P = @MKDIR_P@
 MKINSTALLDIRS = @MKINSTALLDIRS@
 MSGFMT = @MSGFMT@
 MSGFMT_OPTS = @MSGFMT_OPTS@
+NAMESER_COMPAT_INCLUDE = @NAMESER_COMPAT_INCLUDE@
 NETWORK_LIBS = @NETWORK_LIBS@
 NM = @NM@
 NMEDIT = @NMEDIT@
@@ -301,6 +303,7 @@ STRIP = @STRIP@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
 WINDRES = @WINDRES@
+WSPIAPI_INCLUDE = @WSPIAPI_INCLUDE@
 XATTR_LIBS = @XATTR_LIBS@
 XGETTEXT = @XGETTEXT@
 XMLCATALOG = @XMLCATALOG@
@@ -338,7 +341,6 @@ gio_INCLUDES = @gio_INCLUDES@
 glib_INCLUDES = @glib_INCLUDES@
 gmodule_INCLUDES = @gmodule_INCLUDES@
 gobject_INCLUDES = @gobject_INCLUDES@
-gthread_INCLUDES = @gthread_INCLUDES@
 host = @host@
 host_alias = @host_alias@
 host_cpu = @host_cpu@
@@ -397,6 +399,7 @@ libgiowin32_la_SOURCES = \
 	$(NULL)
 
 libgiowin32_la_CFLAGS = \
+	$(GLIB_HIDDEN_VISIBILITY_CFLAGS)	\
 	-DG_LOG_DOMAIN=\"GLib-GIO\"	\
 	$(gio_INCLUDES)			\
 	$(GLIB_DEBUG_FLAGS)		\

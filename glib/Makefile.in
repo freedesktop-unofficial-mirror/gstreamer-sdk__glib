@@ -61,8 +61,7 @@ DIST_COMMON = $(deprecatedinclude_HEADERS) $(dist_gdb_SCRIPTS) \
 	$(srcdir)/Makefile.am $(srcdir)/Makefile.in \
 	$(srcdir)/glib.rc.in $(srcdir)/glib.stp.in \
 	$(srcdir)/glibconfig.h.win32.in $(srcdir)/makefile.msc.in \
-	$(top_srcdir)/Makefile.decl $(top_srcdir)/depcomp \
-	$(top_srcdir)/mkinstalldirs
+	$(top_srcdir)/Makefile.decl $(top_srcdir)/depcomp
 @BUILD_MODULAR_TESTS_TRUE@am__append_1 = tests 
 @OS_UNIX_TRUE@am__append_2 = glib-unix.c
 @OS_WIN32_TRUE@am__append_3 = gthread-win32.c
@@ -78,7 +77,8 @@ bin_PROGRAMS = $(am__EXEEXT_4)
 @OS_UNIX_TRUE@am__append_12 = ${auto_config_binscripts}
 subdir = glib
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/m4macros/gtk-doc.m4 \
+am__aclocal_m4_deps = $(top_srcdir)/m4macros/attributes.m4 \
+	$(top_srcdir)/m4macros/gtk-doc.m4 \
 	$(top_srcdir)/m4macros/libtool.m4 \
 	$(top_srcdir)/m4macros/ltoptions.m4 \
 	$(top_srcdir)/m4macros/ltsugar.m4 \
@@ -91,7 +91,7 @@ am__aclocal_m4_deps = $(top_srcdir)/m4macros/gtk-doc.m4 \
 	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
-mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES = glib.stp glibconfig.h.win32 makefile.msc glib.rc
 CONFIG_CLEAN_VPATH_FILES =
@@ -136,48 +136,72 @@ am__libglib_2_0_la_SOURCES_DIST = deprecated/gallocator.c \
 	deprecated/gthread-deprecated.c glib_probes.d garray.c \
 	gasyncqueue.c gasyncqueueprivate.h gatomic.c gbacktrace.c \
 	gbase64.c gbitlock.c gbookmarkfile.c gbsearcharray.h gbytes.c \
-	gbytes.h gcharset.c gchecksum.c gconvert.c gdataset.c \
-	gdatasetprivate.h gdate.c gdatetime.c gdir.c genviron.c \
-	gerror.c gfileutils.c ggettext.c ghash.c ghmac.c ghook.c \
-	ghostutils.c giochannel.c gkeyfile.c glibintl.h glib_trace.h \
-	glib-init.h glib-init.c glib-private.h glib-private.c glist.c \
-	gmain-internal.h gmain.c gmappedfile.c gmarkup.c gmem.c \
-	gmessages.c gmirroringtable.h gnode.c goption.c gpattern.c \
-	gpoll.c gprimes.c gqsort.c gquark.c gqueue.c grand.c gregex.c \
-	gscanner.c gscripttable.h gsequence.c gshell.c gslice.c \
-	gslist.c gstdio.c gstrfuncs.c gstring.c gstringchunk.c \
-	gtestutils.c gthread.c gthreadprivate.h gthreadpool.c gtimer.c \
-	gtimezone.c gtrashstack.c gtree.c guniprop.c gutf8.c \
-	gunibreak.h gunibreak.c gunichartables.h gunicollate.c \
-	gunicomp.h gunidecomp.h gunidecomp.c gunicodeprivate.h \
-	gurifuncs.c gutils.c gvariant.h gvariant.c gvariant-core.h \
-	gvariant-core.c gvariant-internal.h gvariant-parser.c \
-	gvariant-serialiser.h gvariant-serialiser.c gvarianttypeinfo.h \
-	gvarianttypeinfo.c gvarianttype.c gversion.c gwakeup.h \
-	gwakeup.c gprintf.c gprintfint.h glib-unix.c gthread-win32.c \
-	gthread-posix.c
-am__objects_1 = gallocator.lo gcache.lo gcompletion.lo grel.lo \
-	gthread-deprecated.lo
-@OS_UNIX_TRUE@am__objects_2 = glib-unix.lo
-@OS_WIN32_TRUE@am__objects_3 = gthread-win32.lo
-@OS_WIN32_FALSE@am__objects_4 = gthread-posix.lo
-am_libglib_2_0_la_OBJECTS = $(am__objects_1) garray.lo gasyncqueue.lo \
-	gatomic.lo gbacktrace.lo gbase64.lo gbitlock.lo \
-	gbookmarkfile.lo gbytes.lo gcharset.lo gchecksum.lo \
-	gconvert.lo gdataset.lo gdate.lo gdatetime.lo gdir.lo \
-	genviron.lo gerror.lo gfileutils.lo ggettext.lo ghash.lo \
-	ghmac.lo ghook.lo ghostutils.lo giochannel.lo gkeyfile.lo \
-	glib-init.lo glib-private.lo glist.lo gmain.lo gmappedfile.lo \
-	gmarkup.lo gmem.lo gmessages.lo gnode.lo goption.lo \
-	gpattern.lo gpoll.lo gprimes.lo gqsort.lo gquark.lo gqueue.lo \
-	grand.lo gregex.lo gscanner.lo gsequence.lo gshell.lo \
-	gslice.lo gslist.lo gstdio.lo gstrfuncs.lo gstring.lo \
-	gstringchunk.lo gtestutils.lo gthread.lo gthreadpool.lo \
-	gtimer.lo gtimezone.lo gtrashstack.lo gtree.lo guniprop.lo \
-	gutf8.lo gunibreak.lo gunicollate.lo gunidecomp.lo \
-	gurifuncs.lo gutils.lo gvariant.lo gvariant-core.lo \
-	gvariant-parser.lo gvariant-serialiser.lo gvarianttypeinfo.lo \
-	gvarianttype.lo gversion.lo gwakeup.lo gprintf.lo \
+	gbytes.h gcharset.c gcharsetprivate.h gchecksum.c gconvert.c \
+	gdataset.c gdatasetprivate.h gdate.c gdatetime.c gdir.c \
+	genviron.c gerror.c gfileutils.c ggettext.c ghash.c ghmac.c \
+	ghook.c ghostutils.c giochannel.c gkeyfile.c glibintl.h \
+	glib_trace.h glib-init.h glib-init.c glib-private.h \
+	glib-private.c glist.c gmain-internal.h gmain.c gmappedfile.c \
+	gmarkup.c gmem.c gmessages.c gmirroringtable.h gnode.c \
+	goption.c gpattern.c gpoll.c gprimes.c gqsort.c gquark.c \
+	gqueue.c grand.c gregex.c gscanner.c gscripttable.h \
+	gsequence.c gshell.c gslice.c gslist.c gstdio.c gstrfuncs.c \
+	gstring.c gstringchunk.c gtestutils.c gthread.c \
+	gthreadprivate.h gthreadpool.c gtimer.c gtimezone.c \
+	gtrashstack.c gtree.c guniprop.c gutf8.c gunibreak.h \
+	gunibreak.c gunichartables.h gunicollate.c gunicomp.h \
+	gunidecomp.h gunidecomp.c gunicodeprivate.h gurifuncs.c \
+	gutils.c gvariant.h gvariant.c gvariant-core.h gvariant-core.c \
+	gvariant-internal.h gvariant-parser.c gvariant-serialiser.h \
+	gvariant-serialiser.c gvarianttypeinfo.h gvarianttypeinfo.c \
+	gvarianttype.c gversion.c gwakeup.h gwakeup.c gprintf.c \
+	gprintfint.h glib-unix.c gthread-win32.c gthread-posix.c
+am__objects_1 = libglib_2_0_la-gallocator.lo libglib_2_0_la-gcache.lo \
+	libglib_2_0_la-gcompletion.lo libglib_2_0_la-grel.lo \
+	libglib_2_0_la-gthread-deprecated.lo
+@OS_UNIX_TRUE@am__objects_2 = libglib_2_0_la-glib-unix.lo
+@OS_WIN32_TRUE@am__objects_3 = libglib_2_0_la-gthread-win32.lo
+@OS_WIN32_FALSE@am__objects_4 = libglib_2_0_la-gthread-posix.lo
+am_libglib_2_0_la_OBJECTS = $(am__objects_1) libglib_2_0_la-garray.lo \
+	libglib_2_0_la-gasyncqueue.lo libglib_2_0_la-gatomic.lo \
+	libglib_2_0_la-gbacktrace.lo libglib_2_0_la-gbase64.lo \
+	libglib_2_0_la-gbitlock.lo libglib_2_0_la-gbookmarkfile.lo \
+	libglib_2_0_la-gbytes.lo libglib_2_0_la-gcharset.lo \
+	libglib_2_0_la-gchecksum.lo libglib_2_0_la-gconvert.lo \
+	libglib_2_0_la-gdataset.lo libglib_2_0_la-gdate.lo \
+	libglib_2_0_la-gdatetime.lo libglib_2_0_la-gdir.lo \
+	libglib_2_0_la-genviron.lo libglib_2_0_la-gerror.lo \
+	libglib_2_0_la-gfileutils.lo libglib_2_0_la-ggettext.lo \
+	libglib_2_0_la-ghash.lo libglib_2_0_la-ghmac.lo \
+	libglib_2_0_la-ghook.lo libglib_2_0_la-ghostutils.lo \
+	libglib_2_0_la-giochannel.lo libglib_2_0_la-gkeyfile.lo \
+	libglib_2_0_la-glib-init.lo libglib_2_0_la-glib-private.lo \
+	libglib_2_0_la-glist.lo libglib_2_0_la-gmain.lo \
+	libglib_2_0_la-gmappedfile.lo libglib_2_0_la-gmarkup.lo \
+	libglib_2_0_la-gmem.lo libglib_2_0_la-gmessages.lo \
+	libglib_2_0_la-gnode.lo libglib_2_0_la-goption.lo \
+	libglib_2_0_la-gpattern.lo libglib_2_0_la-gpoll.lo \
+	libglib_2_0_la-gprimes.lo libglib_2_0_la-gqsort.lo \
+	libglib_2_0_la-gquark.lo libglib_2_0_la-gqueue.lo \
+	libglib_2_0_la-grand.lo libglib_2_0_la-gregex.lo \
+	libglib_2_0_la-gscanner.lo libglib_2_0_la-gsequence.lo \
+	libglib_2_0_la-gshell.lo libglib_2_0_la-gslice.lo \
+	libglib_2_0_la-gslist.lo libglib_2_0_la-gstdio.lo \
+	libglib_2_0_la-gstrfuncs.lo libglib_2_0_la-gstring.lo \
+	libglib_2_0_la-gstringchunk.lo libglib_2_0_la-gtestutils.lo \
+	libglib_2_0_la-gthread.lo libglib_2_0_la-gthreadpool.lo \
+	libglib_2_0_la-gtimer.lo libglib_2_0_la-gtimezone.lo \
+	libglib_2_0_la-gtrashstack.lo libglib_2_0_la-gtree.lo \
+	libglib_2_0_la-guniprop.lo libglib_2_0_la-gutf8.lo \
+	libglib_2_0_la-gunibreak.lo libglib_2_0_la-gunicollate.lo \
+	libglib_2_0_la-gunidecomp.lo libglib_2_0_la-gurifuncs.lo \
+	libglib_2_0_la-gutils.lo libglib_2_0_la-gvariant.lo \
+	libglib_2_0_la-gvariant-core.lo \
+	libglib_2_0_la-gvariant-parser.lo \
+	libglib_2_0_la-gvariant-serialiser.lo \
+	libglib_2_0_la-gvarianttypeinfo.lo \
+	libglib_2_0_la-gvarianttype.lo libglib_2_0_la-gversion.lo \
+	libglib_2_0_la-gwakeup.lo libglib_2_0_la-gprintf.lo \
 	$(am__objects_2) $(am__objects_3) $(am__objects_4)
 libglib_2_0_la_OBJECTS = $(am_libglib_2_0_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
@@ -186,8 +210,8 @@ am__v_lt_0 = --silent
 am__v_lt_1 = 
 libglib_2_0_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
 	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CCLD) \
-	$(AM_CFLAGS) $(CFLAGS) $(libglib_2_0_la_LDFLAGS) $(LDFLAGS) -o \
-	$@
+	$(libglib_2_0_la_CFLAGS) $(CFLAGS) $(libglib_2_0_la_LDFLAGS) \
+	$(LDFLAGS) -o $@
 @OS_WIN32_TRUE@@OS_WIN32_X64_TRUE@am__EXEEXT_1 = gspawn-win64-helper$(EXEEXT) \
 @OS_WIN32_TRUE@@OS_WIN32_X64_TRUE@	gspawn-win64-helper-console$(EXEEXT)
 @OS_WIN32_TRUE@@OS_WIN32_X64_FALSE@am__EXEEXT_2 = gspawn-win32-helper$(EXEEXT) \
@@ -290,10 +314,6 @@ AM_RECURSIVE_TARGETS = $(RECURSIVE_TARGETS:-recursive=) \
 	distdir
 ETAGS = etags
 CTAGS = ctags
-am__tty_colors_dummy = \
-  mgn= red= grn= lgn= blu= brg= std=; \
-  am__color_tests=no
-am__tty_colors = $(am__tty_colors_dummy)
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 am__relativize = \
   dir0=`pwd`; \
@@ -372,6 +392,7 @@ GLIB_COMPILE_SCHEMAS = @GLIB_COMPILE_SCHEMAS@
 GLIB_DEBUG_FLAGS = @GLIB_DEBUG_FLAGS@
 GLIB_EXTRA_CFLAGS = @GLIB_EXTRA_CFLAGS@
 GLIB_GENMARSHAL = @GLIB_GENMARSHAL@
+GLIB_HIDDEN_VISIBILITY_CFLAGS = @GLIB_HIDDEN_VISIBILITY_CFLAGS@
 GLIB_INTERFACE_AGE = @GLIB_INTERFACE_AGE@
 GLIB_LINK_FLAGS = @GLIB_LINK_FLAGS@
 GLIB_MAJOR_VERSION = @GLIB_MAJOR_VERSION@
@@ -379,6 +400,7 @@ GLIB_MICRO_VERSION = @GLIB_MICRO_VERSION@
 GLIB_MINOR_VERSION = @GLIB_MINOR_VERSION@
 GLIB_RUNTIME_LIBDIR = @GLIB_RUNTIME_LIBDIR@
 GLIB_VERSION = @GLIB_VERSION@
+GLIB_WARN_CFLAGS = @GLIB_WARN_CFLAGS@
 GLIB_WIN32_STATIC_COMPILATION_DEFINE = @GLIB_WIN32_STATIC_COMPILATION_DEFINE@
 GMOFILES = @GMOFILES@
 GMSGFMT = @GMSGFMT@
@@ -423,7 +445,6 @@ LIBFFI_LIBS = @LIBFFI_LIBS@
 LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
 LIBTOOL = @LIBTOOL@
-LIBTOOL_EXPORT_OPTIONS = @LIBTOOL_EXPORT_OPTIONS@
 LIB_EXE_MACHINE_FLAG = @LIB_EXE_MACHINE_FLAG@
 LIPO = @LIPO@
 LN_S = @LN_S@
@@ -442,6 +463,7 @@ MKDIR_P = @MKDIR_P@
 MKINSTALLDIRS = @MKINSTALLDIRS@
 MSGFMT = @MSGFMT@
 MSGFMT_OPTS = @MSGFMT_OPTS@
+NAMESER_COMPAT_INCLUDE = @NAMESER_COMPAT_INCLUDE@
 NETWORK_LIBS = @NETWORK_LIBS@
 NM = @NM@
 NMEDIT = @NMEDIT@
@@ -487,6 +509,7 @@ STRIP = @STRIP@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
 WINDRES = @WINDRES@
+WSPIAPI_INCLUDE = @WSPIAPI_INCLUDE@
 XATTR_LIBS = @XATTR_LIBS@
 XGETTEXT = @XGETTEXT@
 XMLCATALOG = @XMLCATALOG@
@@ -524,7 +547,6 @@ gio_INCLUDES = @gio_INCLUDES@
 glib_INCLUDES = @glib_INCLUDES@
 gmodule_INCLUDES = @gmodule_INCLUDES@
 gobject_INCLUDES = @gobject_INCLUDES@
-gthread_INCLUDES = @gthread_INCLUDES@
 host = @host@
 host_alias = @host_alias@
 host_cpu = @host_cpu@
@@ -569,8 +591,8 @@ GTESTER_REPORT = $(top_builddir)/glib/gtester-report	# for the GLIB package
 # be distributed.
 EXTRA_DIST = makefile.msc.in glib.rc.in gen-iswide-table.py \
 	gen-unicode-tables.pl gen-script-table.pl \
-	glibconfig.h.win32.in abicheck.sh glib.symbols gregex.c \
-	gregex.h win_iconv.c libglib-gdb.py.in docs.c gconstructor.h \
+	glibconfig.h.win32.in gregex.c gregex.h win_iconv.c \
+	libglib-gdb.py.in docs.c gconstructor.h \
 	$(MIRRORING_TAB_SOURCE) $(am__append_8) $(am__append_12)
 TEST_PROGS = 
 BUILT_SOURCES = glibconfig-stamp $(am__append_5)
@@ -601,8 +623,7 @@ AM_CPPFLAGS = \
 	-DGLIB_COMPILATION 		\
 	-DPCRE_STATIC
 
-@HAVE_GNUC_VISIBILITY_TRUE@@OS_LINUX_TRUE@TESTS_ENVIRONMENT = GLIB_DEBUG_FLAGS="$(GLIB_DEBUG_FLAGS)"
-@HAVE_GNUC_VISIBILITY_TRUE@@OS_LINUX_TRUE@TESTS = abicheck.sh
+AM_CFLAGS = $(GLIB_WARN_CFLAGS)
 MIRRORING_TAB_SOURCE = \
 	glib-mirroring-tab/Makefile 		\
 	glib-mirroring-tab/gen-mirroring-tab.c	\
@@ -630,26 +651,26 @@ deprecated_sources = \
 libglib_2_0_la_SOURCES = $(deprecated_sources) glib_probes.d garray.c \
 	gasyncqueue.c gasyncqueueprivate.h gatomic.c gbacktrace.c \
 	gbase64.c gbitlock.c gbookmarkfile.c gbsearcharray.h gbytes.c \
-	gbytes.h gcharset.c gchecksum.c gconvert.c gdataset.c \
-	gdatasetprivate.h gdate.c gdatetime.c gdir.c genviron.c \
-	gerror.c gfileutils.c ggettext.c ghash.c ghmac.c ghook.c \
-	ghostutils.c giochannel.c gkeyfile.c glibintl.h glib_trace.h \
-	glib-init.h glib-init.c glib-private.h glib-private.c glist.c \
-	gmain-internal.h gmain.c gmappedfile.c gmarkup.c gmem.c \
-	gmessages.c gmirroringtable.h gnode.c goption.c gpattern.c \
-	gpoll.c gprimes.c gqsort.c gquark.c gqueue.c grand.c gregex.c \
-	gscanner.c gscripttable.h gsequence.c gshell.c gslice.c \
-	gslist.c gstdio.c gstrfuncs.c gstring.c gstringchunk.c \
-	gtestutils.c gthread.c gthreadprivate.h gthreadpool.c gtimer.c \
-	gtimezone.c gtrashstack.c gtree.c guniprop.c gutf8.c \
-	gunibreak.h gunibreak.c gunichartables.h gunicollate.c \
-	gunicomp.h gunidecomp.h gunidecomp.c gunicodeprivate.h \
-	gurifuncs.c gutils.c gvariant.h gvariant.c gvariant-core.h \
-	gvariant-core.c gvariant-internal.h gvariant-parser.c \
-	gvariant-serialiser.h gvariant-serialiser.c gvarianttypeinfo.h \
-	gvarianttypeinfo.c gvarianttype.c gversion.c gwakeup.h \
-	gwakeup.c gprintf.c gprintfint.h $(am__append_2) \
-	$(am__append_3) $(am__append_4)
+	gbytes.h gcharset.c gcharsetprivate.h gchecksum.c gconvert.c \
+	gdataset.c gdatasetprivate.h gdate.c gdatetime.c gdir.c \
+	genviron.c gerror.c gfileutils.c ggettext.c ghash.c ghmac.c \
+	ghook.c ghostutils.c giochannel.c gkeyfile.c glibintl.h \
+	glib_trace.h glib-init.h glib-init.c glib-private.h \
+	glib-private.c glist.c gmain-internal.h gmain.c gmappedfile.c \
+	gmarkup.c gmem.c gmessages.c gmirroringtable.h gnode.c \
+	goption.c gpattern.c gpoll.c gprimes.c gqsort.c gquark.c \
+	gqueue.c grand.c gregex.c gscanner.c gscripttable.h \
+	gsequence.c gshell.c gslice.c gslist.c gstdio.c gstrfuncs.c \
+	gstring.c gstringchunk.c gtestutils.c gthread.c \
+	gthreadprivate.h gthreadpool.c gtimer.c gtimezone.c \
+	gtrashstack.c gtree.c guniprop.c gutf8.c gunibreak.h \
+	gunibreak.c gunichartables.h gunicollate.c gunicomp.h \
+	gunidecomp.h gunidecomp.c gunicodeprivate.h gurifuncs.c \
+	gutils.c gvariant.h gvariant.c gvariant-core.h gvariant-core.c \
+	gvariant-internal.h gvariant-parser.c gvariant-serialiser.h \
+	gvariant-serialiser.c gvarianttypeinfo.h gvarianttypeinfo.c \
+	gvarianttype.c gversion.c gwakeup.h gwakeup.c gprintf.c \
+	gprintfint.h $(am__append_2) $(am__append_3) $(am__append_4)
 EXTRA_libglib_2_0_la_SOURCES = \
 	giounix.c	\
 	giowin32.c	\
@@ -748,15 +769,13 @@ glibsubinclude_HEADERS = \
 	gprintf.h
 
 @PLATFORM_WIN32_TRUE@no_undefined = -no-undefined
-@OS_WIN32_AND_DLL_COMPILATION_FALSE@export_symbols = $(LIBTOOL_EXPORT_OPTIONS)
-@OS_WIN32_AND_DLL_COMPILATION_TRUE@export_symbols = -export-symbols $(builddir)/glib.def
 @OS_WIN32_AND_DLL_COMPILATION_TRUE@glib_win32_res = glib-win32-res.o
 @OS_WIN32_AND_DLL_COMPILATION_TRUE@glib_win32_res_ldflag = -Wl,$(glib_win32_res)
-@OS_WIN32_AND_DLL_COMPILATION_TRUE@glib_def = glib.def
 @USE_SYSTEM_PCRE_FALSE@pcre_lib = pcre/libpcre.la
 @USE_SYSTEM_PCRE_TRUE@pcre_lib = $(PCRE_LIBS)
 @USE_SYSTEM_PCRE_FALSE@pcre_inc = 
 @USE_SYSTEM_PCRE_TRUE@pcre_inc = $(PCRE_CFLAGS)
+libglib_2_0_la_CFLAGS = $(AM_CFLAGS) $(GLIB_HIDDEN_VISIBILITY_CFLAGS)
 libglib_2_0_la_LIBADD = libcharset/libcharset.la $(printf_la) @GIO@ \
 	@GSPAWN@ @PLATFORMDEP@ @ICONV_LIBS@ @G_LIBS_EXTRA@ $(pcre_lib) \
 	$(G_THREAD_LIBS_EXTRA) $(G_THREAD_LIBS_FOR_GTHREAD) \
@@ -765,7 +784,7 @@ libglib_2_0_la_DEPENDENCIES = libcharset/libcharset.la $(printf_la) @GIO@ @GSPAW
 libglib_2_0_la_LDFLAGS = $(GLIB_LINK_FLAGS) \
 	 $(glib_win32_res_ldflag) \
 	-version-info $(LT_CURRENT):$(LT_REVISION):$(LT_AGE) \
-	-export-dynamic $(no_undefined) $(export_symbols)
+	-export-dynamic $(no_undefined)
 
 INSTALL_PROGS = $(am__append_9) $(am__append_10) $(am__append_11)
 @ENABLE_SYSTEMTAP_TRUE@tapset_in_files = glib.stp.in
@@ -1007,99 +1026,99 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gallocator.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/garray.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gasyncqueue.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gatomic.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gbacktrace.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gbase64.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gbitlock.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gbookmarkfile.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gbytes.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gcache.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gcharset.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gchecksum.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gcompletion.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gconvert.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdataset.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdate.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdatetime.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdir.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/genviron.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gerror.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gfileutils.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ggettext.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ghash.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ghmac.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ghook.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ghostutils.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/giochannel.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/giounix.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/giowin32.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gkeyfile.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/glib-init.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/glib-private.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/glib-unix.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/glist.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gmain.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gmappedfile.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gmarkup.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gmem.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gmessages.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnode.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/goption.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gpattern.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gpoll.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gprimes.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gprintf.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gqsort.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gquark.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gqueue.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/grand.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gregex.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/grel.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gscanner.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gsequence.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gshell.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gslice.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gslist.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gspawn-win32-helper-console.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gspawn-win32-helper.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gspawn-win32.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gspawn-win64-helper-console.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gspawn-win64-helper.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gspawn.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gstdio.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gstrfuncs.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gstring.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gstringchunk.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtester.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtestutils.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gthread-deprecated.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gthread-posix.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gthread-win32.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gthread.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gthreadpool.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtimer.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtimezone.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtrashstack.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtree.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gunibreak.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gunicollate.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gunidecomp.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/guniprop.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gurifuncs.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gutf8.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gutils.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gvariant-core.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gvariant-parser.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gvariant-serialiser.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gvariant.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gvarianttype.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gvarianttypeinfo.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gversion.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gwakeup.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gwin32.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gallocator.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-garray.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gasyncqueue.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gatomic.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gbacktrace.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gbase64.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gbitlock.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gbookmarkfile.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gbytes.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gcache.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gcharset.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gchecksum.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gcompletion.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gconvert.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gdataset.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gdate.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gdatetime.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gdir.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-genviron.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gerror.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gfileutils.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-ggettext.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-ghash.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-ghmac.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-ghook.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-ghostutils.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-giochannel.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-giounix.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-giowin32.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gkeyfile.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-glib-init.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-glib-private.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-glib-unix.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-glist.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gmain.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gmappedfile.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gmarkup.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gmem.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gmessages.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gnode.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-goption.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gpattern.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gpoll.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gprimes.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gprintf.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gqsort.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gquark.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gqueue.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-grand.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gregex.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-grel.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gscanner.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gsequence.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gshell.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gslice.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gslist.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gspawn-win32.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gspawn.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gstdio.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gstrfuncs.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gstring.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gstringchunk.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gtestutils.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gthread-deprecated.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gthread-posix.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gthread-win32.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gthread.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gthreadpool.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gtimer.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gtimezone.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gtrashstack.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gtree.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gunibreak.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gunicollate.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gunidecomp.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-guniprop.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gurifuncs.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gutf8.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gutils.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gvariant-core.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gvariant-parser.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gvariant-serialiser.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gvariant.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gvarianttype.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gvarianttypeinfo.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gversion.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gwakeup.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gwin32.Plo@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -1122,40 +1141,621 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
 
-gallocator.lo: deprecated/gallocator.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gallocator.lo -MD -MP -MF $(DEPDIR)/gallocator.Tpo -c -o gallocator.lo `test -f 'deprecated/gallocator.c' || echo '$(srcdir)/'`deprecated/gallocator.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/gallocator.Tpo $(DEPDIR)/gallocator.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='deprecated/gallocator.c' object='gallocator.lo' libtool=yes @AMDEPBACKSLASH@
+libglib_2_0_la-gallocator.lo: deprecated/gallocator.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gallocator.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gallocator.Tpo -c -o libglib_2_0_la-gallocator.lo `test -f 'deprecated/gallocator.c' || echo '$(srcdir)/'`deprecated/gallocator.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gallocator.Tpo $(DEPDIR)/libglib_2_0_la-gallocator.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='deprecated/gallocator.c' object='libglib_2_0_la-gallocator.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gallocator.lo `test -f 'deprecated/gallocator.c' || echo '$(srcdir)/'`deprecated/gallocator.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gallocator.lo `test -f 'deprecated/gallocator.c' || echo '$(srcdir)/'`deprecated/gallocator.c
 
-gcache.lo: deprecated/gcache.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gcache.lo -MD -MP -MF $(DEPDIR)/gcache.Tpo -c -o gcache.lo `test -f 'deprecated/gcache.c' || echo '$(srcdir)/'`deprecated/gcache.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/gcache.Tpo $(DEPDIR)/gcache.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='deprecated/gcache.c' object='gcache.lo' libtool=yes @AMDEPBACKSLASH@
+libglib_2_0_la-gcache.lo: deprecated/gcache.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gcache.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gcache.Tpo -c -o libglib_2_0_la-gcache.lo `test -f 'deprecated/gcache.c' || echo '$(srcdir)/'`deprecated/gcache.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gcache.Tpo $(DEPDIR)/libglib_2_0_la-gcache.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='deprecated/gcache.c' object='libglib_2_0_la-gcache.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gcache.lo `test -f 'deprecated/gcache.c' || echo '$(srcdir)/'`deprecated/gcache.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gcache.lo `test -f 'deprecated/gcache.c' || echo '$(srcdir)/'`deprecated/gcache.c
 
-gcompletion.lo: deprecated/gcompletion.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gcompletion.lo -MD -MP -MF $(DEPDIR)/gcompletion.Tpo -c -o gcompletion.lo `test -f 'deprecated/gcompletion.c' || echo '$(srcdir)/'`deprecated/gcompletion.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/gcompletion.Tpo $(DEPDIR)/gcompletion.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='deprecated/gcompletion.c' object='gcompletion.lo' libtool=yes @AMDEPBACKSLASH@
+libglib_2_0_la-gcompletion.lo: deprecated/gcompletion.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gcompletion.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gcompletion.Tpo -c -o libglib_2_0_la-gcompletion.lo `test -f 'deprecated/gcompletion.c' || echo '$(srcdir)/'`deprecated/gcompletion.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gcompletion.Tpo $(DEPDIR)/libglib_2_0_la-gcompletion.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='deprecated/gcompletion.c' object='libglib_2_0_la-gcompletion.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gcompletion.lo `test -f 'deprecated/gcompletion.c' || echo '$(srcdir)/'`deprecated/gcompletion.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gcompletion.lo `test -f 'deprecated/gcompletion.c' || echo '$(srcdir)/'`deprecated/gcompletion.c
 
-grel.lo: deprecated/grel.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT grel.lo -MD -MP -MF $(DEPDIR)/grel.Tpo -c -o grel.lo `test -f 'deprecated/grel.c' || echo '$(srcdir)/'`deprecated/grel.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/grel.Tpo $(DEPDIR)/grel.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='deprecated/grel.c' object='grel.lo' libtool=yes @AMDEPBACKSLASH@
+libglib_2_0_la-grel.lo: deprecated/grel.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-grel.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-grel.Tpo -c -o libglib_2_0_la-grel.lo `test -f 'deprecated/grel.c' || echo '$(srcdir)/'`deprecated/grel.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-grel.Tpo $(DEPDIR)/libglib_2_0_la-grel.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='deprecated/grel.c' object='libglib_2_0_la-grel.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o grel.lo `test -f 'deprecated/grel.c' || echo '$(srcdir)/'`deprecated/grel.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-grel.lo `test -f 'deprecated/grel.c' || echo '$(srcdir)/'`deprecated/grel.c
 
-gthread-deprecated.lo: deprecated/gthread-deprecated.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gthread-deprecated.lo -MD -MP -MF $(DEPDIR)/gthread-deprecated.Tpo -c -o gthread-deprecated.lo `test -f 'deprecated/gthread-deprecated.c' || echo '$(srcdir)/'`deprecated/gthread-deprecated.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/gthread-deprecated.Tpo $(DEPDIR)/gthread-deprecated.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='deprecated/gthread-deprecated.c' object='gthread-deprecated.lo' libtool=yes @AMDEPBACKSLASH@
+libglib_2_0_la-gthread-deprecated.lo: deprecated/gthread-deprecated.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gthread-deprecated.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gthread-deprecated.Tpo -c -o libglib_2_0_la-gthread-deprecated.lo `test -f 'deprecated/gthread-deprecated.c' || echo '$(srcdir)/'`deprecated/gthread-deprecated.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gthread-deprecated.Tpo $(DEPDIR)/libglib_2_0_la-gthread-deprecated.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='deprecated/gthread-deprecated.c' object='libglib_2_0_la-gthread-deprecated.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gthread-deprecated.lo `test -f 'deprecated/gthread-deprecated.c' || echo '$(srcdir)/'`deprecated/gthread-deprecated.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gthread-deprecated.lo `test -f 'deprecated/gthread-deprecated.c' || echo '$(srcdir)/'`deprecated/gthread-deprecated.c
+
+libglib_2_0_la-garray.lo: garray.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-garray.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-garray.Tpo -c -o libglib_2_0_la-garray.lo `test -f 'garray.c' || echo '$(srcdir)/'`garray.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-garray.Tpo $(DEPDIR)/libglib_2_0_la-garray.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='garray.c' object='libglib_2_0_la-garray.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-garray.lo `test -f 'garray.c' || echo '$(srcdir)/'`garray.c
+
+libglib_2_0_la-gasyncqueue.lo: gasyncqueue.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gasyncqueue.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gasyncqueue.Tpo -c -o libglib_2_0_la-gasyncqueue.lo `test -f 'gasyncqueue.c' || echo '$(srcdir)/'`gasyncqueue.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gasyncqueue.Tpo $(DEPDIR)/libglib_2_0_la-gasyncqueue.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gasyncqueue.c' object='libglib_2_0_la-gasyncqueue.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gasyncqueue.lo `test -f 'gasyncqueue.c' || echo '$(srcdir)/'`gasyncqueue.c
+
+libglib_2_0_la-gatomic.lo: gatomic.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gatomic.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gatomic.Tpo -c -o libglib_2_0_la-gatomic.lo `test -f 'gatomic.c' || echo '$(srcdir)/'`gatomic.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gatomic.Tpo $(DEPDIR)/libglib_2_0_la-gatomic.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gatomic.c' object='libglib_2_0_la-gatomic.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gatomic.lo `test -f 'gatomic.c' || echo '$(srcdir)/'`gatomic.c
+
+libglib_2_0_la-gbacktrace.lo: gbacktrace.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gbacktrace.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gbacktrace.Tpo -c -o libglib_2_0_la-gbacktrace.lo `test -f 'gbacktrace.c' || echo '$(srcdir)/'`gbacktrace.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gbacktrace.Tpo $(DEPDIR)/libglib_2_0_la-gbacktrace.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gbacktrace.c' object='libglib_2_0_la-gbacktrace.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gbacktrace.lo `test -f 'gbacktrace.c' || echo '$(srcdir)/'`gbacktrace.c
+
+libglib_2_0_la-gbase64.lo: gbase64.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gbase64.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gbase64.Tpo -c -o libglib_2_0_la-gbase64.lo `test -f 'gbase64.c' || echo '$(srcdir)/'`gbase64.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gbase64.Tpo $(DEPDIR)/libglib_2_0_la-gbase64.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gbase64.c' object='libglib_2_0_la-gbase64.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gbase64.lo `test -f 'gbase64.c' || echo '$(srcdir)/'`gbase64.c
+
+libglib_2_0_la-gbitlock.lo: gbitlock.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gbitlock.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gbitlock.Tpo -c -o libglib_2_0_la-gbitlock.lo `test -f 'gbitlock.c' || echo '$(srcdir)/'`gbitlock.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gbitlock.Tpo $(DEPDIR)/libglib_2_0_la-gbitlock.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gbitlock.c' object='libglib_2_0_la-gbitlock.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gbitlock.lo `test -f 'gbitlock.c' || echo '$(srcdir)/'`gbitlock.c
+
+libglib_2_0_la-gbookmarkfile.lo: gbookmarkfile.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gbookmarkfile.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gbookmarkfile.Tpo -c -o libglib_2_0_la-gbookmarkfile.lo `test -f 'gbookmarkfile.c' || echo '$(srcdir)/'`gbookmarkfile.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gbookmarkfile.Tpo $(DEPDIR)/libglib_2_0_la-gbookmarkfile.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gbookmarkfile.c' object='libglib_2_0_la-gbookmarkfile.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gbookmarkfile.lo `test -f 'gbookmarkfile.c' || echo '$(srcdir)/'`gbookmarkfile.c
+
+libglib_2_0_la-gbytes.lo: gbytes.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gbytes.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gbytes.Tpo -c -o libglib_2_0_la-gbytes.lo `test -f 'gbytes.c' || echo '$(srcdir)/'`gbytes.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gbytes.Tpo $(DEPDIR)/libglib_2_0_la-gbytes.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gbytes.c' object='libglib_2_0_la-gbytes.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gbytes.lo `test -f 'gbytes.c' || echo '$(srcdir)/'`gbytes.c
+
+libglib_2_0_la-gcharset.lo: gcharset.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gcharset.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gcharset.Tpo -c -o libglib_2_0_la-gcharset.lo `test -f 'gcharset.c' || echo '$(srcdir)/'`gcharset.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gcharset.Tpo $(DEPDIR)/libglib_2_0_la-gcharset.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gcharset.c' object='libglib_2_0_la-gcharset.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gcharset.lo `test -f 'gcharset.c' || echo '$(srcdir)/'`gcharset.c
+
+libglib_2_0_la-gchecksum.lo: gchecksum.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gchecksum.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gchecksum.Tpo -c -o libglib_2_0_la-gchecksum.lo `test -f 'gchecksum.c' || echo '$(srcdir)/'`gchecksum.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gchecksum.Tpo $(DEPDIR)/libglib_2_0_la-gchecksum.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gchecksum.c' object='libglib_2_0_la-gchecksum.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gchecksum.lo `test -f 'gchecksum.c' || echo '$(srcdir)/'`gchecksum.c
+
+libglib_2_0_la-gconvert.lo: gconvert.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gconvert.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gconvert.Tpo -c -o libglib_2_0_la-gconvert.lo `test -f 'gconvert.c' || echo '$(srcdir)/'`gconvert.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gconvert.Tpo $(DEPDIR)/libglib_2_0_la-gconvert.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gconvert.c' object='libglib_2_0_la-gconvert.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gconvert.lo `test -f 'gconvert.c' || echo '$(srcdir)/'`gconvert.c
+
+libglib_2_0_la-gdataset.lo: gdataset.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gdataset.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gdataset.Tpo -c -o libglib_2_0_la-gdataset.lo `test -f 'gdataset.c' || echo '$(srcdir)/'`gdataset.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gdataset.Tpo $(DEPDIR)/libglib_2_0_la-gdataset.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gdataset.c' object='libglib_2_0_la-gdataset.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gdataset.lo `test -f 'gdataset.c' || echo '$(srcdir)/'`gdataset.c
+
+libglib_2_0_la-gdate.lo: gdate.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gdate.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gdate.Tpo -c -o libglib_2_0_la-gdate.lo `test -f 'gdate.c' || echo '$(srcdir)/'`gdate.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gdate.Tpo $(DEPDIR)/libglib_2_0_la-gdate.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gdate.c' object='libglib_2_0_la-gdate.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gdate.lo `test -f 'gdate.c' || echo '$(srcdir)/'`gdate.c
+
+libglib_2_0_la-gdatetime.lo: gdatetime.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gdatetime.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gdatetime.Tpo -c -o libglib_2_0_la-gdatetime.lo `test -f 'gdatetime.c' || echo '$(srcdir)/'`gdatetime.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gdatetime.Tpo $(DEPDIR)/libglib_2_0_la-gdatetime.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gdatetime.c' object='libglib_2_0_la-gdatetime.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gdatetime.lo `test -f 'gdatetime.c' || echo '$(srcdir)/'`gdatetime.c
+
+libglib_2_0_la-gdir.lo: gdir.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gdir.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gdir.Tpo -c -o libglib_2_0_la-gdir.lo `test -f 'gdir.c' || echo '$(srcdir)/'`gdir.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gdir.Tpo $(DEPDIR)/libglib_2_0_la-gdir.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gdir.c' object='libglib_2_0_la-gdir.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gdir.lo `test -f 'gdir.c' || echo '$(srcdir)/'`gdir.c
+
+libglib_2_0_la-genviron.lo: genviron.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-genviron.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-genviron.Tpo -c -o libglib_2_0_la-genviron.lo `test -f 'genviron.c' || echo '$(srcdir)/'`genviron.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-genviron.Tpo $(DEPDIR)/libglib_2_0_la-genviron.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='genviron.c' object='libglib_2_0_la-genviron.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-genviron.lo `test -f 'genviron.c' || echo '$(srcdir)/'`genviron.c
+
+libglib_2_0_la-gerror.lo: gerror.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gerror.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gerror.Tpo -c -o libglib_2_0_la-gerror.lo `test -f 'gerror.c' || echo '$(srcdir)/'`gerror.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gerror.Tpo $(DEPDIR)/libglib_2_0_la-gerror.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gerror.c' object='libglib_2_0_la-gerror.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gerror.lo `test -f 'gerror.c' || echo '$(srcdir)/'`gerror.c
+
+libglib_2_0_la-gfileutils.lo: gfileutils.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gfileutils.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gfileutils.Tpo -c -o libglib_2_0_la-gfileutils.lo `test -f 'gfileutils.c' || echo '$(srcdir)/'`gfileutils.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gfileutils.Tpo $(DEPDIR)/libglib_2_0_la-gfileutils.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gfileutils.c' object='libglib_2_0_la-gfileutils.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gfileutils.lo `test -f 'gfileutils.c' || echo '$(srcdir)/'`gfileutils.c
+
+libglib_2_0_la-ggettext.lo: ggettext.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-ggettext.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-ggettext.Tpo -c -o libglib_2_0_la-ggettext.lo `test -f 'ggettext.c' || echo '$(srcdir)/'`ggettext.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-ggettext.Tpo $(DEPDIR)/libglib_2_0_la-ggettext.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='ggettext.c' object='libglib_2_0_la-ggettext.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-ggettext.lo `test -f 'ggettext.c' || echo '$(srcdir)/'`ggettext.c
+
+libglib_2_0_la-ghash.lo: ghash.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-ghash.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-ghash.Tpo -c -o libglib_2_0_la-ghash.lo `test -f 'ghash.c' || echo '$(srcdir)/'`ghash.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-ghash.Tpo $(DEPDIR)/libglib_2_0_la-ghash.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='ghash.c' object='libglib_2_0_la-ghash.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-ghash.lo `test -f 'ghash.c' || echo '$(srcdir)/'`ghash.c
+
+libglib_2_0_la-ghmac.lo: ghmac.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-ghmac.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-ghmac.Tpo -c -o libglib_2_0_la-ghmac.lo `test -f 'ghmac.c' || echo '$(srcdir)/'`ghmac.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-ghmac.Tpo $(DEPDIR)/libglib_2_0_la-ghmac.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='ghmac.c' object='libglib_2_0_la-ghmac.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-ghmac.lo `test -f 'ghmac.c' || echo '$(srcdir)/'`ghmac.c
+
+libglib_2_0_la-ghook.lo: ghook.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-ghook.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-ghook.Tpo -c -o libglib_2_0_la-ghook.lo `test -f 'ghook.c' || echo '$(srcdir)/'`ghook.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-ghook.Tpo $(DEPDIR)/libglib_2_0_la-ghook.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='ghook.c' object='libglib_2_0_la-ghook.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-ghook.lo `test -f 'ghook.c' || echo '$(srcdir)/'`ghook.c
+
+libglib_2_0_la-ghostutils.lo: ghostutils.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-ghostutils.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-ghostutils.Tpo -c -o libglib_2_0_la-ghostutils.lo `test -f 'ghostutils.c' || echo '$(srcdir)/'`ghostutils.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-ghostutils.Tpo $(DEPDIR)/libglib_2_0_la-ghostutils.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='ghostutils.c' object='libglib_2_0_la-ghostutils.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-ghostutils.lo `test -f 'ghostutils.c' || echo '$(srcdir)/'`ghostutils.c
+
+libglib_2_0_la-giochannel.lo: giochannel.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-giochannel.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-giochannel.Tpo -c -o libglib_2_0_la-giochannel.lo `test -f 'giochannel.c' || echo '$(srcdir)/'`giochannel.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-giochannel.Tpo $(DEPDIR)/libglib_2_0_la-giochannel.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='giochannel.c' object='libglib_2_0_la-giochannel.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-giochannel.lo `test -f 'giochannel.c' || echo '$(srcdir)/'`giochannel.c
+
+libglib_2_0_la-gkeyfile.lo: gkeyfile.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gkeyfile.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gkeyfile.Tpo -c -o libglib_2_0_la-gkeyfile.lo `test -f 'gkeyfile.c' || echo '$(srcdir)/'`gkeyfile.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gkeyfile.Tpo $(DEPDIR)/libglib_2_0_la-gkeyfile.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gkeyfile.c' object='libglib_2_0_la-gkeyfile.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gkeyfile.lo `test -f 'gkeyfile.c' || echo '$(srcdir)/'`gkeyfile.c
+
+libglib_2_0_la-glib-init.lo: glib-init.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-glib-init.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-glib-init.Tpo -c -o libglib_2_0_la-glib-init.lo `test -f 'glib-init.c' || echo '$(srcdir)/'`glib-init.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-glib-init.Tpo $(DEPDIR)/libglib_2_0_la-glib-init.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='glib-init.c' object='libglib_2_0_la-glib-init.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-glib-init.lo `test -f 'glib-init.c' || echo '$(srcdir)/'`glib-init.c
+
+libglib_2_0_la-glib-private.lo: glib-private.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-glib-private.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-glib-private.Tpo -c -o libglib_2_0_la-glib-private.lo `test -f 'glib-private.c' || echo '$(srcdir)/'`glib-private.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-glib-private.Tpo $(DEPDIR)/libglib_2_0_la-glib-private.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='glib-private.c' object='libglib_2_0_la-glib-private.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-glib-private.lo `test -f 'glib-private.c' || echo '$(srcdir)/'`glib-private.c
+
+libglib_2_0_la-glist.lo: glist.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-glist.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-glist.Tpo -c -o libglib_2_0_la-glist.lo `test -f 'glist.c' || echo '$(srcdir)/'`glist.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-glist.Tpo $(DEPDIR)/libglib_2_0_la-glist.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='glist.c' object='libglib_2_0_la-glist.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-glist.lo `test -f 'glist.c' || echo '$(srcdir)/'`glist.c
+
+libglib_2_0_la-gmain.lo: gmain.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gmain.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gmain.Tpo -c -o libglib_2_0_la-gmain.lo `test -f 'gmain.c' || echo '$(srcdir)/'`gmain.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gmain.Tpo $(DEPDIR)/libglib_2_0_la-gmain.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gmain.c' object='libglib_2_0_la-gmain.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gmain.lo `test -f 'gmain.c' || echo '$(srcdir)/'`gmain.c
+
+libglib_2_0_la-gmappedfile.lo: gmappedfile.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gmappedfile.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gmappedfile.Tpo -c -o libglib_2_0_la-gmappedfile.lo `test -f 'gmappedfile.c' || echo '$(srcdir)/'`gmappedfile.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gmappedfile.Tpo $(DEPDIR)/libglib_2_0_la-gmappedfile.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gmappedfile.c' object='libglib_2_0_la-gmappedfile.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gmappedfile.lo `test -f 'gmappedfile.c' || echo '$(srcdir)/'`gmappedfile.c
+
+libglib_2_0_la-gmarkup.lo: gmarkup.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gmarkup.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gmarkup.Tpo -c -o libglib_2_0_la-gmarkup.lo `test -f 'gmarkup.c' || echo '$(srcdir)/'`gmarkup.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gmarkup.Tpo $(DEPDIR)/libglib_2_0_la-gmarkup.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gmarkup.c' object='libglib_2_0_la-gmarkup.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gmarkup.lo `test -f 'gmarkup.c' || echo '$(srcdir)/'`gmarkup.c
+
+libglib_2_0_la-gmem.lo: gmem.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gmem.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gmem.Tpo -c -o libglib_2_0_la-gmem.lo `test -f 'gmem.c' || echo '$(srcdir)/'`gmem.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gmem.Tpo $(DEPDIR)/libglib_2_0_la-gmem.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gmem.c' object='libglib_2_0_la-gmem.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gmem.lo `test -f 'gmem.c' || echo '$(srcdir)/'`gmem.c
+
+libglib_2_0_la-gmessages.lo: gmessages.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gmessages.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gmessages.Tpo -c -o libglib_2_0_la-gmessages.lo `test -f 'gmessages.c' || echo '$(srcdir)/'`gmessages.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gmessages.Tpo $(DEPDIR)/libglib_2_0_la-gmessages.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gmessages.c' object='libglib_2_0_la-gmessages.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gmessages.lo `test -f 'gmessages.c' || echo '$(srcdir)/'`gmessages.c
+
+libglib_2_0_la-gnode.lo: gnode.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gnode.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gnode.Tpo -c -o libglib_2_0_la-gnode.lo `test -f 'gnode.c' || echo '$(srcdir)/'`gnode.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gnode.Tpo $(DEPDIR)/libglib_2_0_la-gnode.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gnode.c' object='libglib_2_0_la-gnode.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gnode.lo `test -f 'gnode.c' || echo '$(srcdir)/'`gnode.c
+
+libglib_2_0_la-goption.lo: goption.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-goption.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-goption.Tpo -c -o libglib_2_0_la-goption.lo `test -f 'goption.c' || echo '$(srcdir)/'`goption.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-goption.Tpo $(DEPDIR)/libglib_2_0_la-goption.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='goption.c' object='libglib_2_0_la-goption.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-goption.lo `test -f 'goption.c' || echo '$(srcdir)/'`goption.c
+
+libglib_2_0_la-gpattern.lo: gpattern.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gpattern.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gpattern.Tpo -c -o libglib_2_0_la-gpattern.lo `test -f 'gpattern.c' || echo '$(srcdir)/'`gpattern.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gpattern.Tpo $(DEPDIR)/libglib_2_0_la-gpattern.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gpattern.c' object='libglib_2_0_la-gpattern.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gpattern.lo `test -f 'gpattern.c' || echo '$(srcdir)/'`gpattern.c
+
+libglib_2_0_la-gpoll.lo: gpoll.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gpoll.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gpoll.Tpo -c -o libglib_2_0_la-gpoll.lo `test -f 'gpoll.c' || echo '$(srcdir)/'`gpoll.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gpoll.Tpo $(DEPDIR)/libglib_2_0_la-gpoll.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gpoll.c' object='libglib_2_0_la-gpoll.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gpoll.lo `test -f 'gpoll.c' || echo '$(srcdir)/'`gpoll.c
+
+libglib_2_0_la-gprimes.lo: gprimes.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gprimes.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gprimes.Tpo -c -o libglib_2_0_la-gprimes.lo `test -f 'gprimes.c' || echo '$(srcdir)/'`gprimes.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gprimes.Tpo $(DEPDIR)/libglib_2_0_la-gprimes.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gprimes.c' object='libglib_2_0_la-gprimes.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gprimes.lo `test -f 'gprimes.c' || echo '$(srcdir)/'`gprimes.c
+
+libglib_2_0_la-gqsort.lo: gqsort.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gqsort.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gqsort.Tpo -c -o libglib_2_0_la-gqsort.lo `test -f 'gqsort.c' || echo '$(srcdir)/'`gqsort.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gqsort.Tpo $(DEPDIR)/libglib_2_0_la-gqsort.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gqsort.c' object='libglib_2_0_la-gqsort.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gqsort.lo `test -f 'gqsort.c' || echo '$(srcdir)/'`gqsort.c
+
+libglib_2_0_la-gquark.lo: gquark.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gquark.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gquark.Tpo -c -o libglib_2_0_la-gquark.lo `test -f 'gquark.c' || echo '$(srcdir)/'`gquark.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gquark.Tpo $(DEPDIR)/libglib_2_0_la-gquark.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gquark.c' object='libglib_2_0_la-gquark.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gquark.lo `test -f 'gquark.c' || echo '$(srcdir)/'`gquark.c
+
+libglib_2_0_la-gqueue.lo: gqueue.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gqueue.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gqueue.Tpo -c -o libglib_2_0_la-gqueue.lo `test -f 'gqueue.c' || echo '$(srcdir)/'`gqueue.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gqueue.Tpo $(DEPDIR)/libglib_2_0_la-gqueue.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gqueue.c' object='libglib_2_0_la-gqueue.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gqueue.lo `test -f 'gqueue.c' || echo '$(srcdir)/'`gqueue.c
+
+libglib_2_0_la-grand.lo: grand.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-grand.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-grand.Tpo -c -o libglib_2_0_la-grand.lo `test -f 'grand.c' || echo '$(srcdir)/'`grand.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-grand.Tpo $(DEPDIR)/libglib_2_0_la-grand.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='grand.c' object='libglib_2_0_la-grand.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-grand.lo `test -f 'grand.c' || echo '$(srcdir)/'`grand.c
+
+libglib_2_0_la-gregex.lo: gregex.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gregex.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gregex.Tpo -c -o libglib_2_0_la-gregex.lo `test -f 'gregex.c' || echo '$(srcdir)/'`gregex.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gregex.Tpo $(DEPDIR)/libglib_2_0_la-gregex.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gregex.c' object='libglib_2_0_la-gregex.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gregex.lo `test -f 'gregex.c' || echo '$(srcdir)/'`gregex.c
+
+libglib_2_0_la-gscanner.lo: gscanner.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gscanner.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gscanner.Tpo -c -o libglib_2_0_la-gscanner.lo `test -f 'gscanner.c' || echo '$(srcdir)/'`gscanner.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gscanner.Tpo $(DEPDIR)/libglib_2_0_la-gscanner.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gscanner.c' object='libglib_2_0_la-gscanner.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gscanner.lo `test -f 'gscanner.c' || echo '$(srcdir)/'`gscanner.c
+
+libglib_2_0_la-gsequence.lo: gsequence.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gsequence.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gsequence.Tpo -c -o libglib_2_0_la-gsequence.lo `test -f 'gsequence.c' || echo '$(srcdir)/'`gsequence.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gsequence.Tpo $(DEPDIR)/libglib_2_0_la-gsequence.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gsequence.c' object='libglib_2_0_la-gsequence.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gsequence.lo `test -f 'gsequence.c' || echo '$(srcdir)/'`gsequence.c
+
+libglib_2_0_la-gshell.lo: gshell.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gshell.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gshell.Tpo -c -o libglib_2_0_la-gshell.lo `test -f 'gshell.c' || echo '$(srcdir)/'`gshell.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gshell.Tpo $(DEPDIR)/libglib_2_0_la-gshell.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gshell.c' object='libglib_2_0_la-gshell.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gshell.lo `test -f 'gshell.c' || echo '$(srcdir)/'`gshell.c
+
+libglib_2_0_la-gslice.lo: gslice.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gslice.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gslice.Tpo -c -o libglib_2_0_la-gslice.lo `test -f 'gslice.c' || echo '$(srcdir)/'`gslice.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gslice.Tpo $(DEPDIR)/libglib_2_0_la-gslice.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gslice.c' object='libglib_2_0_la-gslice.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gslice.lo `test -f 'gslice.c' || echo '$(srcdir)/'`gslice.c
+
+libglib_2_0_la-gslist.lo: gslist.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gslist.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gslist.Tpo -c -o libglib_2_0_la-gslist.lo `test -f 'gslist.c' || echo '$(srcdir)/'`gslist.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gslist.Tpo $(DEPDIR)/libglib_2_0_la-gslist.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gslist.c' object='libglib_2_0_la-gslist.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gslist.lo `test -f 'gslist.c' || echo '$(srcdir)/'`gslist.c
+
+libglib_2_0_la-gstdio.lo: gstdio.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gstdio.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gstdio.Tpo -c -o libglib_2_0_la-gstdio.lo `test -f 'gstdio.c' || echo '$(srcdir)/'`gstdio.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gstdio.Tpo $(DEPDIR)/libglib_2_0_la-gstdio.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gstdio.c' object='libglib_2_0_la-gstdio.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gstdio.lo `test -f 'gstdio.c' || echo '$(srcdir)/'`gstdio.c
+
+libglib_2_0_la-gstrfuncs.lo: gstrfuncs.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gstrfuncs.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gstrfuncs.Tpo -c -o libglib_2_0_la-gstrfuncs.lo `test -f 'gstrfuncs.c' || echo '$(srcdir)/'`gstrfuncs.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gstrfuncs.Tpo $(DEPDIR)/libglib_2_0_la-gstrfuncs.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gstrfuncs.c' object='libglib_2_0_la-gstrfuncs.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gstrfuncs.lo `test -f 'gstrfuncs.c' || echo '$(srcdir)/'`gstrfuncs.c
+
+libglib_2_0_la-gstring.lo: gstring.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gstring.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gstring.Tpo -c -o libglib_2_0_la-gstring.lo `test -f 'gstring.c' || echo '$(srcdir)/'`gstring.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gstring.Tpo $(DEPDIR)/libglib_2_0_la-gstring.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gstring.c' object='libglib_2_0_la-gstring.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gstring.lo `test -f 'gstring.c' || echo '$(srcdir)/'`gstring.c
+
+libglib_2_0_la-gstringchunk.lo: gstringchunk.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gstringchunk.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gstringchunk.Tpo -c -o libglib_2_0_la-gstringchunk.lo `test -f 'gstringchunk.c' || echo '$(srcdir)/'`gstringchunk.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gstringchunk.Tpo $(DEPDIR)/libglib_2_0_la-gstringchunk.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gstringchunk.c' object='libglib_2_0_la-gstringchunk.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gstringchunk.lo `test -f 'gstringchunk.c' || echo '$(srcdir)/'`gstringchunk.c
+
+libglib_2_0_la-gtestutils.lo: gtestutils.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gtestutils.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gtestutils.Tpo -c -o libglib_2_0_la-gtestutils.lo `test -f 'gtestutils.c' || echo '$(srcdir)/'`gtestutils.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gtestutils.Tpo $(DEPDIR)/libglib_2_0_la-gtestutils.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gtestutils.c' object='libglib_2_0_la-gtestutils.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gtestutils.lo `test -f 'gtestutils.c' || echo '$(srcdir)/'`gtestutils.c
+
+libglib_2_0_la-gthread.lo: gthread.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gthread.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gthread.Tpo -c -o libglib_2_0_la-gthread.lo `test -f 'gthread.c' || echo '$(srcdir)/'`gthread.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gthread.Tpo $(DEPDIR)/libglib_2_0_la-gthread.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gthread.c' object='libglib_2_0_la-gthread.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gthread.lo `test -f 'gthread.c' || echo '$(srcdir)/'`gthread.c
+
+libglib_2_0_la-gthreadpool.lo: gthreadpool.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gthreadpool.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gthreadpool.Tpo -c -o libglib_2_0_la-gthreadpool.lo `test -f 'gthreadpool.c' || echo '$(srcdir)/'`gthreadpool.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gthreadpool.Tpo $(DEPDIR)/libglib_2_0_la-gthreadpool.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gthreadpool.c' object='libglib_2_0_la-gthreadpool.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gthreadpool.lo `test -f 'gthreadpool.c' || echo '$(srcdir)/'`gthreadpool.c
+
+libglib_2_0_la-gtimer.lo: gtimer.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gtimer.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gtimer.Tpo -c -o libglib_2_0_la-gtimer.lo `test -f 'gtimer.c' || echo '$(srcdir)/'`gtimer.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gtimer.Tpo $(DEPDIR)/libglib_2_0_la-gtimer.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gtimer.c' object='libglib_2_0_la-gtimer.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gtimer.lo `test -f 'gtimer.c' || echo '$(srcdir)/'`gtimer.c
+
+libglib_2_0_la-gtimezone.lo: gtimezone.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gtimezone.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gtimezone.Tpo -c -o libglib_2_0_la-gtimezone.lo `test -f 'gtimezone.c' || echo '$(srcdir)/'`gtimezone.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gtimezone.Tpo $(DEPDIR)/libglib_2_0_la-gtimezone.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gtimezone.c' object='libglib_2_0_la-gtimezone.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gtimezone.lo `test -f 'gtimezone.c' || echo '$(srcdir)/'`gtimezone.c
+
+libglib_2_0_la-gtrashstack.lo: gtrashstack.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gtrashstack.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gtrashstack.Tpo -c -o libglib_2_0_la-gtrashstack.lo `test -f 'gtrashstack.c' || echo '$(srcdir)/'`gtrashstack.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gtrashstack.Tpo $(DEPDIR)/libglib_2_0_la-gtrashstack.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gtrashstack.c' object='libglib_2_0_la-gtrashstack.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gtrashstack.lo `test -f 'gtrashstack.c' || echo '$(srcdir)/'`gtrashstack.c
+
+libglib_2_0_la-gtree.lo: gtree.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gtree.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gtree.Tpo -c -o libglib_2_0_la-gtree.lo `test -f 'gtree.c' || echo '$(srcdir)/'`gtree.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gtree.Tpo $(DEPDIR)/libglib_2_0_la-gtree.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gtree.c' object='libglib_2_0_la-gtree.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gtree.lo `test -f 'gtree.c' || echo '$(srcdir)/'`gtree.c
+
+libglib_2_0_la-guniprop.lo: guniprop.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-guniprop.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-guniprop.Tpo -c -o libglib_2_0_la-guniprop.lo `test -f 'guniprop.c' || echo '$(srcdir)/'`guniprop.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-guniprop.Tpo $(DEPDIR)/libglib_2_0_la-guniprop.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='guniprop.c' object='libglib_2_0_la-guniprop.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-guniprop.lo `test -f 'guniprop.c' || echo '$(srcdir)/'`guniprop.c
+
+libglib_2_0_la-gutf8.lo: gutf8.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gutf8.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gutf8.Tpo -c -o libglib_2_0_la-gutf8.lo `test -f 'gutf8.c' || echo '$(srcdir)/'`gutf8.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gutf8.Tpo $(DEPDIR)/libglib_2_0_la-gutf8.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gutf8.c' object='libglib_2_0_la-gutf8.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gutf8.lo `test -f 'gutf8.c' || echo '$(srcdir)/'`gutf8.c
+
+libglib_2_0_la-gunibreak.lo: gunibreak.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gunibreak.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gunibreak.Tpo -c -o libglib_2_0_la-gunibreak.lo `test -f 'gunibreak.c' || echo '$(srcdir)/'`gunibreak.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gunibreak.Tpo $(DEPDIR)/libglib_2_0_la-gunibreak.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gunibreak.c' object='libglib_2_0_la-gunibreak.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gunibreak.lo `test -f 'gunibreak.c' || echo '$(srcdir)/'`gunibreak.c
+
+libglib_2_0_la-gunicollate.lo: gunicollate.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gunicollate.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gunicollate.Tpo -c -o libglib_2_0_la-gunicollate.lo `test -f 'gunicollate.c' || echo '$(srcdir)/'`gunicollate.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gunicollate.Tpo $(DEPDIR)/libglib_2_0_la-gunicollate.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gunicollate.c' object='libglib_2_0_la-gunicollate.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gunicollate.lo `test -f 'gunicollate.c' || echo '$(srcdir)/'`gunicollate.c
+
+libglib_2_0_la-gunidecomp.lo: gunidecomp.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gunidecomp.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gunidecomp.Tpo -c -o libglib_2_0_la-gunidecomp.lo `test -f 'gunidecomp.c' || echo '$(srcdir)/'`gunidecomp.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gunidecomp.Tpo $(DEPDIR)/libglib_2_0_la-gunidecomp.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gunidecomp.c' object='libglib_2_0_la-gunidecomp.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gunidecomp.lo `test -f 'gunidecomp.c' || echo '$(srcdir)/'`gunidecomp.c
+
+libglib_2_0_la-gurifuncs.lo: gurifuncs.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gurifuncs.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gurifuncs.Tpo -c -o libglib_2_0_la-gurifuncs.lo `test -f 'gurifuncs.c' || echo '$(srcdir)/'`gurifuncs.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gurifuncs.Tpo $(DEPDIR)/libglib_2_0_la-gurifuncs.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gurifuncs.c' object='libglib_2_0_la-gurifuncs.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gurifuncs.lo `test -f 'gurifuncs.c' || echo '$(srcdir)/'`gurifuncs.c
+
+libglib_2_0_la-gutils.lo: gutils.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gutils.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gutils.Tpo -c -o libglib_2_0_la-gutils.lo `test -f 'gutils.c' || echo '$(srcdir)/'`gutils.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gutils.Tpo $(DEPDIR)/libglib_2_0_la-gutils.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gutils.c' object='libglib_2_0_la-gutils.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gutils.lo `test -f 'gutils.c' || echo '$(srcdir)/'`gutils.c
+
+libglib_2_0_la-gvariant.lo: gvariant.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gvariant.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gvariant.Tpo -c -o libglib_2_0_la-gvariant.lo `test -f 'gvariant.c' || echo '$(srcdir)/'`gvariant.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gvariant.Tpo $(DEPDIR)/libglib_2_0_la-gvariant.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gvariant.c' object='libglib_2_0_la-gvariant.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gvariant.lo `test -f 'gvariant.c' || echo '$(srcdir)/'`gvariant.c
+
+libglib_2_0_la-gvariant-core.lo: gvariant-core.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gvariant-core.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gvariant-core.Tpo -c -o libglib_2_0_la-gvariant-core.lo `test -f 'gvariant-core.c' || echo '$(srcdir)/'`gvariant-core.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gvariant-core.Tpo $(DEPDIR)/libglib_2_0_la-gvariant-core.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gvariant-core.c' object='libglib_2_0_la-gvariant-core.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gvariant-core.lo `test -f 'gvariant-core.c' || echo '$(srcdir)/'`gvariant-core.c
+
+libglib_2_0_la-gvariant-parser.lo: gvariant-parser.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gvariant-parser.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gvariant-parser.Tpo -c -o libglib_2_0_la-gvariant-parser.lo `test -f 'gvariant-parser.c' || echo '$(srcdir)/'`gvariant-parser.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gvariant-parser.Tpo $(DEPDIR)/libglib_2_0_la-gvariant-parser.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gvariant-parser.c' object='libglib_2_0_la-gvariant-parser.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gvariant-parser.lo `test -f 'gvariant-parser.c' || echo '$(srcdir)/'`gvariant-parser.c
+
+libglib_2_0_la-gvariant-serialiser.lo: gvariant-serialiser.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gvariant-serialiser.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gvariant-serialiser.Tpo -c -o libglib_2_0_la-gvariant-serialiser.lo `test -f 'gvariant-serialiser.c' || echo '$(srcdir)/'`gvariant-serialiser.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gvariant-serialiser.Tpo $(DEPDIR)/libglib_2_0_la-gvariant-serialiser.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gvariant-serialiser.c' object='libglib_2_0_la-gvariant-serialiser.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gvariant-serialiser.lo `test -f 'gvariant-serialiser.c' || echo '$(srcdir)/'`gvariant-serialiser.c
+
+libglib_2_0_la-gvarianttypeinfo.lo: gvarianttypeinfo.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gvarianttypeinfo.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gvarianttypeinfo.Tpo -c -o libglib_2_0_la-gvarianttypeinfo.lo `test -f 'gvarianttypeinfo.c' || echo '$(srcdir)/'`gvarianttypeinfo.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gvarianttypeinfo.Tpo $(DEPDIR)/libglib_2_0_la-gvarianttypeinfo.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gvarianttypeinfo.c' object='libglib_2_0_la-gvarianttypeinfo.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gvarianttypeinfo.lo `test -f 'gvarianttypeinfo.c' || echo '$(srcdir)/'`gvarianttypeinfo.c
+
+libglib_2_0_la-gvarianttype.lo: gvarianttype.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gvarianttype.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gvarianttype.Tpo -c -o libglib_2_0_la-gvarianttype.lo `test -f 'gvarianttype.c' || echo '$(srcdir)/'`gvarianttype.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gvarianttype.Tpo $(DEPDIR)/libglib_2_0_la-gvarianttype.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gvarianttype.c' object='libglib_2_0_la-gvarianttype.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gvarianttype.lo `test -f 'gvarianttype.c' || echo '$(srcdir)/'`gvarianttype.c
+
+libglib_2_0_la-gversion.lo: gversion.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gversion.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gversion.Tpo -c -o libglib_2_0_la-gversion.lo `test -f 'gversion.c' || echo '$(srcdir)/'`gversion.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gversion.Tpo $(DEPDIR)/libglib_2_0_la-gversion.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gversion.c' object='libglib_2_0_la-gversion.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gversion.lo `test -f 'gversion.c' || echo '$(srcdir)/'`gversion.c
+
+libglib_2_0_la-gwakeup.lo: gwakeup.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gwakeup.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gwakeup.Tpo -c -o libglib_2_0_la-gwakeup.lo `test -f 'gwakeup.c' || echo '$(srcdir)/'`gwakeup.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gwakeup.Tpo $(DEPDIR)/libglib_2_0_la-gwakeup.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gwakeup.c' object='libglib_2_0_la-gwakeup.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gwakeup.lo `test -f 'gwakeup.c' || echo '$(srcdir)/'`gwakeup.c
+
+libglib_2_0_la-gprintf.lo: gprintf.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gprintf.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gprintf.Tpo -c -o libglib_2_0_la-gprintf.lo `test -f 'gprintf.c' || echo '$(srcdir)/'`gprintf.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gprintf.Tpo $(DEPDIR)/libglib_2_0_la-gprintf.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gprintf.c' object='libglib_2_0_la-gprintf.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gprintf.lo `test -f 'gprintf.c' || echo '$(srcdir)/'`gprintf.c
+
+libglib_2_0_la-glib-unix.lo: glib-unix.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-glib-unix.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-glib-unix.Tpo -c -o libglib_2_0_la-glib-unix.lo `test -f 'glib-unix.c' || echo '$(srcdir)/'`glib-unix.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-glib-unix.Tpo $(DEPDIR)/libglib_2_0_la-glib-unix.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='glib-unix.c' object='libglib_2_0_la-glib-unix.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-glib-unix.lo `test -f 'glib-unix.c' || echo '$(srcdir)/'`glib-unix.c
+
+libglib_2_0_la-gthread-win32.lo: gthread-win32.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gthread-win32.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gthread-win32.Tpo -c -o libglib_2_0_la-gthread-win32.lo `test -f 'gthread-win32.c' || echo '$(srcdir)/'`gthread-win32.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gthread-win32.Tpo $(DEPDIR)/libglib_2_0_la-gthread-win32.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gthread-win32.c' object='libglib_2_0_la-gthread-win32.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gthread-win32.lo `test -f 'gthread-win32.c' || echo '$(srcdir)/'`gthread-win32.c
+
+libglib_2_0_la-gthread-posix.lo: gthread-posix.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gthread-posix.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gthread-posix.Tpo -c -o libglib_2_0_la-gthread-posix.lo `test -f 'gthread-posix.c' || echo '$(srcdir)/'`gthread-posix.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gthread-posix.Tpo $(DEPDIR)/libglib_2_0_la-gthread-posix.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gthread-posix.c' object='libglib_2_0_la-gthread-posix.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gthread-posix.lo `test -f 'gthread-posix.c' || echo '$(srcdir)/'`gthread-posix.c
+
+libglib_2_0_la-giounix.lo: giounix.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-giounix.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-giounix.Tpo -c -o libglib_2_0_la-giounix.lo `test -f 'giounix.c' || echo '$(srcdir)/'`giounix.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-giounix.Tpo $(DEPDIR)/libglib_2_0_la-giounix.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='giounix.c' object='libglib_2_0_la-giounix.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-giounix.lo `test -f 'giounix.c' || echo '$(srcdir)/'`giounix.c
+
+libglib_2_0_la-giowin32.lo: giowin32.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-giowin32.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-giowin32.Tpo -c -o libglib_2_0_la-giowin32.lo `test -f 'giowin32.c' || echo '$(srcdir)/'`giowin32.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-giowin32.Tpo $(DEPDIR)/libglib_2_0_la-giowin32.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='giowin32.c' object='libglib_2_0_la-giowin32.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-giowin32.lo `test -f 'giowin32.c' || echo '$(srcdir)/'`giowin32.c
+
+libglib_2_0_la-gspawn.lo: gspawn.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gspawn.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gspawn.Tpo -c -o libglib_2_0_la-gspawn.lo `test -f 'gspawn.c' || echo '$(srcdir)/'`gspawn.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gspawn.Tpo $(DEPDIR)/libglib_2_0_la-gspawn.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gspawn.c' object='libglib_2_0_la-gspawn.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gspawn.lo `test -f 'gspawn.c' || echo '$(srcdir)/'`gspawn.c
+
+libglib_2_0_la-gspawn-win32.lo: gspawn-win32.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gspawn-win32.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gspawn-win32.Tpo -c -o libglib_2_0_la-gspawn-win32.lo `test -f 'gspawn-win32.c' || echo '$(srcdir)/'`gspawn-win32.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gspawn-win32.Tpo $(DEPDIR)/libglib_2_0_la-gspawn-win32.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gspawn-win32.c' object='libglib_2_0_la-gspawn-win32.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gspawn-win32.lo `test -f 'gspawn-win32.c' || echo '$(srcdir)/'`gspawn-win32.c
+
+libglib_2_0_la-gwin32.lo: gwin32.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gwin32.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gwin32.Tpo -c -o libglib_2_0_la-gwin32.lo `test -f 'gwin32.c' || echo '$(srcdir)/'`gwin32.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gwin32.Tpo $(DEPDIR)/libglib_2_0_la-gwin32.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gwin32.c' object='libglib_2_0_la-gwin32.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gwin32.lo `test -f 'gwin32.c' || echo '$(srcdir)/'`gwin32.c
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -1394,99 +1994,6 @@ cscopelist: cscopelist-recursive $(HEADERS) $(SOURCES) $(LISP)
 distclean-tags:
 	-rm -f TAGS ID GTAGS GRTAGS GSYMS GPATH tags
 
-check-TESTS: $(TESTS)
-	@failed=0; all=0; xfail=0; xpass=0; skip=0; \
-	srcdir=$(srcdir); export srcdir; \
-	list=' $(TESTS) '; \
-	$(am__tty_colors); \
-	if test -n "$$list"; then \
-	  for tst in $$list; do \
-	    if test -f ./$$tst; then dir=./; \
-	    elif test -f $$tst; then dir=; \
-	    else dir="$(srcdir)/"; fi; \
-	    if $(TESTS_ENVIRONMENT) $${dir}$$tst $(AM_TESTS_FD_REDIRECT); then \
-	      all=`expr $$all + 1`; \
-	      case " $(XFAIL_TESTS) " in \
-	      *[\ \	]$$tst[\ \	]*) \
-		xpass=`expr $$xpass + 1`; \
-		failed=`expr $$failed + 1`; \
-		col=$$red; res=XPASS; \
-	      ;; \
-	      *) \
-		col=$$grn; res=PASS; \
-	      ;; \
-	      esac; \
-	    elif test $$? -ne 77; then \
-	      all=`expr $$all + 1`; \
-	      case " $(XFAIL_TESTS) " in \
-	      *[\ \	]$$tst[\ \	]*) \
-		xfail=`expr $$xfail + 1`; \
-		col=$$lgn; res=XFAIL; \
-	      ;; \
-	      *) \
-		failed=`expr $$failed + 1`; \
-		col=$$red; res=FAIL; \
-	      ;; \
-	      esac; \
-	    else \
-	      skip=`expr $$skip + 1`; \
-	      col=$$blu; res=SKIP; \
-	    fi; \
-	    echo "$${col}$$res$${std}: $$tst"; \
-	  done; \
-	  if test "$$all" -eq 1; then \
-	    tests="test"; \
-	    All=""; \
-	  else \
-	    tests="tests"; \
-	    All="All "; \
-	  fi; \
-	  if test "$$failed" -eq 0; then \
-	    if test "$$xfail" -eq 0; then \
-	      banner="$$All$$all $$tests passed"; \
-	    else \
-	      if test "$$xfail" -eq 1; then failures=failure; else failures=failures; fi; \
-	      banner="$$All$$all $$tests behaved as expected ($$xfail expected $$failures)"; \
-	    fi; \
-	  else \
-	    if test "$$xpass" -eq 0; then \
-	      banner="$$failed of $$all $$tests failed"; \
-	    else \
-	      if test "$$xpass" -eq 1; then passes=pass; else passes=passes; fi; \
-	      banner="$$failed of $$all $$tests did not behave as expected ($$xpass unexpected $$passes)"; \
-	    fi; \
-	  fi; \
-	  dashes="$$banner"; \
-	  skipped=""; \
-	  if test "$$skip" -ne 0; then \
-	    if test "$$skip" -eq 1; then \
-	      skipped="($$skip test was not run)"; \
-	    else \
-	      skipped="($$skip tests were not run)"; \
-	    fi; \
-	    test `echo "$$skipped" | wc -c` -le `echo "$$banner" | wc -c` || \
-	      dashes="$$skipped"; \
-	  fi; \
-	  report=""; \
-	  if test "$$failed" -ne 0 && test -n "$(PACKAGE_BUGREPORT)"; then \
-	    report="Please report to $(PACKAGE_BUGREPORT)"; \
-	    test `echo "$$report" | wc -c` -le `echo "$$banner" | wc -c` || \
-	      dashes="$$report"; \
-	  fi; \
-	  dashes=`echo "$$dashes" | sed s/./=/g`; \
-	  if test "$$failed" -eq 0; then \
-	    col="$$grn"; \
-	  else \
-	    col="$$red"; \
-	  fi; \
-	  echo "$${col}$$dashes$${std}"; \
-	  echo "$${col}$$banner$${std}"; \
-	  test -z "$$skipped" || echo "$${col}$$skipped$${std}"; \
-	  test -z "$$report" || echo "$${col}$$report$${std}"; \
-	  echo "$${col}$$dashes$${std}"; \
-	  test "$$failed" -eq 0; \
-	else :; fi
-
 distdir: $(DISTFILES)
 	@srcdirstrip=`echo "$(srcdir)" | sed 's/[].[^$$\\*]/\\\\&/g'`; \
 	topsrcdirstrip=`echo "$(top_srcdir)" | sed 's/[].[^$$\\*]/\\\\&/g'`; \
@@ -1546,7 +2053,7 @@ distdir: $(DISTFILES)
 	  top_distdir="$(top_distdir)" distdir="$(distdir)" \
 	  dist-hook
 check-am: all-am
-	$(MAKE) $(AM_MAKEFLAGS) check-TESTS check-local
+	$(MAKE) $(AM_MAKEFLAGS) check-local
 check: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) check-recursive
 all-am: Makefile $(LTLIBRARIES) $(PROGRAMS) $(SCRIPTS) $(DATA) \
@@ -1679,8 +2186,8 @@ uninstall-am: uninstall-binPROGRAMS uninstall-binSCRIPTS \
 	tags-recursive
 
 .PHONY: $(RECURSIVE_CLEAN_TARGETS) $(RECURSIVE_TARGETS) CTAGS GTAGS \
-	all all-am all-local check check-TESTS check-am check-local \
-	clean clean-binPROGRAMS clean-generic clean-libLTLIBRARIES \
+	all all-am all-local check check-am check-local clean \
+	clean-binPROGRAMS clean-generic clean-libLTLIBRARIES \
 	clean-libtool cscopelist cscopelist-recursive ctags \
 	ctags-recursive dist-hook distclean distclean-compile \
 	distclean-generic distclean-libtool distclean-tags distdir dvi \
@@ -1795,9 +2302,6 @@ glibconfig-stamp: ../config.status
 	  $(SHELL) ./config.status glib/glibconfig.h
 	@touch glibconfig-stamp
 
-glib.def: glib.symbols
-	$(AM_V_GEN) (echo EXPORTS; $(CPP) -P -DG_OS_WIN32 - <$(srcdir)/glib.symbols | sed -e '/^$$/d' -e 's/^/	/') > $(builddir)/glib.def
-
 install-ms-lib:
 	$(install_ms_lib_cmd)
 
@@ -1810,22 +2314,14 @@ glib-public-headers.txt: Makefile
 
 all-local: glib-public-headers.txt
 
-install-data-local: install-ms-lib install-def-file
+install-data-local: install-ms-lib
 	@if test -f $(glibincludedir)/glist.h ; then					\
 	  echo "*** Old headers found in $(glibincludedir). You should remove the" ;	\
 	  echo "*** contents of this directory and type 'make install' again." ;	\
 	  false ;									\
 	fi
 
-uninstall-local: uninstall-ms-lib uninstall-def-file uninstall-gdb
-
-@OS_WIN32_AND_DLL_COMPILATION_TRUE@install-def-file:
-@OS_WIN32_AND_DLL_COMPILATION_TRUE@	$(INSTALL) $(builddir)/glib.def $(DESTDIR)$(libdir)/glib-2.0.def
-
-@OS_WIN32_AND_DLL_COMPILATION_TRUE@uninstall-def-file:
-@OS_WIN32_AND_DLL_COMPILATION_TRUE@	-rm $(DESTDIR)$(libdir)/glib-2.0.def
-@OS_WIN32_AND_DLL_COMPILATION_FALSE@install-def-file:
-@OS_WIN32_AND_DLL_COMPILATION_FALSE@uninstall-def-file:
+uninstall-local: uninstall-ms-lib uninstall-gdb
 
 @ENABLE_DTRACE_TRUE@glib_probes.h: glib_probes.d Makefile
 @ENABLE_DTRACE_TRUE@	$(AM_V_GEN) $(DTRACE) -C -h -s $< -o $@.tmp

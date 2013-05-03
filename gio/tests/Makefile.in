@@ -55,8 +55,7 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
-	$(top_srcdir)/Makefile.decl $(top_srcdir)/depcomp \
-	$(top_srcdir)/mkinstalldirs
+	$(top_srcdir)/Makefile.decl $(top_srcdir)/depcomp
 noinst_PROGRAMS = $(am__EXEEXT_6) $(am__EXEEXT_8)
 @HAVE_DBUS_DAEMON_TRUE@am__append_1 = \
 @HAVE_DBUS_DAEMON_TRUE@	actions 		\
@@ -77,8 +76,9 @@ noinst_PROGRAMS = $(am__EXEEXT_6) $(am__EXEEXT_8)
 
 @OS_UNIX_TRUE@am__append_2 = gdbus-close-pending \
 @OS_UNIX_TRUE@	gdbus-connection-flush gdbus-peer \
-@OS_UNIX_TRUE@	gdbus-exit-on-close gdbus-non-socket appinfo \
-@OS_UNIX_TRUE@	contenttype mimeapps file $(NULL) live-g-file \
+@OS_UNIX_TRUE@	gdbus-exit-on-close gdbus-non-socket \
+@OS_UNIX_TRUE@	gdbus-peer-object-manager appinfo contenttype \
+@OS_UNIX_TRUE@	mimeapps file $(NULL) live-g-file \
 @OS_UNIX_TRUE@	desktop-app-info unix-fd unix-streams \
 @OS_UNIX_TRUE@	gapplication basic-application \
 @OS_UNIX_TRUE@	gdbus-test-codegen $(NULL)
@@ -86,14 +86,17 @@ noinst_PROGRAMS = $(am__EXEEXT_6) $(am__EXEEXT_8)
 @OS_UNIX_TRUE@	gdbus-example-unix-fd-client 		\
 @OS_UNIX_TRUE@	gdbus-example-objectmanager-server 	\
 @OS_UNIX_TRUE@	gdbus-example-objectmanager-client 	\
+@OS_UNIX_TRUE@	gdbus-test-fixture			\
+@OS_UNIX_TRUE@	appinfo-test				\
 @OS_UNIX_TRUE@	$(NULL)
 
 @OS_WIN32_TRUE@am__append_4 = win32-streams
-@HAVE_DBUS1_TRUE@am__append_5 = gdbus-serialization gdbus-auth
+@HAVE_DBUS1_TRUE@am__append_5 = gdbus-serialization
 @OS_UNIX_TRUE@am__append_6 = gdbus-test-codegen-generated.c gdbus-test-codegen-generated.h
 subdir = gio/tests
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/m4macros/gtk-doc.m4 \
+am__aclocal_m4_deps = $(top_srcdir)/m4macros/attributes.m4 \
+	$(top_srcdir)/m4macros/gtk-doc.m4 \
 	$(top_srcdir)/m4macros/libtool.m4 \
 	$(top_srcdir)/m4macros/ltoptions.m4 \
 	$(top_srcdir)/m4macros/ltsugar.m4 \
@@ -106,12 +109,12 @@ am__aclocal_m4_deps = $(top_srcdir)/m4macros/gtk-doc.m4 \
 	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
-mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 LTLIBRARIES = $(noinst_LTLIBRARIES)
-libresourceplugin_la_DEPENDENCIES = $(progs_ldadd)
+libresourceplugin_la_DEPENDENCIES = $(LDADD)
 am_libresourceplugin_la_OBJECTS = resourceplugin.lo \
 	plugin_resources.lo
 libresourceplugin_la_OBJECTS = $(am_libresourceplugin_la_OBJECTS)
@@ -141,16 +144,16 @@ am__EXEEXT_1 =
 @OS_UNIX_TRUE@am__EXEEXT_3 = gdbus-close-pending$(EXEEXT) \
 @OS_UNIX_TRUE@	gdbus-connection-flush$(EXEEXT) \
 @OS_UNIX_TRUE@	gdbus-peer$(EXEEXT) gdbus-exit-on-close$(EXEEXT) \
-@OS_UNIX_TRUE@	gdbus-non-socket$(EXEEXT) appinfo$(EXEEXT) \
-@OS_UNIX_TRUE@	contenttype$(EXEEXT) mimeapps$(EXEEXT) \
-@OS_UNIX_TRUE@	file$(EXEEXT) $(am__EXEEXT_1) \
+@OS_UNIX_TRUE@	gdbus-non-socket$(EXEEXT) \
+@OS_UNIX_TRUE@	gdbus-peer-object-manager$(EXEEXT) \
+@OS_UNIX_TRUE@	appinfo$(EXEEXT) contenttype$(EXEEXT) \
+@OS_UNIX_TRUE@	mimeapps$(EXEEXT) file$(EXEEXT) $(am__EXEEXT_1) \
 @OS_UNIX_TRUE@	live-g-file$(EXEEXT) desktop-app-info$(EXEEXT) \
 @OS_UNIX_TRUE@	unix-fd$(EXEEXT) unix-streams$(EXEEXT) \
 @OS_UNIX_TRUE@	gapplication$(EXEEXT) basic-application$(EXEEXT) \
 @OS_UNIX_TRUE@	gdbus-test-codegen$(EXEEXT) $(am__EXEEXT_1)
 @OS_WIN32_TRUE@am__EXEEXT_4 = win32-streams$(EXEEXT)
-@HAVE_DBUS1_TRUE@am__EXEEXT_5 = gdbus-serialization$(EXEEXT) \
-@HAVE_DBUS1_TRUE@	gdbus-auth$(EXEEXT)
+@HAVE_DBUS1_TRUE@am__EXEEXT_5 = gdbus-serialization$(EXEEXT)
 am__EXEEXT_6 = io-stream$(EXEEXT) memory-input-stream$(EXEEXT) \
 	memory-output-stream$(EXEEXT) readwrite$(EXEEXT) \
 	g-file$(EXEEXT) g-file-info$(EXEEXT) converter-stream$(EXEEXT) \
@@ -165,13 +168,16 @@ am__EXEEXT_6 = io-stream$(EXEEXT) memory-input-stream$(EXEEXT) \
 	socket$(EXEEXT) pollable$(EXEEXT) tls-certificate$(EXEEXT) \
 	tls-interaction$(EXEEXT) cancellable$(EXEEXT) vfs$(EXEEXT) \
 	network-monitor$(EXEEXT) fileattributematcher$(EXEEXT) \
-	resources$(EXEEXT) proxy-test$(EXEEXT) inet-address$(EXEEXT) \
-	permission$(EXEEXT) $(am__EXEEXT_1) $(am__EXEEXT_2) \
-	$(am__EXEEXT_3) $(am__EXEEXT_4) $(am__EXEEXT_5)
+	resources$(EXEEXT) proxy-test$(EXEEXT) simple-proxy$(EXEEXT) \
+	inet-address$(EXEEXT) permission$(EXEEXT) task$(EXEEXT) \
+	credentials$(EXEEXT) $(am__EXEEXT_1) $(am__EXEEXT_2) \
+	$(am__EXEEXT_3) $(am__EXEEXT_4) $(am__EXEEXT_5) \
+	gdbus-auth$(EXEEXT)
 @OS_UNIX_TRUE@am__EXEEXT_7 = gdbus-example-unix-fd-client$(EXEEXT) \
 @OS_UNIX_TRUE@	gdbus-example-objectmanager-server$(EXEEXT) \
 @OS_UNIX_TRUE@	gdbus-example-objectmanager-client$(EXEEXT) \
-@OS_UNIX_TRUE@	$(am__EXEEXT_1)
+@OS_UNIX_TRUE@	gdbus-test-fixture$(EXEEXT) \
+@OS_UNIX_TRUE@	appinfo-test$(EXEEXT) $(am__EXEEXT_1)
 am__EXEEXT_8 = resolver$(EXEEXT) socket-server$(EXEEXT) \
 	socket-client$(EXEEXT) echo-server$(EXEEXT) httpd$(EXEEXT) \
 	send-data$(EXEEXT) filter-cat$(EXEEXT) \
@@ -181,284 +187,583 @@ am__EXEEXT_8 = resolver$(EXEEXT) socket-server$(EXEEXT) \
 	gdbus-example-server$(EXEEXT) gdbus-example-subtree$(EXEEXT) \
 	gdbus-example-peer$(EXEEXT) \
 	gdbus-example-proxy-subclass$(EXEEXT) \
-	gdbus-connection-flush-helper$(EXEEXT) appinfo-test$(EXEEXT) \
-	proxy$(EXEEXT) gapplication-example-open$(EXEEXT) \
+	gdbus-connection-flush-helper$(EXEEXT) proxy$(EXEEXT) \
+	gapplication-example-open$(EXEEXT) \
 	gapplication-example-cmdline$(EXEEXT) \
 	gapplication-example-cmdline2$(EXEEXT) \
 	gapplication-example-cmdline3$(EXEEXT) \
 	gapplication-example-actions$(EXEEXT) \
 	gapplication-example-dbushooks$(EXEEXT) gdbus-daemon$(EXEEXT) \
-	$(am__EXEEXT_1) $(am__EXEEXT_7)
+	gdbus-testserver$(EXEEXT) $(am__EXEEXT_1) $(am__EXEEXT_7)
 PROGRAMS = $(noinst_PROGRAMS)
 am_actions_OBJECTS = actions.$(OBJEXT) gdbus-sessionbus.$(OBJEXT)
 actions_OBJECTS = $(am_actions_OBJECTS)
-actions_DEPENDENCIES = $(progs_ldadd)
-am_appinfo_OBJECTS = appinfo.$(OBJEXT)
-appinfo_OBJECTS = $(am_appinfo_OBJECTS)
-appinfo_DEPENDENCIES = $(progs_ldadd)
-am_appinfo_test_OBJECTS = appinfo-test.$(OBJEXT)
-appinfo_test_OBJECTS = $(am_appinfo_test_OBJECTS)
-appinfo_test_DEPENDENCIES = $(progs_ldadd)
-am_async_close_output_stream_OBJECTS =  \
-	async-close-output-stream.$(OBJEXT)
+actions_LDADD = $(LDADD)
+actions_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+appinfo_SOURCES = appinfo.c
+appinfo_OBJECTS = appinfo.$(OBJEXT)
+appinfo_LDADD = $(LDADD)
+appinfo_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+appinfo_test_SOURCES = appinfo-test.c
+appinfo_test_OBJECTS = appinfo-test.$(OBJEXT)
+appinfo_test_LDADD = $(LDADD)
+appinfo_test_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+async_close_output_stream_SOURCES = async-close-output-stream.c
 async_close_output_stream_OBJECTS =  \
-	$(am_async_close_output_stream_OBJECTS)
-async_close_output_stream_DEPENDENCIES = $(progs_ldadd)
+	async-close-output-stream.$(OBJEXT)
+async_close_output_stream_LDADD = $(LDADD)
+async_close_output_stream_DEPENDENCIES =  \
+	$(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
 basic_application_SOURCES = basic-application.c
 basic_application_OBJECTS = basic-application.$(OBJEXT)
-basic_application_DEPENDENCIES = $(progs_ldadd)
-am_buffered_input_stream_OBJECTS = buffered-input-stream.$(OBJEXT)
-buffered_input_stream_OBJECTS = $(am_buffered_input_stream_OBJECTS)
-buffered_input_stream_DEPENDENCIES = $(progs_ldadd)
-am_buffered_output_stream_OBJECTS = buffered-output-stream.$(OBJEXT)
-buffered_output_stream_OBJECTS = $(am_buffered_output_stream_OBJECTS)
-buffered_output_stream_DEPENDENCIES = $(progs_ldadd)
+basic_application_LDADD = $(LDADD)
+basic_application_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+buffered_input_stream_SOURCES = buffered-input-stream.c
+buffered_input_stream_OBJECTS = buffered-input-stream.$(OBJEXT)
+buffered_input_stream_LDADD = $(LDADD)
+buffered_input_stream_DEPENDENCIES =  \
+	$(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+buffered_output_stream_SOURCES = buffered-output-stream.c
+buffered_output_stream_OBJECTS = buffered-output-stream.$(OBJEXT)
+buffered_output_stream_LDADD = $(LDADD)
+buffered_output_stream_DEPENDENCIES =  \
+	$(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
 cancellable_SOURCES = cancellable.c
 cancellable_OBJECTS = cancellable.$(OBJEXT)
-cancellable_DEPENDENCIES = $(progs_ldadd)
-am_contenttype_OBJECTS = contenttype.$(OBJEXT)
-contenttype_OBJECTS = $(am_contenttype_OBJECTS)
-contenttype_DEPENDENCIES = $(progs_ldadd)
-am_contexts_OBJECTS = contexts.$(OBJEXT)
-contexts_OBJECTS = $(am_contexts_OBJECTS)
-contexts_DEPENDENCIES = $(progs_ldadd) \
+cancellable_LDADD = $(LDADD)
+cancellable_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+contenttype_SOURCES = contenttype.c
+contenttype_OBJECTS = contenttype.$(OBJEXT)
+contenttype_LDADD = $(LDADD)
+contenttype_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+contexts_SOURCES = contexts.c
+contexts_OBJECTS = contexts.$(OBJEXT)
+contexts_DEPENDENCIES = $(LDADD) \
 	$(top_builddir)/gthread/libgthread-2.0.la
-am_converter_stream_OBJECTS = converter-stream.$(OBJEXT)
-converter_stream_OBJECTS = $(am_converter_stream_OBJECTS)
-converter_stream_DEPENDENCIES = $(progs_ldadd)
-am_data_input_stream_OBJECTS = data-input-stream.$(OBJEXT)
-data_input_stream_OBJECTS = $(am_data_input_stream_OBJECTS)
-data_input_stream_DEPENDENCIES = $(progs_ldadd)
-am_data_output_stream_OBJECTS = data-output-stream.$(OBJEXT)
-data_output_stream_OBJECTS = $(am_data_output_stream_OBJECTS)
-data_output_stream_DEPENDENCIES = $(progs_ldadd)
-am_desktop_app_info_OBJECTS = desktop-app-info.$(OBJEXT)
-desktop_app_info_OBJECTS = $(am_desktop_app_info_OBJECTS)
-desktop_app_info_DEPENDENCIES = $(progs_ldadd)
-am_echo_server_OBJECTS = echo-server.$(OBJEXT)
-echo_server_OBJECTS = $(am_echo_server_OBJECTS)
-echo_server_DEPENDENCIES = $(progs_ldadd) \
+converter_stream_SOURCES = converter-stream.c
+converter_stream_OBJECTS = converter-stream.$(OBJEXT)
+converter_stream_LDADD = $(LDADD)
+converter_stream_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+credentials_SOURCES = credentials.c
+credentials_OBJECTS = credentials.$(OBJEXT)
+credentials_LDADD = $(LDADD)
+credentials_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+data_input_stream_SOURCES = data-input-stream.c
+data_input_stream_OBJECTS = data-input-stream.$(OBJEXT)
+data_input_stream_LDADD = $(LDADD)
+data_input_stream_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+data_output_stream_SOURCES = data-output-stream.c
+data_output_stream_OBJECTS = data-output-stream.$(OBJEXT)
+data_output_stream_LDADD = $(LDADD)
+data_output_stream_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+desktop_app_info_SOURCES = desktop-app-info.c
+desktop_app_info_OBJECTS = desktop-app-info.$(OBJEXT)
+desktop_app_info_LDADD = $(LDADD)
+desktop_app_info_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+echo_server_SOURCES = echo-server.c
+echo_server_OBJECTS = echo-server.$(OBJEXT)
+echo_server_DEPENDENCIES = $(LDADD) \
 	$(top_builddir)/gthread/libgthread-2.0.la
-am_file_OBJECTS = file.$(OBJEXT)
-file_OBJECTS = $(am_file_OBJECTS)
-file_DEPENDENCIES = $(progs_ldadd)
-am_fileattributematcher_OBJECTS = fileattributematcher.$(OBJEXT)
-fileattributematcher_OBJECTS = $(am_fileattributematcher_OBJECTS)
-fileattributematcher_DEPENDENCIES = $(progs_ldadd)
-am_filter_cat_OBJECTS = filter-cat.$(OBJEXT)
-filter_cat_OBJECTS = $(am_filter_cat_OBJECTS)
-filter_cat_DEPENDENCIES = $(progs_ldadd)
-am_filter_streams_OBJECTS = filter-streams.$(OBJEXT)
-filter_streams_OBJECTS = $(am_filter_streams_OBJECTS)
-filter_streams_DEPENDENCIES = $(progs_ldadd)
-am_g_file_OBJECTS = g-file.$(OBJEXT)
-g_file_OBJECTS = $(am_g_file_OBJECTS)
-g_file_DEPENDENCIES = $(progs_ldadd)
-am_g_file_info_OBJECTS = g-file-info.$(OBJEXT)
-g_file_info_OBJECTS = $(am_g_file_info_OBJECTS)
-g_file_info_DEPENDENCIES = $(progs_ldadd)
-am_g_icon_OBJECTS = g-icon.$(OBJEXT)
-g_icon_OBJECTS = $(am_g_icon_OBJECTS)
-g_icon_DEPENDENCIES = $(progs_ldadd)
+file_SOURCES = file.c
+file_OBJECTS = file.$(OBJEXT)
+file_LDADD = $(LDADD)
+file_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+fileattributematcher_SOURCES = fileattributematcher.c
+fileattributematcher_OBJECTS = fileattributematcher.$(OBJEXT)
+fileattributematcher_LDADD = $(LDADD)
+fileattributematcher_DEPENDENCIES =  \
+	$(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+filter_cat_SOURCES = filter-cat.c
+filter_cat_OBJECTS = filter-cat.$(OBJEXT)
+filter_cat_LDADD = $(LDADD)
+filter_cat_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+filter_streams_SOURCES = filter-streams.c
+filter_streams_OBJECTS = filter-streams.$(OBJEXT)
+filter_streams_LDADD = $(LDADD)
+filter_streams_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+g_file_SOURCES = g-file.c
+g_file_OBJECTS = g-file.$(OBJEXT)
+g_file_LDADD = $(LDADD)
+g_file_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+g_file_info_SOURCES = g-file-info.c
+g_file_info_OBJECTS = g-file-info.$(OBJEXT)
+g_file_info_LDADD = $(LDADD)
+g_file_info_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+g_icon_SOURCES = g-icon.c
+g_icon_OBJECTS = g-icon.$(OBJEXT)
+g_icon_LDADD = $(LDADD)
+g_icon_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
 am_gapplication_OBJECTS = gapplication.$(OBJEXT) \
 	gdbus-sessionbus.$(OBJEXT) gdbus-tests.$(OBJEXT)
 gapplication_OBJECTS = $(am_gapplication_OBJECTS)
-gapplication_DEPENDENCIES = $(progs_ldadd)
-am_gapplication_example_actions_OBJECTS =  \
-	gapplication-example-actions.$(OBJEXT)
+gapplication_LDADD = $(LDADD)
+gapplication_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+gapplication_example_actions_SOURCES = gapplication-example-actions.c
 gapplication_example_actions_OBJECTS =  \
-	$(am_gapplication_example_actions_OBJECTS)
-gapplication_example_actions_DEPENDENCIES = $(progs_ldadd)
-am_gapplication_example_cmdline_OBJECTS =  \
-	gapplication-example-cmdline.$(OBJEXT)
+	gapplication-example-actions.$(OBJEXT)
+gapplication_example_actions_LDADD = $(LDADD)
+gapplication_example_actions_DEPENDENCIES =  \
+	$(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+gapplication_example_cmdline_SOURCES = gapplication-example-cmdline.c
 gapplication_example_cmdline_OBJECTS =  \
-	$(am_gapplication_example_cmdline_OBJECTS)
-gapplication_example_cmdline_DEPENDENCIES = $(progs_ldadd)
-am_gapplication_example_cmdline2_OBJECTS =  \
-	gapplication-example-cmdline2.$(OBJEXT)
+	gapplication-example-cmdline.$(OBJEXT)
+gapplication_example_cmdline_LDADD = $(LDADD)
+gapplication_example_cmdline_DEPENDENCIES =  \
+	$(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+gapplication_example_cmdline2_SOURCES =  \
+	gapplication-example-cmdline2.c
 gapplication_example_cmdline2_OBJECTS =  \
-	$(am_gapplication_example_cmdline2_OBJECTS)
-gapplication_example_cmdline2_DEPENDENCIES = $(progs_ldadd)
-am_gapplication_example_cmdline3_OBJECTS =  \
-	gapplication-example-cmdline3.$(OBJEXT)
+	gapplication-example-cmdline2.$(OBJEXT)
+gapplication_example_cmdline2_LDADD = $(LDADD)
+gapplication_example_cmdline2_DEPENDENCIES =  \
+	$(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+gapplication_example_cmdline3_SOURCES =  \
+	gapplication-example-cmdline3.c
 gapplication_example_cmdline3_OBJECTS =  \
-	$(am_gapplication_example_cmdline3_OBJECTS)
-gapplication_example_cmdline3_DEPENDENCIES = $(progs_ldadd)
-am_gapplication_example_dbushooks_OBJECTS =  \
-	gapplication-example-dbushooks.$(OBJEXT)
+	gapplication-example-cmdline3.$(OBJEXT)
+gapplication_example_cmdline3_LDADD = $(LDADD)
+gapplication_example_cmdline3_DEPENDENCIES =  \
+	$(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+gapplication_example_dbushooks_SOURCES =  \
+	gapplication-example-dbushooks.c
 gapplication_example_dbushooks_OBJECTS =  \
-	$(am_gapplication_example_dbushooks_OBJECTS)
-gapplication_example_dbushooks_DEPENDENCIES = $(progs_ldadd)
-am_gapplication_example_open_OBJECTS =  \
-	gapplication-example-open.$(OBJEXT)
+	gapplication-example-dbushooks.$(OBJEXT)
+gapplication_example_dbushooks_LDADD = $(LDADD)
+gapplication_example_dbushooks_DEPENDENCIES =  \
+	$(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+gapplication_example_open_SOURCES = gapplication-example-open.c
 gapplication_example_open_OBJECTS =  \
-	$(am_gapplication_example_open_OBJECTS)
-gapplication_example_open_DEPENDENCIES = $(progs_ldadd)
-am_gdbus_addresses_OBJECTS = gdbus-addresses.$(OBJEXT)
-gdbus_addresses_OBJECTS = $(am_gdbus_addresses_OBJECTS)
-gdbus_addresses_DEPENDENCIES = $(progs_ldadd)
-am__gdbus_auth_SOURCES_DIST = gdbus-auth.c gdbus-sessionbus.c \
-	gdbus-sessionbus.h gdbus-tests.h gdbus-tests.c
-@HAVE_DBUS1_TRUE@am_gdbus_auth_OBJECTS =  \
-@HAVE_DBUS1_TRUE@	gdbus_auth-gdbus-auth.$(OBJEXT) \
-@HAVE_DBUS1_TRUE@	gdbus_auth-gdbus-sessionbus.$(OBJEXT) \
-@HAVE_DBUS1_TRUE@	gdbus_auth-gdbus-tests.$(OBJEXT)
+	gapplication-example-open.$(OBJEXT)
+gapplication_example_open_LDADD = $(LDADD)
+gapplication_example_open_DEPENDENCIES =  \
+	$(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+gdbus_addresses_SOURCES = gdbus-addresses.c
+gdbus_addresses_OBJECTS = gdbus-addresses.$(OBJEXT)
+gdbus_addresses_LDADD = $(LDADD)
+gdbus_addresses_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+am_gdbus_auth_OBJECTS = gdbus-auth.$(OBJEXT) \
+	gdbus-sessionbus.$(OBJEXT) gdbus-tests.$(OBJEXT)
 gdbus_auth_OBJECTS = $(am_gdbus_auth_OBJECTS)
-am__DEPENDENCIES_1 =
-@HAVE_DBUS1_TRUE@gdbus_auth_DEPENDENCIES = $(progs_ldadd) \
-@HAVE_DBUS1_TRUE@	$(am__DEPENDENCIES_1)
-gdbus_auth_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(gdbus_auth_CFLAGS) \
-	$(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
+gdbus_auth_DEPENDENCIES = $(LDADD)
 am_gdbus_bz627724_OBJECTS = gdbus-bz627724.$(OBJEXT) \
 	gdbus-sessionbus.$(OBJEXT) gdbus-tests.$(OBJEXT)
 gdbus_bz627724_OBJECTS = $(am_gdbus_bz627724_OBJECTS)
-gdbus_bz627724_DEPENDENCIES = $(progs_ldadd)
+gdbus_bz627724_LDADD = $(LDADD)
+gdbus_bz627724_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
 am_gdbus_close_pending_OBJECTS = gdbus-close-pending.$(OBJEXT) \
 	gdbus-sessionbus.$(OBJEXT) gdbus-tests.$(OBJEXT)
 gdbus_close_pending_OBJECTS = $(am_gdbus_close_pending_OBJECTS)
-gdbus_close_pending_DEPENDENCIES = $(progs_ldadd)
+gdbus_close_pending_LDADD = $(LDADD)
+gdbus_close_pending_DEPENDENCIES =  \
+	$(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
 am_gdbus_connection_OBJECTS = gdbus-connection.$(OBJEXT) \
 	gdbus-sessionbus.$(OBJEXT) gdbus-tests.$(OBJEXT)
 gdbus_connection_OBJECTS = $(am_gdbus_connection_OBJECTS)
-gdbus_connection_DEPENDENCIES = $(progs_ldadd)
+gdbus_connection_LDADD = $(LDADD)
+gdbus_connection_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
 am__objects_1 =
 am_gdbus_connection_flush_OBJECTS = gdbus-connection-flush.$(OBJEXT) \
 	test-io-stream.$(OBJEXT) test-pipe-unix.$(OBJEXT) \
 	$(am__objects_1)
 gdbus_connection_flush_OBJECTS = $(am_gdbus_connection_flush_OBJECTS)
-gdbus_connection_flush_DEPENDENCIES = $(progs_ldadd)
-am_gdbus_connection_flush_helper_OBJECTS =  \
-	gdbus-connection-flush-helper.$(OBJEXT)
+gdbus_connection_flush_LDADD = $(LDADD)
+gdbus_connection_flush_DEPENDENCIES =  \
+	$(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+gdbus_connection_flush_helper_SOURCES =  \
+	gdbus-connection-flush-helper.c
 gdbus_connection_flush_helper_OBJECTS =  \
-	$(am_gdbus_connection_flush_helper_OBJECTS)
-gdbus_connection_flush_helper_DEPENDENCIES = $(progs_ldadd)
+	gdbus-connection-flush-helper.$(OBJEXT)
+gdbus_connection_flush_helper_LDADD = $(LDADD)
+gdbus_connection_flush_helper_DEPENDENCIES =  \
+	$(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
 am_gdbus_connection_loss_OBJECTS = gdbus-connection-loss.$(OBJEXT) \
 	gdbus-sessionbus.$(OBJEXT) gdbus-tests.$(OBJEXT)
 gdbus_connection_loss_OBJECTS = $(am_gdbus_connection_loss_OBJECTS)
-gdbus_connection_loss_DEPENDENCIES = $(progs_ldadd)
+gdbus_connection_loss_LDADD = $(LDADD)
+gdbus_connection_loss_DEPENDENCIES =  \
+	$(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
 am_gdbus_connection_slow_OBJECTS = gdbus-connection-slow.$(OBJEXT) \
 	gdbus-sessionbus.$(OBJEXT) gdbus-tests.$(OBJEXT)
 gdbus_connection_slow_OBJECTS = $(am_gdbus_connection_slow_OBJECTS)
-gdbus_connection_slow_DEPENDENCIES = $(progs_ldadd)
+gdbus_connection_slow_LDADD = $(LDADD)
+gdbus_connection_slow_DEPENDENCIES =  \
+	$(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
 am_gdbus_daemon_OBJECTS = gdbus-daemon.$(OBJEXT) gdbusdaemon.$(OBJEXT) \
 	gdbus-daemon-generated.$(OBJEXT)
 gdbus_daemon_OBJECTS = $(am_gdbus_daemon_OBJECTS)
-gdbus_daemon_DEPENDENCIES = $(progs_ldadd)
+gdbus_daemon_LDADD = $(LDADD)
+gdbus_daemon_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
 am_gdbus_error_OBJECTS = gdbus-error.$(OBJEXT) \
 	gdbus-sessionbus.$(OBJEXT) gdbus-tests.$(OBJEXT)
 gdbus_error_OBJECTS = $(am_gdbus_error_OBJECTS)
-gdbus_error_DEPENDENCIES = $(progs_ldadd)
-am_gdbus_example_export_OBJECTS = gdbus-example-export.$(OBJEXT)
-gdbus_example_export_OBJECTS = $(am_gdbus_example_export_OBJECTS)
-gdbus_example_export_DEPENDENCIES = $(progs_ldadd)
-am__gdbus_example_objectmanager_client_SOURCES_DIST =  \
+gdbus_error_LDADD = $(LDADD)
+gdbus_error_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+gdbus_example_export_SOURCES = gdbus-example-export.c
+gdbus_example_export_OBJECTS = gdbus-example-export.$(OBJEXT)
+gdbus_example_export_LDADD = $(LDADD)
+gdbus_example_export_DEPENDENCIES =  \
+	$(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+gdbus_example_objectmanager_client_SOURCES =  \
 	gdbus-example-objectmanager-client.c
-@OS_UNIX_TRUE@am_gdbus_example_objectmanager_client_OBJECTS = gdbus_example_objectmanager_client-gdbus-example-objectmanager-client.$(OBJEXT)
-gdbus_example_objectmanager_client_OBJECTS =  \
-	$(am_gdbus_example_objectmanager_client_OBJECTS)
+gdbus_example_objectmanager_client_OBJECTS = gdbus_example_objectmanager_client-gdbus-example-objectmanager-client.$(OBJEXT)
 @OS_UNIX_TRUE@gdbus_example_objectmanager_client_DEPENDENCIES = $(top_builddir)/gio/tests/gdbus-object-manager-example/libgdbus-example-objectmanager.la \
-@OS_UNIX_TRUE@	$(progs_ldadd)
+@OS_UNIX_TRUE@	$(LDADD)
 gdbus_example_objectmanager_client_LINK = $(LIBTOOL) $(AM_V_lt) \
 	--tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link \
 	$(CCLD) $(gdbus_example_objectmanager_client_CFLAGS) $(CFLAGS) \
 	$(AM_LDFLAGS) $(LDFLAGS) -o $@
-am__gdbus_example_objectmanager_server_SOURCES_DIST =  \
+gdbus_example_objectmanager_server_SOURCES =  \
 	gdbus-example-objectmanager-server.c
-@OS_UNIX_TRUE@am_gdbus_example_objectmanager_server_OBJECTS = gdbus_example_objectmanager_server-gdbus-example-objectmanager-server.$(OBJEXT)
-gdbus_example_objectmanager_server_OBJECTS =  \
-	$(am_gdbus_example_objectmanager_server_OBJECTS)
+gdbus_example_objectmanager_server_OBJECTS = gdbus_example_objectmanager_server-gdbus-example-objectmanager-server.$(OBJEXT)
 @OS_UNIX_TRUE@gdbus_example_objectmanager_server_DEPENDENCIES = $(top_builddir)/gio/tests/gdbus-object-manager-example/libgdbus-example-objectmanager.la \
-@OS_UNIX_TRUE@	$(progs_ldadd)
+@OS_UNIX_TRUE@	$(LDADD)
 gdbus_example_objectmanager_server_LINK = $(LIBTOOL) $(AM_V_lt) \
 	--tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link \
 	$(CCLD) $(gdbus_example_objectmanager_server_CFLAGS) $(CFLAGS) \
 	$(AM_LDFLAGS) $(LDFLAGS) -o $@
-am_gdbus_example_own_name_OBJECTS = gdbus-example-own-name.$(OBJEXT)
-gdbus_example_own_name_OBJECTS = $(am_gdbus_example_own_name_OBJECTS)
-gdbus_example_own_name_DEPENDENCIES = $(progs_ldadd)
-am_gdbus_example_peer_OBJECTS = gdbus-example-peer.$(OBJEXT)
-gdbus_example_peer_OBJECTS = $(am_gdbus_example_peer_OBJECTS)
-gdbus_example_peer_DEPENDENCIES = $(progs_ldadd)
-am_gdbus_example_proxy_subclass_OBJECTS =  \
-	gdbus-example-proxy-subclass.$(OBJEXT)
+gdbus_example_own_name_SOURCES = gdbus-example-own-name.c
+gdbus_example_own_name_OBJECTS = gdbus-example-own-name.$(OBJEXT)
+gdbus_example_own_name_LDADD = $(LDADD)
+gdbus_example_own_name_DEPENDENCIES =  \
+	$(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+gdbus_example_peer_SOURCES = gdbus-example-peer.c
+gdbus_example_peer_OBJECTS = gdbus-example-peer.$(OBJEXT)
+gdbus_example_peer_LDADD = $(LDADD)
+gdbus_example_peer_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+gdbus_example_proxy_subclass_SOURCES = gdbus-example-proxy-subclass.c
 gdbus_example_proxy_subclass_OBJECTS =  \
-	$(am_gdbus_example_proxy_subclass_OBJECTS)
-gdbus_example_proxy_subclass_DEPENDENCIES = $(progs_ldadd)
-am_gdbus_example_server_OBJECTS = gdbus-example-server.$(OBJEXT)
-gdbus_example_server_OBJECTS = $(am_gdbus_example_server_OBJECTS)
-gdbus_example_server_DEPENDENCIES = $(progs_ldadd)
-am_gdbus_example_subtree_OBJECTS = gdbus-example-subtree.$(OBJEXT)
-gdbus_example_subtree_OBJECTS = $(am_gdbus_example_subtree_OBJECTS)
-gdbus_example_subtree_DEPENDENCIES = $(progs_ldadd)
-am_gdbus_example_unix_fd_client_OBJECTS =  \
-	gdbus-example-unix-fd-client.$(OBJEXT)
+	gdbus-example-proxy-subclass.$(OBJEXT)
+gdbus_example_proxy_subclass_LDADD = $(LDADD)
+gdbus_example_proxy_subclass_DEPENDENCIES =  \
+	$(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+gdbus_example_server_SOURCES = gdbus-example-server.c
+gdbus_example_server_OBJECTS = gdbus-example-server.$(OBJEXT)
+gdbus_example_server_LDADD = $(LDADD)
+gdbus_example_server_DEPENDENCIES =  \
+	$(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+gdbus_example_subtree_SOURCES = gdbus-example-subtree.c
+gdbus_example_subtree_OBJECTS = gdbus-example-subtree.$(OBJEXT)
+gdbus_example_subtree_LDADD = $(LDADD)
+gdbus_example_subtree_DEPENDENCIES =  \
+	$(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+gdbus_example_unix_fd_client_SOURCES = gdbus-example-unix-fd-client.c
 gdbus_example_unix_fd_client_OBJECTS =  \
-	$(am_gdbus_example_unix_fd_client_OBJECTS)
-gdbus_example_unix_fd_client_DEPENDENCIES = $(progs_ldadd)
-am_gdbus_example_watch_name_OBJECTS =  \
-	gdbus-example-watch-name.$(OBJEXT)
-gdbus_example_watch_name_OBJECTS =  \
-	$(am_gdbus_example_watch_name_OBJECTS)
-gdbus_example_watch_name_DEPENDENCIES = $(progs_ldadd)
-am_gdbus_example_watch_proxy_OBJECTS =  \
-	gdbus-example-watch-proxy.$(OBJEXT)
+	gdbus-example-unix-fd-client.$(OBJEXT)
+gdbus_example_unix_fd_client_LDADD = $(LDADD)
+gdbus_example_unix_fd_client_DEPENDENCIES =  \
+	$(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+gdbus_example_watch_name_SOURCES = gdbus-example-watch-name.c
+gdbus_example_watch_name_OBJECTS = gdbus-example-watch-name.$(OBJEXT)
+gdbus_example_watch_name_LDADD = $(LDADD)
+gdbus_example_watch_name_DEPENDENCIES =  \
+	$(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+gdbus_example_watch_proxy_SOURCES = gdbus-example-watch-proxy.c
 gdbus_example_watch_proxy_OBJECTS =  \
-	$(am_gdbus_example_watch_proxy_OBJECTS)
-gdbus_example_watch_proxy_DEPENDENCIES = $(progs_ldadd)
+	gdbus-example-watch-proxy.$(OBJEXT)
+gdbus_example_watch_proxy_LDADD = $(LDADD)
+gdbus_example_watch_proxy_DEPENDENCIES =  \
+	$(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
 am_gdbus_exit_on_close_OBJECTS = gdbus-exit-on-close.$(OBJEXT) \
 	gdbus-sessionbus.$(OBJEXT) gdbus-tests.$(OBJEXT)
 gdbus_exit_on_close_OBJECTS = $(am_gdbus_exit_on_close_OBJECTS)
-gdbus_exit_on_close_DEPENDENCIES = $(progs_ldadd)
+gdbus_exit_on_close_LDADD = $(LDADD)
+gdbus_exit_on_close_DEPENDENCIES =  \
+	$(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
 am_gdbus_export_OBJECTS = gdbus-export.$(OBJEXT) \
 	gdbus-sessionbus.$(OBJEXT) gdbus-tests.$(OBJEXT)
 gdbus_export_OBJECTS = $(am_gdbus_export_OBJECTS)
-gdbus_export_DEPENDENCIES = $(progs_ldadd)
+gdbus_export_LDADD = $(LDADD)
+gdbus_export_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
 am_gdbus_introspection_OBJECTS = gdbus-introspection.$(OBJEXT) \
 	gdbus-sessionbus.$(OBJEXT) gdbus-tests.$(OBJEXT)
 gdbus_introspection_OBJECTS = $(am_gdbus_introspection_OBJECTS)
-gdbus_introspection_DEPENDENCIES = $(progs_ldadd)
-am_gdbus_message_OBJECTS = gdbus-message.$(OBJEXT)
-gdbus_message_OBJECTS = $(am_gdbus_message_OBJECTS)
-gdbus_message_DEPENDENCIES = $(progs_ldadd)
+gdbus_introspection_LDADD = $(LDADD)
+gdbus_introspection_DEPENDENCIES =  \
+	$(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+gdbus_message_SOURCES = gdbus-message.c
+gdbus_message_OBJECTS = gdbus-message.$(OBJEXT)
+gdbus_message_LDADD = $(LDADD)
+gdbus_message_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
 am_gdbus_names_OBJECTS = gdbus-names.$(OBJEXT) \
 	gdbus-sessionbus.$(OBJEXT) gdbus-tests.$(OBJEXT)
 gdbus_names_OBJECTS = $(am_gdbus_names_OBJECTS)
-gdbus_names_DEPENDENCIES = $(progs_ldadd)
+gdbus_names_LDADD = $(LDADD)
+gdbus_names_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
 am_gdbus_non_socket_OBJECTS = gdbus-non-socket.$(OBJEXT) \
 	gdbus-tests.$(OBJEXT) test-io-stream.$(OBJEXT) \
 	test-pipe-unix.$(OBJEXT) $(am__objects_1)
 gdbus_non_socket_OBJECTS = $(am_gdbus_non_socket_OBJECTS)
-gdbus_non_socket_DEPENDENCIES = $(progs_ldadd)
+gdbus_non_socket_LDADD = $(LDADD)
+gdbus_non_socket_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
 am__gdbus_peer_SOURCES_DIST = gdbus-peer.c gdbus-tests.h gdbus-tests.c
 @OS_UNIX_TRUE@am_gdbus_peer_OBJECTS = gdbus_peer-gdbus-peer.$(OBJEXT) \
 @OS_UNIX_TRUE@	gdbus_peer-gdbus-tests.$(OBJEXT)
 gdbus_peer_OBJECTS = $(am_gdbus_peer_OBJECTS)
 @OS_UNIX_TRUE@gdbus_peer_DEPENDENCIES = $(top_builddir)/gio/tests/gdbus-object-manager-example/libgdbus-example-objectmanager.la \
-@OS_UNIX_TRUE@	$(progs_ldadd)
+@OS_UNIX_TRUE@	$(LDADD)
 gdbus_peer_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(gdbus_peer_CFLAGS) \
 	$(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
+gdbus_peer_object_manager_SOURCES = gdbus-peer-object-manager.c
+gdbus_peer_object_manager_OBJECTS =  \
+	gdbus-peer-object-manager.$(OBJEXT)
+gdbus_peer_object_manager_LDADD = $(LDADD)
+gdbus_peer_object_manager_DEPENDENCIES =  \
+	$(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
 am_gdbus_proxy_OBJECTS = gdbus-proxy.$(OBJEXT) \
 	gdbus-sessionbus.$(OBJEXT) gdbus-tests.$(OBJEXT)
 gdbus_proxy_OBJECTS = $(am_gdbus_proxy_OBJECTS)
-gdbus_proxy_DEPENDENCIES = $(progs_ldadd)
+gdbus_proxy_LDADD = $(LDADD)
+gdbus_proxy_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
 am_gdbus_proxy_threads_OBJECTS = gdbus-proxy-threads.$(OBJEXT) \
 	gdbus-sessionbus.$(OBJEXT) gdbus-tests.$(OBJEXT)
 gdbus_proxy_threads_OBJECTS = $(am_gdbus_proxy_threads_OBJECTS)
-gdbus_proxy_threads_DEPENDENCIES = $(progs_ldadd)
+gdbus_proxy_threads_LDADD = $(LDADD)
+gdbus_proxy_threads_DEPENDENCIES =  \
+	$(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
 am_gdbus_proxy_well_known_name_OBJECTS =  \
 	gdbus-proxy-well-known-name.$(OBJEXT) \
 	gdbus-sessionbus.$(OBJEXT) gdbus-tests.$(OBJEXT)
 gdbus_proxy_well_known_name_OBJECTS =  \
 	$(am_gdbus_proxy_well_known_name_OBJECTS)
-gdbus_proxy_well_known_name_DEPENDENCIES = $(progs_ldadd)
+gdbus_proxy_well_known_name_LDADD = $(LDADD)
+gdbus_proxy_well_known_name_DEPENDENCIES =  \
+	$(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
 am__gdbus_serialization_SOURCES_DIST = gdbus-serialization.c \
 	gdbus-tests.h gdbus-tests.c
 @HAVE_DBUS1_TRUE@am_gdbus_serialization_OBJECTS = gdbus_serialization-gdbus-serialization.$(OBJEXT) \
 @HAVE_DBUS1_TRUE@	gdbus_serialization-gdbus-tests.$(OBJEXT)
 gdbus_serialization_OBJECTS = $(am_gdbus_serialization_OBJECTS)
-@HAVE_DBUS1_TRUE@gdbus_serialization_DEPENDENCIES = $(progs_ldadd) \
+am__DEPENDENCIES_1 =
+@HAVE_DBUS1_TRUE@gdbus_serialization_DEPENDENCIES = $(LDADD) \
 @HAVE_DBUS1_TRUE@	$(am__DEPENDENCIES_1)
 gdbus_serialization_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
 	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CCLD) \
@@ -473,120 +778,288 @@ am__gdbus_test_codegen_SOURCES_DIST = gdbus-test-codegen.c \
 @OS_UNIX_TRUE@	gdbus-sessionbus.$(OBJEXT) gdbus-tests.$(OBJEXT) \
 @OS_UNIX_TRUE@	gdbus-test-codegen-generated.$(OBJEXT)
 gdbus_test_codegen_OBJECTS = $(am_gdbus_test_codegen_OBJECTS)
-@OS_UNIX_TRUE@gdbus_test_codegen_DEPENDENCIES = $(progs_ldadd)
+gdbus_test_codegen_LDADD = $(LDADD)
+gdbus_test_codegen_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+am__gdbus_test_fixture_SOURCES_DIST = gdbus-test-fixture.c
+@OS_UNIX_TRUE@am_gdbus_test_fixture_OBJECTS =  \
+@OS_UNIX_TRUE@	gdbus_test_fixture-gdbus-test-fixture.$(OBJEXT)
+gdbus_test_fixture_OBJECTS = $(am_gdbus_test_fixture_OBJECTS)
+@OS_UNIX_TRUE@gdbus_test_fixture_DEPENDENCIES = $(top_builddir)/gio/tests/gdbus-object-manager-example/libgdbus-example-objectmanager.la \
+@OS_UNIX_TRUE@	$(LDADD)
+gdbus_test_fixture_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
+	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CCLD) \
+	$(gdbus_test_fixture_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
+	$(LDFLAGS) -o $@
+am_gdbus_testserver_OBJECTS = gdbus-testserver.$(OBJEXT)
+gdbus_testserver_OBJECTS = $(am_gdbus_testserver_OBJECTS)
+gdbus_testserver_LDADD = $(LDADD)
+gdbus_testserver_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
 am_gdbus_threading_OBJECTS = gdbus-threading.$(OBJEXT) \
 	gdbus-sessionbus.$(OBJEXT) gdbus-tests.$(OBJEXT)
 gdbus_threading_OBJECTS = $(am_gdbus_threading_OBJECTS)
-gdbus_threading_DEPENDENCIES = $(progs_ldadd)
+gdbus_threading_LDADD = $(LDADD)
+gdbus_threading_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
 am_gmenumodel_OBJECTS = gmenumodel.$(OBJEXT) \
 	gdbus-sessionbus.$(OBJEXT)
 gmenumodel_OBJECTS = $(am_gmenumodel_OBJECTS)
-gmenumodel_DEPENDENCIES = $(progs_ldadd)
-am_gschema_compile_OBJECTS = gschema-compile.$(OBJEXT)
-gschema_compile_OBJECTS = $(am_gschema_compile_OBJECTS)
-gschema_compile_DEPENDENCIES = $(progs_ldadd)
-am_gsettings_OBJECTS = gsettings.$(OBJEXT)
-gsettings_OBJECTS = $(am_gsettings_OBJECTS)
-gsettings_DEPENDENCIES = $(progs_ldadd)
-am_httpd_OBJECTS = httpd.$(OBJEXT)
-httpd_OBJECTS = $(am_httpd_OBJECTS)
-httpd_DEPENDENCIES = $(progs_ldadd) \
+gmenumodel_LDADD = $(LDADD)
+gmenumodel_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+gschema_compile_SOURCES = gschema-compile.c
+gschema_compile_OBJECTS = gschema-compile.$(OBJEXT)
+gschema_compile_LDADD = $(LDADD)
+gschema_compile_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+gsettings_SOURCES = gsettings.c
+gsettings_OBJECTS = gsettings.$(OBJEXT)
+gsettings_LDADD = $(LDADD)
+gsettings_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+httpd_SOURCES = httpd.c
+httpd_OBJECTS = httpd.$(OBJEXT)
+httpd_DEPENDENCIES = $(LDADD) \
 	$(top_builddir)/gthread/libgthread-2.0.la
-am_inet_address_OBJECTS = inet-address.$(OBJEXT)
-inet_address_OBJECTS = $(am_inet_address_OBJECTS)
-inet_address_DEPENDENCIES = $(progs_ldadd)
-am_io_stream_OBJECTS = io-stream.$(OBJEXT)
-io_stream_OBJECTS = $(am_io_stream_OBJECTS)
-io_stream_DEPENDENCIES = $(progs_ldadd)
-am_live_g_file_OBJECTS = live-g-file.$(OBJEXT)
-live_g_file_OBJECTS = $(am_live_g_file_OBJECTS)
-live_g_file_DEPENDENCIES = $(progs_ldadd)
-am_memory_input_stream_OBJECTS = memory-input-stream.$(OBJEXT)
-memory_input_stream_OBJECTS = $(am_memory_input_stream_OBJECTS)
-memory_input_stream_DEPENDENCIES = $(progs_ldadd)
-am_memory_output_stream_OBJECTS = memory-output-stream.$(OBJEXT)
-memory_output_stream_OBJECTS = $(am_memory_output_stream_OBJECTS)
-memory_output_stream_DEPENDENCIES = $(progs_ldadd)
-am_mimeapps_OBJECTS = mimeapps.$(OBJEXT)
-mimeapps_OBJECTS = $(am_mimeapps_OBJECTS)
-mimeapps_DEPENDENCIES = $(progs_ldadd)
+inet_address_SOURCES = inet-address.c
+inet_address_OBJECTS = inet-address.$(OBJEXT)
+inet_address_LDADD = $(LDADD)
+inet_address_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+io_stream_SOURCES = io-stream.c
+io_stream_OBJECTS = io-stream.$(OBJEXT)
+io_stream_LDADD = $(LDADD)
+io_stream_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+live_g_file_SOURCES = live-g-file.c
+live_g_file_OBJECTS = live-g-file.$(OBJEXT)
+live_g_file_LDADD = $(LDADD)
+live_g_file_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+memory_input_stream_SOURCES = memory-input-stream.c
+memory_input_stream_OBJECTS = memory-input-stream.$(OBJEXT)
+memory_input_stream_LDADD = $(LDADD)
+memory_input_stream_DEPENDENCIES =  \
+	$(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+memory_output_stream_SOURCES = memory-output-stream.c
+memory_output_stream_OBJECTS = memory-output-stream.$(OBJEXT)
+memory_output_stream_LDADD = $(LDADD)
+memory_output_stream_DEPENDENCIES =  \
+	$(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+mimeapps_SOURCES = mimeapps.c
+mimeapps_OBJECTS = mimeapps.$(OBJEXT)
+mimeapps_LDADD = $(LDADD)
+mimeapps_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
 network_address_SOURCES = network-address.c
 network_address_OBJECTS = network-address.$(OBJEXT)
-network_address_DEPENDENCIES = $(progs_ldadd)
+network_address_LDADD = $(LDADD)
+network_address_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
 network_monitor_SOURCES = network-monitor.c
 network_monitor_OBJECTS = network-monitor.$(OBJEXT)
-network_monitor_DEPENDENCIES = $(progs_ldadd)
-am_permission_OBJECTS = permission.$(OBJEXT)
-permission_OBJECTS = $(am_permission_OBJECTS)
-permission_DEPENDENCIES = $(progs_ldadd)
+network_monitor_LDADD = $(LDADD)
+network_monitor_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+permission_SOURCES = permission.c
+permission_OBJECTS = permission.$(OBJEXT)
+permission_LDADD = $(LDADD)
+permission_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
 pollable_SOURCES = pollable.c
 pollable_OBJECTS = pollable.$(OBJEXT)
-pollable_DEPENDENCIES = $(progs_ldadd)
-am_proxy_OBJECTS = proxy.$(OBJEXT)
-proxy_OBJECTS = $(am_proxy_OBJECTS)
-proxy_DEPENDENCIES = $(progs_ldadd) \
+pollable_LDADD = $(LDADD)
+pollable_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+proxy_SOURCES = proxy.c
+proxy_OBJECTS = proxy.$(OBJEXT)
+proxy_DEPENDENCIES = $(LDADD) \
 	$(top_builddir)/gthread/libgthread-2.0.la
-am_proxy_test_OBJECTS = proxy-test.$(OBJEXT)
-proxy_test_OBJECTS = $(am_proxy_test_OBJECTS)
-proxy_test_DEPENDENCIES = $(progs_ldadd)
-am_readwrite_OBJECTS = readwrite.$(OBJEXT)
-readwrite_OBJECTS = $(am_readwrite_OBJECTS)
-readwrite_DEPENDENCIES = $(progs_ldadd)
-am_resolver_OBJECTS = resolver.$(OBJEXT)
-resolver_OBJECTS = $(am_resolver_OBJECTS)
-resolver_DEPENDENCIES = $(progs_ldadd) \
+proxy_test_SOURCES = proxy-test.c
+proxy_test_OBJECTS = proxy-test.$(OBJEXT)
+proxy_test_LDADD = $(LDADD)
+proxy_test_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+readwrite_SOURCES = readwrite.c
+readwrite_OBJECTS = readwrite.$(OBJEXT)
+readwrite_LDADD = $(LDADD)
+readwrite_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+resolver_SOURCES = resolver.c
+resolver_OBJECTS = resolver.$(OBJEXT)
+resolver_DEPENDENCIES = $(LDADD) \
 	$(top_builddir)/gthread/libgthread-2.0.la
 am_resources_OBJECTS = resources.$(OBJEXT) test_resources.$(OBJEXT) \
 	test_resources2.$(OBJEXT)
 resources_OBJECTS = $(am_resources_OBJECTS)
-am_send_data_OBJECTS = send-data.$(OBJEXT)
-send_data_OBJECTS = $(am_send_data_OBJECTS)
-send_data_DEPENDENCIES = $(progs_ldadd) \
+resources_LDADD = $(LDADD)
+send_data_SOURCES = send-data.c
+send_data_OBJECTS = send-data.$(OBJEXT)
+send_data_DEPENDENCIES = $(LDADD) \
 	$(top_builddir)/gthread/libgthread-2.0.la
-am_simple_async_result_OBJECTS = simple-async-result.$(OBJEXT)
-simple_async_result_OBJECTS = $(am_simple_async_result_OBJECTS)
-simple_async_result_DEPENDENCIES = $(progs_ldadd)
-am_sleepy_stream_OBJECTS = sleepy-stream.$(OBJEXT)
-sleepy_stream_OBJECTS = $(am_sleepy_stream_OBJECTS)
-sleepy_stream_DEPENDENCIES = $(progs_ldadd)
+simple_async_result_SOURCES = simple-async-result.c
+simple_async_result_OBJECTS = simple-async-result.$(OBJEXT)
+simple_async_result_LDADD = $(LDADD)
+simple_async_result_DEPENDENCIES =  \
+	$(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+simple_proxy_SOURCES = simple-proxy.c
+simple_proxy_OBJECTS = simple-proxy.$(OBJEXT)
+simple_proxy_LDADD = $(LDADD)
+simple_proxy_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+sleepy_stream_SOURCES = sleepy-stream.c
+sleepy_stream_OBJECTS = sleepy-stream.$(OBJEXT)
+sleepy_stream_LDADD = $(LDADD)
+sleepy_stream_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
 socket_SOURCES = socket.c
 socket_OBJECTS = socket.$(OBJEXT)
-socket_DEPENDENCIES = $(progs_ldadd)
+socket_LDADD = $(LDADD)
+socket_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
 am_socket_client_OBJECTS = socket-client.$(OBJEXT) \
 	gtlsconsoleinteraction.$(OBJEXT)
 socket_client_OBJECTS = $(am_socket_client_OBJECTS)
-socket_client_DEPENDENCIES = $(progs_ldadd) \
+socket_client_DEPENDENCIES = $(LDADD) \
 	$(top_builddir)/gthread/libgthread-2.0.la
-am_socket_server_OBJECTS = socket-server.$(OBJEXT)
-socket_server_OBJECTS = $(am_socket_server_OBJECTS)
-socket_server_DEPENDENCIES = $(progs_ldadd) \
+socket_server_SOURCES = socket-server.c
+socket_server_OBJECTS = socket-server.$(OBJEXT)
+socket_server_DEPENDENCIES = $(LDADD) \
 	$(top_builddir)/gthread/libgthread-2.0.la
-am_srvtarget_OBJECTS = srvtarget.$(OBJEXT)
-srvtarget_OBJECTS = $(am_srvtarget_OBJECTS)
-srvtarget_DEPENDENCIES = $(progs_ldadd)
+srvtarget_SOURCES = srvtarget.c
+srvtarget_OBJECTS = srvtarget.$(OBJEXT)
+srvtarget_LDADD = $(LDADD)
+srvtarget_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+task_SOURCES = task.c
+task_OBJECTS = task.$(OBJEXT)
+task_LDADD = $(LDADD)
+task_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
 am_tls_certificate_OBJECTS = tls-certificate.$(OBJEXT) \
 	gtesttlsbackend.$(OBJEXT)
 tls_certificate_OBJECTS = $(am_tls_certificate_OBJECTS)
-tls_certificate_DEPENDENCIES = $(progs_ldadd)
+tls_certificate_LDADD = $(LDADD)
+tls_certificate_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
 tls_interaction_SOURCES = tls-interaction.c
 tls_interaction_OBJECTS = tls-interaction.$(OBJEXT)
-tls_interaction_DEPENDENCIES = $(progs_ldadd)
-am_unix_fd_OBJECTS = unix-fd.$(OBJEXT)
-unix_fd_OBJECTS = $(am_unix_fd_OBJECTS)
-unix_fd_DEPENDENCIES = $(progs_ldadd)
-am_unix_streams_OBJECTS = unix-streams.$(OBJEXT)
-unix_streams_OBJECTS = $(am_unix_streams_OBJECTS)
-unix_streams_DEPENDENCIES = $(progs_ldadd) \
+tls_interaction_LDADD = $(LDADD)
+tls_interaction_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+unix_fd_SOURCES = unix-fd.c
+unix_fd_OBJECTS = unix-fd.$(OBJEXT)
+unix_fd_LDADD = $(LDADD)
+unix_fd_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+unix_streams_SOURCES = unix-streams.c
+unix_streams_OBJECTS = unix-streams.$(OBJEXT)
+unix_streams_DEPENDENCIES = $(LDADD) \
 	$(top_builddir)/gthread/libgthread-2.0.la
 vfs_SOURCES = vfs.c
 vfs_OBJECTS = vfs.$(OBJEXT)
-vfs_DEPENDENCIES = $(progs_ldadd)
-am_volumemonitor_OBJECTS = volumemonitor.$(OBJEXT)
-volumemonitor_OBJECTS = $(am_volumemonitor_OBJECTS)
-volumemonitor_DEPENDENCIES = $(progs_ldadd)
-am_win32_streams_OBJECTS = win32-streams.$(OBJEXT)
-win32_streams_OBJECTS = $(am_win32_streams_OBJECTS)
-win32_streams_DEPENDENCIES = $(progs_ldadd) \
+vfs_LDADD = $(LDADD)
+vfs_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+volumemonitor_SOURCES = volumemonitor.c
+volumemonitor_OBJECTS = volumemonitor.$(OBJEXT)
+volumemonitor_LDADD = $(LDADD)
+volumemonitor_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gthread/libgthread-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/gio/libgio-2.0.la
+win32_streams_SOURCES = win32-streams.c
+win32_streams_OBJECTS = win32-streams.$(OBJEXT)
+win32_streams_DEPENDENCIES = $(LDADD) \
 	$(top_builddir)/gthread/libgthread-2.0.la
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
@@ -622,121 +1095,92 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(libresourceplugin_la_SOURCES) $(actions_SOURCES) \
-	$(appinfo_SOURCES) $(appinfo_test_SOURCES) \
-	$(async_close_output_stream_SOURCES) basic-application.c \
-	$(buffered_input_stream_SOURCES) \
-	$(buffered_output_stream_SOURCES) cancellable.c \
-	$(contenttype_SOURCES) $(contexts_SOURCES) \
-	$(converter_stream_SOURCES) $(data_input_stream_SOURCES) \
-	$(data_output_stream_SOURCES) $(desktop_app_info_SOURCES) \
-	$(echo_server_SOURCES) $(file_SOURCES) \
-	$(fileattributematcher_SOURCES) $(filter_cat_SOURCES) \
-	$(filter_streams_SOURCES) $(g_file_SOURCES) \
-	$(g_file_info_SOURCES) $(g_icon_SOURCES) \
-	$(gapplication_SOURCES) \
-	$(gapplication_example_actions_SOURCES) \
-	$(gapplication_example_cmdline_SOURCES) \
-	$(gapplication_example_cmdline2_SOURCES) \
-	$(gapplication_example_cmdline3_SOURCES) \
-	$(gapplication_example_dbushooks_SOURCES) \
-	$(gapplication_example_open_SOURCES) \
-	$(gdbus_addresses_SOURCES) $(gdbus_auth_SOURCES) \
+SOURCES = $(libresourceplugin_la_SOURCES) $(actions_SOURCES) appinfo.c \
+	appinfo-test.c async-close-output-stream.c basic-application.c \
+	buffered-input-stream.c buffered-output-stream.c cancellable.c \
+	contenttype.c contexts.c converter-stream.c credentials.c \
+	data-input-stream.c data-output-stream.c desktop-app-info.c \
+	echo-server.c file.c fileattributematcher.c filter-cat.c \
+	filter-streams.c g-file.c g-file-info.c g-icon.c \
+	$(gapplication_SOURCES) gapplication-example-actions.c \
+	gapplication-example-cmdline.c gapplication-example-cmdline2.c \
+	gapplication-example-cmdline3.c \
+	gapplication-example-dbushooks.c gapplication-example-open.c \
+	gdbus-addresses.c $(gdbus_auth_SOURCES) \
 	$(gdbus_bz627724_SOURCES) $(gdbus_close_pending_SOURCES) \
 	$(gdbus_connection_SOURCES) $(gdbus_connection_flush_SOURCES) \
-	$(gdbus_connection_flush_helper_SOURCES) \
+	gdbus-connection-flush-helper.c \
 	$(gdbus_connection_loss_SOURCES) \
 	$(gdbus_connection_slow_SOURCES) $(gdbus_daemon_SOURCES) \
-	$(gdbus_error_SOURCES) $(gdbus_example_export_SOURCES) \
-	$(gdbus_example_objectmanager_client_SOURCES) \
-	$(gdbus_example_objectmanager_server_SOURCES) \
-	$(gdbus_example_own_name_SOURCES) \
-	$(gdbus_example_peer_SOURCES) \
-	$(gdbus_example_proxy_subclass_SOURCES) \
-	$(gdbus_example_server_SOURCES) \
-	$(gdbus_example_subtree_SOURCES) \
-	$(gdbus_example_unix_fd_client_SOURCES) \
-	$(gdbus_example_watch_name_SOURCES) \
-	$(gdbus_example_watch_proxy_SOURCES) \
-	$(gdbus_exit_on_close_SOURCES) $(gdbus_export_SOURCES) \
-	$(gdbus_introspection_SOURCES) $(gdbus_message_SOURCES) \
-	$(gdbus_names_SOURCES) $(gdbus_non_socket_SOURCES) \
-	$(gdbus_peer_SOURCES) $(gdbus_proxy_SOURCES) \
+	$(gdbus_error_SOURCES) gdbus-example-export.c \
+	gdbus-example-objectmanager-client.c \
+	gdbus-example-objectmanager-server.c gdbus-example-own-name.c \
+	gdbus-example-peer.c gdbus-example-proxy-subclass.c \
+	gdbus-example-server.c gdbus-example-subtree.c \
+	gdbus-example-unix-fd-client.c gdbus-example-watch-name.c \
+	gdbus-example-watch-proxy.c $(gdbus_exit_on_close_SOURCES) \
+	$(gdbus_export_SOURCES) $(gdbus_introspection_SOURCES) \
+	gdbus-message.c $(gdbus_names_SOURCES) \
+	$(gdbus_non_socket_SOURCES) $(gdbus_peer_SOURCES) \
+	gdbus-peer-object-manager.c $(gdbus_proxy_SOURCES) \
 	$(gdbus_proxy_threads_SOURCES) \
 	$(gdbus_proxy_well_known_name_SOURCES) \
 	$(gdbus_serialization_SOURCES) $(gdbus_test_codegen_SOURCES) \
+	$(gdbus_test_fixture_SOURCES) $(gdbus_testserver_SOURCES) \
 	$(gdbus_threading_SOURCES) $(gmenumodel_SOURCES) \
-	$(gschema_compile_SOURCES) $(gsettings_SOURCES) \
-	$(httpd_SOURCES) $(inet_address_SOURCES) $(io_stream_SOURCES) \
-	$(live_g_file_SOURCES) $(memory_input_stream_SOURCES) \
-	$(memory_output_stream_SOURCES) $(mimeapps_SOURCES) \
-	network-address.c network-monitor.c $(permission_SOURCES) \
-	pollable.c $(proxy_SOURCES) $(proxy_test_SOURCES) \
-	$(readwrite_SOURCES) $(resolver_SOURCES) $(resources_SOURCES) \
-	$(send_data_SOURCES) $(simple_async_result_SOURCES) \
-	$(sleepy_stream_SOURCES) socket.c $(socket_client_SOURCES) \
-	$(socket_server_SOURCES) $(srvtarget_SOURCES) \
-	$(tls_certificate_SOURCES) tls-interaction.c \
-	$(unix_fd_SOURCES) $(unix_streams_SOURCES) vfs.c \
-	$(volumemonitor_SOURCES) $(win32_streams_SOURCES)
+	gschema-compile.c gsettings.c httpd.c inet-address.c \
+	io-stream.c live-g-file.c memory-input-stream.c \
+	memory-output-stream.c mimeapps.c network-address.c \
+	network-monitor.c permission.c pollable.c proxy.c proxy-test.c \
+	readwrite.c resolver.c $(resources_SOURCES) send-data.c \
+	simple-async-result.c simple-proxy.c sleepy-stream.c socket.c \
+	$(socket_client_SOURCES) socket-server.c srvtarget.c task.c \
+	$(tls_certificate_SOURCES) tls-interaction.c unix-fd.c \
+	unix-streams.c vfs.c volumemonitor.c win32-streams.c
 DIST_SOURCES = $(libresourceplugin_la_SOURCES) $(actions_SOURCES) \
-	$(appinfo_SOURCES) $(appinfo_test_SOURCES) \
-	$(async_close_output_stream_SOURCES) basic-application.c \
-	$(buffered_input_stream_SOURCES) \
-	$(buffered_output_stream_SOURCES) cancellable.c \
-	$(contenttype_SOURCES) $(contexts_SOURCES) \
-	$(converter_stream_SOURCES) $(data_input_stream_SOURCES) \
-	$(data_output_stream_SOURCES) $(desktop_app_info_SOURCES) \
-	$(echo_server_SOURCES) $(file_SOURCES) \
-	$(fileattributematcher_SOURCES) $(filter_cat_SOURCES) \
-	$(filter_streams_SOURCES) $(g_file_SOURCES) \
-	$(g_file_info_SOURCES) $(g_icon_SOURCES) \
-	$(gapplication_SOURCES) \
-	$(gapplication_example_actions_SOURCES) \
-	$(gapplication_example_cmdline_SOURCES) \
-	$(gapplication_example_cmdline2_SOURCES) \
-	$(gapplication_example_cmdline3_SOURCES) \
-	$(gapplication_example_dbushooks_SOURCES) \
-	$(gapplication_example_open_SOURCES) \
-	$(gdbus_addresses_SOURCES) $(am__gdbus_auth_SOURCES_DIST) \
+	appinfo.c appinfo-test.c async-close-output-stream.c \
+	basic-application.c buffered-input-stream.c \
+	buffered-output-stream.c cancellable.c contenttype.c \
+	contexts.c converter-stream.c credentials.c \
+	data-input-stream.c data-output-stream.c desktop-app-info.c \
+	echo-server.c file.c fileattributematcher.c filter-cat.c \
+	filter-streams.c g-file.c g-file-info.c g-icon.c \
+	$(gapplication_SOURCES) gapplication-example-actions.c \
+	gapplication-example-cmdline.c gapplication-example-cmdline2.c \
+	gapplication-example-cmdline3.c \
+	gapplication-example-dbushooks.c gapplication-example-open.c \
+	gdbus-addresses.c $(gdbus_auth_SOURCES) \
 	$(gdbus_bz627724_SOURCES) $(gdbus_close_pending_SOURCES) \
 	$(gdbus_connection_SOURCES) $(gdbus_connection_flush_SOURCES) \
-	$(gdbus_connection_flush_helper_SOURCES) \
+	gdbus-connection-flush-helper.c \
 	$(gdbus_connection_loss_SOURCES) \
 	$(gdbus_connection_slow_SOURCES) $(gdbus_daemon_SOURCES) \
-	$(gdbus_error_SOURCES) $(gdbus_example_export_SOURCES) \
-	$(am__gdbus_example_objectmanager_client_SOURCES_DIST) \
-	$(am__gdbus_example_objectmanager_server_SOURCES_DIST) \
-	$(gdbus_example_own_name_SOURCES) \
-	$(gdbus_example_peer_SOURCES) \
-	$(gdbus_example_proxy_subclass_SOURCES) \
-	$(gdbus_example_server_SOURCES) \
-	$(gdbus_example_subtree_SOURCES) \
-	$(gdbus_example_unix_fd_client_SOURCES) \
-	$(gdbus_example_watch_name_SOURCES) \
-	$(gdbus_example_watch_proxy_SOURCES) \
-	$(gdbus_exit_on_close_SOURCES) $(gdbus_export_SOURCES) \
-	$(gdbus_introspection_SOURCES) $(gdbus_message_SOURCES) \
-	$(gdbus_names_SOURCES) $(gdbus_non_socket_SOURCES) \
-	$(am__gdbus_peer_SOURCES_DIST) $(gdbus_proxy_SOURCES) \
+	$(gdbus_error_SOURCES) gdbus-example-export.c \
+	gdbus-example-objectmanager-client.c \
+	gdbus-example-objectmanager-server.c gdbus-example-own-name.c \
+	gdbus-example-peer.c gdbus-example-proxy-subclass.c \
+	gdbus-example-server.c gdbus-example-subtree.c \
+	gdbus-example-unix-fd-client.c gdbus-example-watch-name.c \
+	gdbus-example-watch-proxy.c $(gdbus_exit_on_close_SOURCES) \
+	$(gdbus_export_SOURCES) $(gdbus_introspection_SOURCES) \
+	gdbus-message.c $(gdbus_names_SOURCES) \
+	$(gdbus_non_socket_SOURCES) $(am__gdbus_peer_SOURCES_DIST) \
+	gdbus-peer-object-manager.c $(gdbus_proxy_SOURCES) \
 	$(gdbus_proxy_threads_SOURCES) \
 	$(gdbus_proxy_well_known_name_SOURCES) \
 	$(am__gdbus_serialization_SOURCES_DIST) \
 	$(am__gdbus_test_codegen_SOURCES_DIST) \
-	$(gdbus_threading_SOURCES) $(gmenumodel_SOURCES) \
-	$(gschema_compile_SOURCES) $(gsettings_SOURCES) \
-	$(httpd_SOURCES) $(inet_address_SOURCES) $(io_stream_SOURCES) \
-	$(live_g_file_SOURCES) $(memory_input_stream_SOURCES) \
-	$(memory_output_stream_SOURCES) $(mimeapps_SOURCES) \
-	network-address.c network-monitor.c $(permission_SOURCES) \
-	pollable.c $(proxy_SOURCES) $(proxy_test_SOURCES) \
-	$(readwrite_SOURCES) $(resolver_SOURCES) $(resources_SOURCES) \
-	$(send_data_SOURCES) $(simple_async_result_SOURCES) \
-	$(sleepy_stream_SOURCES) socket.c $(socket_client_SOURCES) \
-	$(socket_server_SOURCES) $(srvtarget_SOURCES) \
-	$(tls_certificate_SOURCES) tls-interaction.c \
-	$(unix_fd_SOURCES) $(unix_streams_SOURCES) vfs.c \
-	$(volumemonitor_SOURCES) $(win32_streams_SOURCES)
+	$(am__gdbus_test_fixture_SOURCES_DIST) \
+	$(gdbus_testserver_SOURCES) $(gdbus_threading_SOURCES) \
+	$(gmenumodel_SOURCES) gschema-compile.c gsettings.c httpd.c \
+	inet-address.c io-stream.c live-g-file.c memory-input-stream.c \
+	memory-output-stream.c mimeapps.c network-address.c \
+	network-monitor.c permission.c pollable.c proxy.c proxy-test.c \
+	readwrite.c resolver.c $(resources_SOURCES) send-data.c \
+	simple-async-result.c simple-proxy.c sleepy-stream.c socket.c \
+	$(socket_client_SOURCES) socket-server.c srvtarget.c task.c \
+	$(tls_certificate_SOURCES) tls-interaction.c unix-fd.c \
+	unix-streams.c vfs.c volumemonitor.c win32-streams.c
 RECURSIVE_TARGETS = all-recursive check-recursive dvi-recursive \
 	html-recursive info-recursive install-data-recursive \
 	install-dvi-recursive install-exec-recursive \
@@ -836,6 +1280,7 @@ GLIB_COMPILE_SCHEMAS = @GLIB_COMPILE_SCHEMAS@
 GLIB_DEBUG_FLAGS = @GLIB_DEBUG_FLAGS@
 GLIB_EXTRA_CFLAGS = @GLIB_EXTRA_CFLAGS@
 GLIB_GENMARSHAL = @GLIB_GENMARSHAL@
+GLIB_HIDDEN_VISIBILITY_CFLAGS = @GLIB_HIDDEN_VISIBILITY_CFLAGS@
 GLIB_INTERFACE_AGE = @GLIB_INTERFACE_AGE@
 GLIB_LINK_FLAGS = @GLIB_LINK_FLAGS@
 GLIB_MAJOR_VERSION = @GLIB_MAJOR_VERSION@
@@ -843,6 +1288,7 @@ GLIB_MICRO_VERSION = @GLIB_MICRO_VERSION@
 GLIB_MINOR_VERSION = @GLIB_MINOR_VERSION@
 GLIB_RUNTIME_LIBDIR = @GLIB_RUNTIME_LIBDIR@
 GLIB_VERSION = @GLIB_VERSION@
+GLIB_WARN_CFLAGS = @GLIB_WARN_CFLAGS@
 GLIB_WIN32_STATIC_COMPILATION_DEFINE = @GLIB_WIN32_STATIC_COMPILATION_DEFINE@
 GMOFILES = @GMOFILES@
 GMSGFMT = @GMSGFMT@
@@ -887,7 +1333,6 @@ LIBFFI_LIBS = @LIBFFI_LIBS@
 LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
 LIBTOOL = @LIBTOOL@
-LIBTOOL_EXPORT_OPTIONS = @LIBTOOL_EXPORT_OPTIONS@
 LIB_EXE_MACHINE_FLAG = @LIB_EXE_MACHINE_FLAG@
 LIPO = @LIPO@
 LN_S = @LN_S@
@@ -906,6 +1351,7 @@ MKDIR_P = @MKDIR_P@
 MKINSTALLDIRS = @MKINSTALLDIRS@
 MSGFMT = @MSGFMT@
 MSGFMT_OPTS = @MSGFMT_OPTS@
+NAMESER_COMPAT_INCLUDE = @NAMESER_COMPAT_INCLUDE@
 NETWORK_LIBS = @NETWORK_LIBS@
 NM = @NM@
 NMEDIT = @NMEDIT@
@@ -951,6 +1397,7 @@ STRIP = @STRIP@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
 WINDRES = @WINDRES@
+WSPIAPI_INCLUDE = @WSPIAPI_INCLUDE@
 XATTR_LIBS = @XATTR_LIBS@
 XGETTEXT = @XGETTEXT@
 XMLCATALOG = @XMLCATALOG@
@@ -988,7 +1435,6 @@ gio_INCLUDES = @gio_INCLUDES@
 glib_INCLUDES = @glib_INCLUDES@
 gmodule_INCLUDES = @gmodule_INCLUDES@
 gobject_INCLUDES = @gobject_INCLUDES@
-gthread_INCLUDES = @gthread_INCLUDES@
 host = @host@
 host_alias = @host_alias@
 host_cpu = @host_cpu@
@@ -1038,11 +1484,10 @@ EXTRA_DIST = socket-common.c org.gtk.test.gschema \
 	$(schema_tests) org.gtk.schemasourcecheck.gschema.xml \
 	appinfo-test.desktop appinfo-test2.desktop \
 	appinfo-test-gnome.desktop appinfo-test-notgnome.desktop \
-	gdbus-testserver.py test-codegen.xml cert1.pem cert2.pem \
-	cert3.pem key.pem key8.pem key-cert.pem cert-key.pem \
-	cert-list.pem nothing.pem test.gresource.xml test1.txt \
-	test2.gresource.xml test2.txt test3.gresource.xml test3.txt \
-	test4.gresource.xml $(NULL)
+	test-codegen.xml cert1.pem cert2.pem cert3.pem key.pem \
+	key8.pem key-cert.pem cert-key.pem cert-list.pem nothing.pem \
+	test.gresource.xml test1.txt test2.gresource.xml test2.txt \
+	test3.gresource.xml test3.txt test4.gresource.xml $(NULL)
 TEST_PROGS = io-stream memory-input-stream memory-output-stream \
 	readwrite g-file g-file-info converter-stream \
 	data-input-stream data-output-stream g-icon \
@@ -1052,20 +1497,23 @@ TEST_PROGS = io-stream memory-input-stream memory-output-stream \
 	gdbus-addresses network-address gdbus-message socket pollable \
 	tls-certificate tls-interaction cancellable vfs \
 	network-monitor fileattributematcher resources proxy-test \
-	inet-address permission $(NULL) $(am__append_1) \
-	$(am__append_2) $(am__append_4) $(am__append_5)
-SUBDIRS = gdbus-object-manager-example
-INCLUDES = \
-	-DG_LOG_DOMAIN=\"GLib-GIO\" \
-	$(gio_INCLUDES)		\
-	$(GLIB_DEBUG_FLAGS)	\
-	-I$(top_builddir)/gio	\
-	-I$(top_srcdir)/gio	\
-	$(DBUS1_CFLAGS)		\
-	-DSRCDIR=\""$(srcdir)"\"
+	simple-proxy inet-address permission task credentials $(NULL) \
+	$(am__append_1) $(am__append_2) $(am__append_4) \
+	$(am__append_5) gdbus-auth
+SUBDIRS = gdbus-object-manager-example services
+AM_CPPFLAGS = \
+	-DG_LOG_DOMAIN=\"GLib-GIO\" 	\
+	$(gio_INCLUDES)			\
+	$(GLIB_DEBUG_FLAGS)		\
+	-I$(top_builddir)/gio		\
+	-I$(top_srcdir)/gio		\
+	$(DBUS1_CFLAGS)			\
+	-DSRCDIR=\""$(srcdir)"\" 	\
+	-DTEST_SERVICES=\""$(abs_top_builddir)/gio/tests/services"\"
 
+AM_CFLAGS = $(GLIB_WARN_CFLAGS)
 noinst_DATA = $(MISC_STUFF)
-progs_ldadd = \
+LDADD = \
 	$(top_builddir)/glib/libglib-2.0.la 		\
 	$(top_builddir)/gthread/libgthread-2.0.la	\
 	$(top_builddir)/gobject/libgobject-2.0.la	\
@@ -1078,128 +1526,58 @@ SAMPLE_PROGS = resolver socket-server socket-client echo-server httpd \
 	gdbus-example-watch-proxy gdbus-example-server \
 	gdbus-example-subtree gdbus-example-peer \
 	gdbus-example-proxy-subclass gdbus-connection-flush-helper \
-	appinfo-test proxy gapplication-example-open \
-	gapplication-example-cmdline gapplication-example-cmdline2 \
-	gapplication-example-cmdline3 gapplication-example-actions \
-	gapplication-example-dbushooks gdbus-daemon $(NULL) \
-	$(am__append_3)
-io_stream_SOURCES = io-stream.c
-io_stream_LDADD = $(progs_ldadd)
+	proxy gapplication-example-open gapplication-example-cmdline \
+	gapplication-example-cmdline2 gapplication-example-cmdline3 \
+	gapplication-example-actions gapplication-example-dbushooks \
+	gdbus-daemon gdbus-testserver $(NULL) $(am__append_3)
+@PLATFORM_WIN32_TRUE@no_undefined = -no-undefined
 actions_SOURCES = actions.c gdbus-sessionbus.c gdbus-sessionbus.h
-actions_LDADD = $(progs_ldadd)
-memory_input_stream_SOURCES = memory-input-stream.c
-memory_input_stream_LDADD = $(progs_ldadd)
-memory_output_stream_SOURCES = memory-output-stream.c
-memory_output_stream_LDADD = $(progs_ldadd)
-g_file_SOURCES = g-file.c
-g_file_LDADD = $(progs_ldadd)
-readwrite_SOURCES = readwrite.c
-readwrite_LDADD = $(progs_ldadd)
-g_file_info_SOURCES = g-file-info.c
-g_file_info_LDADD = $(progs_ldadd)
-converter_stream_SOURCES = converter-stream.c
-converter_stream_LDADD = $(progs_ldadd)
-data_input_stream_SOURCES = data-input-stream.c
-data_input_stream_LDADD = $(progs_ldadd)
-data_output_stream_SOURCES = data-output-stream.c
-data_output_stream_LDADD = $(progs_ldadd)
-async_close_output_stream_SOURCES = async-close-output-stream.c
-async_close_output_stream_LDADD = $(progs_ldadd)
-filter_cat_SOURCES = filter-cat.c
-filter_cat_LDADD = $(progs_ldadd)
-g_icon_SOURCES = g-icon.c
-g_icon_LDADD = $(progs_ldadd)
-buffered_input_stream_SOURCES = buffered-input-stream.c
-buffered_input_stream_LDADD = $(progs_ldadd)
-buffered_output_stream_SOURCES = buffered-output-stream.c
-buffered_output_stream_LDADD = $(progs_ldadd)
-live_g_file_SOURCES = live-g-file.c
-live_g_file_LDADD = $(progs_ldadd)
-desktop_app_info_SOURCES = desktop-app-info.c
-desktop_app_info_LDADD = $(progs_ldadd)
-unix_streams_SOURCES = unix-streams.c
-unix_streams_LDADD = $(progs_ldadd) \
+unix_streams_LDADD = $(LDADD) \
 	$(top_builddir)/gthread/libgthread-2.0.la
 
-win32_streams_SOURCES = win32-streams.c
-win32_streams_LDADD = $(progs_ldadd) \
+win32_streams_LDADD = $(LDADD) \
 	$(top_builddir)/gthread/libgthread-2.0.la
 
-unix_fd_SOURCES = unix-fd.c
-unix_fd_LDADD = $(progs_ldadd)
-simple_async_result_SOURCES = simple-async-result.c
-simple_async_result_LDADD = $(progs_ldadd)
-sleepy_stream_SOURCES = sleepy-stream.c
-sleepy_stream_LDADD = $(progs_ldadd)
-filter_streams_SOURCES = filter-streams.c
-filter_streams_LDADD = $(progs_ldadd)
-volumemonitor_SOURCES = volumemonitor.c
-volumemonitor_LDADD = $(progs_ldadd)
-resolver_SOURCES = resolver.c
-resolver_LDADD = $(progs_ldadd) \
+resolver_LDADD = $(LDADD) \
 	$(top_builddir)/gthread/libgthread-2.0.la
 
-socket_server_SOURCES = socket-server.c
-socket_server_LDADD = $(progs_ldadd) \
+socket_server_LDADD = $(LDADD) \
 	$(top_builddir)/gthread/libgthread-2.0.la
 
 socket_client_SOURCES = socket-client.c \
                             gtlsconsoleinteraction.c \
                             gtlsconsoleinteraction.h
 
-socket_client_LDADD = $(progs_ldadd) \
+socket_client_LDADD = $(LDADD) \
 	$(top_builddir)/gthread/libgthread-2.0.la
 
-echo_server_SOURCES = echo-server.c
-echo_server_LDADD = $(progs_ldadd) \
+echo_server_LDADD = $(LDADD) \
 	$(top_builddir)/gthread/libgthread-2.0.la
 
-httpd_SOURCES = httpd.c
-httpd_LDADD = $(progs_ldadd) \
+httpd_LDADD = $(LDADD) \
 	$(top_builddir)/gthread/libgthread-2.0.la
 
-send_data_SOURCES = send-data.c
-send_data_LDADD = $(progs_ldadd) \
+send_data_LDADD = $(LDADD) \
 	$(top_builddir)/gthread/libgthread-2.0.la
 
-srvtarget_SOURCES = srvtarget.c
-srvtarget_LDADD = $(progs_ldadd)
-network_address_SOURCE = network-address.c
-network_address_LDADD = $(progs_ldadd)
-socket_SOURCE = socket.c
-socket_LDADD = $(progs_ldadd)
-pollable_SOURCE = pollable.c
-pollable_LDADD = $(progs_ldadd)
-contexts_SOURCES = contexts.c
-contexts_LDADD = $(progs_ldadd) \
+contexts_LDADD = $(LDADD) \
 	$(top_builddir)/gthread/libgthread-2.0.la
 
-gsettings_SOURCES = gsettings.c
-gsettings_LDADD = $(progs_ldadd)
-gschema_compile_SOURCES = gschema-compile.c
-gschema_compile_LDADD = $(progs_ldadd)
 gdbus_daemon_SOURCES = gdbus-daemon.c $(top_srcdir)/gio/gdbusdaemon.c $(top_builddir)/gio/gdbus-daemon-generated.c
-gdbus_daemon_LDADD = $(progs_ldadd)
+gdbus_testserver_SOURCES = gdbus-testserver.c
 @HAVE_DBUS1_TRUE@gdbus_serialization_SOURCES = gdbus-serialization.c gdbus-tests.h gdbus-tests.c
-@HAVE_DBUS1_TRUE@gdbus_serialization_CFLAGS = $(DBUS1_CFLAGS)
-@HAVE_DBUS1_TRUE@gdbus_serialization_LDADD = $(progs_ldadd) $(DBUS1_LIBS)
-@HAVE_DBUS1_TRUE@gdbus_auth_SOURCES = gdbus-auth.c gdbus-sessionbus.c gdbus-sessionbus.h gdbus-tests.h gdbus-tests.c
-@HAVE_DBUS1_TRUE@gdbus_auth_CFLAGS = $(DBUS1_CFLAGS)
-@HAVE_DBUS1_TRUE@gdbus_auth_LDADD = $(progs_ldadd) $(DBUS1_LIBS)
-gdbus_addresses_SOURCES = gdbus-addresses.c
-gdbus_addresses_LDADD = $(progs_ldadd)
+@HAVE_DBUS1_TRUE@gdbus_serialization_CFLAGS = $(AM_CFLAGS) $(DBUS1_CFLAGS)
+@HAVE_DBUS1_TRUE@gdbus_serialization_LDADD = $(LDADD) $(DBUS1_LIBS)
+gdbus_auth_SOURCES = gdbus-auth.c gdbus-sessionbus.c gdbus-sessionbus.h gdbus-tests.h gdbus-tests.c
+gdbus_auth_LDADD = $(LDADD)
 gdbus_bz627724_SOURCES = gdbus-bz627724.c gdbus-sessionbus.c gdbus-sessionbus.h gdbus-tests.h gdbus-tests.c
-gdbus_bz627724_LDADD = $(progs_ldadd)
 gdbus_close_pending_SOURCES = gdbus-close-pending.c gdbus-sessionbus.c gdbus-sessionbus.h gdbus-tests.h gdbus-tests.c
-gdbus_close_pending_LDADD = $(progs_ldadd)
 @OS_UNIX_TRUE@gdbus_test_codegen_SOURCES = gdbus-test-codegen.c \
 @OS_UNIX_TRUE@	gdbus-sessionbus.c gdbus-sessionbus.h \
 @OS_UNIX_TRUE@	gdbus-tests.h gdbus-tests.c \
 @OS_UNIX_TRUE@	gdbus-test-codegen-generated.c \
 @OS_UNIX_TRUE@	gdbus-test-codegen-generated.h
-@OS_UNIX_TRUE@gdbus_test_codegen_LDADD = $(progs_ldadd)
 gdbus_connection_SOURCES = gdbus-connection.c gdbus-sessionbus.c gdbus-sessionbus.h gdbus-tests.h gdbus-tests.c
-gdbus_connection_LDADD = $(progs_ldadd)
 gdbus_connection_flush_SOURCES = \
 	gdbus-connection-flush.c \
 	test-io-stream.c \
@@ -1208,29 +1586,16 @@ gdbus_connection_flush_SOURCES = \
 	test-pipe-unix.h \
 	$(NULL)
 
-gdbus_connection_flush_LDADD = $(progs_ldadd)
 gdbus_connection_loss_SOURCES = gdbus-connection-loss.c gdbus-sessionbus.c gdbus-sessionbus.h gdbus-tests.h gdbus-tests.c
-gdbus_connection_loss_LDADD = $(progs_ldadd)
 gdbus_connection_slow_SOURCES = gdbus-connection-slow.c gdbus-sessionbus.c gdbus-sessionbus.h gdbus-tests.h gdbus-tests.c
-gdbus_connection_slow_LDADD = $(progs_ldadd)
-gdbus_message_SOURCES = gdbus-message.c
-gdbus_message_LDADD = $(progs_ldadd)
 gdbus_names_SOURCES = gdbus-names.c gdbus-sessionbus.c gdbus-sessionbus.h gdbus-tests.h gdbus-tests.c
-gdbus_names_LDADD = $(progs_ldadd)
 gdbus_proxy_SOURCES = gdbus-proxy.c gdbus-sessionbus.c gdbus-sessionbus.h gdbus-tests.h gdbus-tests.c
-gdbus_proxy_LDADD = $(progs_ldadd)
 gdbus_proxy_threads_SOURCES = gdbus-proxy-threads.c gdbus-sessionbus.c gdbus-sessionbus.h gdbus-tests.h gdbus-tests.c
-gdbus_proxy_threads_LDADD = $(progs_ldadd)
 gdbus_proxy_well_known_name_SOURCES = gdbus-proxy-well-known-name.c gdbus-sessionbus.c gdbus-sessionbus.h gdbus-tests.h gdbus-tests.c
-gdbus_proxy_well_known_name_LDADD = $(progs_ldadd)
 gdbus_introspection_SOURCES = gdbus-introspection.c gdbus-sessionbus.c gdbus-sessionbus.h gdbus-tests.h gdbus-tests.c
-gdbus_introspection_LDADD = $(progs_ldadd)
 gdbus_threading_SOURCES = gdbus-threading.c gdbus-sessionbus.c gdbus-sessionbus.h gdbus-tests.h gdbus-tests.c
-gdbus_threading_LDADD = $(progs_ldadd)
 gdbus_export_SOURCES = gdbus-export.c gdbus-sessionbus.c gdbus-sessionbus.h gdbus-tests.h gdbus-tests.c
-gdbus_export_LDADD = $(progs_ldadd)
 gdbus_error_SOURCES = gdbus-error.c gdbus-sessionbus.c gdbus-sessionbus.h gdbus-tests.h gdbus-tests.c
-gdbus_error_LDADD = $(progs_ldadd)
 gdbus_non_socket_SOURCES = \
 	gdbus-non-socket.c \
 	gdbus-tests.c \
@@ -1241,67 +1606,11 @@ gdbus_non_socket_SOURCES = \
 	test-pipe-unix.h \
 	$(NULL)
 
-gdbus_non_socket_LDADD = $(progs_ldadd)
 gdbus_exit_on_close_SOURCES = gdbus-exit-on-close.c gdbus-sessionbus.c gdbus-sessionbus.h gdbus-tests.h gdbus-tests.c
-gdbus_exit_on_close_LDADD = $(progs_ldadd)
-gdbus_example_watch_name_SOURCES = gdbus-example-watch-name.c
-gdbus_example_watch_name_LDADD = $(progs_ldadd)
-gdbus_example_watch_proxy_SOURCES = gdbus-example-watch-proxy.c
-gdbus_example_watch_proxy_LDADD = $(progs_ldadd)
-gdbus_example_own_name_SOURCES = gdbus-example-own-name.c
-gdbus_example_own_name_LDADD = $(progs_ldadd)
-gdbus_example_server_SOURCES = gdbus-example-server.c
-gdbus_example_server_LDADD = $(progs_ldadd)
-gdbus_example_unix_fd_client_SOURCES = gdbus-example-unix-fd-client.c
-gdbus_example_unix_fd_client_LDADD = $(progs_ldadd)
-gdbus_example_subtree_SOURCES = gdbus-example-subtree.c
-gdbus_example_subtree_LDADD = $(progs_ldadd)
-gdbus_example_peer_SOURCES = gdbus-example-peer.c
-gdbus_example_peer_LDADD = $(progs_ldadd)
-gdbus_example_proxy_subclass_SOURCES = gdbus-example-proxy-subclass.c
-gdbus_example_proxy_subclass_LDADD = $(progs_ldadd)
-gdbus_example_export_SOURCES = gdbus-example-export.c
-gdbus_example_export_LDADD = $(progs_ldadd)
-gdbus_connection_flush_helper_SOURCES = gdbus-connection-flush-helper.c
-gdbus_connection_flush_helper_LDADD = $(progs_ldadd)
-appinfo_SOURCES = appinfo.c
-appinfo_LDADD = $(progs_ldadd)
 resources_SOURCES = resources.c test_resources.c test_resources2.c test_resources2.h
 resources_DEPENDENCIES = test.gresource
-resources_LDADD = $(progs_ldadd)
-appinfo_test_SOURCES = appinfo-test.c
-appinfo_test_LDADD = $(progs_ldadd)
-contenttype_SOURCES = contenttype.c
-contenttype_LDADD = $(progs_ldadd)
-mimeapps_SOURCES = mimeapps.c
-mimeapps_LDADD = $(progs_ldadd)
-file_SOURCES = file.c
-file_LDADD = $(progs_ldadd)
-fileattributematcher_SOURCES = fileattributematcher.c
-fileattributematcher_LDADD = $(progs_ldadd)
 gapplication_SOURCES = gapplication.c gdbus-sessionbus.h gdbus-sessionbus.c gdbus-tests.h gdbus-tests.c
-gapplication_LDADD = $(progs_ldadd)
-basic_application_LDADD = $(progs_ldadd)
-gapplication_example_open_SOURCES = gapplication-example-open.c
-gapplication_example_open_LDADD = $(progs_ldadd)
-gapplication_example_cmdline_SOURCES = gapplication-example-cmdline.c
-gapplication_example_cmdline_LDADD = $(progs_ldadd)
-gapplication_example_cmdline2_SOURCES = gapplication-example-cmdline2.c
-gapplication_example_cmdline2_LDADD = $(progs_ldadd)
-gapplication_example_cmdline3_SOURCES = gapplication-example-cmdline3.c
-gapplication_example_cmdline3_LDADD = $(progs_ldadd)
-gapplication_example_actions_SOURCES = gapplication-example-actions.c
-gapplication_example_actions_LDADD = $(progs_ldadd)
-gapplication_example_dbushooks_SOURCES = gapplication-example-dbushooks.c
-gapplication_example_dbushooks_LDADD = $(progs_ldadd)
 gmenumodel_SOURCES = gmenumodel.c gdbus-sessionbus.h gdbus-sessionbus.c
-gmenumodel_LDADD = $(progs_ldadd)
-proxy_test_SOURCES = proxy-test.c
-proxy_test_LDADD = $(progs_ldadd)
-inet_address_SOURCES = inet-address.c
-inet_address_LDADD = $(progs_ldadd)
-permission_SOURCES = permission.c
-permission_LDADD = $(progs_ldadd)
 schema_tests = \
 	schema-tests/array-default-not-in-choices.gschema.xml		\
 	schema-tests/bad-choice.gschema.xml				\
@@ -1375,34 +1684,29 @@ schema_tests = \
 	schema-tests/range.gschema.xml					\
 	schema-tests/wrong-category.gschema.xml
 
-proxy_SOURCES = proxy.c
-proxy_LDADD = $(progs_ldadd) \
+proxy_LDADD = $(LDADD) \
 	$(top_builddir)/gthread/libgthread-2.0.la
 
 tls_certificate_SOURCES = tls-certificate.c gtesttlsbackend.c gtesttlsbackend.h
-tls_certificate_LDADD = $(progs_ldadd)
-tls_interaction_LDADD = $(progs_ldadd)
-cancellable_LDADD = $(progs_ldadd)
-vfs_LDADD = $(progs_ldadd)
-network_monitor_LDADD = $(progs_ldadd)
 
 # -----------------------------------------------------------------------------
-@OS_UNIX_TRUE@gdbus_example_objectmanager_server_SOURCES = gdbus-example-objectmanager-server.c
-@OS_UNIX_TRUE@gdbus_example_objectmanager_server_CFLAGS = -I$(top_builddir)/gio/tests/gdbus-object-manager-example
-@OS_UNIX_TRUE@gdbus_example_objectmanager_server_LDADD = $(top_builddir)/gio/tests/gdbus-object-manager-example/libgdbus-example-objectmanager.la $(progs_ldadd)
-@OS_UNIX_TRUE@gdbus_example_objectmanager_client_SOURCES = gdbus-example-objectmanager-client.c
-@OS_UNIX_TRUE@gdbus_example_objectmanager_client_CFLAGS = -I$(top_builddir)/gio/tests/gdbus-object-manager-example
-@OS_UNIX_TRUE@gdbus_example_objectmanager_client_LDADD = $(top_builddir)/gio/tests/gdbus-object-manager-example/libgdbus-example-objectmanager.la $(progs_ldadd)
+@OS_UNIX_TRUE@gdbus_example_objectmanager_server_CFLAGS = $(AM_CFLAGS) -I$(top_builddir)/gio/tests/gdbus-object-manager-example
+@OS_UNIX_TRUE@gdbus_example_objectmanager_server_LDADD = $(top_builddir)/gio/tests/gdbus-object-manager-example/libgdbus-example-objectmanager.la $(LDADD)
+@OS_UNIX_TRUE@gdbus_example_objectmanager_client_CFLAGS = $(AM_CFLAGS) -I$(top_builddir)/gio/tests/gdbus-object-manager-example
+@OS_UNIX_TRUE@gdbus_example_objectmanager_client_LDADD = $(top_builddir)/gio/tests/gdbus-object-manager-example/libgdbus-example-objectmanager.la $(LDADD)
 @OS_UNIX_TRUE@gdbus_peer_SOURCES = gdbus-peer.c gdbus-tests.h gdbus-tests.c
-@OS_UNIX_TRUE@gdbus_peer_CFLAGS = -I$(top_builddir)/gio/tests/gdbus-object-manager-example
-@OS_UNIX_TRUE@gdbus_peer_LDADD = $(top_builddir)/gio/tests/gdbus-object-manager-example/libgdbus-example-objectmanager.la $(progs_ldadd)
+@OS_UNIX_TRUE@gdbus_peer_CFLAGS = $(AM_CFLAGS) -I$(top_builddir)/gio/tests/gdbus-object-manager-example
+@OS_UNIX_TRUE@gdbus_peer_LDADD = $(top_builddir)/gio/tests/gdbus-object-manager-example/libgdbus-example-objectmanager.la $(LDADD)
+@OS_UNIX_TRUE@gdbus_test_fixture_SOURCES = gdbus-test-fixture.c
+@OS_UNIX_TRUE@gdbus_test_fixture_CFLAGS = $(AM_CFLAGS) -I$(top_builddir)/gio/tests/gdbus-object-manager-example
+@OS_UNIX_TRUE@gdbus_test_fixture_LDADD = $(top_builddir)/gio/tests/gdbus-object-manager-example/libgdbus-example-objectmanager.la $(LDADD)
 MISC_STUFF = test.mo test.gresource
 @CROSS_COMPILING_FALSE@glib_compile_resources = $(top_builddir)/gio/glib-compile-resources
 @CROSS_COMPILING_TRUE@glib_compile_resources = $(GLIB_COMPILE_RESOURCES)
 noinst_LTLIBRARIES = libresourceplugin.la
 libresourceplugin_la_SOURCES = resourceplugin.c plugin_resources.c
 libresourceplugin_la_LDFLAGS = -avoid-version -module $(no_undefined) -rpath $(libdir)
-libresourceplugin_la_LIBADD = $(progs_ldadd)
+libresourceplugin_la_LIBADD = $(LDADD)
 CLEANFILES = gdbus-test-codegen-generated.[ch] gdbus-test-codegen-generated-doc-*.xml test_resources2.[ch] plugin_resources.c
 DISTCLEANFILES = \
 	applications/mimeinfo.cache	\
@@ -1506,6 +1810,9 @@ contexts$(EXEEXT): $(contexts_OBJECTS) $(contexts_DEPENDENCIES) $(EXTRA_contexts
 converter-stream$(EXEEXT): $(converter_stream_OBJECTS) $(converter_stream_DEPENDENCIES) $(EXTRA_converter_stream_DEPENDENCIES) 
 	@rm -f converter-stream$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(converter_stream_OBJECTS) $(converter_stream_LDADD) $(LIBS)
+credentials$(EXEEXT): $(credentials_OBJECTS) $(credentials_DEPENDENCIES) $(EXTRA_credentials_DEPENDENCIES) 
+	@rm -f credentials$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(credentials_OBJECTS) $(credentials_LDADD) $(LIBS)
 data-input-stream$(EXEEXT): $(data_input_stream_OBJECTS) $(data_input_stream_DEPENDENCIES) $(EXTRA_data_input_stream_DEPENDENCIES) 
 	@rm -f data-input-stream$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(data_input_stream_OBJECTS) $(data_input_stream_LDADD) $(LIBS)
@@ -1565,7 +1872,7 @@ gdbus-addresses$(EXEEXT): $(gdbus_addresses_OBJECTS) $(gdbus_addresses_DEPENDENC
 	$(AM_V_CCLD)$(LINK) $(gdbus_addresses_OBJECTS) $(gdbus_addresses_LDADD) $(LIBS)
 gdbus-auth$(EXEEXT): $(gdbus_auth_OBJECTS) $(gdbus_auth_DEPENDENCIES) $(EXTRA_gdbus_auth_DEPENDENCIES) 
 	@rm -f gdbus-auth$(EXEEXT)
-	$(AM_V_CCLD)$(gdbus_auth_LINK) $(gdbus_auth_OBJECTS) $(gdbus_auth_LDADD) $(LIBS)
+	$(AM_V_CCLD)$(LINK) $(gdbus_auth_OBJECTS) $(gdbus_auth_LDADD) $(LIBS)
 gdbus-bz627724$(EXEEXT): $(gdbus_bz627724_OBJECTS) $(gdbus_bz627724_DEPENDENCIES) $(EXTRA_gdbus_bz627724_DEPENDENCIES) 
 	@rm -f gdbus-bz627724$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(gdbus_bz627724_OBJECTS) $(gdbus_bz627724_LDADD) $(LIBS)
@@ -1647,6 +1954,9 @@ gdbus-non-socket$(EXEEXT): $(gdbus_non_socket_OBJECTS) $(gdbus_non_socket_DEPEND
 gdbus-peer$(EXEEXT): $(gdbus_peer_OBJECTS) $(gdbus_peer_DEPENDENCIES) $(EXTRA_gdbus_peer_DEPENDENCIES) 
 	@rm -f gdbus-peer$(EXEEXT)
 	$(AM_V_CCLD)$(gdbus_peer_LINK) $(gdbus_peer_OBJECTS) $(gdbus_peer_LDADD) $(LIBS)
+gdbus-peer-object-manager$(EXEEXT): $(gdbus_peer_object_manager_OBJECTS) $(gdbus_peer_object_manager_DEPENDENCIES) $(EXTRA_gdbus_peer_object_manager_DEPENDENCIES) 
+	@rm -f gdbus-peer-object-manager$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(gdbus_peer_object_manager_OBJECTS) $(gdbus_peer_object_manager_LDADD) $(LIBS)
 gdbus-proxy$(EXEEXT): $(gdbus_proxy_OBJECTS) $(gdbus_proxy_DEPENDENCIES) $(EXTRA_gdbus_proxy_DEPENDENCIES) 
 	@rm -f gdbus-proxy$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(gdbus_proxy_OBJECTS) $(gdbus_proxy_LDADD) $(LIBS)
@@ -1662,6 +1972,12 @@ gdbus-serialization$(EXEEXT): $(gdbus_serialization_OBJECTS) $(gdbus_serializati
 gdbus-test-codegen$(EXEEXT): $(gdbus_test_codegen_OBJECTS) $(gdbus_test_codegen_DEPENDENCIES) $(EXTRA_gdbus_test_codegen_DEPENDENCIES) 
 	@rm -f gdbus-test-codegen$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(gdbus_test_codegen_OBJECTS) $(gdbus_test_codegen_LDADD) $(LIBS)
+gdbus-test-fixture$(EXEEXT): $(gdbus_test_fixture_OBJECTS) $(gdbus_test_fixture_DEPENDENCIES) $(EXTRA_gdbus_test_fixture_DEPENDENCIES) 
+	@rm -f gdbus-test-fixture$(EXEEXT)
+	$(AM_V_CCLD)$(gdbus_test_fixture_LINK) $(gdbus_test_fixture_OBJECTS) $(gdbus_test_fixture_LDADD) $(LIBS)
+gdbus-testserver$(EXEEXT): $(gdbus_testserver_OBJECTS) $(gdbus_testserver_DEPENDENCIES) $(EXTRA_gdbus_testserver_DEPENDENCIES) 
+	@rm -f gdbus-testserver$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(gdbus_testserver_OBJECTS) $(gdbus_testserver_LDADD) $(LIBS)
 gdbus-threading$(EXEEXT): $(gdbus_threading_OBJECTS) $(gdbus_threading_DEPENDENCIES) $(EXTRA_gdbus_threading_DEPENDENCIES) 
 	@rm -f gdbus-threading$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(gdbus_threading_OBJECTS) $(gdbus_threading_LDADD) $(LIBS)
@@ -1728,6 +2044,9 @@ send-data$(EXEEXT): $(send_data_OBJECTS) $(send_data_DEPENDENCIES) $(EXTRA_send_
 simple-async-result$(EXEEXT): $(simple_async_result_OBJECTS) $(simple_async_result_DEPENDENCIES) $(EXTRA_simple_async_result_DEPENDENCIES) 
 	@rm -f simple-async-result$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(simple_async_result_OBJECTS) $(simple_async_result_LDADD) $(LIBS)
+simple-proxy$(EXEEXT): $(simple_proxy_OBJECTS) $(simple_proxy_DEPENDENCIES) $(EXTRA_simple_proxy_DEPENDENCIES) 
+	@rm -f simple-proxy$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(simple_proxy_OBJECTS) $(simple_proxy_LDADD) $(LIBS)
 sleepy-stream$(EXEEXT): $(sleepy_stream_OBJECTS) $(sleepy_stream_DEPENDENCIES) $(EXTRA_sleepy_stream_DEPENDENCIES) 
 	@rm -f sleepy-stream$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(sleepy_stream_OBJECTS) $(sleepy_stream_LDADD) $(LIBS)
@@ -1743,6 +2062,9 @@ socket-server$(EXEEXT): $(socket_server_OBJECTS) $(socket_server_DEPENDENCIES) $
 srvtarget$(EXEEXT): $(srvtarget_OBJECTS) $(srvtarget_DEPENDENCIES) $(EXTRA_srvtarget_DEPENDENCIES) 
 	@rm -f srvtarget$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(srvtarget_OBJECTS) $(srvtarget_LDADD) $(LIBS)
+task$(EXEEXT): $(task_OBJECTS) $(task_DEPENDENCIES) $(EXTRA_task_DEPENDENCIES) 
+	@rm -f task$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(task_OBJECTS) $(task_LDADD) $(LIBS)
 tls-certificate$(EXEEXT): $(tls_certificate_OBJECTS) $(tls_certificate_DEPENDENCIES) $(EXTRA_tls_certificate_DEPENDENCIES) 
 	@rm -f tls-certificate$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(tls_certificate_OBJECTS) $(tls_certificate_LDADD) $(LIBS)
@@ -1782,6 +2104,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/contenttype.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/contexts.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/converter-stream.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/credentials.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/data-input-stream.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/data-output-stream.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/desktop-app-info.Po@am__quote@
@@ -1801,6 +2124,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gapplication-example-open.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gapplication.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus-addresses.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus-auth.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus-bz627724.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus-close-pending.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus-connection-flush-helper.Po@am__quote@
@@ -1826,6 +2150,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus-message.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus-names.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus-non-socket.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus-peer-object-manager.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus-proxy-threads.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus-proxy-well-known-name.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus-proxy.Po@am__quote@
@@ -1833,16 +2158,15 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus-test-codegen-generated.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus-test-codegen.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus-tests.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus-testserver.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus-threading.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus_auth-gdbus-auth.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus_auth-gdbus-sessionbus.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus_auth-gdbus-tests.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus_example_objectmanager_client-gdbus-example-objectmanager-client.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus_example_objectmanager_server-gdbus-example-objectmanager-server.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus_peer-gdbus-peer.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus_peer-gdbus-tests.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus_serialization-gdbus-serialization.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus_serialization-gdbus-tests.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus_test_fixture-gdbus-test-fixture.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbusdaemon.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gmenumodel.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gschema-compile.Po@am__quote@
@@ -1869,11 +2193,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/resources.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/send-data.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/simple-async-result.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/simple-proxy.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/sleepy-stream.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/socket-client.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/socket-server.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/socket.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/srvtarget.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/task.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-io-stream.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test-pipe-unix.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/test_resources.Po@am__quote@
@@ -1906,48 +2232,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
-
-gdbus_auth-gdbus-auth.o: gdbus-auth.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gdbus_auth_CFLAGS) $(CFLAGS) -MT gdbus_auth-gdbus-auth.o -MD -MP -MF $(DEPDIR)/gdbus_auth-gdbus-auth.Tpo -c -o gdbus_auth-gdbus-auth.o `test -f 'gdbus-auth.c' || echo '$(srcdir)/'`gdbus-auth.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/gdbus_auth-gdbus-auth.Tpo $(DEPDIR)/gdbus_auth-gdbus-auth.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gdbus-auth.c' object='gdbus_auth-gdbus-auth.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gdbus_auth_CFLAGS) $(CFLAGS) -c -o gdbus_auth-gdbus-auth.o `test -f 'gdbus-auth.c' || echo '$(srcdir)/'`gdbus-auth.c
-
-gdbus_auth-gdbus-auth.obj: gdbus-auth.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gdbus_auth_CFLAGS) $(CFLAGS) -MT gdbus_auth-gdbus-auth.obj -MD -MP -MF $(DEPDIR)/gdbus_auth-gdbus-auth.Tpo -c -o gdbus_auth-gdbus-auth.obj `if test -f 'gdbus-auth.c'; then $(CYGPATH_W) 'gdbus-auth.c'; else $(CYGPATH_W) '$(srcdir)/gdbus-auth.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/gdbus_auth-gdbus-auth.Tpo $(DEPDIR)/gdbus_auth-gdbus-auth.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gdbus-auth.c' object='gdbus_auth-gdbus-auth.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gdbus_auth_CFLAGS) $(CFLAGS) -c -o gdbus_auth-gdbus-auth.obj `if test -f 'gdbus-auth.c'; then $(CYGPATH_W) 'gdbus-auth.c'; else $(CYGPATH_W) '$(srcdir)/gdbus-auth.c'; fi`
-
-gdbus_auth-gdbus-sessionbus.o: gdbus-sessionbus.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gdbus_auth_CFLAGS) $(CFLAGS) -MT gdbus_auth-gdbus-sessionbus.o -MD -MP -MF $(DEPDIR)/gdbus_auth-gdbus-sessionbus.Tpo -c -o gdbus_auth-gdbus-sessionbus.o `test -f 'gdbus-sessionbus.c' || echo '$(srcdir)/'`gdbus-sessionbus.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/gdbus_auth-gdbus-sessionbus.Tpo $(DEPDIR)/gdbus_auth-gdbus-sessionbus.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gdbus-sessionbus.c' object='gdbus_auth-gdbus-sessionbus.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gdbus_auth_CFLAGS) $(CFLAGS) -c -o gdbus_auth-gdbus-sessionbus.o `test -f 'gdbus-sessionbus.c' || echo '$(srcdir)/'`gdbus-sessionbus.c
-
-gdbus_auth-gdbus-sessionbus.obj: gdbus-sessionbus.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gdbus_auth_CFLAGS) $(CFLAGS) -MT gdbus_auth-gdbus-sessionbus.obj -MD -MP -MF $(DEPDIR)/gdbus_auth-gdbus-sessionbus.Tpo -c -o gdbus_auth-gdbus-sessionbus.obj `if test -f 'gdbus-sessionbus.c'; then $(CYGPATH_W) 'gdbus-sessionbus.c'; else $(CYGPATH_W) '$(srcdir)/gdbus-sessionbus.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/gdbus_auth-gdbus-sessionbus.Tpo $(DEPDIR)/gdbus_auth-gdbus-sessionbus.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gdbus-sessionbus.c' object='gdbus_auth-gdbus-sessionbus.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gdbus_auth_CFLAGS) $(CFLAGS) -c -o gdbus_auth-gdbus-sessionbus.obj `if test -f 'gdbus-sessionbus.c'; then $(CYGPATH_W) 'gdbus-sessionbus.c'; else $(CYGPATH_W) '$(srcdir)/gdbus-sessionbus.c'; fi`
-
-gdbus_auth-gdbus-tests.o: gdbus-tests.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gdbus_auth_CFLAGS) $(CFLAGS) -MT gdbus_auth-gdbus-tests.o -MD -MP -MF $(DEPDIR)/gdbus_auth-gdbus-tests.Tpo -c -o gdbus_auth-gdbus-tests.o `test -f 'gdbus-tests.c' || echo '$(srcdir)/'`gdbus-tests.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/gdbus_auth-gdbus-tests.Tpo $(DEPDIR)/gdbus_auth-gdbus-tests.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gdbus-tests.c' object='gdbus_auth-gdbus-tests.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gdbus_auth_CFLAGS) $(CFLAGS) -c -o gdbus_auth-gdbus-tests.o `test -f 'gdbus-tests.c' || echo '$(srcdir)/'`gdbus-tests.c
-
-gdbus_auth-gdbus-tests.obj: gdbus-tests.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gdbus_auth_CFLAGS) $(CFLAGS) -MT gdbus_auth-gdbus-tests.obj -MD -MP -MF $(DEPDIR)/gdbus_auth-gdbus-tests.Tpo -c -o gdbus_auth-gdbus-tests.obj `if test -f 'gdbus-tests.c'; then $(CYGPATH_W) 'gdbus-tests.c'; else $(CYGPATH_W) '$(srcdir)/gdbus-tests.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/gdbus_auth-gdbus-tests.Tpo $(DEPDIR)/gdbus_auth-gdbus-tests.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gdbus-tests.c' object='gdbus_auth-gdbus-tests.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gdbus_auth_CFLAGS) $(CFLAGS) -c -o gdbus_auth-gdbus-tests.obj `if test -f 'gdbus-tests.c'; then $(CYGPATH_W) 'gdbus-tests.c'; else $(CYGPATH_W) '$(srcdir)/gdbus-tests.c'; fi`
 
 gdbusdaemon.o: $(top_srcdir)/gio/gdbusdaemon.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gdbusdaemon.o -MD -MP -MF $(DEPDIR)/gdbusdaemon.Tpo -c -o gdbusdaemon.o `test -f '$(top_srcdir)/gio/gdbusdaemon.c' || echo '$(srcdir)/'`$(top_srcdir)/gio/gdbusdaemon.c
@@ -2060,6 +2344,20 @@ gdbus_serialization-gdbus-tests.obj: gdbus-tests.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gdbus-tests.c' object='gdbus_serialization-gdbus-tests.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gdbus_serialization_CFLAGS) $(CFLAGS) -c -o gdbus_serialization-gdbus-tests.obj `if test -f 'gdbus-tests.c'; then $(CYGPATH_W) 'gdbus-tests.c'; else $(CYGPATH_W) '$(srcdir)/gdbus-tests.c'; fi`
+
+gdbus_test_fixture-gdbus-test-fixture.o: gdbus-test-fixture.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gdbus_test_fixture_CFLAGS) $(CFLAGS) -MT gdbus_test_fixture-gdbus-test-fixture.o -MD -MP -MF $(DEPDIR)/gdbus_test_fixture-gdbus-test-fixture.Tpo -c -o gdbus_test_fixture-gdbus-test-fixture.o `test -f 'gdbus-test-fixture.c' || echo '$(srcdir)/'`gdbus-test-fixture.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/gdbus_test_fixture-gdbus-test-fixture.Tpo $(DEPDIR)/gdbus_test_fixture-gdbus-test-fixture.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gdbus-test-fixture.c' object='gdbus_test_fixture-gdbus-test-fixture.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gdbus_test_fixture_CFLAGS) $(CFLAGS) -c -o gdbus_test_fixture-gdbus-test-fixture.o `test -f 'gdbus-test-fixture.c' || echo '$(srcdir)/'`gdbus-test-fixture.c
+
+gdbus_test_fixture-gdbus-test-fixture.obj: gdbus-test-fixture.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gdbus_test_fixture_CFLAGS) $(CFLAGS) -MT gdbus_test_fixture-gdbus-test-fixture.obj -MD -MP -MF $(DEPDIR)/gdbus_test_fixture-gdbus-test-fixture.Tpo -c -o gdbus_test_fixture-gdbus-test-fixture.obj `if test -f 'gdbus-test-fixture.c'; then $(CYGPATH_W) 'gdbus-test-fixture.c'; else $(CYGPATH_W) '$(srcdir)/gdbus-test-fixture.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/gdbus_test_fixture-gdbus-test-fixture.Tpo $(DEPDIR)/gdbus_test_fixture-gdbus-test-fixture.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gdbus-test-fixture.c' object='gdbus_test_fixture-gdbus-test-fixture.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gdbus_test_fixture_CFLAGS) $(CFLAGS) -c -o gdbus_test_fixture-gdbus-test-fixture.obj `if test -f 'gdbus-test-fixture.c'; then $(CYGPATH_W) 'gdbus-test-fixture.c'; else $(CYGPATH_W) '$(srcdir)/gdbus-test-fixture.c'; fi`
 
 mostlyclean-libtool:
 	-rm -f *.lo

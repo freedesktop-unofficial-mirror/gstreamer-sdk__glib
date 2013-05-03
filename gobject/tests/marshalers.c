@@ -1,3 +1,4 @@
+#include "marshalers.h"
 
 #include	<glib-object.h>
 

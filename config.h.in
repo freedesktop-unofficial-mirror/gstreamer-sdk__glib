@@ -75,9 +75,6 @@
    */
 #undef HAVE_ALLOCA_H
 
-/* Define to 1 if you have the <arpa/nameser_compat.h> header file. */
-#undef HAVE_ARPA_NAMESER_COMPAT_H
-
 /* Define to 1 if you have the `atexit' function. */
 #undef HAVE_ATEXIT
 
@@ -241,6 +238,12 @@
 /* Define to 1 if you have the `issetugid' function. */
 #undef HAVE_ISSETUGID
 
+/* Define to 1 if you have the `kevent' function. */
+#undef HAVE_KEVENT
+
+/* Define to 1 if you have the `kqueue' function. */
+#undef HAVE_KQUEUE
+
 /* Define if you have <langinfo.h> and nl_langinfo(CODESET). */
 #undef HAVE_LANGINFO_CODESET
 
@@ -315,9 +318,6 @@
 
 /* Define to 1 if you have the <ndir.h> header file, and it defines `DIR'. */
 #undef HAVE_NDIR_H
-
-/* Define to 1 if you have the <netdb.h> header file. */
-#undef HAVE_NETDB_H
 
 /* We have AF_NETLINK sockets */
 #undef HAVE_NETLINK
@@ -494,9 +494,15 @@
 /* Define to 1 if you have the `symlink' function. */
 #undef HAVE_SYMLINK
 
+/* Define to 1 if you have the `sysctlbyname' function. */
+#undef HAVE_SYSCTLBYNAME
+
 /* Define to 1 if you have the <sys/dir.h> header file, and it defines `DIR'.
    */
 #undef HAVE_SYS_DIR_H
+
+/* Define to 1 if you have the <sys/event.h> header file. */
+#undef HAVE_SYS_EVENT_H
 
 /* Define to 1 if you have the <sys/filio.h> header file. */
 #undef HAVE_SYS_FILIO_H
@@ -619,9 +625,6 @@
 
 /* Have a working bcopy */
 #undef HAVE_WORKING_BCOPY
-
-/* Define to 1 if you have the <wspiapi.h> header file. */
-#undef HAVE_WSPIAPI_H
 
 /* Define to 1 if xattr is available */
 #undef HAVE_XATTR
@@ -748,11 +751,17 @@
 /* Number of bits in a file offset, on hosts where this is settable. */
 #undef _FILE_OFFSET_BITS
 
+/* defines how to decorate public symbols while building */
+#undef _GLIB_EXTERN
+
 /* Make all glibc extensions visible */
 #undef _GNU_SOURCE
 
 /* Define for large files, on AIX-style hosts. */
 #undef _LARGE_FILES
+
+/* Target the Windows XP API */
+#undef _WIN32_WINNT
 
 /* Needed to get declarations for msg_control and msg_controllen on Solaris */
 #undef _XOPEN_SOURCE
@@ -762,6 +771,9 @@
 
 /* Needed to get declarations for msg_control and msg_controllen on Solaris */
 #undef __EXTENSIONS__
+
+/* compiler supports atomic operations */
+#undef __GCC_HAVE_SYNC_COMPARE_AND_SWAP_4
 
 /* Define to empty if `const' does not conform to ANSI C. */
 #undef const

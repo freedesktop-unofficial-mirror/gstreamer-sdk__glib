@@ -53,11 +53,11 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 DIST_COMMON = README $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
-	$(top_srcdir)/Makefile.decl $(top_srcdir)/depcomp \
-	$(top_srcdir)/mkinstalldirs
+	$(top_srcdir)/Makefile.decl $(top_srcdir)/depcomp
 subdir = glib/libcharset
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/m4macros/gtk-doc.m4 \
+am__aclocal_m4_deps = $(top_srcdir)/m4macros/attributes.m4 \
+	$(top_srcdir)/m4macros/gtk-doc.m4 \
 	$(top_srcdir)/m4macros/libtool.m4 \
 	$(top_srcdir)/m4macros/ltoptions.m4 \
 	$(top_srcdir)/m4macros/ltsugar.m4 \
@@ -70,18 +70,21 @@ am__aclocal_m4_deps = $(top_srcdir)/m4macros/gtk-doc.m4 \
 	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
-mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 LTLIBRARIES = $(noinst_LTLIBRARIES)
 libcharset_la_LIBADD =
-am_libcharset_la_OBJECTS = localcharset.lo
+am_libcharset_la_OBJECTS = libcharset_la-localcharset.lo
 libcharset_la_OBJECTS = $(am_libcharset_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
 am__v_lt_1 = 
+libcharset_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(libcharset_la_CFLAGS) \
+	$(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -178,6 +181,7 @@ GLIB_COMPILE_SCHEMAS = @GLIB_COMPILE_SCHEMAS@
 GLIB_DEBUG_FLAGS = @GLIB_DEBUG_FLAGS@
 GLIB_EXTRA_CFLAGS = @GLIB_EXTRA_CFLAGS@
 GLIB_GENMARSHAL = @GLIB_GENMARSHAL@
+GLIB_HIDDEN_VISIBILITY_CFLAGS = @GLIB_HIDDEN_VISIBILITY_CFLAGS@
 GLIB_INTERFACE_AGE = @GLIB_INTERFACE_AGE@
 GLIB_LINK_FLAGS = @GLIB_LINK_FLAGS@
 GLIB_MAJOR_VERSION = @GLIB_MAJOR_VERSION@
@@ -185,6 +189,7 @@ GLIB_MICRO_VERSION = @GLIB_MICRO_VERSION@
 GLIB_MINOR_VERSION = @GLIB_MINOR_VERSION@
 GLIB_RUNTIME_LIBDIR = @GLIB_RUNTIME_LIBDIR@
 GLIB_VERSION = @GLIB_VERSION@
+GLIB_WARN_CFLAGS = @GLIB_WARN_CFLAGS@
 GLIB_WIN32_STATIC_COMPILATION_DEFINE = @GLIB_WIN32_STATIC_COMPILATION_DEFINE@
 GMOFILES = @GMOFILES@
 GMSGFMT = @GMSGFMT@
@@ -229,7 +234,6 @@ LIBFFI_LIBS = @LIBFFI_LIBS@
 LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
 LIBTOOL = @LIBTOOL@
-LIBTOOL_EXPORT_OPTIONS = @LIBTOOL_EXPORT_OPTIONS@
 LIB_EXE_MACHINE_FLAG = @LIB_EXE_MACHINE_FLAG@
 LIPO = @LIPO@
 LN_S = @LN_S@
@@ -248,6 +252,7 @@ MKDIR_P = @MKDIR_P@
 MKINSTALLDIRS = @MKINSTALLDIRS@
 MSGFMT = @MSGFMT@
 MSGFMT_OPTS = @MSGFMT_OPTS@
+NAMESER_COMPAT_INCLUDE = @NAMESER_COMPAT_INCLUDE@
 NETWORK_LIBS = @NETWORK_LIBS@
 NM = @NM@
 NMEDIT = @NMEDIT@
@@ -293,6 +298,7 @@ STRIP = @STRIP@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
 WINDRES = @WINDRES@
+WSPIAPI_INCLUDE = @WSPIAPI_INCLUDE@
 XATTR_LIBS = @XATTR_LIBS@
 XGETTEXT = @XGETTEXT@
 XMLCATALOG = @XMLCATALOG@
@@ -330,7 +336,6 @@ gio_INCLUDES = @gio_INCLUDES@
 glib_INCLUDES = @glib_INCLUDES@
 gmodule_INCLUDES = @gmodule_INCLUDES@
 gobject_INCLUDES = @gobject_INCLUDES@
-gthread_INCLUDES = @gthread_INCLUDES@
 host = @host@
 host_alias = @host_alias@
 host_cpu = @host_cpu@
@@ -373,10 +378,12 @@ GTESTER_REPORT = $(top_builddir)/glib/gtester-report	# for the GLIB package
 EXTRA_DIST = README config.charset ref-add.sin ref-del.sin glibc21.m4 \
 	codeset.m4 update.sh make-patch.sh libcharset-glib.patch
 TEST_PROGS = 
-INCLUDES = \
-	-DLIBDIR=\"$(libdir)\" $(config_h_INCLUDES)
+AM_CPPFLAGS = \
+	-DLIBDIR=\"$(libdir)\" 		\
+	$(config_h_INCLUDES)
 
 noinst_LTLIBRARIES = libcharset.la
+libcharset_la_CFLAGS = $(GLIB_HIDDEN_VISIBILITY_CFLAGS)
 libcharset_la_SOURCES = \
 	libcharset.h		\
 	localcharset.h		\
@@ -433,7 +440,7 @@ clean-noinstLTLIBRARIES:
 	  rm -f $${locs}; \
 	}
 libcharset.la: $(libcharset_la_OBJECTS) $(libcharset_la_DEPENDENCIES) $(EXTRA_libcharset_la_DEPENDENCIES) 
-	$(AM_V_CCLD)$(LINK)  $(libcharset_la_OBJECTS) $(libcharset_la_LIBADD) $(LIBS)
+	$(AM_V_CCLD)$(libcharset_la_LINK)  $(libcharset_la_OBJECTS) $(libcharset_la_LIBADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -441,7 +448,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/localcharset.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libcharset_la-localcharset.Plo@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -463,6 +470,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
+
+libcharset_la-localcharset.lo: localcharset.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libcharset_la_CFLAGS) $(CFLAGS) -MT libcharset_la-localcharset.lo -MD -MP -MF $(DEPDIR)/libcharset_la-localcharset.Tpo -c -o libcharset_la-localcharset.lo `test -f 'localcharset.c' || echo '$(srcdir)/'`localcharset.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libcharset_la-localcharset.Tpo $(DEPDIR)/libcharset_la-localcharset.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='localcharset.c' object='libcharset_la-localcharset.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libcharset_la_CFLAGS) $(CFLAGS) -c -o libcharset_la-localcharset.lo `test -f 'localcharset.c' || echo '$(srcdir)/'`localcharset.c
 
 mostlyclean-libtool:
 	-rm -f *.lo

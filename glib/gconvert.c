@@ -43,7 +43,7 @@
 
 #include "gconvert.h"
 
-#include "gcharset.h"
+#include "gcharsetprivate.h"
 #include "gslist.h"
 #include "gstrfuncs.h"
 #include "gtestutils.h"
@@ -229,7 +229,7 @@ try_to_aliases (const char **to_aliases,
   return FALSE;
 }
 
-G_GNUC_INTERNAL extern const char ** 
+extern const char **
 _g_charset_get_aliases (const char *canonical_name);
 
 /**

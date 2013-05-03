@@ -43,9 +43,11 @@
 
 #include "gspawn.h"
 #include "gthread.h"
+#include "glib/gstdio.h"
 
 #include "genviron.h"
 #include "gmem.h"
+#include "gmain.h"
 #include "gshell.h"
 #include "gstring.h"
 #include "gstrfuncs.h"
@@ -149,23 +151,16 @@ g_spawn_async (const gchar          *working_directory,
  * on a file descriptor twice, and another thread has
  * re-opened it since the first close)
  */
-static gint
+static void
 close_and_invalidate (gint *fd)
 {
-  gint ret;
-
   if (*fd < 0)
-    return -1;
+    return;
   else
     {
-    again:
-      ret = close (*fd);
-      if (ret == -1 && errno == EINTR)
-	goto again;
+      (void) g_close (*fd, NULL);
       *fd = -1;
     }
-
-  return ret;
 }
 
 /* Some versions of OS X define READ_OK in public headers */
@@ -210,6 +205,21 @@ read_data (GString *str,
 
       return READ_FAILED;
     }
+}
+
+typedef struct {
+  GMainLoop *loop;
+  gint *status_p;
+} SyncWaitpidData;
+
+static void
+on_sync_waitpid (GPid     pid,
+                 gint     status,
+                 gpointer user_data)
+{
+  SyncWaitpidData *data = user_data;
+  *(data->status_p) = status;
+  g_main_loop_quit (data->loop);
 }
 
 /**
@@ -267,6 +277,7 @@ g_spawn_sync (const gchar          *working_directory,
   GString *errstr = NULL;
   gboolean failed;
   gint status;
+  SyncWaitpidData waitpid_data;
   
   g_return_val_if_fail (argv != NULL, FALSE);
   g_return_val_if_fail (!(flags & G_SPAWN_DO_NOT_REAP_CHILD), FALSE);
@@ -399,45 +410,32 @@ g_spawn_sync (const gchar          *working_directory,
     close_and_invalidate (&outpipe);
   if (errpipe >= 0)
     close_and_invalidate (&errpipe);
-  
-  /* Wait for child to exit, even if we have
-   * an error pending.
+
+  /* Now create a temporary main context and loop, with just one
+   * waitpid source.  We used to invoke waitpid() directly here, but
+   * this way we unify with the worker thread in gmain.c.
    */
- again:
-      
-  ret = waitpid (pid, &status, 0);
+  {
+    GMainContext *context;
+    GMainLoop *loop;
+    GSource *source;
 
-  if (ret < 0)
-    {
-      if (errno == EINTR)
-        goto again;
-      else if (errno == ECHILD)
-        {
-          if (exit_status)
-            {
-              g_warning ("In call to g_spawn_sync(), exit status of a child process was requested but SIGCHLD action was set to SIG_IGN and ECHILD was received by waitpid(), so exit status can't be returned. This is a bug in the program calling g_spawn_sync(); either don't request the exit status, or don't set the SIGCHLD action.");
-            }
-          else
-            {
-              /* We don't need the exit status. */
-            }
-        }
-      else
-        {
-          if (!failed) /* avoid error pileups */
-            {
-              int errsv = errno;
+    context = g_main_context_new ();
+    loop = g_main_loop_new (context, TRUE);
 
-              failed = TRUE;
-                  
-              g_set_error (error,
-                           G_SPAWN_ERROR,
-                           G_SPAWN_ERROR_READ,
-                           _("Unexpected error in waitpid() (%s)"),
-                           g_strerror (errsv));
-            }
-        }
-    }
+    waitpid_data.loop = loop;
+    waitpid_data.status_p = &status;
+    
+    source = g_child_watch_source_new (pid);
+    g_source_set_callback (source, (GSourceFunc)on_sync_waitpid, &waitpid_data, NULL);
+    g_source_attach (source, context);
+    g_source_unref (source);
+    
+    g_main_loop_run (loop);
+
+    g_main_context_unref (context);
+    g_main_loop_unref (loop);
+  }
   
   if (failed)
     {

@@ -8,7 +8,7 @@
 <link rel="up" href="glib-utilities.html" title="GLib Utilities">
 <link rel="prev" href="glib-Spawning-Processes.html" title="Spawning Processes">
 <link rel="next" href="glib-URI-Functions.html" title="URI Functions">
-<meta name="generator" content="GTK-Doc V1.18 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.18.1 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -123,6 +123,8 @@ typedef             <a class="link" href="glib-File-Utilities.html#GStatBuf" tit
 <span class="returnvalue">int</span>                 <a class="link" href="glib-File-Utilities.html#g-chdir" title="g_chdir ()">g_chdir</a>                             (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *path</code></em>);
 <span class="returnvalue">int</span>                 <a class="link" href="glib-File-Utilities.html#g-utime" title="g_utime ()">g_utime</a>                             (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *filename</code></em>,
                                                          <em class="parameter"><code><span class="type">struct utimbuf</span> *utb</code></em>);
+<a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="glib-File-Utilities.html#g-close" title="g_close ()">g_close</a>                             (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> fd</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);
 </pre>
 </div>
 <div class="refsect1">
@@ -506,7 +508,7 @@ codes are those in the <a class="link" href="glib-File-Utilities.html#GFileError
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>filename</code></em> :</span></p></td>
-<td>name of a file to read contents from, in the GLib file name encoding. <span class="annotation">[<acronym title="Override the parsed C type with given type"><span class="acronym">type</span></acronym> filename]</span>
+<td>name of a file to read contents from, in the GLib file name encoding. <span class="annotation">[<acronym title="Override the parsed C type with given type."><span class="acronym">type</span></acronym> filename]</span>
 </td>
 </tr>
 <tr>
@@ -586,7 +588,7 @@ to 7 characters to <em class="parameter"><code>filename</code></em>.
 <tr>
 <td><p><span class="term"><em class="parameter"><code>filename</code></em> :</span></p></td>
 <td>name of a file to write <em class="parameter"><code>contents</code></em> to, in the GLib file name
-encoding. <span class="annotation">[<acronym title="Override the parsed C type with given type"><span class="acronym">type</span></acronym> filename]</span>
+encoding. <span class="annotation">[<acronym title="Override the parsed C type with given type."><span class="acronym">type</span></acronym> filename]</span>
 </td>
 </tr>
 <tr>
@@ -727,7 +729,7 @@ Most importantly, on Windows it should be in UTF-8.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>tmpl</code></em> :</span></p></td>
-<td>template filename. <span class="annotation">[<acronym title="Override the parsed C type with given type"><span class="acronym">type</span></acronym> filename]</span>
+<td>template filename. <span class="annotation">[<acronym title="Override the parsed C type with given type."><span class="acronym">type</span></acronym> filename]</span>
 </td>
 </tr>
 <tr>
@@ -769,7 +771,7 @@ on Windows it should be in UTF-8.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>tmpl</code></em> :</span></p></td>
-<td>template filename. <span class="annotation">[<acronym title="Override the parsed C type with given type"><span class="acronym">type</span></acronym> filename]</span>
+<td>template filename. <span class="annotation">[<acronym title="Override the parsed C type with given type."><span class="acronym">type</span></acronym> filename]</span>
 </td>
 </tr>
 <tr>
@@ -828,13 +830,13 @@ name encoding.
 <tr>
 <td><p><span class="term"><em class="parameter"><code>tmpl</code></em> :</span></p></td>
 <td>Template for file name, as in
-<a class="link" href="glib-File-Utilities.html#g-mkstemp" title="g_mkstemp ()"><code class="function">g_mkstemp()</code></a>, basename only, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> for a default template. <span class="annotation">[<acronym title="Override the parsed C type with given type"><span class="acronym">type</span></acronym> filename][<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+<a class="link" href="glib-File-Utilities.html#g-mkstemp" title="g_mkstemp ()"><code class="function">g_mkstemp()</code></a>, basename only, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> for a default template. <span class="annotation">[<acronym title="Override the parsed C type with given type."><span class="acronym">type</span></acronym> filename][<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>name_used</code></em> :</span></p></td>
 <td>location to store actual name used,
-or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>][<acronym title="Override the parsed C type with given type"><span class="acronym">type</span></acronym> filename]</span>
+or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>][<acronym title="Override the parsed C type with given type."><span class="acronym">type</span></acronym> filename]</span>
 </td>
 </tr>
 <tr>
@@ -944,7 +946,7 @@ on Windows it should be in UTF-8.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>tmpl</code></em> :</span></p></td>
-<td>template directory name. <span class="annotation">[<acronym title="Override the parsed C type with given type"><span class="acronym">type</span></acronym> filename]</span>
+<td>template directory name. <span class="annotation">[<acronym title="Override the parsed C type with given type."><span class="acronym">type</span></acronym> filename]</span>
 </td>
 </tr>
 <tr>
@@ -984,7 +986,7 @@ should be in UTF-8.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>tmpl</code></em> :</span></p></td>
-<td>template directory name. <span class="annotation">[<acronym title="Override the parsed C type with given type"><span class="acronym">type</span></acronym> filename]</span>
+<td>template directory name. <span class="annotation">[<acronym title="Override the parsed C type with given type."><span class="acronym">type</span></acronym> filename]</span>
 </td>
 </tr>
 <tr>
@@ -1030,7 +1032,7 @@ modified, and might thus be a read-only literal string.
 <tr>
 <td><p><span class="term"><em class="parameter"><code>tmpl</code></em> :</span></p></td>
 <td>Template for directory name,
-as in <a class="link" href="glib-File-Utilities.html#g-mkdtemp" title="g_mkdtemp ()"><code class="function">g_mkdtemp()</code></a>, basename only, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> for a default template. <span class="annotation">[<acronym title="Override the parsed C type with given type"><span class="acronym">type</span></acronym> filename][<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+as in <a class="link" href="glib-File-Utilities.html#g-mkdtemp" title="g_mkdtemp ()"><code class="function">g_mkdtemp()</code></a>, basename only, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> for a default template. <span class="annotation">[<acronym title="Override the parsed C type with given type."><span class="acronym">type</span></acronym> filename][<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
@@ -1043,7 +1045,7 @@ as in <a class="link" href="glib-File-Utilities.html#g-mkdtemp" title="g_mkdtemp
 <td>The actual name used. This string
 should be freed with <a class="link" href="glib-Memory-Allocation.html#g-free" title="g_free ()"><code class="function">g_free()</code></a> when not needed any longer and is
 is in the GLib file name encoding. In case of errors, <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> is
-returned and <em class="parameter"><code>error</code></em> will be set. <span class="annotation">[<acronym title="Override the parsed C type with given type"><span class="acronym">type</span></acronym> filename]</span>
+returned and <em class="parameter"><code>error</code></em> will be set. <span class="annotation">[<acronym title="Override the parsed C type with given type."><span class="acronym">type</span></acronym> filename]</span>
 </td>
 </tr>
 </tbody>
@@ -2100,10 +2102,43 @@ occurred</td>
 </table></div>
 <p class="since">Since 2.18</p>
 </div>
+<hr>
+<div class="refsect2">
+<a name="g-close"></a><h3>g_close ()</h3>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_close                             (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> fd</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+<p>
+This wraps the <code class="function">close()</code> call; in case of error, <code class="literal">errno</code> will be
+preserved, but the error will also be stored as a <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> in <em class="parameter"><code>error</code></em>.
+</p>
+<p>
+Besides using <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a>, there is another major reason to prefer this
+function over the call provided by the system; on Unix, it will
+attempt to correctly handle <code class="literal">EINTR</code>, which has platform-specific
+semantics.
+</p>
+<div class="variablelist"><table border="0" class="variablelist">
+<colgroup>
+<col align="left" valign="top">
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>fd</code></em> :</span></p></td>
+<td>A file descriptor</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td>a <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
 </div>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.18</div>
+          Generated by GTK-Doc V1.18.1</div>
 </body>
 </html>
