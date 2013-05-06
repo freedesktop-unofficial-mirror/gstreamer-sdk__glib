@@ -232,6 +232,9 @@ g_resolver_set_default (GResolver *resolver)
   default_resolver = g_object_ref (resolver);
 }
 
+#ifdef __BIONIC__
+int res_init (void);
+#endif
 
 static void
 g_resolver_maybe_reload (GResolver *resolver)
