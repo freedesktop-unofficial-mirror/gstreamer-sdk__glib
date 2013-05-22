@@ -1102,7 +1102,9 @@ _g_io_modules_ensure_loaded (void)
 	}
 
       /* Then load the compiled in path */
+#ifndef GST_SDK_IOS
       g_io_modules_scan_all_in_directory_with_scope (GIO_MODULE_DIR, scope);
+#endif
 
 #ifdef GST_SDK_GLIB_GIO_DISTRO_GIO_MODULE_PATH
       /* Now load all modules from the distro, e.g. gvfs */
