@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Migrating from GnomeVFS to GIO</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.77.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
 <link rel="home" href="index.html" title="GIO Reference Manual">
 <link rel="up" href="migrating.html" title="Part III. Migrating to GIO">
 <link rel="prev" href="ch29.html" title="Migrating from POSIX to GIO">
 <link rel="next" href="ch30s02.html" title="Operations on multiple files">
-<meta name="generator" content="GTK-Doc V1.18.1 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.19 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -22,7 +22,7 @@
 <div class="chapter">
 <div class="titlepage"><div><div><h2 class="title">
 <a name="id-1.5.3"></a>Migrating from GnomeVFS to GIO</h2></div></div></div>
-<div class="toc"><dl>
+<div class="toc"><dl class="toc">
 <dt><span class="section"><a href="ch30.html#id-1.5.3.3">Trash handling</a></span></dt>
 <dt><span class="section"><a href="ch30s02.html">Operations on multiple files</a></span></dt>
 <dt><span class="section"><a href="ch30s03.html">Mime monitoring</a></span></dt>
@@ -164,10 +164,10 @@
 <span class="normal">  </span><span class="keyword">switch</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">event_type</span><span class="symbol">)</span>
 <span class="normal">  </span><span class="cbracket">{</span>
 <span class="normal">  </span><span class="keyword">case</span><span class="normal"> <a href="GFileMonitor.html#G-FILE-MONITOR-EVENT-DELETED:CAPS">G_FILE_MONITOR_EVENT_DELETED</a></span><span class="symbol">:</span>
-<span class="normal">    </span><span class="function"><a href="../glib/glib-Warnings-and-Assertions.html#g-print">g_print</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"'%s' removed from trash</span><span class="specialchar">\n</span><span class="string">"</span><span class="symbol">,</span><span class="normal"> </span><span class="function"><a href="GFile.html#g-file-get-basename">g_file_get_basename</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">child</span><span class="symbol">));</span>
+<span class="normal">    </span><span class="function"><a href="http://library.gnome.org/devel/glib/unstable/glib-Warnings-and-Assertions.html#g-print">g_print</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"'%s' removed from trash</span><span class="specialchar">\n</span><span class="string">"</span><span class="symbol">,</span><span class="normal"> </span><span class="function"><a href="GFile.html#g-file-get-basename">g_file_get_basename</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">child</span><span class="symbol">));</span>
 <span class="normal">    </span><span class="keyword">break</span><span class="symbol">;</span>
 <span class="normal">  </span><span class="keyword">case</span><span class="normal"> <a href="GFileMonitor.html#G-FILE-MONITOR-EVENT-CREATED:CAPS">G_FILE_MONITOR_EVENT_CREATED</a></span><span class="symbol">:</span>
-<span class="normal">    </span><span class="function"><a href="../glib/glib-Warnings-and-Assertions.html#g-print">g_print</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"'%s' added to trash</span><span class="specialchar">\n</span><span class="string">"</span><span class="symbol">,</span><span class="normal"> </span><span class="function"><a href="GFile.html#g-file-get-basename">g_file_get_basename</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">child</span><span class="symbol">));</span>
+<span class="normal">    </span><span class="function"><a href="http://library.gnome.org/devel/glib/unstable/glib-Warnings-and-Assertions.html#g-print">g_print</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"'%s' added to trash</span><span class="specialchar">\n</span><span class="string">"</span><span class="symbol">,</span><span class="normal"> </span><span class="function"><a href="GFile.html#g-file-get-basename">g_file_get_basename</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">child</span><span class="symbol">));</span>
 <span class="normal">    </span><span class="keyword">break</span><span class="symbol">;</span>
 <span class="normal">  </span><span class="keyword">default</span><span class="symbol">:</span><span class="normal"> </span><span class="symbol">;</span>
 <span class="normal">  </span><span class="cbracket">}</span>
@@ -180,10 +180,10 @@
 <span class="normal">  </span><span class="usertype">GFileMonitor</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">monitor</span><span class="symbol">;</span>
 
 <span class="normal">  file </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="GFile.html#g-file-new-for-uri">g_file_new_for_uri</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"trash://"</span><span class="symbol">);</span>
-<span class="normal">  monitor </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="GFile.html#g-file-monitor-directory">g_file_monitor_directory</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">file</span><span class="symbol">,</span><span class="normal"> </span><span class="number">0</span><span class="symbol">,</span><span class="normal"> <a href="../glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span><span class="normal"> <a href="../glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">);</span>
-<span class="normal">  </span><span class="function"><a href="../gobject/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">file</span><span class="symbol">);</span>
+<span class="normal">  monitor </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="GFile.html#g-file-monitor-directory">g_file_monitor_directory</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">file</span><span class="symbol">,</span><span class="normal"> </span><span class="number">0</span><span class="symbol">,</span><span class="normal"> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span><span class="normal"> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">);</span>
+<span class="normal">  </span><span class="function"><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">file</span><span class="symbol">);</span>
 
-<span class="normal">  </span><span class="function"><a href="../gobject/gobject-Signals.html#g-signal-connect">g_signal_connect</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">monitor</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"changed"</span><span class="symbol">,</span><span class="normal"> </span><span class="function"><a href="../gobject/gobject-Closures.html#G-CALLBACK:CAPS">G_CALLBACK</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">file_changed</span><span class="symbol">),</span><span class="normal"> <a href="../glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">);</span>
+<span class="normal">  </span><span class="function"><a href="http://library.gnome.org/devel/gobject/unstable/gobject-Signals.html#g-signal-connect">g_signal_connect</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">monitor</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"changed"</span><span class="symbol">,</span><span class="normal"> </span><span class="function"><a href="http://library.gnome.org/devel/gobject/unstable/gobject-Closures.html#G-CALLBACK:CAPS">G_CALLBACK</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">file_changed</span><span class="symbol">),</span><span class="normal"> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">);</span>
 
 <span class="normal">  </span><span class="comment">/* ... */</span>
 
@@ -212,6 +212,6 @@
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.18.1</div>
+          Generated by GTK-Doc V1.19</div>
 </body>
 </html>

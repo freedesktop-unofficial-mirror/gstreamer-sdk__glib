@@ -1,3 +1,71 @@
+Overview of changes fron GLib 2.36.2 to 2.36.4
+==============================================
+
+This change addresses a major issue: despite assurances in the
+documentation for the ext4 filesystem, it is still unsafe to omit a call
+to fsync() when doing atomic replaces, as per g_file_set_contents().
+Some patches have gone into the kernel already, but we are putting the
+fsync() back for safety reasons.
+
+There have also been win32 improvements and a fix where
+GNetworkMonitor failed to detect the connection with some VPN
+configurations.
+
+Translation updates:
+ Assamese
+ Brazilian Portuguese
+ Catalan
+ Czech
+ Galician
+ German
+ Indonesian
+ Kannada
+ Lithuanian
+ Marathi
+ Polish
+ Punjabi
+ Russian
+ Serbian
+ Slovenian
+ Spanish
+
+
+Overview of changes fron GLib 2.36.2 to 2.36.3
+==============================================
+
+* Bug fixes:
+ 692848 Fix property example in gobject tutorial
+ 696857 GThreadedResolver: set an error if no records could be found
+ 697849 spelling fixes of 'runtine' and 'adresses' in cross.xml a...
+ 699779 G_GNUC_FORMAT: documentation error
+ 699959 g_file_copy(): Ensure we create private files by default
+ 701560 various improvements for g_file_set_contents()
+ 701680 GFileEnumerator: Add some documentation about ordering
+
+* Translation updates:
+ Kannada
+
+
+Overview of changes fron GLib 2.36.1 to 2.36.2
+==============================================
+
+* Bug fixes:
+ 697887 GVariant: fix transfer annotation
+ 699485 tests/mappedfile: Also handle ENOMEM
+ 699493 SOCKS5 proxy code crashes if it cannot authenticate
+ 699500 gbitlock: fix this to not unconditionally use futex emu...
+        Fix a hang in pidgin
+
+* Translation updates:
+ Indonesian
+ Italian
+ Lithuanian
+ Norwegian bokmål
+ Polish
+ Serbian
+ Slovenian
+
+
 Overview of changes fron GLib 2.36.0 to 2.36.1
 ==============================================
 

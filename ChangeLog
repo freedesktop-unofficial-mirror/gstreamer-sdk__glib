@@ -1,3 +1,881 @@
+commit 1d6cd4b1b3761dbeb887538a2417456c1611585f
+Author: Ryan Lortie <desrt@desrt.ca>
+Date:   Wed Aug 7 16:41:40 2013 +0200
+
+    GLib 2.36.4
+
+ NEWS | 32 ++++++++++++++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
+
+commit f5163fea0da1d7dc692aea5be72893f5b81a1e36
+Author: Chun-wei Fan <fanchunwei@src.gnome.org>
+Date:   Wed Jul 17 16:45:50 2013 +0800
+
+    Visual Studio Builds: "Install" gdbus-codegen
+
+ build/win32/vs10/glib.props  | 7 +++++++
+ build/win32/vs9/glib.vsprops | 4 ++++
+ 2 files changed, 11 insertions(+)
+
+commit f4fb40a0f5cf1e975b7af3dbe31066a44bd9ceed
+Author: Yuri Myasoedov <omerta13@yandex.ru>
+Date:   Sun Aug 4 09:26:42 2013 +0400
+
+    Updated Russian translation
+
+ po/ru.po | 316
+ +++++++++++++++++++++++++++++++--------------------------------
+ 1 file changed, 157 insertions(+), 159 deletions(-)
+
+commit 2d3837563f1087cf00630fc1d4126af7a5f25ebf
+Author: Dan Winship <danw@gnome.org>
+Date:   Tue Jun 4 17:29:55 2013 -0300
+
+    gnetworkmonitornetlink: handle default route via device
+
+    If the default route is via a device rather than a particular IP
+    address, then neither RTA_DST nor RTA_GATEWAY will be present in the
+    RTM_NEWROUTE message, and so GNetworkMonitorNetlink would ignore it,
+    and then think there was no default route. (This could happen with
+    certain kinds of VPNs, if they were set to route all traffic through
+    the VPN.)
+
+    Fix this by recognizing routes that specify RTA_OIF ("output
+    interface") instead of RTA_GATEWAY.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=701609
+    (cherry picked from commit c08ef6c165c6935f257d3fb98c049be50e3816da)
+
+ gio/gnetworkmonitornetlink.c | 18 +++++++++---------
+ 1 file changed, 9 insertions(+), 9 deletions(-)
+
+commit 6d8ee5ef409f4497d18aa1676eef886184dd5d03
+Author: Sandeep Sheshrao Shedmake <sshedmak@redhat.com>
+Date:   Tue Jul 23 10:34:27 2013 +0530
+
+    Updated Marathi localization
+
+ po/mr.po | 361
+ ++++++++++++++++++++++++++++++---------------------------------
+ 1 file changed, 174 insertions(+), 187 deletions(-)
+
+commit e1c950bda7b2b3714093a9cab0de7e2bfa721964
+Author: Christian Kirbach <christian.kirbach@gmail.com>
+Date:   Sun Jul 14 12:22:18 2013 +0200
+
+    Updated German translation
+
+ po/de.po | 528
+ ++++++++++++++++++++++++++++++++-------------------------------
+ 1 file changed, 271 insertions(+), 257 deletions(-)
+
+commit 5518ee2d5a6b567ba7d8492b57b0bfcd436b9832
+Author: Gil Forcada <gforcada@gnome.org>
+Date:   Fri Jul 5 02:27:05 2013 +0200
+
+    [l10n] Update Catalan translation
+
+ po/ca.po | 364
+ +++++++++++++++++++++++++++++++--------------------------------
+ 1 file changed, 181 insertions(+), 183 deletions(-)
+
+commit 27fc015cb92add86fd2a8dd5df467ff484059cc1
+Author: Andika Triwidada <andika@gmail.com>
+Date:   Tue Jul 2 20:18:49 2013 +0700
+
+    Updated Indonesian translation
+
+ po/id.po | 242
+ ++++++++++++++++++++++++++++++---------------------------------
+ 1 file changed, 114 insertions(+), 128 deletions(-)
+
+commit baf4f9d43f2223a22ef93c52e9174e1809fda57b
+Author: Rafael Ferreira <rafael.f.f1@gmail.com>
+Date:   Fri Jun 28 17:24:50 2013 -0300
+
+    Updated Brazilian Portuguese translation
+
+ po/pt_BR.po | 348
+ ++++++++++++++++++++++++++++++------------------------------
+ 1 file changed, 172 insertions(+), 176 deletions(-)
+
+commit 81590baa2a43d1d804d21e6d28231a5f743c7ae1
+Author: Мирослав Николић <miroslavnikolic@rocketmail.com>
+Date:   Tue Jun 25 23:25:32 2013 +0200
+
+    Updated Serbian translation
+
+ po/sr.po       | 262
+ +++++++++++++++++++++++++++------------------------------
+ po/sr@latin.po | 262
+ +++++++++++++++++++++++++++------------------------------
+ 2 files changed, 250 insertions(+), 274 deletions(-)
+
+commit 05d430065da918051a97e3384c4b2252af47503d
+Author: Colin Walters <walters@verbum.org>
+Date:   Thu Jun 20 13:13:29 2013 -0400
+
+    Revert "g_file_set_contents(): don't fsync on ext3/4"
+
+    We didn't actually do any real-world testing of this, and
+    unsurprisingly it turns out to break in at least one widely-used
+    configuration (Fedora 19 x86_64, ext4 on LVM).
+
+    This reverts commit 9d0c17b50102267a5029b58b1f44efbad82d8f03.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=701560
+
+ glib/gfileutils.c | 9 +--------
+ 1 file changed, 1 insertion(+), 8 deletions(-)
+
+commit 5747064ecb1d9c89ff13f9ef6f2462a2d4fbb129
+Author: Chun-wei Fan <fanchunwei@src.gnome.org>
+Date:   Thu Jun 20 15:48:32 2013 +0800
+
+    Add MSVC Projects for Utility Programs
+
+    Build and "install" the gio-querymodules and gdbus utility programs
+    so that
+    the Visual Studio builds of GLib is more comprehensive.  The Python
+    scripts
+    for the GDBus codegen will be added to "installation" later.
+
+ build/win32/vs10/Makefile.am                      |   4 +
+ build/win32/vs10/gdbus.vcxproj                    | 180
+ +++++++++++++++++++++
+ build/win32/vs10/gdbus.vcxproj.filters            |  14 ++
+ build/win32/vs10/gio-querymodules.vcxproj         | 184
+ ++++++++++++++++++++++
+ build/win32/vs10/gio-querymodules.vcxproj.filters |  14 ++
+ build/win32/vs10/glib.props                       |   4 +
+ build/win32/vs10/glib.sln                         |  36 +++++
+ build/win32/vs10/install.vcxproj                  |   8 +
+ build/win32/vs11/Makefile.am                      |   4 +
+ build/win32/vs9/Makefile.am                       |   2 +
+ build/win32/vs9/gdbus.vcproj                      | 155
+ ++++++++++++++++++
+ build/win32/vs9/gio-querymodules.vcproj           | 155
+ ++++++++++++++++++
+ build/win32/vs9/glib.sln                          |  49 ++++++
+ build/win32/vs9/glib.vsprops                      |   2 +
+ 14 files changed, 811 insertions(+)
+
+commit 1f8026f8f8e700aa73844a159ac4cd8e1b2a4994
+Author: Chun-wei Fan <fanchunwei@src.gnome.org>
+Date:   Thu Jun 20 15:43:32 2013 +0800
+
+    Update Visual Studio Projects
+
+    Make all projects settings use the MultiByte character set when
+    building
+    GLib to improve consistency.
+
+ build/win32/vs10/glib-compile-resources.vcxproj | 4 ++--
+ build/win32/vs10/glib-compile-schemas.vcxproj   | 4 ++--
+ build/win32/vs10/glib-genmarshal.vcxproj        | 4 ++--
+ build/win32/vs10/gresource.vcxproj              | 4 ++--
+ build/win32/vs10/gsettings.vcxproj              | 4 ++--
+ build/win32/vs9/glib-compile-resources.vcproj   | 4 ++--
+ build/win32/vs9/glib-compile-schemas.vcproj     | 4 ++--
+ build/win32/vs9/glib-genmarshal.vcproj          | 4 ++--
+ build/win32/vs9/gresource.vcproj                | 4 ++--
+ build/win32/vs9/gsettings.vcproj                | 4 ++--
+ 10 files changed, 20 insertions(+), 20 deletions(-)
+
+commit 20c630bde60da5723848cad76fdb5b876510b1fc
+Author: A S Alam <aalam@users.sf.net>
+Date:   Fri Jun 14 10:05:56 2013 -0500
+
+    update Punjabi Translation
+
+ po/pa.po | 349
+ +++++++++++++++++++++++++++++++--------------------------------
+ 1 file changed, 172 insertions(+), 177 deletions(-)
+
+commit aeafbc8a22322298218a2d0a1d023859bc2969b5
+Author: Matej Urbančič <mateju@svn.gnome.org>
+Date:   Thu Jun 13 21:23:22 2013 +0200
+
+    Updated Slovenian translation
+
+ po/sl.po | 255
+ +++++++++++++++++++++++++++++++--------------------------------
+ 1 file changed, 126 insertions(+), 129 deletions(-)
+
+commit 0729dac2315560ed9bda39c6d3844824011cb227
+Author: Daniel Mustieles <daniel.mustieles@gmail.com>
+Date:   Thu Jun 13 13:06:53 2013 +0200
+
+    Updated Spanish translation
+
+ po/es.po | 349
+ +++++++++++++++++++++++++++++++--------------------------------
+ 1 file changed, 172 insertions(+), 177 deletions(-)
+
+commit 9c4d28406127ce5bc6a7ec7fe3739161c0c61c8f
+Author: Aurimas Černius <aurisc4@gmail.com>
+Date:   Wed Jun 12 23:14:03 2013 +0300
+
+    Updated Lithuanian translation
+
+ po/lt.po | 252
+ +++++++++++++++++++++++++++++++--------------------------------
+ 1 file changed, 124 insertions(+), 128 deletions(-)
+
+commit 1f00f3d74077fe9e48e49966eea6787793724e03
+Author: Shankar Prasad <svenkate@redhat.com>
+Date:   Tue Jun 11 11:54:17 2013 +0530
+
+    updated kn translations
+
+ po/kn.po | 431
+ +++++++++++++++++++++++++++++++--------------------------------
+ 1 file changed, 213 insertions(+), 218 deletions(-)
+
+commit 5d41dd9a1f5b54daac8616207cde67855f4c9205
+Author: Marek Černocký <marek@manet.cz>
+Date:   Mon Jun 10 21:31:00 2013 +0200
+
+    Updated Czech translation
+
+ po/cs.po | 398
+ ++++++++++++++++++++++++++++-----------------------------------
+ 1 file changed, 175 insertions(+), 223 deletions(-)
+
+commit 6238fb8db5f2e4d94bc2a1eb0eec24c75e3cc194
+Author: Piotr Drąg <piotrdrag@gmail.com>
+Date:   Mon Jun 10 20:32:57 2013 +0200
+
+    Updated Polish translation
+
+ po/pl.po | 246
+ +++++++++++++++++++++++++++++----------------------------------
+ 1 file changed, 114 insertions(+), 132 deletions(-)
+
+commit 5e987336eeafe975cbbb6d61e87351dd6699aba1
+Author: Nilamdyuti Goswami <ngoswami@redhat.com>
+Date:   Mon Jun 10 15:18:23 2013 +0530
+
+    Assamese translation updated
+
+ po/as.po | 349
+ +++++++++++++++++++++++++++++++--------------------------------
+ 1 file changed, 172 insertions(+), 177 deletions(-)
+
+commit c2525c45082c23f249c284ede485705abdef6fdd
+Author: Fran Diéguez <fran.dieguez@mabishu.com>
+Date:   Mon Jun 10 10:18:02 2013 +0200
+
+    Updated Galician translations
+
+ po/gl.po | 349
+ +++++++++++++++++++++++++++++++--------------------------------
+ 1 file changed, 173 insertions(+), 176 deletions(-)
+
+commit 8bd53990e1a60d1f47d04486813690abea75b5c7
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Sun Jun 9 20:15:13 2013 -0400
+
+    Bump version
+
+ configure.ac | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 5cd352c13272e2d518d624037052c87a12f65d7e
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Sun Jun 9 18:53:15 2013 -0400
+
+    2.36.3
+
+ NEWS | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+
+commit cbb8446c1dbffb390b20c5425c7b975be4bfb8fa
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Thu Jun 6 00:05:41 2013 -0400
+
+    Update link to documentation
+
+ gio/gapplicationimpl-dbus.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit f269f51ed3f8253ec6b96e5a26032dfc84a7e2ce
+Author: Colin Walters <walters@verbum.org>
+Date:   Wed Jun 5 18:05:12 2013 -0400
+
+    GFileEnumerator: Add some documentation about ordering
+
+    Kind of a gratuitious gaping hole in the docs...
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=701680
+
+ gio/gfileenumerator.c | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+
+commit c2ad7d1aa549deff6e0ab34e6981a8f794df729c
+Author: Dan Winship <danw@gnome.org>
+Date:   Sun Jun 2 18:32:21 2013 -0300
+
+    ginetaddress: fix addr/string conversions on windows
+
+    When parsing an address, we need to re-set "len" between IPv4 and
+    IPv6, since WSAStringToAddress() might set it to sizeof(struct
+    sin_addr)
+    when trying to parse the string as IPv4, even if it fails. Also, we
+    need to make sure to not pass strings to WSAStringToAddress() that it
+    will accept but that we don't want it to.
+
+    When stringifying an address, we need to clear the sockaddr before
+    filling it in, so we don't accidentally end up with an unwanted
+    scope_id or the like.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=701401
+
+ gio/ginetaddress.c | 29 +++++++++++++++++++++--------
+ 1 file changed, 21 insertions(+), 8 deletions(-)
+
+commit ffddb55ab3ef781822adfad1f64b32a2f1ef09a9
+Author: Colin Walters <walters@verbum.org>
+Date:   Sun May 12 07:28:01 2013 +0100
+
+    Ensure g_file_copy() does not temporarily expose private files
+
+    Previously, g_file_copy() would (on Unix) create files with the
+    default mode of 644.  For applications which might at user request
+    copy arbitrary private files such as ~/.ssh or /etc/shadow, a
+    world-readable copy would be temporarily exposed.
+
+    This patch is suboptimal in that it *only* fixes g_file_copy()
+    for the case where both source and destination are instances of
+    GLocalFile on Unix.
+
+    The reason for this is that the public GFile APIs for creating files
+    allow very limited control over the access permissions for the created
+    file; one can either say a file is "private" or not.  Fixing
+    this by adding e.g. g_file_create_with_attributes() would make sense,
+    except this would entail 8 new API calls for all the variants of
+    _create(), _create_async(), _replace(), _replace_async(),
+    _create_readwrite(), _create_readwrite_async(), _replace_readwrite(),
+    _replace_readwrite_async().  That can be done as a separate patch
+    later.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=699959
+
+ gio/gfile.c                  | 24 +++++++++++++++++++++++-
+ gio/glocalfile.c             | 23 ++++++++++++++---------
+ gio/glocalfile.h             |  2 ++
+ gio/glocalfileoutputstream.c | 36 ++++++++++++++++++++++--------------
+ gio/glocalfileoutputstream.h |  2 ++
+ 5 files changed, 63 insertions(+), 24 deletions(-)
+
+commit ae82af8da06f57f10ae9a0b74e89a02fa9c8babf
+Author: Colin Walters <walters@verbum.org>
+Date:   Thu May 9 00:01:59 2013 +0100
+
+    g_file_copy(): Clean up logic for info query
+
+    Previously, we called g_file_query_info() *again* on the source at the
+    very end of the copy.  This has the lame semantics that if the source
+    happened to be deleted, we would fail to apply attributes to the
+    destination.  This could even be a security flaw.
+
+    This commit changes things so that we query info from the source
+    *stream* after opening - i.e. on Unix we use the proper fstat() and
+    friends.  That way we operate more atomically.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=699959
+
+ gio/gfile.c | 128
+ +++++++++++++++++++++++++++++++++++++++++-------------------
+ 1 file changed, 88 insertions(+), 40 deletions(-)
+
+commit cf1922965a897cbfb53ac3e88c2a444f880b01d7
+Author: Ryan Lortie <desrt@desrt.ca>
+Date:   Tue Jun 4 09:48:12 2013 -0400
+
+    g_file_set_contents(): don't fsync on ext3/4
+
+    ext3 and ext4 (for quite some time) with default mount options don't
+    need fsync() to ensure safety of replace-by-rename.  Stop doing
+    that for
+    these filesystems.
+
+    Note: this patch also impacts ext2, which is probably not safe, but I
+    don't know of any way to check ext2. vs the others because they
+    all have
+    the same magic numbers (short of opening /proc/mount).
+
+    This patch assumes that if BTRFS_SUPER_MAGIC is defined then so
+    will be
+    EXT3_SUPER_MAGIC.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=701560
+
+ glib/gfileutils.c | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
+
+commit ee8d3333ddc350da5853707c31169af866fc4524
+Author: Ryan Lortie <desrt@desrt.ca>
+Date:   Mon Jun 3 22:55:20 2013 -0400
+
+    g_file_set_contents: change {posix_ => }fallocate
+
+    Use fallocate() instead of posix_fallocate() so that we just fail
+    instead of getting the emulated version from the libc.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=701560
+
+ configure.ac      | 2 +-
+ glib/gfileutils.c | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+commit c244222d65d2e9c1fe05e46207a7aedde45e1e86
+Author: Ryan Lortie <desrt@desrt.ca>
+Date:   Mon Jun 3 17:59:29 2013 -0400
+
+    g_file_set_contents(): fix simple logic error
+
+    CI FTW.
+
+ glib/gfileutils.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit dad3cb55cf357b3bae7f02bdc8fc4a8473db0388
+Author: Ryan Lortie <desrt@desrt.ca>
+Date:   Mon Jun 3 17:49:06 2013 -0400
+
+    g_file_set_contents(): use unistd instead of stdio
+
+    Use a normal write() system call instead of fdopen() and fwrite().
+
+    This will definitely work on UNIX system and should work on Windows as
+    well...
+
+    As an added bonus, we can use g_close() now as well.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=701560
+
+ glib/gfileutils.c | 52
+ +++++++++++++++++++---------------------------------
+ 1 file changed, 19 insertions(+), 33 deletions(-)
+
+commit 75c0593a268b5ceb0cc7ac84d52e23a93a3f2e9d
+Author: Ryan Lortie <desrt@desrt.ca>
+Date:   Mon Jun 3 16:16:25 2013 -0400
+
+    g_file_set_contents(): don't allocate display name
+
+    g_file_set_contents() sets a GError in the event of various failures
+    that count occur.  It uses g_filename_display_name() in order to
+    get the
+    filename to include in the messages.
+
+    Factor out the error handling to make it easier to allocate the
+    display
+    name only when we need it (instead of allocating it every time).
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=701560
+
+ glib/gfileutils.c | 124
+ ++++++++++++++++++++----------------------------------
+ 1 file changed, 46 insertions(+), 78 deletions(-)
+
+commit 2d827a25af4bea0513d5fc0796b139337278734b
+Author: Ryan Lortie <desrt@desrt.ca>
+Date:   Mon Jun 3 15:43:01 2013 -0400
+
+    g_file_set_contents(): use posix_fallocate()
+
+    Extents-based filesystems like knowing in advance how much data
+    will be
+    written to a file in order to prevent fragmentation.  If we have
+    it, use
+    posix_fallocate() before writing data in g_file_set_contents().
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=701560
+
+ configure.ac      | 2 +-
+ glib/gfileutils.c | 7 +++++++
+ 2 files changed, 8 insertions(+), 1 deletion(-)
+
+commit 5d1969c8cb7e4f380f4de3c848425f3aba4b7445
+Author: William Jon McCann <jmccann@redhat.com>
+Date:   Wed Jan 30 00:46:43 2013 +0100
+
+    Fix property example in gobject tutorial
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=692848
+
+ docs/reference/gobject/tut_howto.xml | 10 ++++------
+ 1 file changed, 4 insertions(+), 6 deletions(-)
+
+commit a2f1b4b60e2cc5934df3b1c5b1de9415e229cee2
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Tue May 28 22:23:58 2013 -0400
+
+    Trivial doc typo fix
+
+ gobject/gtype.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+commit 6e4b7a4ab8e5b1fe62e28f368fa305864f79c315
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Wed May 29 00:07:26 2013 -0400
+
+    Trivial documentation typos
+
+ gobject/gobject.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit baed05fbeaa30d4e3b82581388a22cc75bf9a311
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Sat May 25 23:07:03 2013 -0400
+
+    Avoid a segfault in gdbus tool
+
+    When the interface name is invalid, we don't get an error
+    back from g_dbus_connection_call_sync.
+
+ gio/gdbus-tool.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+commit b14e899b5e03cf8120309081f0afbb898ed59235
+Author: Simon Kågedal Reimer <skagedal@gmail.com>
+Date:   Mon May 6 22:04:32 2013 +0200
+
+    G_GNUC_FORMAT: documentation error
+
+    Attribute should be placed just before the semicolon, not after.
+    As can be seen in the example.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=699779
+
+ glib/docs.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit bc9470f3c8b3984f68c74b30aae5f5b11e50f2cd
+Author: Jason L. Quinn <jason.lee.quinn@gmail.com>
+Date:   Thu Apr 11 23:43:17 2013 -0400
+
+    spelling fixes of 'runtine' and 'adresses' in cross.xml and
+    running.xml, respectively
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=697849
+
+ docs/reference/glib/cross.xml   | 2 +-
+ docs/reference/glib/running.xml | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+commit 03d3a53876b8e015a8f4f428fe31b15b5d8ec300
+Author: Giovanni Campagna <gcampagna@src.gnome.org>
+Date:   Fri Mar 29 15:39:26 2013 +0100
+
+    GThreadedResolver: set an error if no records could be found
+
+    It is possible that the upstream servers return something, but
+    we then filter all results because they are of the wrong type.
+    In that case the API and subsequent GTask calls expect a GError
+    to be set.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=696857
+
+ gio/gthreadedresolver.c | 18 +++++++++++++++++-
+ 1 file changed, 17 insertions(+), 1 deletion(-)
+
+commit 36284c5d59ccbe2a62fd506307d92991291038aa
+Author: Chun-wei Fan <fanchunwei@src.gnome.org>
+Date:   Mon May 27 15:57:54 2013 +0800
+
+    Fix the GObject Visual Studio Projects
+
+    Update G_LOG_DOMAIN to be "GLib-GObject" so that we are consistent
+    with
+    the autotools builds, and that tests expecting the log domain to be
+    "GLib-GObject" would not fail.
+
+ build/win32/vs10/gobject.vcxprojin | 8 ++++----
+ build/win32/vs9/gobject.vcprojin   | 8 ++++----
+ 2 files changed, 8 insertions(+), 8 deletions(-)
+
+commit f3b1bab8ada59b6e52eeb74a8872eeb82777baba
+Author: Chun-wei Fan <fanchunwei@src.gnome.org>
+Date:   Mon May 27 13:23:58 2013 +0800
+
+    Fix the GLib Visual Studio Projects
+
+    Define the G_LOG_DOMAIN of the GLib DLL as "GLib", because:
+    -This makes it consistent with the autotools builds
+    -Some tests expect the log domain to be "GLib"
+
+ build/win32/vs10/glib.vcxprojin | 16 ++++++++--------
+ build/win32/vs9/glib.vcprojin   | 16 ++++++++--------
+ 2 files changed, 16 insertions(+), 16 deletions(-)
+
+commit e7ba0c489a6a660ca209dde089a0d712e03eb803
+Author: Shankar Prasad <svenkate@redhat.com>
+Date:   Tue May 14 15:27:33 2013 +0530
+
+    updated kn translations
+
+ po/kn.po | 395
+ +++++++++++++++++++++++++++++++--------------------------------
+ 1 file changed, 192 insertions(+), 203 deletions(-)
+
+commit ced0cea5bbd468713d216db4c4da2abc28957123
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Mon May 13 09:59:47 2013 -0400
+
+    Bump versin
+
+ configure.ac | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 469d4ac68ab886d18c5ec246a2afe62951264a4a
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Mon May 13 08:26:41 2013 -0400
+
+    2.36.2
+
+ NEWS         | 20 ++++++++++++++++++++
+ configure.ac |  4 ++--
+ 2 files changed, 22 insertions(+), 2 deletions(-)
+
+commit 9ba55166dc4158736bcd3ddecfee19f914a4b3be
+Author: Kjartan Maraas <kmaraas@gnome.org>
+Date:   Mon May 13 11:14:48 2013 +0200
+
+    Updated Norwegian bokmål translation
+
+ po/nb.po | 224
+ +++++++++++++++++++++++++++++++++------------------------------
+ 1 file changed, 117 insertions(+), 107 deletions(-)
+
+commit 22f350341462fb5182498975bebc8073a095c677
+Author: Мирослав Николић <miroslavnikolic@rocketmail.com>
+Date:   Mon May 13 10:30:05 2013 +0200
+
+    Updated Serbian translation
+
+ po/sr.po       | 122
+ +++++++++++++++++++++++++++++----------------------------
+ po/sr@latin.po | 122
+ +++++++++++++++++++++++++++++----------------------------
+ 2 files changed, 124 insertions(+), 120 deletions(-)
+
+commit ca3dba9be2ab6aca53106431419ac163135cf366
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Thu May 9 16:02:52 2013 -0400
+
+    Clarify GValueArray docs
+
+    Don't refer to Quicksort in the documentation of
+    g_value_array_sort, but just to qsort().
+
+ gobject/gvaluearray.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+commit a1a621785fdf9ac238ac1b3e21096a5aed044a26
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Sat May 4 21:10:43 2013 -0400
+
+    Document all gtester-report options
+
+    The --subunit option was missing from the man page.
+
+ docs/reference/glib/gtester-report.xml | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+commit 3fbcf027ce1b455b709a3aea46b7b1a625b64a52
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Sat May 4 21:08:18 2013 -0400
+
+    Document all glib-mkenums placeholders
+
+    The @ENUMPREFIX@ placeholder was missing in the man page.
+
+ docs/reference/gobject/glib-mkenums.xml | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+commit 3dbde5083501739e10b27423bab0ea1e2914dd02
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Sat May 4 21:05:24 2013 -0400
+
+    Document all glib-genmarshal options
+
+    The --stdinc option was missing from the man page.
+
+ docs/reference/gobject/glib-genmarshal.xml | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+commit 059f5a7e12611429f1df7d4497f392284b49813a
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Sat May 4 21:03:00 2013 -0400
+
+    Fix a typo
+
+ docs/reference/gio/glib-compile-resources.xml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 20b349ccc50692b4d92901be19faf150fd3e7147
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Sat May 4 21:01:35 2013 -0400
+
+    Document all gdbus-codegen options
+
+    The --help and --xml-files options were missing from the man page.
+
+ docs/reference/gio/gdbus-codegen.xml | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+
+commit 879692b287924d85baf258ddf4c0d4156c9916a6
+Author: Dan Winship <danw@gnome.org>
+Date:   Thu May 2 10:14:57 2013 -0400
+
+    gbitlock: fix this to not unconditionally use futex emulation
+
+    Ryan accidentally committed some debugging code a long time ago,
+    causing this file to always use futex emulation even when real futex
+    support was available. I noticed this a while later and pointed it out
+    to him, and assumed he was going to fix it, but I guess he assumed I
+    was going to fix it, and then neither of us did...
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=699500
+
+ glib/gbitlock.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 91179be5a82a55c32ddc61821430aef0b0f3fa48
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Thu May 2 21:00:57 2013 -0400
+
+    Silently handle icon being NULL
+
+    While an emblemed icon without a base icon is not very
+    useful, no need to crash here.
+    This was crashing the object finalization test in gtk.
+
+ gio/gemblemedicon.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 03086e0b0f96f607f72eb295a4541e1064f72458
+Author: Colin Walters <walters@verbum.org>
+Date:   Thu May 2 11:39:11 2013 -0400
+
+    tests/mappedfile: Also handle ENOMEM
+
+    The RHEL6.4 kernel gives me that instead of EINVAL.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=699485
+
+ glib/tests/mappedfile.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+commit 0ba982e0589c2ae246dca760010d54bbca371399
+Author: Simon McVittie <simon.mcvittie@collabora.co.uk>
+Date:   Thu May 2 16:50:01 2013 +0100
+
+    GSocks5Proxy: don't crash if parsing negotiation reply fails
+
+    The GError should be initialized to NULL, otherwise we'll
+    "pile up" errors, then try to free an uninitialized pointer.
+
+    Signed-off-by: Simon McVittie <simon.mcvittie@collabora.co.uk>
+    Reviewed-by: Dan Winship <danw@gnome.org>
+    Bug: https://bugzilla.gnome.org/show_bug.cgi?id=699493
+
+ gio/gsocks5proxy.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit a70f7cd0435be3588e1090464f2c9416b883834e
+Author: Aurimas Černius <aurisc4@gmail.com>
+Date:   Sat Apr 27 22:45:15 2013 +0300
+
+    Updated Lithuanian translation
+
+ po/lt.po | 122
+ ++++++++++++++++++++++++++++++++-------------------------------
+ 1 file changed, 62 insertions(+), 60 deletions(-)
+
+commit a73a14b4f9cc720d844c9889554a7dafaa584784
+Author: Matej Urbančič <mateju@svn.gnome.org>
+Date:   Sat Apr 27 21:29:11 2013 +0200
+
+    Updated Slovenian translation
+
+ po/sl.po | 1272
+ +++++++++++++++++++++++++++++++-------------------------------
+ 1 file changed, 638 insertions(+), 634 deletions(-)
+
+commit eb1bbb2d66298fc238d0c303383268906c26dc07
+Author: Andika Triwidada <andika@gmail.com>
+Date:   Sat Apr 27 09:20:08 2013 +0700
+
+    Updated Indonesian translation
+
+ po/id.po | 61
+ +++++++++++++++++++++++++++++++++----------------------------
+ 1 file changed, 33 insertions(+), 28 deletions(-)
+
+commit 1711b41ae834d65fda9b9da854c9f6722239c7c6
+Author: Milo Casagrande <milo@ubuntu.com>
+Date:   Thu Apr 25 09:01:11 2013 +0200
+
+    [l10n] Updated Italian translation.
+
+ po/it.po | 121
+ +++++++++++++++++++++++++++++++++------------------------------
+ 1 file changed, 63 insertions(+), 58 deletions(-)
+
+commit a471ce94bc0f93c5cb35715c186dfc09085ea68b
+Author: Piotr Drąg <piotrdrag@gmail.com>
+Date:   Wed Apr 24 00:01:48 2013 +0200
+
+    Updated Polish translation
+
+ po/pl.po | 119
+ +++++++++++++++++++++++++++++++++------------------------------
+ 1 file changed, 62 insertions(+), 57 deletions(-)
+
+commit f3b1054b0ebb4912f700e08da0c3d35c30113e79
+Author: Ryan Lortie <desrt@desrt.ca>
+Date:   Tue Apr 23 13:26:48 2013 -0400
+
+    Partially revert "Merge waitpid() from g_spawn_sync into gmain()"
+
+    This partially reverts commit
+    ce0022933c255313e010b27f977f4ae02aad1e7e.
+
+    It used to be safe to use g_spawn_sync() from processes that had their
+    own SIGCHLD handler because it simply called wait().  When it was
+    changed to depend on the GLib child watching infrastructure this meant
+    that GLib had to own the SIGCHLD handler.
+
+    This caused hangs in at least Pidgin.
+
+    The patch contained two other improvements to the child watch
+    code which
+    we want to keep, so only revert the changes to gspawn itself.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=698081
+
+ glib/gspawn.c | 76
+ ++++++++++++++++++++++++++++-------------------------------
+ 1 file changed, 36 insertions(+), 40 deletions(-)
+
+commit 7304bbd5d8ad56dcf3ee9fadf74f6104c49d4df7
+Author: Giovanni Campagna <gcampagna@src.gnome.org>
+Date:   Fri Apr 12 17:25:15 2013 +0200
+
+    GVariant: fix transfer annotation
+
+    g_variant_new_from_bytes() returns a floating reference, so it
+    must be annotated (transfer none)
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=697887
+
+ glib/gvariant-core.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
 commit e02fbacc9d78dd33957b945200f8a1f98deb0b78
 Author: Ryan Lortie <desrt@desrt.ca>
 Date:   Mon Apr 15 23:58:15 2013 +0200

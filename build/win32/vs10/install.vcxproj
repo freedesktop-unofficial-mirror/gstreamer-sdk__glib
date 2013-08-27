@@ -146,6 +146,14 @@
       <Project>{95a1571f-61be-4c51-be53-2f2dab280685}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+    <ProjectReference Include="gio-querymodules.vcxproj">
+      <Project>{95a1571f-61be-4c51-be53-2f2dab280686}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="gdbus.vcxproj">
+      <Project>{95a1571f-61be-4c51-be53-2f2dab280687}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -141,6 +141,9 @@
 /* we have the eventfd(2) system call */
 #undef HAVE_EVENTFD
 
+/* Define to 1 if you have the `fallocate' function. */
+#undef HAVE_FALLOCATE
+
 /* Define if we have FAM */
 #undef HAVE_FAM
 
