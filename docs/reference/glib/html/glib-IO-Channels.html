@@ -8,7 +8,7 @@
 <link rel="up" href="glib-core.html" title="GLib Core Application Support">
 <link rel="prev" href="glib-Memory-Slices.html" title="Memory Slices">
 <link rel="next" href="glib-Error-Reporting.html" title="Error Reporting">
-<meta name="generator" content="GTK-Doc V1.18 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.18.1 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -51,7 +51,9 @@ struct              <a class="link" href="glib-IO-Channels.html#GIOChannel" titl
 
 <span class="returnvalue">void</span>                <a class="link" href="glib-IO-Channels.html#g-io-channel-init" title="g_io_channel_init ()">g_io_channel_init</a>                   (<em class="parameter"><code><a class="link" href="glib-IO-Channels.html#GIOChannel" title="struct GIOChannel"><span class="type">GIOChannel</span></a> *channel</code></em>);
 
-#define             <a class="link" href="glib-IO-Channels.html#g-io-channel-new-file" title="g_io_channel_new_file">g_io_channel_new_file</a>
+<a class="link" href="glib-IO-Channels.html#GIOChannel" title="struct GIOChannel"><span class="returnvalue">GIOChannel</span></a> *        <a class="link" href="glib-IO-Channels.html#g-io-channel-new-file" title="g_io_channel_new_file ()">g_io_channel_new_file</a>               (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *filename</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *mode</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);
 <a class="link" href="glib-IO-Channels.html#GIOStatus" title="enum GIOStatus"><span class="returnvalue">GIOStatus</span></a>           <a class="link" href="glib-IO-Channels.html#g-io-channel-read-chars" title="g_io_channel_read_chars ()">g_io_channel_read_chars</a>             (<em class="parameter"><code><a class="link" href="glib-IO-Channels.html#GIOChannel" title="struct GIOChannel"><span class="type">GIOChannel</span></a> *channel</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *buf</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> count</code></em>,
@@ -172,7 +174,7 @@ support for Windows is only partially complete.
 To create a new <a class="link" href="glib-IO-Channels.html#GIOChannel" title="struct GIOChannel"><span class="type">GIOChannel</span></a> on UNIX systems use
 <a class="link" href="glib-IO-Channels.html#g-io-channel-unix-new" title="g_io_channel_unix_new ()"><code class="function">g_io_channel_unix_new()</code></a>. This works for plain file descriptors,
 pipes and sockets. Alternatively, a channel can be created for a
-file in a system independent manner using <a class="link" href="glib-IO-Channels.html#g-io-channel-new-file" title="g_io_channel_new_file"><code class="function">g_io_channel_new_file()</code></a>.
+file in a system independent manner using <a class="link" href="glib-IO-Channels.html#g-io-channel-new-file" title="g_io_channel_new_file ()"><code class="function">g_io_channel_new_file()</code></a>.
 </p>
 <p>
 Once a <a class="link" href="glib-IO-Channels.html#GIOChannel" title="struct GIOChannel"><span class="type">GIOChannel</span></a> has been created, it can be used in a generic
@@ -192,7 +194,7 @@ function to be called whenever these events occur.
 increment or decrement the reference count respectively. When the
 reference count falls to 0, the <a class="link" href="glib-IO-Channels.html#GIOChannel" title="struct GIOChannel"><span class="type">GIOChannel</span></a> is freed. (Though it
 isn't closed automatically, unless it was created using
-<a class="link" href="glib-IO-Channels.html#g-io-channel-new-file" title="g_io_channel_new_file"><code class="function">g_io_channel_new_file()</code></a>.) Using <a class="link" href="glib-IO-Channels.html#g-io-add-watch" title="g_io_add_watch ()"><code class="function">g_io_add_watch()</code></a> or
+<a class="link" href="glib-IO-Channels.html#g-io-channel-new-file" title="g_io_channel_new_file ()"><code class="function">g_io_channel_new_file()</code></a>.) Using <a class="link" href="glib-IO-Channels.html#g-io-add-watch" title="g_io_add_watch ()"><code class="function">g_io_add_watch()</code></a> or
 <a class="link" href="glib-IO-Channels.html#g-io-add-watch-full" title="g_io_add_watch_full ()"><code class="function">g_io_add_watch_full()</code></a> increments a channel's reference count.
 </p>
 <p>
@@ -428,8 +430,10 @@ programmer (unless you are creating a new type of <a class="link" href="glib-IO-
 </div>
 <hr>
 <div class="refsect2">
-<a name="g-io-channel-new-file"></a><h3>g_io_channel_new_file</h3>
-<pre class="programlisting">#define             g_io_channel_new_file</pre>
+<a name="g-io-channel-new-file"></a><h3>g_io_channel_new_file ()</h3>
+<pre class="programlisting"><a class="link" href="glib-IO-Channels.html#GIOChannel" title="struct GIOChannel"><span class="returnvalue">GIOChannel</span></a> *        g_io_channel_new_file               (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *filename</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *mode</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Open a file <em class="parameter"><code>filename</code></em> as a <a class="link" href="glib-IO-Channels.html#GIOChannel" title="struct GIOChannel"><span class="type">GIOChannel</span></a> using mode <em class="parameter"><code>mode</code></em>. This
 channel will be closed when the last reference to it is dropped,
@@ -489,7 +493,7 @@ Replacement for <a class="link" href="glib-IO-Channels.html#g-io-channel-read" t
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>buf</code></em> :</span></p></td>
-<td>a buffer to read data into. <span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym> caller-allocates][<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=count][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> guint8]</span>
+<td>a buffer to read data into. <span class="annotation">[<acronym title="Out parameter, where caller must allocate storage."><span class="acronym">out caller-allocates</span></acronym>][<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=count][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> guint8]</span>
 </td>
 </tr>
 <tr>
@@ -1645,6 +1649,7 @@ Sets the (writeable) flags in <em class="parameter"><code>channel</code></em> to
   G_IO_FLAG_NONBLOCK = 1 &lt;&lt; 1,
   G_IO_FLAG_IS_READABLE = 1 &lt;&lt; 2, /* Read only flag */
   G_IO_FLAG_IS_WRITABLE = 1 &lt;&lt; 3, /* Read only flag */
+  G_IO_FLAG_IS_WRITEABLE = 1 &lt;&lt; 3,      /* Misspelling in 2.29.10 and earlier */
   G_IO_FLAG_IS_SEEKABLE = 1 &lt;&lt; 4, /* Read only flag */
   G_IO_FLAG_MASK = (1 &lt;&lt; 5) - 1,
   G_IO_FLAG_GET_MASK = G_IO_FLAG_MASK,
@@ -1687,6 +1692,10 @@ read with <a class="link" href="glib-IO-Channels.html#g-io-channel-get-flags" ti
 <td>indicates that the io channel is writable.
                          This flag cannot be changed.
 </td>
+</tr>
+<tr>
+<td><p><a name="G-IO-FLAG-IS-WRITEABLE:CAPS"></a><span class="term"><code class="literal">G_IO_FLAG_IS_WRITEABLE</code></span></p></td>
+<td></td>
 </tr>
 <tr>
 <td><p><a name="G-IO-FLAG-IS-SEEKABLE:CAPS"></a><span class="term"><code class="literal">G_IO_FLAG_IS_SEEKABLE</code></span></p></td>
@@ -1979,7 +1988,7 @@ calling one of the API "read" functions.
 Returns whether the file/socket/whatever associated with <em class="parameter"><code>channel</code></em>
 will be closed when <em class="parameter"><code>channel</code></em> receives its final unref and is
 destroyed. The default value of this is <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> for channels created
-by <a class="link" href="glib-IO-Channels.html#g-io-channel-new-file" title="g_io_channel_new_file"><code class="function">g_io_channel_new_file()</code></a>, and <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a> for all other channels.
+by <a class="link" href="glib-IO-Channels.html#g-io-channel-new-file" title="g_io_channel_new_file ()"><code class="function">g_io_channel_new_file()</code></a>, and <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a> for all other channels.
 </p>
 <div class="variablelist"><table border="0" class="variablelist">
 <colgroup>
@@ -2023,7 +2032,7 @@ can cause problems.
 <td><p><span class="term"><em class="parameter"><code>do_close</code></em> :</span></p></td>
 <td>Whether to close the channel on the final unref of
 the GIOChannel data structure. The default value of
-this is <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> for channels created by <a class="link" href="glib-IO-Channels.html#g-io-channel-new-file" title="g_io_channel_new_file"><code class="function">g_io_channel_new_file()</code></a>,
+this is <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> for channels created by <a class="link" href="glib-IO-Channels.html#g-io-channel-new-file" title="g_io_channel_new_file ()"><code class="function">g_io_channel_new_file()</code></a>,
 and <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a> for all other channels.</td>
 </tr>
 </tbody>
@@ -2257,6 +2266,6 @@ last reference is dropped using <a class="link" href="glib-IO-Channels.html#g-io
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.18</div>
+          Generated by GTK-Doc V1.18.1</div>
 </body>
 </html>

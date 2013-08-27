@@ -57,11 +57,12 @@ host_triplet = @host@
 DIST_COMMON = $(glibinclude_HEADERS) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in $(srcdir)/gmodule.rc.in \
 	$(srcdir)/gmoduleconf.h.in $(srcdir)/makefile.msc.in \
-	$(top_srcdir)/Makefile.decl $(top_srcdir)/depcomp \
-	$(top_srcdir)/mkinstalldirs AUTHORS COPYING ChangeLog
+	$(top_srcdir)/Makefile.decl $(top_srcdir)/depcomp AUTHORS \
+	COPYING ChangeLog
 subdir = gmodule
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/m4macros/gtk-doc.m4 \
+am__aclocal_m4_deps = $(top_srcdir)/m4macros/attributes.m4 \
+	$(top_srcdir)/m4macros/gtk-doc.m4 \
 	$(top_srcdir)/m4macros/libtool.m4 \
 	$(top_srcdir)/m4macros/ltoptions.m4 \
 	$(top_srcdir)/m4macros/ltsugar.m4 \
@@ -74,7 +75,7 @@ am__aclocal_m4_deps = $(top_srcdir)/m4macros/gtk-doc.m4 \
 	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
-mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES = gmoduleconf.h makefile.msc gmodule.rc
 CONFIG_CLEAN_VPATH_FILES =
@@ -108,7 +109,7 @@ am__uninstall_files_from_dir = { \
 am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(glibincludedir)"
 LTLIBRARIES = $(lib_LTLIBRARIES)
 am__DEPENDENCIES_1 =
-am_libgmodule_2_0_la_OBJECTS = gmodule.lo
+am_libgmodule_2_0_la_OBJECTS = libgmodule_2_0_la-gmodule.lo
 libgmodule_2_0_la_OBJECTS = $(am_libgmodule_2_0_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -116,8 +117,8 @@ am__v_lt_0 = --silent
 am__v_lt_1 = 
 libgmodule_2_0_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
 	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CCLD) \
-	$(AM_CFLAGS) $(CFLAGS) $(libgmodule_2_0_la_LDFLAGS) $(LDFLAGS) \
-	-o $@
+	$(libgmodule_2_0_la_CFLAGS) $(CFLAGS) \
+	$(libgmodule_2_0_la_LDFLAGS) $(LDFLAGS) -o $@
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -216,6 +217,7 @@ GLIB_COMPILE_SCHEMAS = @GLIB_COMPILE_SCHEMAS@
 GLIB_DEBUG_FLAGS = @GLIB_DEBUG_FLAGS@
 GLIB_EXTRA_CFLAGS = @GLIB_EXTRA_CFLAGS@
 GLIB_GENMARSHAL = @GLIB_GENMARSHAL@
+GLIB_HIDDEN_VISIBILITY_CFLAGS = @GLIB_HIDDEN_VISIBILITY_CFLAGS@
 GLIB_INTERFACE_AGE = @GLIB_INTERFACE_AGE@
 GLIB_LINK_FLAGS = @GLIB_LINK_FLAGS@
 GLIB_MAJOR_VERSION = @GLIB_MAJOR_VERSION@
@@ -223,6 +225,7 @@ GLIB_MICRO_VERSION = @GLIB_MICRO_VERSION@
 GLIB_MINOR_VERSION = @GLIB_MINOR_VERSION@
 GLIB_RUNTIME_LIBDIR = @GLIB_RUNTIME_LIBDIR@
 GLIB_VERSION = @GLIB_VERSION@
+GLIB_WARN_CFLAGS = @GLIB_WARN_CFLAGS@
 GLIB_WIN32_STATIC_COMPILATION_DEFINE = @GLIB_WIN32_STATIC_COMPILATION_DEFINE@
 GMOFILES = @GMOFILES@
 GMSGFMT = @GMSGFMT@
@@ -267,7 +270,6 @@ LIBFFI_LIBS = @LIBFFI_LIBS@
 LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
 LIBTOOL = @LIBTOOL@
-LIBTOOL_EXPORT_OPTIONS = @LIBTOOL_EXPORT_OPTIONS@
 LIB_EXE_MACHINE_FLAG = @LIB_EXE_MACHINE_FLAG@
 LIPO = @LIPO@
 LN_S = @LN_S@
@@ -286,6 +288,7 @@ MKDIR_P = @MKDIR_P@
 MKINSTALLDIRS = @MKINSTALLDIRS@
 MSGFMT = @MSGFMT@
 MSGFMT_OPTS = @MSGFMT_OPTS@
+NAMESER_COMPAT_INCLUDE = @NAMESER_COMPAT_INCLUDE@
 NETWORK_LIBS = @NETWORK_LIBS@
 NM = @NM@
 NMEDIT = @NMEDIT@
@@ -331,6 +334,7 @@ STRIP = @STRIP@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
 WINDRES = @WINDRES@
+WSPIAPI_INCLUDE = @WSPIAPI_INCLUDE@
 XATTR_LIBS = @XATTR_LIBS@
 XGETTEXT = @XGETTEXT@
 XMLCATALOG = @XMLCATALOG@
@@ -368,7 +372,6 @@ gio_INCLUDES = @gio_INCLUDES@
 glib_INCLUDES = @glib_INCLUDES@
 gmodule_INCLUDES = @gmodule_INCLUDES@
 gobject_INCLUDES = @gobject_INCLUDES@
-gthread_INCLUDES = @gthread_INCLUDES@
 host = @host@
 host_alias = @host_alias@
 host_cpu = @host_cpu@
@@ -408,10 +411,9 @@ GTESTER = $(top_builddir)/glib/gtester			# for the GLIB package
 GTESTER_REPORT = $(top_builddir)/glib/gtester-report	# for the GLIB package
 
 # initialize variables for unconditional += appending
-EXTRA_DIST = makefile.msc.in gmoduleconf.h.in gmodule.symbols \
-	gmodule-dl.c gmodule-dld.c gmodule-dyld.c gmodule-os2.c \
-	gmodule-win32.c gmodule-beos.c gmodule-ar.c \
-	gmoduleconf.h.win32 gmodule.rc.in
+EXTRA_DIST = makefile.msc.in gmoduleconf.h.in gmodule-dl.c \
+	gmodule-dld.c gmodule-dyld.c gmodule-os2.c gmodule-win32.c \
+	gmodule-beos.c gmodule-ar.c gmoduleconf.h.win32 gmodule.rc.in
 TEST_PROGS = 
 AM_CPPFLAGS = \
 	$(glib_INCLUDES) 		\
@@ -419,6 +421,7 @@ AM_CPPFLAGS = \
 	@GLIB_DEBUG_FLAGS@ 		\
 	-DG_DISABLE_DEPRECATED
 
+AM_CFLAGS = $(GLIB_WARN_CFLAGS)
 BUILT_EXTRA_DIST = \
 		makefile.msc	\
 		gmodule.rc
@@ -435,16 +438,15 @@ lib_LTLIBRARIES = libgmodule-2.0.la
 @MS_LIB_AVAILABLE_TRUE@@OS_WIN32_AND_DLL_COMPILATION_TRUE@install_ms_lib_cmd = $(INSTALL) gmodule-2.0.lib $(DESTDIR)$(libdir)
 @MS_LIB_AVAILABLE_TRUE@@OS_WIN32_AND_DLL_COMPILATION_TRUE@uninstall_ms_lib_cmd = -rm $(DESTDIR)$(libdir)/gmodule-2.0.lib
 @PLATFORM_WIN32_TRUE@no_undefined = -no-undefined
-@OS_WIN32_AND_DLL_COMPILATION_TRUE@export_symbols = -export-symbols $(builddir)/gmodule.def
-@OS_WIN32_AND_DLL_COMPILATION_TRUE@gmodule_def = gmodule.def
 @OS_WIN32_AND_DLL_COMPILATION_TRUE@gmodule_win32_res = gmodule-win32-res.o
 @OS_WIN32_AND_DLL_COMPILATION_TRUE@gmodule_win32_res_ldflag = -Wl,$(gmodule_win32_res)
+libgmodule_2_0_la_CFLAGS = $(AM_CFLAGS) $(GLIB_HIDDEN_VISIBILITY_CFLAGS)
 libgmodule_2_0_la_SOURCES = gmodule.c
 libgmodule_2_0_la_LDFLAGS = $(GLIB_LINK_FLAGS) \
 	$(gmodule_win32_res_ldflag) \
 	$(G_MODULE_LDFLAGS) \
 	-version-info $(LT_CURRENT):$(LT_REVISION):$(LT_AGE) \
-	-export-dynamic $(no_undefined) $(export_symbols)
+	-export-dynamic $(no_undefined)
 
 libgmodule_2_0_la_LIBADD = $(G_MODULE_LIBS_EXTRA) $(G_MODULE_LIBS) $(libglib)
 libgmodule_2_0_la_DEPENDENCIES = $(gmodule_win32_res) $(gmodule_def)
@@ -533,7 +535,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gmodule.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgmodule_2_0_la-gmodule.Plo@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -555,6 +557,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
+
+libgmodule_2_0_la-gmodule.lo: gmodule.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgmodule_2_0_la_CFLAGS) $(CFLAGS) -MT libgmodule_2_0_la-gmodule.lo -MD -MP -MF $(DEPDIR)/libgmodule_2_0_la-gmodule.Tpo -c -o libgmodule_2_0_la-gmodule.lo `test -f 'gmodule.c' || echo '$(srcdir)/'`gmodule.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgmodule_2_0_la-gmodule.Tpo $(DEPDIR)/libgmodule_2_0_la-gmodule.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gmodule.c' object='libgmodule_2_0_la-gmodule.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libgmodule_2_0_la_CFLAGS) $(CFLAGS) -c -o libgmodule_2_0_la-gmodule.lo `test -f 'gmodule.c' || echo '$(srcdir)/'`gmodule.c
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -902,9 +911,6 @@ lcov-clean:
 
 # run tests in cwd as part of make check
 check-local: test-nonrecursive
-
-gmodule.def: gmodule.symbols
-	$(AM_V_GEN) (echo EXPORTS; $(CPP) -P - <$(srcdir)/gmodule.symbols | sed -e '/^$$/d' -e 's/^/	/') > $(builddir)/gmodule.def
 gmoduleconf.h:	gmoduleconf.h.in
 
 install-ms-lib:
@@ -912,14 +918,6 @@ install-ms-lib:
 
 uninstall-ms-lib:
 	$(uninstall_ms_lib_cmd)
-
-@OS_WIN32_AND_DLL_COMPILATION_TRUE@install-def-file:
-@OS_WIN32_AND_DLL_COMPILATION_TRUE@	$(INSTALL) $(builddir)/gmodule.def $(DESTDIR)$(libdir)/gmodule-2.0.def
-
-@OS_WIN32_AND_DLL_COMPILATION_TRUE@uninstall-def-file:
-@OS_WIN32_AND_DLL_COMPILATION_TRUE@	-rm $(DESTDIR)$(libdir)/gmodule-2.0.def
-@OS_WIN32_AND_DLL_COMPILATION_FALSE@install-def-file:
-@OS_WIN32_AND_DLL_COMPILATION_FALSE@uninstall-def-file:
 
 gmodule-win32-res.o: gmodule.rc
 	$(AM_V_GEN) $(WINDRES) gmodule.rc $@
@@ -943,9 +941,9 @@ dist-hook: $(BUILT_EXTRA_DIST)
 	  if test -f $$f; then d=.; else d=$(srcdir); fi; \
 	  cp $$d/$$f $(distdir) || exit 1; done
 
-install-data-local: install-ms-lib install-def-file
+install-data-local: install-ms-lib
 
-uninstall-local: uninstall-ms-lib uninstall-def-file
+uninstall-local: uninstall-ms-lib
 
 @HAVE_GLIB_RUNTIME_LIBDIR_TRUE@install-data-hook:
 @HAVE_GLIB_RUNTIME_LIBDIR_TRUE@	mkdir -p $(DESTDIR)$(libdir)/$(GLIB_RUNTIME_LIBDIR)

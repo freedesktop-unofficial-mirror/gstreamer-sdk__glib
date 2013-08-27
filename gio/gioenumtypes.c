@@ -1,6 +1,8 @@
 
 /* Generated data (by glib-mkenums) */
 
+#include "config.h"
+#include "gioenumtypes.h"
 #include <gio.h>
 
 /* enumerations from "gioenums.h" */
@@ -340,6 +342,7 @@ g_file_monitor_flags_get_type (void)
         { G_FILE_MONITOR_NONE, "G_FILE_MONITOR_NONE", "none" },
         { G_FILE_MONITOR_WATCH_MOUNTS, "G_FILE_MONITOR_WATCH_MOUNTS", "watch-mounts" },
         { G_FILE_MONITOR_SEND_MOVED, "G_FILE_MONITOR_SEND_MOVED", "send-moved" },
+        { G_FILE_MONITOR_WATCH_HARD_LINKS, "G_FILE_MONITOR_WATCH_HARD_LINKS", "watch-hard-links" },
         { 0, NULL, NULL }
       };
       GType g_define_type_id =
@@ -474,6 +477,7 @@ g_io_error_enum_get_type (void)
         { G_IO_ERROR_PROXY_AUTH_FAILED, "G_IO_ERROR_PROXY_AUTH_FAILED", "proxy-auth-failed" },
         { G_IO_ERROR_PROXY_NEED_AUTH, "G_IO_ERROR_PROXY_NEED_AUTH", "proxy-need-auth" },
         { G_IO_ERROR_PROXY_NOT_ALLOWED, "G_IO_ERROR_PROXY_NOT_ALLOWED", "proxy-not-allowed" },
+        { G_IO_ERROR_BROKEN_PIPE, "G_IO_ERROR_BROKEN_PIPE", "broken-pipe" },
         { 0, NULL, NULL }
       };
       GType g_define_type_id =

@@ -59,8 +59,8 @@ DIST_COMMON = $(am__giounixinclude_HEADERS_DIST) \
 	$(am__giowin32include_HEADERS_DIST) $(dist_schema_DATA) \
 	$(gioinclude_HEADERS) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in $(srcdir)/gio.rc.in \
-	$(top_srcdir)/Makefile.decl $(top_srcdir)/depcomp \
-	$(top_srcdir)/mkinstalldirs ChangeLog
+	$(srcdir)/gnetworking.h.in $(top_srcdir)/Makefile.decl \
+	$(top_srcdir)/depcomp ChangeLog
 @OS_UNIX_TRUE@am__append_1 = xdgmime
 @OS_WIN32_TRUE@am__append_2 = \
 @OS_WIN32_TRUE@	gregistrysettingsbackend.h	\
@@ -72,32 +72,39 @@ DIST_COMMON = $(am__giounixinclude_HEADERS_DIST) \
 @HAVE_INOTIFY_TRUE@am__append_4 = inotify
 @HAVE_INOTIFY_TRUE@am__append_5 = inotify/libinotify.la
 @HAVE_INOTIFY_TRUE@am__append_6 = inotify/libinotify.la
-@HAVE_FEN_TRUE@am__append_7 = -DHAVE_FEN
-@HAVE_FEN_TRUE@am__append_8 = fen
-@HAVE_FEN_TRUE@am__append_9 = fen/libfen.la
-@HAVE_FEN_TRUE@am__append_10 = fen/libfen.la
-@OS_WIN32_TRUE@am__append_11 = win32
-@OS_WIN32_TRUE@am__append_12 = win32/libgiowin32.la
-@OS_WIN32_TRUE@am__append_13 = win32/libgiowin32.la
-@HAVE_FAM_TRUE@am__append_14 = fam
-@OS_UNIX_TRUE@am__append_15 = gdesktopappinfo.c
-@OS_UNIX_TRUE@am__append_16 = xdgmime/libxdgmime.la $(RESOLVER_LIBADD)
-@OS_UNIX_TRUE@am__append_17 = xdgmime/libxdgmime.la
-@HAVE_NETLINK_TRUE@@OS_UNIX_TRUE@am__append_18 = \
+@HAVE_KQUEUE_TRUE@am__append_7 = kqueue
+@HAVE_KQUEUE_TRUE@am__append_8 = kqueue/libkqueue.la
+@HAVE_KQUEUE_TRUE@am__append_9 = kqueue/libkqueue.la
+@HAVE_FEN_TRUE@am__append_10 = -DHAVE_FEN
+@HAVE_FEN_TRUE@am__append_11 = fen
+@HAVE_FEN_TRUE@am__append_12 = fen/libfen.la
+@HAVE_FEN_TRUE@am__append_13 = fen/libfen.la
+@OS_WIN32_TRUE@am__append_14 = win32
+@OS_WIN32_TRUE@am__append_15 = win32/libgiowin32.la
+@OS_WIN32_TRUE@am__append_16 = win32/libgiowin32.la
+@HAVE_FAM_TRUE@am__append_17 = fam
+@OS_UNIX_TRUE@am__append_18 = gdesktopappinfo.c
+@OS_UNIX_TRUE@am__append_19 = xdgmime/libxdgmime.la $(RESOLVER_LIBADD)
+@OS_UNIX_TRUE@am__append_20 = xdgmime/libxdgmime.la
+@HAVE_NETLINK_TRUE@@OS_UNIX_TRUE@am__append_21 = \
 @HAVE_NETLINK_TRUE@@OS_UNIX_TRUE@	gnetworkmonitornetlink.c \
 @HAVE_NETLINK_TRUE@@OS_UNIX_TRUE@	gnetworkmonitornetlink.h \
 @HAVE_NETLINK_TRUE@@OS_UNIX_TRUE@	$(NULL)
 
-@OS_WIN32_TRUE@am__append_19 = gwin32appinfo.c gwin32appinfo.h
-@OS_WIN32_TRUE@am__append_20 = -lshlwapi -lws2_32 -ldnsapi
-@BUILD_MODULAR_TESTS_TRUE@am__append_21 = tests 
-@OS_COCOA_TRUE@am__append_22 = -Wl,-framework,Foundation
+@OS_WIN32_TRUE@am__append_22 = gwin32appinfo.c gwin32appinfo.h
+@OS_WIN32_TRUE@am__append_23 = -lshlwapi -lws2_32 -ldnsapi
+@BUILD_MODULAR_TESTS_TRUE@am__append_24 = tests 
+
+# This is dumb.  The ObjC source file should be properly named .m
+@OS_COCOA_TRUE@am__append_25 = -xobjective-c
+@OS_COCOA_TRUE@am__append_26 = -Wl,-framework,Foundation
 bin_PROGRAMS = gio-querymodules$(EXEEXT) glib-compile-schemas$(EXEEXT) \
 	glib-compile-resources$(EXEEXT) gsettings$(EXEEXT) \
 	gdbus$(EXEEXT) gresource$(EXEEXT)
 subdir = gio
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/m4macros/gtk-doc.m4 \
+am__aclocal_m4_deps = $(top_srcdir)/m4macros/attributes.m4 \
+	$(top_srcdir)/m4macros/gtk-doc.m4 \
 	$(top_srcdir)/m4macros/libtool.m4 \
 	$(top_srcdir)/m4macros/ltoptions.m4 \
 	$(top_srcdir)/m4macros/ltsugar.m4 \
@@ -110,9 +117,9 @@ am__aclocal_m4_deps = $(top_srcdir)/m4macros/gtk-doc.m4 \
 	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
-mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = $(top_builddir)/config.h
-CONFIG_CLEAN_FILES = gio.rc
+CONFIG_CLEAN_FILES = gnetworking.h gio.rc
 CONFIG_CLEAN_VPATH_FILES =
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
 am__vpath_adj = case $$p in \
@@ -148,8 +155,8 @@ am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)" \
 LTLIBRARIES = $(lib_LTLIBRARIES)
 @OS_UNIX_TRUE@am__DEPENDENCIES_1 = xdgmime/libxdgmime.la
 am__DEPENDENCIES_2 =
-am__DEPENDENCIES_3 = $(am__append_5) $(am__append_9) $(am__append_12) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2)
+am__DEPENDENCIES_3 = $(am__append_5) $(am__append_8) $(am__append_12) \
+	$(am__append_15) $(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2)
 am__libgio_2_0_la_SOURCES_DIST = gappinfo.c gasynchelper.c \
 	gasynchelper.h gasyncinitable.c gasyncresult.c \
 	gbufferedinputstream.c gbufferedoutputstream.c gcancellable.c \
@@ -168,11 +175,12 @@ am__libgio_2_0_la_SOURCES_DIST = gappinfo.c gasynchelper.c \
 	giomodule-priv.h gioscheduler.c giostream.c gloadableicon.c \
 	gmount.c gmemoryinputstream.c gmemoryoutputstream.c \
 	gmountoperation.c gnativevolumemonitor.c \
-	gnativevolumemonitor.h gnetworkaddress.c gnetworkingprivate.h \
-	gnetworkmonitor.c gnetworkmonitorbase.c gnetworkmonitorbase.h \
-	gnetworkservice.c goutputstream.c gpermission.c \
-	gpollableinputstream.c gpollableoutputstream.c \
+	gnativevolumemonitor.h gnetworkaddress.c gnetworking.c \
+	gnetworkingprivate.h gnetworkmonitor.c gnetworkmonitorbase.c \
+	gnetworkmonitorbase.h gnetworkservice.c goutputstream.c \
+	gpermission.c gpollableinputstream.c gpollableoutputstream.c \
 	gpollableutils.c gpollfilemonitor.c gpollfilemonitor.h \
+	gproxy.c gproxyaddress.c gproxyaddressenumerator.c \
 	gproxyresolver.c gresolver.c gresource.c gresourcefile.c \
 	gresourcefile.h gseekable.c gsimpleasyncresult.c \
 	gsimplepermission.c gsocket.c gsocketaddress.c \
@@ -180,14 +188,13 @@ am__libgio_2_0_la_SOURCES_DIST = gappinfo.c gasynchelper.c \
 	gsocketconnectable.c gsocketconnection.c \
 	gsocketcontrolmessage.c gsocketinputstream.c \
 	gsocketinputstream.h gsocketlistener.c gsocketoutputstream.c \
-	gsocketoutputstream.h gproxy.c gproxyaddress.c \
-	gproxyaddressenumerator.c gsocketservice.c gsrvtarget.c \
-	gtcpconnection.c gtcpwrapperconnection.c \
-	gthreadedsocketservice.c gthemedicon.c gthreadedresolver.c \
-	gthreadedresolver.h gtlsbackend.c gtlscertificate.c \
-	gtlsclientconnection.c gtlsconnection.c gtlsdatabase.c \
-	gtlsfiledatabase.c gtlsinteraction.c gtlspassword.c \
-	gtlsserverconnection.c gunionvolumemonitor.c \
+	gsocketoutputstream.h gsocketservice.c gsrvtarget.c \
+	gsimpleproxyresolver.c gtask.c gtcpconnection.c \
+	gtcpwrapperconnection.c gthreadedsocketservice.c gthemedicon.c \
+	gthreadedresolver.c gthreadedresolver.h gtlsbackend.c \
+	gtlscertificate.c gtlsclientconnection.c gtlsconnection.c \
+	gtlsdatabase.c gtlsfiledatabase.c gtlsinteraction.c \
+	gtlspassword.c gtlsserverconnection.c gunionvolumemonitor.c \
 	gunionvolumemonitor.h gvfs.c gvolume.c gvolumemonitor.c \
 	gzlibcompressor.c gzlibdecompressor.c gmountprivate.h \
 	gioenumtypes.h gioenumtypes.c gdesktopappinfo.c \
@@ -205,14 +212,15 @@ am__libgio_2_0_la_SOURCES_DIST = gappinfo.c gasynchelper.c \
 	gapplication.c gapplicationcommandline.c \
 	gapplicationimpl-dbus.c gapplicationimpl.h gactiongroup.c \
 	gactionmap.c gsimpleactiongroup.c gremoteactiongroup.c \
-	gactiongroupexporter.c gdbusactiongroup.c gaction.c \
-	gsimpleaction.c gmenumodel.c gmenu.c gmenuexporter.c \
-	gdbusmenumodel.c gvdb/gvdb-format.h gvdb/gvdb-reader.h \
-	gvdb/gvdb-reader.c gdelayedsettingsbackend.h \
-	gdelayedsettingsbackend.c gkeyfilesettingsbackend.c \
-	gmemorysettingsbackend.c gnullsettingsbackend.c \
-	gsettingsbackendinternal.h gsettingsbackend.c \
-	gsettingsschema.h gsettingsschema-internal.h gsettingsschema.c \
+	gactiongroupexporter.c gdbusactiongroup-private.h \
+	gdbusactiongroup.c gaction.c gsimpleaction.c gmenumodel.c \
+	gmenu.c gmenuexporter.c gdbusmenumodel.c gvdb/gvdb-format.h \
+	gvdb/gvdb-reader.h gvdb/gvdb-reader.c \
+	gdelayedsettingsbackend.h gdelayedsettingsbackend.c \
+	gkeyfilesettingsbackend.c gmemorysettingsbackend.c \
+	gnullsettingsbackend.c gsettingsbackendinternal.h \
+	gsettingsbackend.c gsettingsschema.h \
+	gsettingsschema-internal.h gsettingsschema.c \
 	gsettings-mapping.h gsettings-mapping.c gsettings.c \
 	gregistrysettingsbackend.h gregistrysettingsbackend.c \
 	gnextstepsettingsbackend.c gdbusutils.h gdbusutils.c \
@@ -364,7 +372,7 @@ am_libgio_2_0_la_OBJECTS = libgio_2_0_la-gappinfo.lo \
 	libgio_2_0_la-gmemoryoutputstream.lo \
 	libgio_2_0_la-gmountoperation.lo \
 	libgio_2_0_la-gnativevolumemonitor.lo \
-	libgio_2_0_la-gnetworkaddress.lo \
+	libgio_2_0_la-gnetworkaddress.lo libgio_2_0_la-gnetworking.lo \
 	libgio_2_0_la-gnetworkmonitor.lo \
 	libgio_2_0_la-gnetworkmonitorbase.lo \
 	libgio_2_0_la-gnetworkservice.lo \
@@ -372,7 +380,9 @@ am_libgio_2_0_la_OBJECTS = libgio_2_0_la-gappinfo.lo \
 	libgio_2_0_la-gpollableinputstream.lo \
 	libgio_2_0_la-gpollableoutputstream.lo \
 	libgio_2_0_la-gpollableutils.lo \
-	libgio_2_0_la-gpollfilemonitor.lo \
+	libgio_2_0_la-gpollfilemonitor.lo libgio_2_0_la-gproxy.lo \
+	libgio_2_0_la-gproxyaddress.lo \
+	libgio_2_0_la-gproxyaddressenumerator.lo \
 	libgio_2_0_la-gproxyresolver.lo libgio_2_0_la-gresolver.lo \
 	libgio_2_0_la-gresource.lo libgio_2_0_la-gresourcefile.lo \
 	libgio_2_0_la-gseekable.lo libgio_2_0_la-gsimpleasyncresult.lo \
@@ -385,10 +395,9 @@ am_libgio_2_0_la_OBJECTS = libgio_2_0_la-gappinfo.lo \
 	libgio_2_0_la-gsocketcontrolmessage.lo \
 	libgio_2_0_la-gsocketinputstream.lo \
 	libgio_2_0_la-gsocketlistener.lo \
-	libgio_2_0_la-gsocketoutputstream.lo libgio_2_0_la-gproxy.lo \
-	libgio_2_0_la-gproxyaddress.lo \
-	libgio_2_0_la-gproxyaddressenumerator.lo \
+	libgio_2_0_la-gsocketoutputstream.lo \
 	libgio_2_0_la-gsocketservice.lo libgio_2_0_la-gsrvtarget.lo \
+	libgio_2_0_la-gsimpleproxyresolver.lo libgio_2_0_la-gtask.lo \
 	libgio_2_0_la-gtcpconnection.lo \
 	libgio_2_0_la-gtcpwrapperconnection.lo \
 	libgio_2_0_la-gthreadedsocketservice.lo \
@@ -519,11 +528,8 @@ AM_RECURSIVE_TARGETS = $(RECURSIVE_TARGETS:-recursive=) \
 	distdir
 ETAGS = etags
 CTAGS = ctags
-am__tty_colors_dummy = \
-  mgn= red= grn= lgn= blu= brg= std=; \
-  am__color_tests=no
-am__tty_colors = $(am__tty_colors_dummy)
-DIST_SUBDIRS = gdbus-2.0/codegen xdgmime inotify fen win32 . fam tests
+DIST_SUBDIRS = gdbus-2.0/codegen xdgmime inotify kqueue fen win32 . \
+	fam tests
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 am__relativize = \
   dir0=`pwd`; \
@@ -602,6 +608,7 @@ GLIB_COMPILE_SCHEMAS = @GLIB_COMPILE_SCHEMAS@
 GLIB_DEBUG_FLAGS = @GLIB_DEBUG_FLAGS@
 GLIB_EXTRA_CFLAGS = @GLIB_EXTRA_CFLAGS@
 GLIB_GENMARSHAL = @GLIB_GENMARSHAL@
+GLIB_HIDDEN_VISIBILITY_CFLAGS = @GLIB_HIDDEN_VISIBILITY_CFLAGS@
 GLIB_INTERFACE_AGE = @GLIB_INTERFACE_AGE@
 GLIB_LINK_FLAGS = @GLIB_LINK_FLAGS@
 GLIB_MAJOR_VERSION = @GLIB_MAJOR_VERSION@
@@ -609,6 +616,7 @@ GLIB_MICRO_VERSION = @GLIB_MICRO_VERSION@
 GLIB_MINOR_VERSION = @GLIB_MINOR_VERSION@
 GLIB_RUNTIME_LIBDIR = @GLIB_RUNTIME_LIBDIR@
 GLIB_VERSION = @GLIB_VERSION@
+GLIB_WARN_CFLAGS = @GLIB_WARN_CFLAGS@
 GLIB_WIN32_STATIC_COMPILATION_DEFINE = @GLIB_WIN32_STATIC_COMPILATION_DEFINE@
 GMOFILES = @GMOFILES@
 GMSGFMT = @GMSGFMT@
@@ -653,7 +661,6 @@ LIBFFI_LIBS = @LIBFFI_LIBS@
 LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
 LIBTOOL = @LIBTOOL@
-LIBTOOL_EXPORT_OPTIONS = @LIBTOOL_EXPORT_OPTIONS@
 LIB_EXE_MACHINE_FLAG = @LIB_EXE_MACHINE_FLAG@
 LIPO = @LIPO@
 LN_S = @LN_S@
@@ -672,6 +679,7 @@ MKDIR_P = @MKDIR_P@
 MKINSTALLDIRS = @MKINSTALLDIRS@
 MSGFMT = @MSGFMT@
 MSGFMT_OPTS = @MSGFMT_OPTS@
+NAMESER_COMPAT_INCLUDE = @NAMESER_COMPAT_INCLUDE@
 NETWORK_LIBS = @NETWORK_LIBS@
 NM = @NM@
 NMEDIT = @NMEDIT@
@@ -717,6 +725,7 @@ STRIP = @STRIP@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
 WINDRES = @WINDRES@
+WSPIAPI_INCLUDE = @WSPIAPI_INCLUDE@
 XATTR_LIBS = @XATTR_LIBS@
 XGETTEXT = @XGETTEXT@
 XMLCATALOG = @XMLCATALOG@
@@ -754,7 +763,6 @@ gio_INCLUDES = @gio_INCLUDES@
 glib_INCLUDES = @glib_INCLUDES@
 gmodule_INCLUDES = @gmodule_INCLUDES@
 gobject_INCLUDES = @gobject_INCLUDES@
-gthread_INCLUDES = @gthread_INCLUDES@
 host = @host@
 host_alias = @host_alias@
 host_cpu = @host_cpu@
@@ -797,21 +805,21 @@ GTESTER_REPORT = $(top_builddir)/glib/gtester-report	# for the GLIB package
 
 # These are not built into the library yet
 EXTRA_DIST = gdbusdaemon.c gdbusdaemon.h dbus-daemon.xml strinfo.c \
-	data-to-c.pl gio.symbols gioenumtypes.h.template \
-	gioenumtypes.c.template makefile.msc abicheck.sh gio.rc.in \
-	gschema.dtd gconstructor_as_data.h $(NULL) $(completion_DATA)
+	data-to-c.pl gioenumtypes.h.template gioenumtypes.c.template \
+	makefile.msc gio.rc.in gschema.dtd gconstructor_as_data.h \
+	gnetworking.h.win32 $(NULL) $(completion_DATA)
 TEST_PROGS = 
 NULL = 
 SUBDIRS = gdbus-2.0/codegen $(am__append_1) $(am__append_4) \
-	$(am__append_8) $(am__append_11) . $(am__append_14) \
-	$(am__append_21)
+	$(am__append_7) $(am__append_11) $(am__append_14) . \
+	$(am__append_17) $(am__append_24)
 @MS_LIB_AVAILABLE_TRUE@@OS_WIN32_AND_DLL_COMPILATION_TRUE@noinst_DATA = gio-2.0.lib
 @MS_LIB_AVAILABLE_TRUE@@OS_WIN32_AND_DLL_COMPILATION_TRUE@install_ms_lib_cmd = $(INSTALL) gio-2.0.lib $(DESTDIR)$(libdir)
 @MS_LIB_AVAILABLE_TRUE@@OS_WIN32_AND_DLL_COMPILATION_TRUE@uninstall_ms_lib_cmd = -rm $(DESTDIR)$(libdir)/gio-2.0.lib
-@HAVE_GNUC_VISIBILITY_TRUE@@OS_LINUX_TRUE@TESTS = abicheck.sh
 AM_CPPFLAGS = -DG_LOG_DOMAIN=\"GLib-GIO\" $(gmodule_INCLUDES) \
 	$(GLIB_DEBUG_FLAGS) -DGIO_COMPILATION \
-	-DGIO_MODULE_DIR=\"$(GIO_MODULE_DIR)\" $(am__append_7)
+	-DGIO_MODULE_DIR=\"$(GIO_MODULE_DIR)\" $(am__append_10)
+AM_CFLAGS = $(GLIB_WARN_CFLAGS)
 lib_LTLIBRARIES = libgio-2.0.la
 gdbus_headers = \
 	gdbusauthobserver.h		\
@@ -911,6 +919,7 @@ application_sources = \
 	gsimpleactiongroup.c			\
 	gremoteactiongroup.c			\
 	gactiongroupexporter.c			\
+	gdbusactiongroup-private.h		\
 	gdbusactiongroup.c			\
 	gaction.c				\
 	gsimpleaction.c				\
@@ -948,11 +957,11 @@ local_sources = \
 	gsocks5proxy.h			\
 	$(NULL)
 
-platform_libadd = $(am__append_5) $(am__append_9) $(am__append_12) \
+platform_libadd = $(am__append_5) $(am__append_8) $(am__append_12) \
+	$(am__append_15) $(am__append_19) $(am__append_23)
+platform_deps = $(am__append_6) $(am__append_9) $(am__append_13) \
 	$(am__append_16) $(am__append_20)
-platform_deps = $(am__append_6) $(am__append_10) $(am__append_13) \
-	$(am__append_17)
-appinfo_sources = $(am__append_15) $(am__append_19)
+appinfo_sources = $(am__append_18) $(am__append_22)
 @OS_UNIX_TRUE@unix_sources = gfiledescriptorbased.c gunixconnection.c \
 @OS_UNIX_TRUE@	gunixcredentialsmessage.c gunixfdlist.c \
 @OS_UNIX_TRUE@	gunixfdmessage.c gunixmount.c gunixmount.h \
@@ -960,7 +969,7 @@ appinfo_sources = $(am__append_15) $(am__append_19)
 @OS_UNIX_TRUE@	gunixvolume.h gunixvolumemonitor.c \
 @OS_UNIX_TRUE@	gunixvolumemonitor.h gunixinputstream.c \
 @OS_UNIX_TRUE@	gunixoutputstream.c gcontenttype.c \
-@OS_UNIX_TRUE@	gcontenttypeprivate.h $(NULL) $(am__append_18)
+@OS_UNIX_TRUE@	gcontenttypeprivate.h $(NULL) $(am__append_21)
 @OS_UNIX_TRUE@giounixincludedir = $(includedir)/gio-unix-2.0/gio
 @OS_UNIX_TRUE@giounixinclude_HEADERS = \
 @OS_UNIX_TRUE@	gdesktopappinfo.h	\
@@ -1071,6 +1080,7 @@ libgio_2_0_la_SOURCES = \
 	gnativevolumemonitor.c 	\
 	gnativevolumemonitor.h 	\
 	gnetworkaddress.c	\
+	gnetworking.c		\
 	gnetworkingprivate.h	\
 	gnetworkmonitor.c	\
 	gnetworkmonitorbase.c	\
@@ -1083,6 +1093,9 @@ libgio_2_0_la_SOURCES = \
 	gpollableutils.c	\
 	gpollfilemonitor.c 	\
 	gpollfilemonitor.h 	\
+	gproxy.c		\
+	gproxyaddress.c         \
+	gproxyaddressenumerator.c \
 	gproxyresolver.c	\
 	gresolver.c		\
 	gresource.c		\
@@ -1103,11 +1116,10 @@ libgio_2_0_la_SOURCES = \
 	gsocketlistener.c	\
 	gsocketoutputstream.c	\
 	gsocketoutputstream.h	\
-	gproxy.c		\
-	gproxyaddress.c         \
-	gproxyaddressenumerator.c \
 	gsocketservice.c	\
 	gsrvtarget.c		\
+	gsimpleproxyresolver.c	\
+	gtask.c			\
 	gtcpconnection.c	\
 	gtcpwrapperconnection.c \
 	gthreadedsocketservice.c\
@@ -1156,18 +1168,13 @@ libgio_2_0_la_LIBADD = \
 
 libgio_2_0_la_CPPFLAGS = $(ZLIB_CFLAGS) $(AM_CPPFLAGS)
 @PLATFORM_WIN32_TRUE@no_undefined = -no-undefined
-@OS_WIN32_AND_DLL_COMPILATION_FALSE@export_symbols = $(LIBTOOL_EXPORT_OPTIONS)
-@OS_WIN32_AND_DLL_COMPILATION_TRUE@export_symbols = -export-symbols $(builddir)/gio.def
-@OS_WIN32_AND_DLL_COMPILATION_TRUE@gio_def = gio.def
 @OS_WIN32_AND_DLL_COMPILATION_TRUE@gio_win32_res = gio-win32-res.o
 @OS_WIN32_AND_DLL_COMPILATION_TRUE@gio_win32_res_ldflag = -Wl,$(gio_win32_res)
+libgio_2_0_la_CFLAGS = $(AM_CFLAGS) $(GLIB_HIDDEN_VISIBILITY_CFLAGS) \
+	$(am__append_25)
 libgio_2_0_la_LDFLAGS = $(GLIB_LINK_FLAGS) $(gio_win32_res_ldflag) \
 	-version-info $(LT_CURRENT):$(LT_REVISION):$(LT_AGE) \
-	-export-dynamic $(no_undefined) $(export_symbols) \
-	$(am__append_22)
-
-# This is dumb.  The ObjC source file should be properly named .m
-@OS_COCOA_TRUE@libgio_2_0_la_CFLAGS = -xobjective-c
+	-export-dynamic $(no_undefined) $(am__append_26)
 libgio_2_0_la_DEPENDENCIES = $(gio_win32_res) $(gio_def) $(platform_deps)
 gio_headers = \
 	gappinfo.h 		\
@@ -1218,6 +1225,7 @@ gio_headers = \
 	gmountoperation.h 	\
 	gnativevolumemonitor.h 	\
 	gnetworkaddress.h	\
+	gnetworking.h		\
 	gnetworkmonitor.h	\
 	gnetworkservice.h	\
 	goutputstream.h 	\
@@ -1244,6 +1252,8 @@ gio_headers = \
 	gsocketlistener.h	\
 	gsocketservice.h	\
 	gsrvtarget.h		\
+	gsimpleproxyresolver.h	\
+	gtask.h			\
 	gtcpconnection.h	\
 	gtcpwrapperconnection.h \
 	gthreadedsocketservice.h\
@@ -1280,12 +1290,17 @@ BUILT_SOURCES = \
 	gioenumtypes.c		\
 	gdbus-daemon-generated.c \
 	gdbus-daemon-generated.h \
+	gnetworking.h		\
 	$(NULL)
 
 BUILT_EXTRA_DIST = \
 	gio.rc
 
 CLEANFILES = gdbus-daemon-generated.c gdbus-daemon-generated.h gio-public-headers.txt gconstructor_as_data.h
+DISTCLEANFILES = \
+	gioenumtypes.h		\
+	gioenumtypes.c
+
 glib_compile_resources_LDADD = \
 	$(top_builddir)/glib/libglib-2.0.la \
 	$(top_builddir)/gobject/libgobject-2.0.la	\
@@ -1375,6 +1390,8 @@ $(top_srcdir)/configure: @MAINTAINER_MODE_TRUE@ $(am__configure_deps)
 $(ACLOCAL_M4): @MAINTAINER_MODE_TRUE@ $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(am__aclocal_m4_deps):
+gnetworking.h: $(top_builddir)/config.status $(srcdir)/gnetworking.h.in
+	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
 gio.rc: $(top_builddir)/config.status $(srcdir)/gio.rc.in
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
 install-libLTLIBRARIES: $(lib_LTLIBRARIES)
@@ -1597,6 +1614,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gmountoperation.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gnativevolumemonitor.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gnetworkaddress.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gnetworking.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gnetworkmonitor.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gnetworkmonitorbase.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gnetworkmonitornetlink.Plo@am__quote@
@@ -1627,6 +1645,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gsimpleactiongroup.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gsimpleasyncresult.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gsimplepermission.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gsimpleproxyresolver.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gsocket.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gsocketaddress.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gsocketaddressenumerator.Plo@am__quote@
@@ -1642,6 +1661,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gsocks4proxy.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gsocks5proxy.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gsrvtarget.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gtask.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gtcpconnection.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gtcpwrapperconnection.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gtestdbus.Plo@am__quote@
@@ -2045,6 +2065,13 @@ libgio_2_0_la-gnetworkaddress.lo: gnetworkaddress.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -c -o libgio_2_0_la-gnetworkaddress.lo `test -f 'gnetworkaddress.c' || echo '$(srcdir)/'`gnetworkaddress.c
 
+libgio_2_0_la-gnetworking.lo: gnetworking.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -MT libgio_2_0_la-gnetworking.lo -MD -MP -MF $(DEPDIR)/libgio_2_0_la-gnetworking.Tpo -c -o libgio_2_0_la-gnetworking.lo `test -f 'gnetworking.c' || echo '$(srcdir)/'`gnetworking.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgio_2_0_la-gnetworking.Tpo $(DEPDIR)/libgio_2_0_la-gnetworking.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gnetworking.c' object='libgio_2_0_la-gnetworking.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -c -o libgio_2_0_la-gnetworking.lo `test -f 'gnetworking.c' || echo '$(srcdir)/'`gnetworking.c
+
 libgio_2_0_la-gnetworkmonitor.lo: gnetworkmonitor.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -MT libgio_2_0_la-gnetworkmonitor.lo -MD -MP -MF $(DEPDIR)/libgio_2_0_la-gnetworkmonitor.Tpo -c -o libgio_2_0_la-gnetworkmonitor.lo `test -f 'gnetworkmonitor.c' || echo '$(srcdir)/'`gnetworkmonitor.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgio_2_0_la-gnetworkmonitor.Tpo $(DEPDIR)/libgio_2_0_la-gnetworkmonitor.Plo
@@ -2107,6 +2134,27 @@ libgio_2_0_la-gpollfilemonitor.lo: gpollfilemonitor.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gpollfilemonitor.c' object='libgio_2_0_la-gpollfilemonitor.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -c -o libgio_2_0_la-gpollfilemonitor.lo `test -f 'gpollfilemonitor.c' || echo '$(srcdir)/'`gpollfilemonitor.c
+
+libgio_2_0_la-gproxy.lo: gproxy.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -MT libgio_2_0_la-gproxy.lo -MD -MP -MF $(DEPDIR)/libgio_2_0_la-gproxy.Tpo -c -o libgio_2_0_la-gproxy.lo `test -f 'gproxy.c' || echo '$(srcdir)/'`gproxy.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgio_2_0_la-gproxy.Tpo $(DEPDIR)/libgio_2_0_la-gproxy.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gproxy.c' object='libgio_2_0_la-gproxy.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -c -o libgio_2_0_la-gproxy.lo `test -f 'gproxy.c' || echo '$(srcdir)/'`gproxy.c
+
+libgio_2_0_la-gproxyaddress.lo: gproxyaddress.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -MT libgio_2_0_la-gproxyaddress.lo -MD -MP -MF $(DEPDIR)/libgio_2_0_la-gproxyaddress.Tpo -c -o libgio_2_0_la-gproxyaddress.lo `test -f 'gproxyaddress.c' || echo '$(srcdir)/'`gproxyaddress.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgio_2_0_la-gproxyaddress.Tpo $(DEPDIR)/libgio_2_0_la-gproxyaddress.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gproxyaddress.c' object='libgio_2_0_la-gproxyaddress.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -c -o libgio_2_0_la-gproxyaddress.lo `test -f 'gproxyaddress.c' || echo '$(srcdir)/'`gproxyaddress.c
+
+libgio_2_0_la-gproxyaddressenumerator.lo: gproxyaddressenumerator.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -MT libgio_2_0_la-gproxyaddressenumerator.lo -MD -MP -MF $(DEPDIR)/libgio_2_0_la-gproxyaddressenumerator.Tpo -c -o libgio_2_0_la-gproxyaddressenumerator.lo `test -f 'gproxyaddressenumerator.c' || echo '$(srcdir)/'`gproxyaddressenumerator.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgio_2_0_la-gproxyaddressenumerator.Tpo $(DEPDIR)/libgio_2_0_la-gproxyaddressenumerator.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gproxyaddressenumerator.c' object='libgio_2_0_la-gproxyaddressenumerator.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -c -o libgio_2_0_la-gproxyaddressenumerator.lo `test -f 'gproxyaddressenumerator.c' || echo '$(srcdir)/'`gproxyaddressenumerator.c
 
 libgio_2_0_la-gproxyresolver.lo: gproxyresolver.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -MT libgio_2_0_la-gproxyresolver.lo -MD -MP -MF $(DEPDIR)/libgio_2_0_la-gproxyresolver.Tpo -c -o libgio_2_0_la-gproxyresolver.lo `test -f 'gproxyresolver.c' || echo '$(srcdir)/'`gproxyresolver.c
@@ -2227,27 +2275,6 @@ libgio_2_0_la-gsocketoutputstream.lo: gsocketoutputstream.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -c -o libgio_2_0_la-gsocketoutputstream.lo `test -f 'gsocketoutputstream.c' || echo '$(srcdir)/'`gsocketoutputstream.c
 
-libgio_2_0_la-gproxy.lo: gproxy.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -MT libgio_2_0_la-gproxy.lo -MD -MP -MF $(DEPDIR)/libgio_2_0_la-gproxy.Tpo -c -o libgio_2_0_la-gproxy.lo `test -f 'gproxy.c' || echo '$(srcdir)/'`gproxy.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgio_2_0_la-gproxy.Tpo $(DEPDIR)/libgio_2_0_la-gproxy.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gproxy.c' object='libgio_2_0_la-gproxy.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -c -o libgio_2_0_la-gproxy.lo `test -f 'gproxy.c' || echo '$(srcdir)/'`gproxy.c
-
-libgio_2_0_la-gproxyaddress.lo: gproxyaddress.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -MT libgio_2_0_la-gproxyaddress.lo -MD -MP -MF $(DEPDIR)/libgio_2_0_la-gproxyaddress.Tpo -c -o libgio_2_0_la-gproxyaddress.lo `test -f 'gproxyaddress.c' || echo '$(srcdir)/'`gproxyaddress.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgio_2_0_la-gproxyaddress.Tpo $(DEPDIR)/libgio_2_0_la-gproxyaddress.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gproxyaddress.c' object='libgio_2_0_la-gproxyaddress.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -c -o libgio_2_0_la-gproxyaddress.lo `test -f 'gproxyaddress.c' || echo '$(srcdir)/'`gproxyaddress.c
-
-libgio_2_0_la-gproxyaddressenumerator.lo: gproxyaddressenumerator.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -MT libgio_2_0_la-gproxyaddressenumerator.lo -MD -MP -MF $(DEPDIR)/libgio_2_0_la-gproxyaddressenumerator.Tpo -c -o libgio_2_0_la-gproxyaddressenumerator.lo `test -f 'gproxyaddressenumerator.c' || echo '$(srcdir)/'`gproxyaddressenumerator.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgio_2_0_la-gproxyaddressenumerator.Tpo $(DEPDIR)/libgio_2_0_la-gproxyaddressenumerator.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gproxyaddressenumerator.c' object='libgio_2_0_la-gproxyaddressenumerator.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -c -o libgio_2_0_la-gproxyaddressenumerator.lo `test -f 'gproxyaddressenumerator.c' || echo '$(srcdir)/'`gproxyaddressenumerator.c
-
 libgio_2_0_la-gsocketservice.lo: gsocketservice.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -MT libgio_2_0_la-gsocketservice.lo -MD -MP -MF $(DEPDIR)/libgio_2_0_la-gsocketservice.Tpo -c -o libgio_2_0_la-gsocketservice.lo `test -f 'gsocketservice.c' || echo '$(srcdir)/'`gsocketservice.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgio_2_0_la-gsocketservice.Tpo $(DEPDIR)/libgio_2_0_la-gsocketservice.Plo
@@ -2261,6 +2288,20 @@ libgio_2_0_la-gsrvtarget.lo: gsrvtarget.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gsrvtarget.c' object='libgio_2_0_la-gsrvtarget.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -c -o libgio_2_0_la-gsrvtarget.lo `test -f 'gsrvtarget.c' || echo '$(srcdir)/'`gsrvtarget.c
+
+libgio_2_0_la-gsimpleproxyresolver.lo: gsimpleproxyresolver.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -MT libgio_2_0_la-gsimpleproxyresolver.lo -MD -MP -MF $(DEPDIR)/libgio_2_0_la-gsimpleproxyresolver.Tpo -c -o libgio_2_0_la-gsimpleproxyresolver.lo `test -f 'gsimpleproxyresolver.c' || echo '$(srcdir)/'`gsimpleproxyresolver.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgio_2_0_la-gsimpleproxyresolver.Tpo $(DEPDIR)/libgio_2_0_la-gsimpleproxyresolver.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gsimpleproxyresolver.c' object='libgio_2_0_la-gsimpleproxyresolver.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -c -o libgio_2_0_la-gsimpleproxyresolver.lo `test -f 'gsimpleproxyresolver.c' || echo '$(srcdir)/'`gsimpleproxyresolver.c
+
+libgio_2_0_la-gtask.lo: gtask.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -MT libgio_2_0_la-gtask.lo -MD -MP -MF $(DEPDIR)/libgio_2_0_la-gtask.Tpo -c -o libgio_2_0_la-gtask.lo `test -f 'gtask.c' || echo '$(srcdir)/'`gtask.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgio_2_0_la-gtask.Tpo $(DEPDIR)/libgio_2_0_la-gtask.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gtask.c' object='libgio_2_0_la-gtask.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -c -o libgio_2_0_la-gtask.lo `test -f 'gtask.c' || echo '$(srcdir)/'`gtask.c
 
 libgio_2_0_la-gtcpconnection.lo: gtcpconnection.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -MT libgio_2_0_la-gtcpconnection.lo -MD -MP -MF $(DEPDIR)/libgio_2_0_la-gtcpconnection.Tpo -c -o libgio_2_0_la-gtcpconnection.lo `test -f 'gtcpconnection.c' || echo '$(srcdir)/'`gtcpconnection.c
@@ -3290,99 +3331,6 @@ cscopelist: cscopelist-recursive $(HEADERS) $(SOURCES) $(LISP)
 distclean-tags:
 	-rm -f TAGS ID GTAGS GRTAGS GSYMS GPATH tags
 
-check-TESTS: $(TESTS)
-	@failed=0; all=0; xfail=0; xpass=0; skip=0; \
-	srcdir=$(srcdir); export srcdir; \
-	list=' $(TESTS) '; \
-	$(am__tty_colors); \
-	if test -n "$$list"; then \
-	  for tst in $$list; do \
-	    if test -f ./$$tst; then dir=./; \
-	    elif test -f $$tst; then dir=; \
-	    else dir="$(srcdir)/"; fi; \
-	    if $(TESTS_ENVIRONMENT) $${dir}$$tst $(AM_TESTS_FD_REDIRECT); then \
-	      all=`expr $$all + 1`; \
-	      case " $(XFAIL_TESTS) " in \
-	      *[\ \	]$$tst[\ \	]*) \
-		xpass=`expr $$xpass + 1`; \
-		failed=`expr $$failed + 1`; \
-		col=$$red; res=XPASS; \
-	      ;; \
-	      *) \
-		col=$$grn; res=PASS; \
-	      ;; \
-	      esac; \
-	    elif test $$? -ne 77; then \
-	      all=`expr $$all + 1`; \
-	      case " $(XFAIL_TESTS) " in \
-	      *[\ \	]$$tst[\ \	]*) \
-		xfail=`expr $$xfail + 1`; \
-		col=$$lgn; res=XFAIL; \
-	      ;; \
-	      *) \
-		failed=`expr $$failed + 1`; \
-		col=$$red; res=FAIL; \
-	      ;; \
-	      esac; \
-	    else \
-	      skip=`expr $$skip + 1`; \
-	      col=$$blu; res=SKIP; \
-	    fi; \
-	    echo "$${col}$$res$${std}: $$tst"; \
-	  done; \
-	  if test "$$all" -eq 1; then \
-	    tests="test"; \
-	    All=""; \
-	  else \
-	    tests="tests"; \
-	    All="All "; \
-	  fi; \
-	  if test "$$failed" -eq 0; then \
-	    if test "$$xfail" -eq 0; then \
-	      banner="$$All$$all $$tests passed"; \
-	    else \
-	      if test "$$xfail" -eq 1; then failures=failure; else failures=failures; fi; \
-	      banner="$$All$$all $$tests behaved as expected ($$xfail expected $$failures)"; \
-	    fi; \
-	  else \
-	    if test "$$xpass" -eq 0; then \
-	      banner="$$failed of $$all $$tests failed"; \
-	    else \
-	      if test "$$xpass" -eq 1; then passes=pass; else passes=passes; fi; \
-	      banner="$$failed of $$all $$tests did not behave as expected ($$xpass unexpected $$passes)"; \
-	    fi; \
-	  fi; \
-	  dashes="$$banner"; \
-	  skipped=""; \
-	  if test "$$skip" -ne 0; then \
-	    if test "$$skip" -eq 1; then \
-	      skipped="($$skip test was not run)"; \
-	    else \
-	      skipped="($$skip tests were not run)"; \
-	    fi; \
-	    test `echo "$$skipped" | wc -c` -le `echo "$$banner" | wc -c` || \
-	      dashes="$$skipped"; \
-	  fi; \
-	  report=""; \
-	  if test "$$failed" -ne 0 && test -n "$(PACKAGE_BUGREPORT)"; then \
-	    report="Please report to $(PACKAGE_BUGREPORT)"; \
-	    test `echo "$$report" | wc -c` -le `echo "$$banner" | wc -c` || \
-	      dashes="$$report"; \
-	  fi; \
-	  dashes=`echo "$$dashes" | sed s/./=/g`; \
-	  if test "$$failed" -eq 0; then \
-	    col="$$grn"; \
-	  else \
-	    col="$$red"; \
-	  fi; \
-	  echo "$${col}$$dashes$${std}"; \
-	  echo "$${col}$$banner$${std}"; \
-	  test -z "$$skipped" || echo "$${col}$$skipped$${std}"; \
-	  test -z "$$report" || echo "$${col}$$report$${std}"; \
-	  echo "$${col}$$dashes$${std}"; \
-	  test "$$failed" -eq 0; \
-	else :; fi
-
 distdir: $(DISTFILES)
 	@srcdirstrip=`echo "$(srcdir)" | sed 's/[].[^$$\\*]/\\\\&/g'`; \
 	topsrcdirstrip=`echo "$(top_srcdir)" | sed 's/[].[^$$\\*]/\\\\&/g'`; \
@@ -3442,7 +3390,7 @@ distdir: $(DISTFILES)
 	  top_distdir="$(top_distdir)" distdir="$(distdir)" \
 	  dist-hook
 check-am: all-am
-	$(MAKE) $(AM_MAKEFLAGS) check-TESTS check-local
+	$(MAKE) $(AM_MAKEFLAGS) check-local
 check: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) check-recursive
 all-am: Makefile $(LTLIBRARIES) $(PROGRAMS) $(DATA) $(HEADERS) \
@@ -3482,6 +3430,7 @@ clean-generic:
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
 	-test . = "$(srcdir)" || test -z "$(CONFIG_CLEAN_VPATH_FILES)" || rm -f $(CONFIG_CLEAN_VPATH_FILES)
+	-test -z "$(DISTCLEANFILES)" || rm -f $(DISTCLEANFILES)
 
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
@@ -3571,8 +3520,8 @@ uninstall-am: uninstall-binPROGRAMS uninstall-completionDATA \
 	install-am install-data-am install-strip tags-recursive
 
 .PHONY: $(RECURSIVE_CLEAN_TARGETS) $(RECURSIVE_TARGETS) CTAGS GTAGS \
-	all all-am all-local check check-TESTS check-am check-local \
-	clean clean-binPROGRAMS clean-generic clean-libLTLIBRARIES \
+	all all-am all-local check check-am check-local clean \
+	clean-binPROGRAMS clean-generic clean-libLTLIBRARIES \
 	clean-libtool cscopelist cscopelist-recursive ctags \
 	ctags-recursive dist-hook distclean distclean-compile \
 	distclean-generic distclean-libtool distclean-tags distdir dvi \
@@ -3687,10 +3636,6 @@ install-ms-lib:
 uninstall-ms-lib:
 	$(uninstall_ms_lib_cmd)
 
-gio.def: gio.symbols
-	$(AM_V_GEN) (echo EXPORTS; $(CPP) -P -DINCLUDE_VARIABLES -DINCLUDE_INTERNAL_SYMBOLS -DG_OS_WIN32 -DALL_FILES - <$(srcdir)/gio.symbols | sed -e '/^$$/d' -e 's/^/	/' -e 's/G_GNUC_[^ ]*//g' | sort) > $(builddir)/gio.def.tmp && \
-	  mv $(builddir)/gio.def.tmp $(builddir)/gio.def
-
 gdbus-daemon-generated.h gdbus-daemon-generated.c: $(srcdir)/dbus-daemon.xml $(srcdir)/gdbus-2.0/codegen/gdbus-codegen.in
 	$(AM_V_GEN) UNINSTALLED_GLIB_SRCDIR=$(top_srcdir) \
 		UNINSTALLED_GLIB_BUILDDIR=$(top_builddir) \
@@ -3701,18 +3646,10 @@ gdbus-daemon-generated.h gdbus-daemon-generated.c: $(srcdir)/dbus-daemon.xml $(s
 		$(srcdir)/dbus-daemon.xml \
 		$(NULL)
 
-@OS_WIN32_AND_DLL_COMPILATION_TRUE@install-def-file:
-@OS_WIN32_AND_DLL_COMPILATION_TRUE@	$(INSTALL) $(builddir)/gio.def $(DESTDIR)$(libdir)/gio-2.0.def
-
-@OS_WIN32_AND_DLL_COMPILATION_TRUE@uninstall-def-file:
-@OS_WIN32_AND_DLL_COMPILATION_TRUE@	-rm $(DESTDIR)$(libdir)/gio-2.0.def
-@OS_WIN32_AND_DLL_COMPILATION_FALSE@install-def-file:
-@OS_WIN32_AND_DLL_COMPILATION_FALSE@uninstall-def-file:
-
-install-data-local: install-ms-lib install-def-file
+install-data-local: install-ms-lib
 	$(mkinstalldirs) $(DESTDIR)$(GIO_MODULE_DIR)
 
-uninstall-local: uninstall-ms-lib uninstall-def-file
+uninstall-local: uninstall-ms-lib
 
 gio-win32-res.o: gio.rc
 	$(WINDRES) gio.rc $@
@@ -3724,13 +3661,11 @@ gio-public-headers.txt: Makefile
 all-local: gio-public-headers.txt
 
 gioenumtypes.h: $(gio_headers) gioenumtypes.h.template
-	$(AM_V_GEN) ( top_builddir=`cd $(top_builddir) && pwd`; \
-	  cd $(srcdir) && $$top_builddir/gobject/glib-mkenums --template gioenumtypes.h.template $(gio_headers) ) > \
+	$(AM_V_GEN) $(top_builddir)/gobject/glib-mkenums --template $(filter %.template,$^) $(filter-out %.template,$^) > \
 	    gioenumtypes.h.tmp && mv gioenumtypes.h.tmp gioenumtypes.h
 
 gioenumtypes.c: $(gio_headers) gioenumtypes.c.template
-	$(AM_V_GEN) ( top_builddir=`cd $(top_builddir) && pwd`; \
-	  cd $(srcdir) && $$top_builddir/gobject/glib-mkenums --template gioenumtypes.c.template $(gio_headers) ) > \
+	$(AM_V_GEN) $(top_builddir)/gobject/glib-mkenums --template $(filter %.template,$^) $(filter-out %.template,$^) > \
 	    gioenumtypes.c.tmp && mv gioenumtypes.c.tmp gioenumtypes.c
 
 gio-2.0.lib: libgio-2.0.la gio.def

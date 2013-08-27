@@ -55,16 +55,18 @@ build_triplet = @build@
 host_triplet = @host@
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
 	$(srcdir)/makefile.msc.in $(top_srcdir)/Makefile.decl \
-	$(top_srcdir)/depcomp $(top_srcdir)/mkinstalldirs
+	$(top_srcdir)/depcomp
 noinst_PROGRAMS = $(am__EXEEXT_5) testgdate$(EXEEXT) \
 	testgdateparser$(EXEEXT) unicode-normalize$(EXEEXT) \
 	unicode-collate$(EXEEXT) $(am__EXEEXT_6) \
-	assert-msg-test$(EXEEXT) datetime$(EXEEXT)
+	assert-msg-test$(EXEEXT) datetime$(EXEEXT) \
+	testgobject$(EXEEXT)
 check_PROGRAMS = $(am__EXEEXT_3) $(am__EXEEXT_4)
 TESTS = $(am__EXEEXT_3) $(test_scripts)
 subdir = tests
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/m4macros/gtk-doc.m4 \
+am__aclocal_m4_deps = $(top_srcdir)/m4macros/attributes.m4 \
+	$(top_srcdir)/m4macros/gtk-doc.m4 \
 	$(top_srcdir)/m4macros/libtool.m4 \
 	$(top_srcdir)/m4macros/ltoptions.m4 \
 	$(top_srcdir)/m4macros/ltsugar.m4 \
@@ -77,7 +79,7 @@ am__aclocal_m4_deps = $(top_srcdir)/m4macros/gtk-doc.m4 \
 	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
-mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES = makefile.msc
 CONFIG_CLEAN_VPATH_FILES =
@@ -226,6 +228,9 @@ testgdateparser_DEPENDENCIES = $(libglib)
 am_testglib_OBJECTS = testglib.$(OBJEXT)
 testglib_OBJECTS = $(am_testglib_OBJECTS)
 testglib_DEPENDENCIES = $(libglib)
+testgobject_SOURCES = testgobject.c
+testgobject_OBJECTS = testgobject.$(OBJEXT)
+testgobject_DEPENDENCIES = $(libglib) $(libgobject)
 thread_test_SOURCES = thread-test.c
 thread_test_OBJECTS = thread-test.$(OBJEXT)
 thread_test_DEPENDENCIES = $(am__DEPENDENCIES_3)
@@ -316,9 +321,10 @@ SOURCES = $(libmoduletestplugin_a_la_SOURCES) \
 	$(slice_concurrent_SOURCES) $(slice_test_SOURCES) \
 	$(slice_threadinit_SOURCES) sources.c spawn-test.c \
 	spawn-test-win32-gui.c testgdate.c testgdateparser.c \
-	$(testglib_SOURCES) thread-test.c threadpool-test.c timeloop.c \
-	timeloop-closure.c type-test.c unicode-caseconv.c \
-	unicode-collate.c unicode-encoding.c unicode-normalize.c
+	$(testglib_SOURCES) testgobject.c thread-test.c \
+	threadpool-test.c timeloop.c timeloop-closure.c type-test.c \
+	unicode-caseconv.c unicode-collate.c unicode-encoding.c \
+	unicode-normalize.c
 DIST_SOURCES = $(libmoduletestplugin_a_la_SOURCES) \
 	$(libmoduletestplugin_b_la_SOURCES) assert-msg-test.c \
 	asyncqueue-test.c atomic-test.c bit-test.c child-test.c \
@@ -329,9 +335,10 @@ DIST_SOURCES = $(libmoduletestplugin_a_la_SOURCES) \
 	$(slice_concurrent_SOURCES) $(slice_test_SOURCES) \
 	$(slice_threadinit_SOURCES) sources.c spawn-test.c \
 	spawn-test-win32-gui.c testgdate.c testgdateparser.c \
-	$(testglib_SOURCES) thread-test.c threadpool-test.c timeloop.c \
-	timeloop-closure.c type-test.c unicode-caseconv.c \
-	unicode-collate.c unicode-encoding.c unicode-normalize.c
+	$(testglib_SOURCES) testgobject.c thread-test.c \
+	threadpool-test.c timeloop.c timeloop-closure.c type-test.c \
+	unicode-caseconv.c unicode-collate.c unicode-encoding.c \
+	unicode-normalize.c
 RECURSIVE_TARGETS = all-recursive check-recursive dvi-recursive \
 	html-recursive info-recursive install-data-recursive \
 	install-dvi-recursive install-exec-recursive \
@@ -434,6 +441,7 @@ GLIB_COMPILE_SCHEMAS = @GLIB_COMPILE_SCHEMAS@
 GLIB_DEBUG_FLAGS = @GLIB_DEBUG_FLAGS@
 GLIB_EXTRA_CFLAGS = @GLIB_EXTRA_CFLAGS@
 GLIB_GENMARSHAL = @GLIB_GENMARSHAL@
+GLIB_HIDDEN_VISIBILITY_CFLAGS = @GLIB_HIDDEN_VISIBILITY_CFLAGS@
 GLIB_INTERFACE_AGE = @GLIB_INTERFACE_AGE@
 GLIB_LINK_FLAGS = @GLIB_LINK_FLAGS@
 GLIB_MAJOR_VERSION = @GLIB_MAJOR_VERSION@
@@ -441,6 +449,7 @@ GLIB_MICRO_VERSION = @GLIB_MICRO_VERSION@
 GLIB_MINOR_VERSION = @GLIB_MINOR_VERSION@
 GLIB_RUNTIME_LIBDIR = @GLIB_RUNTIME_LIBDIR@
 GLIB_VERSION = @GLIB_VERSION@
+GLIB_WARN_CFLAGS = @GLIB_WARN_CFLAGS@
 GLIB_WIN32_STATIC_COMPILATION_DEFINE = @GLIB_WIN32_STATIC_COMPILATION_DEFINE@
 GMOFILES = @GMOFILES@
 GMSGFMT = @GMSGFMT@
@@ -485,7 +494,6 @@ LIBFFI_LIBS = @LIBFFI_LIBS@
 LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
 LIBTOOL = @LIBTOOL@
-LIBTOOL_EXPORT_OPTIONS = @LIBTOOL_EXPORT_OPTIONS@
 LIB_EXE_MACHINE_FLAG = @LIB_EXE_MACHINE_FLAG@
 LIPO = @LIPO@
 LN_S = @LN_S@
@@ -504,6 +512,7 @@ MKDIR_P = @MKDIR_P@
 MKINSTALLDIRS = @MKINSTALLDIRS@
 MSGFMT = @MSGFMT@
 MSGFMT_OPTS = @MSGFMT_OPTS@
+NAMESER_COMPAT_INCLUDE = @NAMESER_COMPAT_INCLUDE@
 NETWORK_LIBS = @NETWORK_LIBS@
 NM = @NM@
 NMEDIT = @NMEDIT@
@@ -549,6 +558,7 @@ STRIP = @STRIP@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
 WINDRES = @WINDRES@
+WSPIAPI_INCLUDE = @WSPIAPI_INCLUDE@
 XATTR_LIBS = @XATTR_LIBS@
 XGETTEXT = @XGETTEXT@
 XMLCATALOG = @XMLCATALOG@
@@ -586,7 +596,6 @@ gio_INCLUDES = @gio_INCLUDES@
 glib_INCLUDES = @glib_INCLUDES@
 gmodule_INCLUDES = @gmodule_INCLUDES@
 gobject_INCLUDES = @gobject_INCLUDES@
-gthread_INCLUDES = @gthread_INCLUDES@
 host = @host@
 host_alias = @host_alias@
 host_cpu = @host_cpu@
@@ -628,7 +637,7 @@ GTESTER_REPORT = $(top_builddir)/glib/gtester-report	# for the GLIB package
 # initialize variables for unconditional += appending
 EXTRA_DIST = $(test_scripts) makefile.msc.in casefold.txt casemap.txt \
 	gen-casefold-txt.pl gen-casemap-txt.pl iochannel-test-infile \
-	utf8.txt timeloop-basic.c
+	utf8.txt timeloop-basic.c assert-msg-test.gdb
 TEST_PROGS = testglib
 SUBDIRS = gobject refcount
 AM_CPPFLAGS = \
@@ -666,6 +675,7 @@ assert_msg_test_LDADD = $(libglib)
 @ENABLE_TIMELOOP_TRUE@timeloop_LDADD = $(libglib)
 @ENABLE_TIMELOOP_TRUE@timeloop_closure_LDADD = $(libglib) $(libgobject)
 datetime_LDADD = $(libglib)
+testgobject_LDADD = $(libglib) $(libgobject)
 test_programs = \
 	atomic-test				\
 	bit-test				\
@@ -910,6 +920,9 @@ testgdateparser$(EXEEXT): $(testgdateparser_OBJECTS) $(testgdateparser_DEPENDENC
 testglib$(EXEEXT): $(testglib_OBJECTS) $(testglib_DEPENDENCIES) $(EXTRA_testglib_DEPENDENCIES) 
 	@rm -f testglib$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(testglib_OBJECTS) $(testglib_LDADD) $(LIBS)
+testgobject$(EXEEXT): $(testgobject_OBJECTS) $(testgobject_DEPENDENCIES) $(EXTRA_testgobject_DEPENDENCIES) 
+	@rm -f testgobject$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(testgobject_OBJECTS) $(testgobject_LDADD) $(LIBS)
 thread-test$(EXEEXT): $(thread_test_OBJECTS) $(thread_test_DEPENDENCIES) $(EXTRA_thread_test_DEPENDENCIES) 
 	@rm -f thread-test$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(thread_test_OBJECTS) $(thread_test_LDADD) $(LIBS)
@@ -976,6 +989,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testgdate.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testgdateparser.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testglib.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testgobject.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/thread-test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/threadpool-test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/timeloop-closure.Po@am__quote@
@@ -1528,7 +1542,7 @@ lcov-clean:
 check-local: test-nonrecursive
 
 @PLATFORM_WIN32_TRUE@module-test.exp: module-test.o
-@PLATFORM_WIN32_TRUE@	dlltool --output-exp module-test.exp module-test.o
+@PLATFORM_WIN32_TRUE@	$(DLLTOOL) --output-exp module-test.exp module-test.o
 
 dist-hook: $(BUILT_EXTRA_DIST)
 	files='$(BUILT_EXTRA_DIST)'; 				\

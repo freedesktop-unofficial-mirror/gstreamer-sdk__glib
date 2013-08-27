@@ -53,13 +53,13 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
-	$(top_srcdir)/Makefile.decl $(top_srcdir)/depcomp \
-	$(top_srcdir)/mkinstalldirs
+	$(top_srcdir)/Makefile.decl $(top_srcdir)/depcomp
 check_PROGRAMS = $(am__EXEEXT_1)
 TESTS = $(am__EXEEXT_1)
 subdir = tests/gobject
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/m4macros/gtk-doc.m4 \
+am__aclocal_m4_deps = $(top_srcdir)/m4macros/attributes.m4 \
+	$(top_srcdir)/m4macros/gtk-doc.m4 \
 	$(top_srcdir)/m4macros/libtool.m4 \
 	$(top_srcdir)/m4macros/ltoptions.m4 \
 	$(top_srcdir)/m4macros/ltsugar.m4 \
@@ -72,7 +72,7 @@ am__aclocal_m4_deps = $(top_srcdir)/m4macros/gtk-doc.m4 \
 	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
-mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
@@ -86,8 +86,7 @@ am__v_lt_0 = --silent
 am__v_lt_1 = 
 am__EXEEXT_1 = deftype$(EXEEXT) gvalue-test$(EXEEXT) \
 	paramspec-test$(EXEEXT) accumulator$(EXEEXT) \
-	defaultiface$(EXEEXT) dynamictype$(EXEEXT) ifacecheck$(EXEEXT) \
-	ifaceinit$(EXEEXT) ifaceinherit$(EXEEXT) override$(EXEEXT) \
+	defaultiface$(EXEEXT) dynamictype$(EXEEXT) override$(EXEEXT) \
 	performance$(EXEEXT) performance-threaded$(EXEEXT) \
 	singleton$(EXEEXT) references$(EXEEXT)
 accumulator_SOURCES = accumulator.c
@@ -110,18 +109,6 @@ gvalue_test_SOURCES = gvalue-test.c
 gvalue_test_OBJECTS = gvalue-test.$(OBJEXT)
 gvalue_test_LDADD = $(LDADD)
 gvalue_test_DEPENDENCIES = libtestgobject.la $(libgobject)
-ifacecheck_SOURCES = ifacecheck.c
-ifacecheck_OBJECTS = ifacecheck.$(OBJEXT)
-ifacecheck_LDADD = $(LDADD)
-ifacecheck_DEPENDENCIES = libtestgobject.la $(libgobject)
-ifaceinherit_SOURCES = ifaceinherit.c
-ifaceinherit_OBJECTS = ifaceinherit.$(OBJEXT)
-ifaceinherit_LDADD = $(LDADD)
-ifaceinherit_DEPENDENCIES = libtestgobject.la $(libgobject)
-ifaceinit_SOURCES = ifaceinit.c
-ifaceinit_OBJECTS = ifaceinit.$(OBJEXT)
-ifaceinit_LDADD = $(LDADD)
-ifaceinit_DEPENDENCIES = libtestgobject.la $(libgobject)
 override_SOURCES = override.c
 override_OBJECTS = override.$(OBJEXT)
 override_LDADD = $(LDADD)
@@ -179,14 +166,13 @@ am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
 SOURCES = $(libtestgobject_la_SOURCES) accumulator.c defaultiface.c \
-	deftype.c dynamictype.c gvalue-test.c ifacecheck.c \
-	ifaceinherit.c ifaceinit.c override.c paramspec-test.c \
-	performance.c performance-threaded.c references.c singleton.c
-DIST_SOURCES = $(libtestgobject_la_SOURCES) accumulator.c \
-	defaultiface.c deftype.c dynamictype.c gvalue-test.c \
-	ifacecheck.c ifaceinherit.c ifaceinit.c override.c \
+	deftype.c dynamictype.c gvalue-test.c override.c \
 	paramspec-test.c performance.c performance-threaded.c \
 	references.c singleton.c
+DIST_SOURCES = $(libtestgobject_la_SOURCES) accumulator.c \
+	defaultiface.c deftype.c dynamictype.c gvalue-test.c \
+	override.c paramspec-test.c performance.c \
+	performance-threaded.c references.c singleton.c
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -251,6 +237,7 @@ GLIB_COMPILE_SCHEMAS = @GLIB_COMPILE_SCHEMAS@
 GLIB_DEBUG_FLAGS = @GLIB_DEBUG_FLAGS@
 GLIB_EXTRA_CFLAGS = @GLIB_EXTRA_CFLAGS@
 GLIB_GENMARSHAL = @GLIB_GENMARSHAL@
+GLIB_HIDDEN_VISIBILITY_CFLAGS = @GLIB_HIDDEN_VISIBILITY_CFLAGS@
 GLIB_INTERFACE_AGE = @GLIB_INTERFACE_AGE@
 GLIB_LINK_FLAGS = @GLIB_LINK_FLAGS@
 GLIB_MAJOR_VERSION = @GLIB_MAJOR_VERSION@
@@ -258,6 +245,7 @@ GLIB_MICRO_VERSION = @GLIB_MICRO_VERSION@
 GLIB_MINOR_VERSION = @GLIB_MINOR_VERSION@
 GLIB_RUNTIME_LIBDIR = @GLIB_RUNTIME_LIBDIR@
 GLIB_VERSION = @GLIB_VERSION@
+GLIB_WARN_CFLAGS = @GLIB_WARN_CFLAGS@
 GLIB_WIN32_STATIC_COMPILATION_DEFINE = @GLIB_WIN32_STATIC_COMPILATION_DEFINE@
 GMOFILES = @GMOFILES@
 GMSGFMT = @GMSGFMT@
@@ -302,7 +290,6 @@ LIBFFI_LIBS = @LIBFFI_LIBS@
 LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
 LIBTOOL = @LIBTOOL@
-LIBTOOL_EXPORT_OPTIONS = @LIBTOOL_EXPORT_OPTIONS@
 LIB_EXE_MACHINE_FLAG = @LIB_EXE_MACHINE_FLAG@
 LIPO = @LIPO@
 LN_S = @LN_S@
@@ -321,6 +308,7 @@ MKDIR_P = @MKDIR_P@
 MKINSTALLDIRS = @MKINSTALLDIRS@
 MSGFMT = @MSGFMT@
 MSGFMT_OPTS = @MSGFMT_OPTS@
+NAMESER_COMPAT_INCLUDE = @NAMESER_COMPAT_INCLUDE@
 NETWORK_LIBS = @NETWORK_LIBS@
 NM = @NM@
 NMEDIT = @NMEDIT@
@@ -366,6 +354,7 @@ STRIP = @STRIP@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
 WINDRES = @WINDRES@
+WSPIAPI_INCLUDE = @WSPIAPI_INCLUDE@
 XATTR_LIBS = @XATTR_LIBS@
 XGETTEXT = @XGETTEXT@
 XMLCATALOG = @XMLCATALOG@
@@ -403,7 +392,6 @@ gio_INCLUDES = @gio_INCLUDES@
 glib_INCLUDES = @glib_INCLUDES@
 gmodule_INCLUDES = @gmodule_INCLUDES@
 gobject_INCLUDES = @gobject_INCLUDES@
-gthread_INCLUDES = @gthread_INCLUDES@
 host = @host@
 host_alias = @host_alias@
 host_cpu = @host_cpu@
@@ -447,7 +435,7 @@ GTESTER_REPORT = $(top_builddir)/glib/gtester-report	# for the GLIB package
 ########################################################################
 EXTRA_DIST = testmarshal.list
 TEST_PROGS = 
-INCLUDES = \
+AM_CPPFLAGS = \
 	$(gmodule_INCLUDES)			\
 	-DGLIB_DISABLE_DEPRECATION_WARNINGS	\
 	$(GLIB_DEBUG_FLAGS)
@@ -484,9 +472,6 @@ test_programs = \
 	accumulator				\
 	defaultiface				\
 	dynamictype				\
-	ifacecheck				\
-	ifaceinit				\
-	ifaceinherit				\
 	override				\
 	performance				\
 	performance-threaded			\
@@ -577,15 +562,6 @@ dynamictype$(EXEEXT): $(dynamictype_OBJECTS) $(dynamictype_DEPENDENCIES) $(EXTRA
 gvalue-test$(EXEEXT): $(gvalue_test_OBJECTS) $(gvalue_test_DEPENDENCIES) $(EXTRA_gvalue_test_DEPENDENCIES) 
 	@rm -f gvalue-test$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(gvalue_test_OBJECTS) $(gvalue_test_LDADD) $(LIBS)
-ifacecheck$(EXEEXT): $(ifacecheck_OBJECTS) $(ifacecheck_DEPENDENCIES) $(EXTRA_ifacecheck_DEPENDENCIES) 
-	@rm -f ifacecheck$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(ifacecheck_OBJECTS) $(ifacecheck_LDADD) $(LIBS)
-ifaceinherit$(EXEEXT): $(ifaceinherit_OBJECTS) $(ifaceinherit_DEPENDENCIES) $(EXTRA_ifaceinherit_DEPENDENCIES) 
-	@rm -f ifaceinherit$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(ifaceinherit_OBJECTS) $(ifaceinherit_LDADD) $(LIBS)
-ifaceinit$(EXEEXT): $(ifaceinit_OBJECTS) $(ifaceinit_DEPENDENCIES) $(EXTRA_ifaceinit_DEPENDENCIES) 
-	@rm -f ifaceinit$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(ifaceinit_OBJECTS) $(ifaceinit_LDADD) $(LIBS)
 override$(EXEEXT): $(override_OBJECTS) $(override_DEPENDENCIES) $(EXTRA_override_DEPENDENCIES) 
 	@rm -f override$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(override_OBJECTS) $(override_LDADD) $(LIBS)
@@ -616,9 +592,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/deftype.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dynamictype.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gvalue-test.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ifacecheck.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ifaceinherit.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ifaceinit.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/override.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/paramspec-test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/performance-threaded.Po@am__quote@
@@ -1068,8 +1041,8 @@ stamp-testmarshal.h: @REBUILD@ testmarshal.list $(glib_genmarshal)
 	&& (cmp -s xgen-gmh testmarshal.h 2>/dev/null || cp xgen-gmh testmarshal.h) \
 	&& rm -f xgen-gmh xgen-gmh~ \
 	&& echo timestamp > $@
-testmarshal.c: @REBUILD@ testmarshal.list $(glib_genmarshal)
-	$(AM_V_GEN) $(glib_genmarshal) --prefix=test_marshal $(srcdir)/testmarshal.list --body >> xgen-gmc \
+testmarshal.c: @REBUILD@ testmarshal.h testmarshal.list $(glib_genmarshal)
+	$(AM_V_GEN) (echo "#include \"testmarshal.h\""; $(glib_genmarshal) --prefix=test_marshal $(srcdir)/testmarshal.list --body) >> xgen-gmc \
 	&& cp xgen-gmc testmarshal.c \
 	&& rm -f xgen-gmc xgen-gmc~
 

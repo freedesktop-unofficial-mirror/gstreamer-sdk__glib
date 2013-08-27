@@ -8,7 +8,7 @@
 <link rel="up" href="glib-utilities.html" title="GLib Utilities">
 <link rel="prev" href="glib-utilities.html" title="GLib Utilities">
 <link rel="next" href="glib-Character-Set-Conversion.html" title="Character Set Conversion">
-<meta name="generator" content="GTK-Doc V1.18 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.18.1 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -73,8 +73,7 @@
 
 <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             <a class="link" href="glib-String-Utility-Functions.html#g-strdup-printf" title="g_strdup_printf ()">g_strdup_printf</a>                     (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *format</code></em>,
                                                          <em class="parameter"><code>...</code></em>);
-<a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             <a class="link" href="glib-String-Utility-Functions.html#g-strdup-vprintf" title="g_strdup_vprintf ()">g_strdup_vprintf</a>                    (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *format</code></em>,
-                                                         <em class="parameter"><code><span class="type">va_list</span> args</code></em>);
+<a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             <a class="link" href="glib-String-Utility-Functions.html#g-strdup-vprintf" title="g_strdup_vprintf ()">g_strdup_vprintf</a>                    (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *format</code></em>);
 <a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a>                <a class="link" href="glib-String-Utility-Functions.html#g-printf" title="g_printf ()">g_printf</a>                            (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> const *format</code></em>,
                                                          <em class="parameter"><code>...</code></em>);
 <a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a>                <a class="link" href="glib-String-Utility-Functions.html#g-vprintf" title="g_vprintf ()">g_vprintf</a>                           (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> const *format</code></em>,
@@ -752,8 +751,7 @@ longer needed.
 <hr>
 <div class="refsect2">
 <a name="g-strdup-vprintf"></a><h3>g_strdup_vprintf ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             g_strdup_vprintf                    (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *format</code></em>,
-                                                         <em class="parameter"><code><span class="type">va_list</span> args</code></em>);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             g_strdup_vprintf                    (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *format</code></em>);</pre>
 <p>
 Similar to the standard C <code class="function">vsprintf()</code> function but safer, since it
 calculates the maximum space required and allocates memory to hold
@@ -2011,9 +2009,10 @@ it doesn't work on many encodings at all, including UTF-8, EUC-JP,
 etc.
 </p>
 <p>
-There are therefore two replacement functions: <a class="link" href="glib-String-Utility-Functions.html#g-ascii-strncasecmp" title="g_ascii_strncasecmp ()"><code class="function">g_ascii_strncasecmp()</code></a>,
+There are therefore two replacement techniques: <a class="link" href="glib-String-Utility-Functions.html#g-ascii-strncasecmp" title="g_ascii_strncasecmp ()"><code class="function">g_ascii_strncasecmp()</code></a>,
 which only works on ASCII and is not locale-sensitive, and
-<a class="link" href="glib-Unicode-Manipulation.html#g-utf8-casefold" title="g_utf8_casefold ()"><code class="function">g_utf8_casefold()</code></a>, which is good for case-insensitive sorting of UTF-8.</p>
+<a class="link" href="glib-Unicode-Manipulation.html#g-utf8-casefold" title="g_utf8_casefold ()"><code class="function">g_utf8_casefold()</code></a> followed by <code class="function">strcmp()</code> on the resulting strings, which is
+good for case-insensitive sorting of UTF-8.</p>
 </div>
 <p>
 A case-insensitive string comparison, corresponding to the standard
@@ -2977,8 +2976,6 @@ is unknown, it returns "unknown error (&lt;code&gt;)".</td>
 <a name="g-strsignal"></a><h3>g_strsignal ()</h3>
 <pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *       g_strsignal                         (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> signum</code></em>);</pre>
 <p>
-Returns a string describing the given signal, e.g. "Segmentation fault".
-You should use this function in preference to <code class="function">strsignal()</code>, because it
 returns a string in UTF-8 encoding, and since not all platforms support
 the <code class="function">strsignal()</code> function.
 </p>
@@ -3005,6 +3002,6 @@ it returns "unknown signal (&lt;signum&gt;)".</td>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.18</div>
+          Generated by GTK-Doc V1.18.1</div>
 </body>
 </html>

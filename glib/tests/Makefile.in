@@ -53,16 +53,15 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
-	$(top_srcdir)/Makefile.decl $(top_srcdir)/depcomp \
-	$(top_srcdir)/mkinstalldirs
+	$(top_srcdir)/Makefile.decl $(top_srcdir)/depcomp
 noinst_PROGRAMS = $(am__EXEEXT_3) test-spawn-echo$(EXEEXT)
 @HAVE_GCC_TRUE@am__append_1 = -Wstrict-aliasing=2
 @HAVE_EVENTFD_TRUE@am__append_2 = gwakeup-fallback
-@OS_UNIX_TRUE@am__append_3 = unix-multithreaded unix unix-nothreads \
-@OS_UNIX_TRUE@	include
+@OS_UNIX_TRUE@am__append_3 = unix include
 subdir = glib/tests
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/m4macros/gtk-doc.m4 \
+am__aclocal_m4_deps = $(top_srcdir)/m4macros/attributes.m4 \
+	$(top_srcdir)/m4macros/gtk-doc.m4 \
 	$(top_srcdir)/m4macros/libtool.m4 \
 	$(top_srcdir)/m4macros/ltoptions.m4 \
 	$(top_srcdir)/m4macros/ltsugar.m4 \
@@ -75,41 +74,43 @@ am__aclocal_m4_deps = $(top_srcdir)/m4macros/gtk-doc.m4 \
 	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
-mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 @HAVE_EVENTFD_TRUE@am__EXEEXT_1 = gwakeup-fallback$(EXEEXT)
-@OS_UNIX_TRUE@am__EXEEXT_2 = unix-multithreaded$(EXEEXT) unix$(EXEEXT) \
-@OS_UNIX_TRUE@	unix-nothreads$(EXEEXT) include$(EXEEXT)
-am__EXEEXT_3 = testing$(EXEEXT) option-context$(EXEEXT) \
-	option-argv0$(EXEEXT) keyfile$(EXEEXT) fileutils$(EXEEXT) \
-	test-printf$(EXEEXT) protocol$(EXEEXT) rand$(EXEEXT) \
-	strfuncs$(EXEEXT) string$(EXEEXT) markup-parse$(EXEEXT) \
+@OS_UNIX_TRUE@am__EXEEXT_2 = unix$(EXEEXT) include$(EXEEXT)
+am__EXEEXT_3 = array-test$(EXEEXT) asyncqueue$(EXEEXT) atomic$(EXEEXT) \
+	base64$(EXEEXT) bitlock$(EXEEXT) bookmarkfile$(EXEEXT) \
+	bytes$(EXEEXT) cache$(EXEEXT) checksum$(EXEEXT) \
+	collate$(EXEEXT) cond$(EXEEXT) convert$(EXEEXT) \
+	dataset$(EXEEXT) date$(EXEEXT) dir$(EXEEXT) \
+	environment$(EXEEXT) error$(EXEEXT) fileutils$(EXEEXT) \
+	gdatetime$(EXEEXT) gvariant$(EXEEXT) gwakeup$(EXEEXT) \
+	hash$(EXEEXT) hmac$(EXEEXT) hook$(EXEEXT) hostutils$(EXEEXT) \
+	keyfile$(EXEEXT) list$(EXEEXT) logging$(EXEEXT) \
+	mainloop$(EXEEXT) mappedfile$(EXEEXT) markup-parse$(EXEEXT) \
 	markup-collect$(EXEEXT) markup-escape$(EXEEXT) \
-	markup-subparser$(EXEEXT) array-test$(EXEEXT) bytes$(EXEEXT) \
-	hostutils$(EXEEXT) gvariant$(EXEEXT) mem-overflow$(EXEEXT) \
-	utf8-performance$(EXEEXT) utils$(EXEEXT) regex$(EXEEXT) \
-	base64$(EXEEXT) sequence$(EXEEXT) scannerapi$(EXEEXT) \
-	shell$(EXEEXT) collate$(EXEEXT) utf8-pointer$(EXEEXT) \
-	utf8-validate$(EXEEXT) utf8-misc$(EXEEXT) unicode$(EXEEXT) \
-	checksum$(EXEEXT) hmac$(EXEEXT) hash$(EXEEXT) cache$(EXEEXT) \
-	date$(EXEEXT) node$(EXEEXT) convert$(EXEEXT) list$(EXEEXT) \
-	slist$(EXEEXT) queue$(EXEEXT) tree$(EXEEXT) uri$(EXEEXT) \
-	dir$(EXEEXT) pattern$(EXEEXT) logging$(EXEEXT) error$(EXEEXT) \
-	bookmarkfile$(EXEEXT) gdatetime$(EXEEXT) timeout$(EXEEXT) \
-	environment$(EXEEXT) mappedfile$(EXEEXT) dataset$(EXEEXT) \
-	sort$(EXEEXT) atomic$(EXEEXT) bitlock$(EXEEXT) mutex$(EXEEXT) \
-	rec-mutex$(EXEEXT) rwlock$(EXEEXT) once$(EXEEXT) cond$(EXEEXT) \
-	thread$(EXEEXT) slice$(EXEEXT) hook$(EXEEXT) mainloop$(EXEEXT) \
-	private$(EXEEXT) asyncqueue$(EXEEXT) 1bit-mutex$(EXEEXT) \
-	642026$(EXEEXT) 642026-ec$(EXEEXT) 1bit-emufutex$(EXEEXT) \
+	markup-subparser$(EXEEXT) mem-overflow$(EXEEXT) mutex$(EXEEXT) \
+	node$(EXEEXT) once$(EXEEXT) option-context$(EXEEXT) \
+	option-argv0$(EXEEXT) pattern$(EXEEXT) private$(EXEEXT) \
+	protocol$(EXEEXT) queue$(EXEEXT) rand$(EXEEXT) \
+	rec-mutex$(EXEEXT) regex$(EXEEXT) rwlock$(EXEEXT) \
+	scannerapi$(EXEEXT) sequence$(EXEEXT) shell$(EXEEXT) \
+	slice$(EXEEXT) slist$(EXEEXT) sort$(EXEEXT) \
 	spawn-multithreaded$(EXEEXT) spawn-singlethread$(EXEEXT) \
-	gwakeup$(EXEEXT) $(am__EXEEXT_1) $(am__EXEEXT_2)
+	strfuncs$(EXEEXT) string$(EXEEXT) testing$(EXEEXT) \
+	test-printf$(EXEEXT) thread$(EXEEXT) timeout$(EXEEXT) \
+	tree$(EXEEXT) utf8-performance$(EXEEXT) utf8-pointer$(EXEEXT) \
+	utf8-validate$(EXEEXT) utf8-misc$(EXEEXT) utils$(EXEEXT) \
+	unicode$(EXEEXT) uri$(EXEEXT) 1bit-mutex$(EXEEXT) \
+	1bit-emufutex$(EXEEXT) 642026$(EXEEXT) 642026-ec$(EXEEXT) \
+	$(am__EXEEXT_1) $(am__EXEEXT_2)
 PROGRAMS = $(noinst_PROGRAMS)
 am_1bit_emufutex_OBJECTS = 1bit_emufutex-1bit-mutex.$(OBJEXT)
 1bit_emufutex_OBJECTS = $(am_1bit_emufutex_OBJECTS)
-1bit_emufutex_DEPENDENCIES = $(progs_ldadd)
+1bit_emufutex_LDADD = $(LDADD)
+1bit_emufutex_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
@@ -119,264 +120,329 @@ am__v_lt_1 =
 	$(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
 1bit_mutex_SOURCES = 1bit-mutex.c
 1bit_mutex_OBJECTS = 1bit-mutex.$(OBJEXT)
-1bit_mutex_DEPENDENCIES = $(progs_ldadd)
+1bit_mutex_LDADD = $(LDADD)
+1bit_mutex_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 642026_SOURCES = 642026.c
 642026_OBJECTS = 642026.$(OBJEXT)
-642026_DEPENDENCIES = $(progs_ldadd)
+642026_LDADD = $(LDADD)
+642026_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 am_642026_ec_OBJECTS = 642026_ec-642026.$(OBJEXT)
 642026_ec_OBJECTS = $(am_642026_ec_OBJECTS)
-642026_ec_DEPENDENCIES = $(progs_ldadd)
+642026_ec_LDADD = $(LDADD)
+642026_ec_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 642026_ec_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(642026_ec_CFLAGS) \
 	$(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
 array_test_SOURCES = array-test.c
 array_test_OBJECTS = array-test.$(OBJEXT)
-array_test_DEPENDENCIES = $(progs_ldadd)
+array_test_LDADD = $(LDADD)
+array_test_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 asyncqueue_SOURCES = asyncqueue.c
 asyncqueue_OBJECTS = asyncqueue.$(OBJEXT)
-asyncqueue_DEPENDENCIES = $(progs_ldadd)
+asyncqueue_LDADD = $(LDADD)
+asyncqueue_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 atomic_SOURCES = atomic.c
 atomic_OBJECTS = atomic-atomic.$(OBJEXT)
-atomic_DEPENDENCIES = $(progs_ldadd)
+atomic_LDADD = $(LDADD)
+atomic_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 atomic_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(atomic_CFLAGS) $(CFLAGS) \
 	$(AM_LDFLAGS) $(LDFLAGS) -o $@
 base64_SOURCES = base64.c
 base64_OBJECTS = base64.$(OBJEXT)
-base64_DEPENDENCIES = $(progs_ldadd)
+base64_LDADD = $(LDADD)
+base64_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 bitlock_SOURCES = bitlock.c
 bitlock_OBJECTS = bitlock.$(OBJEXT)
-bitlock_DEPENDENCIES = $(progs_ldadd)
+bitlock_LDADD = $(LDADD)
+bitlock_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 bookmarkfile_SOURCES = bookmarkfile.c
 bookmarkfile_OBJECTS = bookmarkfile.$(OBJEXT)
-bookmarkfile_DEPENDENCIES = $(progs_ldadd)
+bookmarkfile_LDADD = $(LDADD)
+bookmarkfile_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 bytes_SOURCES = bytes.c
 bytes_OBJECTS = bytes.$(OBJEXT)
-bytes_DEPENDENCIES = $(progs_ldadd)
+bytes_LDADD = $(LDADD)
+bytes_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 cache_SOURCES = cache.c
 cache_OBJECTS = cache.$(OBJEXT)
-cache_DEPENDENCIES = $(progs_ldadd)
+cache_LDADD = $(LDADD)
+cache_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 checksum_SOURCES = checksum.c
 checksum_OBJECTS = checksum.$(OBJEXT)
-checksum_DEPENDENCIES = $(progs_ldadd)
+checksum_LDADD = $(LDADD)
+checksum_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 collate_SOURCES = collate.c
 collate_OBJECTS = collate.$(OBJEXT)
-collate_DEPENDENCIES = $(progs_ldadd)
+collate_LDADD = $(LDADD)
+collate_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 cond_SOURCES = cond.c
 cond_OBJECTS = cond.$(OBJEXT)
-cond_DEPENDENCIES = $(progs_ldadd)
+cond_LDADD = $(LDADD)
+cond_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 convert_SOURCES = convert.c
 convert_OBJECTS = convert.$(OBJEXT)
-convert_DEPENDENCIES = $(progs_ldadd)
+convert_LDADD = $(LDADD)
+convert_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 dataset_SOURCES = dataset.c
 dataset_OBJECTS = dataset.$(OBJEXT)
-dataset_DEPENDENCIES = $(progs_ldadd)
+dataset_LDADD = $(LDADD)
+dataset_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 date_SOURCES = date.c
 date_OBJECTS = date.$(OBJEXT)
-date_DEPENDENCIES = $(progs_ldadd)
+date_LDADD = $(LDADD)
+date_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 dir_SOURCES = dir.c
 dir_OBJECTS = dir.$(OBJEXT)
-dir_DEPENDENCIES = $(progs_ldadd)
+dir_LDADD = $(LDADD)
+dir_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 environment_SOURCES = environment.c
 environment_OBJECTS = environment.$(OBJEXT)
-environment_DEPENDENCIES = $(progs_ldadd)
+environment_LDADD = $(LDADD)
+environment_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 error_SOURCES = error.c
 error_OBJECTS = error.$(OBJEXT)
-error_DEPENDENCIES = $(progs_ldadd)
-am_fileutils_OBJECTS = fileutils.$(OBJEXT)
-fileutils_OBJECTS = $(am_fileutils_OBJECTS)
-fileutils_DEPENDENCIES = $(progs_ldadd)
-am_gdatetime_OBJECTS = gdatetime.$(OBJEXT)
-gdatetime_OBJECTS = $(am_gdatetime_OBJECTS)
-gdatetime_DEPENDENCIES = $(progs_ldadd)
+error_LDADD = $(LDADD)
+error_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
+fileutils_SOURCES = fileutils.c
+fileutils_OBJECTS = fileutils.$(OBJEXT)
+fileutils_LDADD = $(LDADD)
+fileutils_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
+gdatetime_SOURCES = gdatetime.c
+gdatetime_OBJECTS = gdatetime.$(OBJEXT)
+gdatetime_LDADD = $(LDADD)
+gdatetime_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 gvariant_SOURCES = gvariant.c
 gvariant_OBJECTS = gvariant.$(OBJEXT)
-gvariant_DEPENDENCIES = $(progs_ldadd)
+gvariant_LDADD = $(LDADD)
+gvariant_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 am_gwakeup_OBJECTS = gwakeuptest.$(OBJEXT) gwakeup.$(OBJEXT)
 gwakeup_OBJECTS = $(am_gwakeup_OBJECTS)
-gwakeup_DEPENDENCIES = $(progs_ldadd)
+gwakeup_LDADD = $(LDADD)
+gwakeup_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 am__gwakeup_fallback_SOURCES_DIST = gwakeuptest.c ../../glib/gwakeup.c
 @HAVE_EVENTFD_TRUE@am_gwakeup_fallback_OBJECTS =  \
 @HAVE_EVENTFD_TRUE@	gwakeup_fallback-gwakeuptest.$(OBJEXT) \
 @HAVE_EVENTFD_TRUE@	gwakeup_fallback-gwakeup.$(OBJEXT)
 gwakeup_fallback_OBJECTS = $(am_gwakeup_fallback_OBJECTS)
-@HAVE_EVENTFD_TRUE@gwakeup_fallback_DEPENDENCIES = $(progs_ldadd)
+gwakeup_fallback_LDADD = $(LDADD)
+gwakeup_fallback_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 gwakeup_fallback_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
 	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CCLD) \
 	$(gwakeup_fallback_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \
 	-o $@
 hash_SOURCES = hash.c
 hash_OBJECTS = hash.$(OBJEXT)
-hash_DEPENDENCIES = $(progs_ldadd)
+hash_LDADD = $(LDADD)
+hash_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 hmac_SOURCES = hmac.c
 hmac_OBJECTS = hmac.$(OBJEXT)
-hmac_DEPENDENCIES = $(progs_ldadd)
+hmac_LDADD = $(LDADD)
+hmac_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 hook_SOURCES = hook.c
 hook_OBJECTS = hook.$(OBJEXT)
-hook_DEPENDENCIES = $(progs_ldadd)
+hook_LDADD = $(LDADD)
+hook_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 hostutils_SOURCES = hostutils.c
 hostutils_OBJECTS = hostutils.$(OBJEXT)
-hostutils_DEPENDENCIES = $(progs_ldadd)
+hostutils_LDADD = $(LDADD)
+hostutils_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 include_SOURCES = include.c
 include_OBJECTS = include.$(OBJEXT)
-@OS_UNIX_TRUE@include_DEPENDENCIES = $(progs_ldadd)
-am_keyfile_OBJECTS = keyfile.$(OBJEXT)
-keyfile_OBJECTS = $(am_keyfile_OBJECTS)
-keyfile_DEPENDENCIES = $(progs_ldadd)
+include_LDADD = $(LDADD)
+include_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
+keyfile_SOURCES = keyfile.c
+keyfile_OBJECTS = keyfile.$(OBJEXT)
+keyfile_LDADD = $(LDADD)
+keyfile_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 list_SOURCES = list.c
 list_OBJECTS = list.$(OBJEXT)
-list_DEPENDENCIES = $(progs_ldadd)
+list_LDADD = $(LDADD)
+list_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 logging_SOURCES = logging.c
 logging_OBJECTS = logging.$(OBJEXT)
-logging_DEPENDENCIES = $(progs_ldadd)
+logging_LDADD = $(LDADD)
+logging_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 mainloop_SOURCES = mainloop.c
 mainloop_OBJECTS = mainloop.$(OBJEXT)
-mainloop_DEPENDENCIES = $(progs_ldadd)
+mainloop_LDADD = $(LDADD)
+mainloop_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 mappedfile_SOURCES = mappedfile.c
 mappedfile_OBJECTS = mappedfile.$(OBJEXT)
-mappedfile_DEPENDENCIES = $(progs_ldadd)
+mappedfile_LDADD = $(LDADD)
+mappedfile_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 markup_collect_SOURCES = markup-collect.c
 markup_collect_OBJECTS = markup-collect.$(OBJEXT)
-markup_collect_DEPENDENCIES = $(progs_ldadd)
+markup_collect_LDADD = $(LDADD)
+markup_collect_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 markup_escape_SOURCES = markup-escape.c
 markup_escape_OBJECTS = markup-escape.$(OBJEXT)
-markup_escape_DEPENDENCIES = $(progs_ldadd)
+markup_escape_LDADD = $(LDADD)
+markup_escape_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 markup_parse_SOURCES = markup-parse.c
 markup_parse_OBJECTS = markup-parse.$(OBJEXT)
-markup_parse_DEPENDENCIES = $(progs_ldadd)
+markup_parse_LDADD = $(LDADD)
+markup_parse_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 markup_subparser_SOURCES = markup-subparser.c
 markup_subparser_OBJECTS = markup-subparser.$(OBJEXT)
-markup_subparser_DEPENDENCIES = $(progs_ldadd)
+markup_subparser_LDADD = $(LDADD)
+markup_subparser_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 mem_overflow_SOURCES = mem-overflow.c
 mem_overflow_OBJECTS = mem-overflow.$(OBJEXT)
-mem_overflow_DEPENDENCIES = $(progs_ldadd)
+mem_overflow_LDADD = $(LDADD)
+mem_overflow_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 mutex_SOURCES = mutex.c
 mutex_OBJECTS = mutex.$(OBJEXT)
-mutex_DEPENDENCIES = $(progs_ldadd)
+mutex_LDADD = $(LDADD)
+mutex_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 node_SOURCES = node.c
 node_OBJECTS = node.$(OBJEXT)
-node_DEPENDENCIES = $(progs_ldadd)
+node_LDADD = $(LDADD)
+node_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 once_SOURCES = once.c
 once_OBJECTS = once.$(OBJEXT)
-once_DEPENDENCIES = $(progs_ldadd)
-am_option_argv0_OBJECTS = option-argv0.$(OBJEXT)
-option_argv0_OBJECTS = $(am_option_argv0_OBJECTS)
-option_argv0_DEPENDENCIES = $(progs_ldadd)
-am_option_context_OBJECTS = option-context.$(OBJEXT)
-option_context_OBJECTS = $(am_option_context_OBJECTS)
-option_context_DEPENDENCIES = $(progs_ldadd)
+once_LDADD = $(LDADD)
+once_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
+option_argv0_SOURCES = option-argv0.c
+option_argv0_OBJECTS = option-argv0.$(OBJEXT)
+option_argv0_LDADD = $(LDADD)
+option_argv0_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
+option_context_SOURCES = option-context.c
+option_context_OBJECTS = option-context.$(OBJEXT)
+option_context_LDADD = $(LDADD)
+option_context_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 pattern_SOURCES = pattern.c
 pattern_OBJECTS = pattern.$(OBJEXT)
-pattern_DEPENDENCIES = $(progs_ldadd)
+pattern_LDADD = $(LDADD)
+pattern_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 private_SOURCES = private.c
 private_OBJECTS = private.$(OBJEXT)
-private_DEPENDENCIES = $(progs_ldadd)
+private_LDADD = $(LDADD)
+private_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 private_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 	$(private_LDFLAGS) $(LDFLAGS) -o $@
-am_protocol_OBJECTS = protocol.$(OBJEXT)
-protocol_OBJECTS = $(am_protocol_OBJECTS)
-protocol_DEPENDENCIES = $(progs_ldadd)
+protocol_SOURCES = protocol.c
+protocol_OBJECTS = protocol.$(OBJEXT)
+protocol_LDADD = $(LDADD)
+protocol_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 queue_SOURCES = queue.c
 queue_OBJECTS = queue.$(OBJEXT)
-queue_DEPENDENCIES = $(progs_ldadd)
-am_rand_OBJECTS = rand.$(OBJEXT)
-rand_OBJECTS = $(am_rand_OBJECTS)
-rand_DEPENDENCIES = $(progs_ldadd)
+queue_LDADD = $(LDADD)
+queue_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
+rand_SOURCES = rand.c
+rand_OBJECTS = rand.$(OBJEXT)
+rand_LDADD = $(LDADD)
+rand_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 rec_mutex_SOURCES = rec-mutex.c
 rec_mutex_OBJECTS = rec-mutex.$(OBJEXT)
-rec_mutex_DEPENDENCIES = $(progs_ldadd)
+rec_mutex_LDADD = $(LDADD)
+rec_mutex_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 regex_SOURCES = regex.c
 regex_OBJECTS = regex.$(OBJEXT)
-regex_DEPENDENCIES = $(progs_ldadd)
+regex_LDADD = $(LDADD)
+regex_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 rwlock_SOURCES = rwlock.c
 rwlock_OBJECTS = rwlock.$(OBJEXT)
-rwlock_DEPENDENCIES = $(progs_ldadd)
+rwlock_LDADD = $(LDADD)
+rwlock_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 scannerapi_SOURCES = scannerapi.c
 scannerapi_OBJECTS = scannerapi.$(OBJEXT)
-scannerapi_DEPENDENCIES = $(progs_ldadd)
+scannerapi_LDADD = $(LDADD)
+scannerapi_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 sequence_SOURCES = sequence.c
 sequence_OBJECTS = sequence.$(OBJEXT)
-sequence_DEPENDENCIES = $(progs_ldadd)
+sequence_LDADD = $(LDADD)
+sequence_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 shell_SOURCES = shell.c
 shell_OBJECTS = shell.$(OBJEXT)
-shell_DEPENDENCIES = $(progs_ldadd)
+shell_LDADD = $(LDADD)
+shell_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 slice_SOURCES = slice.c
 slice_OBJECTS = slice.$(OBJEXT)
-slice_DEPENDENCIES = $(progs_ldadd)
+slice_LDADD = $(LDADD)
+slice_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 slist_SOURCES = slist.c
 slist_OBJECTS = slist.$(OBJEXT)
-slist_DEPENDENCIES = $(progs_ldadd)
+slist_LDADD = $(LDADD)
+slist_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 sort_SOURCES = sort.c
 sort_OBJECTS = sort.$(OBJEXT)
-sort_DEPENDENCIES = $(progs_ldadd)
-am_spawn_multithreaded_OBJECTS = spawn-multithreaded.$(OBJEXT)
-spawn_multithreaded_OBJECTS = $(am_spawn_multithreaded_OBJECTS)
-spawn_multithreaded_DEPENDENCIES = $(progs_ldadd)
-am_spawn_singlethread_OBJECTS = spawn-singlethread.$(OBJEXT)
-spawn_singlethread_OBJECTS = $(am_spawn_singlethread_OBJECTS)
-spawn_singlethread_DEPENDENCIES = $(progs_ldadd)
-am_strfuncs_OBJECTS = strfuncs.$(OBJEXT)
-strfuncs_OBJECTS = $(am_strfuncs_OBJECTS)
-strfuncs_DEPENDENCIES = $(progs_ldadd)
-am_string_OBJECTS = string.$(OBJEXT)
-string_OBJECTS = $(am_string_OBJECTS)
-string_DEPENDENCIES = $(progs_ldadd)
-am_test_printf_OBJECTS = test-printf.$(OBJEXT)
-test_printf_OBJECTS = $(am_test_printf_OBJECTS)
-test_printf_DEPENDENCIES = $(progs_ldadd)
-am_test_spawn_echo_OBJECTS = test-spawn-echo.$(OBJEXT)
-test_spawn_echo_OBJECTS = $(am_test_spawn_echo_OBJECTS)
-test_spawn_echo_DEPENDENCIES = $(progs_ldadd)
-am_testing_OBJECTS = testing.$(OBJEXT)
-testing_OBJECTS = $(am_testing_OBJECTS)
-testing_DEPENDENCIES = $(progs_ldadd)
+sort_LDADD = $(LDADD)
+sort_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
+spawn_multithreaded_SOURCES = spawn-multithreaded.c
+spawn_multithreaded_OBJECTS = spawn-multithreaded.$(OBJEXT)
+spawn_multithreaded_LDADD = $(LDADD)
+spawn_multithreaded_DEPENDENCIES =  \
+	$(top_builddir)/glib/libglib-2.0.la
+spawn_singlethread_SOURCES = spawn-singlethread.c
+spawn_singlethread_OBJECTS = spawn-singlethread.$(OBJEXT)
+spawn_singlethread_LDADD = $(LDADD)
+spawn_singlethread_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
+strfuncs_SOURCES = strfuncs.c
+strfuncs_OBJECTS = strfuncs.$(OBJEXT)
+strfuncs_LDADD = $(LDADD)
+strfuncs_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
+string_SOURCES = string.c
+string_OBJECTS = string.$(OBJEXT)
+string_LDADD = $(LDADD)
+string_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
+test_printf_SOURCES = test-printf.c
+test_printf_OBJECTS = test-printf.$(OBJEXT)
+test_printf_LDADD = $(LDADD)
+test_printf_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
+test_spawn_echo_SOURCES = test-spawn-echo.c
+test_spawn_echo_OBJECTS = test-spawn-echo.$(OBJEXT)
+test_spawn_echo_LDADD = $(LDADD)
+test_spawn_echo_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
+testing_SOURCES = testing.c
+testing_OBJECTS = testing.$(OBJEXT)
+testing_LDADD = $(LDADD)
+testing_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 thread_SOURCES = thread.c
 thread_OBJECTS = thread.$(OBJEXT)
-thread_DEPENDENCIES = $(progs_ldadd)
-am_timeout_OBJECTS = timeout.$(OBJEXT)
-timeout_OBJECTS = $(am_timeout_OBJECTS)
-timeout_DEPENDENCIES = $(progs_ldadd)
+thread_LDADD = $(LDADD)
+thread_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
+timeout_SOURCES = timeout.c
+timeout_OBJECTS = timeout.$(OBJEXT)
+timeout_LDADD = $(LDADD)
+timeout_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 tree_SOURCES = tree.c
 tree_OBJECTS = tree.$(OBJEXT)
-tree_DEPENDENCIES = $(progs_ldadd)
+tree_LDADD = $(LDADD)
+tree_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 unicode_SOURCES = unicode.c
 unicode_OBJECTS = unicode.$(OBJEXT)
-unicode_DEPENDENCIES = $(progs_ldadd)
+unicode_LDADD = $(LDADD)
+unicode_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 unix_SOURCES = unix.c
 unix_OBJECTS = unix.$(OBJEXT)
-@OS_UNIX_TRUE@unix_DEPENDENCIES = $(progs_ldadd)
-am__unix_multithreaded_SOURCES_DIST = $(top_srcdir)/glib/tests/unix.c
-@OS_UNIX_TRUE@am_unix_multithreaded_OBJECTS =  \
-@OS_UNIX_TRUE@	unix_multithreaded-unix.$(OBJEXT)
-unix_multithreaded_OBJECTS = $(am_unix_multithreaded_OBJECTS)
-@OS_UNIX_TRUE@unix_multithreaded_DEPENDENCIES = $(progs_ldadd)
-unix_multithreaded_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
-	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CCLD) \
-	$(unix_multithreaded_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
-	$(LDFLAGS) -o $@
-am__unix_nothreads_SOURCES_DIST = unix.c
-@OS_UNIX_TRUE@am_unix_nothreads_OBJECTS = unix.$(OBJEXT)
-unix_nothreads_OBJECTS = $(am_unix_nothreads_OBJECTS)
-@OS_UNIX_TRUE@unix_nothreads_DEPENDENCIES = $(progs_ldadd)
+unix_LDADD = $(LDADD)
+unix_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 uri_SOURCES = uri.c
 uri_OBJECTS = uri.$(OBJEXT)
-uri_DEPENDENCIES = $(progs_ldadd)
+uri_LDADD = $(LDADD)
+uri_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 utf8_misc_SOURCES = utf8-misc.c
 utf8_misc_OBJECTS = utf8-misc.$(OBJEXT)
-utf8_misc_DEPENDENCIES = $(progs_ldadd)
-am_utf8_performance_OBJECTS = utf8-performance.$(OBJEXT)
-utf8_performance_OBJECTS = $(am_utf8_performance_OBJECTS)
-utf8_performance_DEPENDENCIES = $(progs_ldadd)
+utf8_misc_LDADD = $(LDADD)
+utf8_misc_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
+utf8_performance_SOURCES = utf8-performance.c
+utf8_performance_OBJECTS = utf8-performance.$(OBJEXT)
+utf8_performance_LDADD = $(LDADD)
+utf8_performance_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 utf8_pointer_SOURCES = utf8-pointer.c
 utf8_pointer_OBJECTS = utf8-pointer.$(OBJEXT)
-utf8_pointer_DEPENDENCIES = $(progs_ldadd)
+utf8_pointer_LDADD = $(LDADD)
+utf8_pointer_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 utf8_validate_SOURCES = utf8-validate.c
 utf8_validate_OBJECTS = utf8-validate.$(OBJEXT)
-utf8_validate_DEPENDENCIES = $(progs_ldadd)
+utf8_validate_LDADD = $(LDADD)
+utf8_validate_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 utils_SOURCES = utils.c
 utils_OBJECTS = utils.$(OBJEXT)
-utils_DEPENDENCIES = $(progs_ldadd)
+utils_LDADD = $(LDADD)
+utils_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -415,46 +481,34 @@ SOURCES = $(1bit_emufutex_SOURCES) 1bit-mutex.c 642026.c \
 	$(642026_ec_SOURCES) array-test.c asyncqueue.c atomic.c \
 	base64.c bitlock.c bookmarkfile.c bytes.c cache.c checksum.c \
 	collate.c cond.c convert.c dataset.c date.c dir.c \
-	environment.c error.c $(fileutils_SOURCES) \
-	$(gdatetime_SOURCES) gvariant.c $(gwakeup_SOURCES) \
-	$(gwakeup_fallback_SOURCES) hash.c hmac.c hook.c hostutils.c \
-	include.c $(keyfile_SOURCES) list.c logging.c mainloop.c \
-	mappedfile.c markup-collect.c markup-escape.c markup-parse.c \
-	markup-subparser.c mem-overflow.c mutex.c node.c once.c \
-	$(option_argv0_SOURCES) $(option_context_SOURCES) pattern.c \
-	private.c $(protocol_SOURCES) queue.c $(rand_SOURCES) \
-	rec-mutex.c regex.c rwlock.c scannerapi.c sequence.c shell.c \
-	slice.c slist.c sort.c $(spawn_multithreaded_SOURCES) \
-	$(spawn_singlethread_SOURCES) $(strfuncs_SOURCES) \
-	$(string_SOURCES) $(test_printf_SOURCES) \
-	$(test_spawn_echo_SOURCES) $(testing_SOURCES) thread.c \
-	$(timeout_SOURCES) tree.c unicode.c unix.c \
-	$(unix_multithreaded_SOURCES) $(unix_nothreads_SOURCES) uri.c \
-	utf8-misc.c $(utf8_performance_SOURCES) utf8-pointer.c \
-	utf8-validate.c utils.c
+	environment.c error.c fileutils.c gdatetime.c gvariant.c \
+	$(gwakeup_SOURCES) $(gwakeup_fallback_SOURCES) hash.c hmac.c \
+	hook.c hostutils.c include.c keyfile.c list.c logging.c \
+	mainloop.c mappedfile.c markup-collect.c markup-escape.c \
+	markup-parse.c markup-subparser.c mem-overflow.c mutex.c \
+	node.c once.c option-argv0.c option-context.c pattern.c \
+	private.c protocol.c queue.c rand.c rec-mutex.c regex.c \
+	rwlock.c scannerapi.c sequence.c shell.c slice.c slist.c \
+	sort.c spawn-multithreaded.c spawn-singlethread.c strfuncs.c \
+	string.c test-printf.c test-spawn-echo.c testing.c thread.c \
+	timeout.c tree.c unicode.c unix.c uri.c utf8-misc.c \
+	utf8-performance.c utf8-pointer.c utf8-validate.c utils.c
 DIST_SOURCES = $(1bit_emufutex_SOURCES) 1bit-mutex.c 642026.c \
 	$(642026_ec_SOURCES) array-test.c asyncqueue.c atomic.c \
 	base64.c bitlock.c bookmarkfile.c bytes.c cache.c checksum.c \
 	collate.c cond.c convert.c dataset.c date.c dir.c \
-	environment.c error.c $(fileutils_SOURCES) \
-	$(gdatetime_SOURCES) gvariant.c $(gwakeup_SOURCES) \
-	$(am__gwakeup_fallback_SOURCES_DIST) hash.c hmac.c hook.c \
-	hostutils.c include.c $(keyfile_SOURCES) list.c logging.c \
+	environment.c error.c fileutils.c gdatetime.c gvariant.c \
+	$(gwakeup_SOURCES) $(am__gwakeup_fallback_SOURCES_DIST) hash.c \
+	hmac.c hook.c hostutils.c include.c keyfile.c list.c logging.c \
 	mainloop.c mappedfile.c markup-collect.c markup-escape.c \
 	markup-parse.c markup-subparser.c mem-overflow.c mutex.c \
-	node.c once.c $(option_argv0_SOURCES) \
-	$(option_context_SOURCES) pattern.c private.c \
-	$(protocol_SOURCES) queue.c $(rand_SOURCES) rec-mutex.c \
-	regex.c rwlock.c scannerapi.c sequence.c shell.c slice.c \
-	slist.c sort.c $(spawn_multithreaded_SOURCES) \
-	$(spawn_singlethread_SOURCES) $(strfuncs_SOURCES) \
-	$(string_SOURCES) $(test_printf_SOURCES) \
-	$(test_spawn_echo_SOURCES) $(testing_SOURCES) thread.c \
-	$(timeout_SOURCES) tree.c unicode.c unix.c \
-	$(am__unix_multithreaded_SOURCES_DIST) \
-	$(am__unix_nothreads_SOURCES_DIST) uri.c utf8-misc.c \
-	$(utf8_performance_SOURCES) utf8-pointer.c utf8-validate.c \
-	utils.c
+	node.c once.c option-argv0.c option-context.c pattern.c \
+	private.c protocol.c queue.c rand.c rec-mutex.c regex.c \
+	rwlock.c scannerapi.c sequence.c shell.c slice.c slist.c \
+	sort.c spawn-multithreaded.c spawn-singlethread.c strfuncs.c \
+	string.c test-printf.c test-spawn-echo.c testing.c thread.c \
+	timeout.c tree.c unicode.c unix.c uri.c utf8-misc.c \
+	utf8-performance.c utf8-pointer.c utf8-validate.c utils.c
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -515,6 +569,7 @@ GLIB_COMPILE_SCHEMAS = @GLIB_COMPILE_SCHEMAS@
 GLIB_DEBUG_FLAGS = @GLIB_DEBUG_FLAGS@
 GLIB_EXTRA_CFLAGS = @GLIB_EXTRA_CFLAGS@
 GLIB_GENMARSHAL = @GLIB_GENMARSHAL@
+GLIB_HIDDEN_VISIBILITY_CFLAGS = @GLIB_HIDDEN_VISIBILITY_CFLAGS@
 GLIB_INTERFACE_AGE = @GLIB_INTERFACE_AGE@
 GLIB_LINK_FLAGS = @GLIB_LINK_FLAGS@
 GLIB_MAJOR_VERSION = @GLIB_MAJOR_VERSION@
@@ -522,6 +577,7 @@ GLIB_MICRO_VERSION = @GLIB_MICRO_VERSION@
 GLIB_MINOR_VERSION = @GLIB_MINOR_VERSION@
 GLIB_RUNTIME_LIBDIR = @GLIB_RUNTIME_LIBDIR@
 GLIB_VERSION = @GLIB_VERSION@
+GLIB_WARN_CFLAGS = @GLIB_WARN_CFLAGS@
 GLIB_WIN32_STATIC_COMPILATION_DEFINE = @GLIB_WIN32_STATIC_COMPILATION_DEFINE@
 GMOFILES = @GMOFILES@
 GMSGFMT = @GMSGFMT@
@@ -566,7 +622,6 @@ LIBFFI_LIBS = @LIBFFI_LIBS@
 LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
 LIBTOOL = @LIBTOOL@
-LIBTOOL_EXPORT_OPTIONS = @LIBTOOL_EXPORT_OPTIONS@
 LIB_EXE_MACHINE_FLAG = @LIB_EXE_MACHINE_FLAG@
 LIPO = @LIPO@
 LN_S = @LN_S@
@@ -585,6 +640,7 @@ MKDIR_P = @MKDIR_P@
 MKINSTALLDIRS = @MKINSTALLDIRS@
 MSGFMT = @MSGFMT@
 MSGFMT_OPTS = @MSGFMT_OPTS@
+NAMESER_COMPAT_INCLUDE = @NAMESER_COMPAT_INCLUDE@
 NETWORK_LIBS = @NETWORK_LIBS@
 NM = @NM@
 NMEDIT = @NMEDIT@
@@ -630,6 +686,7 @@ STRIP = @STRIP@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
 WINDRES = @WINDRES@
+WSPIAPI_INCLUDE = @WSPIAPI_INCLUDE@
 XATTR_LIBS = @XATTR_LIBS@
 XGETTEXT = @XGETTEXT@
 XMLCATALOG = @XMLCATALOG@
@@ -667,7 +724,6 @@ gio_INCLUDES = @gio_INCLUDES@
 glib_INCLUDES = @glib_INCLUDES@
 gmodule_INCLUDES = @gmodule_INCLUDES@
 gobject_INCLUDES = @gobject_INCLUDES@
-gthread_INCLUDES = @gthread_INCLUDES@
 host = @host@
 host_alias = @host_alias@
 host_cpu = @host_cpu@
@@ -709,137 +765,39 @@ GTESTER_REPORT = $(top_builddir)/glib/gtester-report	# for the GLIB package
 # initialize variables for unconditional += appending
 EXTRA_DIST = 4096-random-bytes keyfiletest.ini pages.ini \
 	bookmarks.xbel empty echo-script
-TEST_PROGS = testing option-context option-argv0 keyfile fileutils \
-	test-printf protocol rand strfuncs string markup-parse \
-	markup-collect markup-escape markup-subparser array-test bytes \
-	hostutils gvariant mem-overflow utf8-performance utils regex \
-	base64 sequence scannerapi shell collate utf8-pointer \
-	utf8-validate utf8-misc unicode checksum hmac hash cache date \
-	node convert list slist queue tree uri dir pattern logging \
-	error bookmarkfile gdatetime timeout environment mappedfile \
-	dataset sort atomic bitlock mutex rec-mutex rwlock once cond \
-	thread slice hook mainloop private asyncqueue 1bit-mutex \
-	642026 642026-ec 1bit-emufutex spawn-multithreaded \
-	spawn-singlethread gwakeup $(am__append_2) $(am__append_3)
-INCLUDES = \
+TEST_PROGS = array-test asyncqueue atomic base64 bitlock bookmarkfile \
+	bytes cache checksum collate cond convert dataset date dir \
+	environment error fileutils gdatetime gvariant gwakeup hash \
+	hmac hook hostutils keyfile list logging mainloop mappedfile \
+	markup-parse markup-collect markup-escape markup-subparser \
+	mem-overflow mutex node once option-context option-argv0 \
+	pattern private protocol queue rand rec-mutex regex rwlock \
+	scannerapi sequence shell slice slist sort spawn-multithreaded \
+	spawn-singlethread strfuncs string testing test-printf thread \
+	timeout tree utf8-performance utf8-pointer utf8-validate \
+	utf8-misc utils unicode uri 1bit-mutex 1bit-emufutex 642026 \
+	642026-ec $(am__append_2) $(am__append_3)
+AM_CPPFLAGS = \
 	-g 				\
 	$(glib_INCLUDES) 		\
 	-DG_LOG_DOMAIN=\"GLib\" 	\
 	-DSRCDIR=\""$(srcdir)"\"	\
 	$(GLIB_DEBUG_FLAGS)
 
-progs_ldadd = $(top_builddir)/glib/libglib-2.0.la 
-test_spawn_echo_SOURCES = test-spawn-echo.c
-test_spawn_echo_LDADD = $(progs_ldadd)
-testing_SOURCES = testing.c
-testing_LDADD = $(progs_ldadd)
-option_context_SOURCES = option-context.c
-option_context_LDADD = $(progs_ldadd)
-option_argv0_SOURCES = option-argv0.c
-option_argv0_LDADD = $(progs_ldadd)
-keyfile_SOURCES = keyfile.c
-keyfile_LDADD = $(progs_ldadd)
-fileutils_SOURCES = fileutils.c
-fileutils_LDADD = $(progs_ldadd)
-test_printf_SOURCES = test-printf.c
-test_printf_LDADD = $(progs_ldadd) -lm
-protocol_SOURCES = protocol.c
-protocol_LDADD = $(progs_ldadd)
-rand_SOURCES = rand.c
-rand_LDADD = $(progs_ldadd) -lm
-strfuncs_SOURCES = strfuncs.c
-strfuncs_LDADD = $(progs_ldadd) -lm
-string_SOURCES = string.c
-string_LDADD = $(progs_ldadd) -lm
-markup_parse_LDADD = $(progs_ldadd)
-markup_collect_LDADD = $(progs_ldadd)
-markup_escape_LDADD = $(progs_ldadd)
-markup_subparser_LDADD = $(progs_ldadd)
-array_test_LDADD = $(progs_ldadd)
-bytes_LDADD = $(progs_ldadd)
-hostutils_LDADD = $(progs_ldadd)
-gvariant_LDADD = $(progs_ldadd)
-mem_overflow_LDADD = $(progs_ldadd)
-utf8_performance_SOURCES = utf8-performance.c
-utf8_performance_LDADD = $(progs_ldadd)
-utils_LDADD = $(progs_ldadd)
-regex_LDADD = $(progs_ldadd)
-base64_LDADD = $(progs_ldadd)
-sequence_LDADD = $(progs_ldadd)
-scannerapi_LDADD = $(progs_ldadd)
-shell_LDADD = $(progs_ldadd)
-collate_LDADD = $(progs_ldadd)
-utf8_pointer_LDADD = $(progs_ldadd)
-utf8_validate_LDADD = $(progs_ldadd)
-utf8_misc_LDADD = $(progs_ldadd)
-unicode_LDADD = $(progs_ldadd)
-checksum_LDADD = $(progs_ldadd)
-hmac_LDADD = $(progs_ldadd)
-hash_LDADD = $(progs_ldadd)
-cache_LDADD = $(progs_ldadd)
-date_LDADD = $(progs_ldadd)
-node_LDADD = $(progs_ldadd)
-convert_LDADD = $(progs_ldadd)
-list_LDADD = $(progs_ldadd)
-slist_LDADD = $(progs_ldadd)
-queue_LDADD = $(progs_ldadd)
-tree_LDADD = $(progs_ldadd)
-uri_LDADD = $(progs_ldadd)
-dir_LDADD = $(progs_ldadd)
-pattern_LDADD = $(progs_ldadd)
-logging_LDADD = $(progs_ldadd)
-error_LDADD = $(progs_ldadd)
-bookmarkfile_LDADD = $(progs_ldadd)
-gdatetime_SOURCES = gdatetime.c
-gdatetime_LDADD = $(progs_ldadd)
-timeout_SOURCES = timeout.c
-timeout_LDADD = $(progs_ldadd)
-environment_LDADD = $(progs_ldadd)
-mappedfile_LDADD = $(progs_ldadd)
-dataset_LDADD = $(progs_ldadd)
-sort_LDADD = $(progs_ldadd)
-atomic_CFLAGS = $(INCLUDES) $(am__append_1)
-atomic_LDADD = $(progs_ldadd)
-bitlock_LDADD = $(progs_ldadd)
-mutex_LDADD = $(progs_ldadd)
-rec_mutex_LDADD = $(progs_ldadd)
-rwlock_LDADD = $(progs_ldadd)
-once_LDADD = $(progs_ldadd)
-cond_LDADD = $(progs_ldadd)
-thread_LDADD = $(progs_ldadd)
-slice_LDADD = $(progs_ldadd)
-hook_LDADD = $(progs_ldadd)
-mainloop_LDADD = $(progs_ldadd)
-private_LDADD = $(progs_ldadd)
-asyncqueue_LDADD = $(progs_ldadd)
-1bit_mutex_LDADD = $(progs_ldadd)
-642026_LDADD = $(progs_ldadd)
+AM_CFLAGS = $(GLIB_WARN_CFLAGS)
+LDADD = $(top_builddir)/glib/libglib-2.0.la -lm
+atomic_CFLAGS = $(AM_CFLAGS) $(am__append_1)
 642026_ec_SOURCES = 642026.c
-642026_ec_LDADD = $(progs_ldadd)
 642026_ec_CFLAGS = -DG_ERRORCHECK_MUTEXES
 1bit_emufutex_SOURCES = 1bit-mutex.c
-1bit_emufutex_CFLAGS = -DTEST_EMULATED_FUTEX
-1bit_emufutex_LDADD = $(progs_ldadd)
-spawn_multithreaded_SOURCES = spawn-multithreaded.c
-spawn_multithreaded_LDADD = $(progs_ldadd)
-spawn_singlethread_SOURCES = spawn-singlethread.c
-spawn_singlethread_LDADD = $(progs_ldadd)
+1bit_emufutex_CFLAGS = $(AM_CFLAGS) -DTEST_EMULATED_FUTEX
 gwakeup_SOURCES = gwakeuptest.c ../../glib/gwakeup.c
-gwakeup_LDADD = $(progs_ldadd)
 @HAVE_EVENTFD_TRUE@gwakeup_fallback_SOURCES = gwakeuptest.c ../../glib/gwakeup.c
 @HAVE_EVENTFD_TRUE@gwakeup_fallback_CFLAGS = $(AM_CFLAGS) -DTEST_EVENTFD_FALLBACK
-@HAVE_EVENTFD_TRUE@gwakeup_fallback_LDADD = $(progs_ldadd)
-@OS_UNIX_TRUE@private_LDFLAGS = -pthread
-@OS_UNIX_TRUE@unix_multithreaded_SOURCES = $(top_srcdir)/glib/tests/unix.c
-@OS_UNIX_TRUE@unix_multithreaded_CFLAGS = -DTEST_THREADED
-@OS_UNIX_TRUE@unix_multithreaded_LDADD = $(progs_ldadd)
-@OS_UNIX_TRUE@unix_LDADD = $(progs_ldadd)
-@OS_UNIX_TRUE@unix_nothreads_SOURCES = unix.c
-@OS_UNIX_TRUE@unix_nothreads_LDADD = $(progs_ldadd)
-@OS_UNIX_TRUE@include_LDADD = $(progs_ldadd)
 
-# some testing of gtester funcitonality
+# some testing of gtester functionality
 @OS_UNIX_TRUE@XMLLINT = xmllint
+@OS_UNIX_TRUE@private_LDFLAGS = -pthread
 CLEANFILES = \
 	tmpsample.xml
 
@@ -1103,12 +1061,6 @@ unicode$(EXEEXT): $(unicode_OBJECTS) $(unicode_DEPENDENCIES) $(EXTRA_unicode_DEP
 unix$(EXEEXT): $(unix_OBJECTS) $(unix_DEPENDENCIES) $(EXTRA_unix_DEPENDENCIES) 
 	@rm -f unix$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(unix_OBJECTS) $(unix_LDADD) $(LIBS)
-unix-multithreaded$(EXEEXT): $(unix_multithreaded_OBJECTS) $(unix_multithreaded_DEPENDENCIES) $(EXTRA_unix_multithreaded_DEPENDENCIES) 
-	@rm -f unix-multithreaded$(EXEEXT)
-	$(AM_V_CCLD)$(unix_multithreaded_LINK) $(unix_multithreaded_OBJECTS) $(unix_multithreaded_LDADD) $(LIBS)
-unix-nothreads$(EXEEXT): $(unix_nothreads_OBJECTS) $(unix_nothreads_DEPENDENCIES) $(EXTRA_unix_nothreads_DEPENDENCIES) 
-	@rm -f unix-nothreads$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(unix_nothreads_OBJECTS) $(unix_nothreads_LDADD) $(LIBS)
 uri$(EXEEXT): $(uri_OBJECTS) $(uri_DEPENDENCIES) $(EXTRA_uri_DEPENDENCIES) 
 	@rm -f uri$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(uri_OBJECTS) $(uri_LDADD) $(LIBS)
@@ -1208,7 +1160,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tree.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/unicode.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/unix.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/unix_multithreaded-unix.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/uri.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/utf8-misc.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/utf8-performance.Po@am__quote@
@@ -1320,20 +1271,6 @@ gwakeup_fallback-gwakeup.obj: ../../glib/gwakeup.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='../../glib/gwakeup.c' object='gwakeup_fallback-gwakeup.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gwakeup_fallback_CFLAGS) $(CFLAGS) -c -o gwakeup_fallback-gwakeup.obj `if test -f '../../glib/gwakeup.c'; then $(CYGPATH_W) '../../glib/gwakeup.c'; else $(CYGPATH_W) '$(srcdir)/../../glib/gwakeup.c'; fi`
-
-unix_multithreaded-unix.o: $(top_srcdir)/glib/tests/unix.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(unix_multithreaded_CFLAGS) $(CFLAGS) -MT unix_multithreaded-unix.o -MD -MP -MF $(DEPDIR)/unix_multithreaded-unix.Tpo -c -o unix_multithreaded-unix.o `test -f '$(top_srcdir)/glib/tests/unix.c' || echo '$(srcdir)/'`$(top_srcdir)/glib/tests/unix.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/unix_multithreaded-unix.Tpo $(DEPDIR)/unix_multithreaded-unix.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$(top_srcdir)/glib/tests/unix.c' object='unix_multithreaded-unix.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(unix_multithreaded_CFLAGS) $(CFLAGS) -c -o unix_multithreaded-unix.o `test -f '$(top_srcdir)/glib/tests/unix.c' || echo '$(srcdir)/'`$(top_srcdir)/glib/tests/unix.c
-
-unix_multithreaded-unix.obj: $(top_srcdir)/glib/tests/unix.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(unix_multithreaded_CFLAGS) $(CFLAGS) -MT unix_multithreaded-unix.obj -MD -MP -MF $(DEPDIR)/unix_multithreaded-unix.Tpo -c -o unix_multithreaded-unix.obj `if test -f '$(top_srcdir)/glib/tests/unix.c'; then $(CYGPATH_W) '$(top_srcdir)/glib/tests/unix.c'; else $(CYGPATH_W) '$(srcdir)/$(top_srcdir)/glib/tests/unix.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/unix_multithreaded-unix.Tpo $(DEPDIR)/unix_multithreaded-unix.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$(top_srcdir)/glib/tests/unix.c' object='unix_multithreaded-unix.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(unix_multithreaded_CFLAGS) $(CFLAGS) -c -o unix_multithreaded-unix.obj `if test -f '$(top_srcdir)/glib/tests/unix.c'; then $(CYGPATH_W) '$(top_srcdir)/glib/tests/unix.c'; else $(CYGPATH_W) '$(srcdir)/$(top_srcdir)/glib/tests/unix.c'; fi`
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -1648,9 +1585,11 @@ lcov-clean:
 
 # run tests in cwd as part of make check
 check-local: test-nonrecursive
+
 @OS_UNIX_TRUE@gtester-xmllint-check: # check testreport xml with xmllint if present
 @OS_UNIX_TRUE@	${GTESTER} -k --quiet -o tmpsample.xml --test-arg=--gtester-selftest ${GTESTER}
 @OS_UNIX_TRUE@	${XMLLINT} --version 2>/dev/null; test "$$?" != 0 || ${XMLLINT} --noout tmpsample.xml
+
 @OS_UNIX_TRUE@check-am: gtester-xmllint-check
 
 dist-hook:

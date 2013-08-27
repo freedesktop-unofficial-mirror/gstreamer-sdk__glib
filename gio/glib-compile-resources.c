@@ -47,6 +47,10 @@
 
 #include "gconstructor_as_data.h"
 
+#ifdef G_OS_WIN32
+#include "glib/glib-private.h"
+#endif
+
 typedef struct
 {
   char *filename;
@@ -605,9 +609,11 @@ main (int argc, char **argv)
   gboolean generate_source = FALSE;
   gboolean generate_header = FALSE;
   gboolean manual_register = FALSE;
+  gboolean internal = FALSE;
   gboolean generate_dependencies = FALSE;
   char *c_name = NULL;
   char *c_name_no_underscores;
+  const char *linkage = "extern";
   GOptionContext *context;
   GOptionEntry entries[] = {
     { "target", 0, 0, G_OPTION_ARG_FILENAME, &target, N_("name of the output file"), N_("FILE") },
@@ -617,12 +623,12 @@ main (int argc, char **argv)
     { "generate-source", 0, 0, G_OPTION_ARG_NONE, &generate_source, N_("Generate sourcecode used to link in the resource file into your code"), NULL },
     { "generate-dependencies", 0, 0, G_OPTION_ARG_NONE, &generate_dependencies, N_("Generate dependency list"), NULL },
     { "manual-register", 0, 0, G_OPTION_ARG_NONE, &manual_register, N_("Don't automatically create and register resource"), NULL },
+    { "internal", 0, 0, G_OPTION_ARG_NONE, &internal, N_("Don't export functions; declare them G_GNUC_INTERNAL"), NULL },
     { "c-name", 0, 0, G_OPTION_ARG_STRING, &c_name, N_("C identifier name used for the generated source code"), NULL },
     { NULL }
   };
 
 #ifdef G_OS_WIN32
-  extern gchar *_glib_get_locale_dir (void);
   gchar *tmp;
 #endif
 
@@ -640,8 +646,6 @@ main (int argc, char **argv)
 #ifdef HAVE_BIND_TEXTDOMAIN_CODESET
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 #endif
-
-  g_type_init ();
 
   context = g_option_context_new (N_("FILE"));
   g_option_context_set_translation_domain (context, GETTEXT_PACKAGE);
@@ -665,6 +669,9 @@ main (int argc, char **argv)
       g_printerr (_("You should give exactly one file name\n"));
       return 1;
     }
+
+  if (internal)
+    linkage = "G_GNUC_INTERNAL";
 
   srcfile = argv[1];
 
@@ -807,16 +814,16 @@ main (int argc, char **argv)
 	       "\n"
 	       "#include <gio/gio.h>\n"
 	       "\n"
-	       "extern GResource *%s_get_resource (void);\n",
-	       c_name, c_name, c_name);
+	       "%s GResource *%s_get_resource (void);\n",
+	       c_name, c_name, linkage, c_name);
 
       if (manual_register)
 	fprintf (file,
 		 "\n"
-		 "extern void %s_register_resource (void);\n"
-		 "extern void %s_unregister_resource (void);\n"
+		 "%s void %s_register_resource (void);\n"
+		 "%s void %s_unregister_resource (void);\n"
 		 "\n",
-		 c_name, c_name);
+		 linkage, c_name, linkage, c_name);
 
       fprintf (file,
 	       "#endif\n");
@@ -871,31 +878,31 @@ main (int argc, char **argv)
 
       fprintf (file,
 	       "\n"
-	       "static GStaticResource static_resource = { %s_resource_data.data, sizeof (%s_resource_data.data) };\n"
-	       "extern GResource *%s_get_resource (void);\n"
+	       "static GStaticResource static_resource = { %s_resource_data.data, sizeof (%s_resource_data.data), NULL, NULL, NULL };\n"
+	       "%s GResource *%s_get_resource (void);\n"
 	       "GResource *%s_get_resource (void)\n"
 	       "{\n"
 	       "  return g_static_resource_get_resource (&static_resource);\n"
 	       "}\n",
-	       c_name, c_name, c_name, c_name);
+	       c_name, c_name, linkage, c_name, c_name);
 
 
       if (manual_register)
 	{
 	  fprintf (file,
 		   "\n"
-		   "extern void %s_unregister_resource (void);\n"
+		   "%s void %s_unregister_resource (void);\n"
 		   "void %s_unregister_resource (void)\n"
 		   "{\n"
 		   "  g_static_resource_fini (&static_resource);\n"
 		   "}\n"
 		   "\n"
-		   "extern void %s_register_resource (void);\n"
+		   "%s void %s_register_resource (void);\n"
 		   "void %s_register_resource (void)\n"
 		   "{\n"
 		   "  g_static_resource_init (&static_resource);\n"
 		   "}\n",
-		   c_name, c_name, c_name, c_name);
+		   linkage, c_name, c_name, linkage, c_name, c_name);
 	}
       else
 	{

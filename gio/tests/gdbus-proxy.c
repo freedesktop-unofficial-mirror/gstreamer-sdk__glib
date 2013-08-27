@@ -569,7 +569,7 @@ test_bogus_property (GDBusProxy *proxy)
 static const gchar *frob_dbus_interface_xml =
   "<node>"
   "  <interface name='com.example.Frob'>"
-  /* PairReturn() is deliberately different from gdbus-testserver.py's definition */
+  /* PairReturn() is deliberately different from gdbus-testserver's definition */
   "    <method name='PairReturn'>"
   "      <arg type='u' name='somenumber' direction='in'/>"
   "      <arg type='s' name='somestring' direction='out'/>"
@@ -583,9 +583,9 @@ static const gchar *frob_dbus_interface_xml =
   "    </method>"
   /* We deliberately only mention a single property here */
   "    <property name='y' type='y' access='readwrite'/>"
-  /* The 'i' property is deliberately different from gdbus-testserver.py's definition */
+  /* The 'i' property is deliberately different from gdbus-testserver's definition */
   "    <property name='i' type='u' access='readwrite'/>"
-  /* ::TestSignal2 is deliberately different from gdbus-testserver.py's definition */
+  /* ::TestSignal2 is deliberately different from gdbus-testserver's definition */
   "    <signal name='TestSignal2'>"
   "      <arg type='u' name='somenumber'/>"
   "    </signal>"
@@ -735,6 +735,7 @@ test_basic (GDBusProxy *proxy)
 static void
 kill_test_service (GDBusConnection *connection)
 {
+#ifdef G_OS_UNIX
   guint pid;
   GVariant *ret;
   GError *error = NULL;
@@ -754,6 +755,9 @@ kill_test_service (GDBusConnection *connection)
   g_variant_get (ret, "(u)", &pid);
   g_variant_unref (ret);
   kill (pid, SIGTERM);
+#else
+  g_warning ("Can't kill com.example.TestService");
+#endif
 }
 
 static void
@@ -780,7 +784,7 @@ test_proxy (void)
   g_assert_no_error (error);
 
   /* this is safe; testserver will exit once the bus goes away */
-  g_assert (g_spawn_command_line_async (SRCDIR "/gdbus-testserver.py", NULL));
+  g_assert (g_spawn_command_line_async ("./gdbus-testserver", NULL));
 
   _g_assert_property_notify (proxy, "g-name-owner");
 
@@ -842,7 +846,7 @@ test_async (void)
                             NULL);
 
   /* this is safe; testserver will exit once the bus goes away */
-  g_assert (g_spawn_command_line_async (SRCDIR "/gdbus-testserver.py", NULL));
+  g_assert (g_spawn_command_line_async ("./gdbus-testserver", NULL));
 
   g_timeout_add (10000, fail_test, NULL);
   g_main_loop_run (loop);
@@ -912,7 +916,6 @@ main (int   argc,
   gint ret;
   GDBusNodeInfo *introspection_data = NULL;
 
-  g_type_init ();
   g_test_init (&argc, &argv, NULL);
 
   introspection_data = g_dbus_node_info_new_for_xml (frob_dbus_interface_xml, NULL);

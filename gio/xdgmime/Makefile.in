@@ -53,11 +53,11 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
-	$(top_srcdir)/Makefile.decl $(top_srcdir)/depcomp \
-	$(top_srcdir)/mkinstalldirs
+	$(top_srcdir)/Makefile.decl $(top_srcdir)/depcomp
 subdir = gio/xdgmime
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/m4macros/gtk-doc.m4 \
+am__aclocal_m4_deps = $(top_srcdir)/m4macros/attributes.m4 \
+	$(top_srcdir)/m4macros/gtk-doc.m4 \
 	$(top_srcdir)/m4macros/libtool.m4 \
 	$(top_srcdir)/m4macros/ltoptions.m4 \
 	$(top_srcdir)/m4macros/ltsugar.m4 \
@@ -70,20 +70,25 @@ am__aclocal_m4_deps = $(top_srcdir)/m4macros/gtk-doc.m4 \
 	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
-mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 LTLIBRARIES = $(noinst_LTLIBRARIES)
 libxdgmime_la_LIBADD =
-am_libxdgmime_la_OBJECTS = xdgmime.lo xdgmimealias.lo xdgmimecache.lo \
-	xdgmimeglob.lo xdgmimeicon.lo xdgmimeint.lo xdgmimemagic.lo \
-	xdgmimeparent.lo
+am_libxdgmime_la_OBJECTS = libxdgmime_la-xdgmime.lo \
+	libxdgmime_la-xdgmimealias.lo libxdgmime_la-xdgmimecache.lo \
+	libxdgmime_la-xdgmimeglob.lo libxdgmime_la-xdgmimeicon.lo \
+	libxdgmime_la-xdgmimeint.lo libxdgmime_la-xdgmimemagic.lo \
+	libxdgmime_la-xdgmimeparent.lo
 libxdgmime_la_OBJECTS = $(am_libxdgmime_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
 am__v_lt_1 = 
+libxdgmime_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
+	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(libxdgmime_la_CFLAGS) \
+	$(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -180,6 +185,7 @@ GLIB_COMPILE_SCHEMAS = @GLIB_COMPILE_SCHEMAS@
 GLIB_DEBUG_FLAGS = @GLIB_DEBUG_FLAGS@
 GLIB_EXTRA_CFLAGS = @GLIB_EXTRA_CFLAGS@
 GLIB_GENMARSHAL = @GLIB_GENMARSHAL@
+GLIB_HIDDEN_VISIBILITY_CFLAGS = @GLIB_HIDDEN_VISIBILITY_CFLAGS@
 GLIB_INTERFACE_AGE = @GLIB_INTERFACE_AGE@
 GLIB_LINK_FLAGS = @GLIB_LINK_FLAGS@
 GLIB_MAJOR_VERSION = @GLIB_MAJOR_VERSION@
@@ -187,6 +193,7 @@ GLIB_MICRO_VERSION = @GLIB_MICRO_VERSION@
 GLIB_MINOR_VERSION = @GLIB_MINOR_VERSION@
 GLIB_RUNTIME_LIBDIR = @GLIB_RUNTIME_LIBDIR@
 GLIB_VERSION = @GLIB_VERSION@
+GLIB_WARN_CFLAGS = @GLIB_WARN_CFLAGS@
 GLIB_WIN32_STATIC_COMPILATION_DEFINE = @GLIB_WIN32_STATIC_COMPILATION_DEFINE@
 GMOFILES = @GMOFILES@
 GMSGFMT = @GMSGFMT@
@@ -231,7 +238,6 @@ LIBFFI_LIBS = @LIBFFI_LIBS@
 LIBOBJS = @LIBOBJS@
 LIBS = @LIBS@
 LIBTOOL = @LIBTOOL@
-LIBTOOL_EXPORT_OPTIONS = @LIBTOOL_EXPORT_OPTIONS@
 LIB_EXE_MACHINE_FLAG = @LIB_EXE_MACHINE_FLAG@
 LIPO = @LIPO@
 LN_S = @LN_S@
@@ -250,6 +256,7 @@ MKDIR_P = @MKDIR_P@
 MKINSTALLDIRS = @MKINSTALLDIRS@
 MSGFMT = @MSGFMT@
 MSGFMT_OPTS = @MSGFMT_OPTS@
+NAMESER_COMPAT_INCLUDE = @NAMESER_COMPAT_INCLUDE@
 NETWORK_LIBS = @NETWORK_LIBS@
 NM = @NM@
 NMEDIT = @NMEDIT@
@@ -295,6 +302,7 @@ STRIP = @STRIP@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
 WINDRES = @WINDRES@
+WSPIAPI_INCLUDE = @WSPIAPI_INCLUDE@
 XATTR_LIBS = @XATTR_LIBS@
 XGETTEXT = @XGETTEXT@
 XMLCATALOG = @XMLCATALOG@
@@ -332,7 +340,6 @@ gio_INCLUDES = @gio_INCLUDES@
 glib_INCLUDES = @glib_INCLUDES@
 gmodule_INCLUDES = @gmodule_INCLUDES@
 gobject_INCLUDES = @gobject_INCLUDES@
-gthread_INCLUDES = @gthread_INCLUDES@
 host = @host@
 host_alias = @host_alias@
 host_cpu = @host_cpu@
@@ -376,6 +383,7 @@ EXTRA_DIST =
 TEST_PROGS = 
 AM_CPPFLAGS = -DXDG_PREFIX=_gio_xdg
 noinst_LTLIBRARIES = libxdgmime.la
+libxdgmime_la_CFLAGS = $(GLIB_HIDDEN_VISIBILITY_CFLAGS)
 libxdgmime_la_SOURCES = \
 	xdgmime.c 	\
 	xdgmime.h	\
@@ -441,7 +449,7 @@ clean-noinstLTLIBRARIES:
 	  rm -f $${locs}; \
 	}
 libxdgmime.la: $(libxdgmime_la_OBJECTS) $(libxdgmime_la_DEPENDENCIES) $(EXTRA_libxdgmime_la_DEPENDENCIES) 
-	$(AM_V_CCLD)$(LINK)  $(libxdgmime_la_OBJECTS) $(libxdgmime_la_LIBADD) $(LIBS)
+	$(AM_V_CCLD)$(libxdgmime_la_LINK)  $(libxdgmime_la_OBJECTS) $(libxdgmime_la_LIBADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -449,14 +457,14 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xdgmime.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xdgmimealias.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xdgmimecache.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xdgmimeglob.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xdgmimeicon.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xdgmimeint.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xdgmimemagic.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xdgmimeparent.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libxdgmime_la-xdgmime.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libxdgmime_la-xdgmimealias.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libxdgmime_la-xdgmimecache.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libxdgmime_la-xdgmimeglob.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libxdgmime_la-xdgmimeicon.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libxdgmime_la-xdgmimeint.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libxdgmime_la-xdgmimemagic.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libxdgmime_la-xdgmimeparent.Plo@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -478,6 +486,62 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
+
+libxdgmime_la-xdgmime.lo: xdgmime.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libxdgmime_la_CFLAGS) $(CFLAGS) -MT libxdgmime_la-xdgmime.lo -MD -MP -MF $(DEPDIR)/libxdgmime_la-xdgmime.Tpo -c -o libxdgmime_la-xdgmime.lo `test -f 'xdgmime.c' || echo '$(srcdir)/'`xdgmime.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libxdgmime_la-xdgmime.Tpo $(DEPDIR)/libxdgmime_la-xdgmime.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='xdgmime.c' object='libxdgmime_la-xdgmime.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libxdgmime_la_CFLAGS) $(CFLAGS) -c -o libxdgmime_la-xdgmime.lo `test -f 'xdgmime.c' || echo '$(srcdir)/'`xdgmime.c
+
+libxdgmime_la-xdgmimealias.lo: xdgmimealias.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libxdgmime_la_CFLAGS) $(CFLAGS) -MT libxdgmime_la-xdgmimealias.lo -MD -MP -MF $(DEPDIR)/libxdgmime_la-xdgmimealias.Tpo -c -o libxdgmime_la-xdgmimealias.lo `test -f 'xdgmimealias.c' || echo '$(srcdir)/'`xdgmimealias.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libxdgmime_la-xdgmimealias.Tpo $(DEPDIR)/libxdgmime_la-xdgmimealias.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='xdgmimealias.c' object='libxdgmime_la-xdgmimealias.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libxdgmime_la_CFLAGS) $(CFLAGS) -c -o libxdgmime_la-xdgmimealias.lo `test -f 'xdgmimealias.c' || echo '$(srcdir)/'`xdgmimealias.c
+
+libxdgmime_la-xdgmimecache.lo: xdgmimecache.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libxdgmime_la_CFLAGS) $(CFLAGS) -MT libxdgmime_la-xdgmimecache.lo -MD -MP -MF $(DEPDIR)/libxdgmime_la-xdgmimecache.Tpo -c -o libxdgmime_la-xdgmimecache.lo `test -f 'xdgmimecache.c' || echo '$(srcdir)/'`xdgmimecache.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libxdgmime_la-xdgmimecache.Tpo $(DEPDIR)/libxdgmime_la-xdgmimecache.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='xdgmimecache.c' object='libxdgmime_la-xdgmimecache.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libxdgmime_la_CFLAGS) $(CFLAGS) -c -o libxdgmime_la-xdgmimecache.lo `test -f 'xdgmimecache.c' || echo '$(srcdir)/'`xdgmimecache.c
+
+libxdgmime_la-xdgmimeglob.lo: xdgmimeglob.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libxdgmime_la_CFLAGS) $(CFLAGS) -MT libxdgmime_la-xdgmimeglob.lo -MD -MP -MF $(DEPDIR)/libxdgmime_la-xdgmimeglob.Tpo -c -o libxdgmime_la-xdgmimeglob.lo `test -f 'xdgmimeglob.c' || echo '$(srcdir)/'`xdgmimeglob.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libxdgmime_la-xdgmimeglob.Tpo $(DEPDIR)/libxdgmime_la-xdgmimeglob.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='xdgmimeglob.c' object='libxdgmime_la-xdgmimeglob.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libxdgmime_la_CFLAGS) $(CFLAGS) -c -o libxdgmime_la-xdgmimeglob.lo `test -f 'xdgmimeglob.c' || echo '$(srcdir)/'`xdgmimeglob.c
+
+libxdgmime_la-xdgmimeicon.lo: xdgmimeicon.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libxdgmime_la_CFLAGS) $(CFLAGS) -MT libxdgmime_la-xdgmimeicon.lo -MD -MP -MF $(DEPDIR)/libxdgmime_la-xdgmimeicon.Tpo -c -o libxdgmime_la-xdgmimeicon.lo `test -f 'xdgmimeicon.c' || echo '$(srcdir)/'`xdgmimeicon.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libxdgmime_la-xdgmimeicon.Tpo $(DEPDIR)/libxdgmime_la-xdgmimeicon.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='xdgmimeicon.c' object='libxdgmime_la-xdgmimeicon.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libxdgmime_la_CFLAGS) $(CFLAGS) -c -o libxdgmime_la-xdgmimeicon.lo `test -f 'xdgmimeicon.c' || echo '$(srcdir)/'`xdgmimeicon.c
+
+libxdgmime_la-xdgmimeint.lo: xdgmimeint.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libxdgmime_la_CFLAGS) $(CFLAGS) -MT libxdgmime_la-xdgmimeint.lo -MD -MP -MF $(DEPDIR)/libxdgmime_la-xdgmimeint.Tpo -c -o libxdgmime_la-xdgmimeint.lo `test -f 'xdgmimeint.c' || echo '$(srcdir)/'`xdgmimeint.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libxdgmime_la-xdgmimeint.Tpo $(DEPDIR)/libxdgmime_la-xdgmimeint.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='xdgmimeint.c' object='libxdgmime_la-xdgmimeint.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libxdgmime_la_CFLAGS) $(CFLAGS) -c -o libxdgmime_la-xdgmimeint.lo `test -f 'xdgmimeint.c' || echo '$(srcdir)/'`xdgmimeint.c
+
+libxdgmime_la-xdgmimemagic.lo: xdgmimemagic.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libxdgmime_la_CFLAGS) $(CFLAGS) -MT libxdgmime_la-xdgmimemagic.lo -MD -MP -MF $(DEPDIR)/libxdgmime_la-xdgmimemagic.Tpo -c -o libxdgmime_la-xdgmimemagic.lo `test -f 'xdgmimemagic.c' || echo '$(srcdir)/'`xdgmimemagic.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libxdgmime_la-xdgmimemagic.Tpo $(DEPDIR)/libxdgmime_la-xdgmimemagic.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='xdgmimemagic.c' object='libxdgmime_la-xdgmimemagic.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libxdgmime_la_CFLAGS) $(CFLAGS) -c -o libxdgmime_la-xdgmimemagic.lo `test -f 'xdgmimemagic.c' || echo '$(srcdir)/'`xdgmimemagic.c
+
+libxdgmime_la-xdgmimeparent.lo: xdgmimeparent.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libxdgmime_la_CFLAGS) $(CFLAGS) -MT libxdgmime_la-xdgmimeparent.lo -MD -MP -MF $(DEPDIR)/libxdgmime_la-xdgmimeparent.Tpo -c -o libxdgmime_la-xdgmimeparent.lo `test -f 'xdgmimeparent.c' || echo '$(srcdir)/'`xdgmimeparent.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libxdgmime_la-xdgmimeparent.Tpo $(DEPDIR)/libxdgmime_la-xdgmimeparent.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='xdgmimeparent.c' object='libxdgmime_la-xdgmimeparent.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libxdgmime_la_CFLAGS) $(CFLAGS) -c -o libxdgmime_la-xdgmimeparent.lo `test -f 'xdgmimeparent.c' || echo '$(srcdir)/'`xdgmimeparent.c
 
 mostlyclean-libtool:
 	-rm -f *.lo
