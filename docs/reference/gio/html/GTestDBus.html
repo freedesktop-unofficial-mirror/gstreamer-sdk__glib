@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GTestDBus</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.77.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
 <link rel="home" href="index.html" title="GIO Reference Manual">
 <link rel="up" href="testing.html" title="GIO Testing">
 <link rel="prev" href="testing.html" title="GIO Testing">
 <link rel="next" href="migrating.html" title="Part III. Migrating to GIO">
-<meta name="generator" content="GTK-Doc V1.18.1 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.19 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -48,9 +48,9 @@
 enum                <a class="link" href="GTestDBus.html#GTestDBusFlags-enum" title="enum GTestDBusFlags">GTestDBusFlags</a>;
 <a class="link" href="GTestDBus.html" title="GTestDBus"><span class="returnvalue">GTestDBus</span></a> *         <a class="link" href="GTestDBus.html#g-test-dbus-new" title="g_test_dbus_new ()">g_test_dbus_new</a>                     (<em class="parameter"><code><a class="link" href="GTestDBus.html#GTestDBusFlags"><span class="type">GTestDBusFlags</span></a> flags</code></em>);
 <a class="link" href="GTestDBus.html#GTestDBusFlags"><span class="returnvalue">GTestDBusFlags</span></a>      <a class="link" href="GTestDBus.html#g-test-dbus-get-flags" title="g_test_dbus_get_flags ()">g_test_dbus_get_flags</a>               (<em class="parameter"><code><a class="link" href="GTestDBus.html" title="GTestDBus"><span class="type">GTestDBus</span></a> *self</code></em>);
-const <a href="../glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *       <a class="link" href="GTestDBus.html#g-test-dbus-get-bus-address" title="g_test_dbus_get_bus_address ()">g_test_dbus_get_bus_address</a>         (<em class="parameter"><code><a class="link" href="GTestDBus.html" title="GTestDBus"><span class="type">GTestDBus</span></a> *self</code></em>);
+const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *       <a class="link" href="GTestDBus.html#g-test-dbus-get-bus-address" title="g_test_dbus_get_bus_address ()">g_test_dbus_get_bus_address</a>         (<em class="parameter"><code><a class="link" href="GTestDBus.html" title="GTestDBus"><span class="type">GTestDBus</span></a> *self</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GTestDBus.html#g-test-dbus-add-service-dir" title="g_test_dbus_add_service_dir ()">g_test_dbus_add_service_dir</a>         (<em class="parameter"><code><a class="link" href="GTestDBus.html" title="GTestDBus"><span class="type">GTestDBus</span></a> *self</code></em>,
-                                                         <em class="parameter"><code>const <a href="../glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *path</code></em>);
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *path</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GTestDBus.html#g-test-dbus-up" title="g_test_dbus_up ()">g_test_dbus_up</a>                      (<em class="parameter"><code><a class="link" href="GTestDBus.html" title="GTestDBus"><span class="type">GTestDBus</span></a> *self</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GTestDBus.html#g-test-dbus-stop" title="g_test_dbus_stop ()">g_test_dbus_stop</a>                    (<em class="parameter"><code><a class="link" href="GTestDBus.html" title="GTestDBus"><span class="type">GTestDBus</span></a> *self</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GTestDBus.html#g-test-dbus-down" title="g_test_dbus_down ()">g_test_dbus_down</a>                    (<em class="parameter"><code><a class="link" href="GTestDBus.html" title="GTestDBus"><span class="type">GTestDBus</span></a> *self</code></em>);
@@ -60,7 +60,7 @@ const <a href="../glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gc
 <div class="refsect1">
 <a name="GTestDBus.object-hierarchy"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
-  <a href="../gobject/gobject-The-Base-Object-Type.html#GObject">GObject</a>
+  <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
    +----GTestDBus
 </pre>
 <pre class="synopsis">
@@ -257,7 +257,7 @@ session bus.
 <span class="keyword">static</span><span class="normal"> </span><span class="type">void</span>
 <span class="function">fixture_setup</span><span class="normal"> </span><span class="symbol">(</span><span class="usertype">TestFixture</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">fixture</span><span class="symbol">,</span><span class="normal"> </span><span class="usertype">gconstpointer</span><span class="normal"> unused</span><span class="symbol">)</span>
 <span class="cbracket">{</span>
-<span class="normal">  </span><span class="usertype">GError</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">error </span><span class="symbol">=</span><span class="normal"> <a href="../glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">;</span>
+<span class="normal">  </span><span class="usertype">GError</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">error </span><span class="symbol">=</span><span class="normal"> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">;</span>
 
 <span class="normal">  </span><span class="comment">/* Create the global dbus-daemon for this test suite</span>
 <span class="comment">   */</span>
@@ -280,10 +280,10 @@ session bus.
 <span class="normal">                                                    <a href="GDBusObjectManagerClient.html#G-DBUS-OBJECT-MANAGER-CLIENT-FLAGS-NONE:CAPS">G_DBUS_OBJECT_MANAGER_CLIENT_FLAGS_NONE</a></span><span class="symbol">,</span>
 <span class="normal">                                                    </span><span class="string">"org.gtk.GDBus.Examples.ObjectManager"</span><span class="symbol">,</span>
 <span class="normal">                                                    </span><span class="string">"/example/Animals"</span><span class="symbol">,</span>
-<span class="normal">                                                    <a href="../glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span><span class="normal"> </span><span class="comment">/* GCancellable */</span>
+<span class="normal">                                                    <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span><span class="normal"> </span><span class="comment">/* GCancellable */</span>
 <span class="normal">                                                    </span><span class="symbol">&amp;</span><span class="normal">error</span><span class="symbol">);</span>
-<span class="normal">  </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">fixture</span><span class="symbol">-&gt;</span><span class="normal">manager </span><span class="symbol">==</span><span class="normal"> <a href="../glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">)</span>
-<span class="normal">    </span><span class="function"><a href="../glib/glib-Message-Logging.html#g-error">g_error</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"Error getting object manager client: %s"</span><span class="symbol">,</span><span class="normal"> error</span><span class="symbol">-&gt;</span><span class="normal">message</span><span class="symbol">);</span>
+<span class="normal">  </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">fixture</span><span class="symbol">-&gt;</span><span class="normal">manager </span><span class="symbol">==</span><span class="normal"> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">)</span>
+<span class="normal">    </span><span class="function"><a href="http://library.gnome.org/devel/glib/unstable/glib-Message-Logging.html#g-error">g_error</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"Error getting object manager client: %s"</span><span class="symbol">,</span><span class="normal"> error</span><span class="symbol">-&gt;</span><span class="normal">message</span><span class="symbol">);</span>
 <span class="cbracket">}</span>
 
 <span class="keyword">static</span><span class="normal"> </span><span class="type">void</span>
@@ -292,12 +292,12 @@ session bus.
 <span class="normal">  </span><span class="comment">/* Tear down the proxy</span>
 <span class="comment">   */</span>
 <span class="normal">  </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">fixture</span><span class="symbol">-&gt;</span><span class="normal">manager</span><span class="symbol">)</span>
-<span class="normal">    </span><span class="function"><a href="../gobject/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">fixture</span><span class="symbol">-&gt;</span><span class="normal">manager</span><span class="symbol">);</span>
+<span class="normal">    </span><span class="function"><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">fixture</span><span class="symbol">-&gt;</span><span class="normal">manager</span><span class="symbol">);</span>
 
 <span class="normal">  </span><span class="comment">/* Stop the private D-Bus daemon</span>
 <span class="comment">   */</span>
 <span class="normal">  </span><span class="function"><a href="GTestDBus.html#g-test-dbus-down">g_test_dbus_down</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">fixture</span><span class="symbol">-&gt;</span><span class="normal">dbus</span><span class="symbol">);</span>
-<span class="normal">  </span><span class="function"><a href="../gobject/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">fixture</span><span class="symbol">-&gt;</span><span class="normal">dbus</span><span class="symbol">);</span>
+<span class="normal">  </span><span class="function"><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">fixture</span><span class="symbol">-&gt;</span><span class="normal">dbus</span><span class="symbol">);</span>
 <span class="cbracket">}</span>
 
 <span class="comment">/* The gdbus-example-objectmanager-server exports 10 objects,</span>
@@ -311,31 +311,31 @@ session bus.
 
 <span class="normal">  objects </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="GDBusObjectManager.html#g-dbus-object-manager-get-objects">g_dbus_object_manager_get_objects</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">fixture</span><span class="symbol">-&gt;</span><span class="normal">manager</span><span class="symbol">);</span>
 
-<span class="normal">  </span><span class="function"><a href="../glib/glib-Testing.html#g-assert-cmpint">g_assert_cmpint</a></span><span class="normal"> </span><span class="symbol">(</span><span class="function"><a href="../glib/glib-Doubly-Linked-Lists.html#g-list-length">g_list_length</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">objects</span><span class="symbol">),</span><span class="normal"> </span><span class="symbol">==,</span><span class="normal"> </span><span class="number">10</span><span class="symbol">);</span>
-<span class="normal">  </span><span class="function"><a href="../glib/glib-Doubly-Linked-Lists.html#g-list-free-full">g_list_free_full</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">objects</span><span class="symbol">,</span><span class="normal"> <a href="../gobject/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="symbol">);</span>
+<span class="normal">  </span><span class="function"><a href="http://library.gnome.org/devel/glib/unstable/glib-Testing.html#g-assert-cmpint">g_assert_cmpint</a></span><span class="normal"> </span><span class="symbol">(</span><span class="function"><a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#g-list-length">g_list_length</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">objects</span><span class="symbol">),</span><span class="normal"> </span><span class="symbol">==,</span><span class="normal"> </span><span class="number">10</span><span class="symbol">);</span>
+<span class="normal">  </span><span class="function"><a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#g-list-free-full">g_list_free_full</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">objects</span><span class="symbol">,</span><span class="normal"> <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="symbol">);</span>
 <span class="cbracket">}</span>
 
 <span class="type">int</span>
 <span class="function">main</span><span class="normal"> </span><span class="symbol">(</span><span class="type">int</span><span class="normal">   argc</span><span class="symbol">,</span>
 <span class="normal">      </span><span class="type">char</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">argv</span><span class="symbol">[])</span>
 <span class="cbracket">{</span>
-<span class="normal">  </span><span class="function"><a href="../glib/glib-Testing.html#g-test-init">g_test_init</a></span><span class="normal"> </span><span class="symbol">(&amp;</span><span class="normal">argc</span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">&amp;</span><span class="normal">argv</span><span class="symbol">,</span><span class="normal"> <a href="../glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">);</span>
+<span class="normal">  </span><span class="function"><a href="http://library.gnome.org/devel/glib/unstable/glib-Testing.html#g-test-init">g_test_init</a></span><span class="normal"> </span><span class="symbol">(&amp;</span><span class="normal">argc</span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">&amp;</span><span class="normal">argv</span><span class="symbol">,</span><span class="normal"> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">);</span>
 
 <span class="normal">  </span><span class="comment">/* This test simply ensures that we can bring the GTestDBus up and down a hand</span>
 <span class="comment">   * full of times in a row, each time successfully activating the in-tree service</span>
 <span class="comment">   */</span>
-<span class="normal">  </span><span class="function"><a href="../glib/glib-Testing.html#g-test-add">g_test_add</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"/GTestDBus/Cycle1"</span><span class="symbol">,</span><span class="normal"> TestFixture</span><span class="symbol">,</span><span class="normal"> <a href="../glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span>
+<span class="normal">  </span><span class="function"><a href="http://library.gnome.org/devel/glib/unstable/glib-Testing.html#g-test-add">g_test_add</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"/GTestDBus/Cycle1"</span><span class="symbol">,</span><span class="normal"> TestFixture</span><span class="symbol">,</span><span class="normal"> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span>
 <span class="normal">          fixture_setup</span><span class="symbol">,</span><span class="normal"> test_gtest_dbus</span><span class="symbol">,</span><span class="normal"> fixture_teardown</span><span class="symbol">);</span>
-<span class="normal">  </span><span class="function"><a href="../glib/glib-Testing.html#g-test-add">g_test_add</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"/GTestDBus/Cycle2"</span><span class="symbol">,</span><span class="normal"> TestFixture</span><span class="symbol">,</span><span class="normal"> <a href="../glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span>
+<span class="normal">  </span><span class="function"><a href="http://library.gnome.org/devel/glib/unstable/glib-Testing.html#g-test-add">g_test_add</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"/GTestDBus/Cycle2"</span><span class="symbol">,</span><span class="normal"> TestFixture</span><span class="symbol">,</span><span class="normal"> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span>
 <span class="normal">          fixture_setup</span><span class="symbol">,</span><span class="normal"> test_gtest_dbus</span><span class="symbol">,</span><span class="normal"> fixture_teardown</span><span class="symbol">);</span>
-<span class="normal">  </span><span class="function"><a href="../glib/glib-Testing.html#g-test-add">g_test_add</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"/GTestDBus/Cycle3"</span><span class="symbol">,</span><span class="normal"> TestFixture</span><span class="symbol">,</span><span class="normal"> <a href="../glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span>
+<span class="normal">  </span><span class="function"><a href="http://library.gnome.org/devel/glib/unstable/glib-Testing.html#g-test-add">g_test_add</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"/GTestDBus/Cycle3"</span><span class="symbol">,</span><span class="normal"> TestFixture</span><span class="symbol">,</span><span class="normal"> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span>
 <span class="normal">          fixture_setup</span><span class="symbol">,</span><span class="normal"> test_gtest_dbus</span><span class="symbol">,</span><span class="normal"> fixture_teardown</span><span class="symbol">);</span>
-<span class="normal">  </span><span class="function"><a href="../glib/glib-Testing.html#g-test-add">g_test_add</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"/GTestDBus/Cycle4"</span><span class="symbol">,</span><span class="normal"> TestFixture</span><span class="symbol">,</span><span class="normal"> <a href="../glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span>
+<span class="normal">  </span><span class="function"><a href="http://library.gnome.org/devel/glib/unstable/glib-Testing.html#g-test-add">g_test_add</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"/GTestDBus/Cycle4"</span><span class="symbol">,</span><span class="normal"> TestFixture</span><span class="symbol">,</span><span class="normal"> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span>
 <span class="normal">          fixture_setup</span><span class="symbol">,</span><span class="normal"> test_gtest_dbus</span><span class="symbol">,</span><span class="normal"> fixture_teardown</span><span class="symbol">);</span>
-<span class="normal">  </span><span class="function"><a href="../glib/glib-Testing.html#g-test-add">g_test_add</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"/GTestDBus/Cycle5"</span><span class="symbol">,</span><span class="normal"> TestFixture</span><span class="symbol">,</span><span class="normal"> <a href="../glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span>
+<span class="normal">  </span><span class="function"><a href="http://library.gnome.org/devel/glib/unstable/glib-Testing.html#g-test-add">g_test_add</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"/GTestDBus/Cycle5"</span><span class="symbol">,</span><span class="normal"> TestFixture</span><span class="symbol">,</span><span class="normal"> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span>
 <span class="normal">          fixture_setup</span><span class="symbol">,</span><span class="normal"> test_gtest_dbus</span><span class="symbol">,</span><span class="normal"> fixture_teardown</span><span class="symbol">);</span>
 <span class="normal">  </span>
-<span class="normal">  </span><span class="keyword">return</span><span class="normal"> </span><span class="function"><a href="../glib/glib-Testing.html#g-test-run">g_test_run</a></span><span class="normal"> </span><span class="symbol">();</span>
+<span class="normal">  </span><span class="keyword">return</span><span class="normal"> </span><span class="function"><a href="http://library.gnome.org/devel/glib/unstable/glib-Testing.html#g-test-run">g_test_run</a></span><span class="normal"> </span><span class="symbol">();</span>
 <span class="cbracket">}</span></pre></td>
       </tr>
     </tbody>
@@ -478,10 +478,10 @@ Gets the flags of the <a class="link" href="GTestDBus.html" title="GTestDBus"><s
 <hr>
 <div class="refsect2">
 <a name="g-test-dbus-get-bus-address"></a><h3>g_test_dbus_get_bus_address ()</h3>
-<pre class="programlisting">const <a href="../glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *       g_test_dbus_get_bus_address         (<em class="parameter"><code><a class="link" href="GTestDBus.html" title="GTestDBus"><span class="type">GTestDBus</span></a> *self</code></em>);</pre>
+<pre class="programlisting">const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *       g_test_dbus_get_bus_address         (<em class="parameter"><code><a class="link" href="GTestDBus.html" title="GTestDBus"><span class="type">GTestDBus</span></a> *self</code></em>);</pre>
 <p>
 Get the address on which dbus-daemon is running. if <a class="link" href="GTestDBus.html#g-test-dbus-up" title="g_test_dbus_up ()"><code class="function">g_test_dbus_up()</code></a> has not
-been called yet, <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> is returned. This can be used with
+been called yet, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> is returned. This can be used with
 <a class="link" href="GDBusConnection.html#g-dbus-connection-new-for-address" title="g_dbus_connection_new_for_address ()"><code class="function">g_dbus_connection_new_for_address()</code></a>
 </p>
 <div class="variablelist"><table border="0" class="variablelist">
@@ -497,7 +497,7 @@ been called yet, <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code cla
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>the address of the bus, or <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.</td>
+<td>the address of the bus, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.</td>
 </tr>
 </tbody>
 </table></div>
@@ -506,7 +506,7 @@ been called yet, <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code cla
 <div class="refsect2">
 <a name="g-test-dbus-add-service-dir"></a><h3>g_test_dbus_add_service_dir ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_test_dbus_add_service_dir         (<em class="parameter"><code><a class="link" href="GTestDBus.html" title="GTestDBus"><span class="type">GTestDBus</span></a> *self</code></em>,
-                                                         <em class="parameter"><code>const <a href="../glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *path</code></em>);</pre>
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *path</code></em>);</pre>
 <p>
 Add a path where dbus-daemon will lookup for .services files. This can't be
 called after <a class="link" href="GTestDBus.html#g-test-dbus-up" title="g_test_dbus_up ()"><code class="function">g_test_dbus_up()</code></a>.
@@ -538,12 +538,12 @@ Start a dbus-daemon instance and set DBUS_SESSION_BUS_ADDRESS. After this
 call, it is safe for unit tests to start sending messages on the session bus.
 </p>
 <p>
-If this function is called from setup callback of <a href="../glib/glib-Testing.html#g-test-add"><code class="function">g_test_add()</code></a>,
+If this function is called from setup callback of <a href="http://library.gnome.org/devel/glib/unstable/glib-Testing.html#g-test-add"><code class="function">g_test_add()</code></a>,
 <a class="link" href="GTestDBus.html#g-test-dbus-down" title="g_test_dbus_down ()"><code class="function">g_test_dbus_down()</code></a> must be called in its teardown callback.
 </p>
 <p>
 If this function is called from unit test's <code class="function">main()</code>, then <a class="link" href="GTestDBus.html#g-test-dbus-down" title="g_test_dbus_down ()"><code class="function">g_test_dbus_down()</code></a>
-must be called after <a href="../glib/glib-Testing.html#g-test-run"><code class="function">g_test_run()</code></a>.
+must be called after <a href="http://library.gnome.org/devel/glib/unstable/glib-Testing.html#g-test-run"><code class="function">g_test_run()</code></a>.
 </p>
 <div class="variablelist"><table border="0" class="variablelist">
 <colgroup>
@@ -635,6 +635,6 @@ bus is running. It is not necessary to call this if unit test already calls
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.18.1</div>
+          Generated by GTK-Doc V1.19</div>
 </body>
 </html>

@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GTlsFileDatabase</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.77.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
 <link rel="home" href="index.html" title="GIO Reference Manual">
 <link rel="up" href="tls.html" title="TLS (SSL) support">
 <link rel="prev" href="GTlsDatabase.html" title="GTlsDatabase">
 <link rel="next" href="GTlsInteraction.html" title="GTlsInteraction">
-<meta name="generator" content="GTK-Doc V1.18.1 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.19 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -48,8 +48,8 @@
 
                     <a class="link" href="GTlsFileDatabase.html#GTlsFileDatabase-struct" title="GTlsFileDatabase">GTlsFileDatabase</a>;
 struct              <a class="link" href="GTlsFileDatabase.html#GTlsFileDatabaseInterface" title="struct GTlsFileDatabaseInterface">GTlsFileDatabaseInterface</a>;
-<a class="link" href="GTlsDatabase.html" title="GTlsDatabase"><span class="returnvalue">GTlsDatabase</span></a> *      <a class="link" href="GTlsFileDatabase.html#g-tls-file-database-new" title="g_tls_file_database_new ()">g_tls_file_database_new</a>             (<em class="parameter"><code>const <a href="../glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *anchors</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
+<a class="link" href="GTlsDatabase.html" title="GTlsDatabase"><span class="returnvalue">GTlsDatabase</span></a> *      <a class="link" href="GTlsFileDatabase.html#g-tls-file-database-new" title="g_tls_file_database_new ()">g_tls_file_database_new</a>             (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *anchors</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
 </pre>
 </div>
 <div class="refsect1">
@@ -68,7 +68,7 @@ GTlsFileDatabase requires
 <div class="refsect1">
 <a name="GTlsFileDatabase.properties"></a><h2>Properties</h2>
 <pre class="synopsis">
-  "<a class="link" href="GTlsFileDatabase.html#GTlsFileDatabase--anchors" title='The "anchors" property'>anchors</a>"                  <a href="../glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>*                : Read / Write / Construct
+  "<a class="link" href="GTlsFileDatabase.html#GTlsFileDatabase--anchors" title='The "anchors" property'>anchors</a>"                  <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>*                : Read / Write / Construct
 </pre>
 </div>
 <div class="refsect1">
@@ -106,7 +106,7 @@ Provides an interface for <a class="link" href="GTlsFileDatabase.html" title="GT
 <col>
 </colgroup>
 <tbody><tr>
-<td><p><span class="term"><a href="../gobject/gobject-Type-Information.html#GTypeInterface"><span class="type">GTypeInterface</span></a> <em class="structfield"><code><a name="GTlsFileDatabaseInterface.g-iface"></a>g_iface</code></em>;</span></p></td>
+<td><p><span class="term"><a href="http://library.gnome.org/devel/gobject/unstable/gobject-Type-Information.html#GTypeInterface"><span class="type">GTypeInterface</span></a> <em class="structfield"><code><a name="GTlsFileDatabaseInterface.g-iface"></a>g_iface</code></em>;</span></p></td>
 <td>The parent interface.</td>
 </tr></tbody>
 </table></div>
@@ -114,8 +114,8 @@ Provides an interface for <a class="link" href="GTlsFileDatabase.html" title="GT
 <hr>
 <div class="refsect2">
 <a name="g-tls-file-database-new"></a><h3>g_tls_file_database_new ()</h3>
-<pre class="programlisting"><a class="link" href="GTlsDatabase.html" title="GTlsDatabase"><span class="returnvalue">GTlsDatabase</span></a> *      g_tls_file_database_new             (<em class="parameter"><code>const <a href="../glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *anchors</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+<pre class="programlisting"><a class="link" href="GTlsDatabase.html" title="GTlsDatabase"><span class="returnvalue">GTlsDatabase</span></a> *      g_tls_file_database_new             (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *anchors</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Creates a new <a class="link" href="GTlsFileDatabase.html" title="GTlsFileDatabase"><span class="type">GTlsFileDatabase</span></a> which uses anchor certificate authorities
 in <em class="parameter"><code>anchors</code></em> to verify certificate chains.
@@ -136,12 +136,12 @@ The certificates in <em class="parameter"><code>anchors</code></em> must be PEM 
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
 <td>
-<a href="../glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> for error reporting, or <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.</td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> for error reporting, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>the new
-<a class="link" href="GTlsFileDatabase.html" title="GTlsFileDatabase"><span class="type">GTlsFileDatabase</span></a>, or <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>][<acronym title="Override the parsed C type with given type."><span class="acronym">type</span></acronym> GTlsFileDatabase]</span>
+<a class="link" href="GTlsFileDatabase.html" title="GTlsFileDatabase"><span class="type">GTlsFileDatabase</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>][<acronym title="Override the parsed C type with given type."><span class="acronym">type</span></acronym> GTlsFileDatabase]</span>
 </td>
 </tr>
 </tbody>
@@ -153,7 +153,7 @@ The certificates in <em class="parameter"><code>anchors</code></em> must be PEM 
 <a name="GTlsFileDatabase.property-details"></a><h2>Property Details</h2>
 <div class="refsect2">
 <a name="GTlsFileDatabase--anchors"></a><h3>The <code class="literal">"anchors"</code> property</h3>
-<pre class="programlisting">  "anchors"                  <a href="../glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>*                : Read / Write / Construct</pre>
+<pre class="programlisting">  "anchors"                  <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>*                : Read / Write / Construct</pre>
 <p>
 The path to a file containing PEM encoded certificate authority
 root anchors. The certificates in this file will be treated as
@@ -167,6 +167,6 @@ via the <a class="link" href="GTlsDatabase.html#g-tls-database-verify-chain" tit
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.18.1</div>
+          Generated by GTK-Doc V1.19</div>
 </body>
 </html>

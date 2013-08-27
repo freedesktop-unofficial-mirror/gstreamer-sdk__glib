@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GTask</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.77.1">
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
 <link rel="home" href="index.html" title="GIO Reference Manual">
 <link rel="up" href="async.html" title="Asynchronous I/O">
 <link rel="prev" href="GAsyncResult.html" title="GAsyncResult">
 <link rel="next" href="gio-GIOScheduler.html" title="GIOScheduler">
-<meta name="generator" content="GTK-Doc V1.18.1 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.19 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -45,89 +45,89 @@
 #include &lt;gio/gio.h&gt;
 
                     <a class="link" href="GTask.html#GTask-struct" title="GTask">GTask</a>;
-<a class="link" href="GTask.html" title="GTask"><span class="returnvalue">GTask</span></a> *             <a class="link" href="GTask.html#g-task-new" title="g_task_new ()">g_task_new</a>                          (<em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> source_object</code></em>,
+<a class="link" href="GTask.html" title="GTask"><span class="returnvalue">GTask</span></a> *             <a class="link" href="GTask.html#g-task-new" title="g_task_new ()">g_task_new</a>                          (<em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> source_object</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> callback</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> callback_data</code></em>);
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> callback_data</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GTask.html#g-task-set-task-data" title="g_task_set_task_data ()">g_task_set_task_data</a>                (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> task_data</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Datasets.html#GDestroyNotify"><span class="type">GDestroyNotify</span></a> task_data_destroy</code></em>);
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> task_data</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Datasets.html#GDestroyNotify"><span class="type">GDestroyNotify</span></a> task_data_destroy</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GTask.html#g-task-set-priority" title="g_task_set_priority ()">g_task_set_priority</a>                 (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a> priority</code></em>);
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a> priority</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GTask.html#g-task-set-check-cancellable" title="g_task_set_check_cancellable ()">g_task_set_check_cancellable</a>        (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> check_cancellable</code></em>);
-<a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GTask.html#g-task-set-return-on-cancel" title="g_task_set_return_on_cancel ()">g_task_set_return_on_cancel</a>         (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> return_on_cancel</code></em>);
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> check_cancellable</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GTask.html#g-task-set-return-on-cancel" title="g_task_set_return_on_cancel ()">g_task_set_return_on_cancel</a>         (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> return_on_cancel</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GTask.html#g-task-set-source-tag" title="g_task_set_source_tag ()">g_task_set_source_tag</a>               (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> source_tag</code></em>);
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> source_tag</code></em>);
 
-<span class="returnvalue">void</span>                <a class="link" href="GTask.html#g-task-report-error" title="g_task_report_error ()">g_task_report_error</a>                 (<em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> source_object</code></em>,
+<span class="returnvalue">void</span>                <a class="link" href="GTask.html#g-task-report-error" title="g_task_report_error ()">g_task_report_error</a>                 (<em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> source_object</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> callback</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> callback_data</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> source_tag</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> *error</code></em>);
-<span class="returnvalue">void</span>                <a class="link" href="GTask.html#g-task-report-new-error" title="g_task_report_new_error ()">g_task_report_new_error</a>             (<em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> source_object</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> callback_data</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> source_tag</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> *error</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GTask.html#g-task-report-new-error" title="g_task_report_new_error ()">g_task_report_new_error</a>             (<em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> source_object</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> callback</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> callback_data</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> source_tag</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Quarks.html#GQuark"><span class="type">GQuark</span></a> domain</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a> code</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> callback_data</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> source_tag</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Quarks.html#GQuark"><span class="type">GQuark</span></a> domain</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a> code</code></em>,
                                                          <em class="parameter"><code>const <span class="type">char</span> *format</code></em>,
                                                          <em class="parameter"><code>...</code></em>);
 
-<a href="../glib/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a>            <a class="link" href="GTask.html#g-task-get-task-data" title="g_task_get_task_data ()">g_task_get_task_data</a>                (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>);
-<a href="../glib/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>                <a class="link" href="GTask.html#g-task-get-priority" title="g_task_get_priority ()">g_task_get_priority</a>                 (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a>            <a class="link" href="GTask.html#g-task-get-task-data" title="g_task_get_task_data ()">g_task_get_task_data</a>                (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>                <a class="link" href="GTask.html#g-task-get-priority" title="g_task_get_priority ()">g_task_get_priority</a>                 (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>);
 <a class="link" href="GCancellable.html" title="GCancellable"><span class="returnvalue">GCancellable</span></a> *      <a class="link" href="GTask.html#g-task-get-cancellable" title="g_task_get_cancellable ()">g_task_get_cancellable</a>              (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>);
-<a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GTask.html#g-task-get-check-cancellable" title="g_task_get_check_cancellable ()">g_task_get_check_cancellable</a>        (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>);
-<a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GTask.html#g-task-get-return-on-cancel" title="g_task_get_return_on_cancel ()">g_task_get_return_on_cancel</a>         (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>);
-<a href="../glib/glib-The-Main-Event-Loop.html#GMainContext"><span class="returnvalue">GMainContext</span></a> *      <a class="link" href="GTask.html#g-task-get-context" title="g_task_get_context ()">g_task_get_context</a>                  (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>);
-<a href="../glib/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a>            <a class="link" href="GTask.html#g-task-get-source-object" title="g_task_get_source_object ()">g_task_get_source_object</a>            (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>);
-<a href="../glib/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a>            <a class="link" href="GTask.html#g-task-get-source-tag" title="g_task_get_source_tag ()">g_task_get_source_tag</a>               (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GTask.html#g-task-get-check-cancellable" title="g_task_get_check_cancellable ()">g_task_get_check_cancellable</a>        (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GTask.html#g-task-get-return-on-cancel" title="g_task_get_return_on_cancel ()">g_task_get_return_on_cancel</a>         (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-The-Main-Event-Loop.html#GMainContext"><span class="returnvalue">GMainContext</span></a> *      <a class="link" href="GTask.html#g-task-get-context" title="g_task_get_context ()">g_task_get_context</a>                  (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a>            <a class="link" href="GTask.html#g-task-get-source-object" title="g_task_get_source_object ()">g_task_get_source_object</a>            (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a>            <a class="link" href="GTask.html#g-task-get-source-tag" title="g_task_get_source_tag ()">g_task_get_source_tag</a>               (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>);
 
 <span class="returnvalue">void</span>                <a class="link" href="GTask.html#g-task-return-boolean" title="g_task_return_boolean ()">g_task_return_boolean</a>               (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> result</code></em>);
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> result</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GTask.html#g-task-return-int" title="g_task_return_int ()">g_task_return_int</a>                   (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gssize"><span class="type">gssize</span></a> result</code></em>);
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gssize"><span class="type">gssize</span></a> result</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GTask.html#g-task-return-pointer" title="g_task_return_pointer ()">g_task_return_pointer</a>               (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> result</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Datasets.html#GDestroyNotify"><span class="type">GDestroyNotify</span></a> result_destroy</code></em>);
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> result</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Datasets.html#GDestroyNotify"><span class="type">GDestroyNotify</span></a> result_destroy</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GTask.html#g-task-return-error" title="g_task_return_error ()">g_task_return_error</a>                 (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> *error</code></em>);
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> *error</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GTask.html#g-task-return-new-error" title="g_task_return_new_error ()">g_task_return_new_error</a>             (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Quarks.html#GQuark"><span class="type">GQuark</span></a> domain</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a> code</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Quarks.html#GQuark"><span class="type">GQuark</span></a> domain</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a> code</code></em>,
                                                          <em class="parameter"><code>const <span class="type">char</span> *format</code></em>,
                                                          <em class="parameter"><code>...</code></em>);
-<a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GTask.html#g-task-return-error-if-cancelled" title="g_task_return_error_if_cancelled ()">g_task_return_error_if_cancelled</a>    (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GTask.html#g-task-return-error-if-cancelled" title="g_task_return_error_if_cancelled ()">g_task_return_error_if_cancelled</a>    (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>);
 
-<a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GTask.html#g-task-propagate-boolean" title="g_task_propagate_boolean ()">g_task_propagate_boolean</a>            (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
-<a href="../glib/glib-Basic-Types.html#gssize"><span class="returnvalue">gssize</span></a>              <a class="link" href="GTask.html#g-task-propagate-int" title="g_task_propagate_int ()">g_task_propagate_int</a>                (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
-<a href="../glib/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a>            <a class="link" href="GTask.html#g-task-propagate-pointer" title="g_task_propagate_pointer ()">g_task_propagate_pointer</a>            (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
-<a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GTask.html#g-task-had-error" title="g_task_had_error ()">g_task_had_error</a>                    (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GTask.html#g-task-propagate-boolean" title="g_task_propagate_boolean ()">g_task_propagate_boolean</a>            (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gssize"><span class="returnvalue">gssize</span></a>              <a class="link" href="GTask.html#g-task-propagate-int" title="g_task_propagate_int ()">g_task_propagate_int</a>                (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a>            <a class="link" href="GTask.html#g-task-propagate-pointer" title="g_task_propagate_pointer ()">g_task_propagate_pointer</a>            (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GTask.html#g-task-had-error" title="g_task_had_error ()">g_task_had_error</a>                    (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>);
 
 <span class="returnvalue">void</span>                <a class="link" href="GTask.html#g-task-run-in-thread" title="g_task_run_in_thread ()">g_task_run_in_thread</a>                (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GTask.html#GTaskThreadFunc" title="GTaskThreadFunc ()"><span class="type">GTaskThreadFunc</span></a> task_func</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GTask.html#g-task-run-in-thread-sync" title="g_task_run_in_thread_sync ()">g_task_run_in_thread_sync</a>           (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GTask.html#GTaskThreadFunc" title="GTaskThreadFunc ()"><span class="type">GTaskThreadFunc</span></a> task_func</code></em>);
 <span class="returnvalue">void</span>                (<a class="link" href="GTask.html#GTaskThreadFunc" title="GTaskThreadFunc ()">*GTaskThreadFunc</a>)                  (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> source_object</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> task_data</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> source_object</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> task_data</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GTask.html#g-task-attach-source" title="g_task_attach_source ()">g_task_attach_source</a>                (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-The-Main-Event-Loop.html#GSource"><span class="type">GSource</span></a> *source</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-The-Main-Event-Loop.html#GSourceFunc"><span class="type">GSourceFunc</span></a> callback</code></em>);
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-The-Main-Event-Loop.html#GSource"><span class="type">GSource</span></a> *source</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-The-Main-Event-Loop.html#GSourceFunc"><span class="type">GSourceFunc</span></a> callback</code></em>);
 
-<a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GTask.html#g-task-is-valid" title="g_task_is_valid ()">g_task_is_valid</a>                     (<em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> result</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> source_object</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GTask.html#g-task-is-valid" title="g_task_is_valid ()">g_task_is_valid</a>                     (<em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> result</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> source_object</code></em>);
 </pre>
 </div>
 <div class="refsect1">
 <a name="GTask.object-hierarchy"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
-  <a href="../gobject/gobject-The-Base-Object-Type.html#GObject">GObject</a>
+  <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
    +----GTask
 </pre>
 </div>
@@ -269,8 +269,8 @@ GTask implements
 <span class="keyword">static</span><span class="normal"> </span><span class="type">void</span>
 <span class="function">decoration_data_free</span><span class="normal"> </span><span class="symbol">(</span><span class="usertype">DecorationData</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">decoration</span><span class="symbol">)</span>
 <span class="cbracket">{</span>
-<span class="normal">  </span><span class="function"><a href="../glib/glib-Memory-Allocation.html#g-free">g_free</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">decoration</span><span class="symbol">-&gt;</span><span class="normal">message</span><span class="symbol">);</span>
-<span class="normal">  </span><span class="function"><a href="../glib/glib-Memory-Slices.html#g-slice-free">g_slice_free</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">DecorationData</span><span class="symbol">,</span><span class="normal"> decoration</span><span class="symbol">);</span>
+<span class="normal">  </span><span class="function"><a href="http://library.gnome.org/devel/glib/unstable/glib-Memory-Allocation.html#g-free">g_free</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">decoration</span><span class="symbol">-&gt;</span><span class="normal">message</span><span class="symbol">);</span>
+<span class="normal">  </span><span class="function"><a href="http://library.gnome.org/devel/glib/unstable/glib-Memory-Slices.html#g-slice-free">g_slice_free</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">DecorationData</span><span class="symbol">,</span><span class="normal"> decoration</span><span class="symbol">);</span>
 <span class="cbracket">}</span>
 
 <span class="keyword">static</span><span class="normal"> </span><span class="type">void</span>
@@ -279,27 +279,27 @@ GTask implements
 <span class="cbracket">{</span>
 <span class="normal">  </span><span class="usertype">GTask</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">task </span><span class="symbol">=</span><span class="normal"> user_data</span><span class="symbol">;</span>
 <span class="normal">  </span><span class="usertype">DecorationData</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">decoration </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="GTask.html#g-task-get-task-data">g_task_get_task_data</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">);</span>
-<span class="normal">  </span><span class="usertype">GError</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">error </span><span class="symbol">=</span><span class="normal"> <a href="../glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">;</span>
+<span class="normal">  </span><span class="usertype">GError</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">error </span><span class="symbol">=</span><span class="normal"> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">;</span>
 
-<span class="normal">  </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">cake </span><span class="symbol">==</span><span class="normal"> <a href="../glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">)</span>
+<span class="normal">  </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">cake </span><span class="symbol">==</span><span class="normal"> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">)</span>
 <span class="normal">    </span><span class="cbracket">{</span>
 <span class="normal">      </span><span class="function"><a href="GTask.html#g-task-return-new-error">g_task_return_new_error</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">,</span><span class="normal"> BAKER_ERROR</span><span class="symbol">,</span><span class="normal"> BAKER_ERROR_NO_FLOUR</span><span class="symbol">,</span>
 <span class="normal">                               </span><span class="string">"Go to the supermarket"</span><span class="symbol">);</span>
-<span class="normal">      </span><span class="function"><a href="../gobject/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">);</span>
+<span class="normal">      </span><span class="function"><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">);</span>
 <span class="normal">      </span><span class="keyword">return</span><span class="symbol">;</span>
 <span class="normal">    </span><span class="cbracket">}</span>
 
 <span class="normal">  </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(!</span><span class="function">cake_decorate</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">cake</span><span class="symbol">,</span><span class="normal"> decoration</span><span class="symbol">-&gt;</span><span class="normal">frosting</span><span class="symbol">,</span><span class="normal"> decoration</span><span class="symbol">-&gt;</span><span class="normal">message</span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">&amp;</span><span class="normal">error</span><span class="symbol">))</span>
 <span class="normal">    </span><span class="cbracket">{</span>
-<span class="normal">      </span><span class="function"><a href="../gobject/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">cake</span><span class="symbol">);</span>
+<span class="normal">      </span><span class="function"><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">cake</span><span class="symbol">);</span>
 <span class="normal">      </span><span class="comment">/* g_task_return_error() takes ownership of error */</span>
 <span class="normal">      </span><span class="function"><a href="GTask.html#g-task-return-error">g_task_return_error</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">,</span><span class="normal"> error</span><span class="symbol">);</span>
-<span class="normal">      </span><span class="function"><a href="../gobject/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">);</span>
+<span class="normal">      </span><span class="function"><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">);</span>
 <span class="normal">      </span><span class="keyword">return</span><span class="symbol">;</span>
 <span class="normal">    </span><span class="cbracket">}</span>
 
-<span class="normal">  </span><span class="function"><a href="GTask.html#g-task-return-pointer">g_task_return_pointer</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">result</span><span class="symbol">,</span><span class="normal"> cake</span><span class="symbol">,</span><span class="normal"> <a href="../gobject/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="symbol">);</span>
-<span class="normal">  </span><span class="function"><a href="../gobject/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">);</span>
+<span class="normal">  </span><span class="function"><a href="GTask.html#g-task-return-pointer">g_task_return_pointer</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">result</span><span class="symbol">,</span><span class="normal"> cake</span><span class="symbol">,</span><span class="normal"> <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="symbol">);</span>
+<span class="normal">  </span><span class="function"><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">);</span>
 <span class="cbracket">}</span>
 
 <span class="type">void</span>
@@ -322,23 +322,23 @@ GTask implements
 <span class="normal">      </span><span class="function"><a href="GTask.html#g-task-return-new-error">g_task_return_new_error</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">,</span><span class="normal"> BAKER_ERROR</span><span class="symbol">,</span><span class="normal"> BAKER_ERROR_TOO_SMALL</span><span class="symbol">,</span>
 <span class="normal">                               </span><span class="string">"%ucm radius cakes are silly"</span><span class="symbol">,</span>
 <span class="normal">                               radius</span><span class="symbol">);</span>
-<span class="normal">      </span><span class="function"><a href="../gobject/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">);</span>
+<span class="normal">      </span><span class="function"><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">);</span>
 <span class="normal">      </span><span class="keyword">return</span><span class="symbol">;</span>
 <span class="normal">    </span><span class="cbracket">}</span>
 
 <span class="normal">  cake </span><span class="symbol">=</span><span class="normal"> </span><span class="function">_baker_get_cached_cake</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">self</span><span class="symbol">,</span><span class="normal"> radius</span><span class="symbol">,</span><span class="normal"> flavor</span><span class="symbol">,</span><span class="normal"> frosting</span><span class="symbol">,</span><span class="normal"> message</span><span class="symbol">);</span>
-<span class="normal">  </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">cake </span><span class="symbol">!=</span><span class="normal"> <a href="../glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">)</span>
+<span class="normal">  </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">cake </span><span class="symbol">!=</span><span class="normal"> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">)</span>
 <span class="normal">    </span><span class="cbracket">{</span>
 <span class="normal">      </span><span class="comment">/* _baker_get_cached_cake() returns a reffed cake */</span>
-<span class="normal">      </span><span class="function"><a href="GTask.html#g-task-return-pointer">g_task_return_pointer</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">,</span><span class="normal"> cake</span><span class="symbol">,</span><span class="normal"> <a href="../gobject/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="symbol">);</span>
-<span class="normal">      </span><span class="function"><a href="../gobject/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">);</span>
+<span class="normal">      </span><span class="function"><a href="GTask.html#g-task-return-pointer">g_task_return_pointer</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">,</span><span class="normal"> cake</span><span class="symbol">,</span><span class="normal"> <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="symbol">);</span>
+<span class="normal">      </span><span class="function"><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">);</span>
 <span class="normal">      </span><span class="keyword">return</span><span class="symbol">;</span>
 <span class="normal">    </span><span class="cbracket">}</span>
 
-<span class="normal">  decoration </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="../glib/glib-Memory-Slices.html#g-slice-new">g_slice_new</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">DecorationData</span><span class="symbol">);</span>
+<span class="normal">  decoration </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="http://library.gnome.org/devel/glib/unstable/glib-Memory-Slices.html#g-slice-new">g_slice_new</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">DecorationData</span><span class="symbol">);</span>
 <span class="normal">  decoration</span><span class="symbol">-&gt;</span><span class="normal">frosting </span><span class="symbol">=</span><span class="normal"> frosting</span><span class="symbol">;</span>
-<span class="normal">  decoration</span><span class="symbol">-&gt;</span><span class="normal">message </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="../glib/glib-String-Utility-Functions.html#g-strdup">g_strdup</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">message</span><span class="symbol">);</span>
-<span class="normal">  </span><span class="function"><a href="GTask.html#g-task-set-task-data">g_task_set_task_data</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">,</span><span class="normal"> decoration</span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="../glib/glib-Datasets.html#GDestroyNotify">GDestroyNotify</a></span><span class="symbol">)</span><span class="normal"> decoration_data_free</span><span class="symbol">);</span>
+<span class="normal">  decoration</span><span class="symbol">-&gt;</span><span class="normal">message </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="http://library.gnome.org/devel/glib/unstable/glib-String-Utility-Functions.html#g-strdup">g_strdup</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">message</span><span class="symbol">);</span>
+<span class="normal">  </span><span class="function"><a href="GTask.html#g-task-set-task-data">g_task_set_task_data</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">,</span><span class="normal"> decoration</span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="http://library.gnome.org/devel/glib/unstable/glib-Datasets.html#GDestroyNotify">GDestroyNotify</a></span><span class="symbol">)</span><span class="normal"> decoration_data_free</span><span class="symbol">);</span>
 
 <span class="normal">  </span><span class="function">_baker_begin_cake</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">self</span><span class="symbol">,</span><span class="normal"> radius</span><span class="symbol">,</span><span class="normal"> flavor</span><span class="symbol">,</span><span class="normal"> cancellable</span><span class="symbol">,</span><span class="normal"> baked_cb</span><span class="symbol">,</span><span class="normal"> task</span><span class="symbol">);</span>
 <span class="cbracket">}</span>
@@ -348,7 +348,7 @@ GTask implements
 <span class="normal">                        </span><span class="usertype">GAsyncResult</span><span class="normal">  </span><span class="symbol">*</span><span class="normal">result</span><span class="symbol">,</span>
 <span class="normal">                        </span><span class="usertype">GError</span><span class="normal">       </span><span class="symbol">**</span><span class="normal">error</span><span class="symbol">)</span>
 <span class="cbracket">{</span>
-<span class="normal">  </span><span class="function"><a href="../glib/glib-Warnings-and-Assertions.html#g-return-val-if-fail">g_return_val_if_fail</a></span><span class="normal"> </span><span class="symbol">(</span><span class="function"><a href="GTask.html#g-task-is-valid">g_task_is_valid</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">result</span><span class="symbol">,</span><span class="normal"> self</span><span class="symbol">),</span><span class="normal"> <a href="../glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">);</span>
+<span class="normal">  </span><span class="function"><a href="http://library.gnome.org/devel/glib/unstable/glib-Warnings-and-Assertions.html#g-return-val-if-fail">g_return_val_if_fail</a></span><span class="normal"> </span><span class="symbol">(</span><span class="function"><a href="GTask.html#g-task-is-valid">g_task_is_valid</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">result</span><span class="symbol">,</span><span class="normal"> self</span><span class="symbol">),</span><span class="normal"> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">);</span>
 
 <span class="normal">  </span><span class="keyword">return</span><span class="normal"> </span><span class="function"><a href="GTask.html#g-task-propagate-pointer">g_task_propagate_pointer</a></span><span class="normal"> </span><span class="symbol">(</span><span class="function">G_TASK</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">result</span><span class="symbol">),</span><span class="normal"> error</span><span class="symbol">);</span>
 <span class="cbracket">}</span></pre></td>
@@ -370,10 +370,10 @@ GTask implements
     internally chain together several smaller asynchronous
     operations. <a class="link" href="GTask.html#g-task-get-cancellable" title="g_task_get_cancellable ()"><code class="function">g_task_get_cancellable()</code></a>, <a class="link" href="GTask.html#g-task-get-context" title="g_task_get_context ()"><code class="function">g_task_get_context()</code></a>, and
     <a class="link" href="GTask.html#g-task-get-priority" title="g_task_get_priority ()"><code class="function">g_task_get_priority()</code></a> allow you to get back the task's
-    <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a>, <a href="../glib/glib-The-Main-Event-Loop.html#GMainContext"><span class="type">GMainContext</span></a>, and <a class="link" href="GAsyncResult.html#io-priority">I/O priority</a> when starting a new
+    <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a>, <a href="http://library.gnome.org/devel/glib/unstable/glib-The-Main-Event-Loop.html#GMainContext"><span class="type">GMainContext</span></a>, and <a class="link" href="GAsyncResult.html#io-priority">I/O priority</a> when starting a new
     subtask, so you don't have to keep track of them yourself.
     <a class="link" href="GTask.html#g-task-attach-source" title="g_task_attach_source ()"><code class="function">g_task_attach_source()</code></a> simplifies the case of waiting for a
-    source to fire (automatically using the correct <a href="../glib/glib-The-Main-Event-Loop.html#GMainContext"><span class="type">GMainContext</span></a>
+    source to fire (automatically using the correct <a href="http://library.gnome.org/devel/glib/unstable/glib-The-Main-Event-Loop.html#GMainContext"><span class="type">GMainContext</span></a>
     and priority).
   </p>
 <div class="example">
@@ -516,9 +516,9 @@ GTask implements
 <span class="function">decoration_data_free</span><span class="normal"> </span><span class="symbol">(</span><span class="usertype">BakingData</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">bd</span><span class="symbol">)</span>
 <span class="cbracket">{</span>
 <span class="normal">  </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">bd</span><span class="symbol">-&gt;</span><span class="normal">cake</span><span class="symbol">)</span>
-<span class="normal">    </span><span class="function"><a href="../gobject/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">bd</span><span class="symbol">-&gt;</span><span class="normal">cake</span><span class="symbol">);</span>
-<span class="normal">  </span><span class="function"><a href="../glib/glib-Memory-Allocation.html#g-free">g_free</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">bd</span><span class="symbol">-&gt;</span><span class="normal">message</span><span class="symbol">);</span>
-<span class="normal">  </span><span class="function"><a href="../glib/glib-Memory-Slices.html#g-slice-free">g_slice_free</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">BakingData</span><span class="symbol">,</span><span class="normal"> bd</span><span class="symbol">);</span>
+<span class="normal">    </span><span class="function"><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">bd</span><span class="symbol">-&gt;</span><span class="normal">cake</span><span class="symbol">);</span>
+<span class="normal">  </span><span class="function"><a href="http://library.gnome.org/devel/glib/unstable/glib-Memory-Allocation.html#g-free">g_free</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">bd</span><span class="symbol">-&gt;</span><span class="normal">message</span><span class="symbol">);</span>
+<span class="normal">  </span><span class="function"><a href="http://library.gnome.org/devel/glib/unstable/glib-Memory-Slices.html#g-slice-free">g_slice_free</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">BakingData</span><span class="symbol">,</span><span class="normal"> bd</span><span class="symbol">);</span>
 <span class="cbracket">}</span>
 
 <span class="keyword">static</span><span class="normal"> </span><span class="type">void</span>
@@ -527,21 +527,21 @@ GTask implements
 <span class="normal">              </span><span class="usertype">gpointer</span><span class="normal">      user_data</span><span class="symbol">)</span>
 <span class="cbracket">{</span>
 <span class="normal">  </span><span class="usertype">GTask</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">task </span><span class="symbol">=</span><span class="normal"> user_data</span><span class="symbol">;</span>
-<span class="normal">  </span><span class="usertype">GError</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">error </span><span class="symbol">=</span><span class="normal"> <a href="../glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">;</span>
+<span class="normal">  </span><span class="usertype">GError</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">error </span><span class="symbol">=</span><span class="normal"> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">;</span>
 
 <span class="normal">  </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(!</span><span class="function">cake_decorate_finish</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">cake</span><span class="symbol">,</span><span class="normal"> result</span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">&amp;</span><span class="normal">error</span><span class="symbol">))</span>
 <span class="normal">    </span><span class="cbracket">{</span>
-<span class="normal">      </span><span class="function"><a href="../gobject/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">cake</span><span class="symbol">);</span>
+<span class="normal">      </span><span class="function"><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">cake</span><span class="symbol">);</span>
 <span class="normal">      </span><span class="function"><a href="GTask.html#g-task-return-error">g_task_return_error</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">,</span><span class="normal"> error</span><span class="symbol">);</span>
-<span class="normal">      </span><span class="function"><a href="../gobject/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">);</span>
+<span class="normal">      </span><span class="function"><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">);</span>
 <span class="normal">      </span><span class="keyword">return</span><span class="symbol">;</span>
 <span class="normal">    </span><span class="cbracket">}</span>
 
 <span class="normal">  </span><span class="comment">/* baking_data_free() will drop its ref on the cake, so</span>
 <span class="comment">   * we have to take another here to give to the caller.</span>
 <span class="comment">   */</span>
-<span class="normal">  </span><span class="function"><a href="GTask.html#g-task-return-pointer">g_task_return_pointer</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">result</span><span class="symbol">,</span><span class="normal"> </span><span class="function"><a href="../gobject/gobject-The-Base-Object-Type.html#g-object-ref">g_object_ref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">cake</span><span class="symbol">),</span><span class="normal"> <a href="../gobject/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="symbol">);</span>
-<span class="normal">  </span><span class="function"><a href="../gobject/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">);</span>
+<span class="normal">  </span><span class="function"><a href="GTask.html#g-task-return-pointer">g_task_return_pointer</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">result</span><span class="symbol">,</span><span class="normal"> </span><span class="function"><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-ref">g_object_ref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">cake</span><span class="symbol">),</span><span class="normal"> <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="symbol">);</span>
+<span class="normal">  </span><span class="function"><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">);</span>
 <span class="cbracket">}</span>
 
 <span class="keyword">static</span><span class="normal"> </span><span class="type">void</span>
@@ -561,13 +561,13 @@ GTask implements
 <span class="cbracket">{</span>
 <span class="normal">  </span><span class="usertype">GTask</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">task </span><span class="symbol">=</span><span class="normal"> user_data</span><span class="symbol">;</span>
 <span class="normal">  </span><span class="usertype">BakingData</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">bd </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="GTask.html#g-task-get-task-data">g_task_get_task_data</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">);</span>
-<span class="normal">  </span><span class="usertype">GError</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">error </span><span class="symbol">=</span><span class="normal"> <a href="../glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">;</span>
+<span class="normal">  </span><span class="usertype">GError</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">error </span><span class="symbol">=</span><span class="normal"> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">;</span>
 
-<span class="normal">  </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">cake </span><span class="symbol">==</span><span class="normal"> <a href="../glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">)</span>
+<span class="normal">  </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">cake </span><span class="symbol">==</span><span class="normal"> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">)</span>
 <span class="normal">    </span><span class="cbracket">{</span>
 <span class="normal">      </span><span class="function"><a href="GTask.html#g-task-return-new-error">g_task_return_new_error</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">,</span><span class="normal"> BAKER_ERROR</span><span class="symbol">,</span><span class="normal"> BAKER_ERROR_NO_FLOUR</span><span class="symbol">,</span>
 <span class="normal">                               </span><span class="string">"Go to the supermarket"</span><span class="symbol">);</span>
-<span class="normal">      </span><span class="function"><a href="../gobject/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">);</span>
+<span class="normal">      </span><span class="function"><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">);</span>
 <span class="normal">      </span><span class="keyword">return</span><span class="symbol">;</span>
 <span class="normal">    </span><span class="cbracket">}</span>
 
@@ -576,7 +576,7 @@ GTask implements
 <span class="normal">  </span><span class="comment">/* Bail out now if the user has already cancelled */</span>
 <span class="normal">  </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="function"><a href="GTask.html#g-task-return-error-if-cancelled">g_task_return_error_if_cancelled</a></span><span class="normal"> </span><span class="symbol">(</span><span class="function"><a href="GTask.html#g-task-get-cancellable">g_task_get_cancellable</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">)))</span>
 <span class="normal">    </span><span class="cbracket">{</span>
-<span class="normal">      </span><span class="function"><a href="../gobject/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">);</span>
+<span class="normal">      </span><span class="function"><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">);</span>
 <span class="normal">      </span><span class="keyword">return</span><span class="symbol">;</span>
 <span class="normal">    </span><span class="cbracket">}</span>
 
@@ -591,8 +591,8 @@ GTask implements
 <span class="comment">       * decorator_ready() when it is ready.</span>
 <span class="comment">       */</span>
 <span class="normal">      </span><span class="function"><a href="GTask.html#g-task-attach-source">g_task_attach_source</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">,</span><span class="normal"> source</span><span class="symbol">,</span>
-<span class="normal">                            </span><span class="function"><a href="../gobject/gobject-Closures.html#G-CALLBACK:CAPS">G_CALLBACK</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">decorator_ready</span><span class="symbol">));</span>
-<span class="normal">      </span><span class="function"><a href="../glib/glib-The-Main-Event-Loop.html#g-source-unref">g_source_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">source</span><span class="symbol">);</span>
+<span class="normal">                            </span><span class="function"><a href="http://library.gnome.org/devel/gobject/unstable/gobject-Closures.html#G-CALLBACK:CAPS">G_CALLBACK</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">decorator_ready</span><span class="symbol">));</span>
+<span class="normal">      </span><span class="function"><a href="http://library.gnome.org/devel/glib/unstable/glib-The-Main-Event-Loop.html#g-source-unref">g_source_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">source</span><span class="symbol">);</span>
 <span class="normal">    </span><span class="cbracket">}</span>
 <span class="cbracket">}</span>
 
@@ -613,10 +613,10 @@ GTask implements
 <span class="normal">  task </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="GTask.html#g-task-new">g_task_new</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">self</span><span class="symbol">,</span><span class="normal"> cancellable</span><span class="symbol">,</span><span class="normal"> callback</span><span class="symbol">,</span><span class="normal"> user_data</span><span class="symbol">);</span>
 <span class="normal">  </span><span class="function"><a href="GTask.html#g-task-set-priority">g_task_set_priority</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">,</span><span class="normal"> priority</span><span class="symbol">);</span>
 
-<span class="normal">  bd </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="../glib/glib-Memory-Slices.html#g-slice-new0">g_slice_new0</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">BakingData</span><span class="symbol">);</span>
+<span class="normal">  bd </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="http://library.gnome.org/devel/glib/unstable/glib-Memory-Slices.html#g-slice-new0">g_slice_new0</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">BakingData</span><span class="symbol">);</span>
 <span class="normal">  bd</span><span class="symbol">-&gt;</span><span class="normal">frosting </span><span class="symbol">=</span><span class="normal"> frosting</span><span class="symbol">;</span>
-<span class="normal">  bd</span><span class="symbol">-&gt;</span><span class="normal">message </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="../glib/glib-String-Utility-Functions.html#g-strdup">g_strdup</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">message</span><span class="symbol">);</span>
-<span class="normal">  </span><span class="function"><a href="GTask.html#g-task-set-task-data">g_task_set_task_data</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">,</span><span class="normal"> bd</span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="../glib/glib-Datasets.html#GDestroyNotify">GDestroyNotify</a></span><span class="symbol">)</span><span class="normal"> baking_data_free</span><span class="symbol">);</span>
+<span class="normal">  bd</span><span class="symbol">-&gt;</span><span class="normal">message </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="http://library.gnome.org/devel/glib/unstable/glib-String-Utility-Functions.html#g-strdup">g_strdup</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">message</span><span class="symbol">);</span>
+<span class="normal">  </span><span class="function"><a href="GTask.html#g-task-set-task-data">g_task_set_task_data</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">,</span><span class="normal"> bd</span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="http://library.gnome.org/devel/glib/unstable/glib-Datasets.html#GDestroyNotify">GDestroyNotify</a></span><span class="symbol">)</span><span class="normal"> baking_data_free</span><span class="symbol">);</span>
 
 <span class="normal">  </span><span class="function">_baker_begin_cake</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">self</span><span class="symbol">,</span><span class="normal"> radius</span><span class="symbol">,</span><span class="normal"> flavor</span><span class="symbol">,</span><span class="normal"> cancellable</span><span class="symbol">,</span><span class="normal"> baked_cb</span><span class="symbol">,</span><span class="normal"> task</span><span class="symbol">);</span>
 <span class="cbracket">}</span>
@@ -626,7 +626,7 @@ GTask implements
 <span class="normal">                        </span><span class="usertype">GAsyncResult</span><span class="normal">  </span><span class="symbol">*</span><span class="normal">result</span><span class="symbol">,</span>
 <span class="normal">                        </span><span class="usertype">GError</span><span class="normal">       </span><span class="symbol">**</span><span class="normal">error</span><span class="symbol">)</span>
 <span class="cbracket">{</span>
-<span class="normal">  </span><span class="function"><a href="../glib/glib-Warnings-and-Assertions.html#g-return-val-if-fail">g_return_val_if_fail</a></span><span class="normal"> </span><span class="symbol">(</span><span class="function"><a href="GTask.html#g-task-is-valid">g_task_is_valid</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">result</span><span class="symbol">,</span><span class="normal"> self</span><span class="symbol">),</span><span class="normal"> <a href="../glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">);</span>
+<span class="normal">  </span><span class="function"><a href="http://library.gnome.org/devel/glib/unstable/glib-Warnings-and-Assertions.html#g-return-val-if-fail">g_return_val_if_fail</a></span><span class="normal"> </span><span class="symbol">(</span><span class="function"><a href="GTask.html#g-task-is-valid">g_task_is_valid</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">result</span><span class="symbol">,</span><span class="normal"> self</span><span class="symbol">),</span><span class="normal"> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">);</span>
 
 <span class="normal">  </span><span class="keyword">return</span><span class="normal"> </span><span class="function"><a href="GTask.html#g-task-propagate-pointer">g_task_propagate_pointer</a></span><span class="normal"> </span><span class="symbol">(</span><span class="function">G_TASK</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">result</span><span class="symbol">),</span><span class="normal"> error</span><span class="symbol">);</span>
 <span class="cbracket">}</span></pre></td>
@@ -647,7 +647,7 @@ GTask implements
     You can use <a class="link" href="GTask.html#g-task-run-in-thread" title="g_task_run_in_thread ()"><code class="function">g_task_run_in_thread()</code></a> to turn a synchronous
     operation into an asynchronous one, by running it in a thread
     which will then dispatch the result back to the caller's
-    <a href="../glib/glib-The-Main-Event-Loop.html#GMainContext"><span class="type">GMainContext</span></a> when it completes.
+    <a href="http://library.gnome.org/devel/glib/unstable/glib-The-Main-Event-Loop.html#GMainContext"><span class="type">GMainContext</span></a> when it completes.
   </p>
 <div class="example">
 <a name="gtask-run-in-thread"></a><p class="title"><b>Example 3. <a class="link" href="GTask.html#g-task-run-in-thread" title="g_task_run_in_thread ()"><code class="function">g_task_run_in_thread()</code></a></b></p>
@@ -731,8 +731,8 @@ GTask implements
 <span class="keyword">static</span><span class="normal"> </span><span class="type">void</span>
 <span class="function">cake_data_free</span><span class="normal"> </span><span class="symbol">(</span><span class="usertype">CakeData</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">cake_data</span><span class="symbol">)</span>
 <span class="cbracket">{</span>
-<span class="normal">  </span><span class="function"><a href="../glib/glib-Memory-Allocation.html#g-free">g_free</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">cake_data</span><span class="symbol">-&gt;</span><span class="normal">message</span><span class="symbol">);</span>
-<span class="normal">  </span><span class="function"><a href="../glib/glib-Memory-Slices.html#g-slice-free">g_slice_free</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">CakeData</span><span class="symbol">,</span><span class="normal"> cake_data</span><span class="symbol">);</span>
+<span class="normal">  </span><span class="function"><a href="http://library.gnome.org/devel/glib/unstable/glib-Memory-Allocation.html#g-free">g_free</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">cake_data</span><span class="symbol">-&gt;</span><span class="normal">message</span><span class="symbol">);</span>
+<span class="normal">  </span><span class="function"><a href="http://library.gnome.org/devel/glib/unstable/glib-Memory-Slices.html#g-slice-free">g_slice_free</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">CakeData</span><span class="symbol">,</span><span class="normal"> cake_data</span><span class="symbol">);</span>
 <span class="cbracket">}</span>
 
 <span class="keyword">static</span><span class="normal"> </span><span class="type">void</span>
@@ -744,13 +744,13 @@ GTask implements
 <span class="normal">  </span><span class="usertype">Baker</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">self </span><span class="symbol">=</span><span class="normal"> source_object</span><span class="symbol">;</span>
 <span class="normal">  </span><span class="usertype">CakeData</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">cake_data </span><span class="symbol">=</span><span class="normal"> task_data</span><span class="symbol">;</span>
 <span class="normal">  </span><span class="usertype">Cake</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">cake</span><span class="symbol">;</span>
-<span class="normal">  </span><span class="usertype">GError</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">error </span><span class="symbol">=</span><span class="normal"> <a href="../glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">;</span>
+<span class="normal">  </span><span class="usertype">GError</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">error </span><span class="symbol">=</span><span class="normal"> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">;</span>
 
 <span class="normal">  cake </span><span class="symbol">=</span><span class="normal"> </span><span class="function">bake_cake</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">baker</span><span class="symbol">,</span><span class="normal"> cake_data</span><span class="symbol">-&gt;</span><span class="normal">radius</span><span class="symbol">,</span><span class="normal"> cake_data</span><span class="symbol">-&gt;</span><span class="normal">flavor</span><span class="symbol">,</span>
 <span class="normal">                    cake_data</span><span class="symbol">-&gt;</span><span class="normal">frosting</span><span class="symbol">,</span><span class="normal"> cake_data</span><span class="symbol">-&gt;</span><span class="normal">message</span><span class="symbol">,</span>
 <span class="normal">                    cancellable</span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">&amp;</span><span class="normal">error</span><span class="symbol">);</span>
 <span class="normal">  </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">cake</span><span class="symbol">)</span>
-<span class="normal">    </span><span class="function"><a href="GTask.html#g-task-return-pointer">g_task_return_pointer</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">,</span><span class="normal"> cake</span><span class="symbol">,</span><span class="normal"> <a href="../gobject/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="symbol">);</span>
+<span class="normal">    </span><span class="function"><a href="GTask.html#g-task-return-pointer">g_task_return_pointer</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">,</span><span class="normal"> cake</span><span class="symbol">,</span><span class="normal"> <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="symbol">);</span>
 <span class="normal">  </span><span class="keyword">else</span>
 <span class="normal">    </span><span class="function"><a href="GTask.html#g-task-return-error">g_task_return_error</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">,</span><span class="normal"> error</span><span class="symbol">);</span>
 <span class="cbracket">}</span>
@@ -768,13 +768,13 @@ GTask implements
 <span class="normal">  </span><span class="usertype">CakeData</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">cake_data</span><span class="symbol">;</span>
 <span class="normal">  </span><span class="usertype">GTask</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">task</span><span class="symbol">;</span>
 
-<span class="normal">  cake_data </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="../glib/glib-Memory-Slices.html#g-slice-new">g_slice_new</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">CakeData</span><span class="symbol">);</span>
+<span class="normal">  cake_data </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="http://library.gnome.org/devel/glib/unstable/glib-Memory-Slices.html#g-slice-new">g_slice_new</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">CakeData</span><span class="symbol">);</span>
 <span class="normal">  cake_data</span><span class="symbol">-&gt;</span><span class="normal">radius </span><span class="symbol">=</span><span class="normal"> radius</span><span class="symbol">;</span>
 <span class="normal">  cake_data</span><span class="symbol">-&gt;</span><span class="normal">flavor </span><span class="symbol">=</span><span class="normal"> flavor</span><span class="symbol">;</span>
 <span class="normal">  cake_data</span><span class="symbol">-&gt;</span><span class="normal">frosting </span><span class="symbol">=</span><span class="normal"> frosting</span><span class="symbol">;</span>
-<span class="normal">  cake_data</span><span class="symbol">-&gt;</span><span class="normal">message </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="../glib/glib-String-Utility-Functions.html#g-strdup">g_strdup</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">message</span><span class="symbol">);</span>
+<span class="normal">  cake_data</span><span class="symbol">-&gt;</span><span class="normal">message </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="http://library.gnome.org/devel/glib/unstable/glib-String-Utility-Functions.html#g-strdup">g_strdup</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">message</span><span class="symbol">);</span>
 <span class="normal">  task </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="GTask.html#g-task-new">g_task_new</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">self</span><span class="symbol">,</span><span class="normal"> cancellable</span><span class="symbol">,</span><span class="normal"> callback</span><span class="symbol">,</span><span class="normal"> user_data</span><span class="symbol">);</span>
-<span class="normal">  </span><span class="function"><a href="GTask.html#g-task-set-task-data">g_task_set_task_data</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">,</span><span class="normal"> cake_data</span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="../glib/glib-Datasets.html#GDestroyNotify">GDestroyNotify</a></span><span class="symbol">)</span><span class="normal"> cake_data_free</span><span class="symbol">);</span>
+<span class="normal">  </span><span class="function"><a href="GTask.html#g-task-set-task-data">g_task_set_task_data</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">,</span><span class="normal"> cake_data</span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="http://library.gnome.org/devel/glib/unstable/glib-Datasets.html#GDestroyNotify">GDestroyNotify</a></span><span class="symbol">)</span><span class="normal"> cake_data_free</span><span class="symbol">);</span>
 <span class="normal">  </span><span class="function"><a href="GTask.html#g-task-run-in-thread">g_task_run_in_thread</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">,</span><span class="normal"> bake_cake_thread</span><span class="symbol">);</span>
 <span class="cbracket">}</span>
 
@@ -783,7 +783,7 @@ GTask implements
 <span class="normal">                        </span><span class="usertype">GAsyncResult</span><span class="normal">  </span><span class="symbol">*</span><span class="normal">result</span><span class="symbol">,</span>
 <span class="normal">                        </span><span class="usertype">GError</span><span class="normal">       </span><span class="symbol">**</span><span class="normal">error</span><span class="symbol">)</span>
 <span class="cbracket">{</span>
-<span class="normal">  </span><span class="function"><a href="../glib/glib-Warnings-and-Assertions.html#g-return-val-if-fail">g_return_val_if_fail</a></span><span class="normal"> </span><span class="symbol">(</span><span class="function"><a href="GTask.html#g-task-is-valid">g_task_is_valid</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">result</span><span class="symbol">,</span><span class="normal"> self</span><span class="symbol">),</span><span class="normal"> <a href="../glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">);</span>
+<span class="normal">  </span><span class="function"><a href="http://library.gnome.org/devel/glib/unstable/glib-Warnings-and-Assertions.html#g-return-val-if-fail">g_return_val_if_fail</a></span><span class="normal"> </span><span class="symbol">(</span><span class="function"><a href="GTask.html#g-task-is-valid">g_task_is_valid</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">result</span><span class="symbol">,</span><span class="normal"> self</span><span class="symbol">),</span><span class="normal"> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">);</span>
 
 <span class="normal">  </span><span class="keyword">return</span><span class="normal"> </span><span class="function"><a href="GTask.html#g-task-propagate-pointer">g_task_propagate_pointer</a></span><span class="normal"> </span><span class="symbol">(</span><span class="function">G_TASK</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">result</span><span class="symbol">),</span><span class="normal"> error</span><span class="symbol">);</span>
 <span class="cbracket">}</span></pre></td>
@@ -804,7 +804,7 @@ GTask implements
     Finally, <a class="link" href="GTask.html#g-task-run-in-thread" title="g_task_run_in_thread ()"><code class="function">g_task_run_in_thread()</code></a> and <a class="link" href="GTask.html#g-task-run-in-thread-sync" title="g_task_run_in_thread_sync ()"><code class="function">g_task_run_in_thread_sync()</code></a>
     can be used to turn an uncancellable operation into a
     cancellable one. If you call <a class="link" href="GTask.html#g-task-set-return-on-cancel" title="g_task_set_return_on_cancel ()"><code class="function">g_task_set_return_on_cancel()</code></a>,
-    passing <a href="../glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a>, then if the task's <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> is cancelled,
+    passing <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a>, then if the task's <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> is cancelled,
     it will return control back to the caller immediately, while
     allowing the task thread to continue running in the background
     (and simply discarding its result when it finally does finish).
@@ -916,7 +916,7 @@ GTask implements
 <span class="normal">  </span><span class="usertype">Baker</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">self </span><span class="symbol">=</span><span class="normal"> source_object</span><span class="symbol">;</span>
 <span class="normal">  </span><span class="usertype">CakeData</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">cake_data </span><span class="symbol">=</span><span class="normal"> task_data</span><span class="symbol">;</span>
 <span class="normal">  </span><span class="usertype">Cake</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">cake</span><span class="symbol">;</span>
-<span class="normal">  </span><span class="usertype">GError</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">error </span><span class="symbol">=</span><span class="normal"> <a href="../glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">;</span>
+<span class="normal">  </span><span class="usertype">GError</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">error </span><span class="symbol">=</span><span class="normal"> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">;</span>
 
 <span class="normal">  cake </span><span class="symbol">=</span><span class="normal"> </span><span class="function">bake_cake</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">baker</span><span class="symbol">,</span><span class="normal"> cake_data</span><span class="symbol">-&gt;</span><span class="normal">radius</span><span class="symbol">,</span><span class="normal"> cake_data</span><span class="symbol">-&gt;</span><span class="normal">flavor</span><span class="symbol">,</span>
 <span class="normal">                    cake_data</span><span class="symbol">-&gt;</span><span class="normal">frosting</span><span class="symbol">,</span><span class="normal"> cake_data</span><span class="symbol">-&gt;</span><span class="normal">message</span><span class="symbol">,</span>
@@ -934,7 +934,7 @@ GTask implements
 <span class="comment">   * return %TRUE here if it managed to disable return-on-cancel,</span>
 <span class="comment">   * or %FALSE if the task was cancelled before it could.</span>
 <span class="comment">   */</span>
-<span class="normal">  </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="function"><a href="GTask.html#g-task-set-return-on-cancel">g_task_set_return_on_cancel</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">,</span><span class="normal"> <a href="../glib/glib-Standard-Macros.html#FALSE:CAPS">FALSE</a></span><span class="symbol">))</span>
+<span class="normal">  </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="function"><a href="GTask.html#g-task-set-return-on-cancel">g_task_set_return_on_cancel</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">,</span><span class="normal"> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS">FALSE</a></span><span class="symbol">))</span>
 <span class="normal">    </span><span class="cbracket">{</span>
 <span class="normal">      </span><span class="comment">/* If the caller cancels at this point, their</span>
 <span class="comment">       * GAsyncReadyCallback won't be invoked until we return,</span>
@@ -944,7 +944,7 @@ GTask implements
 <span class="comment">       * then we'd probably need a GMutex here as well.</span>
 <span class="comment">       */</span>
 <span class="normal">      </span><span class="function">baker_add_cake_to_cache</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">baker</span><span class="symbol">,</span><span class="normal"> cake</span><span class="symbol">);</span>
-<span class="normal">      </span><span class="function"><a href="GTask.html#g-task-return-pointer">g_task_return_pointer</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">,</span><span class="normal"> cake</span><span class="symbol">,</span><span class="normal"> <a href="../gobject/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="symbol">);</span>
+<span class="normal">      </span><span class="function"><a href="GTask.html#g-task-return-pointer">g_task_return_pointer</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">,</span><span class="normal"> cake</span><span class="symbol">,</span><span class="normal"> <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="symbol">);</span>
 <span class="normal">    </span><span class="cbracket">}</span>
 <span class="cbracket">}</span>
 
@@ -961,12 +961,12 @@ GTask implements
 <span class="normal">  </span><span class="usertype">CakeData</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">cake_data</span><span class="symbol">;</span>
 <span class="normal">  </span><span class="usertype">GTask</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">task</span><span class="symbol">;</span>
 
-<span class="normal">  cake_data </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="../glib/glib-Memory-Slices.html#g-slice-new">g_slice_new</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">CakeData</span><span class="symbol">);</span>
+<span class="normal">  cake_data </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="http://library.gnome.org/devel/glib/unstable/glib-Memory-Slices.html#g-slice-new">g_slice_new</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">CakeData</span><span class="symbol">);</span>
 <span class="normal">  </span><span class="comment">/* ... */</span>
 
 <span class="normal">  task </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="GTask.html#g-task-new">g_task_new</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">self</span><span class="symbol">,</span><span class="normal"> cancellable</span><span class="symbol">,</span><span class="normal"> callback</span><span class="symbol">,</span><span class="normal"> user_data</span><span class="symbol">);</span>
-<span class="normal">  </span><span class="function"><a href="GTask.html#g-task-set-task-data">g_task_set_task_data</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">,</span><span class="normal"> cake_data</span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="../glib/glib-Datasets.html#GDestroyNotify">GDestroyNotify</a></span><span class="symbol">)</span><span class="normal"> cake_data_free</span><span class="symbol">);</span>
-<span class="normal">  </span><span class="function"><a href="GTask.html#g-task-set-return-on-cancel">g_task_set_return_on_cancel</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">,</span><span class="normal"> <a href="../glib/glib-Standard-Macros.html#TRUE:CAPS">TRUE</a></span><span class="symbol">);</span>
+<span class="normal">  </span><span class="function"><a href="GTask.html#g-task-set-task-data">g_task_set_task_data</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">,</span><span class="normal"> cake_data</span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="http://library.gnome.org/devel/glib/unstable/glib-Datasets.html#GDestroyNotify">GDestroyNotify</a></span><span class="symbol">)</span><span class="normal"> cake_data_free</span><span class="symbol">);</span>
+<span class="normal">  </span><span class="function"><a href="GTask.html#g-task-set-return-on-cancel">g_task_set_return_on_cancel</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">,</span><span class="normal"> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS">TRUE</a></span><span class="symbol">);</span>
 <span class="normal">  </span><span class="function"><a href="GTask.html#g-task-run-in-thread">g_task_run_in_thread</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">,</span><span class="normal"> bake_cake_thread</span><span class="symbol">);</span>
 <span class="cbracket">}</span>
 
@@ -983,16 +983,16 @@ GTask implements
 <span class="normal">  </span><span class="usertype">GTask</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">task</span><span class="symbol">;</span>
 <span class="normal">  </span><span class="usertype">Cake</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">cake</span><span class="symbol">;</span>
 
-<span class="normal">  cake_data </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="../glib/glib-Memory-Slices.html#g-slice-new">g_slice_new</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">CakeData</span><span class="symbol">);</span>
+<span class="normal">  cake_data </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="http://library.gnome.org/devel/glib/unstable/glib-Memory-Slices.html#g-slice-new">g_slice_new</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">CakeData</span><span class="symbol">);</span>
 <span class="normal">  </span><span class="comment">/* ... */</span>
 
-<span class="normal">  task </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="GTask.html#g-task-new">g_task_new</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">self</span><span class="symbol">,</span><span class="normal"> cancellable</span><span class="symbol">,</span><span class="normal"> <a href="../glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span><span class="normal"> <a href="../glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">);</span>
-<span class="normal">  </span><span class="function"><a href="GTask.html#g-task-set-task-data">g_task_set_task_data</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">,</span><span class="normal"> cake_data</span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="../glib/glib-Datasets.html#GDestroyNotify">GDestroyNotify</a></span><span class="symbol">)</span><span class="normal"> cake_data_free</span><span class="symbol">);</span>
-<span class="normal">  </span><span class="function"><a href="GTask.html#g-task-set-return-on-cancel">g_task_set_return_on_cancel</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">,</span><span class="normal"> <a href="../glib/glib-Standard-Macros.html#TRUE:CAPS">TRUE</a></span><span class="symbol">);</span>
+<span class="normal">  task </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="GTask.html#g-task-new">g_task_new</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">self</span><span class="symbol">,</span><span class="normal"> cancellable</span><span class="symbol">,</span><span class="normal"> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span><span class="normal"> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">);</span>
+<span class="normal">  </span><span class="function"><a href="GTask.html#g-task-set-task-data">g_task_set_task_data</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">,</span><span class="normal"> cake_data</span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="http://library.gnome.org/devel/glib/unstable/glib-Datasets.html#GDestroyNotify">GDestroyNotify</a></span><span class="symbol">)</span><span class="normal"> cake_data_free</span><span class="symbol">);</span>
+<span class="normal">  </span><span class="function"><a href="GTask.html#g-task-set-return-on-cancel">g_task_set_return_on_cancel</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">,</span><span class="normal"> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS">TRUE</a></span><span class="symbol">);</span>
 <span class="normal">  </span><span class="function"><a href="GTask.html#g-task-run-in-thread-sync">g_task_run_in_thread_sync</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">,</span><span class="normal"> bake_cake_thread</span><span class="symbol">);</span>
 
 <span class="normal">  cake </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="GTask.html#g-task-propagate-pointer">g_task_propagate_pointer</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">,</span><span class="normal"> error</span><span class="symbol">);</span>
-<span class="normal">  </span><span class="function"><a href="../gobject/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">);</span>
+<span class="normal">  </span><span class="function"><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">task</span><span class="symbol">);</span>
 <span class="normal">  </span><span class="keyword">return</span><span class="normal"> cake</span><span class="symbol">;</span>
 <span class="cbracket">}</span></pre></td>
       </tr>
@@ -1023,7 +1023,7 @@ GTask implements
 <li class="listitem"><p>
       In addition to the task data, <a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> also keeps track of the
       <a class="link" href="GAsyncResult.html#io-priority">priority</a>, <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a>, and
-      <a href="../glib/glib-The-Main-Event-Loop.html#GMainContext"><span class="type">GMainContext</span></a> associated with the task, so tasks that consist of
+      <a href="http://library.gnome.org/devel/glib/unstable/glib-The-Main-Event-Loop.html#GMainContext"><span class="type">GMainContext</span></a> associated with the task, so tasks that consist of
       a chain of simpler asynchronous operations will have easy access
       to those values when starting each sub-task.
     </p></li>
@@ -1048,8 +1048,8 @@ GTask implements
       there is no need to worry about the "complete" vs "complete
       in idle" distinction. (<a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> automatically figures out
       whether the task's callback can be invoked directly, or
-      if it needs to be sent to another <a href="../glib/glib-The-Main-Event-Loop.html#GMainContext"><span class="type">GMainContext</span></a>, or delayed
-      until the next iteration of the current <a href="../glib/glib-The-Main-Event-Loop.html#GMainContext"><span class="type">GMainContext</span></a>.)
+      if it needs to be sent to another <a href="http://library.gnome.org/devel/glib/unstable/glib-The-Main-Event-Loop.html#GMainContext"><span class="type">GMainContext</span></a>, or delayed
+      until the next iteration of the current <a href="http://library.gnome.org/devel/glib/unstable/glib-The-Main-Event-Loop.html#GMainContext"><span class="type">GMainContext</span></a>.)
     </p></li>
 <li class="listitem"><p>
       The "finish" functions for <span class="type">GTask-based</span> operations are generally
@@ -1095,10 +1095,10 @@ and its result.
 <hr>
 <div class="refsect2">
 <a name="g-task-new"></a><h3>g_task_new ()</h3>
-<pre class="programlisting"><a class="link" href="GTask.html" title="GTask"><span class="returnvalue">GTask</span></a> *             g_task_new                          (<em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> source_object</code></em>,
+<pre class="programlisting"><a class="link" href="GTask.html" title="GTask"><span class="returnvalue">GTask</span></a> *             g_task_new                          (<em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> source_object</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> callback</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> callback_data</code></em>);</pre>
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> callback_data</code></em>);</pre>
 <p>
 Creates a <a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> acting on <em class="parameter"><code>source_object</code></em>, which will eventually be
 used to invoke <em class="parameter"><code>callback</code></em> in the current <GTKDOCLINK HREF="g-main-context-push-thread-default">thread-default main
@@ -1127,13 +1127,13 @@ do not want this behavior, you can use
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>source_object</code></em> :</span></p></td>
-<td>the <a href="../gobject/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> that owns
-this task, or <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>][<acronym title="Override the parsed C type with given type."><span class="acronym">type</span></acronym> GObject]</span>
+<td>the <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> that owns
+this task, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>][<acronym title="Override the parsed C type with given type."><span class="acronym">type</span></acronym> GObject]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td>optional <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> object, <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+<td>optional <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> object, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
@@ -1158,8 +1158,8 @@ this task, or <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class=
 <div class="refsect2">
 <a name="g-task-set-task-data"></a><h3>g_task_set_task_data ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_task_set_task_data                (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> task_data</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Datasets.html#GDestroyNotify"><span class="type">GDestroyNotify</span></a> task_data_destroy</code></em>);</pre>
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> task_data</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Datasets.html#GDestroyNotify"><span class="type">GDestroyNotify</span></a> task_data_destroy</code></em>);</pre>
 <p>
 Sets <em class="parameter"><code>task</code></em>'s task data (freeing the existing task data, if any).
 </p>
@@ -1182,7 +1182,7 @@ Sets <em class="parameter"><code>task</code></em>'s task data (freeing the exist
 <tr>
 <td><p><span class="term"><em class="parameter"><code>task_data_destroy</code></em> :</span></p></td>
 <td>
-<a href="../glib/glib-Datasets.html#GDestroyNotify"><span class="type">GDestroyNotify</span></a> for <em class="parameter"><code>task_data</code></em>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Datasets.html#GDestroyNotify"><span class="type">GDestroyNotify</span></a> for <em class="parameter"><code>task_data</code></em>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -1193,13 +1193,13 @@ Sets <em class="parameter"><code>task</code></em>'s task data (freeing the exist
 <div class="refsect2">
 <a name="g-task-set-priority"></a><h3>g_task_set_priority ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_task_set_priority                 (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a> priority</code></em>);</pre>
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a> priority</code></em>);</pre>
 <p>
 Sets <em class="parameter"><code>task</code></em>'s priority. If you do not call this, it will default to
-<a href="../glib/glib-The-Main-Event-Loop.html#G-PRIORITY-DEFAULT:CAPS"><code class="literal">G_PRIORITY_DEFAULT</code></a>.
+<a href="http://library.gnome.org/devel/glib/unstable/glib-The-Main-Event-Loop.html#G-PRIORITY-DEFAULT:CAPS"><code class="literal">G_PRIORITY_DEFAULT</code></a>.
 </p>
 <p>
-This will affect the priority of <a href="../glib/glib-The-Main-Event-Loop.html#GSource"><span class="type">GSources</span></a> created with
+This will affect the priority of <a href="http://library.gnome.org/devel/glib/unstable/glib-The-Main-Event-Loop.html#GSource"><span class="type">GSources</span></a> created with
 <a class="link" href="GTask.html#g-task-attach-source" title="g_task_attach_source ()"><code class="function">g_task_attach_source()</code></a> and the scheduling of tasks run in threads,
 and can also be explicitly retrieved later via
 <a class="link" href="GTask.html#g-task-get-priority" title="g_task_get_priority ()"><code class="function">g_task_get_priority()</code></a>.
@@ -1228,9 +1228,9 @@ of the request.</td>
 <div class="refsect2">
 <a name="g-task-set-check-cancellable"></a><h3>g_task_set_check_cancellable ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_task_set_check_cancellable        (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> check_cancellable</code></em>);</pre>
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> check_cancellable</code></em>);</pre>
 <p>
-Sets or clears <em class="parameter"><code>task</code></em>'s check-cancellable flag. If this is <a href="../glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a>
+Sets or clears <em class="parameter"><code>task</code></em>'s check-cancellable flag. If this is <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a>
 (the default), then <a class="link" href="GTask.html#g-task-propagate-pointer" title="g_task_propagate_pointer ()"><code class="function">g_task_propagate_pointer()</code></a>, etc, and
 <a class="link" href="GTask.html#g-task-had-error" title="g_task_had_error ()"><code class="function">g_task_had_error()</code></a> will check the task's <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> first, and
 if it has been cancelled, then they will consider the task to have
@@ -1239,13 +1239,13 @@ returned an "Operation was cancelled" error
 value the task may have had.
 </p>
 <p>
-If <em class="parameter"><code>check_cancellable</code></em> is <a href="../glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a>, then the <a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> will not check the
+If <em class="parameter"><code>check_cancellable</code></em> is <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a>, then the <a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> will not check the
 cancellable itself, and it is up to <em class="parameter"><code>task</code></em>'s owner to do this (eg,
 via <a class="link" href="GTask.html#g-task-return-error-if-cancelled" title="g_task_return_error_if_cancelled ()"><code class="function">g_task_return_error_if_cancelled()</code></a>).
 </p>
 <p>
 If you are using <a class="link" href="GTask.html#g-task-set-return-on-cancel" title="g_task_set_return_on_cancel ()"><code class="function">g_task_set_return_on_cancel()</code></a> as well, then
-you must leave check-cancellable set <a href="../glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a>.
+you must leave check-cancellable set <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a>.
 </p>
 <div class="variablelist"><table border="0" class="variablelist">
 <colgroup>
@@ -1270,15 +1270,15 @@ its <a class="link" href="GCancellable.html" title="GCancellable"><span class="t
 <hr>
 <div class="refsect2">
 <a name="g-task-set-return-on-cancel"></a><h3>g_task_set_return_on_cancel ()</h3>
-<pre class="programlisting"><a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_task_set_return_on_cancel         (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> return_on_cancel</code></em>);</pre>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_task_set_return_on_cancel         (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> return_on_cancel</code></em>);</pre>
 <p>
 Sets or clears <em class="parameter"><code>task</code></em>'s return-on-cancel flag. This is only
 meaningful for tasks run via <a class="link" href="GTask.html#g-task-run-in-thread" title="g_task_run_in_thread ()"><code class="function">g_task_run_in_thread()</code></a> or
 <a class="link" href="GTask.html#g-task-run-in-thread-sync" title="g_task_run_in_thread_sync ()"><code class="function">g_task_run_in_thread_sync()</code></a>.
 </p>
 <p>
-If <em class="parameter"><code>return_on_cancel</code></em> is <a href="../glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a>, then cancelling <em class="parameter"><code>task</code></em>'s
+If <em class="parameter"><code>return_on_cancel</code></em> is <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a>, then cancelling <em class="parameter"><code>task</code></em>'s
 <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> will immediately cause it to return, as though the
 task's <a class="link" href="GTask.html#GTaskThreadFunc" title="GTaskThreadFunc ()"><span class="type">GTaskThreadFunc</span></a> had called
 <a class="link" href="GTask.html#g-task-return-error-if-cancelled" title="g_task_return_error_if_cancelled ()"><code class="function">g_task_return_error_if_cancelled()</code></a> and then returned.
@@ -1289,15 +1289,15 @@ uninterruptable function. The <a class="link" href="GTask.html#GTaskThreadFunc" 
 careful that it does not modify any externally-visible state after
 it has been cancelled. To do that, the thread should call
 <a class="link" href="GTask.html#g-task-set-return-on-cancel" title="g_task_set_return_on_cancel ()"><code class="function">g_task_set_return_on_cancel()</code></a> again to (atomically) set
-return-on-cancel <a href="../glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> before making externally-visible changes;
+return-on-cancel <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> before making externally-visible changes;
 if the task gets cancelled before the return-on-cancel flag could
 be changed, <a class="link" href="GTask.html#g-task-set-return-on-cancel" title="g_task_set_return_on_cancel ()"><code class="function">g_task_set_return_on_cancel()</code></a> will indicate this by
-returning <a href="../glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a>.
+returning <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a>.
 </p>
 <p>
 You can disable and re-enable this flag multiple times if you wish.
 If the task's <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> is cancelled while return-on-cancel is
-<a href="../glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a>, then calling <a class="link" href="GTask.html#g-task-set-return-on-cancel" title="g_task_set_return_on_cancel ()"><code class="function">g_task_set_return_on_cancel()</code></a> to set it <a href="../glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a>, then calling <a class="link" href="GTask.html#g-task-set-return-on-cancel" title="g_task_set_return_on_cancel ()"><code class="function">g_task_set_return_on_cancel()</code></a> to set it <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a>
 again will cause the task to be cancelled at that point.
 </p>
 <p>
@@ -1325,8 +1325,8 @@ it is cancelled.</td>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>
-<a href="../glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if <em class="parameter"><code>task</code></em>'s return-on-cancel flag was changed to
-match <em class="parameter"><code>return_on_cancel</code></em>. <a href="../glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> if <em class="parameter"><code>task</code></em> has already been
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if <em class="parameter"><code>task</code></em>'s return-on-cancel flag was changed to
+match <em class="parameter"><code>return_on_cancel</code></em>. <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> if <em class="parameter"><code>task</code></em> has already been
 cancelled.</td>
 </tr>
 </tbody>
@@ -1337,7 +1337,7 @@ cancelled.</td>
 <div class="refsect2">
 <a name="g-task-set-source-tag"></a><h3>g_task_set_source_tag ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_task_set_source_tag               (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> source_tag</code></em>);</pre>
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> source_tag</code></em>);</pre>
 <p>
 Sets <em class="parameter"><code>task</code></em>'s source tag. You can use this to tag a task return
 value with a particular pointer (usually a pointer to the function
@@ -1368,11 +1368,11 @@ particular place.
 <hr>
 <div class="refsect2">
 <a name="g-task-report-error"></a><h3>g_task_report_error ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_task_report_error                 (<em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> source_object</code></em>,
+<pre class="programlisting"><span class="returnvalue">void</span>                g_task_report_error                 (<em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> source_object</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> callback</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> callback_data</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> source_tag</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> *error</code></em>);</pre>
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> callback_data</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> source_tag</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> *error</code></em>);</pre>
 <p>
 Creates a <a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> and then immediately calls <a class="link" href="GTask.html#g-task-return-error" title="g_task_return_error ()"><code class="function">g_task_return_error()</code></a>
 on it. Use this in the wrapper function of an asynchronous method
@@ -1392,8 +1392,8 @@ See also <a class="link" href="GTask.html#g-task-report-new-error" title="g_task
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>source_object</code></em> :</span></p></td>
-<td>the <a href="../gobject/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> that owns
-this task, or <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>][<acronym title="Override the parsed C type with given type."><span class="acronym">type</span></acronym> GObject]</span>
+<td>the <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> that owns
+this task, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>][<acronym title="Override the parsed C type with given type."><span class="acronym">type</span></acronym> GObject]</span>
 </td>
 </tr>
 <tr>
@@ -1422,12 +1422,12 @@ this task, or <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class=
 <hr>
 <div class="refsect2">
 <a name="g-task-report-new-error"></a><h3>g_task_report_new_error ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_task_report_new_error             (<em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> source_object</code></em>,
+<pre class="programlisting"><span class="returnvalue">void</span>                g_task_report_new_error             (<em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> source_object</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> callback</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> callback_data</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> source_tag</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Quarks.html#GQuark"><span class="type">GQuark</span></a> domain</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a> code</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> callback_data</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> source_tag</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Quarks.html#GQuark"><span class="type">GQuark</span></a> domain</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a> code</code></em>,
                                                          <em class="parameter"><code>const <span class="type">char</span> *format</code></em>,
                                                          <em class="parameter"><code>...</code></em>);</pre>
 <p>
@@ -1450,8 +1450,8 @@ See also <a class="link" href="GTask.html#g-task-report-error" title="g_task_rep
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>source_object</code></em> :</span></p></td>
-<td>the <a href="../gobject/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> that owns
-this task, or <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>][<acronym title="Override the parsed C type with given type."><span class="acronym">type</span></acronym> GObject]</span>
+<td>the <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> that owns
+this task, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>][<acronym title="Override the parsed C type with given type."><span class="acronym">type</span></acronym> GObject]</span>
 </td>
 </tr>
 <tr>
@@ -1470,7 +1470,7 @@ this task, or <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class=
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>domain</code></em> :</span></p></td>
-<td>a <a href="../glib/glib-Quarks.html#GQuark"><span class="type">GQuark</span></a>.</td>
+<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Quarks.html#GQuark"><span class="type">GQuark</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>code</code></em> :</span></p></td>
@@ -1491,7 +1491,7 @@ this task, or <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class=
 <hr>
 <div class="refsect2">
 <a name="g-task-get-task-data"></a><h3>g_task_get_task_data ()</h3>
-<pre class="programlisting"><a href="../glib/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a>            g_task_get_task_data                (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>);</pre>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a>            g_task_get_task_data                (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>);</pre>
 <p>
 Gets <em class="parameter"><code>task</code></em>'s <code class="literal">task_data</code>.
 </p>
@@ -1519,7 +1519,7 @@ Gets <em class="parameter"><code>task</code></em>'s <code class="literal">task_d
 <hr>
 <div class="refsect2">
 <a name="g-task-get-priority"></a><h3>g_task_get_priority ()</h3>
-<pre class="programlisting"><a href="../glib/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>                g_task_get_priority                 (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>);</pre>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>                g_task_get_priority                 (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>);</pre>
 <p>
 Gets <em class="parameter"><code>task</code></em>'s priority
 </p>
@@ -1574,7 +1574,7 @@ Gets <em class="parameter"><code>task</code></em>'s <a class="link" href="GCance
 <hr>
 <div class="refsect2">
 <a name="g-task-get-check-cancellable"></a><h3>g_task_get_check_cancellable ()</h3>
-<pre class="programlisting"><a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_task_get_check_cancellable        (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>);</pre>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_task_get_check_cancellable        (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>);</pre>
 <p>
 Gets <em class="parameter"><code>task</code></em>'s check-cancellable flag. See
 <a class="link" href="GTask.html#g-task-set-check-cancellable" title="g_task_set_check_cancellable ()"><code class="function">g_task_set_check_cancellable()</code></a> for more details.
@@ -1595,7 +1595,7 @@ Gets <em class="parameter"><code>task</code></em>'s check-cancellable flag. See
 <hr>
 <div class="refsect2">
 <a name="g-task-get-return-on-cancel"></a><h3>g_task_get_return_on_cancel ()</h3>
-<pre class="programlisting"><a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_task_get_return_on_cancel         (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>);</pre>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_task_get_return_on_cancel         (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>);</pre>
 <p>
 Gets <em class="parameter"><code>task</code></em>'s return-on-cancel flag. See
 <a class="link" href="GTask.html#g-task-set-return-on-cancel" title="g_task_set_return_on_cancel ()"><code class="function">g_task_set_return_on_cancel()</code></a> for more details.
@@ -1616,15 +1616,15 @@ Gets <em class="parameter"><code>task</code></em>'s return-on-cancel flag. See
 <hr>
 <div class="refsect2">
 <a name="g-task-get-context"></a><h3>g_task_get_context ()</h3>
-<pre class="programlisting"><a href="../glib/glib-The-Main-Event-Loop.html#GMainContext"><span class="returnvalue">GMainContext</span></a> *      g_task_get_context                  (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>);</pre>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-The-Main-Event-Loop.html#GMainContext"><span class="returnvalue">GMainContext</span></a> *      g_task_get_context                  (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>);</pre>
 <p>
-Gets the <a href="../glib/glib-The-Main-Event-Loop.html#GMainContext"><span class="type">GMainContext</span></a> that <em class="parameter"><code>task</code></em> will return its result in (that
+Gets the <a href="http://library.gnome.org/devel/glib/unstable/glib-The-Main-Event-Loop.html#GMainContext"><span class="type">GMainContext</span></a> that <em class="parameter"><code>task</code></em> will return its result in (that
 is, the context that was the <GTKDOCLINK HREF="g-main-context-push-thread-default">thread-default main
 context</GTKDOCLINK> at the point when <em class="parameter"><code>task</code></em> was created).
 </p>
 <p>
-This will always return a non-<a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> value, even if the task's
-context is the default <a href="../glib/glib-The-Main-Event-Loop.html#GMainContext"><span class="type">GMainContext</span></a>.
+This will always return a non-<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> value, even if the task's
+context is the default <a href="http://library.gnome.org/devel/glib/unstable/glib-The-Main-Event-Loop.html#GMainContext"><span class="type">GMainContext</span></a>.
 </p>
 <div class="variablelist"><table border="0" class="variablelist">
 <colgroup>
@@ -1640,7 +1640,7 @@ context is the default <a href="../glib/glib-The-Main-Event-Loop.html#GMainConte
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>
-<em class="parameter"><code>task</code></em>'s <a href="../glib/glib-The-Main-Event-Loop.html#GMainContext"><span class="type">GMainContext</span></a>. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+<em class="parameter"><code>task</code></em>'s <a href="http://library.gnome.org/devel/glib/unstable/glib-The-Main-Event-Loop.html#GMainContext"><span class="type">GMainContext</span></a>. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -1650,7 +1650,7 @@ context is the default <a href="../glib/glib-The-Main-Event-Loop.html#GMainConte
 <hr>
 <div class="refsect2">
 <a name="g-task-get-source-object"></a><h3>g_task_get_source_object ()</h3>
-<pre class="programlisting"><a href="../glib/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a>            g_task_get_source_object            (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>);</pre>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a>            g_task_get_source_object            (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>);</pre>
 <p>
 Gets the source object from <em class="parameter"><code>task</code></em>. Like
 <a class="link" href="GAsyncResult.html#g-async-result-get-source-object" title="g_async_result_get_source_object ()"><code class="function">g_async_result_get_source_object()</code></a>, but does not ref the object.
@@ -1669,7 +1669,7 @@ Gets the source object from <em class="parameter"><code>task</code></em>. Like
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>
-<em class="parameter"><code>task</code></em>'s source object, or <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>][<acronym title="Override the parsed C type with given type."><span class="acronym">type</span></acronym> GObject]</span>
+<em class="parameter"><code>task</code></em>'s source object, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>][<acronym title="Override the parsed C type with given type."><span class="acronym">type</span></acronym> GObject]</span>
 </td>
 </tr>
 </tbody>
@@ -1679,7 +1679,7 @@ Gets the source object from <em class="parameter"><code>task</code></em>. Like
 <hr>
 <div class="refsect2">
 <a name="g-task-get-source-tag"></a><h3>g_task_get_source_tag ()</h3>
-<pre class="programlisting"><a href="../glib/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a>            g_task_get_source_tag               (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>);</pre>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a>            g_task_get_source_tag               (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>);</pre>
 <p>
 Gets <em class="parameter"><code>task</code></em>'s source tag. See <a class="link" href="GTask.html#g-task-set-source-tag" title="g_task_set_source_tag ()"><code class="function">g_task_set_source_tag()</code></a>.
 </p>
@@ -1708,7 +1708,7 @@ Gets <em class="parameter"><code>task</code></em>'s source tag. See <a class="li
 <div class="refsect2">
 <a name="g-task-return-boolean"></a><h3>g_task_return_boolean ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_task_return_boolean               (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> result</code></em>);</pre>
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> result</code></em>);</pre>
 <p>
 Sets <em class="parameter"><code>task</code></em>'s result to <em class="parameter"><code>result</code></em> and completes the task (see
 <a class="link" href="GTask.html#g-task-return-pointer" title="g_task_return_pointer ()"><code class="function">g_task_return_pointer()</code></a> for more discussion of exactly what this
@@ -1726,7 +1726,7 @@ means).
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>result</code></em> :</span></p></td>
-<td>the <a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> result of a task function.</td>
+<td>the <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> result of a task function.</td>
 </tr>
 </tbody>
 </table></div>
@@ -1736,7 +1736,7 @@ means).
 <div class="refsect2">
 <a name="g-task-return-int"></a><h3>g_task_return_int ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_task_return_int                   (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gssize"><span class="type">gssize</span></a> result</code></em>);</pre>
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gssize"><span class="type">gssize</span></a> result</code></em>);</pre>
 <p>
 Sets <em class="parameter"><code>task</code></em>'s result to <em class="parameter"><code>result</code></em> and completes the task (see
 <a class="link" href="GTask.html#g-task-return-pointer" title="g_task_return_pointer ()"><code class="function">g_task_return_pointer()</code></a> for more discussion of exactly what this
@@ -1754,7 +1754,7 @@ means).
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>result</code></em> :</span></p></td>
-<td>the integer (<a href="../glib/glib-Basic-Types.html#gssize"><span class="type">gssize</span></a>) result of a task function.</td>
+<td>the integer (<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gssize"><span class="type">gssize</span></a>) result of a task function.</td>
 </tr>
 </tbody>
 </table></div>
@@ -1764,19 +1764,19 @@ means).
 <div class="refsect2">
 <a name="g-task-return-pointer"></a><h3>g_task_return_pointer ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_task_return_pointer               (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> result</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Datasets.html#GDestroyNotify"><span class="type">GDestroyNotify</span></a> result_destroy</code></em>);</pre>
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> result</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Datasets.html#GDestroyNotify"><span class="type">GDestroyNotify</span></a> result_destroy</code></em>);</pre>
 <p>
 Sets <em class="parameter"><code>task</code></em>'s result to <em class="parameter"><code>result</code></em> and completes the task. If <em class="parameter"><code>result</code></em>
-is not <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>, then <em class="parameter"><code>result_destroy</code></em> will be used to free <em class="parameter"><code>result</code></em> if
+is not <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>, then <em class="parameter"><code>result_destroy</code></em> will be used to free <em class="parameter"><code>result</code></em> if
 the caller does not take ownership of it with
 <a class="link" href="GTask.html#g-task-propagate-pointer" title="g_task_propagate_pointer ()"><code class="function">g_task_propagate_pointer()</code></a>.
 </p>
 <p>
 "Completes the task" means that for an ordinary asynchronous task
 it will either invoke the task's callback, or else queue that
-callback to be invoked in the proper <a href="../glib/glib-The-Main-Event-Loop.html#GMainContext"><span class="type">GMainContext</span></a>, or in the next
-iteration of the current <a href="../glib/glib-The-Main-Event-Loop.html#GMainContext"><span class="type">GMainContext</span></a>. For a task run via
+callback to be invoked in the proper <a href="http://library.gnome.org/devel/glib/unstable/glib-The-Main-Event-Loop.html#GMainContext"><span class="type">GMainContext</span></a>, or in the next
+iteration of the current <a href="http://library.gnome.org/devel/glib/unstable/glib-The-Main-Event-Loop.html#GMainContext"><span class="type">GMainContext</span></a>. For a task run via
 <a class="link" href="GTask.html#g-task-run-in-thread" title="g_task_run_in_thread ()"><code class="function">g_task_run_in_thread()</code></a> or <a class="link" href="GTask.html#g-task-run-in-thread-sync" title="g_task_run_in_thread_sync ()"><code class="function">g_task_run_in_thread_sync()</code></a>, calling this
 method will save <em class="parameter"><code>result</code></em> to be returned to the caller later, but
 the task will not actually be completed until the <a class="link" href="GTask.html#GTaskThreadFunc" title="GTaskThreadFunc ()"><span class="type">GTaskThreadFunc</span></a>
@@ -1807,7 +1807,7 @@ function. <span class="annotation">[<acronym title="NULL is ok, both for passing
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>result_destroy</code></em> :</span></p></td>
-<td>a <a href="../glib/glib-Datasets.html#GDestroyNotify"><span class="type">GDestroyNotify</span></a> function. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Datasets.html#GDestroyNotify"><span class="type">GDestroyNotify</span></a> function. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -1818,7 +1818,7 @@ function. <span class="annotation">[<acronym title="NULL is ok, both for passing
 <div class="refsect2">
 <a name="g-task-return-error"></a><h3>g_task_return_error ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_task_return_error                 (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> *error</code></em>);</pre>
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> *error</code></em>);</pre>
 <p>
 Sets <em class="parameter"><code>task</code></em>'s result to <em class="parameter"><code>error</code></em> (which <em class="parameter"><code>task</code></em> assumes ownership of)
 and completes the task (see <a class="link" href="GTask.html#g-task-return-pointer" title="g_task_return_pointer ()"><code class="function">g_task_return_pointer()</code></a> for more
@@ -1828,7 +1828,7 @@ discussion of exactly what this means).
 Note that since the task takes ownership of <em class="parameter"><code>error</code></em>, and since the
 task may be completed before returning from <a class="link" href="GTask.html#g-task-return-error" title="g_task_return_error ()"><code class="function">g_task_return_error()</code></a>,
 you cannot assume that <em class="parameter"><code>error</code></em> is still valid after calling this.
-Call <a href="../glib/glib-Error-Reporting.html#g-error-copy"><code class="function">g_error_copy()</code></a> on the error if you need to keep a local copy
+Call <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#g-error-copy"><code class="function">g_error_copy()</code></a> on the error if you need to keep a local copy
 as well.
 </p>
 <p>
@@ -1846,7 +1846,7 @@ See also <a class="link" href="GTask.html#g-task-return-new-error" title="g_task
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>the <a href="../glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> result of a task function. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+<td>the <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> result of a task function. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -1857,12 +1857,12 @@ See also <a class="link" href="GTask.html#g-task-return-new-error" title="g_task
 <div class="refsect2">
 <a name="g-task-return-new-error"></a><h3>g_task_return_new_error ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_task_return_new_error             (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Quarks.html#GQuark"><span class="type">GQuark</span></a> domain</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a> code</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Quarks.html#GQuark"><span class="type">GQuark</span></a> domain</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a> code</code></em>,
                                                          <em class="parameter"><code>const <span class="type">char</span> *format</code></em>,
                                                          <em class="parameter"><code>...</code></em>);</pre>
 <p>
-Sets <em class="parameter"><code>task</code></em>'s result to a new <a href="../glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> created from <em class="parameter"><code>domain</code></em>, <em class="parameter"><code>code</code></em>,
+Sets <em class="parameter"><code>task</code></em>'s result to a new <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> created from <em class="parameter"><code>domain</code></em>, <em class="parameter"><code>code</code></em>,
 <em class="parameter"><code>format</code></em>, and the remaining arguments, and completes the task (see
 <a class="link" href="GTask.html#g-task-return-pointer" title="g_task_return_pointer ()"><code class="function">g_task_return_pointer()</code></a> for more discussion of exactly what this
 means).
@@ -1882,7 +1882,7 @@ See also <a class="link" href="GTask.html#g-task-return-error" title="g_task_ret
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>domain</code></em> :</span></p></td>
-<td>a <a href="../glib/glib-Quarks.html#GQuark"><span class="type">GQuark</span></a>.</td>
+<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Quarks.html#GQuark"><span class="type">GQuark</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>code</code></em> :</span></p></td>
@@ -1903,7 +1903,7 @@ See also <a class="link" href="GTask.html#g-task-return-error" title="g_task_ret
 <hr>
 <div class="refsect2">
 <a name="g-task-return-error-if-cancelled"></a><h3>g_task_return_error_if_cancelled ()</h3>
-<pre class="programlisting"><a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_task_return_error_if_cancelled    (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>);</pre>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_task_return_error_if_cancelled    (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>);</pre>
 <p>
 Checks if <em class="parameter"><code>task</code></em>'s <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> has been cancelled, and if so, sets
 <em class="parameter"><code>task</code></em>'s error accordingly and completes the task (see
@@ -1924,7 +1924,7 @@ means).
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>
-<a href="../glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if <em class="parameter"><code>task</code></em> has been cancelled, <a href="../glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> if not</td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if <em class="parameter"><code>task</code></em> has been cancelled, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> if not</td>
 </tr>
 </tbody>
 </table></div>
@@ -1933,14 +1933,14 @@ means).
 <hr>
 <div class="refsect2">
 <a name="g-task-propagate-boolean"></a><h3>g_task_propagate_boolean ()</h3>
-<pre class="programlisting"><a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_task_propagate_boolean            (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_task_propagate_boolean            (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
-Gets the result of <em class="parameter"><code>task</code></em> as a <a href="../glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>.
+Gets the result of <em class="parameter"><code>task</code></em> as a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>.
 </p>
 <p>
 If the task resulted in an error, or was cancelled, then this will
-instead return <a href="../glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> and set <em class="parameter"><code>error</code></em>.
+instead return <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> and set <em class="parameter"><code>error</code></em>.
 </p>
 <p>
 Since this method transfers ownership of the return value (or
@@ -1958,12 +1958,12 @@ error) to the caller, you may only call it once.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>return location for a <a href="../glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a>
+<td>return location for a <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>the task result, or <a href="../glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> on error</td>
+<td>the task result, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> on error</td>
 </tr>
 </tbody>
 </table></div>
@@ -1972,10 +1972,10 @@ error) to the caller, you may only call it once.
 <hr>
 <div class="refsect2">
 <a name="g-task-propagate-int"></a><h3>g_task_propagate_int ()</h3>
-<pre class="programlisting"><a href="../glib/glib-Basic-Types.html#gssize"><span class="returnvalue">gssize</span></a>              g_task_propagate_int                (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gssize"><span class="returnvalue">gssize</span></a>              g_task_propagate_int                (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
-Gets the result of <em class="parameter"><code>task</code></em> as an integer (<a href="../glib/glib-Basic-Types.html#gssize"><span class="type">gssize</span></a>).
+Gets the result of <em class="parameter"><code>task</code></em> as an integer (<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gssize"><span class="type">gssize</span></a>).
 </p>
 <p>
 If the task resulted in an error, or was cancelled, then this will
@@ -1997,7 +1997,7 @@ error) to the caller, you may only call it once.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>return location for a <a href="../glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a>
+<td>return location for a <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a>
 </td>
 </tr>
 <tr>
@@ -2011,15 +2011,15 @@ error) to the caller, you may only call it once.
 <hr>
 <div class="refsect2">
 <a name="g-task-propagate-pointer"></a><h3>g_task_propagate_pointer ()</h3>
-<pre class="programlisting"><a href="../glib/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a>            g_task_propagate_pointer            (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a>            g_task_propagate_pointer            (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Gets the result of <em class="parameter"><code>task</code></em> as a pointer, and transfers ownership
 of that value to the caller.
 </p>
 <p>
 If the task resulted in an error, or was cancelled, then this will
-instead return <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> and set <em class="parameter"><code>error</code></em>.
+instead return <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> and set <em class="parameter"><code>error</code></em>.
 </p>
 <p>
 Since this method transfers ownership of the return value (or
@@ -2038,12 +2038,12 @@ error) to the caller, you may only call it once.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>return location for a <a href="../glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a>
+<td>return location for a <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>the task result, or <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+<td>the task result, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -2053,7 +2053,7 @@ error) to the caller, you may only call it once.
 <hr>
 <div class="refsect2">
 <a name="g-task-had-error"></a><h3>g_task_had_error ()</h3>
-<pre class="programlisting"><a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_task_had_error                    (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>);</pre>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_task_had_error                    (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>);</pre>
 <p>
 Tests if <em class="parameter"><code>task</code></em> resulted in an error.
 </p>
@@ -2070,7 +2070,7 @@ Tests if <em class="parameter"><code>task</code></em> resulted in an error.
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>
-<a href="../glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the task resulted in an error, <a href="../glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise.</td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the task resulted in an error, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise.</td>
 </tr>
 </tbody>
 </table></div>
@@ -2083,7 +2083,7 @@ Tests if <em class="parameter"><code>task</code></em> resulted in an error.
                                                          <em class="parameter"><code><a class="link" href="GTask.html#GTaskThreadFunc" title="GTaskThreadFunc ()"><span class="type">GTaskThreadFunc</span></a> task_func</code></em>);</pre>
 <p>
 Runs <em class="parameter"><code>task_func</code></em> in another thread. When <em class="parameter"><code>task_func</code></em> returns, <em class="parameter"><code>task</code></em>'s
-<a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> will be invoked in <em class="parameter"><code>task</code></em>'s <a href="../glib/glib-The-Main-Event-Loop.html#GMainContext"><span class="type">GMainContext</span></a>.
+<a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> will be invoked in <em class="parameter"><code>task</code></em>'s <a href="http://library.gnome.org/devel/glib/unstable/glib-The-Main-Event-Loop.html#GMainContext"><span class="type">GMainContext</span></a>.
 </p>
 <p>
 This takes a ref on <em class="parameter"><code>task</code></em> until the task completes.
@@ -2125,7 +2125,7 @@ to get the result of <em class="parameter"><code>task_func</code></em>.
 See <a class="link" href="GTask.html#GTaskThreadFunc" title="GTaskThreadFunc ()"><span class="type">GTaskThreadFunc</span></a> for more details about how <em class="parameter"><code>task_func</code></em> is handled.
 </p>
 <p>
-Normally this is used with tasks created with a <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+Normally this is used with tasks created with a <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
 <code class="literal">callback</code>, but note that even if the task does
 have a callback, it will not be invoked when <em class="parameter"><code>task_func</code></em> returns.
 </p>
@@ -2153,8 +2153,8 @@ have a callback, it will not be invoked when <em class="parameter"><code>task_fu
 <div class="refsect2">
 <a name="GTaskThreadFunc"></a><h3>GTaskThreadFunc ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                (*GTaskThreadFunc)                  (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> source_object</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> task_data</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> source_object</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> task_data</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>);</pre>
 <p>
 The prototype for a task function to be run in a thread via
@@ -2200,7 +2200,7 @@ a <code class="literal">g_task_return_</code> function.
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
 <td>
-<em class="parameter"><code>task</code></em>'s <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a>, or <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+<em class="parameter"><code>task</code></em>'s <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
 </td>
 </tr>
 </tbody>
@@ -2211,12 +2211,12 @@ a <code class="literal">g_task_return_</code> function.
 <div class="refsect2">
 <a name="g-task-attach-source"></a><h3>g_task_attach_source ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_task_attach_source                (<em class="parameter"><code><a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> *task</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-The-Main-Event-Loop.html#GSource"><span class="type">GSource</span></a> *source</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-The-Main-Event-Loop.html#GSourceFunc"><span class="type">GSourceFunc</span></a> callback</code></em>);</pre>
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-The-Main-Event-Loop.html#GSource"><span class="type">GSource</span></a> *source</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-The-Main-Event-Loop.html#GSourceFunc"><span class="type">GSourceFunc</span></a> callback</code></em>);</pre>
 <p>
 A utility function for dealing with async operations where you need
-to wait for a <a href="../glib/glib-The-Main-Event-Loop.html#GSource"><span class="type">GSource</span></a> to trigger. Attaches <em class="parameter"><code>source</code></em> to <em class="parameter"><code>task</code></em>'s
-<a href="../glib/glib-The-Main-Event-Loop.html#GMainContext"><span class="type">GMainContext</span></a> with <em class="parameter"><code>task</code></em>'s <a class="link" href="GAsyncResult.html#io-priority">priority</a>, and sets <em class="parameter"><code>source</code></em>'s callback
+to wait for a <a href="http://library.gnome.org/devel/glib/unstable/glib-The-Main-Event-Loop.html#GSource"><span class="type">GSource</span></a> to trigger. Attaches <em class="parameter"><code>source</code></em> to <em class="parameter"><code>task</code></em>'s
+<a href="http://library.gnome.org/devel/glib/unstable/glib-The-Main-Event-Loop.html#GMainContext"><span class="type">GMainContext</span></a> with <em class="parameter"><code>task</code></em>'s <a class="link" href="GAsyncResult.html#io-priority">priority</a>, and sets <em class="parameter"><code>source</code></em>'s callback
 to <em class="parameter"><code>callback</code></em>, with <em class="parameter"><code>task</code></em> as the callback's
 <code class="literal">user_data</code>.
 </p>
@@ -2249,12 +2249,12 @@ This takes a reference on <em class="parameter"><code>task</code></em> until <em
 <hr>
 <div class="refsect2">
 <a name="g-task-is-valid"></a><h3>g_task_is_valid ()</h3>
-<pre class="programlisting"><a href="../glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_task_is_valid                     (<em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> result</code></em>,
-                                                         <em class="parameter"><code><a href="../glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> source_object</code></em>);</pre>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_task_is_valid                     (<em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> result</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> source_object</code></em>);</pre>
 <p>
 Checks that <em class="parameter"><code>result</code></em> is a <a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a>, and that <em class="parameter"><code>source_object</code></em> is its
-source object (or that <em class="parameter"><code>source_object</code></em> is <a href="../glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> and <em class="parameter"><code>result</code></em> has no
-source object). This can be used in <a href="../glib/glib-Warnings-and-Assertions.html#g-return-if-fail"><code class="function">g_return_if_fail()</code></a> checks.
+source object (or that <em class="parameter"><code>source_object</code></em> is <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> and <em class="parameter"><code>result</code></em> has no
+source object). This can be used in <a href="http://library.gnome.org/devel/glib/unstable/glib-Warnings-and-Assertions.html#g-return-if-fail"><code class="function">g_return_if_fail()</code></a> checks.
 </p>
 <div class="variablelist"><table border="0" class="variablelist">
 <colgroup>
@@ -2276,7 +2276,7 @@ expected to be associated with the task. <span class="annotation">[<acronym titl
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>
-<a href="../glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if <em class="parameter"><code>result</code></em> and <em class="parameter"><code>source_object</code></em> are valid, <a href="../glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if <em class="parameter"><code>result</code></em> and <em class="parameter"><code>source_object</code></em> are valid, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a>
 if not</td>
 </tr>
 </tbody>
@@ -2291,6 +2291,6 @@ if not</td>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.18.1</div>
+          Generated by GTK-Doc V1.19</div>
 </body>
 </html>
