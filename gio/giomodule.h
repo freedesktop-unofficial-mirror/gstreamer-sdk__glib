@@ -190,8 +190,8 @@ G_END_DECLS
 #else
 #define G_IO_MODULE_DEFINE(name) \
 G_BEGIN_DECLS \
-g_io_module_load(GIOModule *module) { _g_io_module_load(module);} \
-g_io_module_unload(GIOModule *module) { _g_io_module_unload(module);} \
+void g_io_module_load(GIOModule *module) { _g_io_module_load(module);} \
+void g_io_module_unload(GIOModule *module) { _g_io_module_unload(module);} \
 gchar ** g_io_module_query(void) {return _g_io_module_query();} \
 G_END_DECLS
 #endif
